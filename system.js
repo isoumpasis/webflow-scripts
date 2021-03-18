@@ -1,6 +1,7 @@
 const par = document.querySelector('.paragraph-2');
 
 document.querySelector('DOMContentLoaded', () => {
+  console.log('whyn ontihgn');
   if (
     typeof Storage !== 'undefined' &&
     localStorage.suggestedSystems &&
