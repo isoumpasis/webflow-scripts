@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (localStorage.vehicleData) {
 		vehicleData = JSON.parse(localStorage.vehicleData);
 		console.log('Parsed json', vehicleData);
+
+		makeSelect.options.forEach((opt, i) => {
+			if (vehicleData.make === opt.value) {
+				makeSelect.selectedIndex = i;
+				break;
+			}
+		});
+
 		populateModelSelect();
 		modelSelect.focus();
 	} else {
