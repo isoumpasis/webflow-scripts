@@ -11,13 +11,19 @@ const suggestedDivs = document.querySelectorAll('.suggested-system-div');
 const suggestedContainer = document.querySelector('.suggested-container');
 
 document.addEventListener('DOMContentLoaded', () => {
-	modelSelect.disabled = true;
-	yearSelect.disabled = true;
-	cylinderSelect.disabled = true;
-	modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-	yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-	cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
-	makeSelect.focus();
+	if (localStorage.vehicleData) {
+		vehicleData = JSON.parse(localStorage.vehicleData);
+		console.log('Parsed json', vehicleData);
+		populateModelSelect();
+	} else {
+		modelSelect.disabled = true;
+		yearSelect.disabled = true;
+		cylinderSelect.disabled = true;
+		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
+		yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+		cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
+		makeSelect.focus();
+	}
 });
 
 makeSelect.addEventListener('change', function () {
