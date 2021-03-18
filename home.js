@@ -14,15 +14,20 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof Storage !== 'undefined' && localStorage.vehicleData) {
     vehicleData = JSON.parse(localStorage.vehicleData);
     console.log('Parsed json local storage', vehicleData);
-
     selectMakeOption();
     populateModelSelect();
-    selectModelOption(); //from storage
-    populateYearSelect();
-    selectYearOption(); //from storage
-    populateCylinderSelect();
-    selectCylinderOption(); //from storage
-    //showResults();
+    if (localStorage.selectedModel) {
+      selectModelOption(); //from storage
+      populateYearSelect();
+      if (localStorage.selectedYear) {
+        selectYearOption(); //from storage
+        populateCylinderSelect();
+        if (localStorage.selectedCylinder) {
+          selectCylinderOption(); //from storage
+          showResults();
+        }
+      }
+    }
   } else {
     modelSelect.disabled = true;
     modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
@@ -111,7 +116,6 @@ modelSelect.addEventListener('change', function () {
 });
 
 function populateYearSelect() {
-  if (!selectedModel) return;
   let yearOptionsStr = '<option value="">Επιλέξτε Χρονολογία</option>';
 
   const [fromYear, toYear] = selectedModel.years;
@@ -128,17 +132,17 @@ yearSelect.addEventListener('change', function () {
   if (!this.value) {
     cylinderSelect.disabled = true;
     cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
-    localStorage.removeItem('storageYearSelect');
+    localStorage.removeItem('selectedYear');
     return;
   }
-  localStorage.storageYearSelect = this.value;
+  localStorage.selectedYear = this.value;
   populateCylinderSelect();
   cylinderSelect.disabled = false;
   cylinderSelect.focus();
 });
 
 function populateCylinderSelect() {
-  if (typeof Storage !== 'undefined' && !localStorage.storageYearSelect) return;
+  if (typeof Storage !== 'undefined' && !localStorage.selectedYear) return;
 
   let cylinderOptionsStr = '<option value="">Επιλέξτε Κυλίνδρους</option>';
   selectedModel.cylinders.forEach(cylinder => {
@@ -166,39 +170,33 @@ function selectMakeOption() {
   }
 }
 function selectModelOption() {
-  if (typeof Storage !== 'undefined' && localStorage.selectedModel) {
-    selectedModel = JSON.parse(localStorage.selectedModel);
-    let opts = modelSelect.options;
-    console.log('select model option opts', opts);
-    for (let i = 0; i <= opts.length; i++) {
-      if (selectedModel.name === opts[i].value) {
-        modelSelect.selectedIndex = i;
-        break;
-      }
+  selectedModel = JSON.parse(localStorage.selectedModel);
+  let opts = modelSelect.options;
+  console.log('select model option opts', opts);
+  for (let i = 0; i <= opts.length; i++) {
+    if (selectedModel.name === opts[i].value) {
+      modelSelect.selectedIndex = i;
+      break;
     }
   }
 }
 function selectYearOption() {
-  if (typeof Storage !== 'undefined' && localStorage.yearSelect) {
-    const storageYearSelect = localStorage.yearSelect;
-    let opts = yearSelect.options;
-    for (let i = 0; i <= opts.length; i++) {
-      if (storageYearSelect === opts[i].value) {
-        yearSelect.selectedIndex = i;
-        break;
-      }
+  const selectedYear = localStorage.selectedYear;
+  let opts = yearSelect.options;
+  for (let i = 0; i <= opts.length; i++) {
+    if (selectedYear === opts[i].value) {
+      yearSelect.selectedIndex = i;
+      break;
     }
   }
 }
 function selectCylinderOption() {
-  if (typeof Storage !== 'undefined' && localStorage.cylinderSelect) {
-    const storageCylinderSelect = localStorage.cylinderSelect;
-    let opts = cylinderSelect.options;
-    for (let i = 0; i <= opts.length; i++) {
-      if (storageCylinderSelect === opts[i].value) {
-        cylinderSelect.selectedIndex = i;
-        break;
-      }
+  const selectedCylinder = localStorage.selectedCylinder;
+  let opts = cylinderSelect.options;
+  for (let i = 0; i <= opts.length; i++) {
+    if (selectedCylinder === opts[i].value) {
+      cylinderSelect.selectedIndex = i;
+      break;
     }
   }
 }
