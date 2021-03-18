@@ -1,4 +1,5 @@
 const par = document.querySelector('.paragraph-2');
+console.log('whyn ontih???gn');
 
 document.querySelector('DOMContentLoaded', () => {
   console.log('whyn ontihgn');
