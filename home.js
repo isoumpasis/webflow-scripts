@@ -11,7 +11,7 @@ const suggestedDivs = document.querySelectorAll('.suggested-system-div');
 const suggestedContainer = document.querySelector('.suggested-container');
 
 document.addEventListener('DOMContentLoaded', () => {
-	if (localStorage.vehicleData) {
+	if (typeof Storage !== 'undefined' && localStorage.vehicleData) {
 		vehicleData = JSON.parse(localStorage.vehicleData);
 		console.log('Parsed json local storage', vehicleData);
 
