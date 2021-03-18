@@ -13,17 +13,11 @@ const suggestedContainer = document.querySelector('.suggested-container');
 document.addEventListener('DOMContentLoaded', () => {
 	if (localStorage.vehicleData) {
 		vehicleData = JSON.parse(localStorage.vehicleData);
-		console.log('Parsed json', vehicleData);
+		console.log('Parsed json local storage', vehicleData);
 
-		let opts = makeSelect.options;
-		for (let i = 0; i <= opts.length; i++) {
-			if (vehicleData.make === opts[i].value) {
-				makeSelect.selectedIndex = i;
-				break;
-			}
-		}
-
+		selectMakeOption();
 		populateModelSelect();
+
 		modelSelect.focus();
 	} else {
 		modelSelect.disabled = true;
@@ -151,6 +145,16 @@ cylinderSelect.addEventListener('change', function () {
 	}
 	showResults();
 });
+
+function selectMakeOption() {
+	let opts = makeSelect.options;
+	for (let i = 0; i <= opts.length; i++) {
+		if (vehicleData.make === opts[i].value) {
+			makeSelect.selectedIndex = i;
+			break;
+		}
+	}
+}
 
 function showResults() {
 	let systemStr;
