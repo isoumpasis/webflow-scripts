@@ -61,7 +61,7 @@ makeSelect.addEventListener('change', function () {
   if (!this.value) {
     modelSelect.disabled = true;
     modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-    localStorage.clear(); //reset
+    localStorage.clear(); //reset //DO YOU WANT TO ERASE EVERYTHING? maybe there is an autonomous var you want to keep
     return;
   }
   modelSelect.disabled = false;
