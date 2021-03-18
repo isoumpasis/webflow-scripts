@@ -1,4 +1,3 @@
-<script>
 //System Identification
 const url = 'https://lovatohellas.herokuapp.com/vehicleDB';
 let vehicleData;
@@ -15,9 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
   modelSelect.disabled = true;
   yearSelect.disabled = true;
   cylinderSelect.disabled = true;
-	modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-  yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-  cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
+	modelSelect.innerHTML = '<option value="">ΓΓ―Γ­Γ΄ΓΓ«Γ―</option>';
+  yearSelect.innerHTML = '<option value="">Γ—Γ±Γ―Γ­Γ―Γ«Γ―Γ£ΓΓ΅</option>';
+  cylinderSelect.innerHTML = '<option value="">ΓΓ½Γ«Γ©Γ­Γ¤Γ±Γ―Γ©</option>';
   makeSelect.focus();
 });
 
@@ -26,12 +25,12 @@ makeSelect.addEventListener('change', function () {
   
   yearSelect.disabled = true;
   cylinderSelect.disabled = true;
-  yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-  cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
+  yearSelect.innerHTML = '<option value="">Γ—Γ±Γ―Γ­Γ―Γ«Γ―Γ£ΓΓ΅</option>';
+  cylinderSelect.innerHTML = '<option value="">ΓΓ½Γ«Γ©Γ­Γ¤Γ±Γ―Γ©</option>';
   suggestedContainer.style.display = 'none';
   if(!this.value){
   	modelSelect.disabled = true;
-    modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
+    modelSelect.innerHTML = '<option value="">ΓΓ―Γ­Γ΄ΓΓ«Γ―</option>';
   	return;
   }
   modelSelect.disabled = false;
@@ -59,13 +58,13 @@ makeSelect.addEventListener('change', function () {
 	})
 	.catch((error) => {
   	endLoadingModelSelect();
-    modelSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
+    modelSelect.innerHTML = '<option value="">ΓΓ±Γ―Γ³Γ°Γ΅Γ¨ΓΓ³Γ΄Γ¥ Γ®Γ΅Γ­Γ</option>';
   	console.error('Error Fetch:', error);
 	});
 });
 
 function populateModelSelect(){
-	let modelOptionsStr = '<option value="">Επιλέξτε Μοντέλο</option>';
+	let modelOptionsStr = '<option value="">Γ…Γ°Γ©Γ«ΓΓ®Γ΄Γ¥ ΓΓ―Γ­Γ΄ΓΓ«Γ―</option>';
 	vehicleData.models.forEach(model => {
   	modelOptionsStr += `<option value="${model.name}">${model.name}</option>`;
   });
@@ -75,12 +74,12 @@ function populateModelSelect(){
 modelSelect.addEventListener('change', function () {
 	console.log('model changed', this.value);
   cylinderSelect.disabled = true;
-  cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
+  cylinderSelect.innerHTML = '<option value="">ΓΓ½Γ«Γ©Γ­Γ¤Γ±Γ―Γ©</option>';
   suggestedContainer.style.display = 'none';
   
   if(!this.value){
   	yearSelect.disabled = true;
-  	yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+  	yearSelect.innerHTML = '<option value="">Γ—Γ±Γ―Γ­Γ―Γ«Γ―Γ£ΓΓ΅</option>';
     return;
   }
   selectedModel = vehicleData.models.filter(model => model.name === this.value)[0];
@@ -92,7 +91,7 @@ modelSelect.addEventListener('change', function () {
 });
 
 function populateYearSelect(){
-	let yearOptionsStr = '<option value="">Επιλέξτε Χρονολογία</option>';
+	let yearOptionsStr = '<option value="">Γ…Γ°Γ©Γ«ΓΓ®Γ΄Γ¥ Γ—Γ±Γ―Γ­Γ―Γ«Γ―Γ£ΓΓ΅</option>';
   
  	const [fromYear, toYear] = selectedModel.years; 
   for(let year = fromYear; year <= toYear; year++){
@@ -107,7 +106,7 @@ yearSelect.addEventListener('change', function () {
   
   if(!this.value){
   	cylinderSelect.disabled = true;
-  	cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
+  	cylinderSelect.innerHTML = '<option value="">ΓΓ½Γ«Γ©Γ­Γ¤Γ±Γ―Γ©</option>';
     return;
   }
   populateCylinderSelect();
@@ -116,7 +115,7 @@ yearSelect.addEventListener('change', function () {
 });
 
 function populateCylinderSelect(){
-	let cylinderOptionsStr = '<option value="">Επιλέξτε Κυλίνδρους</option>';
+	let cylinderOptionsStr = '<option value="">Γ…Γ°Γ©Γ«ΓΓ®Γ΄Γ¥ ΓΓµΓ«ΓΓ­Γ¤Γ±Γ―ΓµΓ²</option>';
   selectedModel.cylinders.forEach(cylinder => {
   	cylinderOptionsStr += `<option value="${cylinder}">${cylinder}</option>`;
   });
@@ -153,7 +152,7 @@ function showResults(){
   
  	suggestedDivs.forEach((suggestedDiv, i) => {
  		suggestedDiv.querySelector('.suggested-name').textContent = systemStr[i];
- 		suggestedDiv.querySelector('.suggested-btn').textContent = 'Γνωρίστε το '+systemStr[i];
+ 		suggestedDiv.querySelector('.suggested-btn').textContent = 'ΓƒΓ­ΓΉΓ±ΓΓ³Γ΄Γ¥ Γ΄Γ― '+systemStr[i];
  	});
   
   if(systemStr.length === 2){
@@ -173,10 +172,7 @@ function endLoadingModelSelect(){
 	modelSelect.classList.remove('loading-model-select');
 }
 
-</script>
 
-
-<script>
 // Calculator
 const lpgConsumption = 1.15; //15% more than petrol
 const cngConsumption = -0.444; //44,44% less than petrol
@@ -217,7 +213,7 @@ perYearCheckbox.addEventListener('change', calcResult);
 calcResult(); //init
 
 function calcResult(){
-	let res = 0;
+  let res = 0;
   let petrolCostPerMonth, lpgCostPerMonth, cngCostPerMonth;
   
   const ltPer100Km = parseInt(document.querySelector('.lt-100km').value);
@@ -226,7 +222,7 @@ function calcResult(){
   const lpgPrice = parseFloat(document.querySelector('.lpg-price').value);
   const cngPrice = parseFloat(document.querySelector('.cng-price').value);
  
-  petrolCostPerMonth = ltPer100Km * kmPerYear * petrolPrice / (100 * 12); // €/month
+  petrolCostPerMonth = ltPer100Km * kmPerYear * petrolPrice / (100 * 12); // β‚¬/month
   
   
   lpgCostPerMonth = (ltPer100Km * lpgConsumption) 
@@ -238,32 +234,32 @@ function calcResult(){
   const cngPercentageValue = 100*(petrolCostPerMonth-cngCostPerMonth)/petrolCostPerMonth;
   
   if(perYearCheckbox.checked){
-  	costLabels.forEach(label => label.textContent = 'Ετήσια Έξοδα:');
-    lpgResultLabel.textContent = 'Ετήσιο όφελος';
-    cngResultLabel.textContent = 'Ετήσιο όφελος';
+  	costLabels.forEach(label => label.textContent = 'Γ…Γ΄ΓΓ³Γ©Γ΅ ΒΈΓ®Γ―Γ¤Γ΅:');
+    lpgResultLabel.textContent = 'Γ…Γ΄ΓΓ³Γ©Γ― ΓΌΓ¶Γ¥Γ«Γ―Γ²';
+    cngResultLabel.textContent = 'Γ…Γ΄ΓΓ³Γ©Γ― ΓΌΓ¶Γ¥Γ«Γ―Γ²';
     
-    petrolCost.textContent = (petrolCostPerMonth*12).toFixed(1)+'€';
-    lpgCost.textContent = (lpgCostPerMonth*12).toFixed(1)+'€';
-    cngCost.textContent = (cngCostPerMonth*12).toFixed(1)+'€';
+    petrolCost.textContent = (petrolCostPerMonth*12).toFixed(1)+'β‚¬';
+    lpgCost.textContent = (lpgCostPerMonth*12).toFixed(1)+'β‚¬';
+    cngCost.textContent = (cngCostPerMonth*12).toFixed(1)+'β‚¬';
 
-    lpgResult.textContent = ((petrolCostPerMonth - lpgCostPerMonth)*12).toFixed(2)+'€';
+    lpgResult.textContent = ((petrolCostPerMonth - lpgCostPerMonth)*12).toFixed(2)+'β‚¬';
     lpgPercentageEl.textContent = lpgPercentageValue.toFixed(1)+'%';
 
-    cngResult.textContent = ((petrolCostPerMonth - cngCostPerMonth)*12).toFixed(2)+'€';
+    cngResult.textContent = ((petrolCostPerMonth - cngCostPerMonth)*12).toFixed(2)+'β‚¬';
     cngPercentageEl.textContent = cngPercentageValue.toFixed(1)+'%';
   }else{
-  	costLabels.forEach(label => label.textContent = 'Μηνιαία Έξοδα:');
-  	lpgResultLabel.textContent = 'Μηνιαίο όφελος';
-    cngResultLabel.textContent = 'Μηνιαίο όφελος';
+  	costLabels.forEach(label => label.textContent = 'ΓΓ§Γ­Γ©Γ΅ΓΓ΅ ΒΈΓ®Γ―Γ¤Γ΅:');
+  	lpgResultLabel.textContent = 'ΓΓ§Γ­Γ©Γ΅ΓΓ― ΓΌΓ¶Γ¥Γ«Γ―Γ²';
+    cngResultLabel.textContent = 'ΓΓ§Γ­Γ©Γ΅ΓΓ― ΓΌΓ¶Γ¥Γ«Γ―Γ²';
     
-    petrolCost.textContent = petrolCostPerMonth.toFixed(1)+'€';
-    lpgCost.textContent = lpgCostPerMonth.toFixed(1)+'€';
-    cngCost.textContent = cngCostPerMonth.toFixed(1)+'€';
+    petrolCost.textContent = petrolCostPerMonth.toFixed(1)+'β‚¬';
+    lpgCost.textContent = lpgCostPerMonth.toFixed(1)+'β‚¬';
+    cngCost.textContent = cngCostPerMonth.toFixed(1)+'β‚¬';
 
-    lpgResult.textContent = (petrolCostPerMonth - lpgCostPerMonth).toFixed(2)+'€';
+    lpgResult.textContent = (petrolCostPerMonth - lpgCostPerMonth).toFixed(2)+'β‚¬';
     lpgPercentageEl.textContent = lpgPercentageValue.toFixed(1)+'%';
 
-    cngResult.textContent = (petrolCostPerMonth - cngCostPerMonth).toFixed(2)+'€';
+    cngResult.textContent = (petrolCostPerMonth - cngCostPerMonth).toFixed(2)+'β‚¬';
     cngPercentageEl.textContent = cngPercentageValue.toFixed(1)+'%';
   }
 }
@@ -272,4 +268,3 @@ function calcCoverWidth(slider){
   let offset = (slider.max-slider.value)/(slider.max-slider.min) > 0.2 ? 0 : 1.5;
   return (slider.max-slider.value)/(slider.max-slider.min)*100+offset;
 }
-</script>
