@@ -160,12 +160,14 @@ function selectMakeOption() {
 	}
 }
 function selectModelOption() {
-	selectedModel = JSON.parse(localStorage.selectedModel);
-	let opts = modelSelect.options;
-	for (let i = 0; i <= opts.length; i++) {
-		if (selectedModel.name === opts[i].value) {
-			modelSelect.selectedIndex = i;
-			break;
+	if (typeof Storage !== 'undefined' && localStorage.selectedModel) {
+		selectedModel = JSON.parse(localStorage.selectedModel);
+		let opts = modelSelect.options;
+		for (let i = 0; i <= opts.length; i++) {
+			if (selectedModel.name === opts[i].value) {
+				modelSelect.selectedIndex = i;
+				break;
+			}
 		}
 	}
 }
