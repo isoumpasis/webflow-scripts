@@ -171,8 +171,10 @@ cylinderSelect.addEventListener('change', function () {
   console.log('cylinder changed', this.value);
   if (!this.value) {
     suggestedContainer.style.display = 'none';
+    localStorage.removeItem('selectedCylinder');
     return;
   }
+  localStorage.selectedCylinder = this.value;
   showResults();
 });
 
