@@ -1,5 +1,4 @@
 //System Identification
-console.log('local2');
 const url = 'https://lovatohellas.herokuapp.com/vehicleDB';
 let vehicleData;
 let selectedModel;
