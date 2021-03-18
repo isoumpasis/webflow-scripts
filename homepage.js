@@ -1,3 +1,4 @@
+
 //System Identification
 const url = 'https://lovatohellas.herokuapp.com/vehicleDB';
 let vehicleData;
@@ -14,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
   modelSelect.disabled = true;
   yearSelect.disabled = true;
   cylinderSelect.disabled = true;
-	modelSelect.innerHTML = '<option value="">ÌïíôÝëï</option>';
-  yearSelect.innerHTML = '<option value="">×ñïíïëïãßá</option>';
-  cylinderSelect.innerHTML = '<option value="">Êýëéíäñïé</option>';
+	modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
+  yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+  cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
   makeSelect.focus();
 });
 
@@ -25,12 +26,12 @@ makeSelect.addEventListener('change', function () {
   
   yearSelect.disabled = true;
   cylinderSelect.disabled = true;
-  yearSelect.innerHTML = '<option value="">×ñïíïëïãßá</option>';
-  cylinderSelect.innerHTML = '<option value="">Êýëéíäñïé</option>';
+  yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+  cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
   suggestedContainer.style.display = 'none';
   if(!this.value){
   	modelSelect.disabled = true;
-    modelSelect.innerHTML = '<option value="">ÌïíôÝëï</option>';
+    modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
   	return;
   }
   modelSelect.disabled = false;
@@ -58,13 +59,13 @@ makeSelect.addEventListener('change', function () {
 	})
 	.catch((error) => {
   	endLoadingModelSelect();
-    modelSelect.innerHTML = '<option value="">ÐñïóðáèÞóôå îáíÜ</option>';
+    modelSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
   	console.error('Error Fetch:', error);
 	});
 });
 
 function populateModelSelect(){
-	let modelOptionsStr = '<option value="">ÅðéëÝîôå ÌïíôÝëï</option>';
+	let modelOptionsStr = '<option value="">Επιλέξτε Μοντέλο</option>';
 	vehicleData.models.forEach(model => {
   	modelOptionsStr += `<option value="${model.name}">${model.name}</option>`;
   });
@@ -74,12 +75,12 @@ function populateModelSelect(){
 modelSelect.addEventListener('change', function () {
 	console.log('model changed', this.value);
   cylinderSelect.disabled = true;
-  cylinderSelect.innerHTML = '<option value="">Êýëéíäñïé</option>';
+  cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
   suggestedContainer.style.display = 'none';
   
   if(!this.value){
   	yearSelect.disabled = true;
-  	yearSelect.innerHTML = '<option value="">×ñïíïëïãßá</option>';
+  	yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
     return;
   }
   selectedModel = vehicleData.models.filter(model => model.name === this.value)[0];
@@ -91,7 +92,7 @@ modelSelect.addEventListener('change', function () {
 });
 
 function populateYearSelect(){
-	let yearOptionsStr = '<option value="">ÅðéëÝîôå ×ñïíïëïãßá</option>';
+	let yearOptionsStr = '<option value="">Επιλέξτε Χρονολογία</option>';
   
  	const [fromYear, toYear] = selectedModel.years; 
   for(let year = fromYear; year <= toYear; year++){
@@ -106,7 +107,7 @@ yearSelect.addEventListener('change', function () {
   
   if(!this.value){
   	cylinderSelect.disabled = true;
-  	cylinderSelect.innerHTML = '<option value="">Êýëéíäñïé</option>';
+  	cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
     return;
   }
   populateCylinderSelect();
@@ -115,7 +116,7 @@ yearSelect.addEventListener('change', function () {
 });
 
 function populateCylinderSelect(){
-	let cylinderOptionsStr = '<option value="">ÅðéëÝîôå Êõëßíäñïõò</option>';
+	let cylinderOptionsStr = '<option value="">Επιλέξτε Κυλίνδρους</option>';
   selectedModel.cylinders.forEach(cylinder => {
   	cylinderOptionsStr += `<option value="${cylinder}">${cylinder}</option>`;
   });
@@ -152,7 +153,7 @@ function showResults(){
   
  	suggestedDivs.forEach((suggestedDiv, i) => {
  		suggestedDiv.querySelector('.suggested-name').textContent = systemStr[i];
- 		suggestedDiv.querySelector('.suggested-btn').textContent = 'Ãíùñßóôå ôï '+systemStr[i];
+ 		suggestedDiv.querySelector('.suggested-btn').textContent = 'Γνωρίστε το '+systemStr[i];
  	});
   
   if(systemStr.length === 2){
@@ -171,7 +172,6 @@ function startLoadingModelSelect(){
 function endLoadingModelSelect(){
 	modelSelect.classList.remove('loading-model-select');
 }
-
 
 // Calculator
 const lpgConsumption = 1.15; //15% more than petrol
@@ -213,7 +213,7 @@ perYearCheckbox.addEventListener('change', calcResult);
 calcResult(); //init
 
 function calcResult(){
-  let res = 0;
+	let res = 0;
   let petrolCostPerMonth, lpgCostPerMonth, cngCostPerMonth;
   
   const ltPer100Km = parseInt(document.querySelector('.lt-100km').value);
@@ -234,9 +234,9 @@ function calcResult(){
   const cngPercentageValue = 100*(petrolCostPerMonth-cngCostPerMonth)/petrolCostPerMonth;
   
   if(perYearCheckbox.checked){
-  	costLabels.forEach(label => label.textContent = 'ÅôÞóéá ¸îïäá:');
-    lpgResultLabel.textContent = 'ÅôÞóéï üöåëïò';
-    cngResultLabel.textContent = 'ÅôÞóéï üöåëïò';
+  	costLabels.forEach(label => label.textContent = 'Ετήσια Έξοδα:');
+    lpgResultLabel.textContent = 'Ετήσιο όφελος';
+    cngResultLabel.textContent = 'Ετήσιο όφελος';
     
     petrolCost.textContent = (petrolCostPerMonth*12).toFixed(1)+'€';
     lpgCost.textContent = (lpgCostPerMonth*12).toFixed(1)+'€';
@@ -248,9 +248,9 @@ function calcResult(){
     cngResult.textContent = ((petrolCostPerMonth - cngCostPerMonth)*12).toFixed(2)+'€';
     cngPercentageEl.textContent = cngPercentageValue.toFixed(1)+'%';
   }else{
-  	costLabels.forEach(label => label.textContent = 'Ìçíéáßá ¸îïäá:');
-  	lpgResultLabel.textContent = 'Ìçíéáßï üöåëïò';
-    cngResultLabel.textContent = 'Ìçíéáßï üöåëïò';
+  	costLabels.forEach(label => label.textContent = 'Μηνιαία Έξοδα:');
+  	lpgResultLabel.textContent = 'Μηνιαίο όφελος';
+    cngResultLabel.textContent = 'Μηνιαίο όφελος';
     
     petrolCost.textContent = petrolCostPerMonth.toFixed(1)+'€';
     lpgCost.textContent = lpgCostPerMonth.toFixed(1)+'€';
