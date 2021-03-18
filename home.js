@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
     yearSelect.disabled = true;
     yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
     makeSelect.focus();
+    cylinderSelect.disabled = true;
+    cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
   }
-  cylinderSelect.disabled = true;
-  cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
 });
 
 makeSelect.addEventListener('change', function () {
