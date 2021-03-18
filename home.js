@@ -186,6 +186,8 @@ function getSystemPrice(system) {
 			return '1000€ + ΦΠΑ';
 		case 'C-OBD II 8cyl':
 			return '1100€ + ΦΠΑ';
+		default:
+			return 'default error: ' + system;
 	}
 }
 
