@@ -272,7 +272,7 @@ function getSystemPrice(system) {
 }
 
 suggestedDivs.forEach((suggestedDiv, i) => {
-  suggestedDiv.querySelector('.suggested-btn').addEventListener('click', () => {
+  suggestedDiv.querySelector('.suggested-btn').addEventListener('click', e => {
     console.log(e.target.value);
   });
   // suggestedDiv.querySelector('.suggested-name').textContent = systemStr[i];
