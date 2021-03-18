@@ -9,6 +9,7 @@ const yearSelect = document.querySelector('#yearSelect');
 const cylinderSelect = document.querySelector('#cylinderSelect');
 const suggestedDivs = document.querySelectorAll('.suggested-system-div');
 const suggestedContainer = document.querySelector('.suggested-container');
+let suggestedSystems;
 
 document.addEventListener('DOMContentLoaded', () => {
   initSelects();
@@ -31,6 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
+  suggestedDivs.forEach(suggestedDiv => {
+    suggestedDiv.querySelector('.suggested-btn').addEventListener('click', e => {
+      const selectedSystem = suggestedDiv.querySelector('.suggested-name').textContent;
+      localStorage.selectedSystem = selectedSystem;
+    });
+  });
 });
 
 function initSelects() {
@@ -218,31 +225,34 @@ function selectCylinderOption() {
 }
 
 function showResults() {
-  let systemStr;
   let cyls = cylinderSelect.value;
   let years = yearSelect.value;
 
   if (cyls == 5 || cyls == 6) {
-    systemStr = ['C-OBD II 6cyl'];
+    suggestedSystems = ['C-OBD II 6cyl'];
   } else if (cyls == 8) {
-    systemStr = ['C-OBD II 8cyl'];
+    suggestedSystems = ['C-OBD II 8cyl'];
   } else if (years < 1999) {
-    systemStr = ['E-GO'];
+    suggestedSystems = ['E-GO'];
   } else if (years >= 1999 && years < 2007) {
-    systemStr = ['E-GO', 'Smart ExR E/P'];
+    suggestedSystems = ['E-GO', 'Smart ExR E/P'];
   } else if (years >= 2007 && years < 2012) {
-    systemStr = ['Smart ExR K/P', 'C-OBD II'];
+    suggestedSystems = ['Smart ExR K/P', 'C-OBD II'];
   } else {
-    systemStr = ['C-OBD II'];
+    suggestedSystems = ['C-OBD II'];
   }
 
+  localStorage.suggestedSystems = JSON.stringify(suggestedSystems);
+
   suggestedDivs.forEach((suggestedDiv, i) => {
-    suggestedDiv.querySelector('.suggested-name').textContent = systemStr[i];
-    suggestedDiv.querySelector('.suggested-price').textContent = getSystemPrice(systemStr[i]);
-    suggestedDiv.querySelector('.suggested-btn').textContent = 'Γνωρίστε το ' + systemStr[i];
+    suggestedDiv.querySelector('.suggested-name').textContent = suggestedSystems[i];
+    suggestedDiv.querySelector('.suggested-price').textContent = getSystemPrice(
+      suggestedSystems[i]
+    );
+    suggestedDiv.querySelector('.suggested-btn').textContent = 'Γνωρίστε το ' + suggestedSystems[i];
   });
 
-  if (systemStr.length === 2) {
+  if (suggestedSystems.length === 2) {
     suggestedContainer.style.display = 'grid';
     suggestedDivs[1].style.display = 'flex';
   } else {
@@ -270,15 +280,6 @@ function getSystemPrice(system) {
       return 'default error: ' + system;
   }
 }
-
-suggestedDivs.forEach((suggestedDiv, i) => {
-  suggestedDiv.querySelector('.suggested-btn').addEventListener('click', e => {
-    console.log(e.target.value);
-  });
-  // suggestedDiv.querySelector('.suggested-name').textContent = systemStr[i];
-  // suggestedDiv.querySelector('.suggested-price').textContent = getSystemPrice(systemStr[i]);
-  // suggestedDiv.querySelector('.suggested-btn').textContent = 'Γνωρίστε το ' + systemStr[i];
-});
 /* System Identification END */
 
 /* Calculator */
