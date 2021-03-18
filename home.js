@@ -1,5 +1,4 @@
 //System Identification
-console.log('paizei?');
 const url = 'https://lovatohellas.herokuapp.com/vehicleDB';
 let vehicleData;
 let selectedModel;
@@ -20,8 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
     populateModelSelect();
     selectModelOption(); //from storage
     populateYearSelect();
-
-    yearSelect.focus();
+    selectYearOption(); //from storage
+    populateCylinderSelect();
+    selectCylinderOption(); //from storage
+    showResults();
   } else {
     modelSelect.disabled = true;
     modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
@@ -125,14 +126,18 @@ yearSelect.addEventListener('change', function () {
   if (!this.value) {
     cylinderSelect.disabled = true;
     cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
+    localStorage.removeItem('storageYearSelect');
     return;
   }
+  localStorage.storageYearSelect = this.value;
   populateCylinderSelect();
   cylinderSelect.disabled = false;
   cylinderSelect.focus();
 });
 
 function populateCylinderSelect() {
+  if (typeof Storage !== 'undefined' && !localStorage.storageYearSelect) return;
+
   let cylinderOptionsStr = '<option value="">Επιλέξτε Κυλίνδρους</option>';
   selectedModel.cylinders.forEach(cylinder => {
     cylinderOptionsStr += `<option value="${cylinder}">${cylinder}</option>`;
@@ -165,6 +170,30 @@ function selectModelOption() {
     for (let i = 0; i <= opts.length; i++) {
       if (selectedModel.name === opts[i].value) {
         modelSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }
+}
+function selectYearOption() {
+  if (typeof Storage !== 'undefined' && localStorage.yearSelect) {
+    const storageYearSelect = localStorage.yearSelect;
+    let opts = yearSelect.options;
+    for (let i = 0; i <= opts.length; i++) {
+      if (storageYearSelect === opts[i].value) {
+        yearSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }
+}
+function selectCylinderOption() {
+  if (typeof Storage !== 'undefined' && localStorage.cylinderSelect) {
+    const storageCylinderSelect = localStorage.cylinderSelect;
+    let opts = cylinderSelect.options;
+    for (let i = 0; i <= opts.length; i++) {
+      if (storageCylinderSelect === opts[i].value) {
+        cylinderSelect.selectedIndex = i;
         break;
       }
     }
