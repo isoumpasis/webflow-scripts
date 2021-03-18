@@ -1,8 +1,6 @@
 const par = document.querySelector('.paragraph-2');
-console.log('whyn ontih???gn');
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('whyn ontihgn');
   if (
     typeof Storage !== 'undefined' &&
     localStorage.suggestedSystems &&
