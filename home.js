@@ -24,11 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	} else {
 		modelSelect.disabled = true;
 		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-		makeSelect.focus();
+		yearSelect.disabled = true;
+		yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+		yearSelect.focus();
 	}
-	yearSelect.disabled = true;
 	cylinderSelect.disabled = true;
-	yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
 	cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
 });
 
