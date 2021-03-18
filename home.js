@@ -20,13 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		selectModelOption(); //from storage
 		populateYearSelect();
 
-		modelSelect.focus();
+		yearSelect.focus();
 	} else {
 		modelSelect.disabled = true;
 		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
 		yearSelect.disabled = true;
 		yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-		yearSelect.focus();
+		makeSelect.focus();
 	}
 	cylinderSelect.disabled = true;
 	cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
