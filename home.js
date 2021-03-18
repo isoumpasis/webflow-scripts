@@ -15,15 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		vehicleData = JSON.parse(localStorage.vehicleData);
 		console.log('Parsed json', vehicleData);
 		populateModelSelect();
+		modelSelect.focus();
 	} else {
 		modelSelect.disabled = true;
-		yearSelect.disabled = true;
-		cylinderSelect.disabled = true;
 		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-		yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-		cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
 		makeSelect.focus();
 	}
+	yearSelect.disabled = true;
+	cylinderSelect.disabled = true;
+	yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+	cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
 });
 
 makeSelect.addEventListener('change', function () {
