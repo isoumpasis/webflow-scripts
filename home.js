@@ -1,4 +1,5 @@
 //System Identification
+console.log('paizei?');
 const url = 'https://lovatohellas.herokuapp.com/vehicleDB';
 let vehicleData;
 let selectedModel;
