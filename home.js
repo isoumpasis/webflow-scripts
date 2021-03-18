@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		selectMakeOption();
 		populateModelSelect();
+		selectModelOption(); //from storage
+		populateYearSelect();
 
 		modelSelect.focus();
 	} else {
@@ -93,12 +95,14 @@ modelSelect.addEventListener('change', function () {
 	if (!this.value) {
 		yearSelect.disabled = true;
 		yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+		localStorage.removeItem('selectedModel');
 		return;
 	}
 	selectedModel = vehicleData.models.filter(
 		model => model.name === this.value
 	)[0];
 	console.log('selectedModel', selectedModel);
+	localStorage.selectedModel = JSON.stringify(selectedModel);
 
 	populateYearSelect();
 	yearSelect.disabled = false;
@@ -151,6 +155,16 @@ function selectMakeOption() {
 	for (let i = 0; i <= opts.length; i++) {
 		if (vehicleData.make === opts[i].value) {
 			makeSelect.selectedIndex = i;
+			break;
+		}
+	}
+}
+function selectModelOption() {
+	selectedModel = JSON.parse(localStorage.selectedModel);
+	let opts = modelSelect.options;
+	for (let i = 0; i <= opts.length; i++) {
+		if (selectedModel.name === opts[i].value) {
+			modelSelect.selectedIndex = i;
 			break;
 		}
 	}
