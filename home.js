@@ -1,5 +1,5 @@
 //System Identification
-console.log('hello from vs code!');
+console.log('hello 2');
 const url = 'https://lovatohellas.herokuapp.com/vehicleDB';
 let vehicleData;
 let selectedModel;
