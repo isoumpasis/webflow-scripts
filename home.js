@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     selectYearOption(); //from storage
     populateCylinderSelect();
     selectCylinderOption(); //from storage
-    showResults();
+    //showResults();
   } else {
     modelSelect.disabled = true;
     modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
@@ -65,6 +65,8 @@ makeSelect.addEventListener('change', function () {
       console.log('Success Fetch Response Data:', data);
       if (data.msg === 'no vehicles') return;
       vehicleData = data;
+
+      localStorage.clear(); //reset every time make changes
       localStorage.vehicleData = JSON.stringify(vehicleData);
 
       populateModelSelect();
@@ -167,6 +169,7 @@ function selectModelOption() {
   if (typeof Storage !== 'undefined' && localStorage.selectedModel) {
     selectedModel = JSON.parse(localStorage.selectedModel);
     let opts = modelSelect.options;
+    console.log('select model option opts', opts);
     for (let i = 0; i <= opts.length; i++) {
       if (selectedModel.name === opts[i].value) {
         modelSelect.selectedIndex = i;
