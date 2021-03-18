@@ -108,6 +108,7 @@ modelSelect.addEventListener('change', function () {
 });
 
 function populateYearSelect() {
+  if (!selectedModel) return;
   let yearOptionsStr = '<option value="">Επιλέξτε Χρονολογία</option>';
 
   const [fromYear, toYear] = selectedModel.years;
@@ -159,7 +160,6 @@ function selectMakeOption() {
 }
 function selectModelOption() {
   if (typeof Storage !== 'undefined' && localStorage.selectedModel) {
-    console.log('localStorage.selectedModel', localStorage.selectedModel);
     selectedModel = JSON.parse(localStorage.selectedModel);
     let opts = modelSelect.options;
     for (let i = 0; i <= opts.length; i++) {
