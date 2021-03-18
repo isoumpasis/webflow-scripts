@@ -112,6 +112,8 @@ modelSelect.addEventListener('change', function () {
   cylinderSelect.disabled = true;
   cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
   suggestedContainer.style.display = 'none';
+  localStorage.removeItem('selectedYear');
+  localStorage.removeItem('selectedCylinder');
 
   if (!this.value) {
     yearSelect.disabled = true;
@@ -141,6 +143,7 @@ function populateYearSelect() {
 yearSelect.addEventListener('change', function () {
   console.log('year changed', this.value);
   suggestedContainer.style.display = 'none';
+  localStorage.removeItem('selectedCylinder');
 
   if (!this.value) {
     cylinderSelect.disabled = true;
