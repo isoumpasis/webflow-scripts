@@ -11,6 +11,8 @@ const suggestedDivs = document.querySelectorAll('.suggested-system-div');
 const suggestedContainer = document.querySelector('.suggested-container');
 
 document.addEventListener('DOMContentLoaded', () => {
+  initSelects();
+
   if (typeof Storage !== 'undefined' && localStorage.vehicleData) {
     vehicleData = JSON.parse(localStorage.vehicleData);
     console.log('Parsed json local storage', vehicleData);
@@ -28,16 +30,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-  } else {
-    modelSelect.disabled = true;
-    modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-    yearSelect.disabled = true;
-    yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-    makeSelect.focus();
-    cylinderSelect.disabled = true;
-    cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
   }
+  // else {
+  //   modelSelect.disabled = true;
+  //   modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
+  //   yearSelect.disabled = true;
+  //   yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+  //   makeSelect.focus();
+  //   cylinderSelect.disabled = true;
+  //   cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
+  // }
 });
+
+function initSelects() {
+  modelSelect.disabled = true;
+  modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
+  yearSelect.disabled = true;
+  yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+  cylinderSelect.disabled = true;
+  cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
+  makeSelect.focus();
+}
 
 makeSelect.addEventListener('change', function () {
   console.log('make changed', this.value);
@@ -76,8 +89,6 @@ makeSelect.addEventListener('change', function () {
 
       populateModelSelect();
       endLoadingModelSelect();
-      modelSelect.disabled = false;
-      modelSelect.focus();
     })
     .catch(error => {
       endLoadingModelSelect();
@@ -92,6 +103,8 @@ function populateModelSelect() {
     modelOptionsStr += `<option value="${model.name}">${model.name}</option>`;
   });
   modelSelect.innerHTML = modelOptionsStr;
+  modelSelect.disabled = false;
+  modelSelect.focus();
 }
 
 modelSelect.addEventListener('change', function () {
@@ -111,8 +124,6 @@ modelSelect.addEventListener('change', function () {
   localStorage.selectedModel = JSON.stringify(selectedModel);
 
   populateYearSelect();
-  yearSelect.disabled = false;
-  yearSelect.focus();
 });
 
 function populateYearSelect() {
@@ -123,6 +134,8 @@ function populateYearSelect() {
     yearOptionsStr += `<option value="${year}">${year}</option>`;
   }
   yearSelect.innerHTML = yearOptionsStr;
+  yearSelect.disabled = false;
+  yearSelect.focus();
 }
 
 yearSelect.addEventListener('change', function () {
@@ -137,8 +150,6 @@ yearSelect.addEventListener('change', function () {
   }
   localStorage.selectedYear = this.value;
   populateCylinderSelect();
-  cylinderSelect.disabled = false;
-  cylinderSelect.focus();
 });
 
 function populateCylinderSelect() {
@@ -149,6 +160,8 @@ function populateCylinderSelect() {
     cylinderOptionsStr += `<option value="${cylinder}">${cylinder}</option>`;
   });
   cylinderSelect.innerHTML = cylinderOptionsStr;
+  cylinderSelect.disabled = false;
+  cylinderSelect.focus();
 }
 
 cylinderSelect.addEventListener('change', function () {
