@@ -1,5 +1,4 @@
 //System Identification
-console.log('hello 2');
 const url = 'https://lovatohellas.herokuapp.com/vehicleDB';
 let vehicleData;
 let selectedModel;
@@ -157,6 +156,8 @@ function showResults() {
 	suggestedDivs.forEach((suggestedDiv, i) => {
 		suggestedDiv.querySelector('.suggested-name').textContent =
 			systemStr[i];
+		suggestedDiv.querySelector('.suggested-price').textContent =
+			getSystemPrice[systemStr[i]];
 		suggestedDiv.querySelector('.suggested-btn').textContent =
 			'Γνωρίστε το ' + systemStr[i];
 	});
@@ -168,6 +169,23 @@ function showResults() {
 		suggestedDivs[1].style.display = 'none';
 		suggestedContainer.style.display = 'flex';
 		suggestedContainer.style.justifyContent = 'center';
+	}
+}
+
+function getSystemPrice(system) {
+	switch (system) {
+		case 'E-GO':
+			return '600€ + ΦΠΑ';
+		case 'Smart ExR E/P':
+			return '640€ + ΦΠΑ';
+		case 'Smart ExR K/P':
+			return '680€ + ΦΠΑ';
+		case 'C-OBD II':
+			return '720€ + ΦΠΑ';
+		case 'C-OBD II 6cyl':
+			return '1000€ + ΦΠΑ';
+		case 'C-OBD II 8cyl':
+			return '1100€ + ΦΠΑ';
 	}
 }
 
