@@ -45,7 +45,7 @@ makeSelect.addEventListener('change', function () {
   if (!this.value) {
     modelSelect.disabled = true;
     modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-    localStorage.removeItem('vehicleData');
+    localStorage.clear(); //reset
     return;
   }
   modelSelect.disabled = false;
