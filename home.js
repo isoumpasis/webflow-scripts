@@ -31,6 +31,7 @@ makeSelect.addEventListener('change', function () {
 	if (!this.value) {
 		modelSelect.disabled = true;
 		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
+		localStorage.removeItem('vehicleData');
 		return;
 	}
 	modelSelect.disabled = false;
@@ -50,6 +51,7 @@ makeSelect.addEventListener('change', function () {
 			console.log('Success Fetch Response Data:', data);
 			if (data.msg === 'no vehicles') return;
 			vehicleData = data;
+			localStorage.vehicleData = JSON.stringify(vehicleData);
 
 			populateModelSelect();
 			endLoadingModelSelect();
