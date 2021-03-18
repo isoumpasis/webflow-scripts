@@ -139,9 +139,9 @@ function showResults() {
 	let cyls = cylinderSelect.value;
 	let years = yearSelect.value;
 
-	if (cyls === 5 || cyls === 6) {
+	if (cyls == 5 || cyls == 6) {
 		systemStr = ['C-OBD II 6cyl'];
-	} else if (cyls === 8) {
+	} else if (cyls == 8) {
 		systemStr = ['C-OBD II 8cyl'];
 	} else if (years < 1999) {
 		systemStr = ['E-GO'];
