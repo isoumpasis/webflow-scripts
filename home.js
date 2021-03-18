@@ -156,8 +156,9 @@ function showResults() {
 	suggestedDivs.forEach((suggestedDiv, i) => {
 		suggestedDiv.querySelector('.suggested-name').textContent =
 			systemStr[i];
-		suggestedDiv.querySelector('.suggested-price').textContent =
-			getSystemPrice[systemStr[i]];
+		suggestedDiv.querySelector(
+			'.suggested-price'
+		).textContent = getSystemPrice(systemStr[i]);
 		suggestedDiv.querySelector('.suggested-btn').textContent =
 			'Γνωρίστε το ' + systemStr[i];
 	});
