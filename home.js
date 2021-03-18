@@ -1,4 +1,4 @@
-//System Identification
+/* System Identification */
 const url = 'https://lovatohellas.herokuapp.com/vehicleDB';
 let vehicleData;
 let selectedModel;
@@ -31,15 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-  // else {
-  //   modelSelect.disabled = true;
-  //   modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-  //   yearSelect.disabled = true;
-  //   yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-  //   makeSelect.focus();
-  //   cylinderSelect.disabled = true;
-  //   cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
-  // }
 });
 
 function initSelects() {
@@ -96,6 +87,13 @@ makeSelect.addEventListener('change', function () {
       console.error('Error Fetch:', error);
     });
 });
+
+function startLoadingModelSelect() {
+  modelSelect.classList.add('loading-model-select');
+}
+function endLoadingModelSelect() {
+  modelSelect.classList.remove('loading-model-select');
+}
 
 function populateModelSelect() {
   let modelOptionsStr = '<option value="">Επιλέξτε Μοντέλο</option>';
@@ -273,14 +271,17 @@ function getSystemPrice(system) {
   }
 }
 
-function startLoadingModelSelect() {
-  modelSelect.classList.add('loading-model-select');
-}
-function endLoadingModelSelect() {
-  modelSelect.classList.remove('loading-model-select');
-}
+suggestedDivs.forEach((suggestedDiv, i) => {
+  suggestedDiv.querySelector('.suggested-btn').addEventListener('click', () => {
+    console.log(e.target.value);
+  });
+  // suggestedDiv.querySelector('.suggested-name').textContent = systemStr[i];
+  // suggestedDiv.querySelector('.suggested-price').textContent = getSystemPrice(systemStr[i]);
+  // suggestedDiv.querySelector('.suggested-btn').textContent = 'Γνωρίστε το ' + systemStr[i];
+});
+/* System Identification END */
 
-// Calculator
+/* Calculator */
 const lpgConsumption = 1.15; //15% more than petrol
 const cngConsumption = -0.444; //44,44% less than petrol
 
@@ -372,3 +373,4 @@ function calcCoverWidth(slider) {
   let offset = (slider.max - slider.value) / (slider.max - slider.min) > 0.2 ? 0 : 1.5;
   return ((slider.max - slider.value) / (slider.max - slider.min)) * 100 + offset;
 }
+/* Calculator END */
