@@ -119,6 +119,8 @@ modelSelect.addEventListener('change', function () {
   suggestedContainer.style.display = 'none';
   localStorage.removeItem('selectedYear');
   localStorage.removeItem('selectedCylinder');
+  localStorage.removeItem('suggestedSystems');
+  localStorage.removeItem('selectedSystem');
 
   if (!this.value) {
     yearSelect.disabled = true;
@@ -149,6 +151,8 @@ yearSelect.addEventListener('change', function () {
   console.log('year changed', this.value);
   suggestedContainer.style.display = 'none';
   localStorage.removeItem('selectedCylinder');
+  localStorage.removeItem('suggestedSystems');
+  localStorage.removeItem('selectedSystem');
 
   if (!this.value) {
     cylinderSelect.disabled = true;
@@ -174,9 +178,12 @@ function populateCylinderSelect() {
 
 cylinderSelect.addEventListener('change', function () {
   console.log('cylinder changed', this.value);
+
   if (!this.value) {
     suggestedContainer.style.display = 'none';
     localStorage.removeItem('selectedCylinder');
+    localStorage.removeItem('suggestedSystems');
+    localStorage.removeItem('selectedSystem');
     return;
   }
   localStorage.selectedCylinder = this.value;
