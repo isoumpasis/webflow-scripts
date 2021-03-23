@@ -1,5 +1,5 @@
 const geoJsonUrl =
-	'https://lovatohellas.herokuapp.com/static/map/storesGeoJson.json'; //test
+	'https://lovatohellas.herokuapp.com/static/map/pinsGeoJsonCache.json'; //cache json from serve
 
 const episimosIconUrl =
 	'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
@@ -443,6 +443,7 @@ function openInfoWindow(marker) {
 	// 	prepareModal(photosContainer);
 	// }
 	// prepareInformation(uploadedImgsElements);
+	console.log(marker.props);
 	prepareInformation(undefined, marker);
 
 	infoWindow.setContent(infoWindowDiv);
