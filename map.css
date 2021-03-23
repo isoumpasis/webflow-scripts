@@ -1,19 +1,21 @@
-@font-face {
+/* @font-face {
 	font-family: lovato;
 	src: url('/static/fonts/PFHighwaySansPro-Regular.woff2');
 }
 @font-face {
 	font-family: lovatoBold;
 	src: url('/static/fonts/PFHighwaySansPro-Bold.woff2');
-}
+} */
 
 body {
-	font-family: lovato, sans-serif;
+	font-family: Pfhighwaysanspro, sans-serif;
+	font-weight: 400;
 }
 
 .lovato-services-header,
 .custom-services-header {
-	font-family: lovatoBold, sans-serif;
+	font-family: Pfhighwaysanspro, sans-serif;
+	font-weight: 700;
 }
 
 .tooltip-help {
@@ -21,7 +23,8 @@ body {
 	display: inline-block;
 	border-bottom: 1px dotted black;
 	cursor: help;
-	font-family: lovatoBold;
+	font-family: Pfhighwaysanspro, sans-serif;
+	font-weight: 700;
 }
 
 .tooltip-help .tooltiptext {
@@ -37,7 +40,8 @@ body {
 	color: #fff;
 	z-index: 99;
 	visibility: hidden;
-	font-family: lovato;
+	font-family: Pfhighwaysanspro, sans-serif;
+	font-weight: 400;
 }
 .tooltip-help .tooltiptext-down {
 	position: absolute;
@@ -52,7 +56,8 @@ body {
 	color: #fff;
 	z-index: 99;
 	visibility: hidden;
-	font-family: lovato;
+	font-family: Pfhighwaysanspro, sans-serif;
+	font-weight: 400;
 }
 
 .tooltip-help .tooltiptext::after {
@@ -161,7 +166,8 @@ body {
 }
 
 .infoWindow {
-	font-family: lovato, sans-serif;
+	font-family: Pfhighwaysanspro, sans-serif;
+	font-weight: 400;
 	font-size: 17px;
 }
 
@@ -287,7 +293,8 @@ img {
 }
 
 .info-name-value {
-	font-family: lovatoBold;
+	font-family: Pfhighwaysanspro, sans-serif;
+	font-weight: 700;
 	overflow-wrap: break-word;
 	text-align: center;
 	line-height: 1.3rem;
@@ -348,7 +355,8 @@ hr {
 }
 
 .info-services-header {
-	font-family: lovatoBold;
+	font-family: Pfhighwaysanspro, sans-serif;
+	font-weight: 700;
 	margin-bottom: 0.8rem;
 	font-size: 21px;
 }
@@ -361,7 +369,8 @@ hr {
 }
 
 .info-services svg {
-	font-family: lovatoBold;
+	font-family: Pfhighwaysanspro, sans-serif;
+	font-weight: 700;
 	width: 20px;
 	height: 20px;
 	margin-right: 1.2rem;
@@ -372,7 +381,8 @@ hr {
 }
 
 .info-customServices-header {
-	font-family: lovatoBold;
+	font-family: Pfhighwaysanspro, sans-serif;
+	font-weight: 700;
 	margin-bottom: 0.8rem;
 	font-size: 15px;
 }
