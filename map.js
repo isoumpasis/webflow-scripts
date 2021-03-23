@@ -118,7 +118,6 @@ async function initMap() {
 	map.data.loadGeoJson(geoJsonUrl, null, features => {
 		markers = features.map(feature => {
 			const g = feature.getGeometry();
-			console.log(g.get(0));
 			return new google.maps.Marker({
 				position: g.get(0),
 				icon: {
@@ -434,9 +433,12 @@ function openInfoWindow(marker) {
 	infoWindowDiv = document.createElement('div');
 	infoWindowDiv.className = 'infoWindow infoWindow-open';
 
-	// const uploadedImgsElements = document.querySelectorAll('.uploaded-img');
-	// const photosContainer = preparePhotos(uploadedImgsElements);
-	// if (uploadedImgsElements.length > 1) {
+	markerProps = marker.props.j;
+	console.log(markerProps);
+
+	//const uploadedImgs = marker.props.getProperty.imgs
+	// const photosContainer = preparePhotos(marker);
+	// if (uploadedImgs.length > 1) {
 	// 	prepareSlideshow(photosContainer);
 	// }
 	// if (uploadedImgsElements.length) {
