@@ -441,19 +441,19 @@ function openInfoWindow(marker) {
 	const markerProps = marker.props.j;
 	console.log(markerProps);
 
-	// const photosContainer = preparePhotos(markerProps.imgs);
-	// if (markerProps.imgs.length > 1) {
-	// 	prepareSlideshow(photosContainer);
-	// }
-	// if (markerProps.imgs.length) {
-	// 	prepareModal(photosContainer);
-	// }
+	const photosContainer = preparePhotos(markerProps.imgs);
+	if (markerProps.imgs.length > 1) {
+		prepareSlideshow(photosContainer);
+	}
+	if (markerProps.imgs.length) {
+		prepareModal(photosContainer);
+	}
 	prepareInformation(markerProps);
 
 	infoWindow.setContent(infoWindowDiv);
 	infoWindow.setPosition(selectedMarker.position);
 	infoWindow.setOptions({
-		pixelOffset: new google.maps.Size(0, 0) //-60)
+		pixelOffset: new google.maps.Size(0, 10) //0) //-60)
 	});
 	infoWindow.open(map);
 }
@@ -734,22 +734,48 @@ function customServicesDisplay(markerProps) {
 	}
 }
 
-// function preparePhotos(uploadedImgsElements) {
-// 	const photosContainer = document.createElement('div');
-// 	photosContainer.className = 'photos-container';
+function preparePhotos(markerImgs) {
+	const photosContainer = document.createElement('div');
+	photosContainer.className = 'photos-container';
 
-// 	let photosHtml = ``;
-// 	uploadedImgsElements.forEach(imgEl => {
-// 		photosHtml += `
-// 			<div class='info-image'>
-// 				${imgEl.firstElementChild.outerHTML}
-// 			</div>
-// 			`;
-// 	});
-// 	photosContainer.innerHTML = photosHtml;
-// 	infoWindowDiv.append(photosContainer);
-// 	return photosContainer;
-// }
+	let photosHtml = ``;
+	let imgElement;
+	markerImgs.forEach(markerImg => {
+		imgElement = insertImgToDOM(markerImg);
+		photosHtml += `
+			<div class='info-image'>
+				${imgElement.firstElementChild.outerHTML}
+			</div>
+			`;
+	});
+	photosContainer.innerHTML = photosHtml;
+	infoWindowDiv.append(photosContainer);
+	return photosContainer;
+}
+
+function insertImgToDOM(img) {
+	const imgHtml = `<img src="data:image/${
+		img.contentType
+	};base64,${bufferToBase64(img.data.data)}"/>`;
+
+	const newImgElement = document.createElement('div');
+	newImgElement.className = 'uploaded-img';
+	newImgElement.innerHTML = imgHtml;
+
+	return newImgElement;
+
+	function bufferToBase64(buf) {
+		var binstr = Array.prototype.map
+			.call(buf, function (ch) {
+				return String.fromCharCode(ch);
+			})
+			.join('');
+		return btoa(binstr);
+	}
+}
+function insertAfter(referenceNode, newNode) {
+	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
 
 // function prepareSlideshow(photosDiv) {
 // 	slideIndex = 1;
