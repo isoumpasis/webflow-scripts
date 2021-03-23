@@ -228,7 +228,7 @@ async function initMap() {
 		});
 
 		userMarker.addListener('click', () => {
-			console.log('markerUser clicked');
+			console.log('userMarker clicked');
 			map.setZoom(searchZoom);
 			map.setCenter(userMarker.position);
 		});
@@ -358,15 +358,6 @@ async function initMap() {
 // 	});
 // }
 
-// function startDeleteLoader() {
-// 	document
-// 		.querySelector('.delete-loader-container')
-// 		.classList.remove('d-none');
-// }
-// function endDeleteLoader() {
-// 	document.querySelector('.delete-loader-container').classList.add('d-none');
-// }
-
 // function getGeometryFromString(str) {
 // 	let [latStr, lngStr] = str.split(',');
 // 	let lat = latStr.substring(1, latStr.length).trim();
@@ -378,388 +369,352 @@ async function initMap() {
 // 	};
 // }
 
-// function getCurrentPosition() {
-// 	return new Promise((resolve, reject) => {
-// 		let geolocationOptions = {
-// 			enableHighAccuracy: true,
-// 			timeout: 5000,
-// 			maximumAge: 0
-// 		};
+function getCurrentPosition() {
+	return new Promise((resolve, reject) => {
+		let geolocationOptions = {
+			enableHighAccuracy: true,
+			timeout: 5000,
+			maximumAge: 0
+		};
 
-// 		navigator.geolocation.getCurrentPosition(
-// 			pos => {
-// 				resolve([
-// 					pos.coords.latitude,
-// 					pos.coords.longitude,
-// 					pos.coords.accuracy
-// 				]);
-// 			},
-// 			err => {
-// 				console.warn(
-// 					`ERROR on geolocation: ${err.code}: ${err.message}`
-// 				);
-// 				reject([0, 0]);
-// 			},
-// 			geolocationOptions
-// 		);
-// 	});
-// }
+		navigator.geolocation.getCurrentPosition(
+			pos => {
+				resolve([
+					pos.coords.latitude,
+					pos.coords.longitude,
+					pos.coords.accuracy
+				]);
+			},
+			err => {
+				console.warn(
+					`ERROR on geolocation: ${err.code}: ${err.message}`
+				);
+				reject([0, 0]);
+			},
+			geolocationOptions
+		);
+	});
+}
 
-// async function runGeocoder(addressEl, options = {}) {
-// 	let newAddress = addressEl.value;
-// 	let waitTime = waitTimeBeforeGeocoding;
-// 	if (options?.withTimeout) {
-// 		clearTimeout(thAddress);
-// 	} else {
-// 		waitTime = 0;
-// 	}
+async function geocoderSolution(address) {
+	return new Promise((resolve, reject) => {
+		if (!address) {
+			//alert('Παρακαλώ προσθέστε μια περιοχή!');
+			reject('Παρακαλώ προσθέστε μια περιοχή!');
+			return;
+		}
+		geocoder.geocode(
+			{
+				address: address,
+				componentRestrictions: {
+					country: 'gr'
+				}
+			},
+			(results, status) => {
+				if (status === 'OK') {
+					// console.log('geocoding for', address);
+					// console.log(
+					// 	'geocoder address result',
+					// 	results[0].formatted_address
+					// );
+					resolve(results[0].geometry.location);
+				} else {
+					//alert(
+					//	'Συγγνώμη, δεν βρέθηκε τέτοια περιοχή. Ξαναπροσπαθήστε!'
+					//);
+					reject('Δε βρέθηκε τέτοια περιοχή! Προσπαθήστε ξανά.');
+					return;
+				}
+			}
+		);
+	});
+}
 
-// 	if (!addressEl.value) {
-// 		addressEl.nextElementSibling.className = 'validation-msg invalid';
-// 		addressEl.nextElementSibling.textContent =
-// 			'Παρακαλώ προσθέστε μια διεύθυνση!';
-// 		addressEl.className = 'form-control invalid-input';
-// 		return;
-// 	}
+function openInfoWindow(marker) {
+	infoWindowDiv = document.createElement('div');
+	infoWindowDiv.className = 'infoWindow infoWindow-open';
 
-// 	thAddress = setTimeout(async e => {
-// 		let newLocation;
-// 		try {
-// 			//show loader
-// 			newLocation = await geocoderSolution(newAddress);
-// 			userMarker.setPosition(newLocation);
-// 			openInfoWindow();
-// 			map.setZoom(startZoom);
-// 			map.setCenter(newLocation);
-// 			workerElements.geometry.value = newLocation.toString();
-// 			addressEl.nextElementSibling.className = 'validation-msg valid';
-// 			addressEl.nextElementSibling.textContent =
-// 				'Βρέθηκε τοποθεσία! Σύρετε την πιζένα στο χάρτη για μεγαλύτερη ακρίβεια.';
-// 			addressEl.className = 'form-control';
-// 			geocoderFoundAddress = true;
-// 		} catch (e) {
-// 			addressEl.nextElementSibling.className = 'validation-msg invalid';
-// 			addressEl.nextElementSibling.textContent = e;
-// 			addressEl.className = 'form-control invalid-input';
-// 			geocoderFoundAddress = false;
-// 		}
-// 	}, waitTime);
-// }
+	// const uploadedImgsElements = document.querySelectorAll('.uploaded-img');
+	// const photosContainer = preparePhotos(uploadedImgsElements);
+	// if (uploadedImgsElements.length > 1) {
+	// 	prepareSlideshow(photosContainer);
+	// }
+	// if (uploadedImgsElements.length) {
+	// 	prepareModal(photosContainer);
+	// }
+	// prepareInformation(uploadedImgsElements);
+	prepareInformation(marker);
 
-// async function geocoderSolution(address) {
-// 	return new Promise((resolve, reject) => {
-// 		if (!address) {
-// 			//alert('Παρακαλώ προσθέστε μια περιοχή!');
-// 			reject('Παρακαλώ προσθέστε μια περιοχή!');
-// 			return;
-// 		}
-// 		geocoder.geocode(
-// 			{
-// 				address: address,
-// 				componentRestrictions: {
-// 					country: 'gr'
-// 				}
-// 			},
-// 			(results, status) => {
-// 				if (status === 'OK') {
-// 					// console.log('geocoding for', address);
-// 					// console.log(
-// 					// 	'geocoder address result',
-// 					// 	results[0].formatted_address
-// 					// );
-// 					resolve(results[0].geometry.location);
-// 				} else {
-// 					//alert(
-// 					//	'Συγγνώμη, δεν βρέθηκε τέτοια περιοχή. Ξαναπροσπαθήστε!'
-// 					//);
-// 					reject('Δε βρέθηκε τέτοια περιοχή! Προσπαθήστε ξανά.');
-// 					return;
-// 				}
-// 			}
-// 		);
-// 	});
-// }
+	infoWindow.setContent(infoWindowDiv);
+	infoWindow.setPosition(selectedMarker.position);
+	infoWindow.setOptions({
+		pixelOffset: new google.maps.Size(0, -60)
+	});
+	infoWindow.open(map);
+}
 
-// function openInfoWindow() {
-// 	infoWindowDiv = document.createElement('div');
-// 	infoWindowDiv.className = 'infoWindow infoWindow-open';
+function prepareInformation(uploadedImgsElements) {
+	let nameHtml = `
+      <div class='info-name-value-container'>
+				<div class='info-name-value'>
+				${marker.props.getProperty('name')}
+				</div>
+			</div>
+      <div class='lovato-icon-header'>
+        <svg class="svg-lovato-icon-header" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="M93.76,93.83a44.33,44.33,0,1,1,62.77,62.62C139.18,173.66,38.9,245.31,21.69,228,4.34,210.75,76.41,111,93.76,93.83" fill="#ffffff"/><path d="M125.07,7c65,0,118.05,53.17,118.05,118.19s-53,117.91-118,117.91H68.94l3.67-1.69,5.64-3,5.79-3,5.77-3.24,5.79-3.38,5.78-3.53,5.78-3.53,5.64-3.67,5.64-3.66,5.5-3.67,5.5-3.67,5.23-3.66,5.07-3.53,4.8-3.53,4.65-3.38,4.23-3.38,4.09-3.11,3.81-3,3.39-2.82,3.1-2.68,2.82-2.54,2.54-2.39,2.39-2.55,2.26-2.53,2.12-2.82,2-2.68,1.69-3,1.7-3,1.41-3,1.41-3.1,1.12-3.1,1-3.11.85-3.1.7-3.24.57-3.25.42-3.25.14-3.24.14-3.1-.14-3.25-.14-3.24-.42-3.24-.57-3.24-.7-3.11-.85-3.25-1-3.09-1.12-3.11-1.41-3.1-1.41-3-1.7-3-1.69-2.82-2-2.82-2.12-2.69-2.26-2.68-2.39-2.53-2.54-2.4-2.54-2.26-2.82-2.12-2.68-1.83-3-1.83-3-1.69-3-1.41-3.1-1.41L147.5,61l-3.1-1-3.11-.85-3.24-.7-3.25-.56-3.24-.42-3.24-.15-3.25-.14-3.24.14-3.24.15-3.25.42-3.25.56-3.1.7-3.24.85-3.1,1L99.54,62.1l-3.1,1.41-3,1.41-3,1.69L87.7,68.44l-2.82,1.83L82.2,72.39l-2.68,2.26L77,77.05l-2.4,2.53-2.53,2.83-2.55,3.1-2.82,3.38-3.1,3.81-3.1,4L57.23,101l-3.52,4.52-3.53,4.93-3.52,4.94L43,120.62l-3.67,5.23-3.81,5.5L31.85,137l-3.67,5.78-3.52,5.64-3.53,5.78L17.74,160l-3.24,5.78-3.1,5.64-2.83,5.78-1.69,3.25V125.14C6.88,60.12,59.92,7,125.07,7" fill="#ffffff"/></svg>
+      </div>
+		</div>`;
 
-// 	const uploadedImgsElements = document.querySelectorAll('.uploaded-img');
-// 	const photosContainer = preparePhotos(uploadedImgsElements);
-// 	if (uploadedImgsElements.length > 1) {
-// 		prepareSlideshow(photosContainer);
-// 	}
-// 	if (uploadedImgsElements.length) {
-// 		prepareModal(photosContainer);
-// 	}
-// 	prepareInformation(uploadedImgsElements);
-// 	addDOMListeners();
+	const infoNameContainerEl = document.createElement('div');
+	infoNameContainerEl.className = 'info-name-container';
+	infoNameContainerEl.innerHTML = nameHtml;
+	infoWindowDiv.append(infoNameContainerEl);
 
-// 	infoWindow.setContent(infoWindowDiv);
-// 	infoWindow.setPosition(userMarker.position);
-// 	infoWindow.setOptions({
-// 		pixelOffset: new google.maps.Size(0, -60)
-// 	});
-// 	infoWindow.open(map);
-// }
+	const remainingHtml = `
+		<div class='info-body-container'>
+      <div class='info-information'>
+        <div class='info-address info-line'>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.4 16.55"><path d="M1.45,9.84,6.2,16.2,11,9.84a5.93,5.93,0,0,0-.56-7.75h0A6,6,0,0,0,2,2.09H2A5.94,5.94,0,0,0,1.45,9.84Z" fill="#565656"/><circle cx="6.2" cy="6.17" r="1.86" fill="#fff"/></svg>
+          <div class='info-address-value'>
+					${marker.props.getProperty('address')}
+          </div>
+        </div>
 
-// function prepareInformation(uploadedImgsElements) {
-// 	let nameHtml = `
-//       <div class='info-name-value-container'>
-// 				<div class='info-name-value'>
-// 					${workerElements.name.value}
-// 				</div>
-// 			</div>
-//       <div class='lovato-icon-header'>
-//         <svg class="svg-lovato-icon-header" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250"><path d="M93.76,93.83a44.33,44.33,0,1,1,62.77,62.62C139.18,173.66,38.9,245.31,21.69,228,4.34,210.75,76.41,111,93.76,93.83" fill="#ffffff"/><path d="M125.07,7c65,0,118.05,53.17,118.05,118.19s-53,117.91-118,117.91H68.94l3.67-1.69,5.64-3,5.79-3,5.77-3.24,5.79-3.38,5.78-3.53,5.78-3.53,5.64-3.67,5.64-3.66,5.5-3.67,5.5-3.67,5.23-3.66,5.07-3.53,4.8-3.53,4.65-3.38,4.23-3.38,4.09-3.11,3.81-3,3.39-2.82,3.1-2.68,2.82-2.54,2.54-2.39,2.39-2.55,2.26-2.53,2.12-2.82,2-2.68,1.69-3,1.7-3,1.41-3,1.41-3.1,1.12-3.1,1-3.11.85-3.1.7-3.24.57-3.25.42-3.25.14-3.24.14-3.1-.14-3.25-.14-3.24-.42-3.24-.57-3.24-.7-3.11-.85-3.25-1-3.09-1.12-3.11-1.41-3.1-1.41-3-1.7-3-1.69-2.82-2-2.82-2.12-2.69-2.26-2.68-2.39-2.53-2.54-2.4-2.54-2.26-2.82-2.12-2.68-1.83-3-1.83-3-1.69-3-1.41-3.1-1.41L147.5,61l-3.1-1-3.11-.85-3.24-.7-3.25-.56-3.24-.42-3.24-.15-3.25-.14-3.24.14-3.24.15-3.25.42-3.25.56-3.1.7-3.24.85-3.1,1L99.54,62.1l-3.1,1.41-3,1.41-3,1.69L87.7,68.44l-2.82,1.83L82.2,72.39l-2.68,2.26L77,77.05l-2.4,2.53-2.53,2.83-2.55,3.1-2.82,3.38-3.1,3.81-3.1,4L57.23,101l-3.52,4.52-3.53,4.93-3.52,4.94L43,120.62l-3.67,5.23-3.81,5.5L31.85,137l-3.67,5.78-3.52,5.64-3.53,5.78L17.74,160l-3.24,5.78-3.1,5.64-2.83,5.78-1.69,3.25V125.14C6.88,60.12,59.92,7,125.07,7" fill="#ffffff"/></svg>
-//       </div>
-// 		</div>`;
+        <div class='info-phone info-line'>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.32 13.46"><path d="M12.76,12l-.92.92a1.66,1.66,0,0,1-.67.27A10.88,10.88,0,0,1,3.36,10,10.93,10.93,0,0,1,.16,2.2a1.88,1.88,0,0,1,.27-.64L1.36.64A1.52,1.52,0,0,1,2.8.3L3,.36a1.82,1.82,0,0,1,1,1.12l.47,1.71a1.72,1.72,0,0,1-.38,1.46l-.62.62A6.56,6.56,0,0,0,8.13,9.88l.62-.62a1.65,1.65,0,0,1,1.46-.38l1.71.47A1.85,1.85,0,0,1,13,10.4l.06.2A1.55,1.55,0,0,1,12.76,12Z" fill="#565656"/></svg>
+          <a class='info-phone-value'
+            href="tel:${marker.props.getProperty(
+				'phone'
+			)}">${marker.props.getProperty('phone')}
+          </a>
+        </div>
 
-// 	const infoNameContainerEl = document.createElement('div');
-// 	infoNameContainerEl.className = 'info-name-container';
-// 	infoNameContainerEl.innerHTML = nameHtml;
-// 	infoWindowDiv.append(infoNameContainerEl);
+        <div class='info-email info-line'>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path></svg>
+          <a class='info-email-value'
+            href="mailto: ${marker.props.getProperty(
+				'email'
+			)}">${marker.props.getProperty('email')}
+          </a>
+        </div>
 
-// 	const remainingHtml = `
-// 		<div class='info-body-container'>
-//       <div class='info-information'>
-//         <div class='info-address info-line'>
-//           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.4 16.55"><path d="M1.45,9.84,6.2,16.2,11,9.84a5.93,5.93,0,0,0-.56-7.75h0A6,6,0,0,0,2,2.09H2A5.94,5.94,0,0,0,1.45,9.84Z" fill="#565656"/><circle cx="6.2" cy="6.17" r="1.86" fill="#fff"/></svg>
-//           <div class='info-address-value'>
-//             ${workerElements.address.value}
-//           </div>
-//         </div>
+        <div class='info-website info-line'>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.32 13.46"><polygon points="12.98 5.26 0.34 0.41 5.19 13.05 7.08 9.04 10.8 12.76 12.69 10.87 8.97 7.15 12.98 5.26" fill="#565656"/></svg>
+          <a class='info-website-value'
+            target='_blank'
+            href='http://www.${lovatohellas.gr}'>
+            ${lovatohellas.gr}
+          </a>
+        </div>
+      </div>
+      <hr>
+			<div class='info-services'>
+        <div class='info-services-header'>
+          Υπηρεσίες
+        </div>
+				<div class='info-lovatoSystems info-line'>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.77 18.76"><path d="M7,7a3.37,3.37,0,0,1,4.77,4.76c-1.32,1.31-8.94,6.75-10.24,5.43S5.69,8.32,7,7" fill="#00679c"/><path d="M9.39.41a9,9,0,1,1,0,17.94H5.13l.28-.13L5.83,18l.44-.23.44-.24.44-.26L7.59,17,8,16.73l.43-.28.43-.27.42-.28.41-.28.4-.28.39-.27.36-.27.35-.25.33-.26.31-.24.29-.22.25-.22.24-.2.21-.19.2-.18.18-.2.17-.19.16-.21.15-.21.13-.22.13-.23.1-.22.11-.24.09-.23.07-.24.07-.24.05-.24,0-.25,0-.25v-1l0-.25,0-.24-.05-.24-.07-.25-.07-.23-.09-.24-.11-.23L14,7l-.13-.22-.13-.22-.15-.21-.16-.21-.17-.2-.18-.19-.2-.18-.19-.18-.21-.16-.21-.14L12,4.94l-.23-.12-.22-.11-.24-.11-.23-.08-.24-.08-.24-.06-.24-.06-.25,0-.25,0h-1l-.25,0-.24,0-.24.06-.25.06-.23.08-.24.08-.23.11L7,4.82l-.22.12-.22.14-.21.14-.21.16-.2.18-.19.18-.18.19-.2.21-.19.24L5,6.64l-.24.29-.24.3-.24.33L4,7.9l-.27.38-.27.37-.27.4-.28.4-.29.41-.28.43L2,10.73l-.27.43-.27.44L1.24,12,1,12.48l-.24.43-.21.44-.13.24V9.39a9,9,0,0,1,9-9" fill="#00679c"/></svg>
+					<div class='info-lovatoSystems-value'>
+            Γνήσια Συστήματα Lovato
+          </div>
+				</div>
 
-//         <div class='info-phone info-line'>
-//           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.32 13.46"><path d="M12.76,12l-.92.92a1.66,1.66,0,0,1-.67.27A10.88,10.88,0,0,1,3.36,10,10.93,10.93,0,0,1,.16,2.2a1.88,1.88,0,0,1,.27-.64L1.36.64A1.52,1.52,0,0,1,2.8.3L3,.36a1.82,1.82,0,0,1,1,1.12l.47,1.71a1.72,1.72,0,0,1-.38,1.46l-.62.62A6.56,6.56,0,0,0,8.13,9.88l.62-.62a1.65,1.65,0,0,1,1.46-.38l1.71.47A1.85,1.85,0,0,1,13,10.4l.06.2A1.55,1.55,0,0,1,12.76,12Z" fill="#565656"/></svg>
-//           <a class='info-phone-value'
-//             href="tel:${workerElements.phone.value}">${workerElements.phone.value}
-//           </a>
-//         </div>
+				<div class='info-gogasTanks info-line'>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.77 18.76"><path d="M18,8.77H11.46l-.06-.2v0s0,0-.06-.09a2,2,0,0,0-.22-.37L11,7.91a2.59,2.59,0,0,0-.35-.31l-.11-.07a2.11,2.11,0,0,0-.43-.2l-.15,0a2.17,2.17,0,0,0-1,0,2.29,2.29,0,0,0-.37.12h0a2.18,2.18,0,1,0,2.64,3.23.41.41,0,0,1,.05-.09,2,2,0,0,0,.18-.32l.08-.18h1.67l-.1.38a3.81,3.81,0,1,1-.38-2.93h5.1A8.64,8.64,0,1,0,18,9.38C18,9.17,18,9,18,8.77Z" fill="#00679c"/></svg>
+					<div class='info-gogasTanks-value'>
+						Νέες Δεξαμενές GO-GAS
+					</div>
+				</div>
 
-//         <div class='info-email info-line'>
-//           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path></svg>
-//           <a class='info-email-value'
-//             href="mailto: ${workerElements.email.value}">${workerElements.email.value}
-//           </a>
-//         </div>
+				<div class='info-webServices info-line'>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.77 18.76"><path d="M16.39,2h-14A1.45,1.45,0,0,0,.94,3.43v8.65a1.45,1.45,0,0,0,1.44,1.44H8v1.3H6.87a1,1,0,1,0,0,1.95h5a1,1,0,0,0,0-1.95H10.77v-1.3h5.62a1.44,1.44,0,0,0,1.44-1.44V3.43A1.44,1.44,0,0,0,16.39,2Zm-.23,9.36a.5.5,0,0,1-.5.5H3.11a.51.51,0,0,1-.5-.5V4.16a.51.51,0,0,1,.5-.5H15.66a.5.5,0,0,1,.5.5Z" fill="#00679c"/><rect x="3.84" y="4.74" width="11.01" height="6.06" rx="0.3" fill="#00679c"/></svg>
+					<div class='info-webServices-value'>
+						Ηλεκτρονικό Βιβλίο Service
+					</div>
+				</div>
 
-//         <div class='info-website info-line'>
-//           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.32 13.46"><polygon points="12.98 5.26 0.34 0.41 5.19 13.05 7.08 9.04 10.8 12.76 12.69 10.87 8.97 7.15 12.98 5.26" fill="#565656"/></svg>
-//           <a class='info-website-value'
-//             target='_blank'
-//             href='http://www.${workerElements.website.value}'>
-//             ${workerElements.website.value}
-//           </a>
-//         </div>
-//       </div>
-//       <hr>
-// 			<div class='info-services'>
-//         <div class='info-services-header'>
-//           Υπηρεσίες
-//         </div>
-// 				<div class='info-lovatoSystems info-line'>
-//           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.77 18.76"><path d="M7,7a3.37,3.37,0,0,1,4.77,4.76c-1.32,1.31-8.94,6.75-10.24,5.43S5.69,8.32,7,7" fill="#00679c"/><path d="M9.39.41a9,9,0,1,1,0,17.94H5.13l.28-.13L5.83,18l.44-.23.44-.24.44-.26L7.59,17,8,16.73l.43-.28.43-.27.42-.28.41-.28.4-.28.39-.27.36-.27.35-.25.33-.26.31-.24.29-.22.25-.22.24-.2.21-.19.2-.18.18-.2.17-.19.16-.21.15-.21.13-.22.13-.23.1-.22.11-.24.09-.23.07-.24.07-.24.05-.24,0-.25,0-.25v-1l0-.25,0-.24-.05-.24-.07-.25-.07-.23-.09-.24-.11-.23L14,7l-.13-.22-.13-.22-.15-.21-.16-.21-.17-.2-.18-.19-.2-.18-.19-.18-.21-.16-.21-.14L12,4.94l-.23-.12-.22-.11-.24-.11-.23-.08-.24-.08-.24-.06-.24-.06-.25,0-.25,0h-1l-.25,0-.24,0-.24.06-.25.06-.23.08-.24.08-.23.11L7,4.82l-.22.12-.22.14-.21.14-.21.16-.2.18-.19.18-.18.19-.2.21-.19.24L5,6.64l-.24.29-.24.3-.24.33L4,7.9l-.27.38-.27.37-.27.4-.28.4-.29.41-.28.43L2,10.73l-.27.43-.27.44L1.24,12,1,12.48l-.24.43-.21.44-.13.24V9.39a9,9,0,0,1,9-9" fill="#00679c"/></svg>
-// 					<div class='info-lovatoSystems-value'>
-//             Γνήσια Συστήματα Lovato
-//           </div>
-// 				</div>
+				<div class='info-lovatoApp info-line'>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.77 18.76"><rect x="5.37" y="3.58" width="8.03" height="11.19" fill="#00679c"/><path d="M13.71.94H5.06A1.44,1.44,0,0,0,3.62,2.38v14a1.45,1.45,0,0,0,1.44,1.45h8.65a1.44,1.44,0,0,0,1.44-1.45v-14A1.43,1.43,0,0,0,13.71.94Zm-6,.67H11a.25.25,0,1,1,0,.5H7.73a.25.25,0,0,1,0-.5ZM9.39,17.37a.72.72,0,1,1,.71-.72A.72.72,0,0,1,9.39,17.37Zm4.76-2.15a.29.29,0,0,1-.3.3H4.92a.3.3,0,0,1-.3-.3V3.13a.3.3,0,0,1,.3-.3h8.93a.29.29,0,0,1,.3.3Z" fill="#00679c"/></svg>
+					<div class='info-lovatoApp-value'>
+						Εφαρμογή Lovato App
+					</div>
+				</div>
 
-// 				<div class='info-gogasTanks info-line'>
-// 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.77 18.76"><path d="M18,8.77H11.46l-.06-.2v0s0,0-.06-.09a2,2,0,0,0-.22-.37L11,7.91a2.59,2.59,0,0,0-.35-.31l-.11-.07a2.11,2.11,0,0,0-.43-.2l-.15,0a2.17,2.17,0,0,0-1,0,2.29,2.29,0,0,0-.37.12h0a2.18,2.18,0,1,0,2.64,3.23.41.41,0,0,1,.05-.09,2,2,0,0,0,.18-.32l.08-.18h1.67l-.1.38a3.81,3.81,0,1,1-.38-2.93h5.1A8.64,8.64,0,1,0,18,9.38C18,9.17,18,9,18,8.77Z" fill="#00679c"/></svg>
-// 					<div class='info-gogasTanks-value'>
-// 						Νέες Δεξαμενές GO-GAS
-// 					</div>
-// 				</div>
+				<div class='info-gogasGuarantee info-line'>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.77 18.76"><path d="M9.39,3.46a5.92,5.92,0,1,0,5.92,5.92A5.93,5.93,0,0,0,9.39,3.46Zm-1.33,8.4H6.83V8.15l-.94.35-.35-1,1.74-.66h.78Zm4.65-.58A2.16,2.16,0,0,1,11,12a2.18,2.18,0,0,1-1.7-.69,2.75,2.75,0,0,1-.62-1.9,2.75,2.75,0,0,1,.62-1.9,2.15,2.15,0,0,1,1.7-.7,2.16,2.16,0,0,1,1.7.69,2.77,2.77,0,0,1,.61,1.91A2.73,2.73,0,0,1,12.71,11.28Z" fill="#00679c"/><path d="M11,7.92a.93.93,0,0,0-.78.38,1.8,1.8,0,0,0-.29,1.08,1.75,1.75,0,0,0,.29,1.07,1,1,0,0,0,1.56,0,1.82,1.82,0,0,0,.28-1.07,1.87,1.87,0,0,0-.28-1.08A.93.93,0,0,0,11,7.92Z" fill="#00679c"/><path d="M17.78,8.26a1.85,1.85,0,0,0-.94-2.9,1.85,1.85,0,0,1-1.33-1.82,1.84,1.84,0,0,0-2.46-1.79,1.85,1.85,0,0,1-2.14-.7,1.86,1.86,0,0,0-3,0h0a1.85,1.85,0,0,1-2.14.7A1.85,1.85,0,0,0,3.26,3.54,1.86,1.86,0,0,1,1.94,5.36,1.85,1.85,0,0,0,1,8.26a1.87,1.87,0,0,1,0,2.25,1.84,1.84,0,0,0,.94,2.89,1.86,1.86,0,0,1,1.32,1.82A1.84,1.84,0,0,0,5.72,17a1.86,1.86,0,0,1,2.14.7h0a1.85,1.85,0,0,0,3.05,0,1.86,1.86,0,0,1,2.14-.7,1.84,1.84,0,0,0,2.46-1.79,1.85,1.85,0,0,1,1.33-1.82,1.84,1.84,0,0,0,.94-2.89A1.85,1.85,0,0,1,17.78,8.26ZM9.39,16.05a6.67,6.67,0,1,1,6.67-6.67A6.68,6.68,0,0,1,9.39,16.05Z" fill="#00679c"/></svg>
+					<div class='info-gogasGuarantee-value'>
+						Γραπτή 10ετής εγγύηση δεξαμενής
+					</div>
+				</div>
+			</div>
+      <hr class='info-customServices-hr'>
+			`;
+	// 		<div class='info-customServices'>
+	//       <div class='info-customServices-header'>
+	//         Ειδικές Υπηρεσίες Συνεργείου
+	//       </div>
+	// 			<div class='info-customService1 info-line'>
 
-// 				<div class='info-webServices info-line'>
-// 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.77 18.76"><path d="M16.39,2h-14A1.45,1.45,0,0,0,.94,3.43v8.65a1.45,1.45,0,0,0,1.44,1.44H8v1.3H6.87a1,1,0,1,0,0,1.95h5a1,1,0,0,0,0-1.95H10.77v-1.3h5.62a1.44,1.44,0,0,0,1.44-1.44V3.43A1.44,1.44,0,0,0,16.39,2Zm-.23,9.36a.5.5,0,0,1-.5.5H3.11a.51.51,0,0,1-.5-.5V4.16a.51.51,0,0,1,.5-.5H15.66a.5.5,0,0,1,.5.5Z" fill="#00679c"/><rect x="3.84" y="4.74" width="11.01" height="6.06" rx="0.3" fill="#00679c"/></svg>
-// 					<div class='info-webServices-value'>
-// 						Ηλεκτρονικό Βιβλίο Service
-// 					</div>
-// 				</div>
+	// 				<div class='info-customService-value'>
+	//           ${workerElements.customService1.value}
+	//         </div>
+	// 			</div>
 
-// 				<div class='info-lovatoApp info-line'>
-// 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.77 18.76"><rect x="5.37" y="3.58" width="8.03" height="11.19" fill="#00679c"/><path d="M13.71.94H5.06A1.44,1.44,0,0,0,3.62,2.38v14a1.45,1.45,0,0,0,1.44,1.45h8.65a1.44,1.44,0,0,0,1.44-1.45v-14A1.43,1.43,0,0,0,13.71.94Zm-6,.67H11a.25.25,0,1,1,0,.5H7.73a.25.25,0,0,1,0-.5ZM9.39,17.37a.72.72,0,1,1,.71-.72A.72.72,0,0,1,9.39,17.37Zm4.76-2.15a.29.29,0,0,1-.3.3H4.92a.3.3,0,0,1-.3-.3V3.13a.3.3,0,0,1,.3-.3h8.93a.29.29,0,0,1,.3.3Z" fill="#00679c"/></svg>
-// 					<div class='info-lovatoApp-value'>
-// 						Εφαρμογή Lovato App
-// 					</div>
-// 				</div>
+	// 			<div class='info-customService2 info-line'>
 
-// 				<div class='info-gogasGuarantee info-line'>
-// 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.77 18.76"><path d="M9.39,3.46a5.92,5.92,0,1,0,5.92,5.92A5.93,5.93,0,0,0,9.39,3.46Zm-1.33,8.4H6.83V8.15l-.94.35-.35-1,1.74-.66h.78Zm4.65-.58A2.16,2.16,0,0,1,11,12a2.18,2.18,0,0,1-1.7-.69,2.75,2.75,0,0,1-.62-1.9,2.75,2.75,0,0,1,.62-1.9,2.15,2.15,0,0,1,1.7-.7,2.16,2.16,0,0,1,1.7.69,2.77,2.77,0,0,1,.61,1.91A2.73,2.73,0,0,1,12.71,11.28Z" fill="#00679c"/><path d="M11,7.92a.93.93,0,0,0-.78.38,1.8,1.8,0,0,0-.29,1.08,1.75,1.75,0,0,0,.29,1.07,1,1,0,0,0,1.56,0,1.82,1.82,0,0,0,.28-1.07,1.87,1.87,0,0,0-.28-1.08A.93.93,0,0,0,11,7.92Z" fill="#00679c"/><path d="M17.78,8.26a1.85,1.85,0,0,0-.94-2.9,1.85,1.85,0,0,1-1.33-1.82,1.84,1.84,0,0,0-2.46-1.79,1.85,1.85,0,0,1-2.14-.7,1.86,1.86,0,0,0-3,0h0a1.85,1.85,0,0,1-2.14.7A1.85,1.85,0,0,0,3.26,3.54,1.86,1.86,0,0,1,1.94,5.36,1.85,1.85,0,0,0,1,8.26a1.87,1.87,0,0,1,0,2.25,1.84,1.84,0,0,0,.94,2.89,1.86,1.86,0,0,1,1.32,1.82A1.84,1.84,0,0,0,5.72,17a1.86,1.86,0,0,1,2.14.7h0a1.85,1.85,0,0,0,3.05,0,1.86,1.86,0,0,1,2.14-.7,1.84,1.84,0,0,0,2.46-1.79,1.85,1.85,0,0,1,1.33-1.82,1.84,1.84,0,0,0,.94-2.89A1.85,1.85,0,0,1,17.78,8.26ZM9.39,16.05a6.67,6.67,0,1,1,6.67-6.67A6.68,6.68,0,0,1,9.39,16.05Z" fill="#00679c"/></svg>
-// 					<div class='info-gogasGuarantee-value'>
-// 						Γραπτή 10ετής εγγύηση δεξαμενής
-// 					</div>
-// 				</div>
-// 			</div>
-//       <hr class='info-customServices-hr'>
-// 			<div class='info-customServices'>
-//         <div class='info-customServices-header'>
-//           Ειδικές Υπηρεσίες Συνεργείου
-//         </div>
-// 				<div class='info-customService1 info-line'>
+	// 				<div class='info-customService-value'>
+	// 					${workerElements.customService2.value}
+	// 				</div>
+	// 			</div>
 
-// 					<div class='info-customService-value'>
-//             ${workerElements.customService1.value}
-//           </div>
-// 				</div>
+	// 			<div class='info-customService3 info-line'>
 
-// 				<div class='info-customService2 info-line'>
+	// 				<div class='info-customService-value'>
+	// 					${workerElements.customService3.value}
+	// 				</div>
+	// 			</div>
+	// 		</div>
+	// 	</div>
 
-// 					<div class='info-customService-value'>
-// 						${workerElements.customService2.value}
-// 					</div>
-// 				</div>
+	//   <div class="google-directions-container">
+	//     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.86 13.85"><rect x="2.94" y="2.94" width="7.97" height="7.97" transform="translate(6.93 -2.87) rotate(45)" fill="#878787"/><polygon points="10.47 6.89 8.21 4.63 8.21 6.18 4.54 6.18 4.54 7.43 4.54 7.59 4.54 9.14 5.96 9.14 5.96 7.59 8.21 7.59 8.21 9.15 10.47 6.89" fill="#fff"/></svg>
+	//     <div class='google-directions-value'>
+	//       Οδηγίες <span>(άνοιγμα στο Google Maps)</span>
+	//     </div>
+	//   </div>
+	// `;
+	// let remainingEl = document.createElement('div');
+	// remainingEl.innerHTML = remainingHtml;
 
-// 				<div class='info-customService3 info-line'>
+	// infoWindowDiv.append(remainingEl);
 
-// 					<div class='info-customService-value'>
-// 						${workerElements.customService3.value}
-// 					</div>
-// 				</div>
-// 			</div>
-// 		</div>
+	// //Google Directions
+	// let markerGeometry = [
+	// 	selectedMarker.getPosition().lat(),
+	// 	selectedMarker.getPosition().lng()
+	// ];
 
-//     <div class="google-directions-container">
-//       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.86 13.85"><rect x="2.94" y="2.94" width="7.97" height="7.97" transform="translate(6.93 -2.87) rotate(45)" fill="#878787"/><polygon points="10.47 6.89 8.21 4.63 8.21 6.18 4.54 6.18 4.54 7.43 4.54 7.59 4.54 9.14 5.96 9.14 5.96 7.59 8.21 7.59 8.21 9.15 10.47 6.89" fill="#fff"/></svg>
-//       <div class='google-directions-value'>
-//         Οδηγίες <span>(άνοιγμα στο Google Maps)</span>
-//       </div>
-//     </div>
-// 	`;
-// 	let remainingEl = document.createElement('div');
-// 	remainingEl.innerHTML = remainingHtml;
+	// infoWindowDiv
+	// 	.querySelector('.google-directions-container')
+	// 	.addEventListener('click', async () => {
+	// 		const currentLatLng = await getCurrentPosition();
+	// 		console.log(currentLatLng);
+	// 		let url = `https://www.google.com/maps?saddr=${currentLatLng[0]},${currentLatLng[1]}&daddr=${markerGeometry}`;
+	// 		window.open(url, '_blank');
+	// 	});
 
-// 	infoWindowDiv.append(remainingEl);
+	// //styles when there is no img
+	// if (!uploadedImgsElements.length) {
+	// 	let infoNameContainer = infoWindowDiv.querySelector(
+	// 		'.info-name-container'
+	// 	);
+	// 	infoNameContainer.style.position = 'static';
+	// 	infoNameContainer.style.borderTopLeftRadius = '5px';
+	// 	infoNameContainer.style.borderTopRightRadius = '5px';
+	// 	infoWindowDiv.querySelector('.info-body-container').style.marginTop =
+	// 		'1rem';
+	// 	let lovatoIconHeader = infoWindowDiv.querySelector(
+	// 		'.lovato-icon-header'
+	// 	);
+	// 	lovatoIconHeader.style.bottom = '-25%';
+	// 	lovatoIconHeader.style.width = '5rem';
+	// 	lovatoIconHeader.style.height = '5rem';
+	// 	infoWindowDiv.querySelector(
+	// 		'.svg-lovato-icon-header'
+	// 	).style.marginLeft = '1px';
+	// 	infoWindowDiv.querySelector('.photos-container').style.width = '500px';
+	// }
 
-// 	//Google Directions
-// 	let markerGeometry = [
-// 		userMarker.getPosition().lat(),
-// 		userMarker.getPosition().lng()
-// 	];
+	// //Information
+	// const infoEmailEl = infoWindowDiv.querySelector('.info-email');
+	// const infoAddressEl = infoWindowDiv.querySelector('.info-address');
+	// const infoPhoneEl = infoWindowDiv.querySelector('.info-phone');
+	// const infoWebsiteEl = infoWindowDiv.querySelector('.info-website');
+	// if (!workerElements.email.value) {
+	// 	infoEmailEl.style.display = 'none';
+	// } else {
+	// 	infoEmailEl.style.display = 'flex';
+	// 	infoEmailEl.lastElementChild.textContent = workerElements.email.value;
+	// }
+	// if (!workerElements.address.value) {
+	// 	infoAddressEl.style.display = 'none';
+	// } else {
+	// 	infoAddressEl.style.display = 'flex';
+	// 	infoAddressEl.lastElementChild.textContent =
+	// 		workerElements.address.value;
+	// }
+	// if (!workerElements.phone.value) {
+	// 	infoPhoneEl.style.display = 'none';
+	// } else {
+	// 	infoPhoneEl.style.display = 'flex';
+	// 	let phoneValue = workerElements.phone.value;
+	// 	if (phoneValue.length >= 7) {
+	// 		let temp = [...phoneValue];
+	// 		temp.splice(6, 0, ' ');
+	// 		phoneValue = temp.join('');
+	// 	}
+	// 	if (phoneValue.length >= 3) {
+	// 		let temp = [...phoneValue];
+	// 		temp.splice(2, 0, ' ');
+	// 		phoneValue = temp.join('');
+	// 	}
+	// 	infoPhoneEl.lastElementChild.textContent = phoneValue;
+	// }
+	// if (!workerElements.website.value) {
+	// 	infoWebsiteEl.style.display = 'none';
+	// } else {
+	// 	infoWebsiteEl.style.display = 'flex';
+	// 	infoWebsiteEl.lastElementChild.textContent =
+	// 		workerElements.website.value;
+	// }
 
-// 	infoWindowDiv
-// 		.querySelector('.google-directions-container')
-// 		.addEventListener('click', async () => {
-// 			const currentLatLng = await getCurrentPosition();
-// 			console.log(currentLatLng);
-// 			let url = `https://www.google.com/maps?saddr=${currentLatLng[0]},${currentLatLng[1]}&daddr=${markerGeometry}`;
-// 			window.open(url, '_blank');
-// 		});
+	// //Services
+	// const infoLovatoSystemsEl = infoWindowDiv.querySelector(
+	// 	'.info-lovatoSystems'
+	// );
+	// const infoGogasTanksEl = infoWindowDiv.querySelector('.info-gogasTanks');
+	// const infoWebServicesEl = infoWindowDiv.querySelector('.info-webServices');
+	// const infolovatoAppEl = infoWindowDiv.querySelector('.info-lovatoApp');
+	// const infoGogasGuaranteeEl = infoWindowDiv.querySelector(
+	// 	'.info-gogasGuarantee'
+	// );
+	// const infoCustomService1 = infoWindowDiv.querySelector(
+	// 	'.info-customService1'
+	// );
+	// const infoCustomService2 = infoWindowDiv.querySelector(
+	// 	'.info-customService2'
+	// );
+	// const infoCustomService3 = infoWindowDiv.querySelector(
+	// 	'.info-customService3'
+	// );
+	// infoLovatoSystemsEl.style.display = workerElements.lovatoSystems.checked
+	// 	? 'flex'
+	// 	: 'none';
+	// infoGogasTanksEl.style.display = workerElements.gogasTanks.checked
+	// 	? 'flex'
+	// 	: 'none';
+	// infoWebServicesEl.style.display = workerElements.webServices.checked
+	// 	? 'flex'
+	// 	: 'none';
+	// infolovatoAppEl.style.display = workerElements.lovatoApp.checked
+	// 	? 'flex'
+	// 	: 'none';
+	// infoGogasGuaranteeEl.style.display = workerElements.gogasGuarantee.checked
+	// 	? 'flex'
+	// 	: 'none';
+	// infoCustomService1.style.display = workerElements.customService1.value
+	// 	? 'flex'
+	// 	: 'none';
+	// infoCustomService2.style.display = workerElements.customService2.value
+	// 	? 'flex'
+	// 	: 'none';
+	// infoCustomService3.style.display = workerElements.customService3.value
+	// 	? 'flex'
+	// 	: 'none';
 
-// 	//styles when there is no img
-// 	if (!uploadedImgsElements.length) {
-// 		let infoNameContainer = infoWindowDiv.querySelector(
-// 			'.info-name-container'
-// 		);
-// 		infoNameContainer.style.position = 'static';
-// 		infoNameContainer.style.borderTopLeftRadius = '5px';
-// 		infoNameContainer.style.borderTopRightRadius = '5px';
-// 		infoWindowDiv.querySelector('.info-body-container').style.marginTop =
-// 			'1rem';
-// 		let lovatoIconHeader = infoWindowDiv.querySelector(
-// 			'.lovato-icon-header'
-// 		);
-// 		lovatoIconHeader.style.bottom = '-25%';
-// 		lovatoIconHeader.style.width = '5rem';
-// 		lovatoIconHeader.style.height = '5rem';
-// 		infoWindowDiv.querySelector(
-// 			'.svg-lovato-icon-header'
-// 		).style.marginLeft = '1px';
-// 		infoWindowDiv.querySelector('.photos-container').style.width = '500px';
-// 	}
-
-// 	//Information
-// 	const infoEmailEl = infoWindowDiv.querySelector('.info-email');
-// 	const infoAddressEl = infoWindowDiv.querySelector('.info-address');
-// 	const infoPhoneEl = infoWindowDiv.querySelector('.info-phone');
-// 	const infoWebsiteEl = infoWindowDiv.querySelector('.info-website');
-// 	if (!workerElements.email.value) {
-// 		infoEmailEl.style.display = 'none';
-// 	} else {
-// 		infoEmailEl.style.display = 'flex';
-// 		infoEmailEl.lastElementChild.textContent = workerElements.email.value;
-// 	}
-// 	if (!workerElements.address.value) {
-// 		infoAddressEl.style.display = 'none';
-// 	} else {
-// 		infoAddressEl.style.display = 'flex';
-// 		infoAddressEl.lastElementChild.textContent =
-// 			workerElements.address.value;
-// 	}
-// 	if (!workerElements.phone.value) {
-// 		infoPhoneEl.style.display = 'none';
-// 	} else {
-// 		infoPhoneEl.style.display = 'flex';
-// 		let phoneValue = workerElements.phone.value;
-// 		if (phoneValue.length >= 7) {
-// 			let temp = [...phoneValue];
-// 			temp.splice(6, 0, ' ');
-// 			phoneValue = temp.join('');
-// 		}
-// 		if (phoneValue.length >= 3) {
-// 			let temp = [...phoneValue];
-// 			temp.splice(2, 0, ' ');
-// 			phoneValue = temp.join('');
-// 		}
-// 		infoPhoneEl.lastElementChild.textContent = phoneValue;
-// 	}
-// 	if (!workerElements.website.value) {
-// 		infoWebsiteEl.style.display = 'none';
-// 	} else {
-// 		infoWebsiteEl.style.display = 'flex';
-// 		infoWebsiteEl.lastElementChild.textContent =
-// 			workerElements.website.value;
-// 	}
-
-// 	//Services
-// 	const infoLovatoSystemsEl = infoWindowDiv.querySelector(
-// 		'.info-lovatoSystems'
-// 	);
-// 	const infoGogasTanksEl = infoWindowDiv.querySelector('.info-gogasTanks');
-// 	const infoWebServicesEl = infoWindowDiv.querySelector('.info-webServices');
-// 	const infolovatoAppEl = infoWindowDiv.querySelector('.info-lovatoApp');
-// 	const infoGogasGuaranteeEl = infoWindowDiv.querySelector(
-// 		'.info-gogasGuarantee'
-// 	);
-// 	const infoCustomService1 = infoWindowDiv.querySelector(
-// 		'.info-customService1'
-// 	);
-// 	const infoCustomService2 = infoWindowDiv.querySelector(
-// 		'.info-customService2'
-// 	);
-// 	const infoCustomService3 = infoWindowDiv.querySelector(
-// 		'.info-customService3'
-// 	);
-// 	infoLovatoSystemsEl.style.display = workerElements.lovatoSystems.checked
-// 		? 'flex'
-// 		: 'none';
-// 	infoGogasTanksEl.style.display = workerElements.gogasTanks.checked
-// 		? 'flex'
-// 		: 'none';
-// 	infoWebServicesEl.style.display = workerElements.webServices.checked
-// 		? 'flex'
-// 		: 'none';
-// 	infolovatoAppEl.style.display = workerElements.lovatoApp.checked
-// 		? 'flex'
-// 		: 'none';
-// 	infoGogasGuaranteeEl.style.display = workerElements.gogasGuarantee.checked
-// 		? 'flex'
-// 		: 'none';
-// 	infoCustomService1.style.display = workerElements.customService1.value
-// 		? 'flex'
-// 		: 'none';
-// 	infoCustomService2.style.display = workerElements.customService2.value
-// 		? 'flex'
-// 		: 'none';
-// 	infoCustomService3.style.display = workerElements.customService3.value
-// 		? 'flex'
-// 		: 'none';
-
-// 	//Custom Services
-// 	customServicesDisplay();
-// }
+	// //Custom Services
+	// customServicesDisplay();
+}
 
 // function customServicesDisplay() {
 // 	if (
