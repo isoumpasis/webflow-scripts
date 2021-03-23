@@ -180,12 +180,14 @@ async function initMap() {
 			// marker.addListener('mouseout', e => {
 			// 	infoWindow.close();
 			// 	selectedMarker.setAnimation(null);
+			//  selectedMarker = null;
 			// });
 		});
 
 		map.addListener('click', e => {
 			infoWindow.close();
 			selectedMarker.setAnimation(null);
+			selectedMarker = null;
 			const [lat, lng] = [
 				e.latLng.lat().toFixed(2),
 				e.latLng.lng().toFixed(2)
@@ -206,6 +208,7 @@ async function initMap() {
 			cluster => {
 				infoWindow.close();
 				selectedMarker.setAnimation(null);
+				selectedMarker = null;
 				map.setZoom(zoomLevelsDependedOnZoom[map.getZoom()]);
 				//map.setZoom(map.getZoom() + 2);
 				map.setCenter(cluster.getCenter());
@@ -225,6 +228,7 @@ async function initMap() {
 
 		infoWindow.addListener('closeclick', () => {
 			selectedMarker.setAnimation(null);
+			selectedMarker = null;
 		});
 
 		userMarker.addListener('click', () => {
@@ -232,18 +236,6 @@ async function initMap() {
 			map.setZoom(searchZoom);
 			map.setCenter(userMarker.position);
 		});
-
-		// map.addListener('click', e => {
-		// 	const [lat, lng] = [
-		// 		e.latLng.lat().toFixed(2),
-		// 		e.latLng.lng().toFixed(2)
-		// 	];
-		// 	infoWindow.setContent(`You clicked at: (${lat}, ${lng})`);
-		// 	infoWindow.setPosition(e.latLng);
-		// 	infoWindow.setOptions({ pixelOffset: new google.maps.Size(0, 0) });
-		// 	infoWindow.open(map);
-		// 	console.log(`You clicked at: (${lat}, ${lng})`);
-		// });
 	});
 	console.log('after load cb');
 }
