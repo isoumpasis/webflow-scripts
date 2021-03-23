@@ -30,6 +30,7 @@ let map,
 
 document.addEventListener('DOMContentLoaded', async () => {
 	console.log('before initMap');
+	generateModalHtml();
 	await initMap();
 	console.log('after initMap');
 });
@@ -869,6 +870,17 @@ document.addEventListener('keydown', e => {
 			document.querySelector('.info-modal').style.display = 'none';
 	}
 });
+
+function generateModalHtml() {
+	const modalEl = document.createElement('div');
+	modalEl.innerHTML = `<div class="info-modal">
+			<span class="info-modal-close">&times;</span>
+			<img class="info-modal-image" />
+			<div class="info-modal-caption"></div>
+		</div>`;
+
+	document.body.append(modalEl);
+}
 
 function prepareModal(photosContainer) {
 	const allImages = photosContainer.querySelectorAll('.info-image');
