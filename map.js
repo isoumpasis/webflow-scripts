@@ -1,7 +1,7 @@
 const geoJsonUrl =
 	'https://lovatohellas.herokuapp.com/static/map/storesGeoJson.json'; //test
 
-const episimosIcon =
+const episimosIconUrl =
 	'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
 
 const markerClustererIcon =
@@ -121,7 +121,12 @@ async function initMap() {
 
 			return new google.maps.Marker({
 				position: g.get(0),
-				icon: episimosIcon,
+				icon: {
+					url: episimosIconUrl, // url
+					scaledSize: new google.maps.Size(50, 50), // scaled size
+					origin: new google.maps.Point(0, 0), // origin
+					anchor: new google.maps.Point(0, 0) // anchor
+				},
 				clickable: true,
 				title: feature.getProperty('name'),
 				cursor: 'pointer',
