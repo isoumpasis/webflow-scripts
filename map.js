@@ -158,6 +158,7 @@ async function initMap() {
 
 		markers.forEach(marker => {
 			marker.addListener('mouseover', () => {
+				if (selectedMarker === marker) return;
 				selectedMarker.setAnimation(null);
 				selectedMarker = marker;
 				selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
@@ -168,6 +169,7 @@ async function initMap() {
 				map.setZoom(searchZoom);
 				map.setCenter(marker.position);
 
+				if (selectedMarker === marker) return;
 				selectedMarker.setAnimation(null);
 				selectedMarker = marker;
 				selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
