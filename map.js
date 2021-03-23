@@ -502,8 +502,8 @@ function prepareInformation(uploadedImgsElements, marker) {
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.32 13.46"><polygon points="12.98 5.26 0.34 0.41 5.19 13.05 7.08 9.04 10.8 12.76 12.69 10.87 8.97 7.15 12.98 5.26" fill="#565656"/></svg>
           <a class='info-website-value'
             target='_blank'
-            href='http://www.${lovatohellas.gr}'>
-            ${lovatohellas.gr}
+            href='http://www.${'lovatohellas.gr'}'>
+            ${'lovatohellas.gr'}
           </a>
         </div>
       </div>
