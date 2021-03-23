@@ -447,7 +447,7 @@ function openInfoWindow(marker) {
 		prepareSlideshow(photosContainer);
 	}
 	if (markerProps.imgs.length) {
-		prepareModal(photosContainer);
+		prepareModal(photosContainer, markerProps);
 	}
 	prepareInformation(markerProps);
 
@@ -593,7 +593,6 @@ function prepareInformation(markerProps) {
 	infoWindowDiv.append(remainingEl);
 
 	//Google Directions
-	console.log('selectedMarker', selectedMarker);
 	let markerGeometry = [
 		selectedMarker.getPosition().lat(),
 		selectedMarker.getPosition().lng()
@@ -882,7 +881,7 @@ function generateModalHtml() {
 	document.body.append(modalEl);
 }
 
-function prepareModal(photosContainer) {
+function prepareModal(photosContainer, markerProps) {
 	const allImages = photosContainer.querySelectorAll('.info-image');
 	const modal = document.querySelector('.info-modal');
 	const modalImage = document.querySelector('.info-modal-image');
@@ -892,7 +891,7 @@ function prepareModal(photosContainer) {
 		image.addEventListener('click', () => {
 			modal.style.display = 'block';
 			modalImage.src = image.firstElementChild.src;
-			modalCaption.textContent = workerElements.name.value;
+			modalCaption.textContent = markerProps.name;
 		});
 	});
 	//close modal
