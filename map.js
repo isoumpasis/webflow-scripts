@@ -443,7 +443,7 @@ function openInfoWindow(marker) {
 	// 	prepareModal(photosContainer);
 	// }
 	// prepareInformation(uploadedImgsElements);
-	prepareInformation(marker);
+	prepareInformation(undefined, marker);
 
 	infoWindow.setContent(infoWindowDiv);
 	infoWindow.setPosition(selectedMarker.position);
@@ -453,7 +453,7 @@ function openInfoWindow(marker) {
 	infoWindow.open(map);
 }
 
-function prepareInformation(uploadedImgsElements) {
+function prepareInformation(uploadedImgsElements, marker) {
 	let nameHtml = `
       <div class='info-name-value-container'>
 				<div class='info-name-value'>
