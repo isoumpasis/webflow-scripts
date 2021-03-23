@@ -6,8 +6,8 @@ const mapCenter = { lat: 38.64, lng: 24.16 };
 const startZoom = 6;
 const searchZoom = 13;
 const maxZoomClusterer = 10;
-const markers = [];
-let markerClusterer;
+let markers = [],
+	markerClusterer;
 
 const gridSizesDependedOnZoom = { 6: 40, 7: 35, 8: 30, 9: 25, 10: 30 };
 const zoomLevelsDependedOnZoom = { 6: 9, 7: 10, 8: 10, 9: 12, 10: 12 };
