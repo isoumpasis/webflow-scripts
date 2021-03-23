@@ -374,7 +374,7 @@ function openInfoWindow(marker) {
 	infoWindow.setContent(infoWindowDiv);
 	infoWindow.setPosition(selectedMarker.position);
 	infoWindow.setOptions({
-		pixelOffset: new google.maps.Size(30, 0)
+		pixelOffset: new google.maps.Size(25, -10)
 		//10 aristera
 		//0
 		//-60
