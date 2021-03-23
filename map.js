@@ -64,7 +64,7 @@ async function initMap() {
 
 		restriction: {
 			latLngBounds: {
-				north: 50.7,
+				north: 60.7,
 				south: 20.43,
 				east: 40.5,
 				west: 8.56
@@ -375,9 +375,6 @@ function openInfoWindow(marker) {
 	infoWindow.setPosition(selectedMarker.position);
 	infoWindow.setOptions({
 		pixelOffset: new google.maps.Size(25, -10)
-		//10 aristera
-		//0
-		//-60
 	});
 	infoWindow.open(map);
 }

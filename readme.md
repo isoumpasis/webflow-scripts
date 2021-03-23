@@ -1,6 +1,8 @@
 [] enter keypress modal
 [] data import problem
 
-[] pin offset
+[x] pin offset
 
-[] loading
+[x] loading
+
+[] another loader
