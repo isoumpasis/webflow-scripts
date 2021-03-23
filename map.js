@@ -159,7 +159,7 @@ async function initMap() {
 		markers.forEach(marker => {
 			marker.addListener('mouseover', () => {
 				if (selectedMarker === marker) return;
-				selectedMarker.setAnimation(null);
+				selectedMarker?.setAnimation(null);
 				selectedMarker = marker;
 				selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
 				openInfoWindow(marker);
