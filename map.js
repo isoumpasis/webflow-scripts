@@ -172,6 +172,7 @@ async function initMap() {
 			// 	selectedMarker.setAnimation(null);
 			// });
 		});
+
 		map.addListener('click', e => {
 			infoWindow.close();
 			selectedMarker.setAnimation(null);
@@ -238,24 +239,7 @@ async function initMap() {
 }
 
 // function initDomListeners() {
-// 	workerElements = {
-// 		name: document.querySelector('#name'),
-// 		email: document.querySelector('#email'),
-// 		address: document.querySelector('#address'),
-// 		geometry: document.querySelector('#geometry'),
-// 		phone: document.querySelector('#phone'),
-// 		imgs: document.querySelector('#imgs'),
-// 		website: document.querySelector('#website'),
-// 		lovatoSystems: document.querySelector('#lovatoSystems'),
-// 		gogasTanks: document.querySelector('#gogasTanks'),
-// 		webServices: document.querySelector('#webServices'),
-// 		lovatoApp: document.querySelector('#lovatoApp'),
-// 		gogasGuarantee: document.querySelector('#gogasGuarantee'),
-// 		customService1: document.querySelector('#customService1'),
-// 		customService2: document.querySelector('#customService2'),
-// 		customService3: document.querySelector('#customService3')
-// 	};
-
+//
 // 	document.addEventListener('keydown', e => {
 // 		if (e.key === 'Enter') {
 // 			e.preventDefault();
@@ -271,100 +255,8 @@ async function initMap() {
 // 		}
 // 	});
 
-// 	workerElements.address.addEventListener('input', () =>
-// 		runGeocoder(workerElements.address, { withTimeout: true })
-// 	);
-
-// 	//Images Fetch
-// 	workerElements.imgs.addEventListener('change', async function () {
-// 		startDeleteLoader();
-// 		const files = Array.from(this.files);
-// 		if (!validateFilesUpload(files, this)) {
-// 			endDeleteLoader();
-// 			return;
-// 		}
-
-// 		const formData = new FormData();
-// 		files.forEach(file => {
-// 			formData.append('imgs', file);
-// 		});
-// 		const id = window.location.pathname.split('/')[3];
-// 		const options = {
-// 			method: 'POST',
-// 			body: formData
-// 		};
-// 		const res = await fetch(`/map/pins/${id}/edit/img`, options);
-// 		const newImgs = await res.json();
-// 		const newImgElements = insertImgsToDOM(newImgs);
-// 		addListenersToImgs(newImgElements);
-// 		openInfoWindow();
-// 		endDeleteLoader();
-// 	});
-
 // 	//Add listeners for all imgs on page load
 // 	addListenersToImgs(document.querySelectorAll('.uploaded-img img'));
-// }
-
-// function validateFilesUpload(files, uploader) {
-// 	uploader.value = null;
-// 	const filesAlreadyUploaded = document.querySelectorAll('.uploaded-img img')
-// 		.length;
-
-// 	if (files.length + filesAlreadyUploaded > imgNumberMax) {
-// 		console.log('5 images only allowed');
-// 		uploader.nextElementSibling.className = 'validation-msg invalid';
-// 		uploader.nextElementSibling.innerHTML =
-// 			`Δεν μπορείτε να ανεβάσετε παραπάνω από ${imgNumberMax} φωτογραφίες συνολικά! ` +
-// 			(files.length > 5
-// 				? `Επιλέξατε πολλά αρχεία μαζί (${files.length}).`
-// 				: `Διαγράψτε μερικές και ξαναπροσπαθήστε.`);
-
-// 		uploader.className = 'form-control invalid-input';
-// 		return false;
-// 	}
-
-// 	for (let file of files) {
-// 		if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
-// 			console.log('not an image');
-// 			uploader.nextElementSibling.className = 'validation-msg invalid';
-// 			uploader.nextElementSibling.textContent = `Το αρχείο "${file.name}" δεν είναι εικόνα. Υποστηριζόμενες μορφές: .png, .jpg, .jgep.`;
-// 			uploader.className = 'form-control invalid-input';
-// 			return false;
-// 		}
-// 		if (file.size >= imgMaxSize) {
-// 			console.log('image max size');
-// 			uploader.nextElementSibling.className = 'validation-msg invalid';
-// 			uploader.nextElementSibling.textContent = `Το μέγεθος της εικόνας "${
-// 				file.name
-// 			}" είναι πολύ μεγάλο. Μέγιστο επιτρεπόμενο όριο: ${Math.floor(
-// 				imgMaxSize / 1024
-// 			)} KB.`;
-// 			uploader.className = 'form-control invalid-input';
-// 			return false;
-// 		}
-// 		const reader = new FileReader();
-// 		reader.onload = function (e) {
-// 			const img = new Image();
-// 			img.src = e.target.result;
-// 			img.onload = function () {
-// 				const w = this.width;
-// 				const h = this.height;
-// 				if (w / h < 1.3 || w / h > 2.1) {
-// 					uploader.nextElementSibling.className =
-// 						'validation-msg warning';
-// 					uploader.nextElementSibling.textContent = `Οι διαστάσεις της εικόνας ${file.name} (${w}, ${h}) δεν προτείνονται. Για την καλύτερη παρουσίαση τους, επιλέξτε εικόνες που έχουν περίπου διπλάσιο πλάτος από το ύψος τους. Ιδανικά 1,7:1`;
-// 					uploader.className = 'form-control';
-// 				}
-// 			};
-// 		};
-// 		reader.readAsDataURL(file);
-// 	}
-
-// 	uploader.nextElementSibling.className = 'validation-msg valid';
-// 	uploader.nextElementSibling.textContent =
-// 		'Οι εικόνες που ανεβάσατε αποθηκεύτηκαν!';
-// 	uploader.className = 'form-control';
-// 	return true;
 // }
 
 // function insertImgsToDOM(imgs) {
