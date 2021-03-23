@@ -30,7 +30,7 @@ let map,
 
 document.addEventListener('DOMContentLoaded', async () => {
 	console.log('before initMap');
-	generateModalHtml();
+	generateInitHtml();
 	await initMap();
 	console.log('after initMap');
 });
@@ -802,7 +802,8 @@ document.addEventListener('keydown', e => {
 	}
 });
 
-function generateModalHtml() {
+function generateInitHtml() {
+	//Generate Modal Html
 	const modalEl = document.createElement('div');
 	modalEl.innerHTML = `<div class="info-modal">
 			<span class="info-modal-close">&times;</span>
@@ -811,6 +812,13 @@ function generateModalHtml() {
 		</div>`;
 
 	document.body.append(modalEl);
+
+	//Generate Loader Html
+	const loaderEl = document.createElement('div');
+	loaderEl.className = 'lds-roller hide-roller';
+	loaderEl.innerHTML = `<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>`;
+
+	insertAfter(document.querySelector('#map'), loaderEl);
 }
 
 function prepareModal(photosContainer, markerProps) {
