@@ -818,7 +818,7 @@ function generateInitHtml() {
 	loaderEl.className = 'lds-roller hide-roller';
 	loaderEl.innerHTML = `<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>`;
 
-	insertAfter(document.querySelector('#map'), loaderEl);
+	document.querySelector('#map').parentElement.append(loaderEl);
 }
 
 function prepareModal(photosContainer, markerProps) {
