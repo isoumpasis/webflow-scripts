@@ -118,7 +118,7 @@ async function initMap() {
 	map.data.loadGeoJson(geoJsonUrl, null, features => {
 		markers = features.map(feature => {
 			const g = feature.getGeometry();
-
+			console.log(g.get(0));
 			return new google.maps.Marker({
 				position: g.get(0),
 				icon: {
