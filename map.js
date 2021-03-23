@@ -442,12 +442,12 @@ function openInfoWindow(marker) {
 	console.log(markerProps);
 
 	const photosContainer = preparePhotos(markerProps.imgs);
-	if (markerProps.imgs.length > 1) {
-		prepareSlideshow(photosContainer);
-	}
-	if (markerProps.imgs.length) {
-		prepareModal(photosContainer);
-	}
+	// if (markerProps.imgs.length > 1) {
+	// 	prepareSlideshow(photosContainer);
+	// }
+	// if (markerProps.imgs.length) {
+	// 	prepareModal(photosContainer);
+	// }
 	prepareInformation(markerProps);
 
 	infoWindow.setContent(infoWindowDiv);
