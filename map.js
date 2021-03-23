@@ -433,34 +433,31 @@ function openInfoWindow(marker) {
 	infoWindowDiv = document.createElement('div');
 	infoWindowDiv.className = 'infoWindow infoWindow-open';
 
-	markerProps = marker.props.j;
+	const markerProps = marker.props.j;
 	console.log(markerProps);
 
-	//const uploadedImgs = marker.props.getProperty.imgs
-	// const photosContainer = preparePhotos(marker);
-	// if (uploadedImgs.length > 1) {
+	// const photosContainer = preparePhotos(markerProps.imgs);
+	// if (markerProps.imgs.length > 1) {
 	// 	prepareSlideshow(photosContainer);
 	// }
-	// if (uploadedImgsElements.length) {
+	// if (markerProps.imgs.length) {
 	// 	prepareModal(photosContainer);
 	// }
-	// prepareInformation(uploadedImgsElements);
-	console.log(marker.props);
-	prepareInformation(undefined, marker);
+	prepareInformation(markerProps);
 
 	infoWindow.setContent(infoWindowDiv);
 	infoWindow.setPosition(selectedMarker.position);
 	infoWindow.setOptions({
-		pixelOffset: new google.maps.Size(0, -60)
+		pixelOffset: new google.maps.Size(0, 0) //-60)
 	});
 	infoWindow.open(map);
 }
 
-function prepareInformation(uploadedImgsElements, marker) {
+function prepareInformation(markerProps) {
 	let nameHtml = `
       <div class='info-name-value-container'>
 				<div class='info-name-value'>
-				${marker.props.getProperty('name')}
+				${markerProps.name}
 				</div>
 			</div>
       <div class='lovato-icon-header'>
@@ -479,25 +476,21 @@ function prepareInformation(uploadedImgsElements, marker) {
         <div class='info-address info-line'>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.4 16.55"><path d="M1.45,9.84,6.2,16.2,11,9.84a5.93,5.93,0,0,0-.56-7.75h0A6,6,0,0,0,2,2.09H2A5.94,5.94,0,0,0,1.45,9.84Z" fill="#565656"/><circle cx="6.2" cy="6.17" r="1.86" fill="#fff"/></svg>
           <div class='info-address-value'>
-					${marker.props.getProperty('address')}
+					${markerProps.address}
           </div>
         </div>
 
         <div class='info-phone info-line'>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.32 13.46"><path d="M12.76,12l-.92.92a1.66,1.66,0,0,1-.67.27A10.88,10.88,0,0,1,3.36,10,10.93,10.93,0,0,1,.16,2.2a1.88,1.88,0,0,1,.27-.64L1.36.64A1.52,1.52,0,0,1,2.8.3L3,.36a1.82,1.82,0,0,1,1,1.12l.47,1.71a1.72,1.72,0,0,1-.38,1.46l-.62.62A6.56,6.56,0,0,0,8.13,9.88l.62-.62a1.65,1.65,0,0,1,1.46-.38l1.71.47A1.85,1.85,0,0,1,13,10.4l.06.2A1.55,1.55,0,0,1,12.76,12Z" fill="#565656"/></svg>
           <a class='info-phone-value'
-            href="tel:${marker.props.getProperty(
-				'phone'
-			)}">${marker.props.getProperty('phone')}
+            href="tel:${markerProps.phone}">${markerProps.phone}
           </a>
         </div>
 
         <div class='info-email info-line'>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path></svg>
           <a class='info-email-value'
-            href="mailto: ${marker.props.getProperty(
-				'email'
-			)}">${marker.props.getProperty('email')}
+            href="mailto: ${markerProps.email}">${markerProps.email}
           </a>
         </div>
 
@@ -505,8 +498,8 @@ function prepareInformation(uploadedImgsElements, marker) {
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.32 13.46"><polygon points="12.98 5.26 0.34 0.41 5.19 13.05 7.08 9.04 10.8 12.76 12.69 10.87 8.97 7.15 12.98 5.26" fill="#565656"/></svg>
           <a class='info-website-value'
             target='_blank'
-            href='http://www.${'lovatohellas.gr'}'>
-            ${'lovatohellas.gr'}
+            href='http://www.${markerProps.website}'>
+            ${markerProps.website}
           </a>
         </div>
       </div>
@@ -551,191 +544,189 @@ function prepareInformation(uploadedImgsElements, marker) {
 				</div>
 			</div>
       <hr class='info-customServices-hr'>
-			`;
-	// 		<div class='info-customServices'>
-	//       <div class='info-customServices-header'>
-	//         Ειδικές Υπηρεσίες Συνεργείου
-	//       </div>
-	// 			<div class='info-customService1 info-line'>
+			<div class='info-customServices'>
+	      <div class='info-customServices-header'>
+	        Ειδικές Υπηρεσίες Συνεργείου
+	      </div>
+				<div class='info-customService1 info-line'>
 
-	// 				<div class='info-customService-value'>
-	//           ${workerElements.customService1.value}
-	//         </div>
-	// 			</div>
+					<div class='info-customService-value'>
+	          ${markerProps.customServices[0]}
+	        </div>
+				</div>
 
-	// 			<div class='info-customService2 info-line'>
+				<div class='info-customService2 info-line'>
 
-	// 				<div class='info-customService-value'>
-	// 					${workerElements.customService2.value}
-	// 				</div>
-	// 			</div>
+					<div class='info-customService-value'>
+						${markerProps.customServices[1]}
+					</div>
+				</div>
 
-	// 			<div class='info-customService3 info-line'>
+				<div class='info-customService3 info-line'>
 
-	// 				<div class='info-customService-value'>
-	// 					${workerElements.customService3.value}
-	// 				</div>
-	// 			</div>
-	// 		</div>
-	// 	</div>
+					<div class='info-customService-value'>
+						${markerProps.customServices[2]}
+					</div>
+				</div>
+			</div>
+		</div>
 
-	//   <div class="google-directions-container">
-	//     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.86 13.85"><rect x="2.94" y="2.94" width="7.97" height="7.97" transform="translate(6.93 -2.87) rotate(45)" fill="#878787"/><polygon points="10.47 6.89 8.21 4.63 8.21 6.18 4.54 6.18 4.54 7.43 4.54 7.59 4.54 9.14 5.96 9.14 5.96 7.59 8.21 7.59 8.21 9.15 10.47 6.89" fill="#fff"/></svg>
-	//     <div class='google-directions-value'>
-	//       Οδηγίες <span>(άνοιγμα στο Google Maps)</span>
-	//     </div>
-	//   </div>
-	// `;
-	// let remainingEl = document.createElement('div');
-	// remainingEl.innerHTML = remainingHtml;
+	  <div class="google-directions-container">
+	    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.86 13.85"><rect x="2.94" y="2.94" width="7.97" height="7.97" transform="translate(6.93 -2.87) rotate(45)" fill="#878787"/><polygon points="10.47 6.89 8.21 4.63 8.21 6.18 4.54 6.18 4.54 7.43 4.54 7.59 4.54 9.14 5.96 9.14 5.96 7.59 8.21 7.59 8.21 9.15 10.47 6.89" fill="#fff"/></svg>
+	    <div class='google-directions-value'>
+	      Οδηγίες <span>(άνοιγμα στο Google Maps)</span>
+	    </div>
+	  </div>
+	`;
+	let remainingEl = document.createElement('div');
+	remainingEl.innerHTML = remainingHtml;
 
-	// infoWindowDiv.append(remainingEl);
+	infoWindowDiv.append(remainingEl);
 
-	// //Google Directions
-	// let markerGeometry = [
-	// 	selectedMarker.getPosition().lat(),
-	// 	selectedMarker.getPosition().lng()
-	// ];
+	//Google Directions
+	let markerGeometry = [
+		selectedMarker.getPosition().lat(),
+		selectedMarker.getPosition().lng()
+	];
 
-	// infoWindowDiv
-	// 	.querySelector('.google-directions-container')
-	// 	.addEventListener('click', async () => {
-	// 		const currentLatLng = await getCurrentPosition();
-	// 		console.log(currentLatLng);
-	// 		let url = `https://www.google.com/maps?saddr=${currentLatLng[0]},${currentLatLng[1]}&daddr=${markerGeometry}`;
-	// 		window.open(url, '_blank');
-	// 	});
+	infoWindowDiv
+		.querySelector('.google-directions-container')
+		.addEventListener('click', async () => {
+			const currentLatLng = await getCurrentPosition();
+			console.log(currentLatLng);
+			let url = `https://www.google.com/maps?saddr=${currentLatLng[0]},${currentLatLng[1]}&daddr=${markerGeometry}`;
+			window.open(url, '_blank');
+		});
 
-	// //styles when there is no img
-	// if (!uploadedImgsElements.length) {
-	// 	let infoNameContainer = infoWindowDiv.querySelector(
-	// 		'.info-name-container'
-	// 	);
-	// 	infoNameContainer.style.position = 'static';
-	// 	infoNameContainer.style.borderTopLeftRadius = '5px';
-	// 	infoNameContainer.style.borderTopRightRadius = '5px';
-	// 	infoWindowDiv.querySelector('.info-body-container').style.marginTop =
-	// 		'1rem';
-	// 	let lovatoIconHeader = infoWindowDiv.querySelector(
-	// 		'.lovato-icon-header'
-	// 	);
-	// 	lovatoIconHeader.style.bottom = '-25%';
-	// 	lovatoIconHeader.style.width = '5rem';
-	// 	lovatoIconHeader.style.height = '5rem';
-	// 	infoWindowDiv.querySelector(
-	// 		'.svg-lovato-icon-header'
-	// 	).style.marginLeft = '1px';
-	// 	infoWindowDiv.querySelector('.photos-container').style.width = '500px';
-	// }
+	//styles when there is no img
+	if (!markerProps.imgs.length) {
+		let infoNameContainer = infoWindowDiv.querySelector(
+			'.info-name-container'
+		);
+		infoNameContainer.style.position = 'static';
+		infoNameContainer.style.borderTopLeftRadius = '5px';
+		infoNameContainer.style.borderTopRightRadius = '5px';
+		infoWindowDiv.querySelector('.info-body-container').style.marginTop =
+			'1rem';
+		let lovatoIconHeader = infoWindowDiv.querySelector(
+			'.lovato-icon-header'
+		);
+		lovatoIconHeader.style.bottom = '-25%';
+		lovatoIconHeader.style.width = '5rem';
+		lovatoIconHeader.style.height = '5rem';
+		infoWindowDiv.querySelector(
+			'.svg-lovato-icon-header'
+		).style.marginLeft = '1px';
+		infoWindowDiv.querySelector('.photos-container').style.width = '500px';
+	}
 
-	// //Information
-	// const infoEmailEl = infoWindowDiv.querySelector('.info-email');
-	// const infoAddressEl = infoWindowDiv.querySelector('.info-address');
-	// const infoPhoneEl = infoWindowDiv.querySelector('.info-phone');
-	// const infoWebsiteEl = infoWindowDiv.querySelector('.info-website');
-	// if (!workerElements.email.value) {
-	// 	infoEmailEl.style.display = 'none';
-	// } else {
-	// 	infoEmailEl.style.display = 'flex';
-	// 	infoEmailEl.lastElementChild.textContent = workerElements.email.value;
-	// }
-	// if (!workerElements.address.value) {
-	// 	infoAddressEl.style.display = 'none';
-	// } else {
-	// 	infoAddressEl.style.display = 'flex';
-	// 	infoAddressEl.lastElementChild.textContent =
-	// 		workerElements.address.value;
-	// }
-	// if (!workerElements.phone.value) {
-	// 	infoPhoneEl.style.display = 'none';
-	// } else {
-	// 	infoPhoneEl.style.display = 'flex';
-	// 	let phoneValue = workerElements.phone.value;
-	// 	if (phoneValue.length >= 7) {
-	// 		let temp = [...phoneValue];
-	// 		temp.splice(6, 0, ' ');
-	// 		phoneValue = temp.join('');
-	// 	}
-	// 	if (phoneValue.length >= 3) {
-	// 		let temp = [...phoneValue];
-	// 		temp.splice(2, 0, ' ');
-	// 		phoneValue = temp.join('');
-	// 	}
-	// 	infoPhoneEl.lastElementChild.textContent = phoneValue;
-	// }
-	// if (!workerElements.website.value) {
-	// 	infoWebsiteEl.style.display = 'none';
-	// } else {
-	// 	infoWebsiteEl.style.display = 'flex';
-	// 	infoWebsiteEl.lastElementChild.textContent =
-	// 		workerElements.website.value;
-	// }
+	//Information
+	const infoEmailEl = infoWindowDiv.querySelector('.info-email');
+	const infoAddressEl = infoWindowDiv.querySelector('.info-address');
+	const infoPhoneEl = infoWindowDiv.querySelector('.info-phone');
+	const infoWebsiteEl = infoWindowDiv.querySelector('.info-website');
+	if (!markerProps.email) {
+		infoEmailEl.style.display = 'none';
+	} else {
+		infoEmailEl.style.display = 'flex';
+		infoEmailEl.lastElementChild.textContent = markerProps.email;
+	}
+	if (!markerProps.address) {
+		infoAddressEl.style.display = 'none';
+	} else {
+		infoAddressEl.style.display = 'flex';
+		infoAddressEl.lastElementChild.textContent = markerProps.address;
+	}
+	if (!markerProps.phone) {
+		infoPhoneEl.style.display = 'none';
+	} else {
+		infoPhoneEl.style.display = 'flex';
+		let phoneValue = markerProps.phone;
+		if (phoneValue.length >= 7) {
+			let temp = [...phoneValue];
+			temp.splice(6, 0, ' ');
+			phoneValue = temp.join('');
+		}
+		if (phoneValue.length >= 3) {
+			let temp = [...phoneValue];
+			temp.splice(2, 0, ' ');
+			phoneValue = temp.join('');
+		}
+		infoPhoneEl.lastElementChild.textContent = phoneValue;
+	}
+	if (!markerProps.website) {
+		infoWebsiteEl.style.display = 'none';
+	} else {
+		infoWebsiteEl.style.display = 'flex';
+		infoWebsiteEl.lastElementChild.textContent = markerProps.website;
+	}
 
-	// //Services
-	// const infoLovatoSystemsEl = infoWindowDiv.querySelector(
-	// 	'.info-lovatoSystems'
-	// );
-	// const infoGogasTanksEl = infoWindowDiv.querySelector('.info-gogasTanks');
-	// const infoWebServicesEl = infoWindowDiv.querySelector('.info-webServices');
-	// const infolovatoAppEl = infoWindowDiv.querySelector('.info-lovatoApp');
-	// const infoGogasGuaranteeEl = infoWindowDiv.querySelector(
-	// 	'.info-gogasGuarantee'
-	// );
-	// const infoCustomService1 = infoWindowDiv.querySelector(
-	// 	'.info-customService1'
-	// );
-	// const infoCustomService2 = infoWindowDiv.querySelector(
-	// 	'.info-customService2'
-	// );
-	// const infoCustomService3 = infoWindowDiv.querySelector(
-	// 	'.info-customService3'
-	// );
-	// infoLovatoSystemsEl.style.display = workerElements.lovatoSystems.checked
-	// 	? 'flex'
-	// 	: 'none';
-	// infoGogasTanksEl.style.display = workerElements.gogasTanks.checked
-	// 	? 'flex'
-	// 	: 'none';
-	// infoWebServicesEl.style.display = workerElements.webServices.checked
-	// 	? 'flex'
-	// 	: 'none';
-	// infolovatoAppEl.style.display = workerElements.lovatoApp.checked
-	// 	? 'flex'
-	// 	: 'none';
-	// infoGogasGuaranteeEl.style.display = workerElements.gogasGuarantee.checked
-	// 	? 'flex'
-	// 	: 'none';
-	// infoCustomService1.style.display = workerElements.customService1.value
-	// 	? 'flex'
-	// 	: 'none';
-	// infoCustomService2.style.display = workerElements.customService2.value
-	// 	? 'flex'
-	// 	: 'none';
-	// infoCustomService3.style.display = workerElements.customService3.value
-	// 	? 'flex'
-	// 	: 'none';
+	//Services
+	const infoLovatoSystemsEl = infoWindowDiv.querySelector(
+		'.info-lovatoSystems'
+	);
+	const infoGogasTanksEl = infoWindowDiv.querySelector('.info-gogasTanks');
+	const infoWebServicesEl = infoWindowDiv.querySelector('.info-webServices');
+	const infolovatoAppEl = infoWindowDiv.querySelector('.info-lovatoApp');
+	const infoGogasGuaranteeEl = infoWindowDiv.querySelector(
+		'.info-gogasGuarantee'
+	);
+	const infoCustomService1 = infoWindowDiv.querySelector(
+		'.info-customService1'
+	);
+	const infoCustomService2 = infoWindowDiv.querySelector(
+		'.info-customService2'
+	);
+	const infoCustomService3 = infoWindowDiv.querySelector(
+		'.info-customService3'
+	);
+	infoLovatoSystemsEl.style.display = markerProps.lovatoServices.lovatoSystems
+		? 'flex'
+		: 'none';
+	infoGogasTanksEl.style.display = markerProps.lovatoServices.gogasTanks
+		? 'flex'
+		: 'none';
+	infoWebServicesEl.style.display = markerProps.lovatoServices.webServices
+		? 'flex'
+		: 'none';
+	infolovatoAppEl.style.display = markerProps.lovatoServices.lovatoApp
+		? 'flex'
+		: 'none';
+	infoGogasGuaranteeEl.style.display = markerProps.lovatoServices
+		.gogasGuarantee
+		? 'flex'
+		: 'none';
+	infoCustomService1.style.display = markerProps.customServices[0]
+		? 'flex'
+		: 'none';
+	infoCustomService2.style.display = markerProps.customServices[1]
+		? 'flex'
+		: 'none';
+	infoCustomService3.style.display = markerProps.customServices[2]
+		? 'flex'
+		: 'none';
 
-	// //Custom Services
-	// customServicesDisplay();
+	//Custom Services
+	customServicesDisplay(markerProps);
 }
 
-// function customServicesDisplay() {
-// 	if (
-// 		workerElements.customService1.value ||
-// 		workerElements.customService2.value ||
-// 		workerElements.customService3.value
-// 	) {
-// 		infoWindowDiv.querySelector('.info-customServices').style.display =
-// 			'block';
-// 		infoWindowDiv.querySelector('.info-customServices-hr').style.display =
-// 			'block';
-// 	} else {
-// 		infoWindowDiv.querySelector('.info-customServices').style.display =
-// 			'none';
-// 		infoWindowDiv.querySelector('.info-customServices-hr').style.display =
-// 			'none';
-// 	}
-// }
+function customServicesDisplay(markerProps) {
+	if (
+		markerProps.customServices[0] ||
+		markerProps.customServices[1] ||
+		markerProps.customServices[2]
+	) {
+		infoWindowDiv.querySelector('.info-customServices').style.display =
+			'block';
+		infoWindowDiv.querySelector('.info-customServices-hr').style.display =
+			'block';
+	} else {
+		infoWindowDiv.querySelector('.info-customServices').style.display =
+			'none';
+		infoWindowDiv.querySelector('.info-customServices-hr').style.display =
+			'none';
+	}
+}
 
 // function preparePhotos(uploadedImgsElements) {
 // 	const photosContainer = document.createElement('div');
