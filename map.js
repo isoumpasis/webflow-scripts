@@ -159,7 +159,9 @@ async function initMap() {
 		markers.forEach(marker => {
 			marker.addListener('mouseover', () => {
 				if (selectedMarker === marker) return;
-				selectedMarker?.setAnimation(null);
+				if (selectedMarker) {
+					selectedMarker.setAnimation(null);
+				}
 				selectedMarker = marker;
 				selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
 				openInfoWindow(marker);
@@ -170,7 +172,9 @@ async function initMap() {
 				map.setCenter(marker.position);
 
 				if (selectedMarker === marker) return;
-				selectedMarker.setAnimation(null);
+				if (selectedMarker) {
+					selectedMarker.setAnimation(null);
+				}
 				selectedMarker = marker;
 				selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
 				openInfoWindow(marker);
@@ -179,14 +183,18 @@ async function initMap() {
 			//Optional
 			// marker.addListener('mouseout', e => {
 			// 	infoWindow.close();
-			// 	selectedMarker.setAnimation(null);
+			//  if(selectedMarker){
+			//		selectedMarker.setAnimation(null);
+			//	}
 			//  selectedMarker = null;
 			// });
 		});
 
 		map.addListener('click', e => {
 			infoWindow.close();
-			selectedMarker.setAnimation(null);
+			if (selectedMarker) {
+				selectedMarker.setAnimation(null);
+			}
 			selectedMarker = null;
 			const [lat, lng] = [
 				e.latLng.lat().toFixed(2),
@@ -207,7 +215,9 @@ async function initMap() {
 			'clusterclick',
 			cluster => {
 				infoWindow.close();
-				selectedMarker.setAnimation(null);
+				if (selectedMarker) {
+					selectedMarker.setAnimation(null);
+				}
 				selectedMarker = null;
 				map.setZoom(zoomLevelsDependedOnZoom[map.getZoom()]);
 				//map.setZoom(map.getZoom() + 2);
@@ -227,7 +237,9 @@ async function initMap() {
 		});
 
 		infoWindow.addListener('closeclick', () => {
-			selectedMarker.setAnimation(null);
+			if (selectedMarker) {
+				selectedMarker.setAnimation(null);
+			}
 			selectedMarker = null;
 		});
 
