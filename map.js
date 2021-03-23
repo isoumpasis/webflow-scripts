@@ -158,21 +158,20 @@ async function initMap() {
 
 		markers.forEach(marker => {
 			marker.addListener('mouseover', () => {
-				openInfoWindow(marker);
-
 				selectedMarker.setAnimation(null);
 				selectedMarker = marker;
 				selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
+				openInfoWindow(marker);
 			});
 
 			marker.addListener('click', () => {
 				map.setZoom(searchZoom);
 				map.setCenter(marker.position);
-				openInfoWindow(marker);
 
 				selectedMarker.setAnimation(null);
 				selectedMarker = marker;
 				selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
+				openInfoWindow(marker);
 			});
 
 			//Optional
