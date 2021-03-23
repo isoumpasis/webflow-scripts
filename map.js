@@ -584,6 +584,7 @@ function prepareInformation(markerProps) {
 	infoWindowDiv.append(remainingEl);
 
 	//Google Directions
+	console.log('selectedMarker', selectedMarker);
 	let markerGeometry = [
 		selectedMarker.getPosition().lat(),
 		selectedMarker.getPosition().lng()
