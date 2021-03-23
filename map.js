@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function initMap() {
+	startLoader();
 	const mapOptions = {
 		zoom: startZoom,
 		center: mapCenter,
@@ -249,6 +250,7 @@ async function initMap() {
 			map.setZoom(searchZoom);
 			map.setCenter(userMarker.position);
 		});
+		endLoader();
 	});
 	console.log('after load cb');
 }
@@ -274,95 +276,6 @@ async function initMap() {
 // 	addListenersToImgs(document.querySelectorAll('.uploaded-img img'));
 // }
 
-// function insertImgsToDOM(imgs) {
-// 	const newImgElements = [];
-// 	imgs.forEach(img => {
-// 		const imgHtml = `<img src="data:image/${
-// 			img.contentType
-// 		};base64,${bufferToBase64(img.data.data)}"/>`;
-
-// 		const newImgNode = document.createElement('div');
-// 		newImgNode.className = 'uploaded-img';
-// 		newImgNode.innerHTML = imgHtml;
-
-// 		const hasOtherImgs = document.querySelector('.uploaded-img-header');
-// 		if (hasOtherImgs) {
-// 			document
-// 				.querySelector('.uploaded-imgs-container')
-// 				.append(newImgNode);
-// 		} else {
-// 			const newImgHeader = document.createElement('div');
-// 			newImgHeader.className = 'uploaded-img-header';
-// 			newImgHeader.textContent = 'Ανεβασμένες Φωτογραφίες';
-// 			insertAfter(
-// 				document.querySelector('.delete-loader-container'),
-// 				newImgHeader
-// 			);
-
-// 			const newImgsContainer = document.createElement('div');
-// 			newImgsContainer.className = 'uploaded-imgs-container';
-// 			newImgsContainer.append(newImgNode);
-// 			insertAfter(newImgHeader, newImgsContainer);
-// 		}
-// 		const newImgElement = document.querySelector(
-// 			'.uploaded-img:last-child img'
-// 		);
-// 		newImgElements.push(newImgElement);
-// 	});
-
-// 	function bufferToBase64(buf) {
-// 		var binstr = Array.prototype.map
-// 			.call(buf, function (ch) {
-// 				return String.fromCharCode(ch);
-// 			})
-// 			.join('');
-// 		return btoa(binstr);
-// 	}
-// 	return newImgElements;
-// }
-// function insertAfter(referenceNode, newNode) {
-// 	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-// }
-
-// function addListenersToImgs(imgElements) {
-// 	const id = window.location.pathname.split('/')[3];
-
-// 	imgElements.forEach(imgElement => {
-// 		imgElement.addEventListener('click', async function () {
-// 			startDeleteLoader();
-// 			const allImgs = [...document.querySelectorAll('.uploaded-img img')];
-// 			const imgIndex = allImgs.indexOf(this);
-// 			// console.log('index to delete:', imgIndex);
-
-// 			const options = {
-// 				method: 'DELETE',
-// 				body: JSON.stringify({
-// 					imgIndex
-// 				}),
-// 				headers: {
-// 					'Content-Type': 'application/json'
-// 				}
-// 			};
-// 			const res = await fetch(`/map/pins/${id}/edit/img`, options);
-// 			await res.json();
-
-// 			workerElements.imgs.nextElementSibling.className =
-// 				'validation-msg d-none';
-// 			workerElements.imgs.className = 'form-control';
-
-// 			if (allImgs.length === 1) {
-// 				document.querySelector('.uploaded-imgs-container').remove();
-// 				document.querySelector('.uploaded-img-header').remove();
-// 				this.parentElement.remove();
-// 			} else {
-// 				this.parentElement.remove();
-// 			}
-// 			openInfoWindow();
-// 			endDeleteLoader();
-// 		});
-// 	});
-// }
-
 // function getGeometryFromString(str) {
 // 	let [latStr, lngStr] = str.split(',');
 // 	let lat = latStr.substring(1, latStr.length).trim();
@@ -373,6 +286,13 @@ async function initMap() {
 // 		lng: parseFloat(lng)
 // 	};
 // }
+
+function startLoader() {
+	document.querySelector('.lds-roller').classList.remove('hide-roller');
+}
+function endLoader() {
+	document.querySelector('.lds-roller').classList.add('hide-roller');
+}
 
 function getCurrentPosition() {
 	return new Promise((resolve, reject) => {
@@ -863,6 +783,18 @@ document.addEventListener('keydown', e => {
 		);
 		if (photosContainer.querySelector('.slideshow-container'))
 			plusDivs(-1, photosContainer);
+	}
+	if (key === 'Enter') {
+		// e.preventDefault();
+		// if (!document.querySelectorAll('.uploaded-img img').length) return;
+		// document.querySelector('.info-modal').style.display = 'block';
+		// document.querySelector(
+		// 	'.info-modal-image'
+		// ).src = infoWindowDiv.querySelector(
+		// 	'.current-image'
+		// ).firstElementChild.src;
+		// document.querySelector('.info-modal-caption').textContent =
+		// 	workerElements.name.value;
 	}
 	if (key === 'Escape') {
 		if (document.querySelector('.info-modal').style.display === 'block')
