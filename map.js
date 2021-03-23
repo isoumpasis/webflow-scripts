@@ -442,18 +442,21 @@ function openInfoWindow(marker) {
 	console.log(markerProps);
 
 	const photosContainer = preparePhotos(markerProps.imgs);
-	// if (markerProps.imgs.length > 1) {
-	// 	prepareSlideshow(photosContainer);
-	// }
-	// if (markerProps.imgs.length) {
-	// 	prepareModal(photosContainer);
-	// }
+	if (markerProps.imgs.length > 1) {
+		prepareSlideshow(photosContainer);
+	}
+	if (markerProps.imgs.length) {
+		prepareModal(photosContainer);
+	}
 	prepareInformation(markerProps);
 
 	infoWindow.setContent(infoWindowDiv);
 	infoWindow.setPosition(selectedMarker.position);
 	infoWindow.setOptions({
-		pixelOffset: new google.maps.Size(0, 10) //0) //-60)
+		pixelOffset: new google.maps.Size(0, 40)
+		//10 aristera
+		//0
+		//-60
 	});
 	infoWindow.open(map);
 }
@@ -777,271 +780,115 @@ function insertAfter(referenceNode, newNode) {
 	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
-// function prepareSlideshow(photosDiv) {
-// 	slideIndex = 1;
-// 	let slideshowHtml = `
-//   <div class='slideshow-container'>
-//   <div class='slideshow-left'>&#10094;</div>
-//   <div class='slideshow-dots'>`;
+function prepareSlideshow(photosDiv) {
+	slideIndex = 1;
+	let slideshowHtml = `
+  <div class='slideshow-container'>
+  <div class='slideshow-left'>&#10094;</div>
+  <div class='slideshow-dots'>`;
 
-// 	const allImgs = photosDiv.querySelectorAll('.info-image');
-// 	for (let i = 0; i < allImgs.length; i++) {
-// 		slideshowHtml += `<span class="slideshow-dot"></span>`;
-// 	}
+	const allImgs = photosDiv.querySelectorAll('.info-image');
+	for (let i = 0; i < allImgs.length; i++) {
+		slideshowHtml += `<span class="slideshow-dot"></span>`;
+	}
 
-// 	slideshowHtml += `
-// 			</div>
-// 			<div class='slideshow-right'>&#10095;</div>
-// 		</div>`;
-// 	photosDiv.innerHTML += slideshowHtml;
+	slideshowHtml += `
+			</div>
+			<div class='slideshow-right'>&#10095;</div>
+		</div>`;
+	photosDiv.innerHTML += slideshowHtml;
 
-// 	showDivs(slideIndex, photosDiv);
+	showDivs(slideIndex, photosDiv);
 
-// 	photosDiv
-// 		.querySelector('.slideshow-left')
-// 		.addEventListener('click', () => plusDivs(-1, photosDiv));
-// 	photosDiv
-// 		.querySelector('.slideshow-right')
-// 		.addEventListener('click', () => plusDivs(1, photosDiv));
+	photosDiv
+		.querySelector('.slideshow-left')
+		.addEventListener('click', () => plusDivs(-1, photosDiv));
+	photosDiv
+		.querySelector('.slideshow-right')
+		.addEventListener('click', () => plusDivs(1, photosDiv));
 
-// 	const dots = photosDiv.getElementsByClassName('slideshow-dot');
-// 	for (let i = 0; i < dots.length; i++) {
-// 		dots[i].addEventListener('click', () => currentDiv(i + 1, photosDiv));
-// 		dots[i].addEventListener('mouseover', () =>
-// 			currentDiv(i + 1, photosDiv)
-// 		);
-// 	}
-// }
-// function plusDivs(n, photosDiv) {
-// 	showDivs((slideIndex += n), photosDiv);
-// }
+	const dots = photosDiv.getElementsByClassName('slideshow-dot');
+	for (let i = 0; i < dots.length; i++) {
+		dots[i].addEventListener('click', () => currentDiv(i + 1, photosDiv));
+		dots[i].addEventListener('mouseover', () =>
+			currentDiv(i + 1, photosDiv)
+		);
+	}
+}
+function plusDivs(n, photosDiv) {
+	showDivs((slideIndex += n), photosDiv);
+}
 
-// function currentDiv(n, photosDiv) {
-// 	showDivs((slideIndex = n), photosDiv);
-// }
+function currentDiv(n, photosDiv) {
+	showDivs((slideIndex = n), photosDiv);
+}
 
-// function showDivs(n, photosDiv) {
-// 	let i;
-// 	const images = photosDiv.querySelectorAll('.info-image');
-// 	const dots = photosDiv.getElementsByClassName('slideshow-dot');
-// 	if (n > images.length) {
-// 		slideIndex = 1;
-// 	}
-// 	if (n < 1) {
-// 		slideIndex = images.length;
-// 	}
-// 	for (i = 0; i < images.length; i++) {
-// 		images[i].style.display = 'none';
-// 		images[i].classList.remove('current-image');
-// 	}
-// 	for (i = 0; i < dots.length; i++) {
-// 		dots[i].className = dots[i].className.replace(
-// 			' slideshow-dot-white',
-// 			''
-// 		);
-// 	}
-// 	images[slideIndex - 1].style.display = 'block';
-// 	images[slideIndex - 1].classList.add('current-image');
-// 	dots[slideIndex - 1].className += ' slideshow-dot-white';
-// }
+function showDivs(n, photosDiv) {
+	let i;
+	const images = photosDiv.querySelectorAll('.info-image');
+	const dots = photosDiv.getElementsByClassName('slideshow-dot');
+	if (n > images.length) {
+		slideIndex = 1;
+	}
+	if (n < 1) {
+		slideIndex = images.length;
+	}
+	for (i = 0; i < images.length; i++) {
+		images[i].style.display = 'none';
+		images[i].classList.remove('current-image');
+	}
+	for (i = 0; i < dots.length; i++) {
+		dots[i].className = dots[i].className.replace(
+			' slideshow-dot-white',
+			''
+		);
+	}
+	images[slideIndex - 1].style.display = 'block';
+	images[slideIndex - 1].classList.add('current-image');
+	dots[slideIndex - 1].className += ' slideshow-dot-white';
+}
 
-// document.addEventListener('keydown', e => {
-// 	const key = e.key;
-// 	if (key === 'ArrowRight') {
-// 		const photosContainer = infoWindowDiv.querySelector(
-// 			'.photos-container'
-// 		);
-// 		if (photosContainer.querySelector('.slideshow-container'))
-// 			plusDivs(1, photosContainer);
-// 	}
-// 	if (key === 'ArrowLeft') {
-// 		const photosContainer = infoWindowDiv.querySelector(
-// 			'.photos-container'
-// 		);
-// 		if (photosContainer.querySelector('.slideshow-container'))
-// 			plusDivs(-1, photosContainer);
-// 	}
-// 	if (key === 'Escape') {
-// 		if (document.querySelector('.info-modal').style.display === 'block')
-// 			document.querySelector('.info-modal').style.display = 'none';
-// 	}
-// });
+document.addEventListener('keydown', e => {
+	const key = e.key;
+	if (key === 'ArrowRight') {
+		const photosContainer = infoWindowDiv.querySelector(
+			'.photos-container'
+		);
+		if (photosContainer.querySelector('.slideshow-container'))
+			plusDivs(1, photosContainer);
+	}
+	if (key === 'ArrowLeft') {
+		const photosContainer = infoWindowDiv.querySelector(
+			'.photos-container'
+		);
+		if (photosContainer.querySelector('.slideshow-container'))
+			plusDivs(-1, photosContainer);
+	}
+	if (key === 'Escape') {
+		if (document.querySelector('.info-modal').style.display === 'block')
+			document.querySelector('.info-modal').style.display = 'none';
+	}
+});
 
-// function prepareModal(photosContainer) {
-// 	const allImages = photosContainer.querySelectorAll('.info-image');
-// 	const modal = document.querySelector('.info-modal');
-// 	const modalImage = document.querySelector('.info-modal-image');
-// 	const modalCaption = document.querySelector('.info-modal-caption');
+function prepareModal(photosContainer) {
+	const allImages = photosContainer.querySelectorAll('.info-image');
+	const modal = document.querySelector('.info-modal');
+	const modalImage = document.querySelector('.info-modal-image');
+	const modalCaption = document.querySelector('.info-modal-caption');
 
-// 	allImages.forEach(image => {
-// 		image.addEventListener('click', () => {
-// 			modal.style.display = 'block';
-// 			modalImage.src = image.firstElementChild.src;
-// 			modalCaption.textContent = workerElements.name.value;
-// 		});
-// 	});
-// 	//close modal
-// 	modal.onclick = e => {
-// 		if (e.target !== modalImage && e.target !== modalCaption)
-// 			modal.style.display = 'none';
-// 	};
-// }
-
-// function addDOMListeners() {
-// 	//Information
-// 	const infoNameEl = infoWindowDiv.querySelector('.info-name-value');
-// 	const infoEmailEl = infoWindowDiv.querySelector('.info-email');
-// 	const infoAddressEl = infoWindowDiv.querySelector('.info-address');
-// 	const infoPhoneEl = infoWindowDiv.querySelector('.info-phone');
-// 	const infoWebsiteEl = infoWindowDiv.querySelector('.info-website');
-// 	google.maps.event.addDomListener(workerElements.name, 'input', e => {
-// 		infoNameEl.textContent = e.target.value;
-// 	});
-// 	google.maps.event.addDomListener(workerElements.email, 'input', e => {
-// 		if (!e.target.value) {
-// 			infoEmailEl.style.display = 'none';
-// 		} else {
-// 			infoEmailEl.style.display = 'flex';
-// 			infoEmailEl.lastElementChild.textContent = e.target.value;
-// 		}
-// 	});
-// 	google.maps.event.addDomListener(workerElements.address, 'input', e => {
-// 		if (!e.target.value) {
-// 			infoAddressEl.style.display = 'none';
-// 		} else {
-// 			infoAddressEl.style.display = 'flex';
-// 			infoAddressEl.lastElementChild.textContent = e.target.value;
-// 		}
-// 	});
-// 	google.maps.event.addDomListener(workerElements.phone, 'input', e => {
-// 		if (!e.target.value) {
-// 			infoPhoneEl.style.display = 'none';
-// 		} else {
-// 			infoPhoneEl.style.display = 'flex';
-// 			let phoneValue = e.target.value;
-// 			if (phoneValue.length >= 7) {
-// 				let temp = [...phoneValue];
-// 				temp.splice(6, 0, ' ');
-// 				phoneValue = temp.join('');
-// 			}
-// 			if (phoneValue.length >= 3) {
-// 				let temp = [...phoneValue];
-// 				temp.splice(2, 0, ' ');
-// 				phoneValue = temp.join('');
-// 			}
-// 			infoPhoneEl.lastElementChild.textContent = phoneValue;
-// 		}
-// 	});
-// 	google.maps.event.addDomListener(workerElements.website, 'input', e => {
-// 		let inputValue = e.target.value;
-// 		const replacers = ['www.', 'https:', 'http:'];
-// 		for (let r of replacers) {
-// 			if (inputValue.indexOf(r) === 0) {
-// 				inputValue = inputValue.replace(r, '');
-// 			}
-// 		}
-// 		infoWebsiteEl.style.display = inputValue.length ? 'flex' : 'none';
-// 		infoWebsiteEl.lastElementChild.textContent = inputValue;
-// 	});
-
-// 	//Services
-// 	const infoLovatoSystemsEl = infoWindowDiv.querySelector(
-// 		'.info-lovatoSystems'
-// 	);
-// 	const infoGogasTanksEl = infoWindowDiv.querySelector('.info-gogasTanks');
-// 	const infoWebServicesEl = infoWindowDiv.querySelector('.info-webServices');
-// 	const infolovatoAppEl = infoWindowDiv.querySelector('.info-lovatoApp');
-// 	const infoGogasGuaranteeEl = infoWindowDiv.querySelector(
-// 		'.info-gogasGuarantee'
-// 	);
-// 	const infoCustomService1El = infoWindowDiv.querySelector(
-// 		'.info-customService1'
-// 	);
-// 	const infoCustomService2El = infoWindowDiv.querySelector(
-// 		'.info-customService2'
-// 	);
-// 	const infoCustomService3El = infoWindowDiv.querySelector(
-// 		'.info-customService3'
-// 	);
-
-// 	google.maps.event.addDomListener(
-// 		workerElements.lovatoSystems,
-// 		'change',
-// 		function () {
-// 			infoLovatoSystemsEl.style.display = this.checked ? 'flex' : 'none';
-// 		}
-// 	);
-// 	google.maps.event.addDomListener(
-// 		workerElements.gogasTanks,
-// 		'change',
-// 		function () {
-// 			infoGogasTanksEl.style.display = this.checked ? 'flex' : 'none';
-// 		}
-// 	);
-// 	google.maps.event.addDomListener(
-// 		workerElements.webServices,
-// 		'change',
-// 		function () {
-// 			infoWebServicesEl.style.display = this.checked ? 'flex' : 'none';
-// 		}
-// 	);
-// 	google.maps.event.addDomListener(
-// 		workerElements.lovatoApp,
-// 		'change',
-// 		function () {
-// 			infolovatoAppEl.style.display = this.checked ? 'flex' : 'none';
-// 		}
-// 	);
-// 	google.maps.event.addDomListener(
-// 		workerElements.gogasGuarantee,
-// 		'change',
-// 		function () {
-// 			infoGogasGuaranteeEl.style.display = this.checked ? 'flex' : 'none';
-// 		}
-// 	);
-// 	google.maps.event.addDomListener(
-// 		workerElements.customService1,
-// 		'input',
-// 		e => {
-// 			if (!e.target.value) {
-// 				infoCustomService1El.style.display = 'none';
-// 			} else {
-// 				infoCustomService1El.style.display = 'flex';
-// 				infoCustomService1El.lastElementChild.textContent =
-// 					e.target.value;
-// 			}
-// 			customServicesDisplay();
-// 		}
-// 	);
-// 	google.maps.event.addDomListener(
-// 		workerElements.customService2,
-// 		'input',
-// 		e => {
-// 			if (!e.target.value) {
-// 				infoCustomService2El.style.display = 'none';
-// 			} else {
-// 				infoCustomService2El.style.display = 'flex';
-// 				infoCustomService2El.lastElementChild.textContent =
-// 					e.target.value;
-// 			}
-// 			customServicesDisplay();
-// 		}
-// 	);
-// 	google.maps.event.addDomListener(
-// 		workerElements.customService3,
-// 		'input',
-// 		e => {
-// 			if (!e.target.value) {
-// 				infoCustomService3El.style.display = 'none';
-// 			} else {
-// 				infoCustomService3El.style.display = 'flex';
-// 				infoCustomService3El.lastElementChild.textContent =
-// 					e.target.value;
-// 			}
-// 			customServicesDisplay();
-// 		}
-// 	);
-// }
+	allImages.forEach(image => {
+		image.addEventListener('click', () => {
+			modal.style.display = 'block';
+			modalImage.src = image.firstElementChild.src;
+			modalCaption.textContent = workerElements.name.value;
+		});
+	});
+	//close modal
+	modal.onclick = e => {
+		if (e.target !== modalImage && e.target !== modalCaption)
+			modal.style.display = 'none';
+	};
+}
 
 // 		//Autocomplete
 // 		const autocompleteOptions = {
