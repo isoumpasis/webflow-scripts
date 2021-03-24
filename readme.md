@@ -1,8 +1,13 @@
-[] enter keypress modal
-[] data import problem
-
-[x] pin offset
+[x] infowindow offset
 
 [x] loading
 
+[] enter keypress modal
+
 [] another loader
+
+[] image clusterer color (white hover bold etc.) and format
+
+[] offset for marker icon
+
+[] data import problem
