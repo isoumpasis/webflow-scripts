@@ -1,6 +1,6 @@
 /* System Identification */
-const urlMake = 'https://lovatohellas.herokuapp.com/make';
-const urlModel = 'https://lovatohellas.herokuapp.com/model';
+const urlMake = 'https://lovatohellas.herokuapp.com/vehicleDB/make';
+const urlModel = 'https://lovatohellas.herokuapp.com/vehicleDB/model';
 
 let vehicleData;
 let selectedModel;
