@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         populateCylinderSelect();
         if (sessionStorage.selectedCylinder) {
           selectCylinderOption(); //from storage
-          showResults();
+          //showResults();
         }
       }
     }
@@ -59,7 +59,7 @@ makeSelect.addEventListener('change', function () {
   cylinderOrEngineSelect.disabled = true;
   yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
   cylinderOrEngineSelect.innerHTML = '<option value="">Κύλινδροι</option>';
-  suggestedContainer.style.display = 'none';
+  //suggestedContainer.style.display = 'none';
   if (!this.value) {
     modelSelect.disabled = true;
     modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
@@ -124,8 +124,8 @@ modelSelect.addEventListener('change', function () {
   // suggestedContainer.style.display = 'none';
   sessionStorage.removeItem('selectedYear');
   sessionStorage.removeItem('selectedCylinder');
-  sessionStorage.removeItem('suggestedSystems');
-  sessionStorage.removeItem('selectedSystem');
+  //sessionStorage.removeItem('suggestedSystems');
+  //sessionStorage.removeItem('selectedSystem');
 
   if (!this.value) {
     yearSelect.disabled = true;
@@ -189,8 +189,8 @@ yearSelect.addEventListener('change', function () {
   console.log('year changed', this.value);
   // suggestedContainer.style.display = 'none';
   sessionStorage.removeItem('selectedCylinder');
-  sessionStorage.removeItem('suggestedSystems');
-  sessionStorage.removeItem('selectedSystem');
+  //sessionStorage.removeItem('suggestedSystems');
+  //sessionStorage.removeItem('selectedSystem');
 
   if (!this.value) {
     cylinderOrEngineSelect.disabled = true;
@@ -218,14 +218,14 @@ cylinderOrEngineSelect.addEventListener('change', function () {
   console.log('cylinder changed', this.value);
 
   if (!this.value) {
-    suggestedContainer.style.display = 'none';
+    //suggestedContainer.style.display = 'none';
     sessionStorage.removeItem('selectedCylinder');
-    sessionStorage.removeItem('suggestedSystems');
-    sessionStorage.removeItem('selectedSystem');
+    //sessionStorage.removeItem('suggestedSystems');
+    //sessionStorage.removeItem('selectedSystem');
     return;
   }
   sessionStorage.selectedCylinder = this.value;
-  showResults();
+  //showResults();
 });
 
 function selectMakeOption() {
@@ -297,14 +297,14 @@ function showResults() {
     suggestedDiv.querySelector('.suggested-btn').textContent = 'Γνωρίστε το ' + suggestedSystems[i];
   });
 
-  if (suggestedSystems.length === 2) {
-    suggestedContainer.style.display = 'grid';
-    suggestedDivs[1].style.display = 'flex';
-  } else {
-    suggestedDivs[1].style.display = 'none';
-    suggestedContainer.style.display = 'flex';
-    suggestedContainer.style.justifyContent = 'center';
-  }
+  //if (suggestedSystems.length === 2) {
+  //suggestedContainer.style.display = 'grid';
+  //suggestedDivs[1].style.display = 'flex';
+  //} else {
+  //suggestedDivs[1].style.display = 'none';
+  //suggestedContainer.style.display = 'flex';
+  //suggestedContainer.style.justifyContent = 'center';
+  //}
 }
 
 function getSystemPrice(system) {
