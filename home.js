@@ -68,8 +68,9 @@ makeSelect.addEventListener('change', function () {
   }
   modelSelect.disabled = false;
   modelSelect.innerHTML = '';
-  startLoadingModelSelect();
 
+  startLoadingSelect(modelSelect);
+  let status;
   fetch(urlMake, {
     method: 'POST',
     headers: {
@@ -77,12 +78,15 @@ makeSelect.addEventListener('change', function () {
     },
     body: JSON.stringify({ make: this.value })
   })
-    .then(response => response.json())
+    .then(response => {
+      status = response.status;
+      response.json();
+    })
     .then(data => {
       console.log('Success Models Fetch:', data);
-      if (data.msg === 'no vehicles') {
-        endLoadingModelSelect();
-        makeSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
+      if (status !== 200) {
+        endLoadingSelect(modelSelect);
+        makeSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
         return;
       }
       selectedModels = data;
@@ -91,7 +95,7 @@ makeSelect.addEventListener('change', function () {
       sessionStorage.selectedModels = JSON.stringify(selectedModels);
 
       populateModelSelect();
-      endLoadingModelSelect();
+      endLoadingSelect(modelSelect);
     })
     .catch(error => {
       endLoadingModelSelect();
@@ -100,11 +104,11 @@ makeSelect.addEventListener('change', function () {
     });
 });
 
-function startLoadingModelSelect() {
-  modelSelect.classList.add('loading-model-select');
+function startLoadingSelect(select) {
+  select.classList.add('loading-select');
 }
-function endLoadingModelSelect() {
-  modelSelect.classList.remove('loading-model-select');
+function endLoadingSelect(select) {
+  select.classList.remove('loading-select');
 }
 
 function populateModelSelect() {
@@ -136,6 +140,7 @@ modelSelect.addEventListener('change', function () {
   // selectedModel = selectedModels.models.filter(model => model.name === this.value)[0];
   // console.log('selectedModel', selectedModel);
   // sessionStorage.selectedModel = JSON.stringify(selectedModel);
+  startLoadingSelect(yearSelect);
   let status;
   fetch(urlModel, {
     method: 'POST',
@@ -150,36 +155,43 @@ modelSelect.addEventListener('change', function () {
     })
     .then(data => {
       console.log('Success Vehicles Fetch:', data);
-      console.log(status);
-      if (status) {
-        endLoadingModelSelect();
+      if (status !== 200) {
+        endLoadingSelect(yearSelect);
         makeSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
         return;
       }
-      selectedModels = data;
+      selectedVehicles = data;
 
-      sessionStorage.clear(); //reset every time make changes
-      sessionStorage.selectedModels = JSON.stringify(selectedModels);
+      //sessionStorage.clear(); //reset every time make changes
+      sessionStorage.selectedVehicles = JSON.stringify(selectedVehicles);
 
-      populateModelSelect();
-      endLoadingModelSelect();
+      populateYearSelect();
+      endLoadingSelect(yearSelect);
     })
     .catch(error => {
-      endLoadingModelSelect();
+      endLoadingSelect(yearSelect);
       modelSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
       console.error('Error Fetch:', error);
     });
 
-  populateYearSelect();
+  // populateYearSelect();
 });
 
 function populateYearSelect() {
   let yearOptionsStr = '<option value="">Επιλέξτε Χρονολογία</option>';
 
-  const [fromYear, toYear] = selectedModel.years;
-  for (let year = fromYear; year <= toYear; year++) {
+  const vehicleYears = [];
+  selectedVehicles.forEach(vehicle => {
+    const vehicleFrom = vehicle.years[0];
+    const vehicleTo = vehicle.years[1];
+    for (let y = vehicleFrom; y <= vehicleTo; y++) {
+      vehicleYears.push(y);
+    }
+  });
+  const years = [...new Set(vehicleYears)];
+  years.forEach(year => {
     yearOptionsStr += `<option value="${year}">${year}</option>`;
-  }
+  });
   yearSelect.innerHTML = yearOptionsStr;
   yearSelect.disabled = false;
   yearSelect.focus();
