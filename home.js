@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       populateYearSelect();
       if (sessionStorage.selectedYear) {
         selectYearOption(); //from storage
-        populateCylinderSelect();
+        populateCylinderOrEngineSelect();
         if (sessionStorage.selectedCylinder) {
           selectCylinderOption(); //from storage
           //showResults();
@@ -68,8 +68,8 @@ makeSelect.addEventListener('change', function () {
   }
   modelSelect.disabled = false;
   modelSelect.innerHTML = '';
-
   startLoadingSelect(modelSelect);
+
   let status;
   fetch(urlMake, {
     method: 'POST',
@@ -140,6 +140,8 @@ modelSelect.addEventListener('change', function () {
   // selectedModel = selectedModels.models.filter(model => model.name === this.value)[0];
   // console.log('selectedModel', selectedModel);
   // sessionStorage.selectedModel = JSON.stringify(selectedModel);
+  yearSelect.disabled = false;
+  yearSelect.innerHTML = '';
   startLoadingSelect(yearSelect);
   let status;
   fetch(urlModel, {
@@ -211,17 +213,37 @@ yearSelect.addEventListener('change', function () {
     return;
   }
   sessionStorage.selectedYear = this.value;
-  populateCylinderSelect();
+  populateCylinderOrEngineSelect();
 });
 
-function populateCylinderSelect() {
-  if (typeof Storage !== 'undefined' && !sessionStorage.selectedYear) return;
+function populateCylinderOrEngineSelect() {
+  if (typeof Storage !== 'undefined' && !sessionStorage.selectedYear) return; //dont know if bug? why return??
+  let optionsStr;
 
-  let cylinderOptionsStr = '<option value="">Επιλέξτε Κυλίνδρους</option>';
-  selectedModel.cylinders.forEach(cylinder => {
-    cylinderOptionsStr += `<option value="${cylinder}">${cylinder}</option>`;
-  });
-  cylinderOrEngineSelect.innerHTML = cylinderOptionsStr;
+  if (selectedVehicles.isDirect) {
+    optionsStr = '<option value="">Επιλέξτε Κινητήρα</option>';
+    let engineCodes = [];
+    selectedVehicles.vehicles.forEach(vehicle => {
+      vehicle.engineCodes.forEach(code => {
+        engineCodes.push(code);
+      });
+    });
+    engineCodes = [...new Set(engineCodes)];
+    engineCodes.forEach(engineCode => {
+      optionsStr += `<option value="${engineCode}">${engineCode}</option>`;
+    });
+  } else {
+    optionsStr = '<option value="">Επιλέξτε Κυλίνδρους</option>';
+    let cylinders = [];
+    selectedVehicles.vehicles.forEach(vehicle => {
+      cylinders.push(vehicle.cylinders);
+    });
+    cylinders = [...new Set(cylinders)];
+    cylinders.forEach(cylinder => {
+      optionsStr += `<option value="${cylinder}">${cylinder}</option>`;
+    });
+  }
+  cylinderOrEngineSelect.innerHTML = optionsStr;
   cylinderOrEngineSelect.disabled = false;
   cylinderOrEngineSelect.focus();
 }
