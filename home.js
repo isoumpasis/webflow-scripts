@@ -1,5 +1,7 @@
 /* System Identification */
-const url = 'https://lovatohellas.herokuapp.com/vehicleDB';
+const urlMake = 'https://lovatohellas.herokuapp.com/make';
+const urlModel = 'https://lovatohellas.herokuapp.com/model';
+
 let vehicleData;
 let selectedModel;
 
@@ -14,18 +16,18 @@ let suggestedSystems;
 document.addEventListener('DOMContentLoaded', () => {
   initSelects();
 
-  if (typeof Storage !== 'undefined' && localStorage.vehicleData) {
-    vehicleData = JSON.parse(localStorage.vehicleData);
+  if (typeof Storage !== 'undefined' && sessionStorage.vehicleData) {
+    vehicleData = JSON.parse(sessionStorage.vehicleData);
     console.log('Parsed json local storage', vehicleData);
     selectMakeOption();
     populateModelSelect();
-    if (localStorage.selectedModel) {
+    if (sessionStorage.selectedModel) {
       selectModelOption(); //from storage
       populateYearSelect();
-      if (localStorage.selectedYear) {
+      if (sessionStorage.selectedYear) {
         selectYearOption(); //from storage
         populateCylinderSelect();
-        if (localStorage.selectedCylinder) {
+        if (sessionStorage.selectedCylinder) {
           selectCylinderOption(); //from storage
           showResults();
         }
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   suggestedDivs.forEach(suggestedDiv => {
     suggestedDiv.querySelector('.suggested-btn').addEventListener('click', e => {
       const selectedSystem = suggestedDiv.querySelector('.suggested-name').textContent;
-      localStorage.selectedSystem = selectedSystem;
+      sessionStorage.selectedSystem = selectedSystem;
     });
   });
 });
@@ -61,29 +63,28 @@ makeSelect.addEventListener('change', function () {
   if (!this.value) {
     modelSelect.disabled = true;
     modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-    localStorage.clear(); //reset //DO YOU WANT TO ERASE EVERYTHING? maybe there is an autonomous var you want to keep
+    sessionStorage.clear(); //reset //DO YOU WANT TO ERASE EVERYTHING? maybe there is an autonomous var you want to keep
     return;
   }
   modelSelect.disabled = false;
   modelSelect.innerHTML = '';
   startLoadingModelSelect();
 
-  fetch(url, {
+  fetch(urlMake, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ make: this.value })
   })
-    .then(response => response.json()) //FOR JSON (WORKING)
-    //.then(response => response.text()) //FOR TEXT (WORKING)
+    .then(response => response.json())
     .then(data => {
       console.log('Success Fetch Response Data:', data);
       if (data.msg === 'no vehicles') return;
       vehicleData = data;
 
-      localStorage.clear(); //reset every time make changes
-      localStorage.vehicleData = JSON.stringify(vehicleData);
+      sessionStorage.clear(); //reset every time make changes
+      sessionStorage.vehicleData = JSON.stringify(vehicleData);
 
       populateModelSelect();
       endLoadingModelSelect();
@@ -104,7 +105,10 @@ function endLoadingModelSelect() {
 
 function populateModelSelect() {
   let modelOptionsStr = '<option value="">Επιλέξτε Μοντέλο</option>';
-  vehicleData.models.forEach(model => {
+  // vehicleData.models.forEach(model => {
+  //   modelOptionsStr += `<option value="${model.name}">${model.name}</option>`;
+  // });
+  vehicleData.forEach(model => {
     modelOptionsStr += `<option value="${model.name}">${model.name}</option>`;
   });
   modelSelect.innerHTML = modelOptionsStr;
@@ -117,20 +121,20 @@ modelSelect.addEventListener('change', function () {
   cylinderSelect.disabled = true;
   cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
   suggestedContainer.style.display = 'none';
-  localStorage.removeItem('selectedYear');
-  localStorage.removeItem('selectedCylinder');
-  localStorage.removeItem('suggestedSystems');
-  localStorage.removeItem('selectedSystem');
+  sessionStorage.removeItem('selectedYear');
+  sessionStorage.removeItem('selectedCylinder');
+  sessionStorage.removeItem('suggestedSystems');
+  sessionStorage.removeItem('selectedSystem');
 
   if (!this.value) {
     yearSelect.disabled = true;
     yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-    localStorage.removeItem('selectedModel');
+    sessionStorage.removeItem('selectedModel');
     return;
   }
   selectedModel = vehicleData.models.filter(model => model.name === this.value)[0];
   console.log('selectedModel', selectedModel);
-  localStorage.selectedModel = JSON.stringify(selectedModel);
+  sessionStorage.selectedModel = JSON.stringify(selectedModel);
 
   populateYearSelect();
 });
@@ -150,22 +154,22 @@ function populateYearSelect() {
 yearSelect.addEventListener('change', function () {
   console.log('year changed', this.value);
   suggestedContainer.style.display = 'none';
-  localStorage.removeItem('selectedCylinder');
-  localStorage.removeItem('suggestedSystems');
-  localStorage.removeItem('selectedSystem');
+  sessionStorage.removeItem('selectedCylinder');
+  sessionStorage.removeItem('suggestedSystems');
+  sessionStorage.removeItem('selectedSystem');
 
   if (!this.value) {
     cylinderSelect.disabled = true;
     cylinderSelect.innerHTML = '<option value="">Κύλινδροι</option>';
-    localStorage.removeItem('selectedYear');
+    sessionStorage.removeItem('selectedYear');
     return;
   }
-  localStorage.selectedYear = this.value;
+  sessionStorage.selectedYear = this.value;
   populateCylinderSelect();
 });
 
 function populateCylinderSelect() {
-  if (typeof Storage !== 'undefined' && !localStorage.selectedYear) return;
+  if (typeof Storage !== 'undefined' && !sessionStorage.selectedYear) return;
 
   let cylinderOptionsStr = '<option value="">Επιλέξτε Κυλίνδρους</option>';
   selectedModel.cylinders.forEach(cylinder => {
@@ -181,12 +185,12 @@ cylinderSelect.addEventListener('change', function () {
 
   if (!this.value) {
     suggestedContainer.style.display = 'none';
-    localStorage.removeItem('selectedCylinder');
-    localStorage.removeItem('suggestedSystems');
-    localStorage.removeItem('selectedSystem');
+    sessionStorage.removeItem('selectedCylinder');
+    sessionStorage.removeItem('suggestedSystems');
+    sessionStorage.removeItem('selectedSystem');
     return;
   }
-  localStorage.selectedCylinder = this.value;
+  sessionStorage.selectedCylinder = this.value;
   showResults();
 });
 
@@ -200,7 +204,7 @@ function selectMakeOption() {
   }
 }
 function selectModelOption() {
-  selectedModel = JSON.parse(localStorage.selectedModel);
+  selectedModel = JSON.parse(sessionStorage.selectedModel);
   let opts = modelSelect.options;
   console.log('select model option opts', opts);
   for (let i = 0; i <= opts.length; i++) {
@@ -211,7 +215,7 @@ function selectModelOption() {
   }
 }
 function selectYearOption() {
-  const selectedYear = localStorage.selectedYear;
+  const selectedYear = sessionStorage.selectedYear;
   let opts = yearSelect.options;
   for (let i = 0; i <= opts.length; i++) {
     if (selectedYear === opts[i].value) {
@@ -221,7 +225,7 @@ function selectYearOption() {
   }
 }
 function selectCylinderOption() {
-  const selectedCylinder = localStorage.selectedCylinder;
+  const selectedCylinder = sessionStorage.selectedCylinder;
   let opts = cylinderSelect.options;
   for (let i = 0; i <= opts.length; i++) {
     if (selectedCylinder === opts[i].value) {
@@ -249,7 +253,7 @@ function showResults() {
     suggestedSystems = ['C-OBD II'];
   }
 
-  localStorage.suggestedSystems = JSON.stringify(suggestedSystems);
+  sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 
   suggestedDivs.forEach((suggestedDiv, i) => {
     suggestedDiv.querySelector('.suggested-name').textContent = suggestedSystems[i];

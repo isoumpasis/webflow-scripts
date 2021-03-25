@@ -3,11 +3,11 @@ const par = document.querySelector('.paragraph-2');
 document.addEventListener('DOMContentLoaded', () => {
   if (
     typeof Storage !== 'undefined' &&
-    localStorage.suggestedSystems &&
-    localStorage.selectedSystem
+    sessionStorage.suggestedSystems &&
+    sessionStorage.selectedSystem
   ) {
-    const suggestedSystems = JSON.parse(localStorage.suggestedSystems);
-    const selectedSystem = localStorage.selectedSystem;
+    const suggestedSystems = JSON.parse(sessionStorage.suggestedSystems);
+    const selectedSystem = sessionStorage.selectedSystem;
 
     par.innerHTML += `<br>Προτάθηκαν: `;
     suggestedStr = `<span style='text-decoration:underline;'>${suggestedSystems[0]}</span>`;
