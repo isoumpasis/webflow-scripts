@@ -181,7 +181,7 @@ function populateYearSelect() {
   let yearOptionsStr = '<option value="">Επιλέξτε Χρονολογία</option>';
 
   const vehicleYears = [];
-  selectedVehicles.forEach(vehicle => {
+  selectedVehicles.vehicles.forEach(vehicle => {
     const vehicleFrom = vehicle.years[0];
     const vehicleTo = vehicle.years[1];
     for (let y = vehicleFrom; y <= vehicleTo; y++) {
