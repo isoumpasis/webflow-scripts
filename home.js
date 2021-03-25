@@ -182,7 +182,7 @@ modelSelect.addEventListener('change', function () {
 function populateYearSelect() {
   let yearOptionsStr = '<option value="">Επιλέξτε Χρονολογία</option>';
 
-  const vehicleYears = [];
+  let vehicleYears = [];
   selectedVehicles.vehicles.forEach(vehicle => {
     const vehicleFrom = vehicle.years[0];
     const vehicleTo = vehicle.years[1];
@@ -190,8 +190,8 @@ function populateYearSelect() {
       vehicleYears.push(y);
     }
   });
-  const years = [...new Set(vehicleYears)];
-  years.forEach(year => {
+  vehicleYears = [...new Set(vehicleYears)].sort();
+  vehicleYears.forEach(year => {
     yearOptionsStr += `<option value="${year}">${year}</option>`;
   });
   yearSelect.innerHTML = yearOptionsStr;
