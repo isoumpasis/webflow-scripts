@@ -98,7 +98,7 @@ makeSelect.addEventListener('change', function () {
       endLoadingSelect(modelSelect);
     })
     .catch(error => {
-      endLoadingModelSelect();
+      endLoadingSelect(modelSelect);
       modelSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
       console.error('Error Fetch:', error);
     });
