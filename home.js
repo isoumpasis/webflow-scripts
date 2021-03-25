@@ -80,7 +80,7 @@ makeSelect.addEventListener('change', function () {
   })
     .then(response => {
       status = response.status;
-      response.json();
+      return response.json();
     })
     .then(data => {
       console.log('Success Models Fetch:', data);
@@ -151,7 +151,7 @@ modelSelect.addEventListener('change', function () {
   })
     .then(response => {
       status = response.status;
-      response.json();
+      return response.json();
     })
     .then(data => {
       console.log('Success Vehicles Fetch:', data);
