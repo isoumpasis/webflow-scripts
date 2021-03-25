@@ -109,7 +109,7 @@ function populateModelSelect() {
   //   modelOptionsStr += `<option value="${model.name}">${model.name}</option>`;
   // });
   vehicleData.forEach(model => {
-    modelOptionsStr += `<option value="${model.name}">${model.name}</option>`;
+    modelOptionsStr += `<option value="${model}">${model}</option>`;
   });
   modelSelect.innerHTML = modelOptionsStr;
   modelSelect.disabled = false;
