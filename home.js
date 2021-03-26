@@ -273,7 +273,7 @@ function populateCylinderOrEngineSelect() {
 		cylinders = [...new Set(cylinders)].sort();
 		cylinders.forEach(cylinder => {
 			optionsArray.push(
-				`<option value="${cylinder}">${cylinder}</option>`
+				`<option value="${cylinder}">${cylinder}cyl</option>`
 			);
 		});
 	}
