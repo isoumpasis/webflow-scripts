@@ -248,8 +248,8 @@ function populateCylinderOrEngineSelect() {
 			) {
 				vehicle.engineCodes.forEach(codeObj => {
 					let isConvertibleStr = codeObj.isConvertible
-						? ' &#10004;' //tick
-						: '';
+						? ' <span>&#10004;</span>' //tick
+						: ' <span>&times;</span>';
 					engineCodes.push(codeObj.code + isConvertibleStr);
 				});
 			}
