@@ -60,7 +60,7 @@ makeSelect.addEventListener('change', function () {
 	yearSelect.disabled = true;
 	cylinderOrEngineSelect.disabled = true;
 	yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-	cylinderOrEngineSelect.innerHTML = '<option value="">Κύλινδροι</option>';
+	cylinderOrEngineSelect.innerHTML = '<option value="">Περιγραφή</option>';
 	//suggestedContainer.style.display = 'none';
 	if (!this.value) {
 		modelSelect.disabled = true;
@@ -136,6 +136,8 @@ modelSelect.addEventListener('change', function () {
 	if (!this.value) {
 		yearSelect.disabled = true;
 		yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+		cylinderOrEngineSelect.innerHTML =
+			'<option value="">Περιγραφή</option>';
 		sessionStorage.removeItem('selectedVehicles');
 		return;
 	}
