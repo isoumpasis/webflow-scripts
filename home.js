@@ -213,8 +213,9 @@ yearSelect.addEventListener('change', function () {
 
 	if (!this.value) {
 		cylinderOrEngineSelect.disabled = true;
-		cylinderOrEngineSelect.innerHTML =
-			'<option value="">Κύλινδροι</option>';
+		cylinderOrEngineSelect.innerHTML = `<option value="">${
+			selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
+		}</option>`;
 		sessionStorage.removeItem('selectedYear');
 		return;
 	}
