@@ -187,7 +187,7 @@ modelSelect.addEventListener('change', function () {
 });
 
 function populateYearSelect() {
-	let yearOptionsStr = '<option value="">Επιλέξτε Χρονολογία</option>';
+	let yearOptionsArray = ['<option value="">Επιλέξτε Χρονολογία</option>'];
 
 	let vehicleYears = [];
 	selectedVehicles.vehicles.forEach(vehicle => {
@@ -199,21 +199,31 @@ function populateYearSelect() {
 	});
 	vehicleYears = [...new Set(vehicleYears)].sort();
 	vehicleYears.forEach(year => {
-		yearOptionsStr += `<option value="${year}">${year}</option>`;
+		yearOptionsArray.push(`<option value="${year}">${year}</option>`);
 	});
-	yearSelect.innerHTML = yearOptionsStr;
+
+	//One option -> auto populate
+	if (yearOptionsArray.length === 2) {
+		yearSelect.selectedIndex = 1;
+		yearSelect.disabled = false;
+		yearOnChange(yearSelect.value);
+		return;
+	}
+	yearSelect.innerHTML = yearOptionsArray.join('');
 	yearSelect.disabled = false;
 	yearSelect.focus();
 }
 
-yearSelect.addEventListener('change', function () {
-	console.log('year changed', this.value);
+yearSelect.addEventListener('change', e => yearOnChange(e.target.value));
+
+function yearOnChange(yearValue) {
+	console.log('year changed', yearValue);
 	// suggestedContainer.style.display = 'none';
 	sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
 	//sessionStorage.removeItem('selectedSystem');
 
-	if (!this.value) {
+	if (!yearValue) {
 		cylinderOrEngineSelect.disabled = true;
 		cylinderOrEngineSelect.innerHTML = `<option value="">${
 			selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
@@ -221,16 +231,16 @@ yearSelect.addEventListener('change', function () {
 		sessionStorage.removeItem('selectedYear');
 		return;
 	}
-	sessionStorage.selectedYear = this.value;
+	sessionStorage.selectedYear = yearValue;
 	populateCylinderOrEngineSelect();
-});
+}
 
 function populateCylinderOrEngineSelect() {
 	if (typeof Storage !== 'undefined' && !sessionStorage.selectedYear) return; //dont know if bug? why return??
-	let optionsStr;
+	let optionsArray;
 
 	if (selectedVehicles.isDirect) {
-		optionsStr = '<option value="">Επιλέξτε Κινητήρα</option>';
+		optionsArray = ['<option value="">Επιλέξτε Κινητήρα</option>'];
 		let engineCodes = [];
 		selectedVehicles.vehicles.forEach(vehicle => {
 			if (
@@ -246,10 +256,12 @@ function populateCylinderOrEngineSelect() {
 			(a, b) => parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0])
 		);
 		engineCodes.forEach(engineCode => {
-			optionsStr += `<option value="${engineCode}">${engineCode}</option>`;
+			optionsArray.push(
+				`<option value="${engineCode}">${engineCode}</option>`
+			);
 		});
 	} else {
-		optionsStr = '<option value="">Επιλέξτε Κυλίνδρους</option>';
+		optionsArray = ['<option value="">Επιλέξτε Κυλίνδρους</option>'];
 		let cylinders = [];
 		selectedVehicles.vehicles.forEach(vehicle => {
 			if (
@@ -261,27 +273,40 @@ function populateCylinderOrEngineSelect() {
 		});
 		cylinders = [...new Set(cylinders)].sort();
 		cylinders.forEach(cylinder => {
-			optionsStr += `<option value="${cylinder}">${cylinder}</option>`;
+			optionsArray.push(
+				`<option value="${cylinder}">${cylinder}</option>`
+			);
 		});
 	}
-	cylinderOrEngineSelect.innerHTML = optionsStr;
+	//One option -> auto populate
+	if (optionsArray.length === 2) {
+		cylinderOrEngineSelect.selectedIndex = 1;
+		cylinderOrEngineSelect.disabled = false;
+		cylinderOrEngineOnChange(cylinderOrEngineSelect.value);
+		return;
+	}
+	cylinderOrEngineSelect.innerHTML = optionsArray.join('');
 	cylinderOrEngineSelect.disabled = false;
 	cylinderOrEngineSelect.focus();
 }
 
-cylinderOrEngineSelect.addEventListener('change', function () {
-	console.log('cylinder changed', this.value);
+cylinderOrEngineSelect.addEventListener('change', e =>
+	cylinderOrEngineOnChange(e.target.value)
+);
 
-	if (!this.value) {
+function cylinderOrEngineOnChange(value) {
+	console.log('cylinder changed', value);
+
+	if (!value) {
 		//suggestedContainer.style.display = 'none';
 		sessionStorage.removeItem('selectedCylinder');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
 		return;
 	}
-	sessionStorage.selectedCylinder = this.value;
+	sessionStorage.selectedCylinder = value;
 	//showResults();
-});
+}
 
 function selectMakeOption() {
 	let opts = makeSelect.options;
