@@ -246,8 +246,11 @@ function populateCylinderOrEngineSelect() {
 				yearSelect.value >= vehicle.years[0] &&
 				yearSelect.value <= vehicle.years[1]
 			) {
-				vehicle.engineCodes.forEach(code => {
-					engineCodes.push(code);
+				vehicle.engineCodes.forEach(codeObj => {
+					let isConvertibleStr = codeObj.isConvertible
+						? ' &#10004;' //tick
+						: '';
+					engineCodes.push(codeObj.code + isConvertibleStr);
 				});
 			}
 		});
@@ -256,7 +259,7 @@ function populateCylinderOrEngineSelect() {
 		);
 		engineCodes.forEach(engineCode => {
 			optionsArray.push(
-				`<option value="${engineCode}">${engineCode}</option>`
+				`<option value="${engineCode}">${engineCode}</option>` //VALUEEE ???
 			);
 		});
 	} else {

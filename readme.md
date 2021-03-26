@@ -18,7 +18,12 @@
 [x] kylindroi na allazei otan mpei di model kateutheian
 [x] sort ta panta
 [x] to idio kai gia tous kylindrous na blepei to year kai na paei sto cyls
-[] αν υπαρχει ενα να το βγαζει κατευθειαν (νεστεντ (!)) => kai protash systhmatos
+[x] display none on change to suggested Containers
+[x] αν υπαρχει ενα να το βγαζει κατευθειαν =>
+[x] kai νεστεντ =>
+[x] kai protash systhmatos =>
+[] kai calc kerdous
+
 [] na exei ena prasino tick sthn perigrafh kinhthra an ginetai metatroph
 [] mnhmh session storage
-[] display none on change to suggested Contianers
+[] mhhmh gia session ti system page
