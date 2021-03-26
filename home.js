@@ -36,12 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 	}
-	// suggestedDivs.forEach(suggestedDiv => {
-	//   suggestedDiv.querySelector('.suggested-btn').addEventListener('click', e => {
-	//     const selectedSystem = suggestedDiv.querySelector('.suggested-name').textContent;
-	//     sessionStorage.selectedSystem = selectedSystem;
-	//   });
-	// });
 });
 
 function initSelects() {
@@ -61,7 +55,9 @@ makeSelect.addEventListener('change', function () {
 	cylinderOrEngineSelect.disabled = true;
 	yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
 	cylinderOrEngineSelect.innerHTML = '<option value="">Περιγραφή</option>';
-	//suggestedContainer.style.display = 'none';
+	suggestedContainers.forEach(container => {
+		container.style.display = 'none';
+	});
 	if (!this.value) {
 		modelSelect.disabled = true;
 		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
@@ -127,7 +123,9 @@ function populateModelSelect() {
 modelSelect.addEventListener('change', function () {
 	console.log('model changed', this.value);
 	cylinderOrEngineSelect.disabled = true;
-	// suggestedContainer.style.display = 'none';
+	suggestedContainers.forEach(container => {
+		container.style.display = 'none';
+	});
 	sessionStorage.removeItem('selectedYear');
 	sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
@@ -217,7 +215,9 @@ yearSelect.addEventListener('change', e => yearOnChange(e.target.value));
 
 function yearOnChange(yearValue) {
 	console.log('year changed', yearValue);
-	// suggestedContainer.style.display = 'none';
+	suggestedContainers.forEach(container => {
+		container.style.display = 'none';
+	});
 	sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
 	//sessionStorage.removeItem('selectedSystem');
