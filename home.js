@@ -127,7 +127,6 @@ function populateModelSelect() {
 modelSelect.addEventListener('change', function () {
 	console.log('model changed', this.value);
 	cylinderOrEngineSelect.disabled = true;
-	cylinderOrEngineSelect.innerHTML = '<option value="">Κύλινδροι</option>';
 	// suggestedContainer.style.display = 'none';
 	sessionStorage.removeItem('selectedYear');
 	sessionStorage.removeItem('selectedCylinder');
@@ -169,6 +168,9 @@ modelSelect.addEventListener('change', function () {
 
 			sessionStorage.selectedVehicles = JSON.stringify(selectedVehicles);
 
+			cylinderOrEngineSelect.innerHTML = `<option value="">${
+				selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
+			}</option>`;
 			populateYearSelect();
 			endLoadingSelect(yearSelect);
 		})
@@ -237,7 +239,7 @@ function populateCylinderOrEngineSelect() {
 				});
 			}
 		});
-		engineCodes = [...new Set(engineCodes)];
+		engineCodes = [...new Set(engineCodes)].sort();
 		engineCodes.forEach(engineCode => {
 			optionsStr += `<option value="${engineCode}">${engineCode}</option>`;
 		});
@@ -245,9 +247,14 @@ function populateCylinderOrEngineSelect() {
 		optionsStr = '<option value="">Επιλέξτε Κυλίνδρους</option>';
 		let cylinders = [];
 		selectedVehicles.vehicles.forEach(vehicle => {
-			cylinders.push(vehicle.cylinders);
+			if (
+				yearSelect.value >= vehicle.years[0] &&
+				yearSelect.value <= vehicle.years[1]
+			) {
+				cylinders.push(vehicle.cylinders);
+			}
 		});
-		cylinders = [...new Set(cylinders)];
+		cylinders = [...new Set(cylinders)].sort();
 		cylinders.forEach(cylinder => {
 			optionsStr += `<option value="${cylinder}">${cylinder}</option>`;
 		});
