@@ -50,7 +50,7 @@ function initSelects() {
 	yearSelect.disabled = true;
 	yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
 	cylinderOrEngineSelect.disabled = true;
-	cylinderOrEngineSelect.innerHTML = '<option value="">Κύλινδροι</option>';
+	cylinderOrEngineSelect.innerHTML = '<option value="">Περιγραφή</option>';
 	makeSelect.focus();
 }
 
