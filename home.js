@@ -369,13 +369,13 @@ function showCylinderResults(years, cyls) {
 		suggestedSystems = ['C-OBD II 6cyl'];
 		const cobdDiv = document.querySelector('#suggested-cobd');
 		cobdDiv.style.display = 'grid';
-		cobdDiv.querySelector('.suggested-name').textContent += ' 6cyl';
+		cobdDiv.querySelector('.suggested-name').textContent = 'C-OBD II 6cyl';
 		cobdDiv.querySelector('.suggested-price').textContent = '1000€ + ΦΠΑ';
 	} else if (cyls == 8) {
 		suggestedSystems = ['C-OBD II 8cyl'];
 		const cobdDiv = document.querySelector('#suggested-cobd');
 		cobdDiv.style.display = 'grid';
-		cobdDiv.querySelector('.suggested-name').textContent += ' 8cyl';
+		cobdDiv.querySelector('.suggested-name').textContent = 'C-OBD II 8cyl';
 		cobdDiv.querySelector('.suggested-price').textContent = '1100€ + ΦΠΑ';
 	} else if (years < 1999) {
 		suggestedSystems = ['E-GO'];
