@@ -202,16 +202,15 @@ function populateYearSelect() {
 		yearOptionsArray.push(`<option value="${year}">${year}</option>`);
 	});
 
-	//One option -> auto populate
-	if (yearOptionsArray.length === 2) {
-		yearSelect.selectedIndex = 1;
-		yearSelect.disabled = false;
-		yearOnChange(yearSelect.value);
-		return;
-	}
 	yearSelect.innerHTML = yearOptionsArray.join('');
 	yearSelect.disabled = false;
 	yearSelect.focus();
+	//One option -> auto populate
+	if (yearOptionsArray.length === 2) {
+		yearSelect.selectedIndex = 1;
+		yearOnChange(yearSelect.value);
+		return;
+	}
 }
 
 yearSelect.addEventListener('change', e => yearOnChange(e.target.value));
@@ -278,6 +277,10 @@ function populateCylinderOrEngineSelect() {
 			);
 		});
 	}
+
+	cylinderOrEngineSelect.innerHTML = optionsArray.join('');
+	cylinderOrEngineSelect.disabled = false;
+	cylinderOrEngineSelect.focus();
 	//One option -> auto populate
 	if (optionsArray.length === 2) {
 		cylinderOrEngineSelect.selectedIndex = 1;
@@ -285,9 +288,6 @@ function populateCylinderOrEngineSelect() {
 		cylinderOrEngineOnChange(cylinderOrEngineSelect.value);
 		return;
 	}
-	cylinderOrEngineSelect.innerHTML = optionsArray.join('');
-	cylinderOrEngineSelect.disabled = false;
-	cylinderOrEngineSelect.focus();
 }
 
 cylinderOrEngineSelect.addEventListener('change', e =>
