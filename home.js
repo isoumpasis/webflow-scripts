@@ -11,8 +11,8 @@ const yearSelect = document.querySelector('#yearSelect');
 const cylinderOrEngineSelect = document.querySelector(
 	'#cylinderOrEngineSelect'
 );
-// const suggestedDivs = document.querySelectorAll('.suggested-system-div');
-// const suggestedContainers = document.querySelectorAll('.suggested-container');
+
+const suggestedContainers = document.querySelectorAll('.suggested-container');
 let suggestedSystems;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -298,8 +298,9 @@ function cylinderOrEngineOnChange(value) {
 	console.log('cylinder changed', value);
 
 	if (!value) {
-		document.querySelectorAll('.suggested-container').style.display =
-			'none';
+		suggestedContainers.forEach(container => {
+			container.style.display = 'none';
+		});
 		sessionStorage.removeItem('selectedCylinderOrEngine');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
