@@ -239,7 +239,9 @@ function populateCylinderOrEngineSelect() {
 				});
 			}
 		});
-		engineCodes = [...new Set(engineCodes)].sort();
+		engineCodes = [...new Set(engineCodes)].sort(
+			(a, b) => parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0])
+		);
 		engineCodes.forEach(engineCode => {
 			optionsStr += `<option value="${engineCode}">${engineCode}</option>`;
 		});
