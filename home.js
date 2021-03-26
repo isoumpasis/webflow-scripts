@@ -258,8 +258,10 @@ function populateCylinderOrEngineSelect() {
 			(a, b) => parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0])
 		);
 		engineCodes.forEach(engineCode => {
+			let engineCodeValue = engineCode.split(' ').pop().join(' ');
+			console.log(engineCodeValue);
 			optionsArray.push(
-				`<option value="${engineCode}">${engineCode}</option>` //VALUEEE ???
+				`<option value="${engineCodeValue}">${engineCode}</option>`
 			);
 		});
 	} else {
