@@ -13,7 +13,7 @@ const cylinderOrEngineSelect = document.querySelector(
 );
 // const suggestedDivs = document.querySelectorAll('.suggested-system-div');
 // const suggestedContainers = document.querySelectorAll('.suggested-container');
-// let suggestedSystems;
+let suggestedSystems;
 
 document.addEventListener('DOMContentLoaded', () => {
 	initSelects();
@@ -298,14 +298,15 @@ function cylinderOrEngineOnChange(value) {
 	console.log('cylinder changed', value);
 
 	if (!value) {
-		//suggestedContainer.style.display = 'none';
-		sessionStorage.removeItem('selectedCylinder');
+		document.querySelectorAll('.suggested-container').style.display =
+			'none';
+		sessionStorage.removeItem('selectedCylinderOrEngine');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
 		return;
 	}
-	sessionStorage.selectedCylinder = value;
-	//showResults();
+	sessionStorage.selectedCylinderOrEngine = value;
+	showResults();
 }
 
 function selectMakeOption() {
@@ -350,63 +351,46 @@ function selectCylinderOption() {
 }
 
 function showResults() {
-	let cyls = cylinderOrEngineSelect.value;
 	let years = yearSelect.value;
 
-	if (cyls == 5 || cyls == 6) {
-		suggestedSystems = ['C-OBD II 6cyl'];
-	} else if (cyls == 8) {
-		suggestedSystems = ['C-OBD II 8cyl'];
-	} else if (years < 1999) {
-		suggestedSystems = ['E-GO'];
-	} else if (years >= 1999 && years < 2007) {
-		suggestedSystems = ['E-GO', 'Smart ExR E/P'];
-	} else if (years >= 2007 && years < 2012) {
-		suggestedSystems = ['Smart ExR K/P', 'C-OBD II'];
+	if (selectedVehicles.isDirect) {
+		console.log('show results is direct!');
 	} else {
-		suggestedSystems = ['C-OBD II'];
+		let cyls = cylinderOrEngineSelect.value;
+		showCylinderResults(years, cyls);
 	}
 
 	sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
-
-	suggestedDivs.forEach((suggestedDiv, i) => {
-		suggestedDiv.querySelector('.suggested-name').textContent =
-			suggestedSystems[i];
-		suggestedDiv.querySelector(
-			'.suggested-price'
-		).textContent = getSystemPrice(suggestedSystems[i]);
-		suggestedDiv.querySelector('.suggested-btn').textContent =
-			'Γνωρίστε το ' + suggestedSystems[i];
-	});
-
-	//if (suggestedSystems.length === 2) {
-	//suggestedContainer.style.display = 'grid';
-	//suggestedDivs[1].style.display = 'flex';
-	//} else {
-	//suggestedDivs[1].style.display = 'none';
-	//suggestedContainer.style.display = 'flex';
-	//suggestedContainer.style.justifyContent = 'center';
-	//}
 }
 
-function getSystemPrice(system) {
-	switch (system) {
-		case 'E-GO':
-			return '600€ + ΦΠΑ';
-		case 'Smart ExR E/P':
-			return '640€ + ΦΠΑ';
-		case 'Smart ExR K/P':
-			return '680€ + ΦΠΑ';
-		case 'C-OBD II':
-			return '720€ + ΦΠΑ';
-		case 'C-OBD II 6cyl':
-			return '1000€ + ΦΠΑ';
-		case 'C-OBD II 8cyl':
-			return '1100€ + ΦΠΑ';
-		default:
-			return 'default error: ' + system;
+function showCylinderResults(years, cyls) {
+	if (cyls == 5 || cyls == 6) {
+		suggestedSystems = ['C-OBD II 6cyl'];
+		const cobdDiv = document.querySelector('#suggested-cobd');
+		cobdDiv.style.display = 'grid';
+		cobdDiv.querySelector('.suggested-name').textContent += ' 6cyl';
+		cobdDiv.querySelector('.suggested-price').textContent = '1000€ + ΦΠΑ';
+	} else if (cyls == 8) {
+		suggestedSystems = ['C-OBD II 8cyl'];
+		const cobdDiv = document.querySelector('#suggested-cobd');
+		cobdDiv.style.display = 'grid';
+		cobdDiv.querySelector('.suggested-name').textContent += ' 8cyl';
+		cobdDiv.querySelector('.suggested-price').textContent = '1100€ + ΦΠΑ';
+	} else if (years < 1999) {
+		suggestedSystems = ['E-GO'];
+		document.querySelector('#suggested-ego').style.display = 'grid';
+	} else if (years >= 1999 && years < 2007) {
+		suggestedSystems = ['E-GO', 'Smart ExR E/P'];
+		document.querySelector('#suggested-ego-ep').style.display = 'grid';
+	} else if (years >= 2007 && years < 2012) {
+		suggestedSystems = ['Smart ExR K/P', 'C-OBD II'];
+		document.querySelector('#suggested-kp-cobd').style.display = 'grid';
+	} else {
+		suggestedSystems = ['C-OBD II'];
+		document.querySelector('#suggested-cobd').style.display = 'grid';
 	}
 }
+
 /* System Identification END */
 
 /* Calculator */
