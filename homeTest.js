@@ -255,6 +255,7 @@ function populateCylinderOrEngineSelect() {
   } else {
     optionsArray = ['<option value="">Επιλέξτε Κυλίνδρους</option>'];
     let cylinders = [];
+    console.log(selectedVehicles, selectedVehicles.vehicles);
     selectedVehicles.vehicles.forEach(vehicle => {
       if (yearSelect.value >= vehicle.years[0] && yearSelect.value <= vehicle.years[1]) {
         cylinders.push(vehicle.cylinders);
