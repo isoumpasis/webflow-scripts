@@ -186,8 +186,6 @@ function yearOnChange(value) {
       yearSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
       console.error('Error Fetch:', error);
     });
-
-  // populateYearSelect();
 }
 
 function populateYearSelect() {
@@ -244,7 +242,7 @@ function populateCylinderOrEngineSelect() {
     selectedModelObj.vehicles.forEach(vehicle => {
       if (yearSelect.value >= vehicle.years[0] && yearSelect.value <= vehicle.years[1]) {
         vehicle.engineCodes.forEach(codeObj => {
-          let isConvertibleStr = codeObj.isConvertible ? '✔️' : '&#10060;';
+          let isConvertibleStr = codeObj.isConvertible ? ' ✔️' : ' &#10060;';
           engineCodes.push(codeObj.code + isConvertibleStr);
         });
       }
