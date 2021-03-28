@@ -236,9 +236,7 @@ function populateCylinderOrEngineSelect() {
     selectedModelObj.vehicles.forEach(vehicle => {
       if (yearSelect.value >= vehicle.years[0] && yearSelect.value <= vehicle.years[1]) {
         vehicle.engineCodes.forEach(codeObj => {
-          let isConvertibleStr = codeObj.isConvertible
-            ? ' ✅ ✔️ &#10004;' //tick
-            : ' &#9940; &#10060; &#10006;';
+          let isConvertibleStr = codeObj.isConvertible ? '✔️' : '&#10060;';
           engineCodes.push(codeObj.code + isConvertibleStr);
         });
       }
