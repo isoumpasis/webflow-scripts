@@ -5,6 +5,7 @@ const urlYear = 'https://lovatohellas.herokuapp.com/vehicleDB/yearTest';
 let selectedYears;
 let selectedModels;
 let selectedModelName;
+let selectedModelObj;
 
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');
@@ -212,9 +213,9 @@ function modelOnChange(value) {
 
   if (!value) {
     cylinderOrEngineSelect.disabled = true;
-    cylinderOrEngineSelect.innerHTML = `<option value="">${
-      selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
-    }</option>`;
+    // cylinderOrEngineSelect.innerHTML = `<option value="">${
+    //   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
+    // }</option>`;
     // sessionStorage.removeItem('selectedYear');
     return;
   }
@@ -225,14 +226,14 @@ function modelOnChange(value) {
 
 function populateCylinderOrEngineSelect() {
   // if (typeof Storage !== 'undefined' && !sessionStorage.selectedYear) return; //dont know if bug? why return??
-  const selectedVehicles = selectedModels.filter(model => model.name === selectedModelName)[0];
-  console.log('selectedVehicles', selectedVehicles);
+  selectedModelObj = selectedModels.filter(model => model.name === selectedModelName)[0];
+  console.log('selectedModelObj', selectedModelObj);
   let optionsArray;
 
-  if (selectedVehicles.isDirect) {
+  if (selectedModelObj.isDirect) {
     optionsArray = ['<option value="">Επιλέξτε Κινητήρα</option>'];
     let engineCodes = [];
-    selectedVehicles.vehicles.forEach(vehicle => {
+    selectedModelObj.vehicles.forEach(vehicle => {
       if (yearSelect.value >= vehicle.years[0] && yearSelect.value <= vehicle.years[1]) {
         vehicle.engineCodes.forEach(codeObj => {
           let isConvertibleStr = codeObj.isConvertible
@@ -255,8 +256,8 @@ function populateCylinderOrEngineSelect() {
   } else {
     optionsArray = ['<option value="">Επιλέξτε Κυλίνδρους</option>'];
     let cylinders = [];
-    console.log(selectedVehicles, selectedVehicles.vehicles);
-    selectedVehicles.vehicles.forEach(vehicle => {
+    console.log(selectedModelObj, selectedModelObj.vehicles);
+    selectedModelObj.vehicles.forEach(vehicle => {
       if (yearSelect.value >= vehicle.years[0] && yearSelect.value <= vehicle.years[1]) {
         cylinders.push(vehicle.cylinders);
       }
@@ -341,7 +342,7 @@ function selectCylinderOption() {
 function showResults() {
   let years = yearSelect.value;
 
-  if (selectedVehicles.isDirect) {
+  if (selectedModelObj.isDirect) {
     console.log('show results is direct!');
   } else {
     let cyls = cylinderOrEngineSelect.value;
