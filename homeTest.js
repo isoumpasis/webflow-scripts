@@ -225,7 +225,7 @@ function modelOnChange(value) {
 
 function populateCylinderOrEngineSelect() {
   // if (typeof Storage !== 'undefined' && !sessionStorage.selectedYear) return; //dont know if bug? why return??
-  const selectedVehicles = selectedModels.filter(model => model.name === selectedModelName);
+  const selectedVehicles = selectedModels.filter(model => model.name === selectedModelName)[0];
   console.log('selectedVehicles', selectedVehicles);
   let optionsArray;
 
