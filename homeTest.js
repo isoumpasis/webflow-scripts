@@ -110,19 +110,27 @@ function endLoadingSelect(select) {
 }
 
 function populateModelSelect() {
-  let modelOptionsStr = '<option value="">Επιλέξτε Μοντέλο</option>';
+  let modelOptionsArray = ['<option value="">Επιλέξτε Μοντέλο</option>'];
   selectedModels.forEach(model => {
-    modelOptionsStr += `<option value="${model.name}">${model.name}</option>`;
+    modelOptionsArray.push(`<option value="${model.name}">${model.name}</option>`);
   });
-  modelSelect.innerHTML = modelOptionsStr;
+
+  modelSelect.innerHTML = modelOptionsArray.join('');
   modelSelect.disabled = false;
   modelSelect.focus();
+
+  if (modelOptionsArray.length === 2) {
+    modelSelect.selectedIndex = 1;
+    modelOnChange(modelSelect.value);
+    return;
+  }
 }
 
 yearSelect.addEventListener('change', e => yearOnChange(e.target.value));
 function yearOnChange(value) {
   console.log('year changed', value);
   cylinderOrEngineSelect.disabled = true;
+  cylinderOrEngineSelect.innerHTML = '<option>Περιγραφή</option>';
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
@@ -272,7 +280,6 @@ function populateCylinderOrEngineSelect() {
   //One option -> auto populate
   if (optionsArray.length === 2) {
     cylinderOrEngineSelect.selectedIndex = 1;
-    cylinderOrEngineSelect.disabled = false;
     cylinderOrEngineOnChange(cylinderOrEngineSelect.value);
     return;
   }
