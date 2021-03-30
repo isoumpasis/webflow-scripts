@@ -117,8 +117,11 @@ async function initMap() {
 	userMarker = new google.maps.Marker();
 	selectedMarker = new google.maps.Marker();
 
+	console.log('before');
 	map.data.loadGeoJson(geoJsonUrl, null, features => {
+		console.log('after');
 		markers = features.map(feature => {
+			console.log('feature');
 			const g = feature.getGeometry();
 			return new google.maps.Marker({
 				position: g.get(0),
