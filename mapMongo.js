@@ -677,7 +677,9 @@ function preparePhotos(markerImgs) {
 }
 
 function insertImgToDOM(img) {
-	const imgHtml = `<img src="${img.url}"/>`;
+	const imgHtml = `<img src="data:image/${
+		img.contentType
+	};base64,${bufferToBase64(img.data.data)}"/>`;
 
 	const newImgElement = document.createElement('div');
 	newImgElement.className = 'uploaded-img';
