@@ -251,8 +251,8 @@ async function initMap() {
 			map.setCenter(userMarker.position);
 		});
 		endLoader();
+		console.log('after load json');
 	});
-	console.log('after load cb');
 }
 
 // function initDomListeners() {

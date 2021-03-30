@@ -11,7 +11,9 @@
 
 [] offset for marker icon
 
-[] data import problem
+[] data import problem cache json or mongodb? or upload url imgs
+
+[] check when there is lag
 
 /_ HOME _/
 /_ VEHICLE DB _/
