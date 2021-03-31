@@ -136,12 +136,10 @@ async function initMap() {
 	selectedMarker = new google.maps.Marker();
 
 	console.log('before');
-	markers = cachedPins.features.map(feature => {
-		console.log('feature');
-		const [lng, lat] = feature.geometry.coordinates;
-		const latLngLiteral = { lat, lng };
+	markers = cachedPins.map(cachedPin => {
+		console.log('cachedPin');
 		return new google.maps.Marker({
-			position: latLngLiteral,
+			position: cachedPin.geometry,
 			icon: {
 				url: episimosIconUrl, // url
 				scaledSize: new google.maps.Size(50, 50), // scaled size
@@ -149,11 +147,11 @@ async function initMap() {
 				anchor: new google.maps.Point(0, 0) // anchor
 			},
 			clickable: true,
-			title: feature.properties.name,
+			title: cachedPin.properties.name,
 			cursor: 'pointer',
 			animation: google.maps.Animation.DROP,
 			visible: true,
-			props: feature.properties
+			props: cachedPin.properties
 		});
 	});
 	markerClusterer = new MarkerClusterer(map, markers, {
@@ -373,7 +371,7 @@ function openInfoWindow(marker) {
 	infoWindowDiv = document.createElement('div');
 	infoWindowDiv.className = 'infoWindow infoWindow-open';
 
-	const markerProps = marker.props.j;
+	const markerProps = marker.properties;
 	console.log(markerProps);
 
 	const photosContainer = preparePhotos(markerProps.imgs);
