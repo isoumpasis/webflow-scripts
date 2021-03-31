@@ -382,7 +382,7 @@ function openInfoWindow(marker) {
 	infoWindow.setContent(infoWindowDiv);
 	infoWindow.setPosition(selectedMarker.position);
 	infoWindow.setOptions({
-		pixelOffset: new google.maps.Size(0, -60)
+		pixelOffset: new google.maps.Size(0, -70)
 	});
 	infoWindow.open(map);
 }
