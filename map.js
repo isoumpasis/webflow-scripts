@@ -160,7 +160,7 @@ async function initMap() {
 				width: 53,
 				height: 52,
 				anchorText: [20, 0],
-				textColor: '#fff',
+				textColor: '#333',
 				textSize: 11,
 				fontWeight: 'bold'
 			}
