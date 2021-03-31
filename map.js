@@ -262,7 +262,6 @@ async function initMap() {
 		map.setZoom(searchZoom);
 		map.setCenter(userMarker.position);
 	});
-	console.log('after load');
 }
 
 // function initDomListeners() {
@@ -383,7 +382,7 @@ function openInfoWindow(marker) {
 	infoWindow.setContent(infoWindowDiv);
 	infoWindow.setPosition(selectedMarker.position);
 	infoWindow.setOptions({
-		pixelOffset: new google.maps.Size(0, -30)
+		pixelOffset: new google.maps.Size(0, -50)
 	});
 	infoWindow.open(map);
 }
