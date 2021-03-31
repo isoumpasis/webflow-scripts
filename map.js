@@ -30,9 +30,11 @@ let map,
 
 document.addEventListener('DOMContentLoaded', async () => {
 	console.log('before initMap');
-	cachedPins = await getCachedPins();
-	console.log(cachedPins);
 	generateInitHtml();
+	startLoader();
+	cachedPins = await getCachedPins();
+	endLoader();
+	console.log(cachedPins);
 	await initMap();
 	console.log('after initMap');
 });
@@ -44,7 +46,6 @@ async function getCachedPins() {
 			headers: {
 				'Content-Type': 'application/json'
 			}
-			//body: JSON.stringify({ make: this.value })
 		});
 		return await res.json();
 	} catch (e) {
@@ -54,7 +55,6 @@ async function getCachedPins() {
 }
 
 async function initMap() {
-	startLoader();
 	const mapOptions = {
 		zoom: startZoom,
 		center: mapCenter,
@@ -263,7 +263,6 @@ async function initMap() {
 		map.setZoom(searchZoom);
 		map.setCenter(userMarker.position);
 	});
-	endLoader();
 	console.log('after load');
 }
 
@@ -372,7 +371,6 @@ function openInfoWindow(marker) {
 	infoWindowDiv.className = 'infoWindow infoWindow-open';
 
 	const markerProps = marker.props;
-	console.log(markerProps);
 
 	const photosContainer = preparePhotos(markerProps.imgs);
 	if (markerProps.imgs.length > 1) {
