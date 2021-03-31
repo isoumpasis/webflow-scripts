@@ -138,7 +138,7 @@ async function initMap() {
 	console.log('before');
 	markers = cachedPins.features.map(feature => {
 		console.log('feature');
-		const [lat, lng] = feature.geometry.coordinates;
+		const [lng, lat] = feature.geometry.coordinates;
 		const latLngLiteral = { lat: +lat, lng: +lng };
 		return new google.maps.Marker({
 			position: latLngLiteral,
