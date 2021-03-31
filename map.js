@@ -383,7 +383,7 @@ function openInfoWindow(marker) {
 	infoWindow.setContent(infoWindowDiv);
 	infoWindow.setPosition(selectedMarker.position);
 	infoWindow.setOptions({
-		pixelOffset: new google.maps.Size(0, 50)
+		pixelOffset: new google.maps.Size(0, -30)
 	});
 	infoWindow.open(map);
 }
