@@ -1,5 +1,4 @@
-const geoJsonUrl =
-	'https://lovatohellas.herokuapp.com/static/map/pinsGeoJsonCache.json'; //cache json from serve
+const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/getAll';
 
 const episimosIconUrl =
 	'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
@@ -26,14 +25,32 @@ let map,
 	geocoderFoundAddress = false,
 	thAddress,
 	infoWindowDiv,
-	slideIndex = 1;
+	slideIndex = 1,
+	cachedPins;
 
 document.addEventListener('DOMContentLoaded', async () => {
 	console.log('before initMap');
+	cachedPins = await getCachedPins();
+	console.log(cachedPins);
 	generateInitHtml();
 	await initMap();
 	console.log('after initMap');
 });
+
+async function getCachedPins() {
+	try {
+		const res = await fetch(urlCachedPins, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+			//body: JSON.stringify({ make: this.value })
+		});
+		cachedPins = await res.json();
+	} catch (e) {
+		console.error('Error Fetching Cached Pins:', error);
+	}
+}
 
 async function initMap() {
 	startLoader();
@@ -677,9 +694,7 @@ function preparePhotos(markerImgs) {
 }
 
 function insertImgToDOM(img) {
-	const imgHtml = `<img src="data:image/${
-		img.contentType
-	};base64,${bufferToBase64(img.data.data)}"/>`;
+	const imgHtml = `<img src="${img.url}"/>`;
 
 	const newImgElement = document.createElement('div');
 	newImgElement.className = 'uploaded-img';
