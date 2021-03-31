@@ -1,20 +1,20 @@
 /_ Map _/
 [x] infowindow offset
-
 [x] loading
+[x] image clusterer color (white hover bold etc.) and format
+[x] offset for marker icon
 
 [] enter keypress modal
-
 [] another loader
 [] another icon (transparent (?))
-
-[] image clusterer color (white hover bold etc.) and format
-[x] offset for marker icon
 
 [] cache json or mongodb live?
 [] test cloudinary limits or cache?
 
 [] create menu
+[] search addresses & places
+[] your location
+[] filters
 
 /_ HOME _/
 /_ VEHICLE DB _/
