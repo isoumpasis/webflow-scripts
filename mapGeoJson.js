@@ -1,4 +1,5 @@
-const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/getAll';
+const geoJsonUrl =
+	'https://lovatohellas.herokuapp.com/static/map/pinsGeoJsonCache.json'; //cache json from serve
 
 const episimosIconUrl =
 	'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
@@ -25,33 +26,14 @@ let map,
 	geocoderFoundAddress = false,
 	thAddress,
 	infoWindowDiv,
-	slideIndex = 1,
-	cachedPins;
+	slideIndex = 1;
 
 document.addEventListener('DOMContentLoaded', async () => {
 	console.log('before initMap');
-	cachedPins = await getCachedPins();
-	console.log(cachedPins);
 	generateInitHtml();
 	await initMap();
 	console.log('after initMap');
 });
-
-async function getCachedPins() {
-	try {
-		const res = await fetch(urlCachedPins, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-			//body: JSON.stringify({ make: this.value })
-		});
-		return await res.json();
-	} catch (e) {
-		console.error('Error Fetching Cached Pins:', error);
-		return null;
-	}
-}
 
 async function initMap() {
 	startLoader();
@@ -136,137 +118,144 @@ async function initMap() {
 	selectedMarker = new google.maps.Marker();
 
 	console.log('before');
-	markers = cachedPins.features.map(feature => {
-		console.log('feature');
-		const [lng, lat] = feature.geometry.coordinates;
-		const latLngLiteral = { lat: lat, lng: lng };
-		return new google.maps.Marker({
-			position: latLngLiteral,
-			icon: {
-				url: episimosIconUrl, // url
-				scaledSize: new google.maps.Size(50, 50), // scaled size
-				origin: new google.maps.Point(0, 0), // origin
-				anchor: new google.maps.Point(0, 0) // anchor
-			},
-			clickable: true,
-			title: feature.properties.name,
-			cursor: 'pointer',
-			animation: google.maps.Animation.DROP,
-			visible: true,
-			props: feature.properties
+	map.data.loadGeoJson(geoJsonUrl, null, features => {
+		console.log('after');
+		markers = features.map(feature => {
+			console.log('feature');
+			const g = feature.getGeometry();
+			return new google.maps.Marker({
+				position: g.get(0),
+				icon: {
+					url: episimosIconUrl, // url
+					scaledSize: new google.maps.Size(50, 50), // scaled size
+					origin: new google.maps.Point(0, 0), // origin
+					anchor: new google.maps.Point(0, 0) // anchor
+				},
+				clickable: true,
+				title: feature.getProperty('name'),
+				cursor: 'pointer',
+				animation: google.maps.Animation.DROP,
+				visible: true,
+				props: feature
+			});
 		});
-	});
-	markerClusterer = new MarkerClusterer(map, markers, {
-		styles: [
-			{
-				url: markerClustererIcon,
-				width: 53,
-				height: 52,
-				anchorText: [20, 0],
-				textColor: '#000',
-				textSize: 11,
-				fontWeight: 'bold'
-			}
-		],
-		// imagePath:
-		// 	'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
-		averageCenter: true,
-		zoomOnClick: false,
-		//minimumClusterSize: 3,
-		maxZoom: maxZoomClusterer,
-		gridSize: gridSizesDependedOnZoom[startZoom] //default=60
-	});
+		markerClusterer = new MarkerClusterer(map, markers, {
+			styles: [
+				{
+					url: markerClustererIcon,
+					width: 53,
+					height: 52,
+					anchorText: [20, 0],
+					textColor: '#000',
+					textSize: 11,
+					fontWeight: 'bold'
+				}
+			],
+			// imagePath:
+			// 	'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+			averageCenter: true,
+			zoomOnClick: false,
+			//minimumClusterSize: 3,
+			maxZoom: maxZoomClusterer,
+			gridSize: gridSizesDependedOnZoom[startZoom] //default=60
+		});
+		map.data.setMap(null); //hide data layer
 
-	markers.forEach(marker => {
-		marker.addListener('mouseover', () => {
-			if (selectedMarker === marker) return;
+		markers.forEach(marker => {
+			marker.addListener('mouseover', () => {
+				if (selectedMarker === marker) return;
+				if (selectedMarker) {
+					selectedMarker.setAnimation(null);
+				}
+				selectedMarker = marker;
+				selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
+				openInfoWindow(marker);
+			});
+
+			marker.addListener('click', () => {
+				map.setZoom(searchZoom);
+				map.setCenter(marker.position);
+
+				if (selectedMarker === marker) return;
+				if (selectedMarker) {
+					selectedMarker.setAnimation(null);
+				}
+				selectedMarker = marker;
+				selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
+				openInfoWindow(marker);
+			});
+
+			//Optional
+			// marker.addListener('mouseout', e => {
+			// 	infoWindow.close();
+			//  if(selectedMarker){
+			//		selectedMarker.setAnimation(null);
+			//	}
+			//  selectedMarker = null;
+			// });
+		});
+
+		map.addListener('click', e => {
+			infoWindow.close();
 			if (selectedMarker) {
 				selectedMarker.setAnimation(null);
 			}
-			selectedMarker = marker;
-			selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
-			openInfoWindow(marker);
+			selectedMarker = null;
+			const [lat, lng] = [
+				e.latLng.lat().toFixed(2),
+				e.latLng.lng().toFixed(2)
+			];
+			console.log(`You clicked at: (${lat}, ${lng})`);
 		});
 
-		marker.addListener('click', () => {
+		map.addListener('zoom_changed', () => {
+			let currentZoom = map.getZoom();
+			//console.log('current zoom', currentZoom);
+			if (currentZoom > maxZoomClusterer) return;
+			markerClusterer.setGridSize(gridSizesDependedOnZoom[currentZoom]);
+		});
+
+		google.maps.event.addListener(
+			markerClusterer,
+			'clusterclick',
+			cluster => {
+				infoWindow.close();
+				if (selectedMarker) {
+					selectedMarker.setAnimation(null);
+				}
+				selectedMarker = null;
+				map.setZoom(zoomLevelsDependedOnZoom[map.getZoom()]);
+				//map.setZoom(map.getZoom() + 2);
+				map.setCenter(cluster.getCenter());
+			}
+		);
+
+		google.maps.event.addListener(markerClusterer, 'mouseover', cluster => {
+			let label = cluster.clusterIcon_.div_.querySelector('span');
+			label.classList.add('cluster-hover');
+			cluster.clusterIcon_.div_.classList.add('grow');
+		});
+		google.maps.event.addListener(markerClusterer, 'mouseout', cluster => {
+			let label = cluster.clusterIcon_.div_.querySelector('span');
+			label.classList.remove('cluster-hover');
+			cluster.clusterIcon_.div_.classList.add('grow');
+		});
+
+		infoWindow.addListener('closeclick', () => {
+			if (selectedMarker) {
+				selectedMarker.setAnimation(null);
+			}
+			selectedMarker = null;
+		});
+
+		userMarker.addListener('click', () => {
+			console.log('userMarker clicked');
 			map.setZoom(searchZoom);
-			map.setCenter(marker.position);
-
-			if (selectedMarker === marker) return;
-			if (selectedMarker) {
-				selectedMarker.setAnimation(null);
-			}
-			selectedMarker = marker;
-			selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
-			openInfoWindow(marker);
+			map.setCenter(userMarker.position);
 		});
-
-		//Optional
-		// marker.addListener('mouseout', e => {
-		// 	infoWindow.close();
-		//  if(selectedMarker){
-		//		selectedMarker.setAnimation(null);
-		//	}
-		//  selectedMarker = null;
-		// });
+		endLoader();
+		console.log('after load json');
 	});
-
-	map.addListener('click', e => {
-		infoWindow.close();
-		if (selectedMarker) {
-			selectedMarker.setAnimation(null);
-		}
-		selectedMarker = null;
-		const [lat, lng] = [
-			e.latLng.lat().toFixed(2),
-			e.latLng.lng().toFixed(2)
-		];
-		console.log(`You clicked at: (${lat}, ${lng})`);
-	});
-
-	map.addListener('zoom_changed', () => {
-		let currentZoom = map.getZoom();
-		//console.log('current zoom', currentZoom);
-		if (currentZoom > maxZoomClusterer) return;
-		markerClusterer.setGridSize(gridSizesDependedOnZoom[currentZoom]);
-	});
-
-	google.maps.event.addListener(markerClusterer, 'clusterclick', cluster => {
-		infoWindow.close();
-		if (selectedMarker) {
-			selectedMarker.setAnimation(null);
-		}
-		selectedMarker = null;
-		map.setZoom(zoomLevelsDependedOnZoom[map.getZoom()]);
-		//map.setZoom(map.getZoom() + 2);
-		map.setCenter(cluster.getCenter());
-	});
-
-	google.maps.event.addListener(markerClusterer, 'mouseover', cluster => {
-		let label = cluster.clusterIcon_.div_.querySelector('span');
-		label.classList.add('cluster-hover');
-		cluster.clusterIcon_.div_.classList.add('grow');
-	});
-	google.maps.event.addListener(markerClusterer, 'mouseout', cluster => {
-		let label = cluster.clusterIcon_.div_.querySelector('span');
-		label.classList.remove('cluster-hover');
-		cluster.clusterIcon_.div_.classList.add('grow');
-	});
-
-	infoWindow.addListener('closeclick', () => {
-		if (selectedMarker) {
-			selectedMarker.setAnimation(null);
-		}
-		selectedMarker = null;
-	});
-
-	userMarker.addListener('click', () => {
-		console.log('userMarker clicked');
-		map.setZoom(searchZoom);
-		map.setCenter(userMarker.position);
-	});
-	endLoader();
-	console.log('after load');
 }
 
 // function initDomListeners() {
