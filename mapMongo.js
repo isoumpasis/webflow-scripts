@@ -138,8 +138,10 @@ async function initMap() {
 	console.log('before');
 	markers = cachedPins.features.map(feature => {
 		console.log('feature');
+		const [lat, lng] = feature.geometry.coordinates;
+		const latLngLiteral = { lat: +lat, lng: +lng };
 		return new google.maps.Marker({
-			position: feature.geometry.coordinates,
+			position: latLngLiteral,
 			icon: {
 				url: episimosIconUrl, // url
 				scaledSize: new google.maps.Size(50, 50), // scaled size
