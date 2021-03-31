@@ -371,8 +371,7 @@ function openInfoWindow(marker) {
 	infoWindowDiv = document.createElement('div');
 	infoWindowDiv.className = 'infoWindow infoWindow-open';
 
-	console.log(marker);
-	const markerProps = marker.properties;
+	const markerProps = marker.props;
 	console.log(markerProps);
 
 	const photosContainer = preparePhotos(markerProps.imgs);
