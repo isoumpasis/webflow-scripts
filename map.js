@@ -241,7 +241,6 @@ async function initMap() {
 
 	google.maps.event.addListener(markerClusterer, 'mouseover', cluster => {
 		let label = cluster.clusterIcon_.div_.querySelector('span');
-		console.log(label, cluster);
 		label.classList.add('cluster-hover');
 		cluster.clusterIcon_.div_.classList.add('grow');
 	});
