@@ -6,14 +6,13 @@
 [] enter keypress modal
 
 [] another loader
+[] another icon (transparent (?))
 
 [] image clusterer color (white hover bold etc.) and format
-
 [] offset for marker icon
 
-[] data import problem cache json or mongodb? or upload url imgs
-
-[] check when there is lag
+[] cache json or mongodb live?
+[] test cloudinary limits or cache?
 
 /_ HOME _/
 /_ VEHICLE DB _/
