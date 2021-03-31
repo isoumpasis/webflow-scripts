@@ -46,9 +46,10 @@ async function getCachedPins() {
 			}
 			//body: JSON.stringify({ make: this.value })
 		});
-		cachedPins = await res.json();
+		return await res.json();
 	} catch (e) {
 		console.error('Error Fetching Cached Pins:', error);
+		return null;
 	}
 }
 
