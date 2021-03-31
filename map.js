@@ -141,10 +141,9 @@ async function initMap() {
 		return new google.maps.Marker({
 			position: cachedPin.geometry,
 			icon: {
-				url: episimosIconUrl, // url
-				scaledSize: new google.maps.Size(50, 50), // scaled size
-				origin: new google.maps.Point(0, 0) // origin
-				// anchor: new google.maps.Point(0, 0) // anchor
+				url: episimosIconUrl,
+				scaledSize: new google.maps.Size(50, 50),
+				origin: new google.maps.Point(0, 0)
 			},
 			clickable: true,
 			title: cachedPin.properties.name,
@@ -161,7 +160,7 @@ async function initMap() {
 				width: 53,
 				height: 52,
 				anchorText: [20, 0],
-				textColor: '#000',
+				textColor: '#fff',
 				textSize: 11,
 				fontWeight: 'bold'
 			}
@@ -242,6 +241,7 @@ async function initMap() {
 
 	google.maps.event.addListener(markerClusterer, 'mouseover', cluster => {
 		let label = cluster.clusterIcon_.div_.querySelector('span');
+		console.log(label, cluster);
 		label.classList.add('cluster-hover');
 		cluster.clusterIcon_.div_.classList.add('grow');
 	});
