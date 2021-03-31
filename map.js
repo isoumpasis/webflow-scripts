@@ -160,7 +160,7 @@ async function initMap() {
 				width: 53,
 				height: 52,
 				anchorText: [20, 0],
-				textColor: '#333',
+				textColor: '#111',
 				textSize: 11,
 				fontWeight: 'bold'
 			}
@@ -383,7 +383,7 @@ function openInfoWindow(marker) {
 	infoWindow.setContent(infoWindowDiv);
 	infoWindow.setPosition(selectedMarker.position);
 	infoWindow.setOptions({
-		pixelOffset: new google.maps.Size(25, -10)
+		pixelOffset: new google.maps.Size(0, 50)
 	});
 	infoWindow.open(map);
 }
