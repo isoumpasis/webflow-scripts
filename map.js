@@ -1,7 +1,9 @@
 const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/getAll';
 
+// const episimosIconUrl =
+// 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
 const episimosIconUrl =
-	'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
+	'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60663eb3c347c9975c35d5d9_location-icon-white.svg';
 
 const markerClustererIcon =
 	'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6059ab2542758022d1e784de_m1.png';
@@ -276,7 +278,7 @@ async function initMap() {
 				width: 53,
 				height: 52,
 				anchorText: [20, 0],
-				textColor: '#111',
+				textColor: '#fff',
 				textSize: 11,
 				fontWeight: 'bold'
 			}
