@@ -358,6 +358,11 @@ async function initMap() {
 	});
 
 	google.maps.event.addListener(markerClusterer, 'mouseover', cluster => {
+		infoWindow.close();
+		if (selectedMarker) {
+			selectedMarker.setAnimation(null);
+		}
+		selectedMarker = null;
 		let label = cluster.clusterIcon_.div_.querySelector('span');
 		label.classList.add('cluster-hover');
 		cluster.clusterIcon_.div_.classList.add('grow');
