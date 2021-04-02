@@ -505,7 +505,7 @@ function openInfoWindow(marker) {
 	infoWindow.setContent(infoWindowDiv);
 	infoWindow.setPosition(selectedMarker.position);
 	infoWindow.setOptions({
-		pixelOffset: new google.maps.Size(0, -70)
+		pixelOffset: new google.maps.Size(0, -60)
 	});
 	infoWindow.open(map);
 }
@@ -944,7 +944,7 @@ function generateInitHtml() {
 	const loaderEl = document.createElement('div');
 	loaderEl.className = 'lds-roller hide-roller';
 	// loaderEl.innerHTML = `<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>`;
-	loaderEl.innerHTML = `<img scr='https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6066396962c725d882040aba_Ripple-2s-800px.svg' alt='loading...'/>`;
+	loaderEl.innerHTML = `<img src='https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6066396962c725d882040aba_Ripple-2s-800px.svg' alt='loading...'/>`;
 
 	document.querySelector('#map').parentElement.prepend(loaderEl);
 }
