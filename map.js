@@ -937,8 +937,8 @@ function generateInitHtml() {
 			<div class="info-modal-caption"></div>
 		</div>`;
 
-	// document.body.append(modalEl);
-	document.querySelector('#map').append(modalEl); //test!!
+	document.body.append(modalEl);
+	// document.querySelector('#map').append(modalEl); //test!!
 
 	//Generate Loader Html
 	const loaderEl = document.createElement('div');
