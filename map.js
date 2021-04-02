@@ -937,12 +937,14 @@ function generateInitHtml() {
 			<div class="info-modal-caption"></div>
 		</div>`;
 
-	document.body.append(modalEl);
+	// document.body.append(modalEl);
+	document.querySelector('#map').append(modalEl); //test!!
 
 	//Generate Loader Html
 	const loaderEl = document.createElement('div');
 	loaderEl.className = 'lds-roller hide-roller';
-	loaderEl.innerHTML = `<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>`;
+	// loaderEl.innerHTML = `<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>`;
+	loaderEl.innerHTML = `<img scr='https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6066396962c725d882040aba_Ripple-2s-800px.svg' alt='loading...'/>`;
 
 	document.querySelector('#map').parentElement.prepend(loaderEl);
 }
