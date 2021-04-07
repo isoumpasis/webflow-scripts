@@ -27,6 +27,7 @@ const FPA = 1.24;
 
 const creditCardPrice1 = document.querySelector('#creditCardPrice1');
 const creditCardPrice2 = document.querySelector('#creditCardPrice2');
+const creditCardInstallments = document.querySelector('#creditCardInstallments');
 
 document.addEventListener('DOMContentLoaded', () => {
   initSelects();
@@ -445,6 +446,7 @@ function configureEasyPay() {
 
 function setWithCreditCard() {
   setCostWithCreditCard();
+  setCreditCardCosts();
 }
 
 function setCostWithCreditCard() {
@@ -458,6 +460,23 @@ function setCostWithCreditCard() {
     creditCardPrice2.parentElement.style.display = 'none';
     creditCardPrice2.previousElementSibling.checked = false;
   }
+}
+function setCreditCardCosts() {
+  let cost = creditCardPrice1.checked ? suggestedSystemPrices[0] : suggestedSystemPrices[1];
+
+  let installments;
+  installments = creditCardInstallments.value;
+  if (!installments) installments = 1;
+
+  document.querySelector('#creditCardFinalCost').textContent = `{${cost}€`;
+  document.querySelector('#creditCardPerMonth').textContent = `${cost / installments}€`;
+
+  let lpgPerMonthCost = parseFloat(lpgResult.textContent.replace('€', ''));
+  if (perYearCheckbox.checked) lpgPerMonthCost /= 12;
+
+  document.querySelector('#creditCardBenefit').textContent = `${
+    lpgPerMonthCost - cost / installments
+  }€`;
 }
 
 /* System Identification END */
