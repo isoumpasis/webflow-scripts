@@ -462,21 +462,28 @@ function setCostWithCreditCard() {
   }
 }
 function setCreditCardCosts() {
+  creditCardInstallmentsOnChange(1);
+}
+
+creditCardInstallments.addEventListener('change', e =>
+  creditCardInstallmentsOnChange(e.target.value)
+);
+
+function creditCardInstallmentsOnChange(value) {
   let cost = creditCardPrice1.checked ? suggestedSystemPrices[0] : suggestedSystemPrices[1];
 
-  let installments;
-  installments = creditCardInstallments.value;
-  if (!installments) installments = 1;
+  let installments = value;
 
-  document.querySelector('#creditCardFinalCost').textContent = `{${cost}€`;
+  document.querySelector('#creditCardFinalCost').textContent = `${cost}€`;
   document.querySelector('#creditCardPerMonth').textContent = `${cost / installments}€`;
 
   let lpgPerMonthCost = parseFloat(lpgResult.textContent.replace('€', ''));
   if (perYearCheckbox.checked) lpgPerMonthCost /= 12;
 
-  document.querySelector('#creditCardBenefit').textContent = `${
-    lpgPerMonthCost - cost / installments
-  }€`;
+  document.querySelector('#creditCardBenefit').textContent = `${(
+    lpgPerMonthCost -
+    cost / installments
+  ).toFixed(2)}€`;
 }
 
 /* System Identification END */
