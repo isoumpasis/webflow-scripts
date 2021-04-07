@@ -471,6 +471,7 @@ creditCardInstallments.addEventListener('change', e =>
 
 function creditCardInstallmentsOnChange(value) {
   console.log({ suggestedSystemPrices });
+  console.log(creditCardPrice1.checked);
   let cost = creditCardPrice1.checked ? suggestedSystemPrices[0] : suggestedSystemPrices[1];
 
   let installments = +value;
