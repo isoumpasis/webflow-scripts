@@ -356,15 +356,14 @@ function showResults() {
 
 function showDirectResults() {
 	const selectedEngineCode = cylinderOrEngineSelect.value;
-	console.log(selectedEngineCode);
 	const filteredVehicle = selectedModelObj.vehicles.filter(veh => {
 		for (let engineCode of veh.engineCodes) {
-			console.log(engineCode.code, selectedEngineCode);
 			if (engineCode.code === selectedEngineCode) return true;
 		}
 		return false;
 	});
 	console.log({ filteredVehicle });
+	filteredVehicle = filteredVehicle[0];
 }
 
 function showCylinderResults(years, cyls) {
