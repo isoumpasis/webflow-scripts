@@ -25,6 +25,9 @@ let suggestedSystemPrices = [];
 let suggestedSystemNames = [];
 const FPA = 1.24;
 
+const creditCardPrice1 = document.querySelector('#creditCardPrice1');
+const creditCardPrice2 = document.querySelector('#creditCardPrice2');
+
 document.addEventListener('DOMContentLoaded', () => {
   initSelects();
 
@@ -441,15 +444,18 @@ function configureEasyPay() {
 }
 
 function setWithCreditCard() {
-  document.querySelector(
-    '#creditCardPrice1'
-  ).textContent = `${suggestedSystemPrices[0]}€ (${suggestedSystemNames[0]})`;
+  setCostWithCreditCard();
+}
+
+function setCostWithCreditCard() {
+  creditCardPrice1.textContent = `${suggestedSystemPrices[0]}€ (${suggestedSystemNames[0]})`;
+  creditCardPrice1.previousElementSibling.checked = true;
+
   if (suggestedSystemPrices.length === 2) {
-    document.querySelector(
-      '#creditCardPrice2'
-    ).textContent = `${suggestedSystemPrices[1]}€ (${suggestedSystemNames[1]})`;
+    creditCardPrice2.textContent = `${suggestedSystemPrices[1]}€ (${suggestedSystemNames[1]})`;
   } else {
-    document.querySelector('#creditCardPrice2').style.display = 'none';
+    creditCardPrice2.parentElement.style.display = 'none';
+    creditCardPrice2.previousElementSibling.checked = false;
   }
 }
 
