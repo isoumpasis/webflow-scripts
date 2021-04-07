@@ -453,6 +453,7 @@ function setCostWithCreditCard() {
 
   if (suggestedSystemPrices.length === 2) {
     creditCardPrice2.textContent = `${suggestedSystemPrices[1]}€ (${suggestedSystemNames[1]})`;
+    creditCardPrice2.previousElementSibling.checked = true;
   } else {
     creditCardPrice2.parentElement.style.display = 'none';
     creditCardPrice2.previousElementSibling.checked = false;
