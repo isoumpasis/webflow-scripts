@@ -364,7 +364,7 @@ function showResults() {
   suggestedContainers.forEach(container => {
     if (container.style.display !== 'none') {
       let price = parseInt(
-        container.querySelector('.suggested-price').split(' ')[0].replace('€', '')
+        container.querySelector('.suggested-price').textContent.split(' ')[0].replace('€', '')
       );
       price *= FPA;
       suggestedSystemPrices.push(price);
