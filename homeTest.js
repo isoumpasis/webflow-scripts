@@ -379,6 +379,10 @@ function showDirectResults() {
       `#suggested-${systemQueryDict[foundEngineCodeObj.system]}`
     );
     directSystemDiv.style.display = 'grid';
+  } else {
+    suggestedContainers.forEach(container => {
+      container.style.display = 'none';
+    });
   }
 }
 
