@@ -428,7 +428,7 @@ function configureEasyPay() {
         price *= FPA;
         suggestedSystemPrices.push(price);
       });
-      container.querySelectorAll('.suggested-name').forEach(namel => {
+      container.querySelectorAll('.suggested-name').forEach(nameEl => {
         suggestedSystemNames.push(nameEl.textContent);
       });
       break;
