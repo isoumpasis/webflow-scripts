@@ -472,7 +472,9 @@ creditCardInstallments.addEventListener('change', e =>
 function creditCardInstallmentsOnChange(value) {
   let cost = creditCardPrice1.checked ? suggestedSystemPrices[0] : suggestedSystemPrices[1];
 
-  let installments = value;
+  let installments = +value;
+  console.log({ installments });
+  console.log({ cost });
 
   document.querySelector('#creditCardFinalCost').textContent = `${cost}€`;
   document.querySelector('#creditCardPerMonth').textContent = `${cost / installments}€`;
