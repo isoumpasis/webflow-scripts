@@ -356,6 +356,7 @@ function showResults() {
 
 function showDirectResults() {
 	const selectedEngineCode = cylinderOrEngineSelect.value;
+	console.log(selectedEngineCode);
 	const filteredVehicle = selectedModelObj.vehicles.filter(veh => {
 		veh.engineCodes.forEach(engineCode => {
 			if (engineCode.code === selectedEngineCode) return true;
