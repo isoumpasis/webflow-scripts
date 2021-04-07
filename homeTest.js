@@ -21,6 +21,9 @@ const systemQueryDict = {
   'DI 108': 'di108'
 };
 
+let selectedSystemPrices = [];
+const FPA = 1.24;
+
 document.addEventListener('DOMContentLoaded', () => {
   initSelects();
 
@@ -134,7 +137,6 @@ function populateModelSelect() {
 
 yearSelect.addEventListener('change', e => yearOnChange(e.target.value));
 function yearOnChange(value) {
-  console.log('year changed', value);
   cylinderOrEngineSelect.disabled = true;
   cylinderOrEngineSelect.innerHTML = '<option>Περιγραφή</option>';
   suggestedContainers.forEach(container => {
@@ -260,7 +262,6 @@ function populateCylinderOrEngineSelect() {
       let engineCodeValue = engineCode.split(' ');
       engineCodeValue.pop();
       engineCodeValue = engineCodeValue.join(' ');
-      console.log(engineCodeValue);
       optionsArray.push(`<option value="${engineCodeValue}">${engineCode}</option>`);
     });
   } else {
@@ -350,6 +351,7 @@ function selectCylinderOption() {
 
 function showResults() {
   let years = yearSelect.value;
+  suggestedSystemPrices = [];
 
   if (selectedModelObj.isDirect) {
     console.log('show results is direct!');
@@ -358,6 +360,17 @@ function showResults() {
     let cyls = cylinderOrEngineSelect.value;
     showCylinderResults(years, cyls);
   }
+
+  suggestedContainers.forEach(container => {
+    if (container.style.display !== 'none') {
+      let price = parseInt(
+        container.querySelector('.suggested-price').split(' ')[0].replace('€', '')
+      );
+      price *= FPA;
+      suggestedSystemPrices.push(price);
+    }
+  });
+  console.log(suggestedSystemPrices);
 
   // sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }

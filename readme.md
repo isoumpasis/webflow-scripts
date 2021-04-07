@@ -24,11 +24,10 @@
 [x] display none on change to suggested Containers
 [x] αν υπαρχει ενα να το βγαζει κατευθειαν =>
 [x] kai νεστεντ =>
-[x] kai protash systhmatos =>
-[] kai calc kerdous
-
+[x] kai protash systhmatos
 [x] na exei ena prasino tick sthn perigrafh kinhthra an ginetai metatroph
+[x] value option x times klp
+
+[] kai calc kerdous gia kathe protash
 [] mnhmh session storage
 [] mhhmh gia session ti system page
-[] direct 3 psifio me index an den pianei an den einai ===
-[] value option x times klp
