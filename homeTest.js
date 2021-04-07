@@ -15,6 +15,12 @@ const cylinderOrEngineSelect = document.querySelector('#cylinderOrEngineSelect')
 const suggestedContainers = document.querySelectorAll('.suggested-container');
 let suggestedSystems;
 
+const systemQueryDict = {
+  'DI 3000B': 'di3000b',
+  'DI 60': 'di60',
+  'DI 108': 'di108'
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   initSelects();
 
@@ -367,8 +373,13 @@ function showDirectResults() {
       }
     }
   }
-
   console.log(foundEngineCodeObj);
+  if (foundEngineCodeObj.isConvertible) {
+    const directSystemDiv = document.querySelector(
+      `#suggested-${systemQueryDict[foundEngineCodeObj.system]}`
+    );
+    directSystemDiv.style.display = 'grid';
+  }
 }
 
 function showCylinderResults(years, cyls) {
