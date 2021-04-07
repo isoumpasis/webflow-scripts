@@ -21,7 +21,8 @@ const systemQueryDict = {
   'DI 108': 'di108'
 };
 
-let selectedSystemPrices = [];
+let suggestedSystemPrices = [];
+let suggestedSystemNames = [];
 const FPA = 1.24;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -352,6 +353,7 @@ function selectCylinderOption() {
 function showResults() {
   let years = yearSelect.value;
   suggestedSystemPrices = [];
+  suggestedSystemNames = [];
 
   if (selectedModelObj.isDirect) {
     console.log('show results is direct!');
@@ -361,17 +363,7 @@ function showResults() {
     showCylinderResults(years, cyls);
   }
 
-  for (let container of suggestedContainers) {
-    if (container.style.display !== 'none') {
-      container.querySelectorAll('.suggested-price').forEach(priceEl => {
-        let price = parseInt(priceEl.textContent.split(' ')[0].replace('€', ''));
-        price *= FPA;
-        suggestedSystemPrices.push(price);
-      });
-      break;
-    }
-  }
-  console.log(suggestedSystemPrices);
+  configureEasyPay();
 
   // sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
@@ -425,6 +417,39 @@ function showCylinderResults(years, cyls) {
   } else {
     suggestedSystems = ['C-OBD II'];
     document.querySelector('#suggested-cobd').style.display = 'grid';
+  }
+}
+
+function configureEasyPay() {
+  for (let container of suggestedContainers) {
+    if (container.style.display !== 'none') {
+      container.querySelectorAll('.suggested-price').forEach(priceEl => {
+        let price = parseInt(priceEl.textContent.split(' ')[0].replace('€', ''));
+        price *= FPA;
+        suggestedSystemPrices.push(price);
+      });
+      container.querySelectorAll('.suggested-name').forEach(namel => {
+        suggestedSystemNames.push(nameEl.textContent);
+      });
+      break;
+    }
+  }
+  console.log(suggestedSystemPrices);
+  console.log(suggestedSystemNames);
+
+  setWithCreditCard();
+}
+
+function setWithCreditCard() {
+  document.querySelector(
+    '#creditCardPrice1'
+  ).textContent = `${suggestedSystemPrices[0]}€ (${suggestedSystemNames[0]})`;
+  if (suggestedSystemPrices.length === 2) {
+    document.querySelector(
+      '#creditCardPrice2'
+    ).textContent = `${suggestedSystemPrices[1]}€ (${suggestedSystemNames[1]})`;
+  } else {
+    document.querySelector('#creditCardPrice2').style.display = 'none';
   }
 }
 
