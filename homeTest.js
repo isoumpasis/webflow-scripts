@@ -480,8 +480,10 @@ function creditCardInstallmentsOnChange(value) {
   console.log({ installments });
   console.log({ cost });
 
-  document.querySelector('#creditCardFinalCost').textContent = `${cost.toFixed(2)}€`;
-  document.querySelector('#creditCardPerMonth').textContent = `${cost / installments}€`;
+  document.querySelector('#creditCardFinalCost').textContent = `${cost}€`;
+  document.querySelector('#creditCardPerMonth').textContent = `${(cost / installments).toFixed(
+    2
+  )}€`;
 
   let lpgPerMonthCost = parseFloat(lpgResult.textContent.replace('€', ''));
   if (perYearCheckbox.checked) lpgPerMonthCost /= 12;
