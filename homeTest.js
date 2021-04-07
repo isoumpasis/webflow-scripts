@@ -355,15 +355,18 @@ function showResults() {
 }
 
 function showDirectResults() {
-	const selectedEngineCode = cylinderOrEngineSelect.value;
-	const filteredVehicle = selectedModelObj.vehicles.filter(veh => {
+  const selectedEngineCode = cylinderOrEngineSelect.value;
+  let foundEngineCodeObj;
+	label: for(let veh of selectedModelObj.vehicles){
 		for (let engineCode of veh.engineCodes) {
-			if (engineCode.code === selectedEngineCode) return true;
+      if (engineCode.code === selectedEngineCode) {
+        foundEngineCodeObj = engineCode.code;
+        break label;
+      }
 		}
-		return false;
-	});
-	console.log({ filteredVehicle });
-	filteredVehicle = filteredVehicle[0];
+  }
+  
+	console.log(foundEngineCodeObj);
 }
 
 function showCylinderResults(years, cyls) {
