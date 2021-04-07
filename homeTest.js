@@ -450,11 +450,12 @@ function setWithCreditCard() {
 }
 
 function setCostWithCreditCard() {
-  creditCardPrice1.textContent = `${suggestedSystemPrices[0]}€ (${suggestedSystemNames[0]})`;
+  creditCardPrice1.innerHTML = `${suggestedSystemPrices[0]}€ <br>(${suggestedSystemNames[0]})`;
   creditCardPrice1.previousElementSibling.checked = true;
+  creditCardPrice2.parentElement.style.display = 'block';
 
   if (suggestedSystemPrices.length === 2) {
-    creditCardPrice2.textContent = `${suggestedSystemPrices[1]}€ (${suggestedSystemNames[1]})`;
+    creditCardPrice2.innerHTML = `${suggestedSystemPrices[1]}€ <br>(${suggestedSystemNames[1]})`;
     creditCardPrice2.previousElementSibling.checked = true;
   } else {
     creditCardPrice2.parentElement.style.display = 'none';
