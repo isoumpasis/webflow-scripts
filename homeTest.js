@@ -463,7 +463,7 @@ function setCostWithCreditCard() {
   }
 }
 function setCreditCardCosts() {
-  creditCardInstallmentsOnChange(1);
+  creditCardInstallmentsOnChange(creditCardInstallments.value);
 }
 
 creditCardInstallments.addEventListener('change', e =>
