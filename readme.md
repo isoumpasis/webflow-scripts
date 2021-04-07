@@ -31,3 +31,7 @@
 [] kai calc kerdous gia kathe protash
 [] mnhmh session storage
 [] mhhmh gia session ti system page
+
+/_ EASY PAY _/
+na mpei ethsio ofelos credit card ? etisia eksoikonomish..?
+panta atokes oi doseis? ara den xreiazetai teliko poso plhrwmhs ?
