@@ -361,15 +361,16 @@ function showResults() {
     showCylinderResults(years, cyls);
   }
 
-  suggestedContainers.forEach(container => {
+  for (let container of suggestedContainers) {
     if (container.style.display !== 'none') {
-      let price = parseInt(
-        container.querySelector('.suggested-price').textContent.split(' ')[0].replace('€', '')
-      );
-      price *= FPA;
-      suggestedSystemPrices.push(price);
+      container.querySelectorAll('.suggested-price').forEach(priceEl => {
+        let price = parseInt(priceEl.textContent.split(' ')[0].replace('€', ''));
+        price *= FPA;
+        suggestedSystemPrices.push(price);
+      });
+      break;
     }
-  });
+  }
   console.log(suggestedSystemPrices);
 
   // sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
