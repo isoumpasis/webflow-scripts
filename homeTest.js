@@ -31,6 +31,7 @@ const creditCardInstallments = document.querySelector('#creditCardInstallments')
 
 document.addEventListener('DOMContentLoaded', () => {
 	initSelects();
+	initEasyPay();
 
 	// if (typeof Storage !== 'undefined' && sessionStorage.selectedModels) {
 	//   selectedModels = JSON.parse(sessionStorage.selectedModels);
@@ -60,6 +61,11 @@ function initSelects() {
 	cylinderOrEngineSelect.disabled = true;
 	cylinderOrEngineSelect.innerHTML = '<option value="">Περιγραφή</option>';
 	makeSelect.focus();
+}
+
+function initEasyPay() {
+	creditCardPrice1.checked = true;
+	creditCardInstallmentsOnChange(installments.value);
 }
 
 makeSelect.addEventListener('change', function () {
@@ -514,19 +520,21 @@ sliders.forEach((slider, i) => {
 		outputs[i].value = slider.value;
 		covers[i].style.width = calcCoverWidth(slider) + '%';
 		calcResult();
+		calcEasyPay();
 	});
 	outputs[i].addEventListener('input', function () {
 		slider.value = this.value;
 		covers[i].style.width = calcCoverWidth(slider) + '%';
 		calcResult();
+		calcEasyPay();
 	});
 });
 perYearCheckbox.addEventListener('change', calcResult);
 
 calcResult(); //init
+calcEasyPay(); //init
 
 function calcResult() {
-	let res = 0;
 	let petrolCostPerMonth, lpgCostPerMonth, cngCostPerMonth;
 
 	const ltPer100Km = parseInt(document.querySelector('.lt-100km').value);
@@ -577,5 +585,9 @@ function calcResult() {
 function calcCoverWidth(slider) {
 	let offset = (slider.max - slider.value) / (slider.max - slider.min) > 0.2 ? 0 : 1.5;
 	return ((slider.max - slider.value) / (slider.max - slider.min)) * 100 + offset;
+}
+
+function calcEasyPay() {
+	creditCardInstallmentsOnChange(installments.value);
 }
 /* Calculator END */
