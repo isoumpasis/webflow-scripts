@@ -369,8 +369,12 @@ function showResults() {
 		let cyls = cylinderOrEngineSelect.value;
 		showCylinderResults(years, cyls);
 	}
-
-	configureEasyPay();
+	if (
+		suggestedContainers.some(container => {
+			container.style.display !== 'none';
+		})
+	)
+		configureEasyPay();
 
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
