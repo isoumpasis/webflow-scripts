@@ -65,7 +65,7 @@ function initSelects() {
 
 function initEasyPay() {
 	creditCardPrice1.checked = true;
-	creditCardInstallmentsOnChange(installments.value);
+	creditCardInstallmentsOnChange(creditCardInstallments.value);
 }
 
 makeSelect.addEventListener('change', function () {
@@ -588,6 +588,6 @@ function calcCoverWidth(slider) {
 }
 
 function calcEasyPay() {
-	creditCardInstallmentsOnChange(installments.value);
+	creditCardInstallmentsOnChange(creditCardInstallments.value);
 }
 /* Calculator END */
