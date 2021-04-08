@@ -479,7 +479,7 @@ function creditCardInstallmentsOnChange(value) {
 }
 
 document.querySelectorAll('.credit-card-radio').forEach(radio => {
-	radio.addEventListener('click', e => {
+	radio.addEventListener('change', e => {
 		creditCardInstallmentsOnChange(creditCardInstallments.value);
 	});
 });
