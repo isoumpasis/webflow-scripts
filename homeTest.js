@@ -469,8 +469,8 @@ creditCardInstallments.addEventListener('change', e => creditCardInstallmentsOnC
 function creditCardInstallmentsOnChange(value) {
 	console.log({ suggestedSystemPrices });
 	let cost = creditCardPrice1.previousElementSibling.checked
-		? suggestedSystemPrices[0] || parseFloat(creditCardPrice1.textContent.replace(' €', '')).toFixed(2)
-		: suggestedSystemPrices[1] || parseFloat(creditCardPrice2.textContent.replace(' €', '')).toFixed(2);
+		? suggestedSystemPrices[0] || parseFloat(creditCardPrice1.textContent.replace(' €', ''))
+		: suggestedSystemPrices[1] || parseFloat(creditCardPrice2.textContent.replace(' €', ''));
 
 	let installments = +value;
 	console.log({ installments });
