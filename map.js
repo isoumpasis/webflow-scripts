@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	console.log('1');
 	generateInitHtml();
 	startLoader();
-	console.log('2');
+	console.log('2'); //3.6
 	cachedPins = await getCachedPins();
 	console.log('3');
 	endLoader();

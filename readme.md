@@ -31,6 +31,9 @@
 [] kai calc kerdous gia kathe protash
 [] mnhmh session storage
 [] mhhmh gia session ti system page
+[] katw apo 6 cyls kai panw apo 180hp kai oxi direct epilogh analoga me tous ippous
+[] emulator
+[] nea lovato direct codes
 
 /_ EASY PAY _/
 na mpei ethsio ofelos credit card ? etisia eksoikonomish..?
