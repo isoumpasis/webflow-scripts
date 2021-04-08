@@ -2,11 +2,9 @@ const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/getAll';
 
 // const episimosIconUrl =
 // 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
-const episimosIconUrl =
-	'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60663eb3c347c9975c35d5d9_location-icon-white.svg';
+const episimosIconUrl = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60663eb3c347c9975c35d5d9_location-icon-white.svg';
 
-const markerClustererIcon =
-	'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6059ab2542758022d1e784de_m1.png';
+const markerClustererIcon = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6059ab2542758022d1e784de_m1.png';
 
 const mapCenter = { lat: 38.64, lng: 24.16 };
 const startZoom = 6;
@@ -31,10 +29,12 @@ let map,
 	cachedPins;
 
 document.addEventListener('DOMContentLoaded', async () => {
-	console.log('before initMap');
+	console.log('1');
 	generateInitHtml();
 	startLoader();
+	console.log('2');
 	cachedPins = await getCachedPins();
+	console.log('3');
 	endLoader();
 	console.log(cachedPins);
 	await initMap();
@@ -332,10 +332,7 @@ async function initMap() {
 			selectedMarker.setAnimation(null);
 		}
 		selectedMarker = null;
-		const [lat, lng] = [
-			e.latLng.lat().toFixed(2),
-			e.latLng.lng().toFixed(2)
-		];
+		const [lat, lng] = [e.latLng.lat().toFixed(2), e.latLng.lng().toFixed(2)];
 		console.log(`You clicked at: (${lat}, ${lng})`);
 	});
 
@@ -436,16 +433,10 @@ function getCurrentPosition() {
 
 		navigator.geolocation.getCurrentPosition(
 			pos => {
-				resolve([
-					pos.coords.latitude,
-					pos.coords.longitude,
-					pos.coords.accuracy
-				]);
+				resolve([pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy]);
 			},
 			err => {
-				console.warn(
-					`ERROR on geolocation: ${err.code}: ${err.message}`
-				);
+				console.warn(`ERROR on geolocation: ${err.code}: ${err.message}`);
 				reject([0, 0]);
 			},
 			geolocationOptions
@@ -641,39 +632,27 @@ function prepareInformation(markerProps) {
 	infoWindowDiv.append(remainingEl);
 
 	//Google Directions
-	let markerGeometry = [
-		selectedMarker.getPosition().lat(),
-		selectedMarker.getPosition().lng()
-	];
+	let markerGeometry = [selectedMarker.getPosition().lat(), selectedMarker.getPosition().lng()];
 
-	infoWindowDiv
-		.querySelector('.google-directions-container')
-		.addEventListener('click', async () => {
-			const currentLatLng = await getCurrentPosition();
-			console.log(currentLatLng);
-			let url = `https://www.google.com/maps?saddr=${currentLatLng[0]},${currentLatLng[1]}&daddr=${markerGeometry}`;
-			window.open(url, '_blank');
-		});
+	infoWindowDiv.querySelector('.google-directions-container').addEventListener('click', async () => {
+		const currentLatLng = await getCurrentPosition();
+		console.log(currentLatLng);
+		let url = `https://www.google.com/maps?saddr=${currentLatLng[0]},${currentLatLng[1]}&daddr=${markerGeometry}`;
+		window.open(url, '_blank');
+	});
 
 	//styles when there is no img
 	if (!markerProps.imgs.length) {
-		let infoNameContainer = infoWindowDiv.querySelector(
-			'.info-name-container'
-		);
+		let infoNameContainer = infoWindowDiv.querySelector('.info-name-container');
 		infoNameContainer.style.position = 'static';
 		infoNameContainer.style.borderTopLeftRadius = '5px';
 		infoNameContainer.style.borderTopRightRadius = '5px';
-		infoWindowDiv.querySelector('.info-body-container').style.marginTop =
-			'1rem';
-		let lovatoIconHeader = infoWindowDiv.querySelector(
-			'.lovato-icon-header'
-		);
+		infoWindowDiv.querySelector('.info-body-container').style.marginTop = '1rem';
+		let lovatoIconHeader = infoWindowDiv.querySelector('.lovato-icon-header');
 		lovatoIconHeader.style.bottom = '-25%';
 		lovatoIconHeader.style.width = '5rem';
 		lovatoIconHeader.style.height = '5rem';
-		infoWindowDiv.querySelector(
-			'.svg-lovato-icon-header'
-		).style.marginLeft = '1px';
+		infoWindowDiv.querySelector('.svg-lovato-icon-header').style.marginLeft = '1px';
 		infoWindowDiv.querySelector('.photos-container').style.width = '500px';
 	}
 
@@ -719,69 +698,34 @@ function prepareInformation(markerProps) {
 	}
 
 	//Services
-	const infoLovatoSystemsEl = infoWindowDiv.querySelector(
-		'.info-lovatoSystems'
-	);
+	const infoLovatoSystemsEl = infoWindowDiv.querySelector('.info-lovatoSystems');
 	const infoGogasTanksEl = infoWindowDiv.querySelector('.info-gogasTanks');
 	const infoWebServicesEl = infoWindowDiv.querySelector('.info-webServices');
 	const infolovatoAppEl = infoWindowDiv.querySelector('.info-lovatoApp');
-	const infoGogasGuaranteeEl = infoWindowDiv.querySelector(
-		'.info-gogasGuarantee'
-	);
-	const infoCustomService1 = infoWindowDiv.querySelector(
-		'.info-customService1'
-	);
-	const infoCustomService2 = infoWindowDiv.querySelector(
-		'.info-customService2'
-	);
-	const infoCustomService3 = infoWindowDiv.querySelector(
-		'.info-customService3'
-	);
-	infoLovatoSystemsEl.style.display = markerProps.lovatoServices.lovatoSystems
-		? 'flex'
-		: 'none';
-	infoGogasTanksEl.style.display = markerProps.lovatoServices.gogasTanks
-		? 'flex'
-		: 'none';
-	infoWebServicesEl.style.display = markerProps.lovatoServices.webServices
-		? 'flex'
-		: 'none';
-	infolovatoAppEl.style.display = markerProps.lovatoServices.lovatoApp
-		? 'flex'
-		: 'none';
-	infoGogasGuaranteeEl.style.display = markerProps.lovatoServices
-		.gogasGuarantee
-		? 'flex'
-		: 'none';
-	infoCustomService1.style.display = markerProps.customServices[0]
-		? 'flex'
-		: 'none';
-	infoCustomService2.style.display = markerProps.customServices[1]
-		? 'flex'
-		: 'none';
-	infoCustomService3.style.display = markerProps.customServices[2]
-		? 'flex'
-		: 'none';
+	const infoGogasGuaranteeEl = infoWindowDiv.querySelector('.info-gogasGuarantee');
+	const infoCustomService1 = infoWindowDiv.querySelector('.info-customService1');
+	const infoCustomService2 = infoWindowDiv.querySelector('.info-customService2');
+	const infoCustomService3 = infoWindowDiv.querySelector('.info-customService3');
+	infoLovatoSystemsEl.style.display = markerProps.lovatoServices.lovatoSystems ? 'flex' : 'none';
+	infoGogasTanksEl.style.display = markerProps.lovatoServices.gogasTanks ? 'flex' : 'none';
+	infoWebServicesEl.style.display = markerProps.lovatoServices.webServices ? 'flex' : 'none';
+	infolovatoAppEl.style.display = markerProps.lovatoServices.lovatoApp ? 'flex' : 'none';
+	infoGogasGuaranteeEl.style.display = markerProps.lovatoServices.gogasGuarantee ? 'flex' : 'none';
+	infoCustomService1.style.display = markerProps.customServices[0] ? 'flex' : 'none';
+	infoCustomService2.style.display = markerProps.customServices[1] ? 'flex' : 'none';
+	infoCustomService3.style.display = markerProps.customServices[2] ? 'flex' : 'none';
 
 	//Custom Services
 	customServicesDisplay(markerProps);
 }
 
 function customServicesDisplay(markerProps) {
-	if (
-		markerProps.customServices[0] ||
-		markerProps.customServices[1] ||
-		markerProps.customServices[2]
-	) {
-		infoWindowDiv.querySelector('.info-customServices').style.display =
-			'block';
-		infoWindowDiv.querySelector('.info-customServices-hr').style.display =
-			'block';
+	if (markerProps.customServices[0] || markerProps.customServices[1] || markerProps.customServices[2]) {
+		infoWindowDiv.querySelector('.info-customServices').style.display = 'block';
+		infoWindowDiv.querySelector('.info-customServices-hr').style.display = 'block';
 	} else {
-		infoWindowDiv.querySelector('.info-customServices').style.display =
-			'none';
-		infoWindowDiv.querySelector('.info-customServices-hr').style.display =
-			'none';
+		infoWindowDiv.querySelector('.info-customServices').style.display = 'none';
+		infoWindowDiv.querySelector('.info-customServices-hr').style.display = 'none';
 	}
 }
 
@@ -846,19 +790,13 @@ function prepareSlideshow(photosDiv) {
 
 	showDivs(slideIndex, photosDiv);
 
-	photosDiv
-		.querySelector('.slideshow-left')
-		.addEventListener('click', () => plusDivs(-1, photosDiv));
-	photosDiv
-		.querySelector('.slideshow-right')
-		.addEventListener('click', () => plusDivs(1, photosDiv));
+	photosDiv.querySelector('.slideshow-left').addEventListener('click', () => plusDivs(-1, photosDiv));
+	photosDiv.querySelector('.slideshow-right').addEventListener('click', () => plusDivs(1, photosDiv));
 
 	const dots = photosDiv.getElementsByClassName('slideshow-dot');
 	for (let i = 0; i < dots.length; i++) {
 		dots[i].addEventListener('click', () => currentDiv(i + 1, photosDiv));
-		dots[i].addEventListener('mouseover', () =>
-			currentDiv(i + 1, photosDiv)
-		);
+		dots[i].addEventListener('mouseover', () => currentDiv(i + 1, photosDiv));
 	}
 }
 function plusDivs(n, photosDiv) {
@@ -884,10 +822,7 @@ function showDivs(n, photosDiv) {
 		images[i].classList.remove('current-image');
 	}
 	for (i = 0; i < dots.length; i++) {
-		dots[i].className = dots[i].className.replace(
-			' slideshow-dot-white',
-			''
-		);
+		dots[i].className = dots[i].className.replace(' slideshow-dot-white', '');
 	}
 	images[slideIndex - 1].style.display = 'block';
 	images[slideIndex - 1].classList.add('current-image');
@@ -897,18 +832,12 @@ function showDivs(n, photosDiv) {
 document.addEventListener('keydown', e => {
 	const key = e.key;
 	if (key === 'ArrowRight') {
-		const photosContainer = infoWindowDiv.querySelector(
-			'.photos-container'
-		);
-		if (photosContainer.querySelector('.slideshow-container'))
-			plusDivs(1, photosContainer);
+		const photosContainer = infoWindowDiv.querySelector('.photos-container');
+		if (photosContainer.querySelector('.slideshow-container')) plusDivs(1, photosContainer);
 	}
 	if (key === 'ArrowLeft') {
-		const photosContainer = infoWindowDiv.querySelector(
-			'.photos-container'
-		);
-		if (photosContainer.querySelector('.slideshow-container'))
-			plusDivs(-1, photosContainer);
+		const photosContainer = infoWindowDiv.querySelector('.photos-container');
+		if (photosContainer.querySelector('.slideshow-container')) plusDivs(-1, photosContainer);
 	}
 	if (key === 'Enter') {
 		// e.preventDefault();
@@ -923,8 +852,7 @@ document.addEventListener('keydown', e => {
 		// 	workerElements.name.value;
 	}
 	if (key === 'Escape') {
-		if (document.querySelector('.info-modal').style.display === 'block')
-			document.querySelector('.info-modal').style.display = 'none';
+		if (document.querySelector('.info-modal').style.display === 'block') document.querySelector('.info-modal').style.display = 'none';
 	}
 });
 
@@ -964,8 +892,7 @@ function prepareModal(photosContainer, markerProps) {
 	});
 	//close modal
 	modal.onclick = e => {
-		if (e.target !== modalImage && e.target !== modalCaption)
-			modal.style.display = 'none';
+		if (e.target !== modalImage && e.target !== modalCaption) modal.style.display = 'none';
 	};
 }
 
