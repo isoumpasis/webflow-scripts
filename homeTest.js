@@ -485,6 +485,16 @@ function creditCardInstallmentsOnChange(value) {
 
 	let lpgPerMonthOrYearCost = parseFloat(lpgResult.textContent.replace('€', ''));
 
+	function calcEasyPay() {
+		creditCardInstallmentsOnChange(creditCardInstallments.value);
+	}
+
+	if (perYearCheckbox.checked) {
+		document.querySelector('#creditCardBenefitLabel').textContent = 'Ετήσιο όφελος LPG';
+	} else {
+		document.querySelector('#creditCardBenefitLabel').textContent = 'Μηνιαίο όφελος LPG';
+	}
+
 	document.querySelector('#creditCardBenefit').textContent = `${(lpgPerMonthOrYearCost - cost / installments).toFixed(2)}€`;
 }
 
@@ -493,6 +503,18 @@ document.querySelectorAll('.credit-card-radio').forEach(radio => {
 		creditCardInstallmentsOnChange(creditCardInstallments.value);
 	});
 });
+
+function calcEasyPay() {
+	creditCardInstallmentsOnChange(creditCardInstallments.value);
+}
+
+function updateEasyPay() {
+	if (perYearCheckbox.checked) {
+		document.querySelector('#creditCardBenefitLabel').textContent = 'Ετήσιο όφελος LPG';
+	} else {
+		document.querySelector('#creditCardBenefitLabel').textContent = 'Μηνιαίο όφελος LPG';
+	}
+}
 
 /* System Identification END */
 
@@ -536,11 +558,7 @@ sliders.forEach((slider, i) => {
 
 perYearCheckbox.addEventListener('change', function () {
 	calcResult();
-	if (this.checked) {
-		document.querySelector('#creditCardBenefitLabel').textContent = 'Ετήσιο όφελος LPG';
-	} else {
-		document.querySelector('#creditCardBenefitLabel').textContent = 'Μηνιαίο όφελος LPG';
-	}
+	creditCardInstallmentsOnChange(creditCardInstallments.value);
 });
 
 calcResult(); //init
@@ -599,7 +617,4 @@ function calcCoverWidth(slider) {
 	return ((slider.max - slider.value) / (slider.max - slider.min)) * 100 + offset;
 }
 
-function calcEasyPay() {
-	creditCardInstallmentsOnChange(creditCardInstallments.value);
-}
 /* Calculator END */
