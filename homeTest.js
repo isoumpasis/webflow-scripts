@@ -64,7 +64,7 @@ function initSelects() {
 }
 
 function initEasyPay() {
-	creditCardPrice1.checked = true;
+	creditCardPrice1.previousElementSibling.checked = true;
 	creditCardInstallmentsOnChange(creditCardInstallments.value);
 }
 
