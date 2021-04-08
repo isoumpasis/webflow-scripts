@@ -370,7 +370,7 @@ function showResults() {
 		showCylinderResults(years, cyls);
 	}
 	if (
-		suggestedContainers.some(container => {
+		[...suggestedContainers].some(container => {
 			container.style.display !== 'none';
 		})
 	)
