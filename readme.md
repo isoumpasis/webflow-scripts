@@ -35,3 +35,5 @@
 /_ EASY PAY _/
 na mpei ethsio ofelos credit card ? etisia eksoikonomish..?
 panta atokes oi doseis? ara den xreiazetai teliko poso plhrwmhs ?
+
+[] init stage without suggested vehicles
