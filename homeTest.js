@@ -369,12 +369,7 @@ function showResults() {
 		let cyls = cylinderOrEngineSelect.value;
 		showCylinderResults(years, cyls);
 	}
-	if (
-		[...suggestedContainers].some(container => {
-			container.style.display !== 'none';
-		})
-	)
-		configureEasyPay();
+	if ([...suggestedContainers].some(container => container.style.display !== 'none')) configureEasyPay();
 
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
@@ -484,10 +479,6 @@ function creditCardInstallmentsOnChange(value) {
 	document.querySelector('#creditCardPerMonth').textContent = `${(cost / installments).toFixed(2)}€`;
 
 	let lpgPerMonthOrYearCost = parseFloat(lpgResult.textContent.replace('€', ''));
-
-	function calcEasyPay() {
-		creditCardInstallmentsOnChange(creditCardInstallments.value);
-	}
 
 	if (perYearCheckbox.checked) {
 		document.querySelector('#creditCardBenefitLabel').textContent = 'Ετήσιο όφελος LPG';
