@@ -256,17 +256,17 @@ function populateCylinderOrEngineSelect() {
 
 	if (selectedModelObj.isDirect) {
 		optionsArray = ['<option value="">Επιλέξτε Κινητήρα</option>'];
-		let engineCodes = [];
+		let engineCodesOptions = [];
 		selectedModelObj.vehicles.forEach(vehicle => {
 			if (yearSelect.value >= vehicle.years[0] && yearSelect.value <= vehicle.years[1]) {
-				vehicle.engineCodes.forEach(codeObj => {
-					let isConvertibleStr = vehicle.isConvertible ? ' ✔️' : ' &#10060;';
-					engineCodes.push(codeObj.code + isConvertibleStr);
+				vehicle.engineCodes.forEach(code => {
+					let convertibleSymbol = vehicle.isConvertible ? ' ✔️' : ' &#10060;';
+					engineCodesOptions.push(code + convertibleSymbol);
 				});
 			}
 		});
-		engineCodes = [...new Set(engineCodes)].sort((a, b) => parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0]));
-		engineCodes.forEach(engineCode => {
+		engineCodesOptions = [...new Set(engineCodesOptions)].sort((a, b) => parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0]));
+		engineCodesOptions.forEach(engineCode => {
 			let engineCodeValue = engineCode.split(' ');
 			engineCodeValue.pop();
 			engineCodeValue = engineCodeValue.join(' ');
