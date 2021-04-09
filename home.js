@@ -260,7 +260,7 @@ function populateCylinderOrEngineSelect() {
 		selectedModelObj.vehicles.forEach(vehicle => {
 			if (yearSelect.value >= vehicle.years[0] && yearSelect.value <= vehicle.years[1]) {
 				vehicle.engineCodes.forEach(codeObj => {
-					let isConvertibleStr = codeObj.isConvertible ? ' ✔️' : ' &#10060;';
+					let isConvertibleStr = vehicle.isConvertible ? ' ✔️' : ' &#10060;';
 					engineCodes.push(codeObj.code + isConvertibleStr);
 				});
 			}
@@ -376,18 +376,21 @@ function showResults() {
 
 function showDirectResults() {
 	const selectedEngineCode = cylinderOrEngineSelect.value;
-	let foundEngineCodeObj;
+	let foundEngineCodeObj, foundVehicleObj;
 	label: for (let veh of selectedModelObj.vehicles) {
 		for (let engineCode of veh.engineCodes) {
 			if (engineCode.code === selectedEngineCode) {
 				foundEngineCodeObj = engineCode;
+				foundVehicleObj = veh;
 				break label;
 			}
 		}
 	}
-	console.log(foundEngineCodeObj);
-	if (foundEngineCodeObj.isConvertible) {
-		const directSystemDiv = document.querySelector(`#suggested-${systemQueryDict[foundEngineCodeObj.system]}`);
+	console.log({ foundEngineCodeObj });
+	console.log({ foundVehicleObj });
+
+	if (foundVehicleObj.isConvertible) {
+		const directSystemDiv = document.querySelector(`#suggested-${systemQueryDict[foundVehicleObj.system]}`);
 		directSystemDiv.style.display = 'grid';
 	} else {
 		suggestedContainers.forEach(container => {
