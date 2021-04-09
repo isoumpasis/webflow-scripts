@@ -379,7 +379,7 @@ function showDirectResults() {
 	let foundEngineCodeObj, foundVehicleObj;
 	label: for (let veh of selectedModelObj.vehicles) {
 		for (let engineCode of veh.engineCodes) {
-			if (engineCode.code === selectedEngineCode) {
+			if (engineCode === selectedEngineCode) {
 				foundEngineCodeObj = engineCode;
 				foundVehicleObj = veh;
 				break label;
