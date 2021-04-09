@@ -473,7 +473,7 @@ function creditCardInstallmentsOnChange(value) {
 
 	let installments = +value;
 	console.log({ installments });
-	console.log({ cost }, '!');
+	console.log({ cost });
 
 	document.querySelector('#creditCardFinalCost').textContent = `${cost}€`;
 	document.querySelector('#creditCardPerMonth').textContent = `${(cost / installments).toFixed(2)}€`;
