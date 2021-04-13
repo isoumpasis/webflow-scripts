@@ -29,7 +29,6 @@ let map,
 	cachedPins;
 
 document.addEventListener('DOMContentLoaded', async () => {
-	console.log('1');
 	generateInitHtml();
 	startLoader();
 	console.log('2'); //3.6
@@ -38,7 +37,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 	endLoader();
 	console.log(cachedPins);
 	await initMap();
-	console.log('after initMap');
 });
 
 async function getCachedPins() {
