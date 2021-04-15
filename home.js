@@ -6,6 +6,7 @@ let selectedYears;
 let selectedModels;
 let selectedModelName;
 let selectedModelObj;
+let foundVehicleObj;
 
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');
@@ -19,6 +20,50 @@ const systemQueryDict = {
 	'DI 3000B': 'di3000b',
 	'DI 60': 'di60',
 	'DI 108': 'di108'
+};
+
+const makeImgDict = {
+	'ALFA ROMEO': 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f1d502c7ef4d03ff154b_Alfa_Romeo.png',
+	AUDI: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f607b580721ba1274496_Audi.png',
+	BMW: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f607325eb960af680a4e_BMW.png',
+	CHEVROLET: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60729203574193c205c_Chevrolet.png',
+	CHRYSLER: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f6077735848685f48c4d_Chrysler.png',
+	CITROEN: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f607703f5581b7a6b6e9_Citroen.png',
+	DACIA: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f607ac4c2566782969fa_Dacia.png',
+	DAEWOO: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f6096e3ae999700f15ad_Daewoo.png',
+	DAIHATSU: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f6095e0f21739e801c4d_Daihatsu.png',
+	DODGE: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60929203581043c205d_Dodge.png',
+	FIAT: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f609aecccf25fc3868f0_Fiat.png',
+	FORD: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f609ed355314a4ea8ba7_Ford.png',
+	HONDA: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f6094bacedfa12748b66_Honda.png',
+	HUMMER: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f609325eb912c5680a51_Hummer.png',
+	HYUNDAI: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60969316192201b5e9a_Hyundai.png',
+	JAGUAR: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f609703f555667a6b6eb_Jaguar.png',
+	JEEP: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f6099881859ece0dc158_Jeep.png',
+	KIA: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f609ed35535997ea8ba8_Kia.jpg',
+	LADA: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60b7735848bc7f48c50_Lada.png',
+	LANCIA: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60b703f55244fa6b6ec_Lancia.png',
+	'LAND ROVER': 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60baecccf47553868f2_Land_Rover.png',
+	LEXUS: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60b02c7ef3588ff4bed_Lexus.png',
+	MAZDA: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60bac4c25e840296a07_Mazda.png',
+	'MERCEDES-BENZ': 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60b2cf4c1fc9aeb4a97_Mercedes-Benz.png',
+	MINI: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60dec0785fc99826f63_Mini.png',
+	MITSUBISHI: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60df4fa193ad096cf91_Mitsubishi.png',
+	NISSAN: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60c3f6057d3245ac3fd_Nissan.png',
+	OPEL: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60d8ec314543c0c7030_Opel.png',
+	PEUGEOT: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60da5cf01576cad4d60_Peugeot.png',
+	PORSCHE: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60dec07850afc826f64_Porsche.png',
+	RENAULT: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60e7c02f416a420a7ea_Renault.png',
+	ROVER: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60deb33aa3e792d0d74_Rover.png',
+	SAAB: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60dde273a2a845dc8c0_Saab.png',
+	SEAT: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60e66bedcb79fa5a7ff_Seat.png',
+	SKODA: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60e9d13c22e7326344f_Skoda.png',
+	SMART: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60dacb311235e2254ff_Smart.png',
+	SUBARU: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60f51e2742da00ac18a_Subaru.png',
+	SUZUKI: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60f1fb9c523b6315031_Suzuki.png',
+	TOYOTA: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60f163ba8861a8a41ee_Toyota.png',
+	VOLVO: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60f6931617b461b5e9e_Volvo.png',
+	VW: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f60f66bedc404ea5a800_VW.png'
 };
 
 let suggestedSystemPrices = [];
@@ -363,30 +408,30 @@ function showResults() {
 	suggestedSystemNames = [];
 
 	if (selectedModelObj.isDirect) {
-		console.log('show results is direct!');
 		showDirectResults();
 	} else {
-		let cyls = cylinderOrEngineSelect.value;
-		showCylinderResults(years, cyls);
+		showCylinderResults(years, cylinderOrEngineSelect.value);
 	}
-	if ([...suggestedContainers].some(container => container.style.display !== 'none')) configureEasyPay();
+
+	//If there is a result
+	if ([...suggestedContainers].some(container => container.style.display !== 'none')) {
+		configureEasyPay();
+	}
+	configureCalculator();
 
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
 
 function showDirectResults() {
 	const selectedEngineCode = cylinderOrEngineSelect.value;
-	let foundEngineCodeObj, foundVehicleObj;
 	label: for (let veh of selectedModelObj.vehicles) {
 		for (let engineCode of veh.engineCodes) {
 			if (engineCode === selectedEngineCode) {
-				foundEngineCodeObj = engineCode;
 				foundVehicleObj = veh;
 				break label;
 			}
 		}
 	}
-	console.log({ foundEngineCodeObj });
 	console.log({ foundVehicleObj });
 
 	if (foundVehicleObj.isConvertible) {
@@ -424,6 +469,24 @@ function showCylinderResults(years, cyls) {
 	} else {
 		suggestedSystems = ['C-OBD II'];
 		document.querySelector('#suggested-cobd').style.display = 'grid';
+	}
+}
+
+function configureCalculator() {
+	if (foundVehicleObj) {
+		document.querySelector('#calcTitle').textContent = 'Υπολόγισε πόσα εξοικονομείς με το αυτοκίνητό σου!';
+
+		document.querySelector('#makeImg').src = makeImgDict[makeSelect.value];
+		document.querySelector('#modelName').textContent = `${modelSelect.value} ${yearSelect.value}`;
+
+		document.querySelector('#inConsumption').innerHTML = `<strong>Εντός πόλης</strong><br>(${foundVehicleObj.consumption[0]}L/100km)`;
+		document.querySelector('#outConsumption').innerHTML = `<strong>Εκτός πόλης</strong><br>(${foundVehicleObj.consumption[1]}L/100km)`;
+		document.querySelector('#combinedConsumption').innerHTML = `<strong>Μικτά</strong><br>(${foundVehicleObj.consumption[2]}L/100km)`;
+
+		document.querySelector('#consumptionDiv').style.display = 'block';
+	} else {
+		document.querySelector('#consumptionDiv').style.display = 'none';
+		document.querySelector('#calcTitle').textContent = 'Υπολόγισε πόσα εξοικονομείς με συστήματα Lovato!';
 	}
 }
 
