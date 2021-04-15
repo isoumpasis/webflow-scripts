@@ -473,12 +473,11 @@ function showCylinderResults(years, cyls) {
 }
 
 function configureCalculator() {
-	console.log('calcl consfige');
 	if ([...suggestedContainers].some(container => container.style.display !== 'none')) {
 		document.querySelector('#calcTitle').textContent = 'Υπολόγισε πόσα εξοικονομείς με το αυτοκίνητό σου!';
 
 		document.querySelector('#makeImg').src = makeImgDict[makeSelect.value];
-		document.querySelector('#modelName').textContent = `${modelSelect.value} ${yearSelect.value}`;
+		document.querySelector('#modelName').textContent = `${modelSelect.value} (${yearSelect.value})`;
 
 		document.querySelector('#inConsumption').innerHTML = `<strong>Εντός πόλης</strong><br>(${foundVehicleObj.consumption[0]}L/100km)`;
 		document.querySelector('#outConsumption').innerHTML = `<strong>Εκτός πόλης</strong><br>(${foundVehicleObj.consumption[1]}L/100km)`;
@@ -488,6 +487,10 @@ function configureCalculator() {
 	} else {
 		document.querySelector('#consumptionDiv').style.display = 'none';
 		document.querySelector('#calcTitle').textContent = 'Υπολόγισε πόσα εξοικονομείς με συστήματα Lovato!';
+
+		document.querySelector('.lt-100km').value = 8;
+		//next element sibling?
+		//covers[i].style.width = calcCoverWidth(slider) + '%';
 	}
 }
 
