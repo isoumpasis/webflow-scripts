@@ -473,6 +473,7 @@ function showCylinderResults(years, cyls) {
 }
 
 function configureCalculator() {
+	console.log('calcl consfige');
 	if (foundVehicleObj) {
 		document.querySelector('#calcTitle').textContent = 'Υπολόγισε πόσα εξοικονομείς με το αυτοκίνητό σου!';
 
