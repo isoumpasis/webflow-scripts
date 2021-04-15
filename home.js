@@ -484,6 +484,10 @@ function configureCalculator() {
 		document.querySelector('#combinedConsumption').innerHTML = `<strong>Μικτά</strong><br>(${foundVehicleObj.consumption[2]}L/100km)`;
 
 		document.querySelector('#consumptionDiv').style.display = 'block';
+
+		// document.querySelector('.lt-100km').value = ;
+		//next element sibling?
+		//covers[i].style.width = calcCoverWidth(slider) + '%';
 	} else {
 		document.querySelector('#consumptionDiv').style.display = 'none';
 		document.querySelector('#calcTitle').textContent = 'Υπολόγισε πόσα εξοικονομείς με συστήματα Lovato!';
