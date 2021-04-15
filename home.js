@@ -474,7 +474,7 @@ function showCylinderResults(years, cyls) {
 
 function configureCalculator() {
 	console.log('calcl consfige');
-	if (foundVehicleObj) {
+	if ([...suggestedContainers].some(container => container.style.display !== 'none')) {
 		document.querySelector('#calcTitle').textContent = 'Υπολόγισε πόσα εξοικονομείς με το αυτοκίνητό σου!';
 
 		document.querySelector('#makeImg').src = makeImgDict[makeSelect.value];
