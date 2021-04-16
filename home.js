@@ -324,7 +324,6 @@ function populateCylinderOrEngineSelect() {
 			optionsArray.push(`<option value="${engineCodeValue}">${engineCode}</option>`);
 		});
 	} else {
-		console.log(selectedModelObj, selectedModelObj.vehicles);
 		const filteredVehicles = selectedModelObj.vehicles.filter(veh => yearSelect.value >= veh.years[0] && yearSelect.value <= veh.years[1]);
 
 		if (
@@ -474,6 +473,7 @@ function showDirectResults() {
 }
 
 function showCylinderResults(years) {
+	foundVehicleObj = selectedModelObj.vehicles[0];
 	const selectedHp = cylinderOrEngineSelect.value;
 	for (let veh of selectedModelObj.vehicles) {
 		if (veh.hp == selectedHp) {
