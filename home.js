@@ -68,7 +68,7 @@ const makeImgDict = {
 
 let suggestedSystemPrices = [];
 let suggestedSystemNames = [];
-const FPA = 1.24;
+const VAT = 1.24;
 
 const creditCardPrice1 = document.querySelector('#creditCardPrice1');
 const creditCardPrice2 = document.querySelector('#creditCardPrice2');
@@ -126,6 +126,7 @@ makeSelect.addEventListener('change', function () {
 	if (!this.value) {
 		yearSelect.disabled = true;
 		yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+		resetCalc();
 		// sessionStorage.clear(); //reset //DO YOU WANT TO ERASE EVERYTHING? maybe there is an autonomous var you want to keep
 		return;
 	}
@@ -206,6 +207,7 @@ function yearOnChange(value) {
 		modelSelect.disabled = true;
 		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
 		cylinderOrEngineSelect.innerHTML = '<option value="">Περιγραφή</option>';
+		resetCalc();
 		// sessionStorage.removeItem('selectedVehicles');
 		return;
 	}
@@ -276,6 +278,7 @@ function modelOnChange(value) {
 	suggestedContainers.forEach(container => {
 		container.style.display = 'none';
 	});
+	resetCalc();
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
 	//sessionStorage.removeItem('selectedSystem');
@@ -364,7 +367,7 @@ function cylinderOrEngineOnChange(value) {
 		suggestedContainers.forEach(container => {
 			container.style.display = 'none';
 		});
-		document.querySelector('#consumptionDiv').style.display = 'none';
+		resetCalc();
 		// sessionStorage.removeItem('selectedCylinderOrEngine');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
@@ -509,12 +512,16 @@ function configureCalculator() {
 		document.querySelector('.lt-100km').value = foundVehicleObj.consumption[2];
 		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 	} else {
-		document.querySelector('#consumptionDiv').style.display = 'none';
-		document.querySelector('#calcTitle').innerHTML = 'Υπολόγισε πόσα εξοικονομείς με <br> συστήματα Lovato!';
-
-		document.querySelector('.lt-100km').value = 8;
-		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
+		resetCalc();
 	}
+}
+
+function resetCalc() {
+	document.querySelector('#consumptionDiv').style.display = 'none';
+	document.querySelector('#calcTitle').innerHTML = 'Υπολόγισε πόσα εξοικονομείς με <br> συστήματα Lovato!';
+
+	document.querySelector('.lt-100km').value = 8;
+	covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 }
 
 function configureEasyPay() {
@@ -522,7 +529,7 @@ function configureEasyPay() {
 		if (container.style.display !== 'none') {
 			container.querySelectorAll('.suggested-price').forEach(priceEl => {
 				let price = parseInt(priceEl.textContent.split(' ')[0].replace('€', ''));
-				price *= FPA;
+				price *= VAT;
 				suggestedSystemPrices.push(price);
 			});
 			container.querySelectorAll('.suggested-name').forEach(nameEl => {
