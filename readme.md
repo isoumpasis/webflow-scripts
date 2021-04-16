@@ -27,13 +27,13 @@
 [x] kai protash systhmatos
 [x] na exei ena prasino tick sthn perigrafh kinhthra an ginetai metatroph
 [x] value option x times klp
+[x] nea lovato direct codes
 
 [] kai calc kerdous gia kathe protash
 [] mnhmh session storage
 [] mhhmh gia session ti system page
 [] katw apo 6 cyls kai panw apo 180hp kai oxi direct epilogh analoga me tous ippous
 [] emulator
-[] nea lovato direct codes
 [] eksaerwths
 [] scroll
 [] hp anti gia cylinders
