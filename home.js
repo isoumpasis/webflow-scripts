@@ -332,7 +332,7 @@ function populateCylinderOrEngineSelect() {
 				hpOptions.push(`${vehicle.hp}`);
 			}
 		});
-		hpOptions = [...new Set(hpOptions)].sort();
+		hpOptions = [...new Set(hpOptions)].sort((a, b) => parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0]));
 		hpOptions.forEach(opt => {
 			optionsArray.push(`<option value="${opt}">${opt} HP</option>`);
 		});
