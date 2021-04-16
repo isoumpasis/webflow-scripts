@@ -435,7 +435,7 @@ function showResults() {
 	//If there is a result
 	if ([...suggestedContainers].some(container => container.style.display !== 'none')) {
 		configureEasyPay();
-		[...suggestedContainers].filter(c => c.style.display === 'block')[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+		[...suggestedContainers].filter(c => c.style.display !== 'none')[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
 		// document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
 	}
 	configureCalculator();
