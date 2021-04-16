@@ -545,6 +545,8 @@ function resetCalc() {
 
 document.querySelectorAll('.radio-button.w-radio').forEach(el => {
 	el.addEventListener('click', e => {
+		console.log(e.target);
+		console.log(e.target.dataset);
 		sliders[1].value = e.target.dataset.cons;
 		outputs[1].value = e.target.dataset.cons;
 		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
