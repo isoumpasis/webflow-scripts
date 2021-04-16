@@ -318,18 +318,30 @@ function populateCylinderOrEngineSelect() {
 			optionsArray.push(`<option value="${engineCodeValue}">${engineCode}</option>`);
 		});
 	} else {
-		optionsArray = ['<option value="">Επιλέξτε Κυλίνδρους</option>'];
-		let cylinders = [];
 		console.log(selectedModelObj, selectedModelObj.vehicles);
+		optionsArray = ['<option value="">Επιλέξτε Ιπποδύναμη</option>'];
+		let hpOptions = [];
 		selectedModelObj.vehicles.forEach(vehicle => {
 			if (yearSelect.value >= vehicle.years[0] && yearSelect.value <= vehicle.years[1]) {
-				cylinders.push(vehicle.cylinders);
+				hpOptions.push(`${vehicle.hp}`);
 			}
 		});
-		cylinders = [...new Set(cylinders)].sort();
-		cylinders.forEach(cylinder => {
-			optionsArray.push(`<option value="${cylinder}">${cylinder}cyl</option>`);
+		hpOptions = [...new Set(hpOptions)].sort();
+		hpOptions.forEach(opt => {
+			optionsArray.push(`<option value="${opt}">${opt} HP</option>`);
 		});
+		// optionsArray = ['<option value="">Επιλέξτε Κυλίνδρους</option>'];
+		// let cylinders = [];
+		// console.log(selectedModelObj, selectedModelObj.vehicles);
+		// selectedModelObj.vehicles.forEach(vehicle => {
+		// 	if (yearSelect.value >= vehicle.years[0] && yearSelect.value <= vehicle.years[1]) {
+		// 		cylinders.push(vehicle.cylinders);
+		// 	}
+		// });
+		// cylinders = [...new Set(cylinders)].sort();
+		// cylinders.forEach(cylinder => {
+		// 	optionsArray.push(`<option value="${cylinder}">${cylinder}cyl</option>`);
+		// });
 	}
 
 	cylinderOrEngineSelect.innerHTML = optionsArray.join('');
@@ -445,6 +457,17 @@ function showDirectResults() {
 }
 
 function showCylinderResults(years, cyls) {
+	const selectedHp = cylinderOrEngineSelect.value;
+	label: for (let veh of selectedModelObj.vehicles) {
+		for (let hp of veh.hp) {
+			if (hp == selectedHp) {
+				foundVehicleObj = veh;
+				break label;
+			}
+		}
+	}
+	console.log({ foundVehicleObj });
+
 	if (cyls == 5 || cyls == 6) {
 		suggestedSystems = ['C-OBD II 6cyl'];
 		const cobdDiv = document.querySelector('#suggested-cobd');
@@ -484,17 +507,14 @@ function configureCalculator() {
 		document.querySelector('#combinedConsumption').innerHTML = `<strong>Μικτά</strong><br>(${foundVehicleObj.consumption[2]}L/100km)`;
 
 		document.querySelector('#consumptionDiv').style.display = 'block';
-
-		// document.querySelector('.lt-100km').value = ;
-		//next element sibling?
-		//covers[i].style.width = calcCoverWidth(slider) + '%';
+		document.querySelector('.lt-100km').value = foundVehicleObj.consumption[2];
+		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 	} else {
 		document.querySelector('#consumptionDiv').style.display = 'none';
 		document.querySelector('#calcTitle').textContent = 'Υπολόγισε πόσα εξοικονομείς με συστήματα Lovato!';
 
 		document.querySelector('.lt-100km').value = 8;
-		//next element sibling?
-		//covers[i].style.width = calcCoverWidth(slider) + '%';
+		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 	}
 }
 
