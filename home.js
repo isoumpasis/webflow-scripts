@@ -544,15 +544,19 @@ function resetCalc() {
 }
 
 document.querySelectorAll('.radio-button.w-radio').forEach(el => {
-	el.addEventListener('click', e => {
-		e.stopPropagation();
-		// const radioInput = e.target.querySelector('input');
-		console.log('hello', e.target);
-		const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
-		sliders[1].value = consumptionLabelWithData.dataset.cons;
-		outputs[1].value = consumptionLabelWithData.dataset.cons;
-		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
-	});
+	el.addEventListener(
+		'click',
+		e => {
+			e.stopPropagation();
+			// const radioInput = e.target.querySelector('input');
+			console.log('hello', e.target);
+			const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
+			sliders[1].value = consumptionLabelWithData.dataset.cons;
+			outputs[1].value = consumptionLabelWithData.dataset.cons;
+			covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
+		},
+		true
+	);
 });
 
 function configureEasyPay() {
