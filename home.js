@@ -518,7 +518,8 @@ function configureCalculator() {
 
 	document.querySelector('#consumptionDiv').style.display = 'block';
 
-	document.querySelector('.lt-100km').value = foundVehicleObj.consumption[2];
+	sliders[1].value = foundVehicleObj.consumption[2];
+	outputs[1].value = sliders[1].value;
 	covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 }
 
