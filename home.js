@@ -554,6 +554,7 @@ document.querySelectorAll('.radio-button.w-radio').forEach(el => {
 			sliders[1].value = consumptionLabelWithData.dataset.cons;
 			outputs[1].value = consumptionLabelWithData.dataset.cons;
 			covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
+			calcResult();
 		},
 		true
 	);
