@@ -325,29 +325,32 @@ function populateCylinderOrEngineSelect() {
 		});
 	} else {
 		console.log(selectedModelObj, selectedModelObj.vehicles);
-		optionsArray = ['<option value="">Επιλέξτε Ιπποδύναμη</option>'];
-		let hpOptions = [];
-		selectedModelObj.vehicles.forEach(vehicle => {
-			if (yearSelect.value >= vehicle.years[0] && yearSelect.value <= vehicle.years[1]) {
-				hpOptions.push(`${vehicle.hp}`);
-			}
-		});
-		hpOptions = [...new Set(hpOptions)].sort((a, b) => parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0]));
-		hpOptions.forEach(opt => {
-			optionsArray.push(`<option value="${opt}">${opt} HP</option>`);
-		});
-		// optionsArray = ['<option value="">Επιλέξτε Κυλίνδρους</option>'];
-		// let cylinders = [];
-		// console.log(selectedModelObj, selectedModelObj.vehicles);
-		// selectedModelObj.vehicles.forEach(vehicle => {
-		// 	if (yearSelect.value >= vehicle.years[0] && yearSelect.value <= vehicle.years[1]) {
-		// 		cylinders.push(vehicle.cylinders);
-		// 	}
-		// });
-		// cylinders = [...new Set(cylinders)].sort();
-		// cylinders.forEach(cylinder => {
-		// 	optionsArray.push(`<option value="${cylinder}">${cylinder}cyl</option>`);
-		// });
+		const filteredVehicles = selectedModelObj.vehicles.filter(veh => yearSelect.value >= veh.years[0] && yearSelect.value <= veh.years[1]);
+
+		if (
+			filteredVehicles.every(
+				veh =>
+					veh.consumption[0] === filteredVehicles[0].consumption[0] &&
+					veh.consumption[1] === filteredVehicles[0].consumption[1] &&
+					veh.consumption[2] === filteredVehicles[0].consumption[2] &&
+					veh.cylinders < 6 &&
+					veh.hp < 150
+			)
+		) {
+			optionsArray = ['<option value="">Επιλέξτε Κυλίνδρους</option>'];
+			let cylinders = filteredVehicles.map(veh => veh.cylinders);
+			cylinders = [...new Set(cylinders)].sort();
+			cylinders.forEach(cylinder => {
+				optionsArray.push(`<option value="${cylinder}">${cylinder}cyl</option>`);
+			});
+		} else {
+			optionsArray = ['<option value="">Επιλέξτε Ιπποδύναμη</option>'];
+			let hpOptions = filteredVehicles.map(veh => veh.hp);
+			hpOptions = [...new Set(hpOptions)].sort((a, b) => parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0]));
+			hpOptions.forEach(opt => {
+				optionsArray.push(`<option value="${opt}">${opt} HP</option>`);
+			});
+		}
 	}
 
 	cylinderOrEngineSelect.innerHTML = optionsArray.join('');
