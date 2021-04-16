@@ -511,7 +511,7 @@ function configureCalculator() {
 		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 	} else {
 		document.querySelector('#consumptionDiv').style.display = 'none';
-		document.querySelector('#calcTitle').textContent = 'Υπολόγισε πόσα εξοικονομείς με συστήματα Lovato!';
+		document.querySelector('#calcTitle').innerHTML = 'Υπολόγισε πόσα εξοικονομείς με <br> συστήματα Lovato!';
 
 		document.querySelector('.lt-100km').value = 8;
 		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
