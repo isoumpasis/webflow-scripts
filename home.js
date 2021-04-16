@@ -429,7 +429,7 @@ function showResults() {
 	if (selectedModelObj.isDirect) {
 		showDirectResults();
 	} else {
-		showCylinderResults(years, cylinderOrEngineSelect.value);
+		showCylinderResults(years);
 	}
 
 	//If there is a result
@@ -469,7 +469,7 @@ function showDirectResults() {
 	}
 }
 
-function showCylinderResults(years, cyls) {
+function showCylinderResults(years) {
 	const selectedHp = cylinderOrEngineSelect.value;
 	for (let veh of selectedModelObj.vehicles) {
 		if (veh.hp == selectedHp) {
@@ -478,6 +478,8 @@ function showCylinderResults(years, cyls) {
 		}
 	}
 	console.log({ foundVehicleObj });
+
+	let cyls = foundVehicleObj.cylinders;
 
 	if (cyls == 5 || cyls == 6) {
 		suggestedSystems = ['C-OBD II 6cyl'];

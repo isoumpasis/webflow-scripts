@@ -32,13 +32,13 @@
 [] kai calc kerdous gia kathe protash
 [] mnhmh session storage
 [] mhhmh gia session ti system page
-[] katw apo 6 cyls kai panw apo 180hp kai oxi direct epilogh analoga me tous ippous
+[] katw apo 6 cyls kai panw apo 180hp kai oxi direct epilogh analoga me tous ippous .. eksaerwths
 [] emulator
-[] eksaerwths
 [x] scroll
 [] hp anti gia cylinders
-[] megalytero hp shmainei megalyterh katanalwsh?
-[] να αλλαξουμε μιν μαξ για sliders[1]
+[] να αλλαξουμε μιν μαξ για sliders[1] exoyme dwsei min 4 alla gia
+chevrolet LACETTI 1.4 (2015) exei
+[] επιλογη της περιοχής για τις τιμη βενζινης
 
 /_ EASY PAY _/
 na mpei ethsio ofelos credit card ? etisia eksoikonomish..?
