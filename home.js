@@ -532,6 +532,10 @@ function configureCalculator() {
 	sliders[1].value = foundVehicleObj.consumption[2];
 	outputs[1].value = sliders[1].value;
 	covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
+
+	document.querySelector('.in-consumption').textContent = foundVehicleObj.consumption[1];
+	document.querySelector('.out-consumption').textContent = foundVehicleObj.consumption[2];
+	document.querySelector('.combined-consumption').textContent = foundVehicleObj.consumption[3];
 }
 
 function resetCalc() {
