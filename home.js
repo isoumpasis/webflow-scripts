@@ -329,9 +329,9 @@ function populateCylinderOrEngineSelect() {
 		console.log({ filteredVehicles });
 		filteredVehicles.forEach(veh => {
 			console.log(
-				Math.abs(parseFloat(veh.consumption[0]) - parseFloat(filteredVehicles[0].consumption[0])) <= 0.1,
-				Math.abs(parseFloat(veh.consumption[1]) - parseFloat(filteredVehicles[0].consumption[1])) <= 0.1,
-				Math.abs(parseFloat(veh.consumption[2]) - parseFloat(filteredVehicles[0].consumption[2])) <= 0.1
+				Math.abs(parseFloat(veh.consumption[0]) - parseFloat(filteredVehicles[0].consumption[0])),
+				Math.abs(parseFloat(veh.consumption[1]) - parseFloat(filteredVehicles[0].consumption[1])),
+				Math.abs(parseFloat(veh.consumption[2]) - parseFloat(filteredVehicles[0].consumption[2]))
 			);
 		});
 		if (
