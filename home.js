@@ -458,12 +458,10 @@ function showDirectResults() {
 
 function showCylinderResults(years, cyls) {
 	const selectedHp = cylinderOrEngineSelect.value;
-	label: for (let veh of selectedModelObj.vehicles) {
-		for (let hp of veh.hp) {
-			if (hp == selectedHp) {
-				foundVehicleObj = veh;
-				break label;
-			}
+	for (let veh of selectedModelObj.vehicles) {
+		if (veh.hp == selectedHp) {
+			foundVehicleObj = veh;
+			break;
 		}
 	}
 	console.log({ foundVehicleObj });
