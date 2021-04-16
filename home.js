@@ -515,7 +515,11 @@ function configureCalculator() {
 	document.querySelector('#inConsumption').innerHTML = `<strong>Εντός πόλης</strong><br>(${foundVehicleObj.consumption[0]}L/100km)`;
 	document.querySelector('#outConsumption').innerHTML = `<strong>Εκτός πόλης</strong><br>(${foundVehicleObj.consumption[1]}L/100km)`;
 	document.querySelector('#combinedConsumption').innerHTML = `<strong>Μικτά</strong><br>(${foundVehicleObj.consumption[2]}L/100km)`;
+	document.querySelector('#inConsumption').dataset.cons = foundVehicleObj.consumption[0];
+	document.querySelector('#outConsumption').dataset.cons = foundVehicleObj.consumption[1];
+	document.querySelector('#combinedConsumption').dataset.cons = foundVehicleObj.consumption[2];
 
+	document.querySelectorAll('.radio-button.w-radio')[1].click();
 	document.querySelector('#consumptionDiv').style.display = 'block';
 
 	sliders[1].value = foundVehicleObj.consumption[2];
@@ -531,6 +535,14 @@ function resetCalc() {
 	outputs[1].value = 8;
 	covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 }
+
+document.querySelectorAll('.radio-button.w-radio').forEach(el => {
+	el.addEventListener('click', e => {
+		sliders[1].value = e.target.dataset.cons;
+		outputs[1].value = e.target.dataset.cons;
+		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
+	});
+});
 
 function configureEasyPay() {
 	for (let container of suggestedContainers) {

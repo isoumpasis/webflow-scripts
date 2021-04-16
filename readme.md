@@ -37,7 +37,8 @@
 [] eksaerwths
 [x] scroll
 [] hp anti gia cylinders
-[]
+[] megalytero hp shmainei megalyterh katanalwsh?
+[] να αλλαξουμε μιν μαξ για sliders[1]
 
 /_ EASY PAY _/
 na mpei ethsio ofelos credit card ? etisia eksoikonomish..?
