@@ -555,7 +555,7 @@ document.querySelectorAll('.radio-button.w-radio').forEach(el => {
 			outputs[1].value = consumptionLabelWithData.dataset.cons;
 			covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 		},
-		true
+		false
 	);
 });
 
