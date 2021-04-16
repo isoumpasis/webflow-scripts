@@ -327,11 +327,13 @@ function populateCylinderOrEngineSelect() {
 		const filteredVehicles = selectedModelObj.vehicles.filter(veh => yearSelect.value >= veh.years[0] && yearSelect.value <= veh.years[1]);
 
 		console.log({ filteredVehicles });
-		console.log(
-			Math.abs(parseFloat(veh.consumption[0]) - parseFloat(filteredVehicles[0].consumption[0])) <= 0.1,
-			Math.abs(parseFloat(veh.consumption[1]) - parseFloat(filteredVehicles[0].consumption[1])) <= 0.1,
-			Math.abs(parseFloat(veh.consumption[2]) - parseFloat(filteredVehicles[0].consumption[2])) <= 0.1
-		);
+		filteredVehicles.forEach(veh => {
+			console.log(
+				Math.abs(parseFloat(veh.consumption[0]) - parseFloat(filteredVehicles[0].consumption[0])) <= 0.1,
+				Math.abs(parseFloat(veh.consumption[1]) - parseFloat(filteredVehicles[0].consumption[1])) <= 0.1,
+				Math.abs(parseFloat(veh.consumption[2]) - parseFloat(filteredVehicles[0].consumption[2])) <= 0.1
+			);
+		});
 		if (
 			filteredVehicles.length === 1 ||
 			filteredVehicles.every(
