@@ -331,9 +331,9 @@ function populateCylinderOrEngineSelect() {
 			filteredVehicles.length === 1 ||
 			filteredVehicles.every(
 				veh =>
-					veh.consumption[0] === filteredVehicles[0].consumption[0] &&
-					veh.consumption[1] === filteredVehicles[0].consumption[1] &&
-					veh.consumption[2] === filteredVehicles[0].consumption[2] &&
+					Math.abs(parseFloat(veh.consumption[0]) - parseFloat(filteredVehicles[0].consumption[0])) <= 0.1 &&
+					Math.abs(parseFloat(veh.consumption[1]) - parseFloat(filteredVehicles[0].consumption[1])) <= 0.1 &&
+					Math.abs(parseFloat(veh.consumption[2]) - parseFloat(filteredVehicles[0].consumption[2])) <= 0.1 &&
 					veh.cylinders < 6 &&
 					veh.hp < 150
 			)
