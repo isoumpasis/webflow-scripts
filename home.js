@@ -439,8 +439,10 @@ function showResults() {
 		document.querySelector('.kilometers-liters').scrollIntoView({ behavior: 'smooth', block: 'end' });
 		// document.querySelector('.car-result-block').scrollIntoView({ behavior: 'smooth', block: 'end' });
 		// document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+		configureCalculator();
+	} else {
+		resetCalc();
 	}
-	configureCalculator();
 
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
@@ -505,29 +507,27 @@ function showCylinderResults(years, cyls) {
 }
 
 function configureCalculator() {
-	if ([...suggestedContainers].some(container => container.style.display !== 'none')) {
-		document.querySelector('#calcTitle').textContent = 'Υπολόγισε πόσα εξοικονομείς με το αυτοκίνητό σου!';
+	document.querySelector('#calcTitle').textContent = 'Υπολόγισε πόσα εξοικονομείς με το αυτοκίνητό σου!';
 
-		document.querySelector('#makeImg').src = makeImgDict[makeSelect.value];
-		document.querySelector('#modelName').textContent = `${modelSelect.value} (${yearSelect.value})`;
+	document.querySelector('#makeImg').src = makeImgDict[makeSelect.value];
+	document.querySelector('#modelName').textContent = `${modelSelect.value} (${yearSelect.value})`;
 
-		document.querySelector('#inConsumption').innerHTML = `<strong>Εντός πόλης</strong><br>(${foundVehicleObj.consumption[0]}L/100km)`;
-		document.querySelector('#outConsumption').innerHTML = `<strong>Εκτός πόλης</strong><br>(${foundVehicleObj.consumption[1]}L/100km)`;
-		document.querySelector('#combinedConsumption').innerHTML = `<strong>Μικτά</strong><br>(${foundVehicleObj.consumption[2]}L/100km)`;
+	document.querySelector('#inConsumption').innerHTML = `<strong>Εντός πόλης</strong><br>(${foundVehicleObj.consumption[0]}L/100km)`;
+	document.querySelector('#outConsumption').innerHTML = `<strong>Εκτός πόλης</strong><br>(${foundVehicleObj.consumption[1]}L/100km)`;
+	document.querySelector('#combinedConsumption').innerHTML = `<strong>Μικτά</strong><br>(${foundVehicleObj.consumption[2]}L/100km)`;
 
-		document.querySelector('#consumptionDiv').style.display = 'block';
-		document.querySelector('.lt-100km').value = foundVehicleObj.consumption[2];
-		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
-	} else {
-		resetCalc();
-	}
+	document.querySelector('#consumptionDiv').style.display = 'block';
+
+	document.querySelector('.lt-100km').value = foundVehicleObj.consumption[2];
+	covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 }
 
 function resetCalc() {
 	document.querySelector('#consumptionDiv').style.display = 'none';
 	document.querySelector('#calcTitle').innerHTML = 'Υπολόγισε πόσα εξοικονομείς με <br> συστήματα Lovato!';
 
-	document.querySelector('.lt-100km').value = 8;
+	sliders[1].value = 8;
+	outputs[1].value = 8;
 	covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 }
 

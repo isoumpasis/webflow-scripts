@@ -35,7 +35,7 @@
 [] katw apo 6 cyls kai panw apo 180hp kai oxi direct epilogh analoga me tous ippous
 [] emulator
 [] eksaerwths
-[] scroll
+[x] scroll
 [] hp anti gia cylinders
 []
 
