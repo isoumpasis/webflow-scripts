@@ -123,6 +123,8 @@ makeSelect.addEventListener('change', function () {
 	suggestedContainers.forEach(container => {
 		container.style.display = 'none';
 	});
+	resetCalc();
+
 	if (!this.value) {
 		yearSelect.disabled = true;
 		yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
