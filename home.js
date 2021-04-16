@@ -519,7 +519,7 @@ function configureCalculator() {
 	document.querySelector('#outConsumption').dataset.cons = foundVehicleObj.consumption[1];
 	document.querySelector('#combinedConsumption').dataset.cons = foundVehicleObj.consumption[2];
 
-	document.querySelectorAll('.radio-button.w-radio')[1].click();
+	document.querySelectorAll('.radio-button.w-radio')[2].click();
 	document.querySelector('#consumptionDiv').style.display = 'block';
 
 	sliders[1].value = foundVehicleObj.consumption[2];
