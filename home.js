@@ -326,6 +326,7 @@ function populateCylinderOrEngineSelect() {
 	} else {
 		const filteredVehicles = selectedModelObj.vehicles.filter(veh => yearSelect.value >= veh.years[0] && yearSelect.value <= veh.years[1]);
 
+		console.log({ filteredVehicles });
 		if (
 			filteredVehicles.length === 1 ||
 			filteredVehicles.every(
@@ -346,7 +347,7 @@ function populateCylinderOrEngineSelect() {
 		} else {
 			optionsArray = ['<option value="">Επιλέξτε Ιπποδύναμη</option>'];
 			let hpOptions = filteredVehicles.map(veh => veh.hp);
-			hpOptions = [...new Set(hpOptions)].sort((a, b) => parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0]));
+			hpOptions = [...new Set(hpOptions)].sort((a, b) => parseInt(a) - parseInt(b));
 			hpOptions.forEach(opt => {
 				optionsArray.push(`<option value="${opt}">${opt} HP</option>`);
 			});
