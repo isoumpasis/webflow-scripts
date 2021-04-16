@@ -522,9 +522,9 @@ function configureCalculator() {
 	document.querySelector('#inConsumption').innerHTML = `<strong>Εντός πόλης</strong><br>(${foundVehicleObj.consumption[0]}L/100km)`;
 	document.querySelector('#outConsumption').innerHTML = `<strong>Εκτός πόλης</strong><br>(${foundVehicleObj.consumption[1]}L/100km)`;
 	document.querySelector('#combinedConsumption').innerHTML = `<strong>Μικτά</strong><br>(${foundVehicleObj.consumption[2]}L/100km)`;
-	document.querySelector('#inConsumption').dataset.cons = foundVehicleObj.consumption[0];
-	document.querySelector('#outConsumption').dataset.cons = foundVehicleObj.consumption[1];
-	document.querySelector('#combinedConsumption').dataset.cons = foundVehicleObj.consumption[2];
+	document.querySelector('#inConsumption input').dataset.cons = foundVehicleObj.consumption[0];
+	document.querySelector('#outConsumption input').dataset.cons = foundVehicleObj.consumption[1];
+	document.querySelector('#combinedConsumption input').dataset.cons = foundVehicleObj.consumption[2];
 
 	document.querySelectorAll('.radio-button.w-radio')[2].click();
 	document.querySelector('#consumptionDiv').style.display = 'block';
