@@ -438,7 +438,7 @@ function showResults() {
 	}
 	configureCalculator();
 
-	document.querySelector('.kilometers-liters').scrollIntoView({ behavior: 'smooth', block: 'end' });
+	document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
 
