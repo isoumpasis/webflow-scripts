@@ -341,7 +341,7 @@ function populateCylinderOrEngineSelect() {
 			let cylinders = filteredVehicles.map(veh => veh.cylinders);
 			cylinders = [...new Set(cylinders)].sort();
 			cylinders.forEach(cylinder => {
-				optionsArray.push(`<option value="${cylinder}">${cylinder}cyl</option>`);
+				optionsArray.push(`<option value="${cylinder}">${cylinder} cyl</option>`);
 			});
 		} else {
 			optionsArray = ['<option value="">Επιλέξτε Ιπποδύναμη</option>'];
