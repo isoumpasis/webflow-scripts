@@ -522,9 +522,9 @@ function configureCalculator() {
 	document.querySelector('#inConsumption').innerHTML = `<strong>Εντός πόλης</strong><br>(${foundVehicleObj.consumption[0]}L/100km)`;
 	document.querySelector('#outConsumption').innerHTML = `<strong>Εκτός πόλης</strong><br>(${foundVehicleObj.consumption[1]}L/100km)`;
 	document.querySelector('#combinedConsumption').innerHTML = `<strong>Μικτά</strong><br>(${foundVehicleObj.consumption[2]}L/100km)`;
-	document.querySelector('#inConsumption').dataset.cons = foundVehicleObj.consumption[0];
-	document.querySelector('#outConsumption').dataset.cons = foundVehicleObj.consumption[1];
-	document.querySelector('#combinedConsumption').dataset.cons = foundVehicleObj.consumption[2];
+	document.querySelectorAll('.radio-button.w-radio')[0].dataset.cons = foundVehicleObj.consumption[0];
+	document.querySelectorAll('.radio-button.w-radio')[1].dataset.cons = foundVehicleObj.consumption[1];
+	document.querySelectorAll('.radio-button.w-radio')[2].dataset.cons = foundVehicleObj.consumption[2];
 
 	document.querySelectorAll('.radio-button.w-radio')[2].click();
 	document.querySelector('#consumptionDiv').style.display = 'block';
@@ -546,9 +546,10 @@ function resetCalc() {
 document.querySelectorAll('.radio-button.w-radio').forEach(el => {
 	el.addEventListener('click', e => {
 		// const radioInput = e.target.querySelector('input');
-		console.log(e.target);
-		sliders[1].value = e.target.dataset.cons;
-		outputs[1].value = e.target.dataset.cons;
+		console.log('hello', e.target);
+		const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
+		sliders[1].value = consumptionLabelWithData.dataset.cons;
+		outputs[1].value = consumptionLabelWithData.dataset.cons;
 		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 	});
 });
