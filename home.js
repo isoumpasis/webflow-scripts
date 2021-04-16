@@ -328,6 +328,7 @@ function populateCylinderOrEngineSelect() {
 		const filteredVehicles = selectedModelObj.vehicles.filter(veh => yearSelect.value >= veh.years[0] && yearSelect.value <= veh.years[1]);
 
 		if (
+			filteredVehicles.length === 1 ||
 			filteredVehicles.every(
 				veh =>
 					veh.consumption[0] === filteredVehicles[0].consumption[0] &&
