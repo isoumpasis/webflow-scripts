@@ -198,6 +198,7 @@ function yearOnChange(value) {
 	suggestedContainers.forEach(container => {
 		container.style.display = 'none';
 	});
+	resetCalc();
 	// sessionStorage.removeItem('selectedYear');
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
