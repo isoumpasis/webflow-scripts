@@ -364,6 +364,7 @@ function cylinderOrEngineOnChange(value) {
 		suggestedContainers.forEach(container => {
 			container.style.display = 'none';
 		});
+		document.querySelector('#consumptionDiv').style.display = 'none';
 		// sessionStorage.removeItem('selectedCylinderOrEngine');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
