@@ -705,7 +705,7 @@ calcEasyPay(); //init
 function calcResult() {
 	let petrolCostPerMonth, lpgCostPerMonth, cngCostPerMonth;
 
-	const ltPer100Km = parseInt(document.querySelector('.lt-100km').value);
+	const ltPer100Km = parseFloat(document.querySelector('.lt-100km').value);
 	const kmPerYear = parseInt(document.querySelector('.km-year').value);
 	const petrolPrice = parseFloat(document.querySelector('.petrol-price').value);
 	const lpgPrice = parseFloat(document.querySelector('.lpg-price').value);
