@@ -121,8 +121,16 @@ function initFuelPrices() {
 		.then(data => {
 			fuelPrices = data;
 			console.log(fuelPrices);
+			modifyFuelPriceSliders();
 		})
 		.catch(e => console.error('Error on FuelPrices Fetch:', e));
+}
+
+document.querySelector('#fuelPricesLocationSelect').addEventListener('change', e => modifyFuelPriceSliders(e.target.value));
+
+function modifyFuelPriceSliders(value) {
+	let filtered = fuelPrices.filter(obj => obj.place.indexOf(value) !== -1);
+	console.log(filtered);
 }
 
 function initEasyPay() {
