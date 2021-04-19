@@ -121,7 +121,7 @@ function initFuelPrices() {
 		.then(data => {
 			fuelPrices = data;
 			console.log(fuelPrices);
-			modifyFuelPriceSliders();
+			modifyFuelPriceSliders('Πανελλαδικός Μ.Ο.');
 		})
 		.catch(e => console.error('Error on FuelPrices Fetch:', e));
 }
