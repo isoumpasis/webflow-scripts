@@ -129,8 +129,17 @@ function initFuelPrices() {
 document.querySelector('#fuelPricesLocationSelect').addEventListener('change', e => modifyFuelPriceSliders(e.target.value));
 
 function modifyFuelPriceSliders(value) {
-	let filtered = fuelPrices.filter(obj => obj.place.indexOf(value) !== -1);
-	console.log(filtered);
+	const locationObj = fuelPrices.filter(obj => obj.place.indexOf(value) !== -1)[0];
+	console.table([locationObj]);
+	if (!locationObj) return;
+
+	sliders[2].value = locationObj.petrol;
+	outputs[2].value = locationObj.petrol;
+	covers[2].style.width = calcCoverWidth(sliders[2]) + '%';
+	sliders[3].value = locationObj.lpg;
+	outputs[3].value = locationObj.lpg;
+	covers[3].style.width = calcCoverWidth(sliders[3]) + '%';
+	calcResult();
 }
 
 function initEasyPay() {
