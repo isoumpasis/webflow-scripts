@@ -4,7 +4,7 @@
 	"description": "/_ Map _/\r [x] infowindow offset\r [x] loading\r [x] image clusterer color (white hover bold etc.) and format\r [x] offset for marker icon",
 	"main": "home.js",
 	"scripts": {
-		"git": "git add . && git commit -m \"webflow push\" && git push origin master"
+		"push": "git add . && git commit -m \"webflow push\" && git push origin master"
 	},
 	"repository": {
 		"type": "git",
