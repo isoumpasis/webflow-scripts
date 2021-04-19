@@ -31,6 +31,7 @@ let map,
 document.addEventListener('DOMContentLoaded', async () => {
 	generateInitHtml();
 	startLoader();
+	initDOMEvents();
 	console.log('2'); //3.6
 	cachedPins = await getCachedPins();
 	console.log('3');
@@ -421,61 +422,6 @@ function endLoader() {
 	document.querySelector('.lds-roller').classList.add('hide-roller');
 }
 
-function getCurrentPosition() {
-	return new Promise((resolve, reject) => {
-		let geolocationOptions = {
-			enableHighAccuracy: true,
-			timeout: 5000,
-			maximumAge: 0
-		};
-
-		navigator.geolocation.getCurrentPosition(
-			pos => {
-				resolve([pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy]);
-			},
-			err => {
-				console.warn(`ERROR on geolocation: ${err.code}: ${err.message}`);
-				reject([0, 0]);
-			},
-			geolocationOptions
-		);
-	});
-}
-
-async function geocoderSolution(address) {
-	return new Promise((resolve, reject) => {
-		if (!address) {
-			//alert('Παρακαλώ προσθέστε μια περιοχή!');
-			reject('Παρακαλώ προσθέστε μια περιοχή!');
-			return;
-		}
-		geocoder.geocode(
-			{
-				address: address,
-				componentRestrictions: {
-					country: 'gr'
-				}
-			},
-			(results, status) => {
-				if (status === 'OK') {
-					// console.log('geocoding for', address);
-					// console.log(
-					// 	'geocoder address result',
-					// 	results[0].formatted_address
-					// );
-					resolve(results[0].geometry.location);
-				} else {
-					//alert(
-					//	'Συγγνώμη, δεν βρέθηκε τέτοια περιοχή. Ξαναπροσπαθήστε!'
-					//);
-					reject('Δε βρέθηκε τέτοια περιοχή! Προσπαθήστε ξανά.');
-					return;
-				}
-			}
-		);
-	});
-}
-
 function openInfoWindow(marker) {
 	infoWindowDiv = document.createElement('div');
 	infoWindowDiv.className = 'infoWindow infoWindow-open';
@@ -755,14 +701,14 @@ function insertImgToDOM(img) {
 
 	return newImgElement;
 
-	function bufferToBase64(buf) {
-		var binstr = Array.prototype.map
-			.call(buf, function (ch) {
-				return String.fromCharCode(ch);
-			})
-			.join('');
-		return btoa(binstr);
-	}
+	// function bufferToBase64(buf) {
+	// 	var binstr = Array.prototype.map
+	// 		.call(buf, function (ch) {
+	// 			return String.fromCharCode(ch);
+	// 		})
+	// 		.join('');
+	// 	return btoa(binstr);
+	// }
 }
 function insertAfter(referenceNode, newNode) {
 	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
@@ -894,125 +840,128 @@ function prepareModal(photosContainer, markerProps) {
 	};
 }
 
-// 		//Autocomplete
-// 		const autocompleteOptions = {
-// 			componentRestrictions: { country: 'gr' },
-// 			fields: ['geometry']
-// 		};
+//Map UI
+function initDOMEvents() {
+	// document.querySelector('#searchInput').addEventListener('input', )
+	//Autocomplete
+	const autocompleteOptions = {
+		componentRestrictions: { country: 'gr' },
+		fields: ['geometry']
+	};
 
-// 		const autocompleteInput = document.querySelector('#autocompleteInput');
-// 		var autoComplete = new google.maps.places.Autocomplete(
-// 			autocompleteInput,
-// 			autocompleteOptions
-// 		);
+	const autocompleteInput = document.querySelector('#searchInput');
+	const autoComplete = new google.maps.places.Autocomplete(autocompleteInput, autocompleteOptions);
 
-// 		//Listeners
-// 		autoComplete.addListener('place_changed', async e => {
-// 			const place = autoComplete.getPlace();
-// 			if (Object.keys(place).length === 1) {
-// 				//HANDLE GEOCODER REQUEST FOR UNKNOWN or ENTER
+	//Listeners
+	autoComplete.addListener('place_changed', async () => {
+		const place = autoComplete.getPlace();
+		console.log(place);
 
-// 				return;
-// 			}
-// 			console.log(place);
+		if (Object.keys(place).length === 1) {
+			//HANDLE GEOCODER REQUEST FOR UNKNOWN or ENTER
+			console.log('handling with geocoder for unknown or enter');
+			const res = await geocoderSolution(autocompleteInput.value);
+			console.log(res);
+			return;
+		}
 
-// 			useruserMarker.setOptions({
-// 				map,
-// 				title: autocompleteInput.value,
-// 				position: place.geometry.location,
-// 				animation: google.maps.Animation.DROP,
-// 				zIndex: google.maps.Marker.MAX_ZINDEX
-// 			});
-// 			map.setZoom(searchZoom);
-// 			map.setCenter(userMarker.position);
-// 		});
+		userMarker.setOptions({
+			map,
+			title: autocompleteInput.value,
+			position: place.geometry.location,
+			animation: google.maps.Animation.DROP,
+			zIndex: google.maps.Marker.MAX_ZINDEX
+		});
+		map.setZoom(searchZoom);
+		map.setCenter(userMarker.position);
+	});
 
-// 		userMarker.addListener('click', () => {
-// 			console.log('markerUser clicked');
-// 			map.setZoom(searchZoom);
-// 			map.setCenter(userMarker.position);
-// 		});
+	//Search Icon click
+	google.maps.event.addDomListener(document.querySelector('#searchBtn'), 'click', async () => {
+		try {
+			const address = document.querySelector('#searchInput').value;
+			const res = await geocoderSolution(address);
+			console.log(res);
+		} catch (e) {
+			console.log('error on geocoding', e);
+		}
 
-// document.addEventListener('keydown', e => {
-// 	const code = e.which || e.keyCode;
-// 	console.log({ code });
-// 	if (code === 39) {
-// 		console.log('right!');
-// 		const photosDiv = document.querySelector('.info-photos');
-// 		if (photosDiv) plusDivs(1, photosDiv);
-// 	}
-// 	if (code === 37) {
-// 		console.log('left!');
-// 		const photosDiv = document.querySelector('.info-photos');
-// 		if (photosDiv) plusDivs(-1, photosDiv);
-// 	}
-// });
+		//automatic scroll to #map
+	});
 
-// function initDomListeners() {
-// 	//Search Icon click
-// 	google.maps.event.addDomListener(
-// 		document.querySelector('.geocoder-search-icon'),
-// 		'click',
-// 		async () => {
-// 			const input = document.querySelector('.geocoder-input');
-// 			let address = input.value;
-// 			try {
-// 				await geocoderSolution(address);
-// 			} catch (e) {
-// 				console.log(e);
-// 			}
+	//Geolocation Btn Click
+	google.maps.event.addDomListener(document.querySelector('#my-location-btn'), 'click', async () => {
+		const currentLatLng = await getCurrentPosition();
+		const myLatLng = {
+			lat: currentLatLng[0],
+			lng: currentLatLng[1]
+		};
 
-// 			//automatic scroll to #map
-// 		}
-// 	);
+		userMarker.setOptions({
+			position: myLatLng,
+			map: map,
+			title: 'Είστε εδώ',
+			animation: google.maps.Animation.DROP,
+			zIndex: google.maps.Marker.MAX_ZINDEX
+		});
 
-// 	//Geolocation Btn Click
-// 	google.maps.event.addDomListener(
-// 		document.querySelector('.geolocation-btn'),
-// 		'click',
-// 		async () => {
-// 			console.log('1');
-// 			let currentLatLng = await getCurrentPosition();
-// 			console.log('4');
-// 			const myLatLng = {
-// 				lat: currentLatLng[0],
-// 				lng: currentLatLng[1]
-// 			};
+		console.log(`Accuracy ${currentLatLng[2]} meters.`);
+		map.setZoom(searchZoom);
+		map.setCenter(userMarker.position);
+	});
+}
 
-// 			userMarker.setOptions({
-// 				position: myLatLng,
-// 				map: map,
-// 				title: 'Είστε εδώ',
-// 				animation: google.maps.Animation.DROP,
-// 				zIndex: google.maps.Marker.MAX_ZINDEX
-// 			});
+async function geocoderSolution(address) {
+	return new Promise((resolve, reject) => {
+		if (!address) {
+			//alert('Παρακαλώ προσθέστε μια περιοχή!');
+			reject('Παρακαλώ προσθέστε μια περιοχή!');
+			return;
+		}
+		geocoder.geocode(
+			{
+				address: address,
+				componentRestrictions: {
+					country: 'gr'
+				}
+			},
+			(results, status) => {
+				if (status === 'OK') {
+					console.log('geocoding for', address);
+					console.log('geocoder address result', results[0].formatted_address);
+					resolve(results[0].geometry.location);
+				} else {
+					//alert(
+					//	'Συγγνώμη, δεν βρέθηκε τέτοια περιοχή. Ξαναπροσπαθήστε!'
+					//);
+					reject('Δε βρέθηκε τέτοια περιοχή! Προσπαθήστε ξανά.');
+					return;
+				}
+			}
+		);
+	});
+}
 
-// 			console.log(`Accuracy ${currentLatLng[2]} meters.`);
-// 			map.setZoom(searchZoom);
-// 			map.setCenter(userMarker.position);
-// 		}
-// 	);
+function getCurrentPosition() {
+	return new Promise((resolve, reject) => {
+		let geolocationOptions = {
+			enableHighAccuracy: true,
+			timeout: 5000,
+			maximumAge: 0
+		};
 
-// 	//More Options Click
-// 	google.maps.event.addDomListener(
-// 		document.querySelector('.control-more-options'),
-// 		'click',
-// 		e => {
-// 			let controlBody = e.path[6].querySelector('.control-body');
-// 			let isClosed = controlBody.classList.contains(
-// 				'control-body-collapsed'
-// 			);
-// 			let arrow = e.path[5].querySelector('.control-minimize');
-// 			if (isClosed) {
-// 				controlBody.classList.remove('control-body-collapsed');
-// 				arrow.classList.remove('control-icon-collapsed');
-// 			} else {
-// 				controlBody.classList.add('control-body-collapsed');
-// 				arrow.classList.add('control-icon-collapsed');
-// 			}
-// 		}
-// 	);
-// }
+		navigator.geolocation.getCurrentPosition(
+			pos => {
+				resolve([pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy]);
+			},
+			err => {
+				console.warn(`ERROR on geolocation: ${err.code}: ${err.message}`);
+				reject([0, 0]);
+			},
+			geolocationOptions
+		);
+	});
+}
 
 // function prepareDomForControl(controlDiv, markers) {
 // 	//Fitlers
@@ -1052,25 +1001,4 @@ function prepareModal(photosContainer, markerProps) {
 // 			markerClusterer.addMarkers(filteredMarkers);
 // 			infoWindow.close();
 // 		});
-// }
-
-// function prepareModal(photosDiv) {
-// 	const allImages = photosDiv.querySelectorAll('.info-image');
-// 	const modal = document.querySelector('.info-modal');
-// 	const modalImage = document.querySelector('.modal-image');
-// 	const modalCaption = document.querySelector('.modal-caption');
-
-// 	allImages.forEach(image => {
-// 		image.addEventListener('click', () => {
-// 			modal.style.display = 'block';
-// 			modalImage.src = image.childNodes[1].src;
-// 			modalCaption.innerHTML = image.childNodes[3].textContent;
-// 		});
-// 	});
-
-// 	modal.onclick = e => {
-// 		if (e.target !== modalImage && e.target !== modalCaption)
-// 			//close modal
-// 			modal.style.display = 'none';
-// 	};
 // }
