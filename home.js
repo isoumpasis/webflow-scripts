@@ -1,6 +1,7 @@
 /* System Identification */
 const urlMake = 'https://lovatohellas.herokuapp.com/vehicleDB/makeTest';
 const urlYear = 'https://lovatohellas.herokuapp.com/vehicleDB/yearTest';
+const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices/';
 
 let selectedYears;
 let selectedModels;
@@ -76,6 +77,7 @@ const creditCardInstallments = document.querySelector('#creditCardInstallments')
 
 document.addEventListener('DOMContentLoaded', () => {
 	initSelects();
+	initFuelPrices();
 	initEasyPay();
 
 	// if (typeof Storage !== 'undefined' && sessionStorage.selectedModels) {
@@ -106,6 +108,21 @@ function initSelects() {
 	cylinderOrEngineSelect.disabled = true;
 	cylinderOrEngineSelect.innerHTML = '<option value="">Περιγραφή</option>';
 	makeSelect.focus();
+}
+
+function initFuelPrices() {
+	fetch(urlFuelPrices, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then(res => res.json())
+		.then(data => {
+			fuelPrices = data;
+			console.log(fuelPrices);
+		})
+		.catch(e => console.error('Error on FuelPrices Fetch:', e));
 }
 
 function initEasyPay() {
@@ -327,13 +344,7 @@ function populateCylinderOrEngineSelect() {
 		const filteredVehicles = selectedModelObj.vehicles.filter(veh => yearSelect.value >= veh.years[0] && yearSelect.value <= veh.years[1]);
 
 		console.log({ filteredVehicles });
-		filteredVehicles.forEach(veh => {
-			console.log(
-				Math.abs(parseFloat(veh.consumption[0]) - parseFloat(filteredVehicles[0].consumption[0])),
-				Math.abs(parseFloat(veh.consumption[1]) - parseFloat(filteredVehicles[0].consumption[1])),
-				Math.abs(parseFloat(veh.consumption[2]) - parseFloat(filteredVehicles[0].consumption[2]))
-			);
-		});
+
 		if (
 			filteredVehicles.length === 1 ||
 			filteredVehicles.every(
@@ -673,7 +684,7 @@ const perYearCheckbox = document.querySelector('#perYearCheckbox');
 const costLabels = document.querySelectorAll('.cost-label');
 const lpgResultLabel = document.querySelector('#lpg-result-label');
 const cngResultLabel = document.querySelector('#cng-result-label');
-
+let fuelPrices;
 const covers = document.querySelectorAll('.cover');
 
 sliders.forEach((slider, i) => {
