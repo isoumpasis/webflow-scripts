@@ -890,24 +890,26 @@ function initDOMEvents() {
 	});
 
 	//Geolocation Btn Click
-	google.maps.event.addDomListener(document.querySelector('.my-location-btn'), 'click', async () => {
-		const currentLatLng = await getCurrentPosition();
-		const myLatLng = {
-			lat: currentLatLng[0],
-			lng: currentLatLng[1]
-		};
+	document.querySelectorAll('.my-location-btn').forEach(el => {
+		google.maps.event.addDomListener(el, 'click', async () => {
+			const currentLatLng = await getCurrentPosition();
+			const myLatLng = {
+				lat: currentLatLng[0],
+				lng: currentLatLng[1]
+			};
 
-		userMarker.setOptions({
-			position: myLatLng,
-			map: map,
-			title: 'Είστε εδώ',
-			animation: google.maps.Animation.DROP,
-			zIndex: google.maps.Marker.MAX_ZINDEX
+			userMarker.setOptions({
+				position: myLatLng,
+				map: map,
+				title: 'Είστε εδώ',
+				animation: google.maps.Animation.DROP,
+				zIndex: google.maps.Marker.MAX_ZINDEX
+			});
+
+			console.log(`Accuracy ${currentLatLng[2]} meters.`);
+			map.setZoom(searchZoom);
+			map.setCenter(userMarker.position);
 		});
-
-		console.log(`Accuracy ${currentLatLng[2]} meters.`);
-		map.setZoom(searchZoom);
-		map.setCenter(userMarker.position);
 	});
 }
 
