@@ -890,7 +890,7 @@ function initDOMEvents() {
 	});
 
 	//Geolocation Btn Click
-	google.maps.event.addDomListener(document.querySelector('#my-location-btn'), 'click', async () => {
+	google.maps.event.addDomListener(document.querySelector('.my-location-btn'), 'click', async () => {
 		const currentLatLng = await getCurrentPosition();
 		const myLatLng = {
 			lat: currentLatLng[0],
