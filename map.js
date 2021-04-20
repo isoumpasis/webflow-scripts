@@ -865,7 +865,7 @@ function initDOMEvents() {
 				map.setZoom(searchZoom);
 				map.setCenter(userMarker.position);
 			} catch (e) {
-				console.log('error on geolocation', e, currentLatLng);
+				console.log('error on geolocation', e);
 			}
 		});
 	});
