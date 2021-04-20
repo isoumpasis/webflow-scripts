@@ -979,14 +979,14 @@ function filterMarkers() {
 	markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
 
 	markerClusterer.repaint();
+	counter = 0;
 	console.log('done');
-	// counter = 0;
-	// markers.forEach(marker => {
-	// 	if (marker.getVisible()) {
-	// 		counter++;
-	// 	}
-	// });
-	// console.log({ counter });
+	markers.forEach(marker => {
+		if (marker.getVisible()) {
+			counter++;
+		}
+	});
+	console.log({ counter });
 }
 
 function setMarkerVisibility(marker, labels) {
