@@ -953,6 +953,14 @@ function initFilters() {
 	//Fitlers
 	document.querySelectorAll('#filterForm input').forEach(el => el.addEventListener('change', filterMarkers));
 
+	document.querySelector('#resetFiltersBtn').addEventListener('click', e => {
+		document.querySelectorAll('.f-label').forEach(label => {
+			if (label.className.indexOf('w--redirected-checked') !== -1) {
+				label.click();
+			}
+		});
+	});
+
 	// controlDiv.querySelector('.filter-control').addEventListener('change', e => {
 	// 	const episimoiChecked = controlDiv.querySelector('#episima').checked;
 	// 	const synergazomenoiChecked = controlDiv.querySelector('#synergazomena').checked;
@@ -989,7 +997,6 @@ function filterMarkers() {
 		}
 	});
 	console.log({ counter });
-	// console.log('done');
 }
 
 function setMarkerVisibility(marker, labels) {
@@ -1003,17 +1010,4 @@ function setMarkerVisibility(marker, labels) {
 		if (marker.props.lovatoServices[label.id] !== label.querySelector('input').checked) return false;
 	}
 	return true;
-
-	// if (filterChecked('f-lovato', labels[0]) &&
-	// 		services.lovatoSystems !== filterChecked('f-lovato', labels[0]))
-	// 		res = false;
-	// if (services.gogasTanks !== filterChecked('f-gogas', labels[1])) res = false;
-	// if (services.webServices !== filterChecked('f-webservices', labels[2])) res = false;
-	// if (services.lovatoApp !== filterChecked('f-lovatoapp', labels[3])) res = false;
-	// if (services.gogasGuarantee !== filterChecked('f-gogasguarantee', labels[4])) res = false;
 }
-
-// function filterChecked(classFilterName, label) {
-// 	console.log(classFilterName);
-// 	return label.querySelector('input').checked;
-// }
