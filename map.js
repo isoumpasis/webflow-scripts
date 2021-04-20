@@ -979,8 +979,8 @@ function filterMarkers() {
 }
 
 function setMarkerVisibility(marker, labels) {
-	console.log(marker, marker.properties);
-	const services = marker.properties.lovatoServices;
+	console.log(marker, marker.props);
+	const services = marker.props.lovatoServices;
 	if (services.lovatoSystems !== filterChecked('f-lovato', labels)) return false;
 	if (services.gogasTanks !== filterChecked('f-gogas', labels)) return false;
 	if (services.webServices !== filterChecked('f-webServices', labels)) return false;

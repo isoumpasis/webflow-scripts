@@ -15,6 +15,9 @@
 [] search addresses & places
 [] your location
 [] filters
+[] full screen
+[] args url
+[] z index
 
 /_ HOME _/
 /_ VEHICLE DB _/
