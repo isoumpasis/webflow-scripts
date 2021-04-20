@@ -960,25 +960,6 @@ function initFilters() {
 		});
 		filterMarkers();
 	});
-
-	// controlDiv.querySelector('.filter-control').addEventListener('change', e => {
-	// 	const episimoiChecked = controlDiv.querySelector('#episima').checked;
-	// 	const synergazomenoiChecked = controlDiv.querySelector('#synergazomena').checked;
-
-	// 	let episimoiMarkers = markers.filter(m => m.props.getProperty('category').indexOf('ΕΠΙΣΗΜΟΣ') !== -1);
-	// 	let synergazomenoiMarkers = markers.filter(m => m.props.getProperty('category').indexOf('ΣΥΝΕΡΓΑΖΟΜΕΝΟ') !== -1);
-
-	// 	episimoiMarkers.forEach(m => m.setVisible(episimoiChecked));
-	// 	synergazomenoiMarkers.forEach(m => m.setVisible(synergazomenoiChecked));
-
-	// 	let filteredMarkers = [];
-	// 	if (episimoiChecked) filteredMarkers = [...filteredMarkers, ...episimoiMarkers];
-	// 	if (synergazomenoiChecked) filteredMarkers = [...filteredMarkers, ...synergazomenoiMarkers];
-
-	// 	markerClusterer.clearMarkers();
-	// 	markerClusterer.addMarkers(filteredMarkers);
-	// 	infoWindow.close();
-	// });
 }
 
 function filterMarkers() {
@@ -997,17 +978,12 @@ function filterMarkers() {
 		}
 	});
 	console.log({ counter });
+	infoWindow.close();
 }
 
 function setMarkerVisibility(marker, labels) {
-	// if (!checkedLabels.length) return true;
 	for (let label of labels) {
 		if (label.querySelector('input').checked && !marker.props.lovatoServices[label.id]) return false;
 	}
 	return true;
-
-	// for (let label of labels) {
-	// 	if (marker.props.lovatoServices[label.id] !== label.querySelector('input').checked) return false;
-	// }
-	// return true;
 }
