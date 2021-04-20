@@ -977,7 +977,8 @@ function filterMarkers() {
 	const labels = document.querySelectorAll('#filterForm .f-label');
 	const checkedLabels = [...labels].filter(l => l.querySelector('input').checked);
 
-	markers.map(m => m.setVisible(setMarkerVisibility(m, checkedLabels)));
+	if (!checkedLabels.length) markers.map(m => m.setVisible(true));
+	else markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
 
 	markerClusterer.repaint();
 
@@ -991,12 +992,18 @@ function filterMarkers() {
 	// console.log('done');
 }
 
-function setMarkerVisibility(marker, checkedLabels) {
-	if (!checkedLabels.length) return true;
-	for (let label of checkedLabels) {
-		if (marker.props.lovatoServices[label.id]) return true;
+function setMarkerVisibility(marker, labels) {
+	// if (!checkedLabels.length) return true;
+	// for (let label of checkedLabels) {
+	// 	if (marker.props.lovatoServices[label.id]) return true;
+	// }
+	// return false;
+
+	for (let label of labels) {
+		if (marker.props.lovatoServices[label.id] !== label.querySelector('input').checked) return false;
 	}
-	return false;
+	return true;
+
 	// if (filterChecked('f-lovato', labels[0]) &&
 	// 		services.lovatoSystems !== filterChecked('f-lovato', labels[0]))
 	// 		res = false;
