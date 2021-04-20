@@ -819,13 +819,13 @@ function initDOMEvents() {
 			const res = await geocoderSolution(autocompleteInput.value);
 			console.log(res);
 			autocompleteInput.value = res.address;
-			place.geometry.location = res.location;
+			// place.geometry.location = res.location;
 		}
 
 		userMarker.setOptions({
 			map,
 			title: autocompleteInput.value,
-			position: place.geometry.location,
+			position: place.geometry.location || res.location,
 			animation: google.maps.Animation.DROP,
 			zIndex: google.maps.Marker.MAX_ZINDEX
 		});
