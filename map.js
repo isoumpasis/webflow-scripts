@@ -984,13 +984,13 @@ function setMarkerVisibility(marker, labels) {
 	if (services.lovatoSystems !== filterChecked('f-lovato', labels)) return false;
 	if (services.gogasTanks !== filterChecked('f-gogas', labels)) return false;
 	if (services.webServices !== filterChecked('f-webservices', labels)) return false;
-	if (services.lovatoApp !== filterChecked('f-lovatoApp', labels)) return false;
+	if (services.lovatoApp !== filterChecked('f-lovatoapp', labels)) return false;
 	if (services.gogasGuarantee !== filterChecked('f-gogasguarantee', labels)) return false;
 
 	return true;
 }
 
 function filterChecked(classFilterName, labels) {
-	console.log(labels, classFilterName);
+	console.log(classFilterName);
 	return [...labels].filter(l => l.className.indexOf(classFilterName) !== -1)[0].querySelector('input').checked;
 }
