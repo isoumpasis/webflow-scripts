@@ -980,13 +980,15 @@ function filterMarkers() {
 
 function setMarkerVisibility(marker, labels) {
 	console.log('marker props', marker.props);
+	let res;
 	const services = marker.props.lovatoServices;
-	if (services.lovatoSystems !== filterChecked('f-lovato', labels)) return false;
-	if (services.gogasTanks !== filterChecked('f-gogas', labels)) return false;
-	if (services.webServices !== filterChecked('f-webservices', labels)) return false;
-	if (services.lovatoApp !== filterChecked('f-lovatoapp', labels)) return false;
-	if (services.gogasGuarantee !== filterChecked('f-gogasguarantee', labels)) return false;
+	if (services.lovatoSystems !== filterChecked('f-lovato', labels)) res = false;
+	if (services.gogasTanks !== filterChecked('f-gogas', labels)) res = false;
+	if (services.webServices !== filterChecked('f-webservices', labels)) res = false;
+	if (services.lovatoApp !== filterChecked('f-lovatoapp', labels)) res = false;
+	if (services.gogasGuarantee !== filterChecked('f-gogasguarantee', labels)) res = false;
 
+	console.log({ res });
 	return true;
 }
 
