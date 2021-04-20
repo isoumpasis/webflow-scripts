@@ -978,7 +978,7 @@ function filterMarkers() {
 	markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
 
 	markerClusterer.setIgnoreHidden(true);
-	markerClusterer.repaint();
+	//markerClusterer.repaint();
 	console.log('done');
 	// counter = 0;
 	// markers.forEach(marker => {
