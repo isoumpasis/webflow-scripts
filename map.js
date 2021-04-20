@@ -954,10 +954,9 @@ function initFilters() {
 	document.querySelectorAll('#filterForm input').forEach(el => el.addEventListener('change', filterMarkers));
 
 	document.querySelector('#resetFiltersBtn').addEventListener('click', e => {
-		document.querySelectorAll('.f-label').forEach(label => {
-			if (label.className.indexOf('w--redirected-checked') !== -1) {
-				label.click();
-			}
+		document.querySelectorAll('.f-label.w--redirected-checked').forEach(label => {
+			label.className = label.classList.remove('w--redirected-checked');
+			label.querySelector('input').checked = false;
 		});
 	});
 
