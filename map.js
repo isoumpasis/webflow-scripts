@@ -818,8 +818,8 @@ function initDOMEvents() {
 			console.log('handling with geocoder for unknown or enter');
 			const res = await geocoderSolution(autocompleteInput.value);
 			console.log(res);
-			place.geometry.location = res;
-			// return;
+			autocompleteInput.value = res.address;
+			place.geometry.location = res.location;
 		}
 
 		userMarker.setOptions({
@@ -839,10 +839,11 @@ function initDOMEvents() {
 			const address = document.querySelector('#searchInput').value;
 			const res = await geocoderSolution(address);
 			console.log(res);
+			address.value = res.address;
 			userMarker.setOptions({
 				map,
 				title: autocompleteInput.value,
-				position: res,
+				position: res.location,
 				animation: google.maps.Animation.DROP,
 				zIndex: google.maps.Marker.MAX_ZINDEX
 			});
@@ -903,7 +904,7 @@ async function geocoderSolution(address) {
 				if (status === 'OK') {
 					console.log('geocoding for', address);
 					console.log('geocoder address result', results[0].formatted_address);
-					resolve(results[0].geometry.location);
+					resolve({ location: results[0].geometry.location, address: results[0].formatted_address });
 				} else {
 					alert('Συγγνώμη, δεν βρέθηκε τέτοια περιοχή. Ξαναπροσπαθήστε!');
 					reject('Δε βρέθηκε τέτοια περιοχή! Προσπαθήστε ξανά.');
