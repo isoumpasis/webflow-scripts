@@ -976,6 +976,9 @@ function filterMarkers() {
 	const labels = document.querySelectorAll('#filterForm .f-label');
 
 	markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
+
+	markerClusterer.setIgnoreHidden(true);
+	markerClusterer.repaint();
 }
 
 function setMarkerVisibility(marker, labels) {
