@@ -989,6 +989,7 @@ function setMarkerVisibility(marker, labels) {
 	if (services.gogasGuarantee !== filterChecked('f-gogasguarantee', labels)) res = false;
 
 	console.log({ res });
+	if (!res) return false;
 	return true;
 }
 
