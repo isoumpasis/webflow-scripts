@@ -954,11 +954,11 @@ function initFilters() {
 	document.querySelectorAll('#filterForm input').forEach(el => el.addEventListener('change', filterMarkers));
 
 	document.querySelector('#resetFiltersBtn').addEventListener('click', e => {
-		console.log(document.querySelectorAll('.f-label .w--redirected-checked'));
 		document.querySelectorAll('.f-label .w--redirected-checked').forEach(label => {
 			label.classList.remove('w--redirected-checked');
 			label.nextElementSibling.checked = false;
 		});
+		filterMarkers();
 	});
 
 	// controlDiv.querySelector('.filter-control').addEventListener('change', e => {
