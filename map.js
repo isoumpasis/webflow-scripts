@@ -275,7 +275,8 @@ async function initMap() {
 		zoomOnClick: false,
 		//minimumClusterSize: 3,
 		maxZoom: maxZoomClusterer,
-		gridSize: gridSizesDependedOnZoom[startZoom] //default=60
+		gridSize: gridSizesDependedOnZoom[startZoom], //default=60,
+		ignoreHidden: true
 	});
 
 	markers.forEach(marker => {
@@ -978,7 +979,6 @@ function filterMarkers(el) {
 
 	markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
 
-	markerClusterer.setIgnoreHidden(true);
 	markerClusterer.repaint();
 	console.log('done');
 	// counter = 0;
