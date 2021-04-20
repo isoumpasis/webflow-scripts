@@ -30,8 +30,8 @@ let map,
 
 document.addEventListener('DOMContentLoaded', async () => {
 	generateInitHtml();
-	startLoader();
 	initDOMEvents();
+	startLoader();
 	console.log('2'); //3.6
 	cachedPins = await getCachedPins();
 	console.log('3');
@@ -830,7 +830,6 @@ function initDOMEvents() {
 			}
 		} else searchPosition = place.geometry.location;
 
-		userMarker.setAnimation(null);
 		userMarker.setOptions({
 			map,
 			title: autocompleteInput.value,
@@ -851,7 +850,6 @@ function initDOMEvents() {
 			console.log(res);
 			address.value = res.address;
 
-			userMarker.setAnimation(null);
 			userMarker.setOptions({
 				map,
 				title: autocompleteInput.value,
@@ -878,7 +876,6 @@ function initDOMEvents() {
 					lng: currentLatLng[1]
 				};
 
-				userMarker.setAnimation(null);
 				userMarker.setOptions({
 					position: myLatLng,
 					map: map,
@@ -897,6 +894,8 @@ function initDOMEvents() {
 			}
 		});
 	});
+
+	initFilters();
 }
 
 async function geocoderSolution(address) {
@@ -949,42 +948,47 @@ function getCurrentPosition() {
 	});
 }
 
-// function prepareDomForControl(controlDiv, markers) {
-// 	//Fitlers
-// 	controlDiv
-// 		.querySelector('.filter-control')
-// 		.addEventListener('change', e => {
-// 			const episimoiChecked = controlDiv.querySelector('#episima')
-// 				.checked;
-// 			const synergazomenoiChecked = controlDiv.querySelector(
-// 				'#synergazomena'
-// 			).checked;
+function initFilters() {
+	//Fitlers
+	document.querySelectorAll('#filterForm input').forEach(el => el.addEventListener('change', filterMarkers));
 
-// 			let episimoiMarkers = markers.filter(
-// 				m => m.props.getProperty('category').indexOf('ΕΠΙΣΗΜΟΣ') !== -1
-// 			);
-// 			let synergazomenoiMarkers = markers.filter(
-// 				m =>
-// 					m.props.getProperty('category').indexOf('ΣΥΝΕΡΓΑΖΟΜΕΝΟ') !==
-// 					-1
-// 			);
+	// controlDiv.querySelector('.filter-control').addEventListener('change', e => {
+	// 	const episimoiChecked = controlDiv.querySelector('#episima').checked;
+	// 	const synergazomenoiChecked = controlDiv.querySelector('#synergazomena').checked;
 
-// 			episimoiMarkers.forEach(m => m.setVisible(episimoiChecked));
-// 			synergazomenoiMarkers.forEach(m =>
-// 				m.setVisible(synergazomenoiChecked)
-// 			);
+	// 	let episimoiMarkers = markers.filter(m => m.props.getProperty('category').indexOf('ΕΠΙΣΗΜΟΣ') !== -1);
+	// 	let synergazomenoiMarkers = markers.filter(m => m.props.getProperty('category').indexOf('ΣΥΝΕΡΓΑΖΟΜΕΝΟ') !== -1);
 
-// 			let filteredMarkers = [];
-// 			if (episimoiChecked)
-// 				filteredMarkers = [...filteredMarkers, ...episimoiMarkers];
-// 			if (synergazomenoiChecked)
-// 				filteredMarkers = [
-// 					...filteredMarkers,
-// 					...synergazomenoiMarkers
-// 				];
+	// 	episimoiMarkers.forEach(m => m.setVisible(episimoiChecked));
+	// 	synergazomenoiMarkers.forEach(m => m.setVisible(synergazomenoiChecked));
 
-// 			markerClusterer.clearMarkers();
-// 			markerClusterer.addMarkers(filteredMarkers);
-// 			infoWindow.close();
-// 		});
-// }
+	// 	let filteredMarkers = [];
+	// 	if (episimoiChecked) filteredMarkers = [...filteredMarkers, ...episimoiMarkers];
+	// 	if (synergazomenoiChecked) filteredMarkers = [...filteredMarkers, ...synergazomenoiMarkers];
+
+	// 	markerClusterer.clearMarkers();
+	// 	markerClusterer.addMarkers(filteredMarkers);
+	// 	infoWindow.close();
+	// });
+}
+
+function filterMarkers() {
+	const filterLabels = document.querySelectorAll('#email-form label');
+
+	markers.map(m => m.setVisible(setMarkerVisibility(m, filterLabels)));
+}
+
+function setMarkerVisibility(marker, labels) {
+	const services = marker.properties.lovatoServices;
+	if (services.lovatoSystems !== filterChecked('f-lovato', labels)) return false;
+	if (services.gogasTanks !== filterChecked('f-gogas', labels)) return false;
+	if (services.webServices !== filterChecked('f-webServices', labels)) return false;
+	if (services.lovatoApp !== filterChecked('f-lovatoApp', labels)) return false;
+	if (services.gogasGuarantee !== filterChecked('f-gogasGuarantee', labels)) return false;
+
+	return true;
+}
+
+function filterChecked(classFilterName, labels) {
+	return labels.filter(l => l.className.indexOf(classFilterName) !== -1)[0].querySelector('input').checked;
+}
