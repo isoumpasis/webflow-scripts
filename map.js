@@ -238,23 +238,10 @@ async function initMap() {
 		maxWidth: 500
 	});
 
-	// userMarker = new google.maps.Marker({
-	// 	map,
-	// 	position: getGeometryFromString(workerElements.geometry.value),
-	// 	icon: episimosIcon, //iconMarker,
-	// 	title: workerElements.name.value,
-	// 	cursor: 'grab',
-	// 	animation: google.maps.Animation.DROP,
-	// 	visible: true,
-	// 	draggable: true
-	// });
-
 	userMarker = new google.maps.Marker();
 	selectedMarker = new google.maps.Marker();
 
-	console.log('before');
 	markers = cachedPins.map(cachedPin => {
-		console.log('cachedPin');
 		return new google.maps.Marker({
 			position: cachedPin.geometry,
 			icon: {
@@ -382,38 +369,6 @@ async function initMap() {
 		map.setCenter(userMarker.position);
 	});
 }
-
-// function initDomListeners() {
-//
-// 	document.addEventListener('keydown', e => {
-// 		if (e.key === 'Enter') {
-// 			e.preventDefault();
-// 			if (!document.querySelectorAll('.uploaded-img img').length) return;
-// 			document.querySelector('.info-modal').style.display = 'block';
-// 			document.querySelector(
-// 				'.info-modal-image'
-// 			).src = infoWindowDiv.querySelector(
-// 				'.current-image'
-// 			).firstElementChild.src;
-// 			document.querySelector('.info-modal-caption').textContent =
-// 				workerElements.name.value;
-// 		}
-// 	});
-
-// 	//Add listeners for all imgs on page load
-// 	addListenersToImgs(document.querySelectorAll('.uploaded-img img'));
-// }
-
-// function getGeometryFromString(str) {
-// 	let [latStr, lngStr] = str.split(',');
-// 	let lat = latStr.substring(1, latStr.length).trim();
-// 	let lng = lngStr.substring(0, lngStr.length - 1).trim();
-// 	if (!lat || !lng) return { lat: 0, lng: 0 };
-// 	return {
-// 		lat: parseFloat(lat),
-// 		lng: parseFloat(lng)
-// 	};
-// }
 
 function startLoader() {
 	document.querySelector('.lds-roller').classList.remove('hide-roller');
@@ -842,7 +797,6 @@ function prepareModal(photosContainer, markerProps) {
 
 //Map UI
 function initDOMEvents() {
-	// document.querySelector('#searchInput').addEventListener('input', )
 	//Autocomplete
 	const autocompleteOptions = {
 		componentRestrictions: { country: 'gr' },
@@ -892,23 +846,27 @@ function initDOMEvents() {
 	//Geolocation Btn Click
 	document.querySelectorAll('.my-location-btn').forEach(el => {
 		google.maps.event.addDomListener(el, 'click', async () => {
-			const currentLatLng = await getCurrentPosition();
-			const myLatLng = {
-				lat: currentLatLng[0],
-				lng: currentLatLng[1]
-			};
+			try {
+				const currentLatLng = await getCurrentPosition();
+				const myLatLng = {
+					lat: currentLatLng[0],
+					lng: currentLatLng[1]
+				};
 
-			userMarker.setOptions({
-				position: myLatLng,
-				map: map,
-				title: 'Είστε εδώ',
-				animation: google.maps.Animation.DROP,
-				zIndex: google.maps.Marker.MAX_ZINDEX
-			});
+				userMarker.setOptions({
+					position: myLatLng,
+					map: map,
+					title: 'Είστε εδώ',
+					animation: google.maps.Animation.DROP,
+					zIndex: google.maps.Marker.MAX_ZINDEX
+				});
 
-			console.log(`Accuracy ${currentLatLng[2]} meters.`);
-			map.setZoom(searchZoom);
-			map.setCenter(userMarker.position);
+				console.log(`Accuracy ${currentLatLng[2]} meters.`);
+				map.setZoom(searchZoom);
+				map.setCenter(userMarker.position);
+			} catch (e) {
+				console.log('error on geolocation', e, currentLatLng);
+			}
 		});
 	});
 }
