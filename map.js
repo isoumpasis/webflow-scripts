@@ -973,9 +973,9 @@ function initFilters() {
 }
 
 function filterMarkers() {
-	const filterLabels = document.querySelectorAll('#email-form label');
+	const labels = document.querySelectorAll('#filterForm .f-label');
 
-	markers.map(m => m.setVisible(setMarkerVisibility(m, filterLabels)));
+	markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
 }
 
 function setMarkerVisibility(marker, labels) {
