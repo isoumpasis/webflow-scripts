@@ -979,6 +979,8 @@ function filterMarkers() {
 	});
 	console.log({ counter });
 	infoWindow.close();
+	if (selectedMarker) selectedMarker.setAnimation(null);
+	selectedMarker = null;
 }
 
 function setMarkerVisibility(marker, labels) {
