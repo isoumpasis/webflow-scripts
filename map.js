@@ -957,7 +957,7 @@ function initFilters() {
 		console.log(document.querySelectorAll('.f-label .w--redirected-checked'));
 		document.querySelectorAll('.f-label .w--redirected-checked').forEach(label => {
 			label.classList.remove('w--redirected-checked');
-			label.querySelector('input').checked = false;
+			label.nextElementSibling.checked = false;
 		});
 	});
 
