@@ -1001,13 +1001,13 @@ function filterMarkers() {
 
 function setMarkerVisibility(marker, labels) {
 	// if (!checkedLabels.length) return true;
-	// for (let label of checkedLabels) {
-	// 	if (marker.props.lovatoServices[label.id]) return true;
-	// }
-	// return false;
-
 	for (let label of labels) {
-		if (marker.props.lovatoServices[label.id] !== label.querySelector('input').checked) return false;
+		if (label.querySelector('input').checked && !marker.props.lovatoServices[label.id]) return false;
 	}
 	return true;
+
+	// for (let label of labels) {
+	// 	if (marker.props.lovatoServices[label.id] !== label.querySelector('input').checked) return false;
+	// }
+	// return true;
 }
