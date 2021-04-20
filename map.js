@@ -817,15 +817,17 @@ function initDOMEvents() {
 		console.log(place);
 
 		if (Object.keys(place).length === 1) {
-			//HANDLE GEOCODER REQUEST FOR UNKNOWN or ENTER
 			console.log('handling with geocoder for unknown or enter');
-			const res = await geocoderSolution(autocompleteInput.value);
-			console.log('res', res);
-			autocompleteInput.value = res.address;
-			searchPosition = res.location;
-		} else {
-			searchPosition = place.geometry.location;
-		}
+			try {
+				const res = await geocoderSolution(autocompleteInput.value);
+				console.log('res', res);
+				autocompleteInput.value = res.address;
+				searchPosition = res.location;
+			} catch (e) {
+				console.log(e);
+				return;
+			}
+		} else searchPosition = place.geometry.location;
 
 		userMarker.setOptions({
 			map,
