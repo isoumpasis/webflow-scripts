@@ -991,5 +991,6 @@ function setMarkerVisibility(marker, labels) {
 }
 
 function filterChecked(classFilterName, labels) {
+	console.log(labels, classFilterName);
 	return [...labels].filter(l => l.className.indexOf(classFilterName) !== -1)[0].querySelector('input').checked;
 }
