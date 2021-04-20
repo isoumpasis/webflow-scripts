@@ -951,7 +951,7 @@ function getCurrentPosition() {
 
 function initFilters() {
 	//Fitlers
-	document.querySelectorAll('#filterForm input').forEach(el => el.addEventListener('change', e => filterMarkers(e.target)));
+	document.querySelectorAll('#filterForm input').forEach(el => el.addEventListener('change', filterMarkers));
 
 	// controlDiv.querySelector('.filter-control').addEventListener('change', e => {
 	// 	const episimoiChecked = controlDiv.querySelector('#episima').checked;
@@ -973,8 +973,7 @@ function initFilters() {
 	// });
 }
 
-function filterMarkers(el) {
-	console.log('el', el);
+function filterMarkers() {
 	const labels = document.querySelectorAll('#filterForm .f-label');
 
 	markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
@@ -991,21 +990,29 @@ function filterMarkers(el) {
 }
 
 function setMarkerVisibility(marker, labels) {
-	console.log('marker props', marker.props);
-	let res = true;
+	let res = false;
 	const services = marker.props.lovatoServices;
-	if (services.lovatoSystems !== filterChecked('f-lovato', labels)) res = false;
-	if (services.gogasTanks !== filterChecked('f-gogas', labels)) res = false;
-	if (services.webServices !== filterChecked('f-webservices', labels)) res = false;
-	if (services.lovatoApp !== filterChecked('f-lovatoapp', labels)) res = false;
-	if (services.gogasGuarantee !== filterChecked('f-gogasguarantee', labels)) res = false;
+
+	const checkedLabels = [...labels].filter(l => l.querySelector('input').checked);
+
+	for (let label of checkedLabels) {
+		if (services[label.id]) {
+			return true;
+		}
+	}
+	// if (filterChecked('f-lovato', labels[0]) &&
+	// 		services.lovatoSystems !== filterChecked('f-lovato', labels[0]))
+	// 		res = false;
+	// if (services.gogasTanks !== filterChecked('f-gogas', labels[1])) res = false;
+	// if (services.webServices !== filterChecked('f-webservices', labels[2])) res = false;
+	// if (services.lovatoApp !== filterChecked('f-lovatoapp', labels[3])) res = false;
+	// if (services.gogasGuarantee !== filterChecked('f-gogasguarantee', labels[4])) res = false;
 
 	console.log({ res });
 	return res;
-	return true;
 }
 
-function filterChecked(classFilterName, labels) {
-	console.log(classFilterName);
-	return [...labels].filter(l => l.className.indexOf(classFilterName) !== -1)[0].querySelector('input').checked;
-}
+// function filterChecked(classFilterName, label) {
+// 	console.log(classFilterName);
+// 	return label.querySelector('input').checked;
+// }
