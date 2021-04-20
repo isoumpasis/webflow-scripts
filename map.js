@@ -810,23 +810,25 @@ function initDOMEvents() {
 
 	//Listeners
 	autoComplete.addListener('place_changed', async () => {
+		let searchPosition;
 		const place = autoComplete.getPlace();
 		console.log(place);
-		let res;
 
 		if (Object.keys(place).length === 1) {
 			//HANDLE GEOCODER REQUEST FOR UNKNOWN or ENTER
 			console.log('handling with geocoder for unknown or enter');
-			res = await geocoderSolution(autocompleteInput.value);
-			console.log(res);
+			const res = await geocoderSolution(autocompleteInput.value);
+			console.log('res', res);
 			autocompleteInput.value = res.address;
-			// place.geometry.location = res.location;
+			searchPosition = res.location;
+		} else {
+			searchPosition = place.geometry.location;
 		}
 
 		userMarker.setOptions({
 			map,
 			title: autocompleteInput.value,
-			position: place.geometry.location || res.location,
+			position: searchPosition,
 			animation: google.maps.Animation.DROP,
 			zIndex: google.maps.Marker.MAX_ZINDEX
 		});
