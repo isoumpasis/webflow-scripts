@@ -830,6 +830,7 @@ function initDOMEvents() {
 			}
 		} else searchPosition = place.geometry.location;
 
+		userMarker.setAnimation(null);
 		userMarker.setOptions({
 			map,
 			title: autocompleteInput.value,
@@ -849,6 +850,8 @@ function initDOMEvents() {
 			const res = await geocoderSolution(address);
 			console.log(res);
 			address.value = res.address;
+
+			userMarker.setAnimation(null);
 			userMarker.setOptions({
 				map,
 				title: autocompleteInput.value,
@@ -875,6 +878,7 @@ function initDOMEvents() {
 					lng: currentLatLng[1]
 				};
 
+				userMarker.setAnimation(null);
 				userMarker.setOptions({
 					position: myLatLng,
 					map: map,
