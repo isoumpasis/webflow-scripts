@@ -812,11 +812,12 @@ function initDOMEvents() {
 	autoComplete.addListener('place_changed', async () => {
 		const place = autoComplete.getPlace();
 		console.log(place);
+		let res;
 
 		if (Object.keys(place).length === 1) {
 			//HANDLE GEOCODER REQUEST FOR UNKNOWN or ENTER
 			console.log('handling with geocoder for unknown or enter');
-			const res = await geocoderSolution(autocompleteInput.value);
+			res = await geocoderSolution(autocompleteInput.value);
 			console.log(res);
 			autocompleteInput.value = res.address;
 			// place.geometry.location = res.location;
