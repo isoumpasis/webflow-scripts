@@ -954,7 +954,8 @@ function initFilters() {
 	document.querySelectorAll('#filterForm input').forEach(el => el.addEventListener('change', filterMarkers));
 
 	document.querySelector('#resetFiltersBtn').addEventListener('click', e => {
-		document.querySelectorAll('.f-label.w--redirected-checked').forEach(label => {
+		console.log(document.querySelectorAll('.f-label .w--redirected-checked'));
+		document.querySelectorAll('.f-label .w--redirected-checked').forEach(label => {
 			label.className = label.classList.remove('w--redirected-checked');
 			label.querySelector('input').checked = false;
 		});
