@@ -950,7 +950,7 @@ function getCurrentPosition() {
 
 function initFilters() {
 	//Fitlers
-	document.querySelectorAll('#filterForm input').forEach(el => el.addEventListener('change', filterMarkers));
+	document.querySelectorAll('#filterForm input').forEach(el => el.addEventListener('change', e => filterMarkers(e.target)));
 
 	// controlDiv.querySelector('.filter-control').addEventListener('change', e => {
 	// 	const episimoiChecked = controlDiv.querySelector('#episima').checked;
@@ -972,13 +972,14 @@ function initFilters() {
 	// });
 }
 
-function filterMarkers() {
+function filterMarkers(el) {
+	console.log('el', el);
 	const labels = document.querySelectorAll('#filterForm .f-label');
 
 	markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
 
 	markerClusterer.setIgnoreHidden(true);
-	//markerClusterer.repaint();
+	markerClusterer.repaint();
 	console.log('done');
 	// counter = 0;
 	// markers.forEach(marker => {
