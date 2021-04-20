@@ -8,7 +8,7 @@ const markerClustererIcon = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034e
 
 const mapCenter = { lat: 38.64, lng: 24.16 };
 const startZoom = 6;
-const searchZoom = 16;
+const searchZoom = 15;
 const maxZoomClusterer = 10;
 let markers = [],
 	markerClusterer;
@@ -797,6 +797,8 @@ function prepareModal(photosContainer, markerProps) {
 
 //Map UI
 function initDOMEvents() {
+	document.querySelector('#mapForm').addEventListener('submit', e => e.preventDefault());
+
 	//Autocomplete
 	const autocompleteOptions = {
 		componentRestrictions: { country: 'gr' },
@@ -866,7 +868,7 @@ function initDOMEvents() {
 				map.setCenter(userMarker.position);
 			} catch (e) {
 				alert(
-					'Για να χρησιμοποιήσετε την υπηρεσία της εύρεσης των κοντινότερων σε εσάς συνεργείων, χρειάζεται να επιτρέψετε την εύρεση τοποθεσίας για το παρών site από τις ρυθμίσεις του περιηγητή σας και να ξαναπροσπαθήσετε! Για το Google Chrome: chrome://settings/content/location'
+					'Για να χρησιμοποιήσετε την υπηρεσία της εύρεσης των κοντινότερων συνεργείων, χρειάζεται να επιτρέψετε την εύρεση τοποθεσίας για το παρών site από τις ρυθμίσεις του περιηγητή σας και να ξαναπροσπαθήσετε! Για το Google Chrome πηγαίνετε στο: chrome://settings/content/location'
 				);
 			}
 		});
