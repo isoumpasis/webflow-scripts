@@ -281,15 +281,15 @@ async function initMap() {
 	});
 
 	markers.forEach(marker => {
-		marker.addListener('mouseover', () => {
-			if (selectedMarker === marker) return;
-			if (selectedMarker) {
-				selectedMarker.setAnimation(null);
-			}
-			selectedMarker = marker;
-			selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
-			openInfoWindow(marker);
-		});
+		// marker.addListener('mouseover', () => {
+		// 	if (selectedMarker === marker) return;
+		// 	if (selectedMarker) {
+		// 		selectedMarker.setAnimation(null);
+		// 	}
+		// 	selectedMarker = marker;
+		// 	selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
+		// 	openInfoWindow(marker);
+		// });
 
 		marker.addListener('click', () => {
 			map.setZoom(searchZoom);
@@ -305,13 +305,13 @@ async function initMap() {
 		});
 
 		//Optional
-		marker.addListener('mouseout', e => {
-			infoWindow.close();
-			if (selectedMarker) {
-				selectedMarker.setAnimation(null);
-			}
-			selectedMarker = null;
-		});
+		// marker.addListener('mouseout', e => {
+		// 	infoWindow.close();
+		// 	if (selectedMarker) {
+		// 		selectedMarker.setAnimation(null);
+		// 	}
+		// 	selectedMarker = null;
+		// });
 	});
 
 	map.addListener('click', e => {
