@@ -841,8 +841,9 @@ function initDOMEvents() {
 	});
 
 	//Search Icon click
-	google.maps.event.addDomListener(document.querySelector('#searchBtn'), 'click', async () => {
+	google.maps.event.addDomListener(document.querySelector('#searchBtn'), 'click', async e => {
 		try {
+			console.log('test', e.target);
 			const address = document.querySelector('#searchInput').value;
 			const res = await geocoderSolution(address);
 			console.log(res);
