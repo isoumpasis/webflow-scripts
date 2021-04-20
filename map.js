@@ -982,13 +982,13 @@ function filterMarkers() {
 	markerClusterer.repaint();
 
 	counter = 0;
-	console.log('done');
 	markers.forEach(marker => {
 		if (marker.getVisible()) {
 			counter++;
 		}
 	});
 	console.log({ counter });
+	// console.log('done');
 }
 
 function setMarkerVisibility(marker, checkedLabels) {
