@@ -800,6 +800,7 @@ function prepareModal(photosContainer, markerProps) {
 //Map UI
 function initDOMEvents() {
 	document.querySelector('#mapForm').addEventListener('submit', e => e.preventDefault());
+	document.querySelector('#searchBtn').type = 'button';
 
 	//Autocomplete
 	const autocompleteOptions = {
