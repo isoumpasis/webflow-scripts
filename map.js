@@ -235,7 +235,8 @@ async function initMap() {
 	//Init Variables
 	infoWindow = new google.maps.InfoWindow({
 		disableAutoPan: false,
-		maxWidth: 500
+		maxWidth: 500,
+		zIndex: 1001
 	});
 
 	userMarker = new google.maps.Marker();
