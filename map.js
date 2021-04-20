@@ -1008,7 +1008,6 @@ function setMarkerVisibility(marker, labels) {
 	// if (services.lovatoApp !== filterChecked('f-lovatoapp', labels[3])) res = false;
 	// if (services.gogasGuarantee !== filterChecked('f-gogasguarantee', labels[4])) res = false;
 
-	console.log({ res });
 	return res;
 }
 
