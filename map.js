@@ -982,7 +982,7 @@ function filterMarkers() {
 
 	counter = 0;
 	markers.forEach(marker => {
-		if (marker.isVisible()) {
+		if (marker.getVisible()) {
 			counter++;
 		}
 	});
