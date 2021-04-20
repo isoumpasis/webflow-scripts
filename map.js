@@ -865,7 +865,9 @@ function initDOMEvents() {
 				map.setZoom(searchZoom);
 				map.setCenter(userMarker.position);
 			} catch (e) {
-				console.log('error on geolocation', e);
+				alert(
+					'Για να χρησιμοποιήσετε την υπηρεσία της εύρεσης των κοντινότερων σε εσάς συνεργείων, χρειάζεται να επιτρέψετε την εύρεση τοποθεσίας για το παρών site από τις ρυθμίσεις του περιηγητή σας και να ξαναπροσπαθήσετε! Για το Google Chrome: chrome://settings/content/location'
+				);
 			}
 		});
 	});
@@ -915,8 +917,8 @@ function getCurrentPosition() {
 				resolve([pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy]);
 			},
 			err => {
-				console.warn(`ERROR on geolocation: ${err.code}: ${err.message}`);
-				reject([0, 0]);
+				console.warn(`Error on geolocation: ${err.code}: ${err.message}`);
+				reject(err.message);
 			},
 			geolocationOptions
 		);
