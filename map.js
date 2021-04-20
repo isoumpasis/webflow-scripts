@@ -732,10 +732,12 @@ document.addEventListener('keydown', e => {
 	const key = e.key;
 	if (key === 'ArrowRight') {
 		const photosContainer = infoWindowDiv.querySelector('.photos-container');
+		if (!photosContainer) return;
 		if (photosContainer.querySelector('.slideshow-container')) plusDivs(1, photosContainer);
 	}
 	if (key === 'ArrowLeft') {
 		const photosContainer = infoWindowDiv.querySelector('.photos-container');
+		if (!photosContainer) return;
 		if (photosContainer.querySelector('.slideshow-container')) plusDivs(-1, photosContainer);
 	}
 	if (key === 'Enter') {
