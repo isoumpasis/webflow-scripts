@@ -305,13 +305,13 @@ async function initMap() {
 		});
 
 		//Optional
-		// marker.addListener('mouseout', e => {
-		// 	infoWindow.close();
-		// 	if (selectedMarker) {
-		// 		selectedMarker.setAnimation(null);
-		// 	}
-		// 	selectedMarker = null;
-		// });
+		marker.addListener('mouseout', e => {
+			infoWindow.close();
+			if (selectedMarker) {
+				selectedMarker.setAnimation(null);
+			}
+			selectedMarker = null;
+		});
 	});
 
 	map.addListener('click', e => {
