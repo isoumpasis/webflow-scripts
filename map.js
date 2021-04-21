@@ -1020,5 +1020,17 @@ async function urlParamsConfig() {
 	if (urlParams.has('filters')) {
 		filters = urlParams.getAll('filters');
 		console.log(filters);
+		filters = filters.map(f => parseInt(f));
+
+		if (filters.some(f => !Number(f) || f < 1 || f > 5)) {
+			return console.log('not valid filters param type');
+		}
+
+		const labels = document.querySelectorAll('.f-label');
+		filters.forEach(filter => {
+			labels[filter].classList.add('w--redirected-checked');
+			label.nextElementSibling.checked = true;
+		});
+		filterMarkers();
 	}
 }
