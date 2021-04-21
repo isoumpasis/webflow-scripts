@@ -1018,7 +1018,7 @@ async function urlParamsConfig() {
 		}
 	}
 	if (urlParams.has('filters')) {
-		filters = urlParams.getAll('filters');
+		filters = urlParams.get('filters').split(',');
 		console.log(filters);
 		filters = filters.map(f => parseInt(f));
 		console.log(filters);
