@@ -337,7 +337,6 @@ function modelOnChange(value) {
 	descriptionSelect.innerHTML = '';
 	startLoadingSelect(descriptionSelect);
 	let status;
-	//test
 	fetch(urlDescriptions, {
 		method: 'POST',
 		headers: {
@@ -441,10 +440,11 @@ descriptionSelect.addEventListener('change', e => descriptionOnChange(e.target.v
 function descriptionOnChange(value) {
 	console.log('cylinder changed', value);
 
+	suggestedContainers.forEach(container => {
+		container.style.display = 'none';
+	});
+
 	if (!value) {
-		suggestedContainers.forEach(container => {
-			container.style.display = 'none';
-		});
 		resetCalc();
 		// sessionStorage.removeItem('selectedDescription');
 		//sessionStorage.removeItem('suggestedSystems');
