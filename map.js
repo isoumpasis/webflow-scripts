@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	endLoader();
 	console.log(cachedPins);
 	await initMap();
+	await urlParamsConfig();
 });
 
 async function getCachedPins() {
@@ -989,4 +990,35 @@ function setMarkerVisibility(marker, labels) {
 		if (label.querySelector('input').checked && !marker.props.lovatoServices[label.id]) return false;
 	}
 	return true;
+}
+
+async function urlParamsConfig() {
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	let gps, filters;
+	if (urlParams.has('gps')) {
+		gps = urlParams.get('gps');
+		const searchInput = document.querySelector('#searchInput');
+		try {
+			const res = await geocoderSolution(gps);
+			console.log(res);
+
+			searchInput.value = res.address;
+			userMarker.setOptions({
+				map,
+				title: searchInput.value,
+				position: res.location,
+				animation: google.maps.Animation.DROP,
+				zIndex: google.maps.Marker.MAX_ZINDEX
+			});
+			map.setZoom(searchZoom);
+			map.setCenter(userMarker.position);
+		} catch (e) {
+			console.log('error on params geocoding', e);
+		}
+	}
+	if (urlParams.has('filters')) {
+		filters = urlParams.getAll('filters');
+		console.log(filters);
+	}
 }
