@@ -1022,12 +1022,10 @@ async function urlParamsConfig() {
 		filters = filters.map(f => parseInt(f));
 		filters = [...new Set(filters)];
 
-		if (filters.some(f => !Number(f) || f < 1 || f > 5)) return console.log('not valid filters param type');
+		if (filters.some(f => !Number(f) || f < 1 || f > 5)) return console.log('Not valid filters query');
 
 		const labels = document.querySelectorAll('.f-label div');
 		filters.forEach(filter => {
-			console.log(labels[filter - 1]);
-
 			labels[filter - 1].classList.add('w--redirected-checked');
 			labels[filter - 1].nextElementSibling.checked = true;
 		});
