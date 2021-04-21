@@ -1028,8 +1028,8 @@ async function urlParamsConfig() {
 
 		const labels = document.querySelectorAll('.f-label');
 		filters.forEach(filter => {
-			labels[filter].classList.add('w--redirected-checked');
-			label.nextElementSibling.checked = true;
+			labels[filter - 1].classList.add('w--redirected-checked');
+			labels[filter - 1].nextElementSibling.checked = true;
 		});
 		filterMarkers();
 	}
