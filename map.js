@@ -15,7 +15,6 @@ let markers = [],
 
 const gridSizesDependedOnZoom = { 6: 40, 7: 35, 8: 30, 9: 25, 10: 30 };
 const zoomLevelsDependedOnZoom = { 6: 9, 7: 10, 8: 10, 9: 12, 10: 12 };
-//const waitTimeBeforeGeocoding = 1000;
 
 let map,
 	infoWindow,

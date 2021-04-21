@@ -1,7 +1,8 @@
 /* System Identification */
-const urlMake = 'https://lovatohellas.herokuapp.com/vehicleDB/makeTest';
-const urlYear = 'https://lovatohellas.herokuapp.com/vehicleDB/yearTest';
-const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices/';
+const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
+const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
+const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/getdescriptions';
+const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
 
 let selectedYears;
 let selectedModels;
@@ -12,7 +13,7 @@ let foundVehicleObj;
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');
 const yearSelect = document.querySelector('#yearSelect');
-const cylinderOrEngineSelect = document.querySelector('#cylinderOrEngineSelect');
+const descriptionSelect = document.querySelector('#descriptionSelect');
 
 const suggestedContainers = document.querySelectorAll('.suggested-container');
 let suggestedSystems;
@@ -90,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	//     populateYearSelect();
 	//     if (sessionStorage.selectedYear) {
 	//       selectYearOption(); //from storage
-	//       populateCylinderOrEngineSelect();
+	//       populatedescriptionSelect();
 	//       if (sessionStorage.selectedCylinder) {
 	//         selectCylinderOption(); //from storage
 	//         //showResults();
@@ -105,8 +106,8 @@ function initSelects() {
 	modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
 	yearSelect.disabled = true;
 	yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-	cylinderOrEngineSelect.disabled = true;
-	cylinderOrEngineSelect.innerHTML = '<option value="">Περιγραφή</option>';
+	descriptionSelect.disabled = true;
+	descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
 	makeSelect.focus();
 }
 
@@ -151,9 +152,9 @@ makeSelect.addEventListener('change', function () {
 	console.log('make changed', this.value);
 
 	modelSelect.disabled = true;
-	cylinderOrEngineSelect.disabled = true;
+	descriptionSelect.disabled = true;
 	modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-	cylinderOrEngineSelect.innerHTML = '<option value="">Περιγραφή</option>';
+	descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
 	suggestedContainers.forEach(container => {
 		container.style.display = 'none';
 	});
@@ -213,7 +214,7 @@ function endLoadingSelect(select) {
 function populateModelSelect() {
 	let modelOptionsArray = ['<option value="">Επιλέξτε Μοντέλο</option>'];
 	selectedModels.forEach(model => {
-		modelOptionsArray.push(`<option value="${model.name}">${model.name}</option>`);
+		modelOptionsArray.push(`<option value="${model}">${model}</option>`);
 	});
 
 	modelSelect.innerHTML = modelOptionsArray.join('');
@@ -229,8 +230,8 @@ function populateModelSelect() {
 
 yearSelect.addEventListener('change', e => yearOnChange(e.target.value));
 function yearOnChange(value) {
-	cylinderOrEngineSelect.disabled = true;
-	cylinderOrEngineSelect.innerHTML = '<option>Περιγραφή</option>';
+	descriptionSelect.disabled = true;
+	descriptionSelect.innerHTML = '<option>Περιγραφή</option>';
 	suggestedContainers.forEach(container => {
 		container.style.display = 'none';
 	});
@@ -243,7 +244,7 @@ function yearOnChange(value) {
 	if (!value) {
 		modelSelect.disabled = true;
 		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-		cylinderOrEngineSelect.innerHTML = '<option value="">Περιγραφή</option>';
+		descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
 		resetCalc();
 		// sessionStorage.removeItem('selectedVehicles');
 		return;
@@ -277,7 +278,7 @@ function yearOnChange(value) {
 
 			// sessionStorage.selectedVehicles = JSON.stringify(selectedVehicles);
 
-			// cylinderOrEngineSelect.innerHTML = `<option value="">${
+			// descriptionSelect.innerHTML = `<option value="">${
 			//   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
 			// }</option>`;
 			populateModelSelect();
@@ -321,34 +322,68 @@ function modelOnChange(value) {
 	//sessionStorage.removeItem('selectedSystem');
 
 	if (!value) {
-		cylinderOrEngineSelect.disabled = true;
-		// cylinderOrEngineSelect.innerHTML = `<option value="">${
+		descriptionSelect.disabled = true;
+		// descriptionSelect.innerHTML = `<option value="">${
 		//   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
 		// }</option>`;
 		// sessionStorage.removeItem('selectedYear');
+		resetCalc();
 		return;
 	}
 	selectedModelName = value;
 	// sessionStorage.selectedYear = value;
-	populateCylinderOrEngineSelect();
+
+	descriptionSelect.disabled = false;
+	descriptionSelect.innerHTML = '';
+	startLoadingSelect(descriptionSelect);
+	let status;
+	fetch(urlDescriptions, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ make: makeSelect.value, year: yearSelect, model: value })
+	})
+		.then(response => {
+			status = response.status;
+			return response.json();
+		})
+		.then(data => {
+			console.log('Success Descriptions Fetch:', data);
+			if (status !== 200) {
+				endLoadingSelect(modelSelect);
+				descriptionSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
+				return;
+			}
+			selectedModelObj = data;
+
+			// sessionStorage.selectedVehicles = JSON.stringify(selectedVehicles);
+
+			// descriptionSelect.innerHTML = `<option value="">${
+			//   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
+			// }</option>`;
+			populateDescriptionSelect();
+			endLoadingSelect(descriptionSelect);
+		})
+		.catch(error => {
+			endLoadingSelect(descriptionSelect);
+			descriptionSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
+			console.error('Error Fetch:', error);
+		});
 }
 
-function populateCylinderOrEngineSelect() {
-	// if (typeof Storage !== 'undefined' && !sessionStorage.selectedYear) return; //dont know if bug? why return??
-	selectedModelObj = selectedModels.filter(model => model.name === selectedModelName)[0];
-	console.log('selectedModelObj', selectedModelObj);
+function populateDescriptionSelect() {
+	console.log({ selectedModelObj });
 	let optionsArray;
 
 	if (selectedModelObj.isDirect) {
 		optionsArray = ['<option value="">Επιλέξτε Κινητήρα</option>'];
 		let engineCodesOptions = [];
 		selectedModelObj.vehicles.forEach(vehicle => {
-			if (yearSelect.value >= vehicle.years[0] && yearSelect.value <= vehicle.years[1]) {
-				vehicle.engineCodes.forEach(code => {
-					let convertibleSymbol = vehicle.isConvertible ? ' ✔️' : ' &#10060;';
-					engineCodesOptions.push(code + convertibleSymbol);
-				});
-			}
+			vehicle.engineCodes.forEach(code => {
+				let convertibleSymbol = vehicle.isConvertible ? ' ✔️' : ' &#10060;';
+				engineCodesOptions.push(code + convertibleSymbol);
+			});
 		});
 		engineCodesOptions = [...new Set(engineCodesOptions)].sort((a, b) => parseInt(a.split(' ')[0]) - parseInt(b.split(' ')[0]));
 		engineCodesOptions.forEach(engineCode => {
@@ -358,7 +393,7 @@ function populateCylinderOrEngineSelect() {
 			optionsArray.push(`<option value="${engineCodeValue}">${engineCode}</option>`);
 		});
 	} else {
-		const filteredVehicles = selectedModelObj.vehicles.filter(veh => yearSelect.value >= veh.years[0] && yearSelect.value <= veh.years[1]);
+		const filteredVehicles = selectedModelObj.vehicles.slice();
 
 		console.log({ filteredVehicles });
 
@@ -389,20 +424,20 @@ function populateCylinderOrEngineSelect() {
 		}
 	}
 
-	cylinderOrEngineSelect.innerHTML = optionsArray.join('');
-	cylinderOrEngineSelect.disabled = false;
-	cylinderOrEngineSelect.focus();
+	descriptionSelect.innerHTML = optionsArray.join('');
+	descriptionSelect.disabled = false;
+	descriptionSelect.focus();
 	//One option -> auto populate
 	if (optionsArray.length === 2) {
-		cylinderOrEngineSelect.selectedIndex = 1;
-		cylinderOrEngineOnChange(cylinderOrEngineSelect.value);
+		descriptionSelect.selectedIndex = 1;
+		descriptionOnChange(descriptionSelect.value);
 		return;
 	}
 }
 
-cylinderOrEngineSelect.addEventListener('change', e => cylinderOrEngineOnChange(e.target.value));
+descriptionSelect.addEventListener('change', e => descriptionOnChange(e.target.value));
 
-function cylinderOrEngineOnChange(value) {
+function descriptionOnChange(value) {
 	console.log('cylinder changed', value);
 
 	if (!value) {
@@ -410,12 +445,12 @@ function cylinderOrEngineOnChange(value) {
 			container.style.display = 'none';
 		});
 		resetCalc();
-		// sessionStorage.removeItem('selectedCylinderOrEngine');
+		// sessionStorage.removeItem('selectedDescription');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
 		return;
 	}
-	// sessionStorage.selectedCylinderOrEngine = value;
+	// sessionStorage.selectedDescription = value;
 	showResults();
 }
 
@@ -451,10 +486,10 @@ function selectYearOption() {
 }
 function selectCylinderOption() {
 	const selectedCylinder = sessionStorage.selectedCylinder;
-	let opts = cylinderOrEngineSelect.options;
+	let opts = descriptionSelect.options;
 	for (let i = 0; i <= opts.length; i++) {
 		if (selectedCylinder === opts[i].value) {
-			cylinderOrEngineSelect.selectedIndex = i;
+			descriptionSelect.selectedIndex = i;
 			break;
 		}
 	}
@@ -487,7 +522,7 @@ function showResults() {
 }
 
 function showDirectResults() {
-	const selectedEngineCode = cylinderOrEngineSelect.value;
+	const selectedEngineCode = descriptionSelect.value;
 	label: for (let veh of selectedModelObj.vehicles) {
 		for (let engineCode of veh.engineCodes) {
 			if (engineCode === selectedEngineCode) {
@@ -510,7 +545,7 @@ function showDirectResults() {
 
 function showCylinderResults(years) {
 	foundVehicleObj = selectedModelObj.vehicles[0];
-	const selectedHp = cylinderOrEngineSelect.value;
+	const selectedHp = descriptionSelect.value;
 	for (let veh of selectedModelObj.vehicles) {
 		if (veh.hp == selectedHp) {
 			foundVehicleObj = veh;
