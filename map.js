@@ -1021,13 +1021,13 @@ async function urlParamsConfig() {
 		filters = urlParams.getAll('filters');
 		console.log(filters);
 		filters = filters.map(f => parseInt(f));
+		console.log(filters);
 
 		if (filters.some(f => !Number(f) || f < 1 || f > 5)) {
 			return console.log('not valid filters param type');
 		}
 
-		const labels = document.querySelectorAll('.f-label');
-		console.log(filters);
+		const labels = document.querySelectorAll('.f-label div');
 		filters.forEach(filter => {
 			console.log(labels[filter - 1]);
 
