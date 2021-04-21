@@ -1027,7 +1027,10 @@ async function urlParamsConfig() {
 		}
 
 		const labels = document.querySelectorAll('.f-label');
+		console.log(filters);
 		filters.forEach(filter => {
+			console.log(labels[filter - 1]);
+
 			labels[filter - 1].classList.add('w--redirected-checked');
 			labels[filter - 1].nextElementSibling.checked = true;
 		});
