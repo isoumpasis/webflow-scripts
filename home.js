@@ -1,7 +1,7 @@
 /* System Identification */
 const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
-const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/getdescriptions';
+const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
 const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
 
 let selectedYears;
