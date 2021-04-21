@@ -172,7 +172,7 @@ makeSelect.addEventListener('change', function () {
 	startLoadingSelect(yearSelect);
 
 	let status;
-	fetch(urlMake, {
+	fetch(urlYears, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -256,7 +256,7 @@ function yearOnChange(value) {
 	modelSelect.innerHTML = '';
 	startLoadingSelect(modelSelect);
 	let status;
-	fetch(urlYear, {
+	fetch(urlModels, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
