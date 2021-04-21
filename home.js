@@ -337,6 +337,7 @@ function modelOnChange(value) {
 	descriptionSelect.innerHTML = '';
 	startLoadingSelect(descriptionSelect);
 	let status;
+	//test
 	fetch(urlDescriptions, {
 		method: 'POST',
 		headers: {
