@@ -343,7 +343,7 @@ function modelOnChange(value) {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({ make: makeSelect.value, year: yearSelect, model: value })
+		body: JSON.stringify({ make: makeSelect.value, year: yearSelect.value, model: value })
 	})
 		.then(response => {
 			status = response.status;
