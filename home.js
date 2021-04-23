@@ -127,11 +127,12 @@ function initFuelPrices() {
 		.catch(e => console.error('Error on FuelPrices Fetch:', e));
 }
 
-document.querySelector('#fuelPricesLocationSelect').addEventListener('change', e => modifyFuelPriceSliders(e.target.value));
+document.querySelector('#fuelPricesSelectNoVehicle').addEventListener('change', e => modifyFuelPriceSliders(e.target.value));
+document.querySelector('#fuelPricesSelectVehicle').addEventListener('change', e => modifyFuelPriceSliders(e.target.value));
 
 function modifyFuelPriceSliders(value) {
 	const locationObj = fuelPrices.filter(obj => obj.place.indexOf(value) !== -1)[0];
-	console.table([locationObj]);
+	console.table([locationObj]); //DEBUG
 	if (!locationObj) return;
 
 	sliders[2].value = locationObj.petrol;
@@ -603,7 +604,8 @@ function configureCalculator() {
 	consumptionRadios[2].dataset.cons = foundVehicleObj.consumption[2];
 
 	consumptionRadios[2].click();
-	document.querySelector('#consumptionDiv').style.display = 'grid';
+	document.querySelector('#calcContainerVehicle').style.display = 'grid';
+	document.querySelector('#calcContainerNoVehicle').style.display = 'none';
 
 	sliders[1].value = foundVehicleObj.consumption[2];
 	outputs[1].value = sliders[1].value;
@@ -615,8 +617,10 @@ function configureCalculator() {
 }
 
 function resetCalc() {
-	document.querySelector('#consumptionDiv').style.display = 'none';
 	document.querySelector('#calcTitle').innerHTML = 'Υπολόγισε πόσα εξοικονομείς με συστήματα Lovato!';
+
+	document.querySelector('#calcContainerVehicle').style.display = 'none';
+	document.querySelector('#calcContainerΝοVehicle').style.display = 'flex';
 
 	sliders[1].value = 8;
 	outputs[1].value = 8;
