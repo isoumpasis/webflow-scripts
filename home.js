@@ -323,6 +323,7 @@ function modelOnChange(value) {
 
 	if (!value) {
 		descriptionSelect.disabled = true;
+		descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
 		// descriptionSelect.innerHTML = `<option value="">${
 		//   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
 		// }</option>`;
