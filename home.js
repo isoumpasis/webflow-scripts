@@ -640,10 +640,10 @@ document.querySelectorAll('.radio-button.w-radio').forEach(el => {
 
 		const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
 		document.querySelectorAll('.radio-button.w-radio div').forEach(el => (el.classList.remove = 'w--redirected-checked'));
-		e.target.querySelector('div').classList.add = 'w--redirected-checked';
+		document.querySelector('.radio-button.w-radio div').classList.add = 'w--redirected-checked';
 
 		document.querySelectorAll('.radio-button.w-radio span').forEach(el => (el.style.fontWeight = 'normal'));
-		e.target.querySelector('span').style.fontWeight = 'bold';
+		consumptionLabelWithData.querySelector('span').style.fontWeight = 'bold';
 
 		sliders[1].value = consumptionLabelWithData.dataset.cons;
 		outputs[1].value = consumptionLabelWithData.dataset.cons;
