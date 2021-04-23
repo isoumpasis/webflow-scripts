@@ -633,8 +633,9 @@ function resetCalc() {
 
 document.querySelectorAll('.radio-button.w-radio').forEach(el => {
 	el.addEventListener('click', e => {
-		e.stopPropagation();
-		e.preventDefault();
+		// e.stopPropagation();
+		// e.preventDefault();
+		if (e.target.tagName !== 'LABEL') return;
 		// const radioInput = e.target.querySelector('input');
 		console.log('hello', e.target);
 		const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
