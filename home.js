@@ -600,8 +600,8 @@ function configureCalculator() {
 	consumptionRadios[1].dataset.cons = foundVehicleObj.consumption[1];
 	consumptionRadios[2].dataset.cons = foundVehicleObj.consumption[2];
 
-	document.querySelectorAll('.radio-button.w-radio')[2].click();
-	document.querySelector('#consumptionDiv').style.display = 'block';
+	consumptionRadios[2].click();
+	document.querySelector('#consumptionDiv').style.display = 'grid';
 
 	sliders[1].value = foundVehicleObj.consumption[2];
 	outputs[1].value = sliders[1].value;
@@ -614,7 +614,7 @@ function configureCalculator() {
 
 function resetCalc() {
 	document.querySelector('#consumptionDiv').style.display = 'none';
-	document.querySelector('#calcTitle').innerHTML = 'Υπολόγισε πόσα εξοικονομείς με <br> συστήματα Lovato!';
+	document.querySelector('#calcTitle').innerHTML = 'Υπολόγισε πόσα εξοικονομείς με συστήματα Lovato!';
 
 	sliders[1].value = 8;
 	outputs[1].value = 8;
