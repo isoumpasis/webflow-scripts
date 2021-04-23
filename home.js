@@ -631,37 +631,10 @@ function resetCalc() {
 	covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 }
 
-// document.querySelectorAll('.radio-button.w-radio').forEach(el => {
-// 	el.addEventListener('click', e => {
-// 		console.log(e.target.tagName);
-// 		console.log('hello', e.target);
-// 		// e.stopPropagation();
-// 		// e.preventDefault();
-
-// 		const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
-// 		document.querySelectorAll('.radio-button.w-radio div').forEach(el => (el.classList.remove = 'w--redirected-checked'));
-// 		document.querySelector('.radio-button.w-radio div').classList.add = 'w--redirected-checked';
-
-// 		document.querySelectorAll('.radio-button.w-radio span').forEach(el => (el.style.fontWeight = 'normal'));
-// 		consumptionLabelWithData.querySelector('span').style.fontWeight = 'bold';
-
-// 		sliders[1].value = consumptionLabelWithData.dataset.cons;
-// 		outputs[1].value = consumptionLabelWithData.dataset.cons;
-// 		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
-// 		calcResult();
-// 	});
-// });
-
 document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 	el.addEventListener('change', e => {
 		console.log(e.target.tagName);
-		console.log('hello', e.target);
-		// e.stopPropagation();
-		// e.preventDefault();
-
 		const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
-		// document.querySelectorAll('.radio-button.w-radio div').forEach(el => (el.classList.remove = 'w--redirected-checked'));
-		// document.querySelector('.radio-button.w-radio div').classList.add = 'w--redirected-checked';
 
 		document.querySelectorAll('.radio-button.w-radio span').forEach(el => (el.style.fontWeight = 'normal'));
 		consumptionLabelWithData.querySelector('span').style.fontWeight = 'bold';
