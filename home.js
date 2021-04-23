@@ -121,7 +121,6 @@ function initFuelPrices() {
 		.then(res => res.json())
 		.then(data => {
 			fuelPrices = data;
-			console.log(fuelPrices);
 			modifyFuelPriceSliders('Πανελλαδικός Μ.Ο.');
 		})
 		.catch(e => console.error('Error on FuelPrices Fetch:', e));
@@ -132,7 +131,6 @@ document.querySelector('#fuelPricesSelectVehicle').addEventListener('change', e 
 
 function modifyFuelPriceSliders(value) {
 	const locationObj = fuelPrices.filter(obj => obj.place.indexOf(value) !== -1)[0];
-	console.table([locationObj]); //DEBUG
 	if (!locationObj) return;
 
 	sliders[2].value = locationObj.petrol;
@@ -620,7 +618,7 @@ function resetCalc() {
 	document.querySelector('#calcTitle').innerHTML = 'Υπολόγισε πόσα εξοικονομείς με συστήματα Lovato!';
 
 	document.querySelector('#calcContainerVehicle').style.display = 'none';
-	document.querySelector('#calcContainerΝοVehicle').style.display = 'flex';
+	document.querySelector('#calcContainerNoVehicle').style.display = 'flex';
 
 	sliders[1].value = 8;
 	outputs[1].value = 8;
