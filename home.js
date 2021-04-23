@@ -121,7 +121,7 @@ function initFuelPrices() {
 		.then(res => res.json())
 		.then(data => {
 			fuelPrices = data;
-			modifyFuelPriceSliders('Πανελλαδικός Μ.Ο.');
+			modifyFuelPriceSliders('ΑΤΤΙΚΗΣ');
 		})
 		.catch(e => console.error('Error on FuelPrices Fetch:', e));
 }
