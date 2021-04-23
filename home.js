@@ -647,7 +647,7 @@ document.querySelectorAll('.radio-button.w-radio').forEach(el => {
 			covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 			calcResult();
 		},
-		true
+		false
 	);
 });
 
