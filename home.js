@@ -639,6 +639,8 @@ document.querySelectorAll('.radio-button.w-radio').forEach(el => {
 			// const radioInput = e.target.querySelector('input');
 			console.log('hello', e.target);
 			const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
+			document.querySelectorAll('.radio-button.w-radio span').forEach(el => (el.style.fontWeight = 'normal'));
+			consumptionLabelWithData.querySelector('span').style.fontWeight = 'bold';
 			sliders[1].value = consumptionLabelWithData.dataset.cons;
 			outputs[1].value = consumptionLabelWithData.dataset.cons;
 			covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
