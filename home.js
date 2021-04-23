@@ -635,6 +635,7 @@ document.querySelectorAll('.radio-button.w-radio').forEach(el => {
 	el.addEventListener('click', e => {
 		// e.stopPropagation();
 		// e.preventDefault();
+		console.log(e.target.tagName);
 		if (e.target.tagName !== 'LABEL') return;
 		// const radioInput = e.target.querySelector('input');
 		console.log('hello', e.target);
