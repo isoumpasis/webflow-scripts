@@ -663,7 +663,7 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 		// document.querySelectorAll('.radio-button.w-radio div').forEach(el => (el.classList.remove = 'w--redirected-checked'));
 		// document.querySelector('.radio-button.w-radio div').classList.add = 'w--redirected-checked';
 
-		consumptionLabelWithData.querySelectorAll('span').forEach(el => (el.style.fontWeight = 'normal'));
+		document.querySelectorAll('.radio-button.w-radio span').forEach(el => (el.style.fontWeight = 'normal'));
 		consumptionLabelWithData.querySelector('span').style.fontWeight = 'bold';
 
 		sliders[1].value = consumptionLabelWithData.dataset.cons;
