@@ -636,6 +636,7 @@ document.querySelectorAll('.radio-button.w-radio').forEach(el => {
 		'click',
 		e => {
 			e.stopPropagation();
+			e.preventDefault();
 			// const radioInput = e.target.querySelector('input');
 			console.log('hello', e.target);
 			const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
