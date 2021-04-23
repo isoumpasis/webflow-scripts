@@ -703,7 +703,7 @@ function creditCardInstallmentsOnChange(value) {
 
 	// let lpgPerMonthOrYearCost = parseFloat(lpgResult.textContent.replace('€', ''));
 
-	if (perYearCheckbox.checked) {
+	if (!perMonthCheckbox.checked) {
 		document.querySelector('#creditCardBenefitLabel').textContent = 'Ετήσιο όφελος LPG';
 	} else {
 		document.querySelector('#creditCardBenefitLabel').textContent = 'Μηνιαίο όφελος LPG';
@@ -723,7 +723,7 @@ function calcEasyPay() {
 }
 
 function updateEasyPay() {
-	if (perYearCheckbox.checked) {
+	if (!perMonthCheckbox.checked) {
 		document.querySelector('#creditCardBenefitLabel').textContent = 'Ετήσιο όφελος LPG';
 	} else {
 		document.querySelector('#creditCardBenefitLabel').textContent = 'Μηνιαίο όφελος LPG';
@@ -745,7 +745,7 @@ const cngPercentageEl = document.querySelector('#cng-percentage');
 const petrolCost = document.querySelector('#petrolCost');
 const lpgCost = document.querySelector('#lpgCost');
 const cngCost = document.querySelector('#cngCost');
-const perYearCheckbox = document.querySelector('#perYearCheckbox');
+const perMonthCheckbox = document.querySelector('#perMonthCheckbox');
 const costLabels = document.querySelectorAll('.cost-label');
 const lpgResultLabel = document.querySelector('#lpg-result-label');
 const cngResultLabel = document.querySelector('#cng-result-label');
@@ -770,7 +770,7 @@ sliders.forEach((slider, i) => {
 	});
 });
 
-perYearCheckbox.addEventListener('change', function () {
+perMonthCheckbox.addEventListener('change', function () {
 	calcResult();
 	creditCardInstallmentsOnChange(creditCardInstallments.value);
 });
@@ -795,7 +795,7 @@ function calcResult() {
 	const lpgPercentageValue = (100 * (petrolCostPerMonth - lpgCostPerMonth)) / petrolCostPerMonth;
 	const cngPercentageValue = (100 * (petrolCostPerMonth - cngCostPerMonth)) / petrolCostPerMonth;
 
-	if (perYearCheckbox.checked) {
+	if (!perMonthCheckbox.checked) {
 		costLabels.forEach(label => (label.textContent = 'Ετήσια Έξοδα:'));
 		lpgResultLabel.textContent = 'Ετήσιο όφελος';
 		cngResultLabel.textContent = 'Ετήσιο όφελος';
