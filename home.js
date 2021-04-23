@@ -511,8 +511,9 @@ function showResults() {
 	//If there is a result
 	if ([...suggestedContainers].some(container => container.style.display !== 'none')) {
 		configureEasyPay();
-		// [...suggestedContainers].filter(c => c.style.display !== 'none')[0].scrollIntoView({ behavior: 'smooth', block: 'b' });
-		document.querySelector('.kilometers-liters').scrollIntoView({ behavior: 'smooth', block: 'end' });
+
+		[...suggestedContainers].filter(c => c.style.display !== 'none')[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+		// document.querySelector('.suggest').scrollIntoView({ behavior: 'smooth', block: 'end' });
 		// document.querySelector('.car-result-block').scrollIntoView({ behavior: 'smooth', block: 'end' });
 		// document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
 		configureCalculator();
