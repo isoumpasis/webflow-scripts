@@ -126,8 +126,14 @@ function initFuelPrices() {
 		.catch(e => console.error('Error on FuelPrices Fetch:', e));
 }
 
-document.querySelector('#fuelPricesSelectNoVehicle').addEventListener('change', e => modifyFuelPriceSliders(e.target.value));
-document.querySelector('#fuelPricesSelectVehicle').addEventListener('change', e => modifyFuelPriceSliders(e.target.value));
+document.querySelector('#fuelPricesSelectNoVehicle').addEventListener('change', e => {
+	document.querySelector('#fuelPricesSelectVehicle').value = e.target.value;
+	modifyFuelPriceSliders(e.target.value);
+});
+document.querySelector('#fuelPricesSelectVehicle').addEventListener('change', e => {
+	document.querySelector('#fuelPricesSelectNoVehicle').value = e.target.value;
+	modifyFuelPriceSliders(e.target.value);
+});
 
 function modifyFuelPriceSliders(value) {
 	const locationObj = fuelPrices.filter(obj => obj.place.indexOf(value) !== -1)[0];
