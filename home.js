@@ -3,6 +3,7 @@ const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
 const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
 const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
+const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
 
 let selectedYears;
 let selectedModels;
@@ -921,3 +922,45 @@ function calcCoverWidth(slider) {
 }
 
 /* Calculator END */
+
+/* PDF DOWNLOAD */
+document.querySelector('#submitForm').removeAttribute('type');
+document.querySelector('#submitForm').addEventListener('click', e => {
+  console.log(e.target);
+  const dataToSend = document.querySelector('#pdfName').value;
+
+  startLoadingSelect(e.target);
+  fetch(downloadPdfUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: dataToSend })
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log('!!', data);
+      endLoadingSelect(e.target);
+    })
+    .catch(error => {
+      endLoadingSelect(e.target);
+      console.error('Error Fetch:', error);
+    });
+});
+
+function downloadFile(blob, fileName) {
+  const link = document.createElement('a');
+
+  // create a blobURI pointing to our Blob
+  link.href = URL.createObjectURL(blob);
+  link.download = fileName;
+
+  // some browser needs the anchor to be in the doc
+  document.body.append(link);
+  link.click();
+  link.remove();
+  // in case the Blob uses a lot of memory
+  setTimeout(() => URL.revokeObjectURL(link.href), 7000);
+}
+
+//downloadFile(new Blob(['random data']), 'myfile.txt');
