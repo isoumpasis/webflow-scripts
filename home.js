@@ -3,7 +3,8 @@ const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
 const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
 const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
-const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
+// const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
+const downloadPdfUrl = 'localhost:1917/pdf';
 
 let selectedYears;
 let selectedModels;
