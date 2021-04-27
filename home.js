@@ -937,9 +937,10 @@ document.querySelector('#submitForm').addEventListener('click', e => {
     },
     body: JSON.stringify({ name: dataToSend })
   })
-    .then(res => res.json())
-    .then(data => {
-      console.log('!!', data);
+    .then(res => res.blob())
+    .then(blob => {
+      console.log('!!', blob);
+      downloadFile(blob, dataToSend);
       endLoadingSelect(e.target);
     })
     .catch(error => {
