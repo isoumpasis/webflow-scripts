@@ -937,7 +937,12 @@ document.querySelector('#submitForm').addEventListener('click', e => {
     },
     body: JSON.stringify({ name: dataToSend })
   })
-    .then(res => res.blob())
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return res.blob();
+    })
     .then(blob => {
       console.log('!!', blob);
       downloadFile(blob, dataToSend);
