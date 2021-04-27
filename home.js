@@ -560,7 +560,7 @@ function showResults() {
     showMonouResults();
   } else {
     console.log(selectedModelObj);
-    showCylinderResults(years, cyls);
+    showCylinderResults(years);
   }
 
   //If there is a result
@@ -604,6 +604,15 @@ function showDirectResults() {
 }
 
 function showMonouResults() {
+  foundVehicleObj = selectedModelObj.vehicles[0];
+  const selectedHp = descriptionSelect.value;
+  for (let veh of selectedModelObj.vehicles) {
+    if (veh.hp == selectedHp) {
+      foundVehicleObj = veh;
+      break;
+    }
+  }
+  console.log({ foundVehicleObj });
   document.querySelector('#suggested-monou').style.display = 'grid';
 }
 
@@ -618,7 +627,7 @@ function showCylinderResults(years) {
   }
   console.log({ foundVehicleObj });
 
-  let cyls = foundVehicleObj.cylinders;
+  const cyls = foundVehicleObj.cylinders;
 
   if (cyls == 5 || cyls == 6) {
     suggestedSystems = ['C-OBD II 6cyl'];
@@ -629,15 +638,19 @@ function showCylinderResults(years) {
     const cobdDiv = document.querySelector('#suggested-cobd-8cyl');
     cobdDiv.style.display = 'grid';
   } else if (years <= 1998) {
-    //if(cyls)
-    suggestedSystems = ['E-GO'];
-    document.querySelector('#suggested-ego').style.display = 'grid';
-  } else if (years >= 1999 && years < 2007) {
-    suggestedSystems = ['E-GO', 'Smart ExR E/P'];
-    document.querySelector('#suggested-ego-ep').style.display = 'grid';
-  } else if (years >= 2007 && years < 2012) {
-    suggestedSystems = ['Smart ExR K/P', 'C-OBD II'];
-    document.querySelector('#suggested-kp-cobd').style.display = 'grid';
+    if (foundVehicleObj.hp > 180) {
+      suggestedSystems = ['Smart ExR'];
+      document.querySelector('#suggested-exr').style.display = 'grid';
+    } else {
+      suggestedSystems = ['E-GO'];
+      document.querySelector('#suggested-ego').style.display = 'grid';
+    }
+  } else if (years >= 1999 && years <= 2004) {
+    suggestedSystems = ['Smart ExR', 'E-GO'];
+    document.querySelector('#suggested-exr-ego').style.display = 'grid';
+  } else if (years >= 2005 && years <= 2013) {
+    suggestedSystems = ['C-OBD II', 'Smart ExR'];
+    document.querySelector('#suggested-cobd-exr').style.display = 'grid';
   } else {
     suggestedSystems = ['C-OBD II'];
     document.querySelector('#suggested-cobd').style.display = 'grid';
