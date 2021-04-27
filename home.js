@@ -456,9 +456,10 @@ function populateDescriptionSelect() {
           ) <= 0.1 &&
           Math.abs(
             parseFloat(veh.consumption[2]) - parseFloat(filteredVehicles[0].consumption[2])
-          ) <= 0.1 &&
-          veh.cylinders < 6 &&
-          veh.hp < 190
+          ) <= 0.1
+        // &&
+        // veh.cylinders < 6 &&
+        // veh.hp < 190
       )
     ) {
       optionsArray = ['<option value="">Επιλέξτε Κυλίνδρους</option>'];
