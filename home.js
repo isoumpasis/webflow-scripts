@@ -21,7 +21,8 @@ let suggestedSystems;
 const systemQueryDict = {
   'DI 3000B': 'di3000b',
   'DI 60': 'di60',
-  'DI 108': 'di108'
+  'DI 108': 'di108',
+  'DI 108 8cyl': 'di108-8cyl'
 };
 
 const makeImgDict = {
@@ -457,7 +458,7 @@ function populateDescriptionSelect() {
             parseFloat(veh.consumption[2]) - parseFloat(filteredVehicles[0].consumption[2])
           ) <= 0.1 &&
           veh.cylinders < 6 &&
-          veh.hp < 150
+          veh.hp < 190
       )
     ) {
       optionsArray = ['<option value="">Επιλέξτε Κυλίνδρους</option>'];
@@ -549,14 +550,17 @@ function selectCylinderOption() {
 }
 
 function showResults() {
-  let years = yearSelect.value;
+  const years = yearSelect.value;
   suggestedSystemPrices = [];
   suggestedSystemNames = [];
 
   if (selectedModelObj.isDirect) {
     showDirectResults();
+  } else if (selectedModelObj.isMonou) {
+    showMonouResults();
   } else {
-    showCylinderResults(years);
+    console.log(selectedModelObj);
+    showCylinderResults(years, cyls);
   }
 
   //If there is a result
@@ -599,6 +603,10 @@ function showDirectResults() {
   }
 }
 
+function showMonouResults() {
+  document.querySelector('#suggested-monou').style.display = 'grid';
+}
+
 function showCylinderResults(years) {
   foundVehicleObj = selectedModelObj.vehicles[0];
   const selectedHp = descriptionSelect.value;
@@ -614,17 +622,14 @@ function showCylinderResults(years) {
 
   if (cyls == 5 || cyls == 6) {
     suggestedSystems = ['C-OBD II 6cyl'];
-    const cobdDiv = document.querySelector('#suggested-cobd');
+    const cobdDiv = document.querySelector('#suggested-cobd-6cyl');
     cobdDiv.style.display = 'grid';
-    cobdDiv.querySelector('.suggested-name').textContent = 'C-OBD II 6cyl';
-    cobdDiv.querySelector('.suggested-price').textContent = '1000€ + ΦΠΑ';
   } else if (cyls == 8) {
     suggestedSystems = ['C-OBD II 8cyl'];
-    const cobdDiv = document.querySelector('#suggested-cobd');
+    const cobdDiv = document.querySelector('#suggested-cobd-8cyl');
     cobdDiv.style.display = 'grid';
-    cobdDiv.querySelector('.suggested-name').textContent = 'C-OBD II 8cyl';
-    cobdDiv.querySelector('.suggested-price').textContent = '1100€ + ΦΠΑ';
-  } else if (years < 1999) {
+  } else if (years <= 1998) {
+    //if(cyls)
     suggestedSystems = ['E-GO'];
     document.querySelector('#suggested-ego').style.display = 'grid';
   } else if (years >= 1999 && years < 2007) {
