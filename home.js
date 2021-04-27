@@ -925,8 +925,8 @@ function calcCoverWidth(slider) {
 /* Calculator END */
 
 /* PDF DOWNLOAD */
-document.querySelector('#submitForm').removeAttribute('type');
-document.querySelector('#submitForm').addEventListener('click', e => {
+document.querySelector('#downloadPdfBtn').removeAttribute('type');
+document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
   console.log(e.target);
   const dataToSend = document.querySelector('#pdfName').value;
 
