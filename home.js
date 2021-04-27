@@ -619,11 +619,20 @@ function showMonouResults() {
 
 function showCylinderResults(years) {
   foundVehicleObj = selectedModelObj.vehicles[0];
-  const selectedHp = descriptionSelect.value;
+  const descriptionValue = descriptionSelect.value;
   for (let veh of selectedModelObj.vehicles) {
-    if (veh.hp == selectedHp) {
-      foundVehicleObj = veh;
-      break;
+    if (descriptionValue.length === 1) {
+      //cyls mode
+      if (veh.cylinders == descriptionValue) {
+        foundVehicleObj = veh;
+        break;
+      }
+    } else {
+      //hp mode
+      if (veh.hp == descriptionValue) {
+        foundVehicleObj = veh;
+        break;
+      }
     }
   }
   console.log({ foundVehicleObj });
