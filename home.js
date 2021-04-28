@@ -952,6 +952,11 @@ downloadPdfBtn.addEventListener('click', e => {
 });
 
 function downloadFile(blob, fileName) {
+  if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(newBlob);
+    return;
+  }
+
   const link = document.createElement('a');
 
   // create a blobURI pointing to our Blob
