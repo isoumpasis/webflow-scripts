@@ -925,8 +925,9 @@ function calcCoverWidth(slider) {
 
 /* PDF DOWNLOAD */
 const downloadPdfBtn = document.querySelector('#downloadPdfBtn');
-downloadPdfBtn.removeAttribute('type');
+// downloadPdfBtn.removeAttribute('type');
 downloadPdfBtn.addEventListener('click', e => {
+  e.preventDefault();
   console.log(e.target);
   const dataToSend = document.querySelector('#pdfName').value;
 
