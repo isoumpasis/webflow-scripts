@@ -940,8 +940,9 @@ downloadPdfBtn.addEventListener('click', e => {
   })
     .then(res => res.blob())
     .then(blob => {
-      console.log('!!', blob);
-      downloadFile(blob, dataToSend);
+      const newBlob = new Blob([blob], { type: 'application/pdf' });
+      console.log('!!', newBlob);
+      downloadFile(newBlob, dataToSend);
       endLoadingSelect(e.target);
     })
     .catch(error => {
