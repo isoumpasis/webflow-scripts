@@ -3,8 +3,7 @@ const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
 const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
 const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
-// const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
-const downloadPdfUrl = 'localhost:1917/pdf';
+const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
 
 let selectedYears;
 let selectedModels;
@@ -925,8 +924,9 @@ function calcCoverWidth(slider) {
 /* Calculator END */
 
 /* PDF DOWNLOAD */
-document.querySelector('#downloadPdfBtn').removeAttribute('type');
-document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
+const downloadPdfBtn = document.querySelector('#downloadPdfBtn');
+downloadPdfBtn.removeAttribute('type');
+downloadPdfBtn.addEventListener('click', e => {
   console.log(e.target);
   const dataToSend = document.querySelector('#pdfName').value;
 
@@ -938,12 +938,7 @@ document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
     },
     body: JSON.stringify({ name: dataToSend })
   })
-    .then(res => {
-      if (!res.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return res.blob();
-    })
+    .then(res => res.blob())
     .then(blob => {
       console.log('!!', blob);
       downloadFile(blob, dataToSend);
