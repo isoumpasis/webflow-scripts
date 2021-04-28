@@ -955,7 +955,7 @@ function downloadFile(blob, fileName) {
 
   // create a blobURI pointing to our Blob
   link.href = URL.createObjectURL(blob);
-  link.download = fileName;
+  link.download = fileName + '.pdf';
 
   // some browser needs the anchor to be in the doc
   document.body.append(link);
