@@ -941,7 +941,7 @@ downloadPdfBtn.addEventListener('click', e => {
     .then(res => res.blob())
     .then(blob => {
       const newBlob = new Blob([blob], { type: 'application/pdf' });
-      console.log('!!', newBlob);
+      console.log(newBlob);
       downloadFile(newBlob, dataToSend);
       endLoadingSelect(e.target);
     })
@@ -956,19 +956,13 @@ function downloadFile(blob, fileName) {
     window.navigator.msSaveOrOpenBlob(newBlob);
     return;
   }
-
   const link = document.createElement('a');
-
-  // create a blobURI pointing to our Blob
   link.href = URL.createObjectURL(blob);
   link.download = fileName + '.pdf';
-
-  // some browser needs the anchor to be in the doc
   document.body.append(link);
   link.click();
   link.remove();
+
   // in case the Blob uses a lot of memory
   setTimeout(() => URL.revokeObjectURL(link.href), 7000);
 }
-
-//downloadFile(new Blob(['random data']), 'myfile.txt');
