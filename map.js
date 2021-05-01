@@ -413,8 +413,8 @@ async function initMap() {
       if (selectedMarker === marker) return;
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(52, 52),
-        origin: new google.maps.Point(1, 1)
+        scaledSize: new google.maps.Size(51, 51),
+        origin: new google.maps.Point(1, 0)
       });
     });
     // marker.addListener('mouseover', () => {
