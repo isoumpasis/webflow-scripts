@@ -2,534 +2,536 @@ const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/getAll';
 
 // const episimosIconUrl =
 // 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
-const episimosIconUrl = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60663eb3c347c9975c35d5d9_location-icon-white.svg';
+const episimosIconUrl =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60663eb3c347c9975c35d5d9_location-icon-white.svg';
 
-const markerClustererIcon = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6059ab2542758022d1e784de_m1.png';
+const markerClustererIcon =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6059ab2542758022d1e784de_m1.png';
 
 const mapCenter = { lat: 38.64, lng: 24.16 };
 const startZoom = 6;
 const searchZoom = 14;
 const maxZoomClusterer = 10;
 let markers = [],
-	markerClusterer;
+  markerClusterer;
 
 const gridSizesDependedOnZoom = { 6: 40, 7: 35, 8: 30, 9: 25, 10: 30 };
 const zoomLevelsDependedOnZoom = { 6: 9, 7: 10, 8: 10, 9: 12, 10: 12 };
 
 let map,
-	infoWindow,
-	userMarker,
-	selectedMarker,
-	geocoder,
-	geocoderFoundAddress = false,
-	thAddress,
-	infoWindowDiv,
-	slideIndex = 1,
-	cachedPins;
+  infoWindow,
+  userMarker,
+  selectedMarker,
+  geocoder,
+  geocoderFoundAddress = false,
+  thAddress,
+  infoWindowDiv,
+  slideIndex = 1,
+  cachedPins;
 
 document.addEventListener('DOMContentLoaded', async () => {
-	generateInitHtml();
-	initDOMEvents();
-	startLoader();
-	console.log('2'); //3.6
-	cachedPins = await getCachedPins();
-	console.log('3');
-	endLoader();
-	console.log(cachedPins);
-	await initMap();
-	await urlParamsConfig();
+  generateInitHtml();
+  initDOMEvents();
+  startLoader();
+  console.log('2'); //3.6
+  cachedPins = await getCachedPins();
+  console.log('3');
+  endLoader();
+  console.log(cachedPins);
+  await initMap();
+  await urlParamsConfig();
 });
 
 async function getCachedPins() {
-	try {
-		const res = await fetch(urlCachedPins, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
-		return await res.json();
-	} catch (e) {
-		console.error('Error Fetching Cached Pins:', error);
-		return null;
-	}
+  try {
+    const res = await fetch(urlCachedPins, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    return await res.json();
+  } catch (e) {
+    console.error('Error Fetching Cached Pins:', error);
+    return null;
+  }
 }
 
 async function initMap() {
-	const mapOptions = {
-		zoom: startZoom,
-		center: mapCenter,
-		mapTypeId: 'roadmap', //'terrain',
-		minZoom: startZoom,
-		disableDefaultUI: false,
-		scaleControl: true, // ?
-		clickableIcons: false, //map places not clickable
-		//draggableCursor: 'default',
-		//zoomControl: true,
-		// streetViewControl: true,
-		// rotateControl: true,
-		keyboardShortcuts: false,
-		mapTypeControl: false, //Χάρτης | Δορυφόρος
-		// mapTypeControlOptions: {
-		// 	style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-		// 	position: google.maps.ControlPosition.TOP_LEFT,
-		// 	mapTypeIds: ['roadmap', 'terrain', 'satellite', 'hybrid'] //last 2 not working
-		// },
-		fullscreenControl: true,
-		fullscreenControlOptions: {
-			position: google.maps.ControlPosition.BOTTOM_RIGHT
-		},
-		gestureHandling: 'greedy', //disable ctrl for zoom
+  const mapOptions = {
+    zoom: startZoom,
+    center: mapCenter,
+    mapTypeId: 'roadmap', //'terrain',
+    minZoom: startZoom,
+    disableDefaultUI: false,
+    scaleControl: true, // ?
+    clickableIcons: false, //map places not clickable
+    //draggableCursor: 'default',
+    //zoomControl: true,
+    // streetViewControl: true,
+    // rotateControl: true,
+    keyboardShortcuts: false,
+    mapTypeControl: false, //Χάρτης | Δορυφόρος
+    // mapTypeControlOptions: {
+    // 	style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+    // 	position: google.maps.ControlPosition.TOP_LEFT,
+    // 	mapTypeIds: ['roadmap', 'terrain', 'satellite', 'hybrid'] //last 2 not working
+    // },
+    fullscreenControl: true,
+    fullscreenControlOptions: {
+      position: google.maps.ControlPosition.TOP_RIGHT
+    },
+    gestureHandling: 'greedy', //disable ctrl for zoom
 
-		restriction: {
-			latLngBounds: {
-				north: 60.7,
-				south: 20.43,
-				east: 40.5,
-				west: 8.56
-			}
-		},
-		styles: [
-			{
-				featureType: 'water',
-				stylers: [{ color: '#cae4ff' }]
-			},
-			{
-				featureType: 'landscape',
-				elementType: 'geometry',
-				stylers: [{ color: '#F7F9F9' }]
-			},
+    restriction: {
+      latLngBounds: {
+        north: 60.7,
+        south: 20.43,
+        east: 40.5,
+        west: 8.56
+      }
+    },
+    styles: [
+      {
+        featureType: 'water',
+        stylers: [{ color: '#cae4ff' }]
+      },
+      {
+        featureType: 'landscape',
+        elementType: 'geometry',
+        stylers: [{ color: '#F7F9F9' }]
+      },
 
-			{
-				featureType: 'road.highway',
-				elementType: 'geometry',
-				stylers: [{ color: '#D0E9FF' }]
-			},
-			{
-				featureType: 'road',
-				elementType: 'labels',
-				stylers: [{ saturation: -100 }]
-			}
-		]
-		// styles: [
-		// 	{
-		// 		featureType: 'all',
-		// 		elementType: 'geometry.fill',
-		// 		stylers: [
-		// 			{
-		// 				visibility: 'on'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'administrative',
-		// 		elementType: 'all',
-		// 		stylers: [
-		// 			{
-		// 				color: '#f2f2f2'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'administrative',
-		// 		elementType: 'labels.text.fill',
-		// 		stylers: [
-		// 			{
-		// 				color: '#686868'
-		// 			},
-		// 			{
-		// 				visibility: 'on'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'landscape',
-		// 		elementType: 'all',
-		// 		stylers: [
-		// 			{
-		// 				color: '#f2f2f2'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'poi',
-		// 		elementType: 'all',
-		// 		stylers: [
-		// 			{
-		// 				visibility: 'off'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'poi.park',
-		// 		elementType: 'all',
-		// 		stylers: [
-		// 			{
-		// 				visibility: 'on'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'poi.park',
-		// 		elementType: 'labels.icon',
-		// 		stylers: [
-		// 			{
-		// 				visibility: 'off'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road',
-		// 		elementType: 'all',
-		// 		stylers: [
-		// 			{
-		// 				saturation: -100
-		// 			},
-		// 			{
-		// 				lightness: 45
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.highway',
-		// 		elementType: 'all',
-		// 		stylers: [
-		// 			{
-		// 				visibility: 'simplified'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.highway',
-		// 		elementType: 'geometry.fill',
-		// 		stylers: [
-		// 			{
-		// 				lightness: '-22'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.highway',
-		// 		elementType: 'geometry.stroke',
-		// 		stylers: [
-		// 			{
-		// 				saturation: '-51'
-		// 			},
-		// 			{
-		// 				lightness: '11'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.highway',
-		// 		elementType: 'labels.text',
-		// 		stylers: [
-		// 			{
-		// 				saturation: '3'
-		// 			},
-		// 			{
-		// 				lightness: '-56'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.highway',
-		// 		elementType: 'labels.text.fill',
-		// 		stylers: [
-		// 			{
-		// 				lightness: '-52'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.highway',
-		// 		elementType: 'labels.text.stroke',
-		// 		stylers: [
-		// 			{
-		// 				weight: '6.13'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.highway',
-		// 		elementType: 'labels.icon',
-		// 		stylers: [
-		// 			{
-		// 				weight: '1.24'
-		// 			},
-		// 			{
-		// 				saturation: '-100'
-		// 			},
-		// 			{
-		// 				lightness: '-10'
-		// 			},
-		// 			{
-		// 				gamma: '0.94'
-		// 			},
-		// 			{
-		// 				visibility: 'off'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.arterial',
-		// 		elementType: 'geometry',
-		// 		stylers: [
-		// 			{
-		// 				lightness: '-16'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.arterial',
-		// 		elementType: 'labels.text.fill',
-		// 		stylers: [
-		// 			{
-		// 				saturation: '-41'
-		// 			},
-		// 			{
-		// 				lightness: '-41'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.arterial',
-		// 		elementType: 'labels.text.stroke',
-		// 		stylers: [
-		// 			{
-		// 				weight: '5.46'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.arterial',
-		// 		elementType: 'labels.icon',
-		// 		stylers: [
-		// 			{
-		// 				visibility: 'off'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.local',
-		// 		elementType: 'geometry.fill',
-		// 		stylers: [
-		// 			{
-		// 				lightness: '-16'
-		// 			},
-		// 			{
-		// 				weight: '0.72'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'road.local',
-		// 		elementType: 'labels.text.fill',
-		// 		stylers: [
-		// 			{
-		// 				lightness: '-37'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'transit',
-		// 		elementType: 'all',
-		// 		stylers: [
-		// 			{
-		// 				visibility: 'off'
-		// 			}
-		// 		]
-		// 	},
-		// 	{
-		// 		featureType: 'water',
-		// 		elementType: 'all',
-		// 		stylers: [
-		// 			{
-		// 				color: '#b7e4f4'
-		// 			},
-		// 			{
-		// 				visibility: 'on'
-		// 			}
-		// 		]
-		// 	}
-		// ]
-	};
+      {
+        featureType: 'road.highway',
+        elementType: 'geometry',
+        stylers: [{ color: '#D0E9FF' }]
+      },
+      {
+        featureType: 'road',
+        elementType: 'labels',
+        stylers: [{ saturation: -100 }]
+      }
+    ]
+    // styles: [
+    // 	{
+    // 		featureType: 'all',
+    // 		elementType: 'geometry.fill',
+    // 		stylers: [
+    // 			{
+    // 				visibility: 'on'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'administrative',
+    // 		elementType: 'all',
+    // 		stylers: [
+    // 			{
+    // 				color: '#f2f2f2'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'administrative',
+    // 		elementType: 'labels.text.fill',
+    // 		stylers: [
+    // 			{
+    // 				color: '#686868'
+    // 			},
+    // 			{
+    // 				visibility: 'on'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'landscape',
+    // 		elementType: 'all',
+    // 		stylers: [
+    // 			{
+    // 				color: '#f2f2f2'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'poi',
+    // 		elementType: 'all',
+    // 		stylers: [
+    // 			{
+    // 				visibility: 'off'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'poi.park',
+    // 		elementType: 'all',
+    // 		stylers: [
+    // 			{
+    // 				visibility: 'on'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'poi.park',
+    // 		elementType: 'labels.icon',
+    // 		stylers: [
+    // 			{
+    // 				visibility: 'off'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road',
+    // 		elementType: 'all',
+    // 		stylers: [
+    // 			{
+    // 				saturation: -100
+    // 			},
+    // 			{
+    // 				lightness: 45
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.highway',
+    // 		elementType: 'all',
+    // 		stylers: [
+    // 			{
+    // 				visibility: 'simplified'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.highway',
+    // 		elementType: 'geometry.fill',
+    // 		stylers: [
+    // 			{
+    // 				lightness: '-22'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.highway',
+    // 		elementType: 'geometry.stroke',
+    // 		stylers: [
+    // 			{
+    // 				saturation: '-51'
+    // 			},
+    // 			{
+    // 				lightness: '11'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.highway',
+    // 		elementType: 'labels.text',
+    // 		stylers: [
+    // 			{
+    // 				saturation: '3'
+    // 			},
+    // 			{
+    // 				lightness: '-56'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.highway',
+    // 		elementType: 'labels.text.fill',
+    // 		stylers: [
+    // 			{
+    // 				lightness: '-52'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.highway',
+    // 		elementType: 'labels.text.stroke',
+    // 		stylers: [
+    // 			{
+    // 				weight: '6.13'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.highway',
+    // 		elementType: 'labels.icon',
+    // 		stylers: [
+    // 			{
+    // 				weight: '1.24'
+    // 			},
+    // 			{
+    // 				saturation: '-100'
+    // 			},
+    // 			{
+    // 				lightness: '-10'
+    // 			},
+    // 			{
+    // 				gamma: '0.94'
+    // 			},
+    // 			{
+    // 				visibility: 'off'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.arterial',
+    // 		elementType: 'geometry',
+    // 		stylers: [
+    // 			{
+    // 				lightness: '-16'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.arterial',
+    // 		elementType: 'labels.text.fill',
+    // 		stylers: [
+    // 			{
+    // 				saturation: '-41'
+    // 			},
+    // 			{
+    // 				lightness: '-41'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.arterial',
+    // 		elementType: 'labels.text.stroke',
+    // 		stylers: [
+    // 			{
+    // 				weight: '5.46'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.arterial',
+    // 		elementType: 'labels.icon',
+    // 		stylers: [
+    // 			{
+    // 				visibility: 'off'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.local',
+    // 		elementType: 'geometry.fill',
+    // 		stylers: [
+    // 			{
+    // 				lightness: '-16'
+    // 			},
+    // 			{
+    // 				weight: '0.72'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'road.local',
+    // 		elementType: 'labels.text.fill',
+    // 		stylers: [
+    // 			{
+    // 				lightness: '-37'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'transit',
+    // 		elementType: 'all',
+    // 		stylers: [
+    // 			{
+    // 				visibility: 'off'
+    // 			}
+    // 		]
+    // 	},
+    // 	{
+    // 		featureType: 'water',
+    // 		elementType: 'all',
+    // 		stylers: [
+    // 			{
+    // 				color: '#b7e4f4'
+    // 			},
+    // 			{
+    // 				visibility: 'on'
+    // 			}
+    // 		]
+    // 	}
+    // ]
+  };
 
-	map = new google.maps.Map(document.getElementById('map'), mapOptions);
-	geocoder = new google.maps.Geocoder();
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  geocoder = new google.maps.Geocoder();
 
-	//Init Variables
-	infoWindow = new google.maps.InfoWindow({
-		disableAutoPan: false,
-		maxWidth: 500,
-		zIndex: 1001
-	});
+  //Init Variables
+  infoWindow = new google.maps.InfoWindow({
+    disableAutoPan: false,
+    maxWidth: 500,
+    zIndex: 1001
+  });
 
-	userMarker = new google.maps.Marker();
-	selectedMarker = new google.maps.Marker();
+  userMarker = new google.maps.Marker();
+  selectedMarker = new google.maps.Marker();
 
-	markers = cachedPins.map(cachedPin => {
-		return new google.maps.Marker({
-			position: cachedPin.geometry,
-			icon: {
-				url: episimosIconUrl,
-				scaledSize: new google.maps.Size(50, 50),
-				origin: new google.maps.Point(0, 0)
-			},
-			clickable: true,
-			title: cachedPin.properties.name,
-			cursor: 'pointer',
-			animation: google.maps.Animation.DROP,
-			visible: true,
-			props: cachedPin.properties
-		});
-	});
-	markerClusterer = new MarkerClusterer(map, markers, {
-		styles: [
-			{
-				url: markerClustererIcon,
-				width: 53,
-				height: 52,
-				anchorText: [20, 0],
-				textColor: '#fff',
-				textSize: 11,
-				fontWeight: 'bold'
-			}
-		],
-		// imagePath:
-		// 	'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
-		averageCenter: true,
-		zoomOnClick: false,
-		//minimumClusterSize: 3,
-		maxZoom: maxZoomClusterer,
-		gridSize: gridSizesDependedOnZoom[startZoom], //default=60,
-		ignoreHidden: true
-	});
+  markers = cachedPins.map(cachedPin => {
+    return new google.maps.Marker({
+      position: cachedPin.geometry,
+      icon: {
+        url: episimosIconUrl,
+        scaledSize: new google.maps.Size(50, 50),
+        origin: new google.maps.Point(0, 0)
+      },
+      clickable: true,
+      title: cachedPin.properties.name,
+      cursor: 'pointer',
+      animation: google.maps.Animation.DROP,
+      visible: true,
+      props: cachedPin.properties
+    });
+  });
+  markerClusterer = new MarkerClusterer(map, markers, {
+    styles: [
+      {
+        url: markerClustererIcon,
+        width: 53,
+        height: 52,
+        anchorText: [20, 0],
+        textColor: '#fff',
+        textSize: 11,
+        fontWeight: 'bold'
+      }
+    ],
+    // imagePath:
+    // 	'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+    averageCenter: true,
+    zoomOnClick: false,
+    //minimumClusterSize: 3,
+    maxZoom: maxZoomClusterer,
+    gridSize: gridSizesDependedOnZoom[startZoom], //default=60,
+    ignoreHidden: true
+  });
 
-	markers.forEach(marker => {
-		// marker.addListener('mouseover', () => {
-		// 	if (selectedMarker === marker) return;
-		// 	if (selectedMarker) {
-		// 		selectedMarker.setAnimation(null);
-		// 	}
-		// 	selectedMarker = marker;
-		// 	selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
-		// 	openInfoWindow(marker);
-		// });
+  markers.forEach(marker => {
+    // marker.addListener('mouseover', () => {
+    // 	if (selectedMarker === marker) return;
+    // 	if (selectedMarker) {
+    // 		selectedMarker.setAnimation(null);
+    // 	}
+    // 	selectedMarker = marker;
+    // 	selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
+    // 	openInfoWindow(marker);
+    // });
 
-		marker.addListener('click', () => {
-			map.setZoom(searchZoom);
-			map.setCenter(marker.position);
+    marker.addListener('click', () => {
+      map.setZoom(searchZoom);
+      map.setCenter(marker.position);
 
-			if (selectedMarker === marker) return;
-			if (selectedMarker) {
-				selectedMarker.setAnimation(null);
-			}
-			selectedMarker = marker;
-			selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
-			openInfoWindow(marker);
-		});
+      if (selectedMarker === marker) return;
+      if (selectedMarker) {
+        selectedMarker.setAnimation(null);
+      }
+      selectedMarker = marker;
+      selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
+      openInfoWindow(marker);
+    });
 
-		//Optional
-		// marker.addListener('mouseout', e => {
-		// 	infoWindow.close();
-		// 	if (selectedMarker) {
-		// 		selectedMarker.setAnimation(null);
-		// 	}
-		// 	selectedMarker = null;
-		// });
-	});
+    //Optional
+    // marker.addListener('mouseout', e => {
+    // 	infoWindow.close();
+    // 	if (selectedMarker) {
+    // 		selectedMarker.setAnimation(null);
+    // 	}
+    // 	selectedMarker = null;
+    // });
+  });
 
-	map.addListener('click', e => {
-		infoWindow.close();
-		if (selectedMarker) {
-			selectedMarker.setAnimation(null);
-		}
-		selectedMarker = null;
-		// const [lat, lng] = [e.latLng.lat().toFixed(2), e.latLng.lng().toFixed(2)];
-		// console.log(`You clicked at: (${lat}, ${lng})`);
-	});
+  map.addListener('click', e => {
+    infoWindow.close();
+    if (selectedMarker) {
+      selectedMarker.setAnimation(null);
+    }
+    selectedMarker = null;
+    // const [lat, lng] = [e.latLng.lat().toFixed(2), e.latLng.lng().toFixed(2)];
+    // console.log(`You clicked at: (${lat}, ${lng})`);
+  });
 
-	map.addListener('zoom_changed', () => {
-		let currentZoom = map.getZoom();
-		//console.log('current zoom', currentZoom);
-		if (currentZoom > maxZoomClusterer) return;
-		markerClusterer.setGridSize(gridSizesDependedOnZoom[currentZoom]);
-	});
+  map.addListener('zoom_changed', () => {
+    let currentZoom = map.getZoom();
+    //console.log('current zoom', currentZoom);
+    if (currentZoom > maxZoomClusterer) return;
+    markerClusterer.setGridSize(gridSizesDependedOnZoom[currentZoom]);
+  });
 
-	google.maps.event.addListener(markerClusterer, 'clusterclick', cluster => {
-		infoWindow.close();
-		if (selectedMarker) {
-			selectedMarker.setAnimation(null);
-		}
-		selectedMarker = null;
-		map.setZoom(zoomLevelsDependedOnZoom[map.getZoom()]);
-		//map.setZoom(map.getZoom() + 2);
-		map.setCenter(cluster.getCenter());
-	});
+  google.maps.event.addListener(markerClusterer, 'clusterclick', cluster => {
+    infoWindow.close();
+    if (selectedMarker) {
+      selectedMarker.setAnimation(null);
+    }
+    selectedMarker = null;
+    map.setZoom(zoomLevelsDependedOnZoom[map.getZoom()]);
+    //map.setZoom(map.getZoom() + 2);
+    map.setCenter(cluster.getCenter());
+  });
 
-	google.maps.event.addListener(markerClusterer, 'mouseover', cluster => {
-		infoWindow.close();
-		if (selectedMarker) {
-			selectedMarker.setAnimation(null);
-		}
-		selectedMarker = null;
-		let label = cluster.clusterIcon_.div_.querySelector('span');
-		label.classList.add('cluster-hover');
-		cluster.clusterIcon_.div_.classList.add('grow');
-	});
-	google.maps.event.addListener(markerClusterer, 'mouseout', cluster => {
-		let label = cluster.clusterIcon_.div_.querySelector('span');
-		label.classList.remove('cluster-hover');
-		cluster.clusterIcon_.div_.classList.add('grow');
-	});
+  google.maps.event.addListener(markerClusterer, 'mouseover', cluster => {
+    infoWindow.close();
+    if (selectedMarker) {
+      selectedMarker.setAnimation(null);
+    }
+    selectedMarker = null;
+    let label = cluster.clusterIcon_.div_.querySelector('span');
+    label.classList.add('cluster-hover');
+    cluster.clusterIcon_.div_.classList.add('grow');
+  });
+  google.maps.event.addListener(markerClusterer, 'mouseout', cluster => {
+    let label = cluster.clusterIcon_.div_.querySelector('span');
+    label.classList.remove('cluster-hover');
+    cluster.clusterIcon_.div_.classList.add('grow');
+  });
 
-	infoWindow.addListener('closeclick', () => {
-		if (selectedMarker) {
-			selectedMarker.setAnimation(null);
-		}
-		selectedMarker = null;
-	});
+  infoWindow.addListener('closeclick', () => {
+    if (selectedMarker) {
+      selectedMarker.setAnimation(null);
+    }
+    selectedMarker = null;
+  });
 
-	userMarker.addListener('click', () => {
-		console.log('userMarker clicked');
-		map.setZoom(searchZoom);
-		map.setCenter(userMarker.position);
-	});
+  userMarker.addListener('click', () => {
+    console.log('userMarker clicked');
+    map.setZoom(searchZoom);
+    map.setCenter(userMarker.position);
+  });
 }
 
 function startLoader() {
-	document.querySelector('.lds-roller').classList.remove('hide-roller');
+  document.querySelector('.lds-roller').classList.remove('hide-roller');
 }
 function endLoader() {
-	document.querySelector('.lds-roller').classList.add('hide-roller');
+  document.querySelector('.lds-roller').classList.add('hide-roller');
 }
 
 function openInfoWindow(marker) {
-	infoWindowDiv = document.createElement('div');
-	infoWindowDiv.className = 'infoWindow infoWindow-open';
+  infoWindowDiv = document.createElement('div');
+  infoWindowDiv.className = 'infoWindow infoWindow-open';
 
-	const markerProps = marker.props;
+  const markerProps = marker.props;
 
-	const photosContainer = preparePhotos(markerProps.imgs);
-	if (markerProps.imgs.length > 1) {
-		prepareSlideshow(photosContainer);
-	}
-	if (markerProps.imgs.length) {
-		prepareModal(photosContainer, markerProps);
-	}
-	prepareInformation(markerProps);
+  const photosContainer = preparePhotos(markerProps.imgs);
+  if (markerProps.imgs.length > 1) {
+    prepareSlideshow(photosContainer);
+  }
+  if (markerProps.imgs.length) {
+    prepareModal(photosContainer, markerProps);
+  }
+  prepareInformation(markerProps);
 
-	infoWindow.setContent(infoWindowDiv);
-	infoWindow.setPosition(selectedMarker.position);
-	infoWindow.setOptions({
-		pixelOffset: new google.maps.Size(0, -60)
-	});
-	infoWindow.open(map);
+  infoWindow.setContent(infoWindowDiv);
+  infoWindow.setPosition(selectedMarker.position);
+  infoWindow.setOptions({
+    pixelOffset: new google.maps.Size(0, -60)
+  });
+  infoWindow.open(map);
 }
 
 function prepareInformation(markerProps) {
-	let nameHtml = `
+  let nameHtml = `
       <div class='info-name-value-container'>
 				<div class='info-name-value'>
 				${markerProps.name}
@@ -540,12 +542,12 @@ function prepareInformation(markerProps) {
       </div>
 		</div>`;
 
-	const infoNameContainerEl = document.createElement('div');
-	infoNameContainerEl.className = 'info-name-container';
-	infoNameContainerEl.innerHTML = nameHtml;
-	infoWindowDiv.append(infoNameContainerEl);
+  const infoNameContainerEl = document.createElement('div');
+  infoNameContainerEl.className = 'info-name-container';
+  infoNameContainerEl.innerHTML = nameHtml;
+  infoWindowDiv.append(infoNameContainerEl);
 
-	const remainingHtml = `
+  const remainingHtml = `
 		<div class='info-body-container'>
       <div class='info-information'>
         <div class='info-address info-line'>
@@ -653,507 +655,525 @@ function prepareInformation(markerProps) {
 	    </div>
 	  </div>
 	`;
-	let remainingEl = document.createElement('div');
-	remainingEl.innerHTML = remainingHtml;
+  let remainingEl = document.createElement('div');
+  remainingEl.innerHTML = remainingHtml;
 
-	infoWindowDiv.append(remainingEl);
+  infoWindowDiv.append(remainingEl);
 
-	//Google Directions
-	let markerGeometry = [selectedMarker.getPosition().lat(), selectedMarker.getPosition().lng()];
+  //Google Directions
+  let markerGeometry = [selectedMarker.getPosition().lat(), selectedMarker.getPosition().lng()];
 
-	infoWindowDiv.querySelector('.google-directions-container').addEventListener('click', async () => {
-		const currentLatLng = await getCurrentPosition();
-		console.log(currentLatLng);
-		let url = `https://www.google.com/maps?saddr=${currentLatLng[0]},${currentLatLng[1]}&daddr=${markerGeometry}`;
-		window.open(url, '_blank');
-	});
+  infoWindowDiv
+    .querySelector('.google-directions-container')
+    .addEventListener('click', async () => {
+      const currentLatLng = await getCurrentPosition();
+      console.log(currentLatLng);
+      let url = `https://www.google.com/maps?saddr=${currentLatLng[0]},${currentLatLng[1]}&daddr=${markerGeometry}`;
+      window.open(url, '_blank');
+    });
 
-	//styles when there is no img
-	if (!markerProps.imgs.length) {
-		let infoNameContainer = infoWindowDiv.querySelector('.info-name-container');
-		infoNameContainer.style.position = 'static';
-		infoNameContainer.style.borderTopLeftRadius = '5px';
-		infoNameContainer.style.borderTopRightRadius = '5px';
-		infoWindowDiv.querySelector('.info-body-container').style.marginTop = '1rem';
-		let lovatoIconHeader = infoWindowDiv.querySelector('.lovato-icon-header');
-		lovatoIconHeader.style.bottom = '-25%';
-		lovatoIconHeader.style.width = '5rem';
-		lovatoIconHeader.style.height = '5rem';
-		infoWindowDiv.querySelector('.svg-lovato-icon-header').style.marginLeft = '1px';
-		infoWindowDiv.querySelector('.photos-container').style.width = '500px';
-	}
+  //styles when there is no img
+  if (!markerProps.imgs.length) {
+    let infoNameContainer = infoWindowDiv.querySelector('.info-name-container');
+    infoNameContainer.style.position = 'static';
+    infoNameContainer.style.borderTopLeftRadius = '5px';
+    infoNameContainer.style.borderTopRightRadius = '5px';
+    infoWindowDiv.querySelector('.info-body-container').style.marginTop = '1rem';
+    let lovatoIconHeader = infoWindowDiv.querySelector('.lovato-icon-header');
+    lovatoIconHeader.style.bottom = '-25%';
+    lovatoIconHeader.style.width = '5rem';
+    lovatoIconHeader.style.height = '5rem';
+    infoWindowDiv.querySelector('.svg-lovato-icon-header').style.marginLeft = '1px';
+    infoWindowDiv.querySelector('.photos-container').style.width = '500px';
+  }
 
-	//Information
-	const infoEmailEl = infoWindowDiv.querySelector('.info-email');
-	const infoAddressEl = infoWindowDiv.querySelector('.info-address');
-	const infoPhoneEl = infoWindowDiv.querySelector('.info-phone');
-	const infoWebsiteEl = infoWindowDiv.querySelector('.info-website');
-	if (!markerProps.email) {
-		infoEmailEl.style.display = 'none';
-	} else {
-		infoEmailEl.style.display = 'flex';
-		infoEmailEl.lastElementChild.textContent = markerProps.email;
-	}
-	if (!markerProps.address) {
-		infoAddressEl.style.display = 'none';
-	} else {
-		infoAddressEl.style.display = 'flex';
-		infoAddressEl.lastElementChild.textContent = markerProps.address;
-	}
-	if (!markerProps.phone) {
-		infoPhoneEl.style.display = 'none';
-	} else {
-		infoPhoneEl.style.display = 'flex';
-		let phoneValue = markerProps.phone;
-		if (phoneValue.length >= 7) {
-			let temp = [...phoneValue];
-			temp.splice(6, 0, ' ');
-			phoneValue = temp.join('');
-		}
-		if (phoneValue.length >= 3) {
-			let temp = [...phoneValue];
-			temp.splice(2, 0, ' ');
-			phoneValue = temp.join('');
-		}
-		infoPhoneEl.lastElementChild.textContent = phoneValue;
-	}
-	if (!markerProps.website) {
-		infoWebsiteEl.style.display = 'none';
-	} else {
-		infoWebsiteEl.style.display = 'flex';
-		infoWebsiteEl.lastElementChild.textContent = markerProps.website;
-	}
+  //Information
+  const infoEmailEl = infoWindowDiv.querySelector('.info-email');
+  const infoAddressEl = infoWindowDiv.querySelector('.info-address');
+  const infoPhoneEl = infoWindowDiv.querySelector('.info-phone');
+  const infoWebsiteEl = infoWindowDiv.querySelector('.info-website');
+  if (!markerProps.email) {
+    infoEmailEl.style.display = 'none';
+  } else {
+    infoEmailEl.style.display = 'flex';
+    infoEmailEl.lastElementChild.textContent = markerProps.email;
+  }
+  if (!markerProps.address) {
+    infoAddressEl.style.display = 'none';
+  } else {
+    infoAddressEl.style.display = 'flex';
+    infoAddressEl.lastElementChild.textContent = markerProps.address;
+  }
+  if (!markerProps.phone) {
+    infoPhoneEl.style.display = 'none';
+  } else {
+    infoPhoneEl.style.display = 'flex';
+    let phoneValue = markerProps.phone;
+    if (phoneValue.length >= 7) {
+      let temp = [...phoneValue];
+      temp.splice(6, 0, ' ');
+      phoneValue = temp.join('');
+    }
+    if (phoneValue.length >= 3) {
+      let temp = [...phoneValue];
+      temp.splice(2, 0, ' ');
+      phoneValue = temp.join('');
+    }
+    infoPhoneEl.lastElementChild.textContent = phoneValue;
+  }
+  if (!markerProps.website) {
+    infoWebsiteEl.style.display = 'none';
+  } else {
+    infoWebsiteEl.style.display = 'flex';
+    infoWebsiteEl.lastElementChild.textContent = markerProps.website;
+  }
 
-	//Services
-	const infoLovatoSystemsEl = infoWindowDiv.querySelector('.info-lovatoSystems');
-	const infoGogasTanksEl = infoWindowDiv.querySelector('.info-gogasTanks');
-	const infoWebServicesEl = infoWindowDiv.querySelector('.info-webServices');
-	const infolovatoAppEl = infoWindowDiv.querySelector('.info-lovatoApp');
-	const infoGogasGuaranteeEl = infoWindowDiv.querySelector('.info-gogasGuarantee');
-	const infoCustomService1 = infoWindowDiv.querySelector('.info-customService1');
-	const infoCustomService2 = infoWindowDiv.querySelector('.info-customService2');
-	const infoCustomService3 = infoWindowDiv.querySelector('.info-customService3');
-	infoLovatoSystemsEl.style.display = markerProps.lovatoServices.lovatoSystems ? 'flex' : 'none';
-	infoGogasTanksEl.style.display = markerProps.lovatoServices.gogasTanks ? 'flex' : 'none';
-	infoWebServicesEl.style.display = markerProps.lovatoServices.webServices ? 'flex' : 'none';
-	infolovatoAppEl.style.display = markerProps.lovatoServices.lovatoApp ? 'flex' : 'none';
-	infoGogasGuaranteeEl.style.display = markerProps.lovatoServices.gogasGuarantee ? 'flex' : 'none';
-	infoCustomService1.style.display = markerProps.customServices[0] ? 'flex' : 'none';
-	infoCustomService2.style.display = markerProps.customServices[1] ? 'flex' : 'none';
-	infoCustomService3.style.display = markerProps.customServices[2] ? 'flex' : 'none';
+  //Services
+  const infoLovatoSystemsEl = infoWindowDiv.querySelector('.info-lovatoSystems');
+  const infoGogasTanksEl = infoWindowDiv.querySelector('.info-gogasTanks');
+  const infoWebServicesEl = infoWindowDiv.querySelector('.info-webServices');
+  const infolovatoAppEl = infoWindowDiv.querySelector('.info-lovatoApp');
+  const infoGogasGuaranteeEl = infoWindowDiv.querySelector('.info-gogasGuarantee');
+  const infoCustomService1 = infoWindowDiv.querySelector('.info-customService1');
+  const infoCustomService2 = infoWindowDiv.querySelector('.info-customService2');
+  const infoCustomService3 = infoWindowDiv.querySelector('.info-customService3');
+  infoLovatoSystemsEl.style.display = markerProps.lovatoServices.lovatoSystems ? 'flex' : 'none';
+  infoGogasTanksEl.style.display = markerProps.lovatoServices.gogasTanks ? 'flex' : 'none';
+  infoWebServicesEl.style.display = markerProps.lovatoServices.webServices ? 'flex' : 'none';
+  infolovatoAppEl.style.display = markerProps.lovatoServices.lovatoApp ? 'flex' : 'none';
+  infoGogasGuaranteeEl.style.display = markerProps.lovatoServices.gogasGuarantee ? 'flex' : 'none';
+  infoCustomService1.style.display = markerProps.customServices[0] ? 'flex' : 'none';
+  infoCustomService2.style.display = markerProps.customServices[1] ? 'flex' : 'none';
+  infoCustomService3.style.display = markerProps.customServices[2] ? 'flex' : 'none';
 
-	//Custom Services
-	customServicesDisplay(markerProps);
+  //Custom Services
+  customServicesDisplay(markerProps);
 }
 
 function customServicesDisplay(markerProps) {
-	if (markerProps.customServices[0] || markerProps.customServices[1] || markerProps.customServices[2]) {
-		infoWindowDiv.querySelector('.info-customServices').style.display = 'block';
-		infoWindowDiv.querySelector('.info-customServices-hr').style.display = 'block';
-	} else {
-		infoWindowDiv.querySelector('.info-customServices').style.display = 'none';
-		infoWindowDiv.querySelector('.info-customServices-hr').style.display = 'none';
-	}
+  if (
+    markerProps.customServices[0] ||
+    markerProps.customServices[1] ||
+    markerProps.customServices[2]
+  ) {
+    infoWindowDiv.querySelector('.info-customServices').style.display = 'block';
+    infoWindowDiv.querySelector('.info-customServices-hr').style.display = 'block';
+  } else {
+    infoWindowDiv.querySelector('.info-customServices').style.display = 'none';
+    infoWindowDiv.querySelector('.info-customServices-hr').style.display = 'none';
+  }
 }
 
 function preparePhotos(markerImgs) {
-	const photosContainer = document.createElement('div');
-	photosContainer.className = 'photos-container';
+  const photosContainer = document.createElement('div');
+  photosContainer.className = 'photos-container';
 
-	let photosHtml = ``;
-	let imgElement;
-	markerImgs.forEach(markerImg => {
-		imgElement = insertImgToDOM(markerImg);
-		photosHtml += `
+  let photosHtml = ``;
+  let imgElement;
+  markerImgs.forEach(markerImg => {
+    imgElement = insertImgToDOM(markerImg);
+    photosHtml += `
 			<div class='info-image'>
 				${imgElement.firstElementChild.outerHTML}
 			</div>
 			`;
-	});
-	photosContainer.innerHTML = photosHtml;
-	infoWindowDiv.append(photosContainer);
-	return photosContainer;
+  });
+  photosContainer.innerHTML = photosHtml;
+  infoWindowDiv.append(photosContainer);
+  return photosContainer;
 }
 
 function insertImgToDOM(img) {
-	const imgHtml = `<img src="${img.url}"/>`;
+  const imgHtml = `<img src="${img.url}"/>`;
 
-	const newImgElement = document.createElement('div');
-	newImgElement.className = 'uploaded-img';
-	newImgElement.innerHTML = imgHtml;
+  const newImgElement = document.createElement('div');
+  newImgElement.className = 'uploaded-img';
+  newImgElement.innerHTML = imgHtml;
 
-	return newImgElement;
+  return newImgElement;
 
-	// function bufferToBase64(buf) {
-	// 	var binstr = Array.prototype.map
-	// 		.call(buf, function (ch) {
-	// 			return String.fromCharCode(ch);
-	// 		})
-	// 		.join('');
-	// 	return btoa(binstr);
-	// }
+  // function bufferToBase64(buf) {
+  // 	var binstr = Array.prototype.map
+  // 		.call(buf, function (ch) {
+  // 			return String.fromCharCode(ch);
+  // 		})
+  // 		.join('');
+  // 	return btoa(binstr);
+  // }
 }
 function insertAfter(referenceNode, newNode) {
-	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
 function prepareSlideshow(photosDiv) {
-	slideIndex = 1;
-	let slideshowHtml = `
+  slideIndex = 1;
+  let slideshowHtml = `
   <div class='slideshow-container'>
   <div class='slideshow-left'>&#10094;</div>
   <div class='slideshow-dots'>`;
 
-	const allImgs = photosDiv.querySelectorAll('.info-image');
-	for (let i = 0; i < allImgs.length; i++) {
-		slideshowHtml += `<span class="slideshow-dot"></span>`;
-	}
+  const allImgs = photosDiv.querySelectorAll('.info-image');
+  for (let i = 0; i < allImgs.length; i++) {
+    slideshowHtml += `<span class="slideshow-dot"></span>`;
+  }
 
-	slideshowHtml += `
+  slideshowHtml += `
 			</div>
 			<div class='slideshow-right'>&#10095;</div>
 		</div>`;
-	photosDiv.innerHTML += slideshowHtml;
+  photosDiv.innerHTML += slideshowHtml;
 
-	showDivs(slideIndex, photosDiv);
+  showDivs(slideIndex, photosDiv);
 
-	photosDiv.querySelector('.slideshow-left').addEventListener('click', () => plusDivs(-1, photosDiv));
-	photosDiv.querySelector('.slideshow-right').addEventListener('click', () => plusDivs(1, photosDiv));
+  photosDiv
+    .querySelector('.slideshow-left')
+    .addEventListener('click', () => plusDivs(-1, photosDiv));
+  photosDiv
+    .querySelector('.slideshow-right')
+    .addEventListener('click', () => plusDivs(1, photosDiv));
 
-	const dots = photosDiv.getElementsByClassName('slideshow-dot');
-	for (let i = 0; i < dots.length; i++) {
-		dots[i].addEventListener('click', () => currentDiv(i + 1, photosDiv));
-		dots[i].addEventListener('mouseover', () => currentDiv(i + 1, photosDiv));
-	}
+  const dots = photosDiv.getElementsByClassName('slideshow-dot');
+  for (let i = 0; i < dots.length; i++) {
+    dots[i].addEventListener('click', () => currentDiv(i + 1, photosDiv));
+    dots[i].addEventListener('mouseover', () => currentDiv(i + 1, photosDiv));
+  }
 }
 function plusDivs(n, photosDiv) {
-	showDivs((slideIndex += n), photosDiv);
+  showDivs((slideIndex += n), photosDiv);
 }
 
 function currentDiv(n, photosDiv) {
-	showDivs((slideIndex = n), photosDiv);
+  showDivs((slideIndex = n), photosDiv);
 }
 
 function showDivs(n, photosDiv) {
-	let i;
-	const images = photosDiv.querySelectorAll('.info-image');
-	const dots = photosDiv.getElementsByClassName('slideshow-dot');
-	if (n > images.length) {
-		slideIndex = 1;
-	}
-	if (n < 1) {
-		slideIndex = images.length;
-	}
-	for (i = 0; i < images.length; i++) {
-		images[i].style.display = 'none';
-		images[i].classList.remove('current-image');
-	}
-	for (i = 0; i < dots.length; i++) {
-		dots[i].className = dots[i].className.replace(' slideshow-dot-white', '');
-	}
-	images[slideIndex - 1].style.display = 'block';
-	images[slideIndex - 1].classList.add('current-image');
-	dots[slideIndex - 1].className += ' slideshow-dot-white';
+  let i;
+  const images = photosDiv.querySelectorAll('.info-image');
+  const dots = photosDiv.getElementsByClassName('slideshow-dot');
+  if (n > images.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = images.length;
+  }
+  for (i = 0; i < images.length; i++) {
+    images[i].style.display = 'none';
+    images[i].classList.remove('current-image');
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(' slideshow-dot-white', '');
+  }
+  images[slideIndex - 1].style.display = 'block';
+  images[slideIndex - 1].classList.add('current-image');
+  dots[slideIndex - 1].className += ' slideshow-dot-white';
 }
 
 document.addEventListener('keydown', e => {
-	const key = e.key;
-	if (key === 'ArrowRight') {
-		const photosContainer = infoWindowDiv.querySelector('.photos-container');
-		if (!photosContainer) return;
-		if (photosContainer.querySelector('.slideshow-container')) plusDivs(1, photosContainer);
-	}
-	if (key === 'ArrowLeft') {
-		const photosContainer = infoWindowDiv.querySelector('.photos-container');
-		if (!photosContainer) return;
-		if (photosContainer.querySelector('.slideshow-container')) plusDivs(-1, photosContainer);
-	}
-	if (key === 'Enter') {
-		// e.preventDefault();
-		// if (!document.querySelectorAll('.uploaded-img img').length) return;
-		// document.querySelector('.info-modal').style.display = 'block';
-		// document.querySelector(
-		// 	'.info-modal-image'
-		// ).src = infoWindowDiv.querySelector(
-		// 	'.current-image'
-		// ).firstElementChild.src;
-		// document.querySelector('.info-modal-caption').textContent =
-		// 	workerElements.name.value;
-	}
-	if (key === 'Escape') {
-		if (document.querySelector('.info-modal').style.display === 'block') document.querySelector('.info-modal').style.display = 'none';
-	}
+  const key = e.key;
+  if (key === 'ArrowRight') {
+    const photosContainer = infoWindowDiv.querySelector('.photos-container');
+    if (!photosContainer) return;
+    if (photosContainer.querySelector('.slideshow-container')) plusDivs(1, photosContainer);
+  }
+  if (key === 'ArrowLeft') {
+    const photosContainer = infoWindowDiv.querySelector('.photos-container');
+    if (!photosContainer) return;
+    if (photosContainer.querySelector('.slideshow-container')) plusDivs(-1, photosContainer);
+  }
+  if (key === 'Enter') {
+    // e.preventDefault();
+    // if (!document.querySelectorAll('.uploaded-img img').length) return;
+    // document.querySelector('.info-modal').style.display = 'block';
+    // document.querySelector(
+    // 	'.info-modal-image'
+    // ).src = infoWindowDiv.querySelector(
+    // 	'.current-image'
+    // ).firstElementChild.src;
+    // document.querySelector('.info-modal-caption').textContent =
+    // 	workerElements.name.value;
+  }
+  if (key === 'Escape') {
+    if (document.querySelector('.info-modal').style.display === 'block')
+      document.querySelector('.info-modal').style.display = 'none';
+  }
 });
 
 function generateInitHtml() {
-	//Generate Modal Html
-	const modalEl = document.createElement('div');
-	modalEl.innerHTML = `<div class="info-modal">
+  //Generate Modal Html
+  const modalEl = document.createElement('div');
+  modalEl.innerHTML = `<div class="info-modal">
 			<span class="info-modal-close">&times;</span>
 			<img class="info-modal-image" />
 			<div class="info-modal-caption"></div>
 		</div>`;
 
-	document.body.append(modalEl);
-	// document.querySelector('#map').append(modalEl); //test!!
+  document.body.append(modalEl);
+  // document.querySelector('#map').append(modalEl); //test!!
 
-	//Generate Loader Html
-	const loaderEl = document.createElement('div');
-	loaderEl.className = 'lds-roller hide-roller';
-	// loaderEl.innerHTML = `<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>`;
-	loaderEl.innerHTML = `<img src='https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6066396962c725d882040aba_Ripple-2s-800px.svg' alt='loading...'/>`;
+  //Generate Loader Html
+  const loaderEl = document.createElement('div');
+  loaderEl.className = 'lds-roller hide-roller';
+  // loaderEl.innerHTML = `<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>`;
+  loaderEl.innerHTML = `<img src='https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6066396962c725d882040aba_Ripple-2s-800px.svg' alt='loading...'/>`;
 
-	document.querySelector('#map').parentElement.prepend(loaderEl);
+  document.querySelector('#map').parentElement.prepend(loaderEl);
 }
 
 function prepareModal(photosContainer, markerProps) {
-	const allImages = photosContainer.querySelectorAll('.info-image');
-	const modal = document.querySelector('.info-modal');
-	const modalImage = document.querySelector('.info-modal-image');
-	const modalCaption = document.querySelector('.info-modal-caption');
+  const allImages = photosContainer.querySelectorAll('.info-image');
+  const modal = document.querySelector('.info-modal');
+  const modalImage = document.querySelector('.info-modal-image');
+  const modalCaption = document.querySelector('.info-modal-caption');
 
-	allImages.forEach(image => {
-		image.addEventListener('click', () => {
-			modal.style.display = 'block';
-			modalImage.src = image.firstElementChild.src;
-			modalCaption.textContent = markerProps.name;
-		});
-	});
-	//close modal
-	modal.onclick = e => {
-		if (e.target !== modalImage && e.target !== modalCaption) modal.style.display = 'none';
-	};
+  allImages.forEach(image => {
+    image.addEventListener('click', () => {
+      modal.style.display = 'block';
+      modalImage.src = image.firstElementChild.src;
+      modalCaption.textContent = markerProps.name;
+    });
+  });
+  //close modal
+  modal.onclick = e => {
+    if (e.target !== modalImage && e.target !== modalCaption) modal.style.display = 'none';
+  };
 }
 
 //Map UI
 function initDOMEvents() {
-	document.querySelector('#mapForm').addEventListener('submit', e => e.preventDefault());
-	document.querySelector('#searchBtn').type = 'button';
+  document.querySelector('#mapForm').addEventListener('submit', e => e.preventDefault());
+  document.querySelector('#searchBtn').type = 'button';
 
-	//Autocomplete
-	const autocompleteOptions = {
-		componentRestrictions: { country: 'gr' },
-		fields: ['geometry']
-	};
+  //Autocomplete
+  const autocompleteOptions = {
+    componentRestrictions: { country: 'gr' },
+    fields: ['geometry']
+  };
 
-	const autocompleteInput = document.querySelector('#searchInput');
-	const autoComplete = new google.maps.places.Autocomplete(autocompleteInput, autocompleteOptions);
+  const autocompleteInput = document.querySelector('#searchInput');
+  const autoComplete = new google.maps.places.Autocomplete(autocompleteInput, autocompleteOptions);
 
-	//Listeners
-	autoComplete.addListener('place_changed', async () => {
-		let searchPosition;
-		const place = autoComplete.getPlace();
-		console.log(place);
+  //Listeners
+  autoComplete.addListener('place_changed', async () => {
+    let searchPosition;
+    const place = autoComplete.getPlace();
+    console.log(place);
 
-		if (Object.keys(place).length === 1) {
-			console.log('handling with geocoder for unknown or enter');
-			try {
-				const res = await geocoderSolution(autocompleteInput.value);
-				console.log('res', res);
-				autocompleteInput.value = res.address;
-				searchPosition = res.location;
-			} catch (e) {
-				console.log(e);
-				return;
-			}
-		} else searchPosition = place.geometry.location;
+    if (Object.keys(place).length === 1) {
+      console.log('handling with geocoder for unknown or enter');
+      try {
+        const res = await geocoderSolution(autocompleteInput.value);
+        console.log('res', res);
+        autocompleteInput.value = res.address;
+        searchPosition = res.location;
+      } catch (e) {
+        console.log(e);
+        return;
+      }
+    } else searchPosition = place.geometry.location;
 
-		userMarker.setOptions({
-			map,
-			title: autocompleteInput.value,
-			position: searchPosition,
-			animation: google.maps.Animation.DROP,
-			zIndex: google.maps.Marker.MAX_ZINDEX
-		});
-		map.setZoom(searchZoom);
-		map.setCenter(userMarker.position);
-	});
+    userMarker.setOptions({
+      map,
+      title: autocompleteInput.value,
+      position: searchPosition,
+      animation: google.maps.Animation.DROP,
+      zIndex: google.maps.Marker.MAX_ZINDEX
+    });
+    map.setZoom(searchZoom);
+    map.setCenter(userMarker.position);
+  });
 
-	//Search Icon click
-	google.maps.event.addDomListener(document.querySelector('#searchBtn'), 'click', async e => {
-		try {
-			console.log('test', e.target);
-			const address = document.querySelector('#searchInput').value;
-			const res = await geocoderSolution(address);
-			console.log(res);
-			address.value = res.address;
+  //Search Icon click
+  google.maps.event.addDomListener(document.querySelector('#searchBtn'), 'click', async e => {
+    try {
+      console.log('test', e.target);
+      const address = document.querySelector('#searchInput').value;
+      const res = await geocoderSolution(address);
+      console.log(res);
+      address.value = res.address;
 
-			userMarker.setOptions({
-				map,
-				title: autocompleteInput.value,
-				position: res.location,
-				animation: google.maps.Animation.DROP,
-				zIndex: google.maps.Marker.MAX_ZINDEX
-			});
-			map.setZoom(searchZoom);
-			map.setCenter(userMarker.position);
-		} catch (e) {
-			console.log('error on geocoding', e);
-		}
+      userMarker.setOptions({
+        map,
+        title: autocompleteInput.value,
+        position: res.location,
+        animation: google.maps.Animation.DROP,
+        zIndex: google.maps.Marker.MAX_ZINDEX
+      });
+      map.setZoom(searchZoom);
+      map.setCenter(userMarker.position);
+    } catch (e) {
+      console.log('error on geocoding', e);
+    }
 
-		//automatic scroll to #map
-	});
+    //automatic scroll to #map
+  });
 
-	//Geolocation Btn Click
-	document.querySelectorAll('.my-location-btn').forEach(el => {
-		google.maps.event.addDomListener(el, 'click', async () => {
-			try {
-				const currentLatLng = await getCurrentPosition();
-				const myLatLng = {
-					lat: currentLatLng[0],
-					lng: currentLatLng[1]
-				};
+  //Geolocation Btn Click
+  document.querySelectorAll('.my-location-btn').forEach(el => {
+    google.maps.event.addDomListener(el, 'click', async () => {
+      try {
+        const currentLatLng = await getCurrentPosition();
+        const myLatLng = {
+          lat: currentLatLng[0],
+          lng: currentLatLng[1]
+        };
 
-				userMarker.setOptions({
-					position: myLatLng,
-					map: map,
-					title: 'Είστε εδώ',
-					animation: google.maps.Animation.DROP,
-					zIndex: google.maps.Marker.MAX_ZINDEX
-				});
+        userMarker.setOptions({
+          position: myLatLng,
+          map: map,
+          title: 'Είστε εδώ',
+          animation: google.maps.Animation.DROP,
+          zIndex: google.maps.Marker.MAX_ZINDEX
+        });
 
-				console.log(`Accuracy ${currentLatLng[2]} meters.`);
-				map.setZoom(searchZoom);
-				map.setCenter(userMarker.position);
-			} catch (e) {
-				alert(
-					'Για να χρησιμοποιήσετε την υπηρεσία της εύρεσης των κοντινότερων συνεργείων, χρειάζεται να επιτρέψετε την εύρεση τοποθεσίας για το παρών site από τις ρυθμίσεις του περιηγητή σας και να ξαναπροσπαθήσετε! Για το Google Chrome πηγαίνετε στο: chrome://settings/content/location'
-				);
-			}
-		});
-	});
+        console.log(`Accuracy ${currentLatLng[2]} meters.`);
+        map.setZoom(searchZoom);
+        map.setCenter(userMarker.position);
+      } catch (e) {
+        alert(
+          'Για να χρησιμοποιήσετε την υπηρεσία της εύρεσης των κοντινότερων συνεργείων, χρειάζεται να επιτρέψετε την εύρεση τοποθεσίας για το παρών site από τις ρυθμίσεις του περιηγητή σας και να ξαναπροσπαθήσετε! Για το Google Chrome πηγαίνετε στο: chrome://settings/content/location'
+        );
+      }
+    });
+  });
 
-	initFilters();
+  initFilters();
 }
 
 async function geocoderSolution(address) {
-	return new Promise((resolve, reject) => {
-		if (!address) {
-			alert('Παρακαλώ προσθέστε μια περιοχή!');
-			reject('Παρακαλώ προσθέστε μια περιοχή!');
-			return;
-		}
-		geocoder.geocode(
-			{
-				address: address,
-				componentRestrictions: {
-					country: 'gr'
-				}
-			},
-			(results, status) => {
-				if (status === 'OK') {
-					console.log('geocoding for', address);
-					console.log('geocoder address result', results[0].formatted_address);
-					resolve({ location: results[0].geometry.location, address: results[0].formatted_address });
-				} else {
-					alert('Συγγνώμη, δεν βρέθηκε τέτοια περιοχή. Ξαναπροσπαθήστε!');
-					reject('Δε βρέθηκε τέτοια περιοχή! Προσπαθήστε ξανά.');
-					return;
-				}
-			}
-		);
-	});
+  return new Promise((resolve, reject) => {
+    if (!address) {
+      alert('Παρακαλώ προσθέστε μια περιοχή!');
+      reject('Παρακαλώ προσθέστε μια περιοχή!');
+      return;
+    }
+    geocoder.geocode(
+      {
+        address: address,
+        componentRestrictions: {
+          country: 'gr'
+        }
+      },
+      (results, status) => {
+        if (status === 'OK') {
+          console.log('geocoding for', address);
+          console.log('geocoder address result', results[0].formatted_address);
+          resolve({
+            location: results[0].geometry.location,
+            address: results[0].formatted_address
+          });
+        } else {
+          alert('Συγγνώμη, δεν βρέθηκε τέτοια περιοχή. Ξαναπροσπαθήστε!');
+          reject('Δε βρέθηκε τέτοια περιοχή! Προσπαθήστε ξανά.');
+          return;
+        }
+      }
+    );
+  });
 }
 
 function getCurrentPosition() {
-	return new Promise((resolve, reject) => {
-		let geolocationOptions = {
-			enableHighAccuracy: true,
-			timeout: 5000,
-			maximumAge: 0
-		};
+  return new Promise((resolve, reject) => {
+    let geolocationOptions = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
 
-		navigator.geolocation.getCurrentPosition(
-			pos => {
-				resolve([pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy]);
-			},
-			err => {
-				console.warn(`Error on geolocation: ${err.code}: ${err.message}`);
-				reject(err.message);
-			},
-			geolocationOptions
-		);
-	});
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        resolve([pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy]);
+      },
+      err => {
+        console.warn(`Error on geolocation: ${err.code}: ${err.message}`);
+        reject(err.message);
+      },
+      geolocationOptions
+    );
+  });
 }
 
 function initFilters() {
-	//Fitlers
-	document.querySelectorAll('#filterForm input').forEach(el => el.addEventListener('change', filterMarkers));
+  //Fitlers
+  document
+    .querySelectorAll('#filterForm input')
+    .forEach(el => el.addEventListener('change', filterMarkers));
 
-	document.querySelector('#resetFiltersBtn').addEventListener('click', e => {
-		document.querySelectorAll('.f-label .w--redirected-checked').forEach(label => {
-			label.classList.remove('w--redirected-checked');
-			label.nextElementSibling.checked = false;
-		});
-		filterMarkers();
-	});
+  document.querySelector('#resetFiltersBtn').addEventListener('click', e => {
+    document.querySelectorAll('.f-label .w--redirected-checked').forEach(label => {
+      label.classList.remove('w--redirected-checked');
+      label.nextElementSibling.checked = false;
+    });
+    filterMarkers();
+  });
 }
 
 function filterMarkers() {
-	const labels = document.querySelectorAll('#filterForm .f-label');
-	const checkedLabels = [...labels].filter(l => l.querySelector('input').checked);
+  const labels = document.querySelectorAll('#filterForm .f-label');
+  const checkedLabels = [...labels].filter(l => l.querySelector('input').checked);
 
-	if (!checkedLabels.length) markers.map(m => m.setVisible(true));
-	else markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
+  if (!checkedLabels.length) markers.map(m => m.setVisible(true));
+  else markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
 
-	markerClusterer.repaint();
+  markerClusterer.repaint();
 
-	counter = 0;
-	markers.forEach(marker => {
-		if (marker.getVisible()) {
-			counter++;
-		}
-	});
-	console.log({ counter });
-	infoWindow.close();
-	if (selectedMarker) selectedMarker.setAnimation(null);
-	selectedMarker = null;
+  counter = 0;
+  markers.forEach(marker => {
+    if (marker.getVisible()) {
+      counter++;
+    }
+  });
+  console.log({ counter });
+  infoWindow.close();
+  if (selectedMarker) selectedMarker.setAnimation(null);
+  selectedMarker = null;
 }
 
 function setMarkerVisibility(marker, labels) {
-	for (let label of labels) {
-		if (label.querySelector('input').checked && !marker.props.lovatoServices[label.id]) return false;
-	}
-	return true;
+  for (let label of labels) {
+    if (label.querySelector('input').checked && !marker.props.lovatoServices[label.id])
+      return false;
+  }
+  return true;
 }
 
 async function urlParamsConfig() {
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
-	let gps, filters;
-	if (urlParams.has('gps')) {
-		gps = urlParams.get('gps');
-		const searchInput = document.querySelector('#searchInput');
-		try {
-			const res = await geocoderSolution(gps);
-			console.log(res);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  let gps, filters;
+  if (urlParams.has('gps')) {
+    gps = urlParams.get('gps');
+    const searchInput = document.querySelector('#searchInput');
+    try {
+      const res = await geocoderSolution(gps);
+      console.log(res);
 
-			searchInput.value = res.address;
-			userMarker.setOptions({
-				map,
-				title: searchInput.value,
-				position: res.location,
-				animation: google.maps.Animation.DROP,
-				zIndex: google.maps.Marker.MAX_ZINDEX
-			});
-			map.setZoom(searchZoom);
-			map.setCenter(userMarker.position);
-		} catch (e) {
-			console.log('error on params geocoding', e);
-		}
-	}
-	if (urlParams.has('filters')) {
-		filters = urlParams.get('filters').split(',');
-		filters = filters.map(f => parseInt(f));
-		filters = [...new Set(filters)];
+      searchInput.value = res.address;
+      userMarker.setOptions({
+        map,
+        title: searchInput.value,
+        position: res.location,
+        animation: google.maps.Animation.DROP,
+        zIndex: google.maps.Marker.MAX_ZINDEX
+      });
+      map.setZoom(searchZoom);
+      map.setCenter(userMarker.position);
+    } catch (e) {
+      console.log('error on params geocoding', e);
+    }
+  }
+  if (urlParams.has('filters')) {
+    filters = urlParams.get('filters').split(',');
+    filters = filters.map(f => parseInt(f));
+    filters = [...new Set(filters)];
 
-		if (filters.some(f => !Number(f) || f < 1 || f > 5)) return console.log('Not valid filters query');
+    if (filters.some(f => !Number(f) || f < 1 || f > 5))
+      return console.log('Not valid filters query');
 
-		const labels = document.querySelectorAll('.f-label div');
-		filters.forEach(filter => {
-			labels[filter - 1].classList.add('w--redirected-checked');
-			labels[filter - 1].nextElementSibling.checked = true;
-		});
-		filterMarkers();
-	}
+    const labels = document.querySelectorAll('.f-label div');
+    filters.forEach(filter => {
+      labels[filter - 1].classList.add('w--redirected-checked');
+      labels[filter - 1].nextElementSibling.checked = true;
+    });
+    filterMarkers();
+  }
 }
