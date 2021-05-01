@@ -419,7 +419,8 @@ async function initMap() {
 
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(52, 52)
+        scaledSize: new google.maps.Size(52, 52),
+        origin: new google.maps.Point(-2, 0)
       });
     });
     // marker.addListener('mouseover', () => {
@@ -449,7 +450,8 @@ async function initMap() {
     marker.addListener('mouseout', e => {
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(50, 50)
+        scaledSize: new google.maps.Size(50, 50),
+        origin: new google.maps.Point(0, 0)
       });
     });
     // marker.addListener('mouseout', e => {
