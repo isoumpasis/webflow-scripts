@@ -16,6 +16,10 @@ body {
   overflow-x: hidden;
 }
 
+.shadow-map {
+  pointer-events: none;
+}
+
 .lovato-services-header,
 .custom-services-header {
   font-family: Pfhighwaysanspro, sans-serif;
