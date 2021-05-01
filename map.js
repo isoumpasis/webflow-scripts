@@ -428,8 +428,8 @@ async function initMap() {
     // });
 
     marker.addListener('click', () => {
-      map.setZoom(searchZoom);
-      map.setCenter(marker.position);
+      // map.setZoom(searchZoom);
+      // map.setCenter(marker.position);
 
       if (selectedMarker === marker) return;
       if (selectedMarker) {
