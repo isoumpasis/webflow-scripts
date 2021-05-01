@@ -409,6 +409,19 @@ async function initMap() {
   });
 
   markers.forEach(marker => {
+    marker.addListener('mouseover', () => {
+      // if (selectedMarker === marker) return;
+      // if (selectedMarker) {
+      //   selectedMarker.setAnimation(null);
+      // }
+      // selectedMarker = marker;
+      // selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
+
+      marker.setIcon({
+        ...marker.getIcon(),
+        scaledSize: new google.maps.Size(75, 75)
+      });
+    });
     // marker.addListener('mouseover', () => {
     // 	if (selectedMarker === marker) return;
     // 	if (selectedMarker) {
@@ -433,6 +446,12 @@ async function initMap() {
     });
 
     //Optional
+    marker.addListener('mouseout', e => {
+      marker.setIcon({
+        ...marker.getIcon(),
+        scaledSize: new google.maps.Size(50, 50)
+      });
+    });
     // marker.addListener('mouseout', e => {
     // 	infoWindow.close();
     // 	if (selectedMarker) {
