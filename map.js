@@ -414,7 +414,7 @@ async function initMap() {
       marker.setIcon({
         ...marker.getIcon(),
         scaledSize: new google.maps.Size(52, 52),
-        origin: new google.maps.Point(1, 0)
+        origin: new google.maps.Point(1, 2)
       });
     });
     // marker.addListener('mouseover', () => {
