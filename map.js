@@ -435,6 +435,11 @@ async function initMap() {
       if (selectedMarker) {
         selectedMarker.setAnimation(null);
       }
+      marker.setIcon({
+        ...marker.getIcon(),
+        scaledSize: new google.maps.Size(50, 50),
+        origin: new google.maps.Point(0, 0)
+      });
       selectedMarker = marker;
       selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
       openInfoWindow(marker);
