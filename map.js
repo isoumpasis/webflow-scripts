@@ -419,7 +419,7 @@ async function initMap() {
 
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(55, 55)
+        scaledSize: new google.maps.Size(52, 52)
       });
     });
     // marker.addListener('mouseover', () => {
