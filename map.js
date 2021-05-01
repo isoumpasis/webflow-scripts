@@ -410,17 +410,11 @@ async function initMap() {
 
   markers.forEach(marker => {
     marker.addListener('mouseover', () => {
-      // if (selectedMarker === marker) return;
-      // if (selectedMarker) {
-      //   selectedMarker.setAnimation(null);
-      // }
-      // selectedMarker = marker;
-      // selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
-
+      if (selectedMarker === marker) return;
       marker.setIcon({
         ...marker.getIcon(),
         scaledSize: new google.maps.Size(52, 52),
-        origin: new google.maps.Point(2, 0)
+        origin: new google.maps.Point(1, 0)
       });
     });
     // marker.addListener('mouseover', () => {
@@ -448,6 +442,7 @@ async function initMap() {
 
     //Optional
     marker.addListener('mouseout', e => {
+      if (selectedMarker === marker) return;
       marker.setIcon({
         ...marker.getIcon(),
         scaledSize: new google.maps.Size(50, 50),
