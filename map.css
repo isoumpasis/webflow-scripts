@@ -10,6 +10,9 @@
 body {
   font-family: Pfhighwaysanspro, sans-serif;
   font-weight: 400;
+}
+
+body [body-attr] {
   overflow-x: hidden;
 }
 
