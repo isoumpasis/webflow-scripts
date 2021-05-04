@@ -585,29 +585,14 @@ function showResults() {
 
   //If there is a suggestion
   if (suggestedContainer) {
-    //Hide all emulator containers
-    suggestedContainer
-      .querySelectorAll('.info-content-block')
-      .forEach(emCont => (emCont.style.display = 'none'));
-
-    //show emulator information on suggestion
-    if (foundVehicleObj.hasOwnProperty('emulators')) {
-      const vehicleEmulatorType = foundVehicleObj.emulators[0].toLowerCase();
-      suggestedContainer.querySelectorAll('.info-content-block').forEach(emCont => {
-        console.log('change emulator visibility', emCont);
-        if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
-          emCont.style.display = 'block';
-          emCont.querySelector('.info-content').style.height = '0px';
-        }
-      });
-    }
+    displayEmulatorInfo(suggestedContainer);
 
     configureEasyPay();
 
     // [...suggestedContainers].filter(c => c.style.display !== 'none')[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
     // document.querySelector('.suggest').scrollIntoView({ behavior: 'smooth', block: 'end' });
     // document.querySelector('.car-result-block').scrollIntoView({ behavior: 'smooth', block: 'end' });
-    document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
     configureCalculator();
   } else {
     resetCalc();
@@ -700,6 +685,24 @@ function showCylinderResults(years) {
   } else {
     suggestedSystems = ['C-OBD II'];
     document.querySelector('#suggested-cobd').style.display = 'grid';
+  }
+}
+
+function displayEmulatorInfo(suggestedContainer) {
+  //Hide all emulator containers first
+  suggestedContainer
+    .querySelectorAll('.info-content-block')
+    .forEach(emCont => (emCont.style.display = 'none'));
+
+  if (foundVehicleObj.hasOwnProperty('emulators')) {
+    const vehicleEmulatorType = foundVehicleObj.emulators[0].toLowerCase();
+    suggestedContainer.querySelectorAll('.info-content-block').forEach(emCont => {
+      console.log('change emulator visibility', emCont);
+      if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
+        emCont.style.display = 'block';
+        emCont.querySelector('.info-content').style.height = '0px';
+      }
+    });
   }
 }
 
