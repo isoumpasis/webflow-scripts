@@ -507,7 +507,7 @@ function haveSameEmulators(vehicles) {
 descriptionSelect.addEventListener('change', e => descriptionOnChange(e.target.value));
 
 function descriptionOnChange(value) {
-  console.log('cylinder changed', value);
+  console.log('description changed', value);
 
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
@@ -639,23 +639,41 @@ function showMonouResults() {
 }
 
 function showCylinderResults(years) {
-  foundVehicleObj = selectedModelObj.vehicles[0];
+  foundVehicleObj = selectedModelObj.vehicles[0]; // to be sure
+
   const descriptionValue = descriptionSelect.value;
-  for (let veh of selectedModelObj.vehicles) {
-    if (descriptionValue.length === 1) {
-      //cyls mode
-      if (veh.cylinders == descriptionValue) {
-        foundVehicleObj = veh;
-        break;
-      }
-    } else {
-      //hp mode
-      if (veh.hp == descriptionValue) {
-        foundVehicleObj = veh;
-        break;
-      }
+  let consumptionObjs = [];
+  selectedModelObj.vehicles.forEach(veh => {
+    consumptionObjs.push({ conSum: veh.consumption.reduce((prev, curr) => prev + curr, 0), veh });
+  });
+  consumptionObjs = consumptionObjs.sort((a, b) => a.conSum > b.conSum);
+
+  console.log({ consumptionObjs });
+
+  for (let consumptionObj of consumptionObjs) {
+    const vehAttribute =
+      descriptionValue.length === 1 ? consumptionObj.veh.cylinders : consumptionObj.veh.hp;
+    if (vehAttribute == descriptionValue) {
+      foundVehicleObj = veh;
+      break;
     }
   }
+
+  // for (let veh of selectedModelObj.vehicles) {
+  //   if (descriptionValue.length === 1) {
+  //     //cyls mode
+  //     if (veh.cylinders == descriptionValue) {
+  //       foundVehicleObj = veh;
+  //       break;
+  //     }
+  //   } else {
+  //     //hp mode
+  //     if (veh.hp == descriptionValue) {
+  //       foundVehicleObj = veh;
+  //       break;
+  //     }
+  //   }
+  // }
   console.log({ foundVehicleObj });
 
   const cyls = foundVehicleObj.cylinders;
