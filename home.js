@@ -585,16 +585,20 @@ function showResults() {
 
   //If there is a suggestion
   if (suggestedContainer) {
+    //Hide all emulator containers
+    suggestedContainer
+      .querySelectorAll('.info-content-block')
+      .forEach(emCont => (emCont.style.display = 'none'));
+
+    //show emulator information on suggestion
     if (foundVehicleObj.hasOwnProperty('emulators')) {
       const vehicleEmulatorType = foundVehicleObj.emulators[0].toLowerCase();
       suggestedContainer.querySelectorAll('.info-content-block').forEach(emCont => {
         console.log('change emulator visibility', emCont);
         if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
           emCont.style.display = 'block';
-        } else {
-          emCont.style.display = 'none';
+          emCont.querySelector('.info-content').style.height = '0px';
         }
-        emCont.querySelector('.info-content').style.height = '0px';
       });
     }
 
