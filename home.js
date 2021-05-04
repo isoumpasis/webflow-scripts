@@ -565,8 +565,21 @@ function showResults() {
     showCylinderResults(years);
   }
 
-  //If there is a result
-  if ([...suggestedContainers].some(container => container.style.display !== 'none')) {
+  const suggestedContainer = [...suggestedContainers].filter(
+    container => container.style.display !== 'none'
+  )[0];
+
+  //If there is a suggestion
+  if (suggestedContainer) {
+    if (foundVehicleObj.hasOwnProperty('emulators')) {
+      const vehicleEmulatorType = foundVehicleObj.emulators[0].toLowerCase();
+      suggestedContainer.querySelectorAll('.info-content-block').forEach(emCont => {
+        if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`))
+          emCont.style.display = 'block';
+        else emCont.style.display = 'none';
+      });
+    }
+
     configureEasyPay();
 
     // [...suggestedContainers].filter(c => c.style.display !== 'none')[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
