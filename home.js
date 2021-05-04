@@ -574,6 +574,7 @@ function showResults() {
     if (foundVehicleObj.hasOwnProperty('emulators')) {
       const vehicleEmulatorType = foundVehicleObj.emulators[0].toLowerCase();
       suggestedContainer.querySelectorAll('.info-content-block').forEach(emCont => {
+        console.log('change emulator visibility', emCont);
         if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`))
           emCont.style.display = 'block';
         else emCont.style.display = 'none';
