@@ -646,11 +646,11 @@ function showCylinderResults(years) {
   selectedModelObj.vehicles.forEach(veh => {
     consumptionObjs.push({ conSum: veh.consumption.reduce((prev, curr) => prev + curr, 0), veh });
   });
-  consumptionObjs = consumptionObjs.sort((a, b) => a.conSum > b.conSum);
+  consumptionObjs = consumptionObjs.sort((a, b) => a.conSum < b.conSum);
 
   console.log({ consumptionObjs });
 
-  for (let consumptionObj of consumptionObjs) {
+  for (const consumptionObj of consumptionObjs) {
     const vehAttribute =
       descriptionValue.length === 1 ? consumptionObj.veh.cylinders : consumptionObj.veh.hp;
     if (vehAttribute == descriptionValue) {
