@@ -447,7 +447,7 @@ function populateDescriptionSelect() {
 
     if (
       filteredVehicles.length === 1 ||
-      (haveSameConsumption(filteredVehicles, { tolerance: 0.1 }) &&
+      (haveSameConsumption(filteredVehicles, { tolerance: 0.5 }) &&
         haveSameEmulators(filteredVehicles))
       // &&
       // veh.cylinders < 6 &&
