@@ -654,7 +654,7 @@ function showCylinderResults(years) {
     const vehAttribute =
       descriptionValue.length === 1 ? consumptionObj.veh.cylinders : consumptionObj.veh.hp;
     if (vehAttribute == descriptionValue) {
-      foundVehicleObj = veh;
+      foundVehicleObj = consumptionObj.veh;
       break;
     }
   }
