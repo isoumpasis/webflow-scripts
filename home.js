@@ -591,10 +591,10 @@ function showResults() {
         console.log('change emulator visibility', emCont);
         if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
           emCont.style.display = 'block';
-          emCont.querySelector('.info-content').style.height = '0px';
         } else {
           emCont.style.display = 'none';
         }
+        emCont.querySelector('.info-content').style.height = '0px';
       });
     }
 
