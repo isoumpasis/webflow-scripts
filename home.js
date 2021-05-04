@@ -447,21 +447,11 @@ function populateDescriptionSelect() {
 
     if (
       filteredVehicles.length === 1 ||
-      filteredVehicles.every(
-        veh =>
-          Math.abs(
-            parseFloat(veh.consumption[0]) - parseFloat(filteredVehicles[0].consumption[0])
-          ) <= 0.1 &&
-          Math.abs(
-            parseFloat(veh.consumption[1]) - parseFloat(filteredVehicles[0].consumption[1])
-          ) <= 0.1 &&
-          Math.abs(
-            parseFloat(veh.consumption[2]) - parseFloat(filteredVehicles[0].consumption[2])
-          ) <= 0.1
-        // &&
-        // veh.cylinders < 6 &&
-        // veh.hp < 190
-      )
+      (haveSameConsumption(filteredVehicles, { tolerance: 0.1 }) &&
+        haveSameEmulators(filteredVehicles))
+      // &&
+      // veh.cylinders < 6 &&
+      // veh.hp < 190
     ) {
       optionsArray = ['<option value="">Επιλέξτε Κυλίνδρους</option>'];
       let cylinders = filteredVehicles.map(veh => veh.cylinders);
@@ -488,6 +478,30 @@ function populateDescriptionSelect() {
     descriptionOnChange(descriptionSelect.value);
     return;
   }
+}
+
+function haveSameConsumption(vehicles, { tolerance }) {
+  return vehicles.every(
+    veh =>
+      Math.abs(parseFloat(veh.consumption[0]) - parseFloat(vehicles[0].consumption[0])) <=
+        tolerance &&
+      Math.abs(parseFloat(veh.consumption[1]) - parseFloat(vehicles[0].consumption[1])) <=
+        tolerance &&
+      Math.abs(parseFloat(veh.consumption[2]) - parseFloat(vehicles[0].consumption[2])) <= tolerance
+  );
+}
+
+function haveSameEmulators(vehicles) {
+  const emulators = [];
+  vehicles.forEach(veh => {
+    if (veh.hasOwnProperty('emulator')) {
+      emulators.push(veh.emulators[0]);
+      console.log(veh, 'veh contains emulator');
+    } else {
+      emulators.push(null);
+    }
+  });
+  return [...new Set(emulators)].length === 1;
 }
 
 descriptionSelect.addEventListener('change', e => descriptionOnChange(e.target.value));
