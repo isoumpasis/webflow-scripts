@@ -681,6 +681,7 @@ function showCylinderResults(years) {
   if (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'B8') {
     suggestedSystems = ['C-OBD II 4x2=8cyl'];
     cobdContainer = document.querySelector('#suggested-cobd-8cyl');
+    console.log(cobdContainer, codbContainer.querySelector('.suggested-cylinder-text'));
     codbContainer.querySelector('.suggested-cylinder-text').textContent = '4x2 = 8cyl';
     codbContainer.querySelector('.suggested-cylinder-text-white').textContent = '4x2 = 8cyl';
     cobdContainer.style.display = 'grid';
@@ -724,9 +725,6 @@ function displayEmulatorInfo(suggestedContainer) {
       console.log('change emulator visibility', emCont);
       if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
         emCont.querySelector('.info-content').style.height = '0px';
-        // if (vehicleEmulatorType === 'b8') {
-        // suggestedContainer.querySelector('')
-        // }
         emCont.style.display = 'block';
       }
     });
