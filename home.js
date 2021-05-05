@@ -680,7 +680,7 @@ function showCylinderResults(years) {
 
   if (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'B8') {
     suggestedSystems = ['C-OBD II 4x2=8cyl'];
-    cobdContainer = document.querySelector('#suggested-cobd');
+    cobdContainer = document.querySelector('#suggested-cobd-8cyl');
     codbContainer.querySelector('.suggested-cylinder-text').textContent = '4x2 = 8cyl';
     codbContainer.querySelector('.suggested-cylinder-text-white').textContent = '4x2 = 8cyl';
     cobdContainer.style.display = 'grid';
