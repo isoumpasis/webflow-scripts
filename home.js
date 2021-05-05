@@ -678,7 +678,13 @@ function showCylinderResults(years) {
 
   const cyls = foundVehicleObj.cylinders;
 
-  if (cyls == 5 || cyls == 6) {
+  if (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'B8') {
+    suggestedSystems = ['C-OBD II 4x2=8cyl'];
+    cobdContainer = document.querySelector('#suggested-cobd');
+    codbContainer.querySelector('.suggested-cylinder-text').textContent = '4x2 = 8cyl';
+    codbContainer.querySelector('.suggested-cylinder-text-white').textContent = '4x2 = 8cyl';
+    cobdContainer.style.display = 'grid';
+  } else if (cyls == 5 || cyls == 6) {
     suggestedSystems = ['C-OBD II 6cyl'];
     const cobdDiv = document.querySelector('#suggested-cobd-6cyl');
     cobdDiv.style.display = 'grid';
@@ -717,8 +723,11 @@ function displayEmulatorInfo(suggestedContainer) {
     suggestedContainer.querySelectorAll('.info-content-block').forEach(emCont => {
       console.log('change emulator visibility', emCont);
       if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
-        emCont.style.display = 'block';
         emCont.querySelector('.info-content').style.height = '0px';
+        // if (vehicleEmulatorType === 'b8') {
+        // suggestedContainer.querySelector('')
+        // }
+        emCont.style.display = 'block';
       }
     });
   }
