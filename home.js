@@ -681,10 +681,8 @@ function showCylinderResults(years) {
   if (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'B8') {
     suggestedSystems = ['C-OBD II 4x2=8cyl'];
     cobdContainer = document.querySelector('#suggested-cobd-8cyl');
-    console.log(cobdContainer);
-    console.log(codbContainer.querySelector('.suggested-cylinder-text'));
-    codbContainer.querySelector('.suggested-cylinder-text').textContent = '4x2 = 8cyl';
-    codbContainer.querySelector('.suggested-cylinder-text-white').textContent = '4x2 = 8cyl';
+    cobdContainer.querySelector('.suggested-cylinder-text').textContent = '4x2 = 8cyl';
+    cobdContainer.querySelector('.suggested-cylinder-text-white').textContent = '4x2 = 8cyl';
     cobdContainer.style.display = 'grid';
   } else if (cyls == 5 || cyls == 6) {
     suggestedSystems = ['C-OBD II 6cyl'];
