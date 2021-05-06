@@ -448,10 +448,8 @@ function populateDescriptionSelect() {
     if (
       filteredVehicles.length === 1 ||
       (haveSameConsumption(filteredVehicles, { tolerance: 0.5 }) &&
-        haveSameEmulators(filteredVehicles))
-      // &&
-      // veh.cylinders < 6 &&
-      // veh.hp < 190
+        haveSameEmulators(filteredVehicles) &&
+        filteredVehicles.every(veh => veh.hp <= 180))
     ) {
       optionsArray = ['<option value="">Επιλέξτε Κυλίνδρους</option>'];
       let cylinders = filteredVehicles.map(veh => veh.cylinders);
