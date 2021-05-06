@@ -593,8 +593,8 @@ function showResults() {
     // [...suggestedContainers].filter(c => c.style.display !== 'none')[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
     // document.querySelector('.suggest').scrollIntoView({ behavior: 'smooth', block: 'end' });
     // document.querySelector('.car-result-block').scrollIntoView({ behavior: 'smooth', block: 'end' });
-    if ([...suggestedContainers].every(container => container.style.display === 'none'))
-      document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
+
+    document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
 
     configureCalculator();
   } else {
