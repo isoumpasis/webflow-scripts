@@ -658,7 +658,7 @@ function showCylinderResults(years) {
       break;
     }
   }
-
+  //prev
   // for (let veh of selectedModelObj.vehicles) {
   //   if (descriptionValue.length === 1) {
   //     //cyls mode
