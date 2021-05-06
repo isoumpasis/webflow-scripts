@@ -697,7 +697,10 @@ function showCylinderResults(years) {
     const cobdDiv = document.querySelector('#suggested-cobd-8cyl');
     cobdDiv.style.display = 'grid';
   } else if (years <= 1998) {
-    if (foundVehicleObj.hp > 180) {
+    if (
+      foundVehicleObj.hp > 180 ||
+      (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'T')
+    ) {
       suggestedSystems = ['Smart ExR'];
       document.querySelector('#suggested-exr').style.display = 'grid';
     } else {
@@ -705,8 +708,16 @@ function showCylinderResults(years) {
       document.querySelector('#suggested-ego').style.display = 'grid';
     }
   } else if (years >= 1999 && years <= 2004) {
-    suggestedSystems = ['Smart ExR', 'E-GO'];
-    document.querySelector('#suggested-exr-ego').style.display = 'grid';
+    if (
+      foundVehicleObj.hp > 180 ||
+      (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'T')
+    ) {
+      suggestedSystems = ['Smart ExR'];
+      document.querySelector('#suggested-exr').style.display = 'grid';
+    } else {
+      suggestedSystems = ['Smart ExR', 'E-GO'];
+      document.querySelector('#suggested-exr-ego').style.display = 'grid';
+    }
   } else if (years >= 2005 && years <= 2013) {
     suggestedSystems = ['C-OBD II', 'Smart ExR'];
     document.querySelector('#suggested-cobd-exr').style.display = 'grid';
