@@ -672,6 +672,7 @@ function showCylinderResults(years) {
 		document.querySelector('#suggested-cobd-exr').style.display = 'grid';
 	} else {
 		suggestedSystems = ['C-OBD II'];
+		document.querySelector('#suggested-cobd .suggested-price').textContent = '750€ ΦΠΑ';
 		document.querySelector('#suggested-cobd').style.display = 'grid';
 	}
 }
