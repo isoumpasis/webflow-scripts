@@ -27,10 +27,13 @@ const systemQueryDict = {
 	'DI 108 8cyl': 'di108-8cyl'
 };
 const emulatorPriceDict = {
-	p: 95,
+	p: 85,
 	b6: 95,
-	b8: 95
+	b8: 85
 };
+//90eurw sthn timh gia ta panw apo 180 hp
+//1000 gia to b8
+//timh cobd 720 + fpa
 
 const makeImgDict = {
 	'ALFA ROMEO': 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f1d502c7ef4d03ff154b_Alfa_Romeo.png',
