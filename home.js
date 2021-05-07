@@ -10,6 +10,7 @@ let selectedModels;
 let selectedModelName;
 let selectedModelObj;
 let foundVehicleObj;
+let suggestedPricesChanges = { changed: false };
 
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');
@@ -532,6 +533,10 @@ function showResults() {
 	suggestedSystemPrices = [];
 	suggestedSystemNames = [];
 
+	if (suggestedPricesChanges.changed) {
+		resetToDefaultPrices();
+	}
+
 	if (selectedModelObj.isDirect) {
 		showDirectResults();
 	} else if (selectedModelObj.isMonou) {
@@ -561,6 +566,11 @@ function showResults() {
 	}
 
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
+}
+
+function resetToDefaultPrices() {
+	suggestedPricesChanges.priceEl.textContent = suggestedPricesChanges.defaultPrice + '€ + ΦΠΑ';
+	suggestedPricesChanges = { changed: false };
 }
 
 function showDirectResults() {
@@ -687,7 +697,9 @@ function displayEmulatorInfo(suggestedContainer) {
 			if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
 				if (vehicleEmulatorType === 'p' || vehicleEmulatorType === 'b6' || vehicleEmulatorType === 'b8') {
 					const priceEl = suggestedContainer.querySelector('.suggested-price');
-					priceEl.textContent = parseInt(priceEl.textContent.split('€')[0]) + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
+					const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
+					suggestedPricesChanges = { priceEl, defaultPrice, changed: true };
+					priceEl.textContent = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
 				}
 				emCont.querySelector('.info-content').style.height = '0px';
 				emCont.style.display = 'block';
