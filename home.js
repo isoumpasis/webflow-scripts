@@ -29,7 +29,8 @@ const systemQueryDict = {
 const emulatorPriceDict = {
 	p: 85,
 	b6: 95,
-	b8: -250 // - from cobd 8cyl = 1000€
+	b8: -250, // - from cobd 8cyl = 1000€
+	hp: 90
 };
 //90eurw sthn timh gia ta panw apo 180 hp
 
@@ -692,11 +693,12 @@ function displayEmulatorInfo(suggestedContainer) {
 	//Hide all emulator containers first
 	suggestedContainer.querySelectorAll('.info-content-block').forEach(emCont => (emCont.style.display = 'none'));
 
-	if (foundVehicleObj.hasOwnProperty('emulators')) {
-		const vehicleEmulatorType = foundVehicleObj.emulators[0].toLowerCase();
+	if (foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj)) {
+		const vehicleEmulatorType = hasUHPII(foundVehicleObj) ? 'hp' : foundVehicleObj.emulators[0].toLowerCase();
+
 		suggestedContainer.querySelectorAll('.info-content-block').forEach(emCont => {
 			if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
-				if (vehicleEmulatorType === 'p' || vehicleEmulatorType === 'b6' || vehicleEmulatorType === 'b8') {
+				if (vehicleEmulatorType === 'p' || vehicleEmulatorType === 'b6' || vehicleEmulatorType === 'b8' || vehicleEmulatorType === 'hp') {
 					const priceEl = suggestedContainer.querySelector('.suggested-price');
 					const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
 					suggestedPricesChanges = { priceEl, defaultPrice, changed: true };
@@ -707,6 +709,10 @@ function displayEmulatorInfo(suggestedContainer) {
 			}
 		});
 	}
+}
+
+function hasUHPII(vehObj) {
+	return vehObj.hp > 180 && vehObj.cylinders <= 4 && !vehObj.hasOwnProperty('engineCodes');
 }
 
 function configureCalculator() {
