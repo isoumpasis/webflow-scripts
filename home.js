@@ -29,11 +29,9 @@ const systemQueryDict = {
 const emulatorPriceDict = {
 	p: 85,
 	b6: 95,
-	b8: 85
+	b8: -250 // - from cobd 8cyl = 1000€
 };
 //90eurw sthn timh gia ta panw apo 180 hp
-//1000 gia to b8
-//timh cobd 720 + fpa
 
 const makeImgDict = {
 	'ALFA ROMEO': 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f1d502c7ef4d03ff154b_Alfa_Romeo.png',
