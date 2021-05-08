@@ -635,7 +635,9 @@ function showDirectResults() {
     const directSystemDiv = document.querySelector(
       `#suggested-${systemQueryDict[foundVehicleObj.system]}`
     );
-    directSystemDiv.querySelector('.di-engine-code-overlay').textContent = descriptionSelect.value;
+    directSystemDiv.querySelector(
+      '.di-engine-code-overlay'
+    ).textContent = descriptionSelect.value.split(' - ')[1];
     directSystemDiv.style.display = 'grid';
   } else {
     suggestedContainers.forEach(container => {
