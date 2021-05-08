@@ -769,6 +769,7 @@ function displayEmulatorInfo(suggestedContainer) {
           const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
           suggestedPricesChanges = { priceEl, defaultPrice, changed: true };
           priceEl.textContent = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
+          console.log(priceEl, suggestedPricesChanges, defaultPrice);
         }
         emCont.querySelector('.info-content').style.height = '0px';
         emCont.style.display = 'block';
