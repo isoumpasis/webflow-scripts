@@ -10,7 +10,7 @@ let selectedModels;
 let selectedModelName;
 let selectedModelObj;
 let foundVehicleObj;
-let suggestedPricesChanges = { changed: false };
+let suggestedPricesChanges = [];
 
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');
@@ -577,9 +577,7 @@ function showResults() {
   suggestedSystemPrices = [];
   suggestedSystemNames = [];
 
-  if (suggestedPricesChanges.changed) {
-    resetToDefaultPrices();
-  }
+  if (suggestedPricesChanges.length) resetToDefaultPrices();
 
   if (selectedModelObj.isDirect) {
     showDirectResults();
@@ -615,8 +613,10 @@ function showResults() {
 }
 
 function resetToDefaultPrices() {
-  suggestedPricesChanges.priceEl.textContent = suggestedPricesChanges.defaultPrice + '€ + ΦΠΑ';
-  suggestedPricesChanges = { changed: false };
+  suggestedPricesChanges.forEach(priceChange => {
+    priceChange.priceEl.textContent = priceChange.defaultPrice + '€ + ΦΠΑ';
+  });
+  suggestedPricesChanges = [];
 }
 
 function showDirectResults() {
@@ -757,23 +757,25 @@ function displayEmulatorInfo(suggestedContainer) {
       ? 'hp'
       : foundVehicleObj.emulators[0].toLowerCase();
 
-    suggestedContainer.querySelectorAll('.info-content-block').forEach(emCont => {
-      if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
-        if (
-          vehicleEmulatorType === 'p' ||
-          vehicleEmulatorType === 'b6' ||
-          vehicleEmulatorType === 'b8' ||
-          vehicleEmulatorType === 'hp'
-        ) {
-          const priceEl = suggestedContainer.querySelector('.suggested-price');
-          const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
-          suggestedPricesChanges = { priceEl, defaultPrice, changed: true };
-          priceEl.textContent = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
-          console.log(priceEl, suggestedPricesChanges, defaultPrice);
+    suggestedContainer.querySelectorAll('.suggested-lpg-system').forEach(lpgSystem => {
+      lpgSystem.querySelectorAll('.info-content-block').forEach(emCont => {
+        if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
+          if (
+            vehicleEmulatorType === 'p' ||
+            vehicleEmulatorType === 'b6' ||
+            vehicleEmulatorType === 'b8' ||
+            vehicleEmulatorType === 'hp'
+          ) {
+            const priceEl = lpgSystem.querySelector('.suggested-price');
+            const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
+            suggestedPricesChanges.push({ priceEl, defaultPrice });
+            priceEl.textContent = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
+            console.log({ suggestedPricesChanges });
+          }
+          emCont.querySelector('.info-content').style.height = '0px';
+          emCont.style.display = 'block';
         }
-        emCont.querySelector('.info-content').style.height = '0px';
-        emCont.style.display = 'block';
-      }
+      });
     });
   }
 }
