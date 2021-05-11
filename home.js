@@ -659,15 +659,25 @@ function showCylinderResults(years) {
 	} else if (cyls == 5 || cyls == 6) {
 		suggestedSystems = ['C-OBD II 6cyl'];
 		const cobdDiv = document.querySelector('#suggested-cobd-6cyl');
+		const cylinderDescrText = getCylinderDescrText();
+		cobdDiv.querySelector('.suggested-cylinder-text').textContent = '5-6cyl' + cylinderDescrText;
+		cobdDiv.querySelector('.left-overlay-description').textContent = '5-6cyl' + cylinderDescrText;
 		cobdDiv.style.display = 'grid';
 	} else if (cyls == 8) {
 		suggestedSystems = ['C-OBD II 8cyl'];
 		const cobdDiv = document.querySelector('#suggested-cobd-8cyl');
+		const cylinderDescrText = getCylinderDescrText();
+		cobdDiv.querySelector('.suggested-cylinder-text').textContent = '8cyl' + cylinderDescrText;
+		cobdDiv.querySelector('.left-overlay-description').textContent = '8cyl' + cylinderDescrText;
 		cobdDiv.style.display = 'grid';
 	} else if (years <= 1998) {
 		if (foundVehicleObj.hp > 180 || (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'T')) {
 			suggestedSystems = ['Smart ExR'];
-			document.querySelector('#suggested-exr').style.display = 'grid';
+			const exrDiv = document.querySelector('#suggested-exr');
+			const cylinderDescrText = getCylinderDescrText();
+			exrDiv.querySelector('.suggested-cylinder-text').textContent = '2-4cyl' + cylinderDescrText;
+			exrDiv.querySelector('.left-overlay-description').textContent = '2-4cyl' + cylinderDescrText;
+			exrDiv.style.display = 'grid';
 		} else {
 			suggestedSystems = ['E-GO'];
 			document.querySelector('#suggested-ego').style.display = 'grid';
@@ -675,18 +685,27 @@ function showCylinderResults(years) {
 	} else if (years >= 1999 && years <= 2004) {
 		if (foundVehicleObj.hp > 180 || (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'T')) {
 			suggestedSystems = ['Smart ExR'];
-			document.querySelector('#suggested-exr').style.display = 'grid';
+			const exrDiv = document.querySelector('#suggested-exr');
+			exrDiv.querySelector('.left-overlay-description').textContent = '2-4cyl' + getCylinderDescrText();
+			exrDiv.style.display = 'grid';
 		} else {
 			suggestedSystems = ['Smart ExR', 'E-GO'];
-			document.querySelector('#suggested-exr-ego').style.display = 'grid';
+			const exrEgoDiv = document.querySelector('#suggested-exr-ego');
+			exrEgoDiv.querySelector('.left-overlay-description').textContent = '2-4cyl' + getCylinderDescrText();
+			exrEgoDiv.style.display = 'grid';
 		}
 	} else if (years >= 2005 && years <= 2013) {
 		suggestedSystems = ['C-OBD II', 'Smart ExR'];
-		document.querySelector('#suggested-cobd-exr').style.display = 'grid';
+		const cobdExrDiv = document.querySelector('#suggested-cobd-exr');
+		const cylinderDescrText = getCylinderDescrText();
+		cobdExrDiv.querySelectorAll('.left-overlay-description').forEach(el => (el.textContent = '2-4cyl' + cylinderDescrText));
+		cobdExrDiv.style.display = 'grid';
 	} else {
 		suggestedSystems = ['C-OBD II'];
-		document.querySelector('#suggested-cobd .suggested-price').textContent = '750€ ΦΠΑ';
-		document.querySelector('#suggested-cobd').style.display = 'grid';
+		// document.querySelector('#suggested-cobd .suggested-price').textContent = '750€ ΦΠΑ'; giati auto edw? lathos?
+		const cobdDiv = document.querySelector('#suggested-cobd');
+		cobdDiv.querySelector('.left-overlay-description').textContent = '2-4cyl' + getCylinderDescrText();
+		cobdDiv.style.display = 'grid';
 	}
 }
 
@@ -773,6 +792,14 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 		calcResult();
 	});
 });
+
+function getCylinderDescrText() {
+	if (foundVehicleObj.hasOwnProperty('hp')) {
+		return foundVehicleObj.hp > 180 ? 'έως 350HP' : 'έως 190HP';
+	} else {
+		return Number(foundVehicleObj.engineCodes[0].split(' ')[0]) > 180 ? 'έως 350HP' : 'έως 190HP';
+	}
+}
 
 function configureEasyPay() {
 	for (let container of suggestedContainers) {
