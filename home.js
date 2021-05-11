@@ -551,6 +551,7 @@ function showResults() {
 	//If there is a suggestion
 	if (suggestedContainer) {
 		displayEmulatorInfo(suggestedContainer);
+		suggestedContainer.querySelectorAll('.suggested-overlay-block').forEach(el => (el.style.height = '0px'));
 
 		configureEasyPay();
 
