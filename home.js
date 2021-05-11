@@ -795,9 +795,9 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 
 function getCylinderDescrText() {
 	if (foundVehicleObj.hasOwnProperty('hp')) {
-		return foundVehicleObj.hp > 180 ? 'έως 350HP' : 'έως 190HP';
+		return foundVehicleObj.hp > 180 ? ' έως 350HP' : ' έως 190HP';
 	} else {
-		return Number(foundVehicleObj.engineCodes[0].split(' ')[0]) > 180 ? 'έως 350HP' : 'έως 190HP';
+		return Number(foundVehicleObj.engineCodes[0].split(' ')[0]) > 180 ? ' έως 350HP' : ' έως 190HP';
 	}
 }
 
