@@ -21,10 +21,10 @@ const suggestedContainers = document.querySelectorAll('.suggested-container');
 let suggestedSystems;
 
 const systemQueryDict = {
-	'DI 3000B': { name: 'di3000b', cyls: '2-4cyl' },
-	'DI 60': { name: 'di60', cyls: '2-4cyl' },
-	'DI 108': { name: 'di108', cyls: '5-6cyl' },
-	'DI 108 8cyl': { name: 'di108-8cyl', cyls: '8cyl' }
+	'DI 3000B': 'di3000b',
+	'DI 60': 'di60',
+	'DI 108': 'di108',
+	'DI 108 8cyl': 'di108-8cyl'
 };
 const emulatorPriceDict = {
 	p: 85,
@@ -589,13 +589,7 @@ function showDirectResults() {
 	console.log({ foundVehicleObj });
 
 	if (foundVehicleObj.isConvertible) {
-		const systemKey = systemQueryDict[foundVehicleObj.system];
-		const directSystemDiv = document.querySelector(`#suggested-${systemKey.name}`);
-
-		const cylinderDescrText = getCylinderDescrText();
-		if (systemKey.cyls != '2-4cyl') directSystemDiv.querySelector('.suggested-cylinder-text').textContent = systemKey.cyls + cylinderDescrText;
-		directSystemDiv.querySelector('.left-overlay-description').textContent = systemKey.cyls + cylinderDescrText;
-
+		const directSystemDiv = document.querySelector(`#suggested-${systemQueryDict[foundVehicleObj.system]}`);
 		directSystemDiv.querySelector('.di-engine-code-overlay').textContent = descriptionSelect.value.split(' - ')[1];
 		directSystemDiv.style.display = 'grid';
 	} else {
@@ -682,9 +676,7 @@ function showCylinderResults(years) {
 		if (foundVehicleObj.hp > 180 || (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'T')) {
 			suggestedSystems = ['Smart ExR'];
 			const exrDiv = document.querySelector('#suggested-exr');
-			const cylinderDescrText = getCylinderDescrText();
-			exrDiv.querySelector('.suggested-cylinder-text').textContent = '2-4cyl' + cylinderDescrText;
-			exrDiv.querySelector('.left-overlay-description').textContent = '2-4cyl' + cylinderDescrText;
+			exrDiv.querySelector('.left-overlay-description').textContent = '2-4cyl' + getCylinderDescrText();
 			exrDiv.style.display = 'grid';
 		} else {
 			suggestedSystems = ['E-GO'];
