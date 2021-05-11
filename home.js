@@ -590,7 +590,8 @@ function showDirectResults() {
 
 	if (foundVehicleObj.isConvertible) {
 		const directSystemDiv = document.querySelector(`#suggested-${systemQueryDict[foundVehicleObj.system]}`);
-		directSystemDiv.querySelector('.di-engine-code-overlay').textContent = descriptionSelect.value.split(' - ')[1];
+		let temp = descriptionSelect.value.split(' - ');
+		directSystemDiv.querySelector('.di-engine-code-overlay').textContent = temp[1] + ' - ' + temp[0]; //descriptionSelect.value.split(' - ')[1];
 		directSystemDiv.style.display = 'grid';
 	} else {
 		//not convertible !!! here...TODO
