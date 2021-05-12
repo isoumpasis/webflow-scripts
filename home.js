@@ -148,9 +148,9 @@ function initEasyPay() {
 }
 
 function initStorage() {
-	const json = localStorage.getItem('userSelections');
-	if (json && Object.keys(json.vehicle).length !== 0) {
-		userSelections = JSON.parse(json);
+	const storageObj = JSON.parse(localStorage.getItem('userSelections'));
+	if (storageObj && Object.keys(storageObj.vehicle).length !== 0) {
+		userSelections = storageObj;
 		console.log('Parsed json local storage', userSelections);
 
 		populateAndSelectAllOptions(userSelections.vehicle);
