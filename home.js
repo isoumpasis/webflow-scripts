@@ -191,6 +191,7 @@ function populateAndSelectAllOptions(vehicle) {
 		}
 	}
 	// }
+	suggestedContainers.forEach(cont => (cont.style.display = 'none'));
 	showResults(vehicle.fetched.fetchedModelObj);
 	calcResult();
 }
