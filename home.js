@@ -567,7 +567,7 @@ function showResults() {
 	}
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 
-	calcResult();
+	calcResult(); //
 }
 
 function resetToDefaultPrices() {
