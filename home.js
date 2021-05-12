@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	initFuelPrices();
 	initEasyPay();
 
-	initStorage();
+	//initStorage();
 });
 
 function initSelects() {
