@@ -19,7 +19,7 @@ const yearSelect = document.querySelector('#yearSelect');
 const descriptionSelect = document.querySelector('#descriptionSelect');
 
 const suggestedContainers = document.querySelectorAll('.suggested-container');
-let suggestedContainer;
+let containerId;
 let suggestedSystems;
 
 const systemQueryDict = {
@@ -523,7 +523,7 @@ function descriptionOnChange(value) {
 		},
 		foundVehicleObj,
 		systems: {
-			suggestedContainer
+			containerId
 		}
 	};
 	console.log({ suggestedContainer });
@@ -588,7 +588,8 @@ function showResults() {
 		showCylinderResults(years);
 	}
 
-	suggestedContainer = [...suggestedContainers].filter(container => container.style.display !== 'none')[0];
+	const suggestedContainer = [...suggestedContainers].filter(container => container.style.display !== 'none')[0];
+	containerId = suggestedContainer.id;
 
 	//If there is a suggestion
 	if (suggestedContainer) {
