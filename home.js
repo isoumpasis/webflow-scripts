@@ -565,8 +565,9 @@ function showResults() {
 	} else {
 		resetCalc();
 	}
-
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
+
+	calcResult();
 }
 
 function resetToDefaultPrices() {
@@ -781,7 +782,6 @@ function resetCalc() {
 
 document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 	el.addEventListener('change', e => {
-		console.log(e.target.tagName);
 		const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
 
 		document.querySelectorAll('.radio-button.w-radio span').forEach(el => (el.style.fontWeight = 'normal'));
