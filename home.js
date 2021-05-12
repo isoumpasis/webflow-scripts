@@ -183,7 +183,7 @@ makeSelect.addEventListener('change', function () {
 		yearSelect.disabled = true;
 		yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
 		userSelections.vehicle = {};
-		localStorage.setItem('userSelections') = JSON.stringify(userSelections);
+		localStorage.setItem('userSelections', JSON.stringify(userSelections));
 		// sessionStorage.clear(); //reset //DO YOU WANT TO ERASE EVERYTHING? maybe there is an autonomous var you want to keep
 		return;
 	}
@@ -270,7 +270,7 @@ function yearOnChange(value) {
 		descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
 		// delete userSelections.vehicle.year;
 		userSelections.vehicle = {};
-		localStorage.setItem('userSelections') = JSON.stringify(userSelections);
+		localStorage.setItem('userSelections', JSON.stringify(userSelections));
 		// sessionStorage.removeItem('selectedVehicles');
 		return;
 	}
@@ -357,7 +357,7 @@ function modelOnChange(value) {
 		// }</option>`;
 		// delete userSelections.vehicle.model;
 		userSelections.vehicle = {};
-		localStorage.setItem('userSelections') = JSON.stringify(userSelections);
+		localStorage.setItem('userSelections', JSON.stringify(userSelections));
 		// sessionStorage.removeItem('selectedYear');
 		return;
 	}
@@ -491,15 +491,14 @@ function descriptionOnChange(value) {
 
 	suggestedContainers.forEach(cont => (cont.style.display = 'none'));
 
-	
 	if (!value) {
 		resetCalc();
 		calcResult();
-		
+
 		// delete userSelections.vehicle.description;
 		// delete userSelections.vehicle.foundVehicle;
 		userSelections.vehicle = {};
-		localStorage.setItem('userSelections') = JSON.stringify(userSelections);
+		localStorage.setItem('userSelections', JSON.stringify(userSelections));
 		// sessionStorage.removeItem('selectedDescription');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
@@ -513,9 +512,9 @@ function descriptionOnChange(value) {
 		model: modelSelect.value,
 		description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}`
 	};
-	localStorage.setItem('userSelections') = JSON.stringify(userSelections);
+	localStorage.setItem('userSelections', JSON.stringify(userSelections));
 	// sessionStorage.selectedDescription = value;
-	
+
 	showResults();
 	calcResult();
 }
