@@ -168,7 +168,7 @@ function populateAndSelectAllOptions(vehicle) {
 	populateYearSelect(vehicle.fetched.fetchedYears);
 	opts = yearSelect.options;
 	for (let i = 0; i <= opts.length; i++) {
-		if (vehicle.year === opts[i].value) {
+		if (vehicle.year == opts[i].value) {
 			yearSelect.selectedIndex = i;
 			break;
 		}
@@ -191,7 +191,7 @@ function populateAndSelectAllOptions(vehicle) {
 		}
 	}
 	// }
-	showResults();
+	showResults(vehicle.fetched.fetchedModelObj);
 	calcResult();
 }
 
@@ -538,7 +538,7 @@ function descriptionOnChange(value) {
 		return;
 	}
 
-	showResults();
+	showResults(fetchedModelObj);
 	calcResult();
 
 	// userSelections.vehicle = { ...userSelections.vehicle, description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}` };
@@ -560,7 +560,7 @@ function descriptionOnChange(value) {
 	// sessionStorage.selectedDescription = value;
 }
 
-function showResults() {
+function showResults(fetchedModelObj) {
 	const years = yearSelect.value;
 	suggestedSystemPrices = [];
 	suggestedSystemNames = [];
