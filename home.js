@@ -568,12 +568,12 @@ function showResults(fetchedModelObj) {
 	if (suggestedPricesChanges.length) resetToDefaultPrices();
 
 	if (fetchedModelObj.isDirect) {
-		showDirectResults();
+		showDirectResults(fetchedModelObj);
 	} else if (fetchedModelObj.isMonou) {
-		showMonouResults();
+		showMonouResults(fetchedModelObj);
 	} else {
 		console.log(fetchedModelObj);
-		showCylinderResults(years);
+		showCylinderResults(fetchedModelObj, years);
 	}
 
 	const suggestedContainer = [...suggestedContainers].filter(container => container.style.display !== 'none')[0];
@@ -607,7 +607,7 @@ function resetToDefaultPrices() {
 	suggestedPricesChanges = [];
 }
 
-function showDirectResults() {
+function showDirectResults(fetchedModelObj) {
 	// const selectedEngineCode = descriptionSelect.value;
 	// label: for (let veh of fetchedModelObj.vehicles) {
 	// 	for (let engineCode of veh.engineCodes) {
@@ -648,7 +648,7 @@ function showDirectResults() {
 	}
 }
 
-function showMonouResults() {
+function showMonouResults(fetchedModelObj) {
 	foundVehicleObj = fetchedModelObj.vehicles[0];
 	const selectedHp = descriptionSelect.value;
 	for (let veh of fetchedModelObj.vehicles) {
@@ -661,7 +661,7 @@ function showMonouResults() {
 	document.querySelector('#suggested-monou').style.display = 'grid';
 }
 
-function showCylinderResults(years) {
+function showCylinderResults(fetchedModelObj, years) {
 	foundVehicleObj = fetchedModelObj.vehicles[0]; // to be sure
 
 	const descriptionValue = descriptionSelect.value;
