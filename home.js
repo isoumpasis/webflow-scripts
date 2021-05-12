@@ -251,7 +251,7 @@ function yearOnChange(value) {
 		container.style.display = 'none';
 	});
 	resetCalc();
-	calcResult;
+	calcResult();
 	// sessionStorage.removeItem('selectedYear');
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
