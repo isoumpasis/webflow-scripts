@@ -526,6 +526,7 @@ function descriptionOnChange(value) {
 			suggestedContainer
 		}
 	};
+	console.log({ suggestedContainer });
 	localStorage.setItem('userSelections', JSON.stringify(userSelections));
 	// sessionStorage.selectedDescription = value;
 }
