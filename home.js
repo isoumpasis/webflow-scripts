@@ -11,6 +11,7 @@ let selectedModelName;
 let selectedModelObj;
 let foundVehicleObj;
 let suggestedPricesChanges = [];
+const userSelections = {};
 
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');
@@ -176,9 +177,12 @@ makeSelect.addEventListener('change', function () {
 	resetCalc();
 	calcResult();
 
+	userSelections.vehicle = { make: this.value };
+
 	if (!this.value) {
 		yearSelect.disabled = true;
 		yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+		userSelections.vehicle = {};
 		// sessionStorage.clear(); //reset //DO YOU WANT TO ERASE EVERYTHING? maybe there is an autonomous var you want to keep
 		return;
 	}
@@ -252,6 +256,8 @@ function yearOnChange(value) {
 	});
 	resetCalc();
 	calcResult();
+
+	userSelections.vehicle = { make: userSelections.vehicle.make, year: value };
 	// sessionStorage.removeItem('selectedYear');
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
@@ -261,6 +267,7 @@ function yearOnChange(value) {
 		modelSelect.disabled = true;
 		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
 		descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
+		delete userSelections.vehicle.year;
 		// sessionStorage.removeItem('selectedVehicles');
 		return;
 	}
@@ -333,6 +340,8 @@ function modelOnChange(value) {
 	});
 	resetCalc();
 	calcResult();
+
+	userSelections.vehicle = { make: userSelections.vehicle.make, year: userSelections.vehicle.year, model: value };
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
 	//sessionStorage.removeItem('selectedSystem');
@@ -343,6 +352,7 @@ function modelOnChange(value) {
 		// descriptionSelect.innerHTML = `<option value="">${
 		//   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
 		// }</option>`;
+		delete userSelections.vehicle.model;
 		// sessionStorage.removeItem('selectedYear');
 		return;
 	}
@@ -476,9 +486,13 @@ function descriptionOnChange(value) {
 
 	suggestedContainers.forEach(cont => (cont.style.display = 'none'));
 
+	userSelections.vehicle = { ...userSelections.vehicle, description: value };
+
 	if (!value) {
 		resetCalc();
 		calcResult();
+
+		delete userSelections.vehicle.description;
 		// sessionStorage.removeItem('selectedDescription');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
