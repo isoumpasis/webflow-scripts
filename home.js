@@ -11,7 +11,7 @@ let selectedModelName;
 let selectedModelObj;
 let foundVehicleObj;
 let suggestedPricesChanges = [];
-const userSelections = {};
+const userSelections = { vehicle: {}, systems: {} };
 
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');
