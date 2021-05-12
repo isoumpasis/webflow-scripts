@@ -597,6 +597,7 @@ function showResults() {
 	}
 
 	userSelections.vehicle = { ...userSelections.vehicle, foundVehicle: foundVehicleObj };
+	localStorage.setItem('userSelections', JSON.stringify(userSelections));
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
 
