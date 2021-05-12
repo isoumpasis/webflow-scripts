@@ -579,6 +579,8 @@ function showResults() {
 	} else {
 		resetCalc();
 	}
+
+	userSelections.vehicle = { ...userSelections.vehicle, vehicleFound: foundVehicleObj };
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
 
