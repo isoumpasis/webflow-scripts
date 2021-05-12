@@ -177,7 +177,7 @@ makeSelect.addEventListener('change', function () {
 	resetCalc();
 	calcResult();
 
-	userSelections.vehicle = { make: this.value };
+	// userSelections.vehicle = { make: this.value };
 
 	if (!this.value) {
 		yearSelect.disabled = true;
@@ -257,7 +257,7 @@ function yearOnChange(value) {
 	resetCalc();
 	calcResult();
 
-	userSelections.vehicle = { make: userSelections.vehicle.make, year: value };
+	// userSelections.vehicle = { make: userSelections.vehicle.make, year: value };
 	// sessionStorage.removeItem('selectedYear');
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
@@ -267,7 +267,8 @@ function yearOnChange(value) {
 		modelSelect.disabled = true;
 		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
 		descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
-		delete userSelections.vehicle.year;
+		// delete userSelections.vehicle.year;
+		userSelections.vehicle = {};
 		// sessionStorage.removeItem('selectedVehicles');
 		return;
 	}
@@ -341,7 +342,7 @@ function modelOnChange(value) {
 	resetCalc();
 	calcResult();
 
-	userSelections.vehicle = { make: userSelections.vehicle.make, year: userSelections.vehicle.year, model: value };
+	// userSelections.vehicle = { make: userSelections.vehicle.make, year: userSelections.vehicle.year, model: value };
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
 	//sessionStorage.removeItem('selectedSystem');
@@ -352,7 +353,8 @@ function modelOnChange(value) {
 		// descriptionSelect.innerHTML = `<option value="">${
 		//   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
 		// }</option>`;
-		delete userSelections.vehicle.model;
+		// delete userSelections.vehicle.model;
+		userSelections.vehicle = {};
 		// sessionStorage.removeItem('selectedYear');
 		return;
 	}
@@ -486,14 +488,21 @@ function descriptionOnChange(value) {
 
 	suggestedContainers.forEach(cont => (cont.style.display = 'none'));
 
-	userSelections.vehicle = { ...userSelections.vehicle, description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}` };
+	// userSelections.vehicle = { ...userSelections.vehicle, description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}` };
+	userSelections.vehicle = {
+		make: makeSelect.value,
+		year: yearSelect.value,
+		model: modelSelect.value,
+		description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}`
+	};
 
 	if (!value) {
 		resetCalc();
 		calcResult();
 
-		delete userSelections.vehicle.description;
-		delete userSelections.vehicle.foundVehicle;
+		// delete userSelections.vehicle.description;
+		// delete userSelections.vehicle.foundVehicle;
+		userSelections.vehicle = {};
 		// sessionStorage.removeItem('selectedDescription');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
