@@ -474,14 +474,11 @@ descriptionSelect.addEventListener('change', e => descriptionOnChange(e.target.v
 function descriptionOnChange(value) {
 	console.log('description changed', value);
 
-	suggestedContainers.forEach(container => {
-		container.style.display = 'none';
-	});
+	suggestedContainers.forEach(cont => (cont.style.display = 'none'));
 
 	if (!value) {
 		resetCalc();
 		calcResult();
-		showResults();
 		// sessionStorage.removeItem('selectedDescription');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
