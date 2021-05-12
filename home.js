@@ -11,7 +11,7 @@ let selectedModelName;
 let selectedModelObj;
 let foundVehicleObj;
 let suggestedPricesChanges = [];
-const userSelections = { vehicle: {}, systems: {} };
+let userSelections = { vehicle: {}, systems: {} };
 
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');
@@ -19,6 +19,7 @@ const yearSelect = document.querySelector('#yearSelect');
 const descriptionSelect = document.querySelector('#descriptionSelect');
 
 const suggestedContainers = document.querySelectorAll('.suggested-container');
+let suggestedContainer;
 let suggestedSystems;
 
 const systemQueryDict = {
@@ -179,6 +180,7 @@ makeSelect.addEventListener('change', function () {
 
 	// userSelections.vehicle = { make: this.value };
 	userSelections.vehicle = {};
+	userSelections.systems = {};
 	localStorage.setItem('userSelections', JSON.stringify(userSelections));
 
 	if (!this.value) {
@@ -260,6 +262,7 @@ function yearOnChange(value) {
 
 	// userSelections.vehicle = { make: userSelections.vehicle.make, year: value };
 	userSelections.vehicle = {};
+	userSelections.systems = {};
 	localStorage.setItem('userSelections', JSON.stringify(userSelections));
 	// sessionStorage.removeItem('selectedYear');
 	// sessionStorage.removeItem('selectedCylinder');
@@ -346,6 +349,7 @@ function modelOnChange(value) {
 
 	// userSelections.vehicle = { make: userSelections.vehicle.make, year: userSelections.vehicle.year, model: value };
 	userSelections.vehicle = {};
+	userSelections.systems = {};
 	localStorage.setItem('userSelections', JSON.stringify(userSelections));
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
@@ -498,6 +502,7 @@ function descriptionOnChange(value) {
 		// delete userSelections.vehicle.description;
 		// delete userSelections.vehicle.foundVehicle;
 		userSelections.vehicle = {};
+		userSelections.systems = {};
 		localStorage.setItem('userSelections', JSON.stringify(userSelections));
 		// sessionStorage.removeItem('selectedDescription');
 		//sessionStorage.removeItem('suggestedSystems');
@@ -505,18 +510,22 @@ function descriptionOnChange(value) {
 		return;
 	}
 
-	// userSelections.vehicle = { ...userSelections.vehicle, description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}` };
-	userSelections.vehicle = {
-		make: makeSelect.value,
-		year: yearSelect.value,
-		model: modelSelect.value,
-		description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}`
-	};
-
 	showResults();
 	calcResult();
 
-	userSelections.vehicle = { ...userSelections.vehicle, foundVehicle: foundVehicleObj };
+	// userSelections.vehicle = { ...userSelections.vehicle, description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}` };
+	userSelections = {
+		vehicle: {
+			make: makeSelect.value,
+			year: yearSelect.value,
+			model: modelSelect.value,
+			description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}`
+		},
+		foundVehicleObj,
+		systems: {
+			suggestedContainer
+		}
+	};
 	localStorage.setItem('userSelections', JSON.stringify(userSelections));
 	// sessionStorage.selectedDescription = value;
 }
@@ -578,7 +587,7 @@ function showResults() {
 		showCylinderResults(years);
 	}
 
-	const suggestedContainer = [...suggestedContainers].filter(container => container.style.display !== 'none')[0];
+	suggestedContainer = [...suggestedContainers].filter(container => container.style.display !== 'none')[0];
 
 	//If there is a suggestion
 	if (suggestedContainer) {
