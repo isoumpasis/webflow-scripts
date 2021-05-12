@@ -493,6 +493,7 @@ function descriptionOnChange(value) {
 		calcResult();
 
 		delete userSelections.vehicle.description;
+		delete userSelections.vehicle.foundVehicle;
 		// sessionStorage.removeItem('selectedDescription');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
@@ -580,7 +581,7 @@ function showResults() {
 		resetCalc();
 	}
 
-	userSelections.vehicle = { ...userSelections.vehicle, vehicleFound: foundVehicleObj };
+	userSelections.vehicle = { ...userSelections.vehicle, foundVehicle: foundVehicleObj };
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
 
