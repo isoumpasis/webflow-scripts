@@ -174,11 +174,11 @@ makeSelect.addEventListener('change', function () {
 		container.style.display = 'none';
 	});
 	resetCalc();
+	calcResult();
 
 	if (!this.value) {
 		yearSelect.disabled = true;
 		yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-		resetCalc();
 		// sessionStorage.clear(); //reset //DO YOU WANT TO ERASE EVERYTHING? maybe there is an autonomous var you want to keep
 		return;
 	}
@@ -251,6 +251,7 @@ function yearOnChange(value) {
 		container.style.display = 'none';
 	});
 	resetCalc();
+	calcResult;
 	// sessionStorage.removeItem('selectedYear');
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
@@ -260,7 +261,6 @@ function yearOnChange(value) {
 		modelSelect.disabled = true;
 		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
 		descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
-		resetCalc();
 		// sessionStorage.removeItem('selectedVehicles');
 		return;
 	}
@@ -332,6 +332,7 @@ function modelOnChange(value) {
 		container.style.display = 'none';
 	});
 	resetCalc();
+	calcResult();
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
 	//sessionStorage.removeItem('selectedSystem');
@@ -343,7 +344,6 @@ function modelOnChange(value) {
 		//   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
 		// }</option>`;
 		// sessionStorage.removeItem('selectedYear');
-		resetCalc();
 		return;
 	}
 	selectedModelName = value;
@@ -480,6 +480,8 @@ function descriptionOnChange(value) {
 
 	if (!value) {
 		resetCalc();
+		calcResult();
+		showResults();
 		// sessionStorage.removeItem('selectedDescription');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
@@ -487,6 +489,7 @@ function descriptionOnChange(value) {
 	}
 	// sessionStorage.selectedDescription = value;
 	showResults();
+	calcResult();
 }
 
 function selectMakeOption() {
@@ -566,8 +569,6 @@ function showResults() {
 		resetCalc();
 	}
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
-
-	calcResult(); //
 }
 
 function resetToDefaultPrices() {
