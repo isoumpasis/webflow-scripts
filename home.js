@@ -5,10 +5,9 @@ const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descri
 const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
 const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
 
-let selectedYears;
-let selectedModels;
-let selectedModelName;
-let selectedModelObj;
+let fetchedYears;
+let fetchedModels;
+let fetchedModelObj;
 let foundVehicleObj;
 let suggestedPricesChanges = [];
 let userSelections = { vehicle: {}, systems: {} };
@@ -93,24 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	initFuelPrices();
 	initEasyPay();
 
-	// if (typeof Storage !== 'undefined' && sessionStorage.selectedModels) {
-	//   selectedModels = JSON.parse(sessionStorage.selectedModels);
-	//   console.log('Parsed json local storage', selectedModels);
-	//   selectMakeOption();
-	//   populateModelSelect();
-	//   if (sessionStorage.selectedModel) {
-	//     selectModelOption(); //from storage
-	//     populateYearSelect();
-	//     if (sessionStorage.selectedYear) {
-	//       selectYearOption(); //from storage
-	//       populatedescriptionSelect();
-	//       if (sessionStorage.selectedCylinder) {
-	//         selectCylinderOption(); //from storage
-	//         //showResults();
-	//       }
-	//     }
-	//   }
-	// }
+	initStorage();
 });
 
 function initSelects() {
@@ -165,6 +147,54 @@ function initEasyPay() {
 	creditCardInstallmentsOnChange(creditCardInstallments.value);
 }
 
+function initStorage() {
+	const json = localStorage.getItem('userSelections');
+	if (json && Object.keys(json.vehicle).length !== 0) {
+		userSelections = JSON.parse(json);
+		console.log('Parsed json local storage', userSelections);
+
+		populateAndSelectAllOptions(userSelections.vehicle);
+	}
+}
+
+function populateAndSelectAllOptions(vehicle) {
+	let opts = makeSelect.options;
+	for (let i = 0; i <= opts.length; i++) {
+		if (vehicle.make === opts[i].value) {
+			makeSelect.selectedIndex = i;
+			break;
+		}
+	}
+	populateYearSelect(vehicle.fetched.fetchedYears);
+	opts = yearSelect.options;
+	for (let i = 0; i <= opts.length; i++) {
+		if (vehicle.year === opts[i].value) {
+			yearSelect.selectedIndex = i;
+			break;
+		}
+	}
+	populateModelSelect(vehicle.fetched.fetchedModels);
+	opts = modelSelect.options;
+	for (let i = 0; i <= opts.length; i++) {
+		if (vehicle.model === opts[i].value) {
+			modelSelect.selectedIndex = i;
+			break;
+		}
+	}
+	populateDescriptionSelect(vehicle.fetched.fetchedModelObj);
+	opts = descriptionSelect.options;
+	// if(opts.length > 2){
+	for (let i = 0; i <= opts.length; i++) {
+		if (vehicle.description === opts[i].value) {
+			descriptionSelect.selectedIndex = i;
+			break;
+		}
+	}
+	// }
+	showResults();
+	calcResult();
+}
+
 makeSelect.addEventListener('change', function () {
 	console.log('make changed', this.value);
 
@@ -211,12 +241,11 @@ makeSelect.addEventListener('change', function () {
 				yearSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
 				return;
 			}
-			//selectedModels = data;
-			selectedYears = data;
+			fetchedYears = data;
 			// sessionStorage.clear(); //reset every time make changes
-			// sessionStorage.selectedYears = JSON.stringify(selectedYears);
+			// sessionStorage.fetchedYears = JSON.stringify(fetchedYears);
 
-			populateYearSelect();
+			populateYearSelect(fetchedYears);
 			endLoadingSelect(yearSelect);
 		})
 		.catch(error => {
@@ -233,9 +262,9 @@ function endLoadingSelect(select) {
 	select.classList.remove('loading-select');
 }
 
-function populateModelSelect() {
+function populateModelSelect(fetchedModels) {
 	let modelOptionsArray = ['<option value="">Επιλέξτε Μοντέλο</option>'];
-	selectedModels.forEach(model => {
+	fetchedModels.forEach(model => {
 		modelOptionsArray.push(`<option value="${model}">${model}</option>`);
 	});
 
@@ -277,7 +306,7 @@ function yearOnChange(value) {
 		// sessionStorage.removeItem('selectedVehicles');
 		return;
 	}
-	// selectedModel = selectedModels.models.filter(model => model.name === this.value)[0];
+	// selectedModel = fetchedModels.models.filter(model => model.name === this.value)[0];
 	// console.log('selectedModel', selectedModel);
 	// sessionStorage.selectedModel = JSON.stringify(selectedModel);
 	modelSelect.disabled = false;
@@ -302,14 +331,14 @@ function yearOnChange(value) {
 				yearSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
 				return;
 			}
-			selectedModels = data;
+			fetchedModels = data;
 
 			// sessionStorage.selectedVehicles = JSON.stringify(selectedVehicles);
 
 			// descriptionSelect.innerHTML = `<option value="">${
 			//   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
 			// }</option>`;
-			populateModelSelect();
+			populateModelSelect(fetchedModels);
 			endLoadingSelect(modelSelect);
 		})
 		.catch(error => {
@@ -319,10 +348,10 @@ function yearOnChange(value) {
 		});
 }
 
-function populateYearSelect() {
+function populateYearSelect(fetchedYears) {
 	let yearOptionsArray = ['<option value="">Επιλέξτε Χρονολογία</option>'];
 
-	selectedYears.forEach(year => {
+	fetchedYears.forEach(year => {
 		yearOptionsArray.push(`<option value="${year}">${year}</option>`);
 	});
 
@@ -365,7 +394,6 @@ function modelOnChange(value) {
 		// sessionStorage.removeItem('selectedYear');
 		return;
 	}
-	selectedModelName = value;
 	// sessionStorage.selectedYear = value;
 
 	descriptionSelect.disabled = false;
@@ -390,14 +418,14 @@ function modelOnChange(value) {
 				descriptionSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
 				return;
 			}
-			selectedModelObj = data;
+			fetchedModelObj = data;
 
 			// sessionStorage.selectedVehicles = JSON.stringify(selectedVehicles);
 
 			// descriptionSelect.innerHTML = `<option value="">${
 			//   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
 			// }</option>`;
-			populateDescriptionSelect();
+			populateDescriptionSelect(fetchedModelObj);
 			endLoadingSelect(descriptionSelect);
 		})
 		.catch(error => {
@@ -407,14 +435,14 @@ function modelOnChange(value) {
 		});
 }
 
-function populateDescriptionSelect() {
-	console.log({ selectedModelObj });
+function populateDescriptionSelect(fetchedModelObj) {
+	console.log({ fetchedModelObj });
 	let optionsArray;
 
-	if (selectedModelObj.isDirect) {
+	if (fetchedModelObj.isDirect) {
 		optionsArray = ['<option value="">Επιλέξτε Κινητήρα</option>'];
 		let engineCodesOptions = [];
-		selectedModelObj.vehicles.forEach(vehicle => {
+		fetchedModelObj.vehicles.forEach(vehicle => {
 			vehicle.engineCodes.forEach(code => {
 				let convertibleSymbol = vehicle.isConvertible ? ' ✔️' : ' &#10060;';
 				engineCodesOptions.push(code + convertibleSymbol);
@@ -428,7 +456,7 @@ function populateDescriptionSelect() {
 			optionsArray.push(`<option value="${engineCodeValue}">${engineCode}</option>`);
 		});
 	} else {
-		const filteredVehicles = selectedModelObj.vehicles.slice();
+		const filteredVehicles = fetchedModelObj.vehicles.slice();
 
 		console.log({ filteredVehicles });
 
@@ -519,7 +547,8 @@ function descriptionOnChange(value) {
 			make: makeSelect.value,
 			year: yearSelect.value,
 			model: modelSelect.value,
-			description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}`
+			description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}`,
+			fetched: { fetchedYears, fetchedModels, fetchedModelObj }
 		},
 		foundVehicleObj,
 		systems: {
@@ -531,47 +560,6 @@ function descriptionOnChange(value) {
 	// sessionStorage.selectedDescription = value;
 }
 
-function selectMakeOption() {
-	let opts = makeSelect.options;
-	for (let i = 0; i <= opts.length; i++) {
-		if (selectedModels.make === opts[i].value) {
-			makeSelect.selectedIndex = i;
-			break;
-		}
-	}
-}
-function selectModelOption() {
-	selectedModel = JSON.parse(sessionStorage.selectedModel);
-	let opts = modelSelect.options;
-	console.log('select model option opts', opts);
-	for (let i = 0; i <= opts.length; i++) {
-		if (selectedModel.name === opts[i].value) {
-			modelSelect.selectedIndex = i;
-			break;
-		}
-	}
-}
-function selectYearOption() {
-	const selectedYear = sessionStorage.selectedYear;
-	let opts = yearSelect.options;
-	for (let i = 0; i <= opts.length; i++) {
-		if (selectedYear === opts[i].value) {
-			yearSelect.selectedIndex = i;
-			break;
-		}
-	}
-}
-function selectCylinderOption() {
-	const selectedCylinder = sessionStorage.selectedCylinder;
-	let opts = descriptionSelect.options;
-	for (let i = 0; i <= opts.length; i++) {
-		if (selectedCylinder === opts[i].value) {
-			descriptionSelect.selectedIndex = i;
-			break;
-		}
-	}
-}
-
 function showResults() {
 	const years = yearSelect.value;
 	suggestedSystemPrices = [];
@@ -579,12 +567,12 @@ function showResults() {
 
 	if (suggestedPricesChanges.length) resetToDefaultPrices();
 
-	if (selectedModelObj.isDirect) {
+	if (fetchedModelObj.isDirect) {
 		showDirectResults();
-	} else if (selectedModelObj.isMonou) {
+	} else if (fetchedModelObj.isMonou) {
 		showMonouResults();
 	} else {
-		console.log(selectedModelObj);
+		console.log(fetchedModelObj);
 		showCylinderResults(years);
 	}
 
@@ -621,7 +609,7 @@ function resetToDefaultPrices() {
 
 function showDirectResults() {
 	// const selectedEngineCode = descriptionSelect.value;
-	// label: for (let veh of selectedModelObj.vehicles) {
+	// label: for (let veh of fetchedModelObj.vehicles) {
 	// 	for (let engineCode of veh.engineCodes) {
 	// 		if (engineCode === selectedEngineCode) {
 	// 			foundVehicleObj = veh;
@@ -633,7 +621,7 @@ function showDirectResults() {
 
 	const possibleVehicleObjs = [];
 	const selectedEngineCode = descriptionSelect.value;
-	for (let veh of selectedModelObj.vehicles) {
+	for (let veh of fetchedModelObj.vehicles) {
 		for (let engineCode of veh.engineCodes) {
 			if (engineCode === selectedEngineCode) possibleVehicleObjs.push(veh);
 		}
@@ -661,9 +649,9 @@ function showDirectResults() {
 }
 
 function showMonouResults() {
-	foundVehicleObj = selectedModelObj.vehicles[0];
+	foundVehicleObj = fetchedModelObj.vehicles[0];
 	const selectedHp = descriptionSelect.value;
-	for (let veh of selectedModelObj.vehicles) {
+	for (let veh of fetchedModelObj.vehicles) {
 		if (veh.hp == selectedHp) {
 			foundVehicleObj = veh;
 			break;
@@ -674,10 +662,10 @@ function showMonouResults() {
 }
 
 function showCylinderResults(years) {
-	foundVehicleObj = selectedModelObj.vehicles[0]; // to be sure
+	foundVehicleObj = fetchedModelObj.vehicles[0]; // to be sure
 
 	const descriptionValue = descriptionSelect.value;
-	const consumptionsRace = runConsumptionRace(selectedModelObj.vehicles);
+	const consumptionsRace = runConsumptionRace(fetchedModelObj.vehicles);
 
 	console.log({ consumptionsRace });
 
@@ -689,7 +677,7 @@ function showCylinderResults(years) {
 		}
 	}
 
-	// for (let veh of selectedModelObj.vehicles) {
+	// for (let veh of fetchedModelObj.vehicles) {
 	//   if (descriptionValue.length === 1) {
 	//     //cyls mode
 	//     if (veh.cylinders == descriptionValue) {
