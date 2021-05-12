@@ -486,7 +486,7 @@ function descriptionOnChange(value) {
 
 	suggestedContainers.forEach(cont => (cont.style.display = 'none'));
 
-	userSelections.vehicle = { ...userSelections.vehicle, description: value };
+	userSelections.vehicle = { ...userSelections.vehicle, description: value + `${value.length === 1 ? ' cyl' : ' hp'}` };
 
 	if (!value) {
 		resetCalc();
