@@ -576,15 +576,31 @@ function resetToDefaultPrices() {
 }
 
 function showDirectResults() {
+	// const selectedEngineCode = descriptionSelect.value;
+	// label: for (let veh of selectedModelObj.vehicles) {
+	// 	for (let engineCode of veh.engineCodes) {
+	// 		if (engineCode === selectedEngineCode) {
+	// 			foundVehicleObj = veh;
+	// 			break label;
+	// 		}
+	// 	}
+	// }
+	// console.log({ foundVehicleObj });
+
+	const possibleVehicleObjs = [];
 	const selectedEngineCode = descriptionSelect.value;
-	label: for (let veh of selectedModelObj.vehicles) {
+	for (let veh of selectedModelObj.vehicles) {
 		for (let engineCode of veh.engineCodes) {
-			if (engineCode === selectedEngineCode) {
-				foundVehicleObj = veh;
-				break label;
-			}
+			if (engineCode === selectedEngineCode) possibleVehicleObjs.push(veh);
 		}
 	}
+
+	const consumptionsRace = runConsumptionRace(possibleVehicleObjs);
+
+	console.log({ consumptionsRace });
+
+	foundVehicleObj = consumptionsRace[0].veh;
+
 	console.log({ foundVehicleObj });
 
 	if (foundVehicleObj.isConvertible) {
@@ -617,15 +633,11 @@ function showCylinderResults(years) {
 	foundVehicleObj = selectedModelObj.vehicles[0]; // to be sure
 
 	const descriptionValue = descriptionSelect.value;
-	let consumptionObjs = [];
-	selectedModelObj.vehicles.forEach(veh => {
-		consumptionObjs.push({ conSum: veh.consumption.reduce((prev, curr) => prev + curr, 0), veh });
-	});
-	consumptionObjs = consumptionObjs.sort((a, b) => b.conSum - a.conSum);
+	const consumptionsRace = runConsumptionRace(selectedModelObj.vehicles);
 
-	console.log({ consumptionObjs });
+	console.log({ consumptionsRace });
 
-	for (const consumptionObj of consumptionObjs) {
+	for (const consumptionObj of consumptionsRace) {
 		const vehAttribute = descriptionValue.length === 1 ? consumptionObj.veh.cylinders : consumptionObj.veh.hp;
 		if (vehAttribute == descriptionValue) {
 			foundVehicleObj = consumptionObj.veh;
@@ -707,6 +719,14 @@ function showCylinderResults(years) {
 		cobdDiv.querySelector('.left-overlay-description').textContent = '2-4cyl' + getCylinderDescrText();
 		cobdDiv.style.display = 'grid';
 	}
+}
+
+function runConsumptionRace(vehicles) {
+	const consumptionObjs = [];
+	vehicles.forEach(veh => {
+		consumptionObjs.push({ conSum: veh.consumption.reduce((prev, curr) => prev + curr, 0), veh });
+	});
+	return consumptionObjs.sort((a, b) => b.conSum - a.conSum);
 }
 
 function displayEmulatorInfo(suggestedContainer) {
