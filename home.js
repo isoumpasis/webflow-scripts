@@ -993,7 +993,7 @@ function updateEasyPay() {
 const lpgConsumption = 1.15; //15% more than petrol
 const cngConsumption = -0.444; //44,44% less than petrol
 
-const sliders = document.querySelectorAll('.range-slider');
+const sliders = document.querySelectorAll('.range-slider-calc');
 const outputs = document.querySelectorAll('input[type=number]');
 const lpgResult = document.querySelector('#lpg-result');
 const cngResult = document.querySelector('#cng-result');
