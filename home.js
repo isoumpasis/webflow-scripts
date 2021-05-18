@@ -102,7 +102,7 @@ function initSelects() {
   yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
   descriptionSelect.disabled = true;
   descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
-  makeSelect.focus();
+  // makeSelect.focus();
 }
 
 function initFuelPrices() {
