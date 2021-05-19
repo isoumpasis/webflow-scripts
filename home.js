@@ -83,6 +83,14 @@ let suggestedSystemPrices = [];
 let suggestedSystemNames = [];
 const VAT = 1.24;
 
+//EASY PAY
+const prokatavoliNoCreditSlider = document.querySelector('.prokatavoli-no-credit-slider');
+const doseisNoCreditSlider = document.querySelector('.doseis-no-credit-slider');
+const prokatavoliNoCreditCover = document.querySelector('.prokatavoli-no-credit-cover');
+const doseisNoCreditCover = document.querySelector('.doseis-no-credit-cover');
+const outputNoCreditProkatavoli = document.querySelector('.output-no-credit-prokatavoli');
+const outputNoCreditDoseis = document.querySelector('.output-no-credit-doseis');
+
 const creditCardPrice1 = document.querySelector('#creditCardPrice1');
 const creditCardPrice2 = document.querySelector('#creditCardPrice2');
 const creditCardInstallments = document.querySelector('#creditCardInstallments');
@@ -135,16 +143,35 @@ function modifyFuelPriceSliders(value) {
 
 	sliders[2].value = locationObj.petrol;
 	outputs[2].value = locationObj.petrol;
-	covers[2].style.width = calcCoverWidth(sliders[2]) + '%';
+	calcCovers[2].style.width = calcCoverWidth(sliders[2]) + '%';
 	sliders[3].value = locationObj.lpg;
 	outputs[3].value = locationObj.lpg;
-	covers[3].style.width = calcCoverWidth(sliders[3]) + '%';
+	calcCovers[3].style.width = calcCoverWidth(sliders[3]) + '%';
 	calcResult();
 }
 
 function initEasyPay() {
-	creditCardPrice1.previousElementSibling.checked = true;
-	creditCardInstallmentsOnChange(creditCardInstallments.value);
+	prokatavoliNoCreditSlider.addEventListener('input', function () {
+		outputNoCreditProkatavoli.value = this.value;
+		prokatavoliNoCreditCover.style.width = calcCoverWidth(this) + '%';
+	});
+	doseisNoCreditSlider.addEventListener('input', function () {
+		outputNoCreditDoseis.value = this.value;
+		doseisNoCreditCover.style.width = calcCoverWidth(this) + '%';
+	});
+
+	outputNoCreditProkatavoli.addEventListener('input', function () {
+		prokatavoliNoCreditSlider.value = this.value;
+		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
+	});
+
+	outputNoCreditDoseis.addEventListener('input', function () {
+		doseisNoCreditSlider.value = this.value;
+		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
+	});
+
+	// creditCardPrice1.previousElementSibling.checked = true;
+	// creditCardInstallmentsOnChange(creditCardInstallments.value);
 }
 
 function initStorage() {
@@ -812,7 +839,7 @@ function configureCalculator() {
 
 	sliders[1].value = foundVehicleObj.consumption[2];
 	outputs[1].value = sliders[1].value;
-	covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
+	calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
 	document.querySelector('.in-consumption').textContent = foundVehicleObj.consumption[0];
 	document.querySelector('.out-consumption').textContent = foundVehicleObj.consumption[1];
@@ -827,7 +854,7 @@ function resetCalc() {
 
 	sliders[1].value = 8;
 	outputs[1].value = 8;
-	covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
+	calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
 	document.querySelector('.step-1').style.marginBottom = '10%';
 }
@@ -841,7 +868,7 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 
 		sliders[1].value = consumptionLabelWithData.dataset.cons;
 		outputs[1].value = consumptionLabelWithData.dataset.cons;
-		covers[1].style.width = calcCoverWidth(sliders[1]) + '%';
+		calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 		calcResult();
 	});
 });
@@ -857,6 +884,7 @@ function getCylinderDescrText() {
 function configureEasyPay() {
 	configureModelEasyPay();
 	configureSystemsEasyPay();
+	configureNoCreditSliders();
 
 	// for (let container of suggestedContainers) {
 	// 	if (container.style.display !== 'none') {
@@ -897,21 +925,20 @@ function configureSystemsEasyPay() {
 	systemPriceCreditEls.forEach((el, i) => (el.textContent = suggestedPrices[i % 2]));
 	if (systemLogoSrcs.length === 2) {
 		[...document.querySelectorAll('.easy-pay-first-suggestion-text')].map(el => (el.textContent = 'ΙΔΑΝΙΚΟΤΕΡΗ ΠΡΟΤΑΣΗ'));
-		// systemLogoCreditEls[0].src = systemLogoSrcs[0];
-		// systemLogoCreditEls[1].src = systemLogoSrcs[1];
-		// systemLogoCreditEls[2].src = systemLogoSrcs[0];
-		// systemLogoCreditEls[3].src = systemLogoSrcs[1];
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'block'));
 	} else {
 		[...document.querySelectorAll('.easy-pay-first-suggestion-text')].map(el => (el.textContent = 'ΠΡΟΤΑΣΗ ΣΥΣΤΗΜΑΤΟΣ'));
-		// systemLogoCreditEls[0].src = systemLogoSrcs[0];
-		// systemLogoCreditEls[2].src = systemLogoSrcs[0];
-
-		// systemPriceCreditEls[0].textContent
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'none'));
 	}
 
 	console.log(systemLogoCreditEls, systemLogoSrcs, suggestedPrices);
+}
+
+function configureNoCreditSliders() {
+	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
+	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
+	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
+	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 }
 
 function setWithCreditCard() {
@@ -1001,21 +1028,21 @@ const costLabels = document.querySelectorAll('.cost-label');
 const lpgResultLabel = document.querySelector('#lpg-result-label');
 const cngResultLabel = document.querySelector('#cng-result-label');
 let fuelPrices;
-const covers = document.querySelectorAll('.cover');
+const calcCovers = document.querySelectorAll('.calc-cover');
 
 sliders.forEach((slider, i) => {
 	outputs[i].value = slider.value;
-	covers[i].style.width = calcCoverWidth(slider) + '%';
+	calcCovers[i].style.width = calcCoverWidth(slider) + '%';
 
 	slider.addEventListener('input', () => {
 		outputs[i].value = slider.value;
-		covers[i].style.width = calcCoverWidth(slider) + '%';
+		calcCovers[i].style.width = calcCoverWidth(slider) + '%';
 		calcResult();
 		calcEasyPay();
 	});
 	outputs[i].addEventListener('input', function () {
 		slider.value = this.value;
-		covers[i].style.width = calcCoverWidth(slider) + '%';
+		calcCovers[i].style.width = calcCoverWidth(slider) + '%';
 		calcResult();
 		calcEasyPay();
 	});
