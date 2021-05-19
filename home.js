@@ -892,6 +892,7 @@ function configureSystemsEasyPay() {
 	const systemLogoCreditEls = document.querySelectorAll('.system-logo-credit');
 
 	if (systemLogoSrcs.length === 2) {
+		document.querySelector('.easy-pay-first-suggestion-text').textContent = 'Ιδανικότερη Πρόταση';
 		// systemLogoCreditEls.forEach((el, i) => (el.src = systemLogoSrcs[i % 2]));
 		systemLogoCreditEls[0].src = systemLogoSrcs[0];
 		systemLogoCreditEls[1].src = systemLogoSrcs[1];
@@ -899,6 +900,7 @@ function configureSystemsEasyPay() {
 		systemLogoCreditEls[3].src = systemLogoSrcs[1];
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'block'));
 	} else {
+		document.querySelector('.easy-pay-first-suggestion-text').textContent = 'Πρόταση Συστήματος';
 		systemLogoCreditEls[0].src = systemLogoSrcs[0];
 		systemLogoCreditEls[2].src = systemLogoSrcs[0];
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'none'));
