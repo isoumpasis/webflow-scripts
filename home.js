@@ -643,7 +643,7 @@ function showResults(fetchedModelObj) {
     // document.querySelector('.suggest').scrollIntoView({ behavior: 'smooth', block: 'end' });
     // document.querySelector('.car-result-block').scrollIntoView({ behavior: 'smooth', block: 'end' });
 
-    // document.querySelector('.step-2').style.marginBottom = '0px';
+    document.querySelector('.step-2').style.marginBottom = '10vh';
     configureCalculator();
     configureEasyPay();
     document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
@@ -916,7 +916,7 @@ function resetCalc() {
   outputs[1].value = 8;
   calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
-  // document.querySelector('.step-2').style.marginBottom = '10%';
+  document.querySelector('.step-2').style.marginBottom = '40vh';
 }
 
 document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
