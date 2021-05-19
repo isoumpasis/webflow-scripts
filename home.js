@@ -890,23 +890,28 @@ function configureSystemsEasyPay() {
 	const activeContainer = getActiveContainer();
 	const systemLogoSrcs = [...activeContainer.querySelectorAll('.system-logo')].map(el => el.src);
 	const systemLogoCreditEls = document.querySelectorAll('.system-logo-credit');
+	const systemPriceCreditEls = document.querySelectorAll('.system-price-credit');
+	const suggestedPrices = [...activeContainer.querySelectorAll('suggested-price')].map(el => el.textContent.split('€')[0] * VAT + '€');
 
+	systemLogoCreditEls.forEach((el, i) => (el.src = systemLogoSrcs[i % 2]));
+	systemPriceCreditEls.forEach((el, i) => (el.textContent = suggestedPrices[i % 2]));
 	if (systemLogoSrcs.length === 2) {
 		[...document.querySelectorAll('.easy-pay-first-suggestion-text')].map(el => (el.textContent = 'ΙΔΑΝΙΚΟΤΕΡΗ ΠΡΟΤΑΣΗ'));
-		// systemLogoCreditEls.forEach((el, i) => (el.src = systemLogoSrcs[i % 2]));
-		systemLogoCreditEls[0].src = systemLogoSrcs[0];
-		systemLogoCreditEls[1].src = systemLogoSrcs[1];
-		systemLogoCreditEls[2].src = systemLogoSrcs[0];
-		systemLogoCreditEls[3].src = systemLogoSrcs[1];
+		// systemLogoCreditEls[0].src = systemLogoSrcs[0];
+		// systemLogoCreditEls[1].src = systemLogoSrcs[1];
+		// systemLogoCreditEls[2].src = systemLogoSrcs[0];
+		// systemLogoCreditEls[3].src = systemLogoSrcs[1];
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'block'));
 	} else {
 		[...document.querySelectorAll('.easy-pay-first-suggestion-text')].map(el => (el.textContent = 'ΠΡΟΤΑΣΗ ΣΥΣΤΗΜΑΤΟΣ'));
-		systemLogoCreditEls[0].src = systemLogoSrcs[0];
-		systemLogoCreditEls[2].src = systemLogoSrcs[0];
+		// systemLogoCreditEls[0].src = systemLogoSrcs[0];
+		// systemLogoCreditEls[2].src = systemLogoSrcs[0];
+
+		// systemPriceCreditEls[0].textContent
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'none'));
 	}
 
-	console.log(systemLogoCreditEls, systemLogoSrcs);
+	console.log(systemLogoCreditEls, systemLogoSrcs, suggestedPrices);
 }
 
 function setWithCreditCard() {
