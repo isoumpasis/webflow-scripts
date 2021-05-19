@@ -161,13 +161,15 @@ function initEasyPay() {
 	});
 
 	outputNoCreditProkatavoli.addEventListener('input', function () {
-		if (this.value > 500 || this.value < 0) this.value = prokatavoliNoCreditSlider.value;
+		if (this.value > 500) this.value = 500;
+		if (this.value < 0) this.value = 0;
 		prokatavoliNoCreditSlider.value = this.value;
 		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 	});
 
 	outputNoCreditDoseis.addEventListener('input', function () {
-		if (this.value > 60 || this.value < 3) this.value = doseisNoCreditSlider.value;
+		if (this.value > 60) this.value = 60;
+		if (this.value < 3) this.value = 3;
 		doseisNoCreditSlider.value = this.value;
 		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	});
