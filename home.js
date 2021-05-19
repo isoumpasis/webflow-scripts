@@ -577,7 +577,7 @@ function showResults(fetchedModelObj) {
 		showCylinderResults(fetchedModelObj, years);
 	}
 
-	const suggestedContainer = [...suggestedContainers].filter(container => container.style.display !== 'none')[0];
+	const suggestedContainer = getActiveContainer();
 	containerId = suggestedContainer.id;
 
 	//If there is a suggestion
@@ -855,31 +855,49 @@ function getCylinderDescrText() {
 }
 
 function configureEasyPay() {
-	let makeImgSrc = document.querySelector('#makeImg').src;
-	let modelNameText = document.querySelector('#modelName').textContent;
+	configureModelEasyPay();
+	configureSystemsEasyPay();
 
+	// for (let container of suggestedContainers) {
+	// 	if (container.style.display !== 'none') {
+	// 		container.querySelectorAll('.suggested-price').forEach(priceEl => {
+	// 			let price = parseInt(priceEl.textContent.split(' ')[0].replace('€', ''));
+	// 			price *= VAT;
+	// 			suggestedSystemPrices.push(price);
+	// 		});
+	// 		container.querySelectorAll('.suggested-name').forEach(nameEl => {
+	// 			suggestedSystemNames.push(nameEl.textContent);
+	// 		});
+	// 		break;
+	// 	}
+	// }
+	// console.log(suggestedSystemPrices);
+	// console.log(suggestedSystemNames);
+
+	// setWithCreditCard();
+}
+
+function configureModelEasyPay() {
+	const makeImgSrc = document.querySelector('#makeImg').src;
+	const modelNameText = document.querySelector('#modelName').textContent;
 	document.querySelector('#makeImgNoCredit').src = makeImgSrc;
 	document.querySelector('#makeImgCredit').src = makeImgSrc;
 	document.querySelector('#modelNameNoCredit').textContent = modelNameText;
 	document.querySelector('#modelNameCredit').textContent = modelNameText;
+}
 
-	for (let container of suggestedContainers) {
-		if (container.style.display !== 'none') {
-			container.querySelectorAll('.suggested-price').forEach(priceEl => {
-				let price = parseInt(priceEl.textContent.split(' ')[0].replace('€', ''));
-				price *= VAT;
-				suggestedSystemPrices.push(price);
-			});
-			container.querySelectorAll('.suggested-name').forEach(nameEl => {
-				suggestedSystemNames.push(nameEl.textContent);
-			});
-			break;
-		}
+function configureSystemsEasyPay() {
+	const activeContainer = getActiveContainer();
+	const systemLogoSrcs = activeContainer.querySelectorAll('.system-logo').map(el => el.src);
+	const systemLogoCreditEls = document.querySelectorAll('.system-logo-credit');
+
+	if (systemLogoSrcs.length === 2) {
+		systemLogoCreditEls[0].src = systemLogoSrcs[0];
+		systemLogoCreditEls[1].src = systemLogoSrcs[1];
+	} else {
+		systemLogoCreditEls[0].src = systemLogoSrcs[0];
+		document.querySelectorAll('.easy-pay-second-suggestion').map(el => (el.style.display = 'none'));
 	}
-	console.log(suggestedSystemPrices);
-	console.log(suggestedSystemNames);
-
-	setWithCreditCard();
 }
 
 function setWithCreditCard() {
@@ -943,6 +961,10 @@ function updateEasyPay() {
 	} else {
 		// document.querySelector('#creditCardBenefitLabel').textContent = 'Μηνιαίο όφελος LPG';
 	}
+}
+
+function getActiveContainer() {
+	return [...suggestedContainers].filter(container => container.style.display !== 'none')[0];
 }
 
 /* System Identification END */
