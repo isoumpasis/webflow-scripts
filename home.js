@@ -90,6 +90,10 @@ const prokatavoliNoCreditCover = document.querySelector('.prokatavoli-no-credit-
 const doseisNoCreditCover = document.querySelector('.doseis-no-credit-cover');
 const outputNoCreditProkatavoli = document.querySelector('.output-no-credit-prokatavoli');
 const outputNoCreditDoseis = document.querySelector('.output-no-credit-doseis');
+const prokatavoliMinus = document.querySelector('.no-credit-prokatavoli-minus');
+const prokatavoliPlus = document.querySelector('.no-credit-prokatavoli-plus');
+const doseisMinus = document.querySelector('.no-credit-doseis-minus');
+const doseisPlus = document.querySelector('.no-credit-doseis-plus');
 
 const creditCardPrice1 = document.querySelector('#creditCardPrice1');
 const creditCardPrice2 = document.querySelector('#creditCardPrice2');
@@ -174,6 +178,18 @@ function initEasyPay() {
 		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	});
 
+	prokatavoliMinus.addEventListener('click', () => {
+		prokatavoliNoCreditSlider.value -= +prokatavoliNoCreditSlider.step;
+	});
+	prokatavoliPlus.addEventListener('click', () => {
+		prokatavoliNoCreditSlider.value += +prokatavoliNoCreditSlider.step;
+	});
+	doseisMinus.addEventListener('click', () => {
+		doseisNoCreditSlider.value -= +doseisNoCreditSlider.step;
+	});
+	doseisPlus.addEventListener('click', () => {
+		doseisNoCreditSlider.value += +doseisNoCreditSlider.step;
+	});
 	// creditCardPrice1.previousElementSibling.checked = true;
 	// creditCardInstallmentsOnChange(creditCardInstallments.value);
 }
