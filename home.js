@@ -891,7 +891,7 @@ function configureSystemsEasyPay() {
 	const systemLogoSrcs = [...activeContainer.querySelectorAll('.system-logo')].map(el => el.src);
 	const systemLogoCreditEls = document.querySelectorAll('.system-logo-credit');
 	const systemPriceCreditEls = document.querySelectorAll('.system-price-credit');
-	const suggestedPrices = [...activeContainer.querySelectorAll('suggested-price')].map(el => el.textContent.split('€')[0] * VAT + '€');
+	const suggestedPrices = [...activeContainer.querySelectorAll('.suggested-price')].map(el => el.textContent.split('€')[0] * VAT + '€');
 
 	systemLogoCreditEls.forEach((el, i) => (el.src = systemLogoSrcs[i % 2]));
 	systemPriceCreditEls.forEach((el, i) => (el.textContent = suggestedPrices[i % 2]));
