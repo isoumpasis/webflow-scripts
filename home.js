@@ -888,7 +888,7 @@ function configureModelEasyPay() {
 
 function configureSystemsEasyPay() {
 	const activeContainer = getActiveContainer();
-	const systemLogoSrcs = activeContainer.querySelectorAll('.system-logo').map(el => el.src);
+	const systemLogoSrcs = [...activeContainer.querySelectorAll('.system-logo')].map(el => el.src);
 	const systemLogoCreditEls = document.querySelectorAll('.system-logo-credit');
 
 	if (systemLogoSrcs.length === 2) {
@@ -896,7 +896,7 @@ function configureSystemsEasyPay() {
 		systemLogoCreditEls[1].src = systemLogoSrcs[1];
 	} else {
 		systemLogoCreditEls[0].src = systemLogoSrcs[0];
-		document.querySelectorAll('.easy-pay-second-suggestion').map(el => (el.style.display = 'none'));
+		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'none'));
 	}
 }
 
