@@ -894,10 +894,13 @@ function configureSystemsEasyPay() {
 	if (systemLogoSrcs.length === 2) {
 		systemLogoCreditEls[0].src = systemLogoSrcs[0];
 		systemLogoCreditEls[1].src = systemLogoSrcs[1];
+		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'block'));
 	} else {
 		systemLogoCreditEls[0].src = systemLogoSrcs[0];
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'none'));
 	}
+
+	console.log(systemLogoCreditEls, systemLogoSrcs);
 }
 
 function setWithCreditCard() {
