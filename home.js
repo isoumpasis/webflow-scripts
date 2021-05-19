@@ -900,6 +900,7 @@ function configureSystemsEasyPay() {
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'block'));
 	} else {
 		systemLogoCreditEls[0].src = systemLogoSrcs[0];
+		systemLogoCreditEls[3].src = systemLogoSrcs[0];
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'none'));
 	}
 
