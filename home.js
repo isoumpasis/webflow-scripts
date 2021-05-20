@@ -174,7 +174,7 @@ function initEasyPay() {
 	}
 
 	outputNoCreditProkatavoli.addEventListener('input', function () {
-		if (this.value > 500) this.value = 500;
+		if (this.value > 500) this.value = parseInt(document.querySelector('.max-prokatavoli-slider-text').textContent.replace('€', ''));
 		if (this.value < 0) this.value = 0;
 		if (this.value) this.value = Math.round(this.value);
 		prokatavoliNoCreditSliderOnChange(this.value);
