@@ -843,9 +843,9 @@ function configureCalculator() {
 	document.querySelector('#makeImg').src = makeImgPrefix + makeImgDict[makeSelect.value];
 	document.querySelector('#modelName').textContent = `${modelSelect.value} (${yearSelect.value})`;
 
-	document.querySelector('#inConsumption').innerHTML = `Εντός πόλης<br><span class="text-span">(${foundVehicleObj.consumption[0]}L/100km)</span>`;
-	document.querySelector('#outConsumption').innerHTML = `Εκτός πόλης<br><span class="text-span">(${foundVehicleObj.consumption[1]}L/100km)</span>`;
-	document.querySelector('#combinedConsumption').innerHTML = `Μικτά<br><span class="text-span">(${foundVehicleObj.consumption[2]}L/100km)</span>`;
+	document.querySelector('#inConsumption .text-span').innerHTML = `(${foundVehicleObj.consumption[0]}L/100km)`;
+	document.querySelector('#outConsumption .text-span').innerHTML = `(${foundVehicleObj.consumption[1]}L/100km)`;
+	document.querySelector('#combinedConsumption .text-span').innerHTML = `(${foundVehicleObj.consumption[2]}L/100km)`;
 
 	const consumptionRadios = document.querySelectorAll('.radio-button.w-radio');
 
