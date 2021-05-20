@@ -180,7 +180,7 @@ function initEasyPay() {
 	});
 
 	outputNoCreditDoseis.addEventListener('input', function () {
-		if (!this.value) return doseisNoCreditSliderOnChange(3);
+		// if (!this.value) return doseisNoCreditSliderOnChange(3);
 		if (this.value > 60) this.value = 60;
 		if (this.value < 3) this.value = 3;
 		doseisNoCreditSliderOnChange(this.value);
@@ -954,7 +954,7 @@ function configureSystemsEasyPay() {
 	systemPriceCreditEls.forEach((el, i) => (el.textContent = suggestedPrices[i % 2]));
 
 	if (systemLogoSrcs.length === 2) {
-		[...document.querySelectorAll('.easy-pay-first-suggestion-text')].map(el => (el.textContent = 'ΙΔΑΝΙΚΟΤΕΡΗ ΠΡΟΤΑΣΗ'));
+		[...document.querySelectorAll('.easy-pay-first-suggestion-text')].map(el => (el.textContent = 'Η ΙΔΑΝΙΚΟΤΕΡΗ ΠΡΟΤΑΣΗ ΜΑΣ'));
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'block'));
 	} else {
 		[...document.querySelectorAll('.easy-pay-first-suggestion-text')].map(el => (el.textContent = 'ΠΡΟΤΑΣΗ ΣΥΣΤΗΜΑΤΟΣ'));
