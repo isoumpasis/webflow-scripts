@@ -979,7 +979,7 @@ function configureNoCreditSliders() {
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 
-	document.querySelector('.enapomeinan-poso').textContent = selectedEasyPaySystemPrice - parseInt(prokatavoliNoCreditSlider.value);
+	document.querySelector('.enapomeinan-poso').textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliNoCreditSlider.value)).toFixed(1);
 }
 
 function getSelectedEasyPaySystemPrice() {
