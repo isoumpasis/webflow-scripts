@@ -882,6 +882,7 @@ function resetCalc() {
 document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 	el.addEventListener('change', e => {
 		const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
+		console.log(consumptionLabelWithData);
 
 		document.querySelectorAll('.radio-button.w-radio span').forEach(el => (el.style.fontWeight = 'normal'));
 		consumptionLabelWithData.querySelector('span').style.fontWeight = 'bold';
