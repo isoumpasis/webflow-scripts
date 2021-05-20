@@ -958,6 +958,7 @@ function configureSystemsEasyPay() {
 		[...document.querySelectorAll('.easy-pay-first-suggestion-text')].map(el => (el.textContent = 'ΠΡΟΤΑΣΗ ΣΥΣΤΗΜΑΤΟΣ'));
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'none'));
 	}
+	document.querySelector('.easy-pay-suggested-system-div').click();
 
 	console.log(systemLogoCreditEls, systemLogoSrcs, suggestedPrices);
 }
