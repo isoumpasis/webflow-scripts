@@ -951,6 +951,7 @@ function configureSystemsEasyPay() {
 
 	systemLogoCreditEls.forEach((el, i) => (el.src = systemLogoSrcs[i % 2]));
 	systemPriceCreditEls.forEach((el, i) => (el.textContent = suggestedPrices[i % 2]));
+
 	if (systemLogoSrcs.length === 2) {
 		[...document.querySelectorAll('.easy-pay-first-suggestion-text')].map(el => (el.textContent = 'ΙΔΑΝΙΚΟΤΕΡΗ ΠΡΟΤΑΣΗ'));
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'block'));
