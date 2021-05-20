@@ -967,7 +967,7 @@ function configureSystemsEasyPay() {
 function configureNoCreditSliders() {
 	selectedEasyPaySystemPrice = getSelectedEasyPaySystemPrice();
 	console.log({ selectedEasyPaySystemPrice });
-	const floorPrice = (Math.floor(selectedEasyPaySystemPrice) / 10) * 10;
+	const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
 
 	prokatavoliNoCreditSlider.max = floorPrice - 500;
 	document.querySelector('.max-prokatavoli-slider-text').textContent = floorPrice - 500 + '€';
