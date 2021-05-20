@@ -983,8 +983,7 @@ function getSelectedEasyPaySystemPrice() {
 			: document.querySelector('.easy-pay-second-suggestion .system-price-credit').textContent;
 
 	console.log(selectedSystemDiv, priceText);
-	priceText = parseInt(priceText.replace('€', ''));
-	return priceText;
+	return Math.floor(parseInt(priceText.replace('€', '')) / 10) * 10;
 }
 
 function setWithCreditCard() {
