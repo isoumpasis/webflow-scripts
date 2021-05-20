@@ -94,6 +94,7 @@ const prokatavoliMinus = document.querySelector('.no-credit-prokatavoli-minus');
 const prokatavoliPlus = document.querySelector('.no-credit-prokatavoli-plus');
 const doseisMinus = document.querySelector('.no-credit-doseis-minus');
 const doseisPlus = document.querySelector('.no-credit-doseis-plus');
+let selectedEasyPaySystemPrice;
 
 const creditCardPrice1 = document.querySelector('#creditCardPrice1');
 const creditCardPrice2 = document.querySelector('#creditCardPrice2');
@@ -155,11 +156,19 @@ function modifyFuelPriceSliders(value) {
 }
 
 function initEasyPay() {
-	prokatavoliNoCreditSlider.addEventListener('input', function () {
-		outputNoCreditProkatavoli.value = this.value;
-		prokatavoliNoCreditCover.style.width = calcCoverWidth(this) + '%';
-		document.querySelector('.enapomeinan-poso').textContent = getSelectedEasyPaySystemPrice() - parseInt(this.value);
-	});
+	// prokatavoliNoCreditSlider.addEventListener('input', function () {
+	// 	outputNoCreditProkatavoli.value = this.value;
+	// 	prokatavoliNoCreditCover.style.width = calcCoverWidth(this) + '%';
+	// 	document.querySelector('.enapomeinan-poso').textContent = selectedEasyPaySystemPrice - parseInt(this.value); //DEBUG
+	// });
+	prokatavoliNoCreditSlider.addEventListener('input', e => prokatavoliNoCreditSliderOnChange(e.target.value));
+
+	function prokatavoliNoCreditSliderOnChange(value) {
+		outputNoCreditProkatavoli.value = value;
+		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
+		document.querySelector('.enapomeinan-poso').textContent = selectedEasyPaySystemPrice - parseInt(value);
+	}
+
 	doseisNoCreditSlider.addEventListener('input', function () {
 		outputNoCreditDoseis.value = this.value;
 		doseisNoCreditCover.style.width = calcCoverWidth(this) + '%';
@@ -179,16 +188,24 @@ function initEasyPay() {
 		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	});
 
-	prokatavoliMinus.addEventListener('click', () => {
-		prokatavoliNoCreditSlider.value = parseInt(prokatavoliNoCreditSlider.value) - parseInt(prokatavoliNoCreditSlider.step);
-		outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
-		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
-	});
-	prokatavoliPlus.addEventListener('click', () => {
-		prokatavoliNoCreditSlider.value = parseInt(prokatavoliNoCreditSlider.value) + parseInt(prokatavoliNoCreditSlider.step);
-		outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
-		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
-	});
+	// prokatavoliMinus.addEventListener('click', () => {
+	// 	prokatavoliNoCreditSlider.value = parseInt(prokatavoliNoCreditSlider.value) - parseInt(prokatavoliNoCreditSlider.step);
+	// 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
+	// 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
+	// });
+	// prokatavoliPlus.addEventListener('click', () => {
+	// 	prokatavoliNoCreditSlider.value = parseInt(prokatavoliNoCreditSlider.value) + parseInt(prokatavoliNoCreditSlider.step);
+	// 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
+	// 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
+	// });
+	prokatavoliMinus.addEventListener('click', () =>
+		prokatavoliNoCreditSliderOnChange(parseInt(prokatavoliNoCreditSlider.value) - parseInt(prokatavoliNoCreditSlider.step))
+	);
+
+	prokatavoliPlus.addEventListener('click', () =>
+		prokatavoliNoCreditSliderOnChange(parseInt(prokatavoliNoCreditSlider.value) + parseInt(prokatavoliNoCreditSlider.step))
+	);
+
 	doseisMinus.addEventListener('click', () => {
 		doseisNoCreditSlider.value = parseInt(doseisNoCreditSlider.value) - parseInt(doseisNoCreditSlider.step);
 		outputNoCreditDoseis.value = doseisNoCreditSlider.value;
@@ -966,9 +983,9 @@ function configureSystemsEasyPay() {
 }
 
 function configureNoCreditSliders() {
-	const selectedSystemPrice = getSelectedEasyPaySystemPrice();
-	console.log({ selectedSystemPrice });
-	const floorPrice = (Math.floor(selectedSystemPrice) / 10) * 10;
+	selectedEasyPaySystemPrice = getSelectedEasyPaySystemPrice();
+	console.log({ selectedEasyPaySystemPrice });
+	const floorPrice = (Math.floor(selectedEasyPaySystemPrice) / 10) * 10;
 
 	prokatavoliNoCreditSlider.max = floorPrice - 500;
 	document.querySelector('.max-prokatavoli-slider-text').textContent = floorPrice - 500 + '€';
@@ -978,7 +995,7 @@ function configureNoCreditSliders() {
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 
-	document.querySelector('.enapomeinan-poso').textContent = selectedSystemPrice - parseInt(prokatavoliNoCreditSlider.value);
+	document.querySelector('.enapomeinan-poso').textContent = selectedEasyPaySystemPrice - parseInt(prokatavoliNoCreditSlider.value);
 }
 
 function getSelectedEasyPaySystemPrice() {
