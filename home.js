@@ -156,13 +156,7 @@ function modifyFuelPriceSliders(value) {
 }
 
 function initEasyPay() {
-	// prokatavoliNoCreditSlider.addEventListener('input', function () {
-	// 	outputNoCreditProkatavoli.value = this.value;
-	// 	prokatavoliNoCreditCover.style.width = calcCoverWidth(this) + '%';
-	// 	document.querySelector('.enapomeinan-poso').textContent = selectedEasyPaySystemPrice - parseInt(this.value); //DEBUG
-	// });
 	prokatavoliNoCreditSlider.addEventListener('input', e => prokatavoliNoCreditSliderOnChange(e.target.value));
-
 	function prokatavoliNoCreditSliderOnChange(value) {
 		console.log('value', value);
 		prokatavoliNoCreditSlider.value = value;
@@ -171,35 +165,30 @@ function initEasyPay() {
 		document.querySelector('.enapomeinan-poso').textContent = selectedEasyPaySystemPrice - parseInt(value);
 	}
 
-	doseisNoCreditSlider.addEventListener('input', function () {
-		outputNoCreditDoseis.value = this.value;
-		doseisNoCreditCover.style.width = calcCoverWidth(this) + '%';
-	});
+	doseisNoCreditSlider.addEventListener('input', e => doseisNoCreditSliderOnChange(e.target.value));
+	function doseisNoCreditSliderOnChange(value) {
+		console.log('value', value);
+		doseisNoCreditSlider.value = value;
+		outputNoCreditdoseis.value = value;
+		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
+	}
 
 	outputNoCreditProkatavoli.addEventListener('input', function () {
 		if (this.value > 500) this.value = 500;
 		if (this.value < 0) this.value = 0;
-		prokatavoliNoCreditSlider.value = this.value;
-		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
+		prokatavoliNoCreditSliderOnChange(this.value);
+		// prokatavoliNoCreditSlider.value = this.value;
+		// prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 	});
 
 	outputNoCreditDoseis.addEventListener('input', function () {
 		if (this.value > 60) this.value = 60;
 		if (this.value < 3) this.value = 3;
-		doseisNoCreditSlider.value = this.value;
-		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
+		doseisNoCreditSliderOnChange(this.value);
+		// doseisNoCreditSlider.value = this.value;
+		// doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	});
 
-	// prokatavoliMinus.addEventListener('click', () => {
-	// 	prokatavoliNoCreditSlider.value = parseInt(prokatavoliNoCreditSlider.value) - parseInt(prokatavoliNoCreditSlider.step);
-	// 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
-	// 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
-	// });
-	// prokatavoliPlus.addEventListener('click', () => {
-	// 	prokatavoliNoCreditSlider.value = parseInt(prokatavoliNoCreditSlider.value) + parseInt(prokatavoliNoCreditSlider.step);
-	// 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
-	// 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
-	// });
 	prokatavoliMinus.addEventListener('click', () =>
 		prokatavoliNoCreditSliderOnChange(parseInt(prokatavoliNoCreditSlider.value) - parseInt(prokatavoliNoCreditSlider.step))
 	);
@@ -208,16 +197,12 @@ function initEasyPay() {
 		prokatavoliNoCreditSliderOnChange(parseInt(prokatavoliNoCreditSlider.value) + parseInt(prokatavoliNoCreditSlider.step))
 	);
 
-	doseisMinus.addEventListener('click', () => {
-		doseisNoCreditSlider.value = parseInt(doseisNoCreditSlider.value) - parseInt(doseisNoCreditSlider.step);
-		outputNoCreditDoseis.value = doseisNoCreditSlider.value;
-		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
-	});
-	doseisPlus.addEventListener('click', () => {
-		doseisNoCreditSlider.value = parseInt(doseisNoCreditSlider.value) + parseInt(doseisNoCreditSlider.step);
-		outputNoCreditDoseis.value = doseisNoCreditSlider.value;
-		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
-	});
+	doseisMinus.addEventListener('click', () =>
+		doseisNoCreditSliderOnChange(parseInt(doseisNoCreditSlider.value) - parseInt(doseisNoCreditSlider.step))
+	);
+	doseisPlus.addEventListener('click', () =>
+		doseisNoCreditSliderOnChange(parseInt(doseisNoCreditSlider.value) - parseInt(doseisNoCreditSlider.step))
+	);
 	// creditCardPrice1.previousElementSibling.checked = true;
 	// creditCardInstallmentsOnChange(creditCardInstallments.value);
 }
