@@ -969,16 +969,18 @@ function configureNoCreditSliders() {
 	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 
 	const selectedSystemPrice = getSelectedEasyPaySystemPrice();
+	console.log(selectedSystemPrice);
 	prokatavoliNoCreditSlider.max = selectedSystemPrice - 500;
 	document.querySelector('.max-prokatavoli-slider-text').textContent = selectedSystemPrice - 500 + '€';
 }
 
 function getSelectedEasyPaySystemPrice() {
-	const selectedSystemDiv = [...document.querySelectorAll('.easy-pay-suggested-system-div')].filter(
-		systemDiv => systemDiv.style.backgroundColor !== '#F1F1F1'
-	)[0];
-
-	return +selectedSystemDiv.querySelector('.system-price-credit');
+	const selectedSystemDiv = document.querySelector('.easy-pay-suggested-system-div .system-checkmark');
+	const priceText =
+		selectedSystemDiv.style.display !== 'none'
+			? selectedSystemDiv.querySelector('.system-price-credit')
+			: document.querySelector('.easy-pay-second-suggestion .system-price-credit');
+	return +priceText.replace('€');
 }
 
 function setWithCreditCard() {
