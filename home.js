@@ -179,16 +179,24 @@ function initEasyPay() {
 	});
 
 	prokatavoliMinus.addEventListener('click', () => {
-		prokatavoliNoCreditSlider.value -= +prokatavoliNoCreditSlider.step;
+		prokatavoliNoCreditSlider.value = parseInt(prokatavoliNoCreditSlider.value) - parseInt(prokatavoliNoCreditSlider.step);
+		outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
+		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 	});
 	prokatavoliPlus.addEventListener('click', () => {
-		prokatavoliNoCreditSlider.value += +prokatavoliNoCreditSlider.step;
+		prokatavoliNoCreditSlider.value = parseInt(prokatavoliNoCreditSlider.value) + parseInt(prokatavoliNoCreditSlider.step);
+		outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
+		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 	});
 	doseisMinus.addEventListener('click', () => {
-		doseisNoCreditSlider.value -= +doseisNoCreditSlider.step;
+		doseisNoCreditSlider.value = parseInt(doseisNoCreditSlider.value) - parseInt(doseisNoCreditSlider.step);
+		outputNoCreditDoseis.value = doseisNoCreditSlider.value;
+		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	});
 	doseisPlus.addEventListener('click', () => {
-		doseisNoCreditSlider.value += +doseisNoCreditSlider.step;
+		doseisNoCreditSlider.value = parseInt(doseisNoCreditSlider.value) + parseInt(doseisNoCreditSlider.step);
+		outputNoCreditDoseis.value = doseisNoCreditSlider.value;
+		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	});
 	// creditCardPrice1.previousElementSibling.checked = true;
 	// creditCardInstallmentsOnChange(creditCardInstallments.value);
@@ -884,7 +892,7 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 		const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
 		console.log(consumptionLabelWithData);
 
-		document.querySelectorAll('.radio-button.w-radio .consumption-choice').forEach(el => (el.style.fontWeight = 'normal'));
+		document.querySelectorAll('.radio-button.w-radio .consumption-choice').forEach(el => (el.style.fontWeight = 'normal')); //DEBUG!!
 		consumptionLabelWithData.querySelector('.consumption-choice').style.fontWeight = 'bold';
 
 		sliders[1].value = consumptionLabelWithData.dataset.cons;
