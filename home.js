@@ -162,7 +162,7 @@ function initEasyPay() {
 		prokatavoliNoCreditSlider.value = value;
 		outputNoCreditProkatavoli.value = value;
 		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
-		document.querySelector('.enapomeinan-poso').textContent = selectedEasyPaySystemPrice - parseInt(value);
+		document.querySelector('.enapomeinan-poso').textContent = (selectedEasyPaySystemPrice - parseInt(value)).toFixed(1);
 	}
 
 	doseisNoCreditSlider.addEventListener('input', e => doseisNoCreditSliderOnChange(e.target.value));
@@ -176,12 +176,11 @@ function initEasyPay() {
 	outputNoCreditProkatavoli.addEventListener('input', function () {
 		if (this.value > 500) this.value = 500;
 		if (this.value < 0) this.value = 0;
+		if (this.value) this.value = Math.round(this.value);
 		prokatavoliNoCreditSliderOnChange(this.value);
 	});
 
 	outputNoCreditDoseis.addEventListener('input', function () {
-		// if (!this.value) return doseisNoCreditSliderOnChange(3);
-
 		if (this.value > 60) this.value = 60;
 		if (this.value < 3 && this.value) this.value = 3;
 		if (this.value) this.value = Math.round(this.value);
