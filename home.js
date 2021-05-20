@@ -180,7 +180,7 @@ function initEasyPay() {
 	});
 
 	outputNoCreditDoseis.addEventListener('input', function () {
-		if (!this.value) doseisNoCreditSliderOnChange(6);
+		if (!this.value) return doseisNoCreditSliderOnChange(3);
 		if (this.value > 60) this.value = 60;
 		if (this.value < 3) this.value = 3;
 		doseisNoCreditSliderOnChange(this.value);
