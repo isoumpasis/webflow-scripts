@@ -169,7 +169,7 @@ function initEasyPay() {
 	function doseisNoCreditSliderOnChange(value) {
 		console.log('value', value);
 		doseisNoCreditSlider.value = value;
-		outputNoCreditdoseis.value = value;
+		outputNoCreditDoseis.value = value;
 		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	}
 
