@@ -158,6 +158,7 @@ function initEasyPay() {
 	prokatavoliNoCreditSlider.addEventListener('input', function () {
 		outputNoCreditProkatavoli.value = this.value;
 		prokatavoliNoCreditCover.style.width = calcCoverWidth(this) + '%';
+		document.querySelector('.enapomeinan-poso').textContent = getSelectedEasyPaySystemPrice() - parseInt(this.value);
 	});
 	doseisNoCreditSlider.addEventListener('input', function () {
 		outputNoCreditDoseis.value = this.value;
