@@ -884,8 +884,8 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 		const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
 		console.log(consumptionLabelWithData);
 
-		document.querySelectorAll('.radio-button.w-radio span').forEach(el => (el.style.fontWeight = 'normal'));
-		consumptionLabelWithData.querySelector('span').style.fontWeight = 'bold';
+		document.querySelectorAll('.radio-button.w-radio .consumption-choice').forEach(el => (el.style.fontWeight = 'normal'));
+		consumptionLabelWithData.querySelector('.consumption-choice').style.fontWeight = 'bold';
 
 		sliders[1].value = consumptionLabelWithData.dataset.cons;
 		outputs[1].value = consumptionLabelWithData.dataset.cons;
