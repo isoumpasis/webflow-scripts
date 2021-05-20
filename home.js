@@ -967,13 +967,17 @@ function configureSystemsEasyPay() {
 function configureNoCreditSliders() {
 	const selectedSystemPrice = getSelectedEasyPaySystemPrice();
 	console.log({ selectedSystemPrice });
-	prokatavoliNoCreditSlider.max = selectedSystemPrice - 500;
-	document.querySelector('.max-prokatavoli-slider-text').textContent = selectedSystemPrice - 500 + '€';
+	const floorPrice = (Math.floor(selectedSystemPrice) / 10) * 10;
+
+	prokatavoliNoCreditSlider.max = floorPrice - 500;
+	document.querySelector('.max-prokatavoli-slider-text').textContent = floorPrice - 500 + '€';
 
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
+
+	document.querySelector('.enapomeinan-poso').textContent = selectedSystemPrice - parseInt(prokatavoliNoCreditSlider.value);
 }
 
 function getSelectedEasyPaySystemPrice() {
@@ -984,7 +988,7 @@ function getSelectedEasyPaySystemPrice() {
 			: document.querySelector('.easy-pay-second-suggestion .system-price-credit').textContent;
 
 	console.log(selectedSystemDiv, priceText);
-	return Math.floor(parseInt(priceText.replace('€', '')) / 10) * 10;
+	return parseFloat(priceText.replace('€', ''));
 }
 
 function setWithCreditCard() {
