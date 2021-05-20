@@ -978,9 +978,9 @@ function getSelectedEasyPaySystemPrice() {
 	const selectedSystemDiv = document.querySelector('.easy-pay-suggested-system-div .system-checkmark');
 	const priceText =
 		selectedSystemDiv.style.display !== 'none'
-			? selectedSystemDiv.querySelector('.system-price-credit')
-			: document.querySelector('.easy-pay-second-suggestion .system-price-credit');
-	return +priceText.replace('€');
+			? selectedSystemDiv.querySelector('.system-price-credit').textContent
+			: document.querySelector('.easy-pay-second-suggestion .system-price-credit').textContent;
+	return +priceText.replace('€', '');
 }
 
 function setWithCreditCard() {
