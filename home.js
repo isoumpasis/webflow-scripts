@@ -977,13 +977,13 @@ function configureNoCreditSliders() {
 
 function getSelectedEasyPaySystemPrice() {
 	const selectedSystemDiv = document.querySelector('.easy-pay-suggested-system-div');
-	const priceText =
+	let priceText =
 		selectedSystemDiv.querySelector('.system-checkmark').style.display !== 'none'
 			? selectedSystemDiv.querySelector('.system-price-credit').textContent
 			: document.querySelector('.easy-pay-second-suggestion .system-price-credit').textContent;
 
 	console.log(selectedSystemDiv, priceText);
-	return +priceText.replace('€', '');
+	priceText = parseInt(priceText.replace('€', ''));
 }
 
 function setWithCreditCard() {
