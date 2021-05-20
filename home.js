@@ -181,8 +181,10 @@ function initEasyPay() {
 
 	outputNoCreditDoseis.addEventListener('input', function () {
 		// if (!this.value) return doseisNoCreditSliderOnChange(3);
+
 		if (this.value > 60) this.value = 60;
 		if (this.value < 3 && this.value) this.value = 3;
+		if (this.value) this.value = Math.round(this.value);
 		doseisNoCreditSliderOnChange(this.value);
 	});
 
