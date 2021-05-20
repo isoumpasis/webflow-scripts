@@ -164,6 +164,7 @@ function initEasyPay() {
 	prokatavoliNoCreditSlider.addEventListener('input', e => prokatavoliNoCreditSliderOnChange(e.target.value));
 
 	function prokatavoliNoCreditSliderOnChange(value) {
+		console.log('value', value);
 		outputNoCreditProkatavoli.value = value;
 		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 		document.querySelector('.enapomeinan-poso').textContent = selectedEasyPaySystemPrice - parseInt(value);
