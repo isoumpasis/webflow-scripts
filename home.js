@@ -984,6 +984,7 @@ function getSelectedEasyPaySystemPrice() {
 
 	console.log(selectedSystemDiv, priceText);
 	priceText = parseInt(priceText.replace('€', ''));
+	return priceText;
 }
 
 function setWithCreditCard() {
