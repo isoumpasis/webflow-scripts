@@ -958,21 +958,21 @@ function configureSystemsEasyPay() {
 		[...document.querySelectorAll('.easy-pay-first-suggestion-text')].map(el => (el.textContent = 'ΠΡΟΤΑΣΗ ΣΥΣΤΗΜΑΤΟΣ'));
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'none'));
 	}
-	document.querySelector('.easy-pay-suggested-system-div').click();
+	document.querySelector('.easy-pay-suggested-system-div').click(); //default selection first suggestion
 
 	console.log(systemLogoCreditEls, systemLogoSrcs, suggestedPrices);
 }
 
 function configureNoCreditSliders() {
+	const selectedSystemPrice = getSelectedEasyPaySystemPrice();
+	console.log({ selectedSystemPrice });
+	prokatavoliNoCreditSlider.max = selectedSystemPrice - 500;
+	document.querySelector('.max-prokatavoli-slider-text').textContent = selectedSystemPrice - 500 + '€';
+
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
-
-	const selectedSystemPrice = getSelectedEasyPaySystemPrice();
-	console.log(selectedSystemPrice);
-	prokatavoliNoCreditSlider.max = selectedSystemPrice - 500;
-	document.querySelector('.max-prokatavoli-slider-text').textContent = selectedSystemPrice - 500 + '€';
 }
 
 function getSelectedEasyPaySystemPrice() {
