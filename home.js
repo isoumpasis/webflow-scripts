@@ -95,7 +95,7 @@ const prokatavoliPlus = document.querySelector('.no-credit-prokatavoli-plus');
 const doseisMinus = document.querySelector('.no-credit-doseis-minus');
 const doseisPlus = document.querySelector('.no-credit-doseis-plus');
 const enapomeinanPoso = document.querySelector('.enapomeinan-poso');
-const noCreditMonthlyCost = document.querySelector('.no-credit-monthly-const');
+const noCreditMonthlyCost = document.querySelector('.no-credit-monthly-cost');
 const noCreditMonthlyGain = document.querySelector('.no-credit-monthly-gain');
 let selectedEasyPaySystemPrice;
 
