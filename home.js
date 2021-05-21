@@ -211,7 +211,7 @@ function doseisNoCreditSliderOnChange(value) {
 	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	configureNoCreditResults();
-	noCreditFinalCost.textContent = parseFloat(prokatavoliNoCreditSlider.value) + parseFloat(enapomeinanPoso.textContent).toFixed(2) + '€';
+	noCreditFinalCost.textContent = (parseFloat(prokatavoliNoCreditSlider.value) + parseFloat(enapomeinanPoso.textContent)).toFixed(2) + '€';
 }
 
 function initStorage() {
@@ -994,7 +994,7 @@ function configureNoCreditSliders() {
 
 	configureMaxDoseisSlider();
 
-	noCreditFinalCost.textContent = parseFloat(prokatavoliNoCreditSlider.value) + parseFloat(enapomeinanPoso.textContent).toFixed(2) + '€';
+	noCreditFinalCost.textContent = (parseFloat(prokatavoliNoCreditSlider.value) + parseFloat(enapomeinanPoso.textContent)).toFixed(2) + '€';
 }
 
 function configureMaxDoseisSlider() {
