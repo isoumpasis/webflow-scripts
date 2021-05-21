@@ -202,6 +202,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 	enapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(value)).toFixed(1);
 	configureMaxDoseisSlider();
+	noCreditFinalCost.textContent = parseFloat(prokatavoliNoCreditSlider.value) + parseFloat(enapomeinanPoso.textContent).toFixed(2) + '€';
 }
 function doseisNoCreditSliderOnChange(value) {
 	// console.log('value', value);
@@ -209,6 +210,7 @@ function doseisNoCreditSliderOnChange(value) {
 	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	configureNoCreditResults();
+	noCreditFinalCost.textContent = parseFloat(prokatavoliNoCreditSlider.value) + parseFloat(enapomeinanPoso.textContent).toFixed(2) + '€';
 }
 
 function initStorage() {
@@ -990,10 +992,13 @@ function configureNoCreditSliders() {
 	document.querySelector('.enapomeinan-poso').textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliNoCreditSlider.value)).toFixed(1);
 
 	configureMaxDoseisSlider();
+
+	noCreditFinalCost.textContent = parseFloat(prokatavoliNoCreditSlider.value) + parseFloat(enapomeinanPoso.textContent).toFixed(2) + '€';
 }
 
 function configureMaxDoseisSlider() {
-	const maxDoseis = parseInt(parseFloat(enapomeinanPoso.textContent) / 30);
+	let maxDoseis = parseInt(parseFloat(enapomeinanPoso.textContent) / 30);
+	if (maxDoseis > 36) maxDoseis = 36;
 	doseisNoCreditSlider.max = maxDoseis;
 	maxDoseisSliderText.textContent = maxDoseis + ' μήνες';
 	if (parseInt(doseisNoCreditSlider.value) >= maxDoseis) {
