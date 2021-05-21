@@ -162,30 +162,7 @@ function modifyFuelPriceSliders(value) {
 
 function initEasyPay() {
 	prokatavoliNoCreditSlider.addEventListener('input', e => prokatavoliNoCreditSliderOnChange(e.target.value));
-	function prokatavoliNoCreditSliderOnChange(value) {
-		// console.log('value', value);
-		prokatavoliNoCreditSlider.value = value;
-		outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
-		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
-		enapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(value)).toFixed(1);
-
-		const maxDoseis = parseInt(parseFloat(enapomeinanPoso.textContent) / 30);
-		doseisNoCreditSlider.max = maxDoseis;
-		maxDoseisSliderText.textContent = maxDoseis + ' μήνες';
-		if (parseInt(doseisNoCreditSlider.value) >= maxDoseis) {
-			console.log('doseis slider value', doseisNoCreditSlider.value, 'max doseis', maxDoseis);
-			doseisNoCreditSliderOnChange(maxDoseis);
-		}
-	}
-
 	doseisNoCreditSlider.addEventListener('input', e => doseisNoCreditSliderOnChange(e.target.value));
-	function doseisNoCreditSliderOnChange(value) {
-		// console.log('value', value);
-		doseisNoCreditSlider.value = value;
-		outputNoCreditDoseis.value = doseisNoCreditSlider.value;
-		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
-		configureNoCreditResults();
-	}
 
 	outputNoCreditProkatavoli.addEventListener('input', function () {
 		if (this.value > 500) this.value = parseInt(document.querySelector('.max-prokatavoli-slider-text').textContent.replace('€', ''));
@@ -216,6 +193,22 @@ function initEasyPay() {
 	);
 	// creditCardPrice1.previousElementSibling.checked = true;
 	// creditCardInstallmentsOnChange(creditCardInstallments.value);
+}
+
+function prokatavoliNoCreditSliderOnChange(value) {
+	// console.log('value', value);
+	prokatavoliNoCreditSlider.value = value;
+	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
+	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
+	enapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(value)).toFixed(1);
+	configureMaxDoseisSlider();
+}
+function doseisNoCreditSliderOnChange(value) {
+	// console.log('value', value);
+	doseisNoCreditSlider.value = value;
+	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
+	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
+	configureNoCreditResults();
 }
 
 function initStorage() {
@@ -996,11 +989,15 @@ function configureNoCreditSliders() {
 
 	document.querySelector('.enapomeinan-poso').textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliNoCreditSlider.value)).toFixed(1);
 
+	configureMaxDoseisSlider();
+}
+
+function configureMaxDoseisSlider() {
 	const maxDoseis = parseInt(parseFloat(enapomeinanPoso.textContent) / 30);
 	doseisNoCreditSlider.max = maxDoseis;
-	if (parseInt(doseisNoCreditSlider.value) === maxDoseis) {
-		console.log('max doseis', doseisNoCreditSlider.value);
-		// doseisNoCreditSlider.value = maxDoseis;
+	maxDoseisSliderText.textContent = maxDoseis + ' μήνες';
+	if (parseInt(doseisNoCreditSlider.value) >= maxDoseis) {
+		console.log('doseis slider value', doseisNoCreditSlider.value, 'max doseis', maxDoseis);
 		doseisNoCreditSliderOnChange(maxDoseis);
 	}
 }
