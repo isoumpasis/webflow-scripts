@@ -1172,6 +1172,14 @@ function calcResult() {
 		cngResult.textContent = (petrolCostPerMonth - cngCostPerMonth).toFixed(2) + '€';
 		cngPercentageEl.textContent = cngPercentageValue.toFixed(1) + '%';
 	}
+
+	//EasyPay
+	let monthlyGain = parseFloat(lpgResult.textContent.replace('€', ''));
+	if (!perMonthCheckbox.checked) {
+		//DEBUG (&& selectedGas === LPG)
+		monthlyGain /= 12;
+	}
+	noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
 }
 
 function calcCoverWidth(slider) {
