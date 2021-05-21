@@ -993,6 +993,14 @@ function configureNoCreditSliders() {
 	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 
 	document.querySelector('.enapomeinan-poso').textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliNoCreditSlider.value)).toFixed(1);
+
+	const maxDoseis = parseInt(parseFloat(enapomeinanPoso.textContent) / 30);
+	doseisNoCreditSlider.max = maxDoseis;
+	if (parseInt(doseisNoCreditSlider.value) === maxDoseis) {
+		console.log('max doseis', doseisNoCreditSlider.value);
+		// doseisNoCreditSlider.value = maxDoseis;
+		doseisNoCreditSliderOnChange(maxDoseis);
+	}
 }
 
 function getSelectedEasyPaySystemPrice() {
