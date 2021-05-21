@@ -166,6 +166,14 @@ function initEasyPay() {
 		outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 		enapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(value)).toFixed(1);
+
+		const maxDoseis = parseInt(parseFloat(enapomeinanPoso.textContent) / 30);
+		doseisNoCreditSlider.max = maxDoseis;
+		if (parseInt(doseisNoCreditSlider.value) === maxDoseis) {
+			console.log('max doseis', doseisNoCreditSlider.value);
+			// doseisNoCreditSlider.value = maxDoseis;
+			doseisNoCreditSliderOnChange(maxDoseis);
+		}
 	}
 
 	doseisNoCreditSlider.addEventListener('input', e => doseisNoCreditSliderOnChange(e.target.value));
