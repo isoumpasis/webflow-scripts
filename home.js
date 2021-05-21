@@ -648,7 +648,7 @@ function showResults(fetchedModelObj) {
 	containerId = suggestedContainer.id;
 
 	//If there is a suggestion
-	if (suggestedContainer) {
+	if (suggestedContainer && !suggestedContainer.classList.contains('not-covertible-container')) {
 		displayEmulatorInfo(suggestedContainer);
 		suggestedContainer.querySelectorAll('.suggested-overlay-block').forEach(el => (el.style.height = '0px'));
 
@@ -675,17 +675,6 @@ function resetToDefaultPrices() {
 }
 
 function showDirectResults(fetchedModelObj) {
-	// const selectedEngineCode = descriptionSelect.value;
-	// label: for (let veh of fetchedModelObj.vehicles) {
-	// 	for (let engineCode of veh.engineCodes) {
-	// 		if (engineCode === selectedEngineCode) {
-	// 			foundVehicleObj = veh;
-	// 			break label;
-	// 		}
-	// 	}
-	// }
-	// console.log({ foundVehicleObj });
-
 	const possibleVehicleObjs = [];
 	const selectedEngineCode = descriptionSelect.value;
 	for (let veh of fetchedModelObj.vehicles) {
@@ -709,9 +698,10 @@ function showDirectResults(fetchedModelObj) {
 		directSystemDiv.style.display = 'grid';
 	} else {
 		//not convertible !!! here...TODO
-		suggestedContainers.forEach(container => {
-			container.style.display = 'none';
-		});
+		document.querySelector('.not-covertible-container').style.display = 'grid';
+		// suggestedContainers.forEach(container => {
+		// 	container.style.display = 'none';
+		// });
 	}
 }
 
