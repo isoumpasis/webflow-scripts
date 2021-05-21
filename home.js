@@ -1000,7 +1000,7 @@ function configureMaxDoseisSlider() {
 		console.log('doseis slider value', doseisNoCreditSlider.value, 'max doseis', maxDoseis);
 		doseisNoCreditSliderOnChange(maxDoseis);
 	} else {
-		doseisNoCreditsSliderOnChange(doseisNoCreditSlider.value);
+		doseisNoCreditSliderOnChange(doseisNoCreditSlider.value);
 	}
 }
 
