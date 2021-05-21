@@ -204,7 +204,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
 	configureMaxDoseisSlider();
 }
 function doseisNoCreditSliderOnChange(value) {
-	// console.log('value', value);
+	// console.log('value', value); //test
 	doseisNoCreditSlider.value = value;
 	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
