@@ -202,7 +202,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 	enapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(value)).toFixed(1);
 	configureMaxDoseisSlider();
-	noCreditFinalCost.textContent = parseFloat(prokatavoliNoCreditSlider.value) + parseFloat(enapomeinanPoso.textContent).toFixed(2) + '€';
+	// noCreditFinalCost.textContent = parseFloat(prokatavoliNoCreditSlider.value) + parseFloat(enapomeinanPoso.textContent).toFixed(2) + '€';
 }
 function doseisNoCreditSliderOnChange(value) {
 	// console.log('value', value);
