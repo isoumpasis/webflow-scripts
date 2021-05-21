@@ -999,7 +999,7 @@ function getSelectedEasyPaySystemPrice() {
 }
 
 function configureNoCreditResults() {
-	const monthlyCost = parseFloat(enapomeinanPoso) / parseInt(doseisNoCreditSlider.value);
+	const monthlyCost = parseFloat(enapomeinanPoso.textContent) / parseInt(doseisNoCreditSlider.value);
 	noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
 	//DEBUG LPG RESULT OR CNG RESULT
