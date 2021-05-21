@@ -99,6 +99,7 @@ const noCreditMonthlyCost = document.querySelector('.no-credit-monthly-cost');
 const noCreditMonthlyGain = document.querySelector('.no-credit-monthly-gain');
 const maxDoseisSliderText = document.querySelector('.max-doseis-slider-text');
 const minDoseisSliderText = document.querySelector('.min-doseis-slider-text');
+const noCreditFinalCost = document.querySelector('.no-credit-final-cost');
 let selectedEasyPaySystemPrice;
 
 const creditCardPrice1 = document.querySelector('#creditCardPrice1');
