@@ -97,6 +97,8 @@ const doseisPlus = document.querySelector('.no-credit-doseis-plus');
 const enapomeinanPoso = document.querySelector('.enapomeinan-poso');
 const noCreditMonthlyCost = document.querySelector('.no-credit-monthly-cost');
 const noCreditMonthlyGain = document.querySelector('.no-credit-monthly-gain');
+const maxDoseisSliderText = document.querySelector('.max-doseis-slider-text');
+const minDoseisSliderText = document.querySelector('.min-doseis-slider-text');
 let selectedEasyPaySystemPrice;
 
 const creditCardPrice1 = document.querySelector('#creditCardPrice1');
@@ -161,7 +163,7 @@ function modifyFuelPriceSliders(value) {
 function initEasyPay() {
 	prokatavoliNoCreditSlider.addEventListener('input', e => prokatavoliNoCreditSliderOnChange(e.target.value));
 	function prokatavoliNoCreditSliderOnChange(value) {
-		console.log('value', value);
+		// console.log('value', value);
 		prokatavoliNoCreditSlider.value = value;
 		outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
@@ -169,16 +171,16 @@ function initEasyPay() {
 
 		const maxDoseis = parseInt(parseFloat(enapomeinanPoso.textContent) / 30);
 		doseisNoCreditSlider.max = maxDoseis;
-		if (parseInt(doseisNoCreditSlider.value) === maxDoseis) {
-			console.log('max doseis', doseisNoCreditSlider.value);
-			// doseisNoCreditSlider.value = maxDoseis;
+		maxDoseisSliderText.textContent = maxDoseis + ' μήνες';
+		if (parseInt(doseisNoCreditSlider.value) >= maxDoseis) {
+			console.log('doseis slider value', doseisNoCreditSlider.value, 'max doseis', maxDoseis);
 			doseisNoCreditSliderOnChange(maxDoseis);
 		}
 	}
 
 	doseisNoCreditSlider.addEventListener('input', e => doseisNoCreditSliderOnChange(e.target.value));
 	function doseisNoCreditSliderOnChange(value) {
-		console.log('value', value);
+		// console.log('value', value);
 		doseisNoCreditSlider.value = value;
 		outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
