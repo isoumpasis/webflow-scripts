@@ -648,7 +648,7 @@ function showResults(fetchedModelObj) {
 	containerId = suggestedContainer.id;
 
 	//If there is a suggestion
-	if (suggestedContainer && !suggestedContainer.classList.contains('not-covertible-container')) {
+	if (suggestedContainer && !suggestedContainer.classList.contains('not-convertible-container')) {
 		displayEmulatorInfo(suggestedContainer);
 		suggestedContainer.querySelectorAll('.suggested-overlay-block').forEach(el => (el.style.height = '0px'));
 
@@ -698,7 +698,7 @@ function showDirectResults(fetchedModelObj) {
 		directSystemDiv.style.display = 'grid';
 	} else {
 		//not convertible !!! here...TODO
-		document.querySelector('.not-covertible-container').style.display = 'grid';
+		document.querySelector('.not-convertible-container').style.display = 'grid';
 		// suggestedContainers.forEach(container => {
 		// 	container.style.display = 'none';
 		// });
