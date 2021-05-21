@@ -94,6 +94,9 @@ const prokatavoliMinus = document.querySelector('.no-credit-prokatavoli-minus');
 const prokatavoliPlus = document.querySelector('.no-credit-prokatavoli-plus');
 const doseisMinus = document.querySelector('.no-credit-doseis-minus');
 const doseisPlus = document.querySelector('.no-credit-doseis-plus');
+const enapomeinanPoso = document.querySelector('.enapomeinan-poso');
+const noCreditMonthlyCost = document.querySelector('.no-credit-monthly-const');
+const noCreditMonthlyGain = document.querySelector('.no-credit-monthly-gain');
 let selectedEasyPaySystemPrice;
 
 const creditCardPrice1 = document.querySelector('#creditCardPrice1');
@@ -162,7 +165,7 @@ function initEasyPay() {
 		prokatavoliNoCreditSlider.value = value;
 		outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 		prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
-		document.querySelector('.enapomeinan-poso').textContent = (selectedEasyPaySystemPrice - parseInt(value)).toFixed(1);
+		enapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(value)).toFixed(1);
 	}
 
 	doseisNoCreditSlider.addEventListener('input', e => doseisNoCreditSliderOnChange(e.target.value));
@@ -171,6 +174,7 @@ function initEasyPay() {
 		doseisNoCreditSlider.value = value;
 		outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 		doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
+		configureNoCreditResults();
 	}
 
 	outputNoCreditProkatavoli.addEventListener('input', function () {
@@ -916,6 +920,7 @@ function configureEasyPay() {
 	configureModelEasyPay();
 	configureSystemsEasyPay();
 	configureNoCreditSliders();
+	configureNoCreditResults();
 	// for (let container of suggestedContainers) {
 	// 	if (container.style.display !== 'none') {
 	// 		container.querySelectorAll('.suggested-price').forEach(priceEl => {
@@ -991,6 +996,19 @@ function getSelectedEasyPaySystemPrice() {
 
 	console.log(selectedSystemDiv, priceText);
 	return parseFloat(priceText.replace('€', ''));
+}
+
+function configureNoCreditResults() {
+	const monthlyCost = parseFloat(enapomeinanPoso) / parseInt(doseisNoCreditSlider.value);
+	noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
+
+	//DEBUG LPG RESULT OR CNG RESULT
+	let monthlyGain = parseFloat(lpgResult.textContent.replace('€', ''));
+	if (!perMonthCheckbox.checked) {
+		//DEBUG (&& selectedGas === LPG)
+		monthlyGain /= 12;
+	}
+	noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
 }
 
 function setWithCreditCard() {
