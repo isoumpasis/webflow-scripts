@@ -204,7 +204,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
 	configureMaxDoseisSlider();
 }
 function doseisNoCreditSliderOnChange(value) {
-	// console.log('value', value); //test
+	// console.log('value', value);
 	doseisNoCreditSlider.value = value;
 	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
@@ -999,6 +999,8 @@ function configureMaxDoseisSlider() {
 	if (parseInt(doseisNoCreditSlider.value) >= maxDoseis) {
 		console.log('doseis slider value', doseisNoCreditSlider.value, 'max doseis', maxDoseis);
 		doseisNoCreditSliderOnChange(maxDoseis);
+	} else {
+		doseisNoCreditsSliderOnChange(doseisNoCreditSlider.value);
 	}
 }
 
