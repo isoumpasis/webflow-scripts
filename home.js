@@ -200,16 +200,17 @@ function initEasyPay() {
 
 document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 	el.addEventListener('click', e => {
-		console.log(e.target);
-
 		const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
 		let priceText = selectedSystemDiv.querySelector('.system-price-credit').textContent;
 
 		console.log(selectedSystemDiv, priceText);
 
+		const oldSelectedEasyPaySystemPrice = selectedEasyPaySystemPrice;
 		selectedEasyPaySystemPrice = parseFloat(priceText.replace('€', ''));
 
 		console.log('new selected price = ', selectedEasyPaySystemPrice);
+
+		if (oldSelectedEasyPaySystemPrice === selectedEasyPaySystemPrice) return;
 
 		prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
 	})
