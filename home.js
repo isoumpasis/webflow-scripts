@@ -199,21 +199,17 @@ function initEasyPay() {
 }
 
 function prokatavoliNoCreditSliderOnChange(value) {
-	// console.log('value', value);
 	prokatavoliNoCreditSlider.value = value;
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 	enapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(value)).toFixed(1);
 	configureMaxDoseisSlider();
-	// noCreditFinalCost.textContent = parseFloat(prokatavoliNoCreditSlider.value) + parseFloat(enapomeinanPoso.textContent).toFixed(2) + '€';
 }
 function doseisNoCreditSliderOnChange(value) {
-	// console.log('value', value);
 	doseisNoCreditSlider.value = value;
 	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	configureNoCreditResults();
-	noCreditFinalCost.textContent = (parseFloat(prokatavoliNoCreditSlider.value) + parseFloat(enapomeinanPoso.textContent)).toFixed(2) + '€';
 }
 
 function initStorage() {
@@ -985,27 +981,22 @@ function configureNoCreditSliders() {
 	document.querySelector('.enapomeinan-poso').textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliNoCreditSlider.value)).toFixed(1);
 
 	configureMaxDoseisSlider();
-
-	noCreditFinalCost.textContent = (parseFloat(prokatavoliNoCreditSlider.value) + parseFloat(enapomeinanPoso.textContent)).toFixed(2) + '€';
 }
 
 function configureMaxDoseisSlider() {
-	// const doseisSliderValueInt = parseInt(doseisNoCreditSlider.value);
 	const enapomeinanPosoFloat = parseFloat(enapomeinanPoso.textContent);
-
 	let monthlyCost,
 		doseisNum = 6;
+
 	do {
-		console.log({ doseisNum });
+		// console.log({ doseisNum });
 		monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisNum, enapomeinanPosoFloat);
 		doseisNum++;
-		console.log({ monthlyCost });
+		// console.log({ monthlyCost });
 	} while (monthlyCost > 30);
 
 	let maxDoseis = doseisNum - 2;
-
-	console.log({ maxDoseis });
-	// let maxDoseis = parseInt(parseFloat(enapomeinanPoso.textContent) / 30);
+	// console.log({ maxDoseis });
 	if (maxDoseis > 36) maxDoseis = 36;
 	doseisNoCreditSlider.max = maxDoseis;
 	maxDoseisSliderText.textContent = maxDoseis + ' μήνες';
@@ -1031,8 +1022,10 @@ function getSelectedEasyPaySystemPrice() {
 function configureNoCreditResults() {
 	// const monthlyCost = parseFloat(enapomeinanPoso.textContent) / parseInt(doseisNoCreditSlider.value);
 	// noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
+	doseisSliderValueInt = parseInt(doseisNoCreditSlider.value);
+	prokatavoliSliderValueInt = parseInt(prokatavoliNoCreditSlider.value);
 
-	const monthlyCost = -PMT(noCreditInterest / 100 / 12, parseInt(doseisNoCreditSlider.value), parseFloat(enapomeinanPoso.textContent));
+	const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisSliderValueInt, parseFloat(enapomeinanPoso.textContent));
 	noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
 	//DEBUG LPG RESULT OR CNG RESULT
@@ -1042,6 +1035,8 @@ function configureNoCreditResults() {
 		monthlyGain /= 12;
 	}
 	noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
+
+	noCreditFinalCost.textContent = (monthlyCost * doseisSliderValueInt + prokatavoliSliderValueInt).toFixed(2) + '€';
 }
 
 //console.log('PMT', PMT(0.126 / 12, 10, 900));
