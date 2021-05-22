@@ -990,14 +990,14 @@ function configureNoCreditSliders() {
 }
 
 function configureMaxDoseisSlider() {
-	const doseisSliderValueInt = parseInt(doseisNoCreditSlider.value);
+	// const doseisSliderValueInt = parseInt(doseisNoCreditSlider.value);
 	const enapomeinanPosoFloat = parseFloat(enapomeinanPoso.textContent);
 
 	let monthlyCost,
 		doseisNum = 6;
 	do {
 		console.log({ doseisNum });
-		monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisSliderValueInt, enapomeinanPosoFloat);
+		monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisNum, enapomeinanPosoFloat);
 		doseisNum++;
 	} while (monthlyCost < 30);
 
