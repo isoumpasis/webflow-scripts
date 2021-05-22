@@ -100,6 +100,7 @@ const noCreditMonthlyGain = document.querySelector('.no-credit-monthly-gain');
 const maxDoseisSliderText = document.querySelector('.max-doseis-slider-text');
 const minDoseisSliderText = document.querySelector('.min-doseis-slider-text');
 const noCreditFinalCost = document.querySelector('.no-credit-final-cost');
+const maxProkatavaliSliderText = document.querySelector('.max-prokatavoli-slider-text');
 
 const noCreditInterest = 12.6;
 let selectedEasyPaySystemPrice;
@@ -224,6 +225,9 @@ function prokatavoliNoCreditSliderOnChange(value) {
 	prokatavoliNoCreditSlider.value = value;
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
+
+	maxProkatavaliSliderText.style.fontWeight = prokatavoliNoCreditSlider.value === prokatavoliNoCreditSlider.max ? 'bold' : 'normal';
+
 	enapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(value)).toFixed(1);
 	configureMaxDoseisSlider();
 }
