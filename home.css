@@ -135,7 +135,7 @@ input[type='range']::-ms-thumb:hover {
 
 .cover {
 	position: absolute;
-	height: 11px; /* 1px more for different zooms */
+	height: 11px;
 	right: 0px;
 	bottom: 5px;
 	background: #005dbc; /*#1146bd;*/
@@ -147,7 +147,7 @@ input[type='range']::-ms-thumb:hover {
 
 .doseis-no-credit-cover,
 .prokatavoli-no-credit-cover {
-	right: 11px !important;
+	right: 1px !important;
 }
 
 .range-slider-no-credit {
