@@ -97,10 +97,12 @@ const doseisPlus = document.querySelector('.no-credit-doseis-plus');
 const enapomeinanPoso = document.querySelector('.enapomeinan-poso');
 const noCreditMonthlyCost = document.querySelector('.no-credit-monthly-cost');
 const noCreditMonthlyGain = document.querySelector('.no-credit-monthly-gain');
-const maxDoseisSliderText = document.querySelector('.max-doseis-slider-text');
-const minDoseisSliderText = document.querySelector('.min-doseis-slider-text');
 const noCreditFinalCost = document.querySelector('.no-credit-final-cost');
-const maxProkatavaliSliderText = document.querySelector('.max-prokatavoli-slider-text');
+
+const minProkatavoliSliderText = document.querySelector('.min-prokatavoli-slider-text');
+const maxProkatavoliSliderText = document.querySelector('.max-prokatavoli-slider-text');
+const minDoseisSliderText = document.querySelector('.min-doseis-slider-text');
+const maxDoseisSliderText = document.querySelector('.max-doseis-slider-text');
 
 const noCreditInterest = 12.6;
 let selectedEasyPaySystemPrice;
@@ -225,17 +227,26 @@ function prokatavoliNoCreditSliderOnChange(value) {
 	prokatavoliNoCreditSlider.value = value;
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
-
-	maxProkatavaliSliderText.style.fontWeight = prokatavoliNoCreditSlider.value === prokatavoliNoCreditSlider.max ? 'bold' : 'normal';
-
+	prokatavoliChangeMinMaxLabelsWeight();
 	enapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(value)).toFixed(1);
 	configureMaxDoseisSlider();
 }
+
 function doseisNoCreditSliderOnChange(value) {
 	doseisNoCreditSlider.value = value;
 	outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
+	doseisChangeMinMaxLabelsWeight();
 	configureNoCreditResults();
+}
+
+function prokatavoliChangeMinMaxLabelsWeight() {
+	maxProkatavoliSliderText.style.fontWeight = prokatavoliNoCreditSlider.value === prokatavoliNoCreditSlider.max ? 'bold' : 'normal';
+	minProkatavoliSliderText.style.fontWeight = prokatavoliNoCreditSlider.value === prokatavoliNoCreditSlider.min ? 'bold' : 'normal';
+}
+function doseisChangeMinMaxLabelsWeight() {
+	maxDoseisSliderText.style.fontWeight = doseisNoCreditSlider.value === doseisNoCreditSlider.max ? 'bold' : 'normal';
+	minDoseisSliderText.style.fontWeight = doseisNoCreditSlider.value === doseisNoCreditSlider.min ? 'bold' : 'normal';
 }
 
 function initStorage() {
