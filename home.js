@@ -272,7 +272,7 @@ function noVehicleNoCreditSliderOnChange(value) {
 	noVehicleNoCreditSlider.value = value;
 	outputNoCreditNoVehicle.value = noVehicleNoCreditSlider.value;
 	noVehicleNoCreditCover.style.width = calcCoverWidth(noVehicleNoCreditSlider) + '%';
-	doseisChangeMinMaxLabelsWeight();
+	noVehicleChangeMinMaxLabelsWeight();
 
 	selectedEasyPaySystemPrice = parseInt(noVehicleNoCreditSlider.value);
 	prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
