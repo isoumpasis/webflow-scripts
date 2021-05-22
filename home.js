@@ -999,6 +999,7 @@ function configureMaxDoseisSlider() {
 		console.log({ doseisNum });
 		monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisNum, enapomeinanPosoFloat);
 		doseisNum++;
+		console.log({ monthlyCost });
 	} while (monthlyCost < 30);
 
 	const maxDoseis = doseisNum - 1;
