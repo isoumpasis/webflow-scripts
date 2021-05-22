@@ -201,7 +201,14 @@ function initEasyPay() {
 document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 	el.addEventListener('click', e => {
 		console.log(e.target);
-		selectedEasyPaySystemPrice = getSelectedEasyPaySystemPrice();
+
+		const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
+		let priceText = selectedSystemDiv.querySelector('.system-price-credit').textContent;
+
+		console.log(selectedSystemDiv, priceText);
+
+		selectedEasyPaySystemPrice = parseFloat(priceText.replace('€', ''));
+
 		console.log('new selected price = ', selectedEasyPaySystemPrice);
 	})
 );
