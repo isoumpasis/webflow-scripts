@@ -210,6 +210,8 @@ document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 		selectedEasyPaySystemPrice = parseFloat(priceText.replace('€', ''));
 
 		console.log('new selected price = ', selectedEasyPaySystemPrice);
+
+		prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
 	})
 );
 
