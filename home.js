@@ -179,9 +179,9 @@ function initEasyPay() {
 	});
 
 	outputNoCreditDoseis.addEventListener('change', function () {
-		if (this.value > doseisNoCreditSlider.max) this.value = doseisNoCreditSlider.max;
-		if (this.value < doseisNoCreditSlider.min) this.value = doseisNoCreditSlider.min;
-		if (this.value) this.value = Math.round(this.value);
+		if (+this.value > +doseisNoCreditSlider.max) this.value = doseisNoCreditSlider.max;
+		if (+this.value < +doseisNoCreditSlider.min) this.value = doseisNoCreditSlider.min;
+		if (+this.value) this.value = Math.round(+this.value);
 		console.log(this.value);
 		doseisNoCreditSliderOnChange(this.value);
 	});
