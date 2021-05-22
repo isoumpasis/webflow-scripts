@@ -217,6 +217,7 @@ document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 );
 
 function prokatavoliNoCreditSliderOnChange(value) {
+	console.log('test');
 	prokatavoliNoCreditSlider.value = value;
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
