@@ -171,15 +171,15 @@ function initEasyPay() {
 	doseisNoCreditSlider.addEventListener('input', e => doseisNoCreditSliderOnChange(e.target.value));
 
 	outputNoCreditProkatavoli.addEventListener('input', function () {
-		if (this.value > 500) this.value = parseInt(document.querySelector('.max-prokatavoli-slider-text').textContent.replace('€', ''));
-		if (this.value < 0) this.value = 0;
+		if (this.value > this.max) this.value = this.max;
+		if (this.value < this.min) this.value = this.min;
 		if (this.value) this.value = Math.round(this.value);
 		prokatavoliNoCreditSliderOnChange(this.value);
 	});
 
 	outputNoCreditDoseis.addEventListener('input', function () {
-		if (this.value > 60) this.value = 60;
-		if (this.value < 3 && this.value) this.value = 3;
+		if (this.value > this.max) this.value = this.max;
+		if (this.value < this.min) this.value = this.min;
 		if (this.value) this.value = Math.round(this.value);
 		doseisNoCreditSliderOnChange(this.value);
 	});
