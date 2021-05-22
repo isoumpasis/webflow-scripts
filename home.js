@@ -749,6 +749,7 @@ function showResults(fetchedModelObj) {
 		document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
 	} else {
 		resetCalc();
+		initNoCreditAppearance();
 	}
 
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
@@ -1030,6 +1031,10 @@ function configureModelEasyPay() {
 	document.querySelector('#makeImgCredit').src = makeImgSrc;
 	document.querySelector('#modelNameNoCredit').textContent = modelNameText;
 	document.querySelector('#modelNameCredit').textContent = modelNameText;
+
+	document.querySelector('.easy-pay-vehicle-container').style.display = 'grid';
+	document.querySelector('.easy-pay-with-vehicle-container').style.display = 'grid';
+	document.querySelector('.easy-pay-no-vehicle-container').style.display = 'none';
 }
 
 function configureSystemsEasyPay() {
