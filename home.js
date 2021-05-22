@@ -208,10 +208,13 @@ document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 		const oldSelectedEasyPaySystemPrice = selectedEasyPaySystemPrice;
 		selectedEasyPaySystemPrice = parseFloat(priceText.replace('€', ''));
 
-		console.log('new selected price = ', selectedEasyPaySystemPrice);
-
 		if (oldSelectedEasyPaySystemPrice === selectedEasyPaySystemPrice) return;
 
+		console.log('new selected price = ', selectedEasyPaySystemPrice);
+
+		const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
+		prokatavoliNoCreditSlider.max = floorPrice - 500;
+		document.querySelector('.max-prokatavoli-slider-text').textContent = floorPrice - 500 + '€';
 		prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
 	})
 );
