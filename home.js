@@ -230,7 +230,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 	prokatavoliChangeMinMaxLabelsWeight();
-	enapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(value)).toFixed(1);
+	enapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliNoCreditSlider.value)).toFixed(1);
 	configureMaxDoseisSlider();
 }
 
