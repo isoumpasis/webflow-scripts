@@ -990,7 +990,21 @@ function configureNoCreditSliders() {
 }
 
 function configureMaxDoseisSlider() {
-	let maxDoseis = parseInt(parseFloat(enapomeinanPoso.textContent) / 30);
+	const doseisSliderValueInt = parseInt(doseisNoCreditSlider.value);
+	const enapomeinanPosoFloat = parseFloat(enapomeinanPoso.textContent);
+
+	let monthlyCost,
+		doseisNum = 6;
+	do {
+		console.log({ doseisNum });
+		monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisSliderValueInt, enapomeinanPosoFloat);
+		doseisNum++;
+	} while (monthlyCost < 30);
+
+	const maxDoseis = doseisNum - 1;
+
+	console.log({ maxDoseis });
+	// let maxDoseis = parseInt(parseFloat(enapomeinanPoso.textContent) / 30);
 	if (maxDoseis > 36) maxDoseis = 36;
 	doseisNoCreditSlider.max = maxDoseis;
 	maxDoseisSliderText.textContent = maxDoseis + ' μήνες';
