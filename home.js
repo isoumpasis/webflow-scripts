@@ -240,14 +240,18 @@ document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 
 		console.log('new selected price = ', selectedEasyPaySystemPrice);
 
-		const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
-		prokatavoliNoCreditSlider.max = floorPrice - 500;
-		document.querySelector('.max-prokatavoli-slider-text').textContent = floorPrice - 500 + '€';
+		// const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
+		// prokatavoliNoCreditSlider.max = floorPrice - 500;
+		// document.querySelector('.max-prokatavoli-slider-text').textContent = floorPrice - 500 + '€';
 		prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
 	})
 );
 
 function prokatavoliNoCreditSliderOnChange(value) {
+	const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
+	prokatavoliNoCreditSlider.max = floorPrice - 500;
+	maxProkatavoliSliderText.textContent = floorPrice - 500 + '€';
+
 	prokatavoliNoCreditSlider.value = value;
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
@@ -268,6 +272,7 @@ function noVehicleNoCreditSliderOnChange(value) {
 	noVehicleNoCreditSlider.value = value;
 	outputNoCreditNoVehicle.value = noVehicleNoCreditSlider.value;
 	noVehicleNoCreditCover.style.width = calcCoverWidth(noVehicleNoCreditSlider) + '%';
+	doseisChangeMinMaxLabelsWeight();
 
 	selectedEasyPaySystemPrice = parseInt(noVehicleNoCreditSlider.value);
 	prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
@@ -280,6 +285,10 @@ function prokatavoliChangeMinMaxLabelsWeight() {
 function doseisChangeMinMaxLabelsWeight() {
 	maxDoseisSliderText.style.fontWeight = doseisNoCreditSlider.value === doseisNoCreditSlider.max ? 'bold' : 'normal';
 	minDoseisSliderText.style.fontWeight = doseisNoCreditSlider.value === doseisNoCreditSlider.min ? 'bold' : 'normal';
+}
+function noVehicleChangeMinMaxLabelsWeight() {
+	maxNoVehicleSliderText.style.fontWeight = noVehicleNoCreditSlider.value === noVehicleNoCreditSlider.max ? 'bold' : 'normal';
+	minNoVehicleSliderText.style.fontWeight = noVehicleNoCreditSlider.value === noVehicleNoCreditSlider.min ? 'bold' : 'normal';
 }
 
 function initNoCreditAppearance() {
