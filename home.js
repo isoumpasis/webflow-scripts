@@ -198,6 +198,14 @@ function initEasyPay() {
 	// creditCardInstallmentsOnChange(creditCardInstallments.value);
 }
 
+document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
+	el.addEventListener('click', e => {
+		console.log(e.target);
+		selectedEasyPaySystemPrice = getSelectedEasyPaySystemPrice();
+		console.log('new selected price = ', selectedEasyPaySystemPrice);
+	})
+);
+
 function prokatavoliNoCreditSliderOnChange(value) {
 	prokatavoliNoCreditSlider.value = value;
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
@@ -1000,12 +1008,8 @@ function configureMaxDoseisSlider() {
 	if (maxDoseis > 36) maxDoseis = 36;
 	doseisNoCreditSlider.max = maxDoseis;
 	maxDoseisSliderText.textContent = maxDoseis + ' μήνες';
-	if (parseInt(doseisNoCreditSlider.value) >= maxDoseis) {
-		console.log('doseis slider value', doseisNoCreditSlider.value, 'max doseis', maxDoseis);
-		doseisNoCreditSliderOnChange(maxDoseis);
-	} else {
-		doseisNoCreditSliderOnChange(doseisNoCreditSlider.value);
-	}
+	if (parseInt(doseisNoCreditSlider.value) >= maxDoseis) doseisNoCreditSliderOnChange(maxDoseis);
+	else doseisNoCreditSliderOnChange(doseisNoCreditSlider.value);
 }
 
 function getSelectedEasyPaySystemPrice() {
