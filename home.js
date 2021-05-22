@@ -174,7 +174,6 @@ function initEasyPay() {
 		if (+this.value > +prokatavoliNoCreditSlider.max) this.value = prokatavoliNoCreditSlider.max;
 		if (+this.value < +prokatavoliNoCreditSlider.min) this.value = prokatavoliNoCreditSlider.min;
 		if (+this.value) this.value = Math.round(+this.value);
-		console.log(this.value);
 		prokatavoliNoCreditSliderOnChange(this.value);
 	});
 
@@ -182,7 +181,6 @@ function initEasyPay() {
 		if (+this.value > +doseisNoCreditSlider.max) this.value = doseisNoCreditSlider.max;
 		if (+this.value < +doseisNoCreditSlider.min) this.value = doseisNoCreditSlider.min;
 		if (+this.value) this.value = Math.round(+this.value);
-		console.log(this.value);
 		doseisNoCreditSliderOnChange(this.value);
 	});
 
@@ -225,7 +223,6 @@ document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 );
 
 function prokatavoliNoCreditSliderOnChange(value) {
-	console.log('test');
 	prokatavoliNoCreditSlider.value = value;
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
@@ -1000,8 +997,6 @@ function configureSystemsEasyPay() {
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'none'));
 	}
 	document.querySelector('.easy-pay-suggested-system-div').click(); //default selection first suggestion
-
-	console.log(systemLogoCreditEls, systemLogoSrcs, suggestedPrices);
 }
 
 function configureNoCreditSliders() {
@@ -1050,7 +1045,6 @@ function getSelectedEasyPaySystemPrice() {
 			? selectedSystemDiv.querySelector('.system-price-credit').textContent
 			: document.querySelector('.easy-pay-second-suggestion .system-price-credit').textContent;
 
-	console.log(selectedSystemDiv, priceText);
 	return parseFloat(priceText.replace('€', ''));
 }
 
@@ -1073,8 +1067,6 @@ function configureNoCreditResults() {
 
 	noCreditFinalCost.textContent = (monthlyCost * doseisSliderValueInt + prokatavoliSliderValueInt).toFixed(2) + '€';
 }
-
-//console.log('PMT', PMT(0.126 / 12, 10, 900));
 
 function PMT(interestPerMonth, doseis, cost) {
 	let pmt, pvif;
