@@ -1,20 +1,3 @@
-function PMT(interestPerMonth, doseis, cost) {
-	/*
-	 * interestPerMonth - interest rate per month //interestPerMonth
-	 * doseis   - number of periods (months) //doseis
-	 * cost   - present value //cost
-	 */
-	let pmt, pvif;
-
-	if (interestPerMonth === 0) return -cost / doseis;
-
-	pvif = Math.pow(1 + interestPerMonth, doseis);
-	pmt = (-interestPerMonth * (cost * pvif)) / (pvif - 1);
-
-	return pmt;
-}
-console.log('PMT', PMT(0.126 / 12, 10, 900));
-
 /* System Identification */
 const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
@@ -117,6 +100,8 @@ const noCreditMonthlyGain = document.querySelector('.no-credit-monthly-gain');
 const maxDoseisSliderText = document.querySelector('.max-doseis-slider-text');
 const minDoseisSliderText = document.querySelector('.min-doseis-slider-text');
 const noCreditFinalCost = document.querySelector('.no-credit-final-cost');
+
+const noCreditInterest = 12.6;
 let selectedEasyPaySystemPrice;
 
 const creditCardPrice1 = document.querySelector('#creditCardPrice1');
@@ -1029,7 +1014,10 @@ function getSelectedEasyPaySystemPrice() {
 }
 
 function configureNoCreditResults() {
-	const monthlyCost = parseFloat(enapomeinanPoso.textContent) / parseInt(doseisNoCreditSlider.value);
+	// const monthlyCost = parseFloat(enapomeinanPoso.textContent) / parseInt(doseisNoCreditSlider.value);
+	// noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
+
+	const monthlyCost = -PMT(noCreditInterest / 100 / 12, parseInt(doseisNoCreditSlider.value), parseFloat(enapomeinanPoso.textContent));
 	noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
 	//DEBUG LPG RESULT OR CNG RESULT
@@ -1039,6 +1027,19 @@ function configureNoCreditResults() {
 		monthlyGain /= 12;
 	}
 	noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
+}
+
+//console.log('PMT', PMT(0.126 / 12, 10, 900));
+
+function PMT(interestPerMonth, doseis, cost) {
+	let pmt, pvif;
+
+	if (interestPerMonth === 0) return -cost / doseis;
+
+	pvif = Math.pow(1 + interestPerMonth, doseis);
+	pmt = (-interestPerMonth * (cost * pvif)) / (pvif - 1);
+
+	return pmt;
 }
 
 function setWithCreditCard() {
