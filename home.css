@@ -145,11 +145,6 @@ input[type='range']::-ms-thumb:hover {
 	float: right;
 }
 
-.doseis-no-credit-cover,
-.prokatavoli-no-credit-cover {
-	right: 1px !important;
-}
-
 .range-slider-no-credit {
 	background: #3fa8ff;
 }
