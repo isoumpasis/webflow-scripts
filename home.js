@@ -171,9 +171,9 @@ function initEasyPay() {
 	doseisNoCreditSlider.addEventListener('input', e => doseisNoCreditSliderOnChange(e.target.value));
 
 	outputNoCreditProkatavoli.addEventListener('change', function () {
-		if (this.value > prokatavoliNoCreditSlider.max) this.value = prokatavoliNoCreditSlider.max;
-		if (this.value < prokatavoliNoCreditSlider.min) this.value = prokatavoliNoCreditSlider.min;
-		if (this.value) this.value = Math.round(this.value);
+		if (+this.value > +prokatavoliNoCreditSlider.max) this.value = prokatavoliNoCreditSlider.max;
+		if (+this.value < +prokatavoliNoCreditSlider.min) this.value = prokatavoliNoCreditSlider.min;
+		if (+this.value) this.value = Math.round(+this.value);
 		console.log(this.value);
 		prokatavoliNoCreditSliderOnChange(this.value);
 	});
