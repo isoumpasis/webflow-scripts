@@ -1002,7 +1002,7 @@ function configureMaxDoseisSlider() {
 		console.log({ monthlyCost });
 	} while (monthlyCost > 30);
 
-	const maxDoseis = doseisNum - 1;
+	let maxDoseis = doseisNum - 1;
 
 	console.log({ maxDoseis });
 	// let maxDoseis = parseInt(parseFloat(enapomeinanPoso.textContent) / 30);
