@@ -31,7 +31,7 @@ input::-webkit-inner-spin-button {
 input[type='range'] {
 	-webkit-appearance: none;
 	appearance: none;
-	margin-left: -10px;
+	/* margin-left: -10px; */
 	width: 100%;
 	height: 10px;
 	border-radius: 20px;
