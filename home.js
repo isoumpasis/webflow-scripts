@@ -323,14 +323,14 @@ maxProkatavoliSliderText.addEventListener('click', e =>
 );
 
 minDoseisSliderText.addEventListener('click', e =>
-  doseisNoCreditSliderOnChange(doseisNoCreditSlider.max)
+  doseisNoCreditSliderOnChange(doseisNoCreditSlider.min)
 );
 maxDoseisSliderText.addEventListener('click', e =>
   doseisNoCreditSliderOnChange(doseisNoCreditSlider.max)
 );
 
 minNoVehicleSliderText.addEventListener('click', e =>
-  noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.max)
+  noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.min)
 );
 maxNoVehicleSliderText.addEventListener('click', e =>
   noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.max)
