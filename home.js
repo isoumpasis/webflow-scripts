@@ -319,6 +319,7 @@ function initNoCreditAppearance() {
   document.querySelector('.easy-pay-vehicle-container').style.display = 'none';
   document.querySelector('.easy-pay-with-vehicle-container').style.display = 'none';
   document.querySelector('.easy-pay-no-vehicle-container').style.display = 'flex';
+  document.querySelector('.easy-pay-no-vehicle-descr').style.display = 'flex';
 
   selectedEasyPaySystemPrice = +noVehicleNoCreditSlider.value;
   noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.value);
@@ -1100,6 +1101,7 @@ function configureModelEasyPay() {
   document.querySelector('.easy-pay-vehicle-container').style.display = 'flex';
   document.querySelector('.easy-pay-with-vehicle-container').style.display = 'flex';
   document.querySelector('.easy-pay-no-vehicle-container').style.display = 'none';
+  document.querySelector('.easy-pay-no-vehicle-descr').style.display = 'none';
 }
 
 function configureSystemsEasyPay() {
