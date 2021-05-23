@@ -237,7 +237,7 @@ function initEasyPay() {
     )
   );
 
-  initNoCreditAppearance();
+  resetEasyPay();
   // creditCardPrice1.previousElementSibling.checked = true;
   // creditCardInstallmentsOnChange(creditCardInstallments.value);
 }
@@ -315,7 +315,7 @@ function noVehicleChangeMinMaxLabelsWeight() {
     noVehicleNoCreditSlider.value === noVehicleNoCreditSlider.min ? 'bold' : 'normal';
 }
 
-function initNoCreditAppearance() {
+function resetEasyPay() {
   document.querySelector('.easy-pay-vehicle-container').style.display = 'none';
   document.querySelector('.easy-pay-with-vehicle-container').style.display = 'none';
   document.querySelector('.easy-pay-no-vehicle-container').style.display = 'flex';
@@ -385,6 +385,7 @@ makeSelect.addEventListener('change', function () {
     container.style.display = 'none';
   });
   resetCalc();
+  resetEasyPay();
   calcResult();
 
   // userSelections.vehicle = { make: this.value };
@@ -466,6 +467,7 @@ function yearOnChange(value) {
     container.style.display = 'none';
   });
   resetCalc();
+  resetEasyPay();
   calcResult();
 
   // userSelections.vehicle = { make: userSelections.vehicle.make, year: value };
@@ -553,6 +555,7 @@ function modelOnChange(value) {
     container.style.display = 'none';
   });
   resetCalc();
+  resetEasyPay();
   calcResult();
 
   // userSelections.vehicle = { make: userSelections.vehicle.make, year: userSelections.vehicle.year, model: value };
@@ -709,6 +712,7 @@ function descriptionOnChange(value) {
 
   if (!value) {
     resetCalc();
+    resetEasyPay();
     calcResult();
 
     // delete userSelections.vehicle.description;
@@ -780,7 +784,7 @@ function showResults(fetchedModelObj) {
     document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
   } else {
     resetCalc();
-    initNoCreditAppearance();
+    resetEasyPay();
   }
 
   // sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
