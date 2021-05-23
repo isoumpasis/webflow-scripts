@@ -245,23 +245,36 @@ function initEasyPay() {
 document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
   el.addEventListener('click', e => {
     const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
-    let priceText = selectedSystemDiv.querySelector('.system-price-credit').textContent;
+    changePriceFontWeight(selectedSystemDiv);
 
-    console.log(selectedSystemDiv, priceText);
+    const priceText = selectedSystemDiv.querySelector('.system-price-credit').textContent;
 
     const oldSelectedEasyPaySystemPrice = selectedEasyPaySystemPrice;
     selectedEasyPaySystemPrice = parseFloat(priceText.replace('€', ''));
-
     if (oldSelectedEasyPaySystemPrice === selectedEasyPaySystemPrice) return;
-
     console.log('new selected price = ', selectedEasyPaySystemPrice);
 
-    // const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
-    // prokatavoliNoCreditSlider.max = floorPrice - 500;
-    // document.querySelector('.max-prokatavoli-slider-text').textContent = floorPrice - 500 + '€';
     prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
   })
 );
+
+function changePriceFontWeight(selectedSystemDiv) {
+  if (selectedSystemDiv.classList.contains('system-1st-selection')) {
+    [...document.querySelectorAll('.system-1st-selection .system-price-credit')].map(
+      el => (el.style.fontWeight = 'bold')
+    );
+    [...document.querySelectorAll('.system-2nd-selection .system-price-credit')].map(
+      el => (el.style.fontWeight = 'normal')
+    );
+  } else {
+    [...document.querySelectorAll('.system-1st-selection .system-price-credit')].map(
+      el => (el.style.fontWeight = 'bold')
+    );
+    [...document.querySelectorAll('.system-2nd-selection .system-price-credit')].map(
+      el => (el.style.fontWeight = 'normal')
+    );
+  }
+}
 
 function prokatavoliNoCreditSliderOnChange(value) {
   const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
