@@ -1139,12 +1139,11 @@ function configureSystemsEasyPay() {
   selectedEasyPaySystemPrice = +document
     .querySelector('.system-price-credit')
     .textContent.replace('€', '');
-  console.log('before', selectedEasyPaySystemPrice);
+  console.log({ selectedEasyPaySystemPrice });
 }
 
 function configureNoCreditSliders() {
-  selectedEasyPaySystemPrice = getSelectedEasyPaySystemPrice();
-  console.log({ selectedEasyPaySystemPrice });
+  // selectedEasyPaySystemPrice = getSelectedEasyPaySystemPrice();
   const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
 
   prokatavoliNoCreditSlider.max = floorPrice - 500;
