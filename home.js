@@ -1139,6 +1139,7 @@ function configureSystemsEasyPay() {
   selectedEasyPaySystemPrice = +document
     .querySelector('.system-price-credit')
     .textContent.replace('€', '');
+  console.log('before', selectedEasyPaySystemPrice);
 }
 
 function configureNoCreditSliders() {
@@ -1189,7 +1190,7 @@ function getSelectedEasyPaySystemPrice() {
       ? selectedSystemDiv.querySelector('.system-price-credit').textContent
       : document.querySelector('.easy-pay-second-suggestion .system-price-credit').textContent;
 
-  return parseFloat(priceText.replace('€', ''));
+  return +priceText.replace('€', '');
 }
 
 function configureNoCreditResults() {
