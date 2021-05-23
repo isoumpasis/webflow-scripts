@@ -141,13 +141,13 @@ input[type='range']::-ms-thumb {
 }
 
 input[type='range']::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
+  transform: scale(1.175);
 }
 input[type='range']::-moz-range-thumb:hover {
-  transform: scale(1.15);
+  transform: scale(1.175);
 }
 input[type='range']::-ms-thumb:hover {
-  transform: scale(1.15);
+  transform: scale(1.175);
 }
 
 .cover {
