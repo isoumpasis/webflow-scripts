@@ -558,7 +558,7 @@ function modelOnChange(value) {
   resetEasyPay();
   calcResult();
 
-  // userSelections.vehicle = { make: userSelections.vehicle.make, year: userSelections.vehicle.year, model: value };
+  // userSelections.vehicleF = { make: userSelections.vehicle.make, year: userSelections.vehicle.year, model: value };
   userSelections.vehicle = {};
   userSelections.systems = {};
   localStorage.setItem('userSelections', JSON.stringify(userSelections));
@@ -1136,6 +1136,9 @@ function configureSystemsEasyPay() {
     );
   }
   document.querySelector('.easy-pay-suggested-system-div').click(); //default selection first suggestion
+  selectedEasyPaySystemPrice = +document
+    .querySelector('.system-price-credit')
+    .textContent.replace('€', '');
 }
 
 function configureNoCreditSliders() {
