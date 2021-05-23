@@ -172,10 +172,3 @@ input[type='range']::-ms-thumb:hover {
   width: 100%;
   background: #3fa8ff;
 }
-
-.easy-pay-plus-minus-btns {
-  transition: transform 200ms ease-in-out;
-}
-.easy-pay-plus-minus-btns:hover {
-  transform: scale(1.2);
-}
