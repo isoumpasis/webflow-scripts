@@ -260,6 +260,9 @@ document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 
 function changePriceFontWeight(selectedSystemDiv) {
   if (selectedSystemDiv.classList.contains('system-1st-selection')) {
+    console.log('contains -> bold 1st', [
+      ...document.querySelectorAll('.system-1st-selection .system-price-credit')
+    ]);
     [...document.querySelectorAll('.system-1st-selection .system-price-credit')].map(
       el => (el.style.fontWeight = 'bold')
     );
@@ -267,11 +270,14 @@ function changePriceFontWeight(selectedSystemDiv) {
       el => (el.style.fontWeight = 'normal')
     );
   } else {
+    console.log('contains -> bold 1st', [
+      ...document.querySelectorAll('.system-1st-selection .system-price-credit')
+    ]);
     [...document.querySelectorAll('.system-1st-selection .system-price-credit')].map(
-      el => (el.style.fontWeight = 'bold')
+      el => (el.style.fontWeight = 'normal')
     );
     [...document.querySelectorAll('.system-2nd-selection .system-price-credit')].map(
-      el => (el.style.fontWeight = 'normal')
+      el => (el.style.fontWeight = 'bold')
     );
   }
 }
