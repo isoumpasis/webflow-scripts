@@ -279,11 +279,13 @@ function prokatavoliNoCreditSliderOnChange(value) {
 }
 
 function doseisNoCreditSliderOnChange(value) {
+  console.log('value', value);
   doseisNoCreditSlider.value = value;
   outputNoCreditDoseis.value = doseisNoCreditSlider.value;
   doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
   doseisChangeMinMaxLabelsWeight();
   configureNoCreditResults();
+  console.log('after', doseisNoCreditSlider.value);
 }
 
 function noVehicleNoCreditSliderOnChange(value) {
@@ -325,9 +327,8 @@ maxProkatavoliSliderText.addEventListener('click', e =>
 minDoseisSliderText.addEventListener('click', e =>
   doseisNoCreditSliderOnChange(doseisNoCreditSlider.min)
 );
-maxDoseisSliderText.addEventListener(
-  'click',
-  e => doseisNoCreditSliderOnChange(doseisNoCreditSlider.max) //τεστ
+maxDoseisSliderText.addEventListener('click', e =>
+  doseisNoCreditSliderOnChange(doseisNoCreditSlider.max)
 );
 
 minNoVehicleSliderText.addEventListener('click', e =>
