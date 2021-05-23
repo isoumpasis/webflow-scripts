@@ -174,8 +174,8 @@ input[type='range']::-ms-thumb:hover {
 }
 
 .easy-pay-plus-minus-btns {
-  transition: transform 200ms easy-in-out;
+  transition: transform 200ms eas-in-out;
 }
 .easy-pay-plus-minus-btns:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
