@@ -85,25 +85,52 @@ const VAT = 1.24;
 
 //EASY PAY
 const prokatavoliNoCreditSlider = document.querySelector('.prokatavoli-no-credit-slider');
+const prokatavoliCreditSlider = document.querySelector('.prokatavoli-credit-slider');
+
 const doseisNoCreditSlider = document.querySelector('.doseis-no-credit-slider');
+
 const noVehicleNoCreditSlider = document.querySelector('.no-vehicle-no-credit-slider');
+const noVehicleCreditSlider = document.querySelector('.no-vehicle-credit-slider');
+
 const prokatavoliNoCreditCover = document.querySelector('.prokatavoli-no-credit-cover');
+const prokatavoliCreditCover = document.querySelector('.prokatavoli-credit-cover');
+
 const doseisNoCreditCover = document.querySelector('.doseis-no-credit-cover');
+
 const noVehicleNoCreditCover = document.querySelector('.no-vehicle-no-credit-cover');
+const noVehicleCreditCover = document.querySelector('.no-vehicle-credit-cover');
+
 const outputNoCreditProkatavoli = document.querySelector('.output-no-credit-prokatavoli');
+const outputCreditProkatavoli = document.querySelector('.output-credit-prokatavoli');
+
 const outputNoCreditDoseis = document.querySelector('.output-no-credit-doseis');
+
 const outputNoCreditNoVehicle = document.querySelector('.output-no-credit-no-vehicle');
-const prokatavoliMinus = document.querySelector('.no-credit-prokatavoli-minus');
-const prokatavoliPlus = document.querySelector('.no-credit-prokatavoli-plus');
-const doseisMinus = document.querySelector('.no-credit-doseis-minus');
-const doseisPlus = document.querySelector('.no-credit-doseis-plus');
-const noVehicleMinus = document.querySelector('.no-credit-no-vehicle-minus');
-const noVehiclePlus = document.querySelector('.no-credit-no-vehicle-plus');
+const outputCreditNoVehicle = document.querySelector('.output-credit-no-vehicle');
+
+const noCreditProkatavoliMinus = document.querySelector('.no-credit-prokatavoli-minus');
+const noCreditProkatavoliPlus = document.querySelector('.no-credit-prokatavoli-plus');
+const creditProkatavoliMinus = document.querySelector('.credit-prokatavoli-minus');
+const creditProkatavoliPlus = document.querySelector('.credit-prokatavoli-plus');
+
+const noCreditDoseisMinus = document.querySelector('.no-credit-doseis-minus');
+const noCreditDoseisPlus = document.querySelector('.no-credit-doseis-plus');
+
+const noCreditNoVehicleMinus = document.querySelector('.no-credit-no-vehicle-minus');
+const noCreditNoVehiclePlus = document.querySelector('.no-credit-no-vehicle-plus');
+const creditNoVehicleMinus = document.querySelector('.credit-no-vehicle-minus');
+const creditNoVehiclePlus = document.querySelector('.credit-no-vehicle-plus');
 
 const noCreditEnapomeinanPoso = document.querySelector('.no-credit-enapomeinan-poso');
+const creditEnapomeinanPoso = document.querySelector('.credit-enapomeinan-poso');
+
+const noCreditFinalCost = document.querySelector('.no-credit-final-cost');
+const creditFinalCost = document.querySelector('.credit-final-cost');
+
 const noCreditMonthlyCost = document.querySelector('.no-credit-monthly-cost');
 const noCreditMonthlyGain = document.querySelector('.no-credit-monthly-gain');
-const noCreditFinalCost = document.querySelector('.no-credit-final-cost');
+const creditMonthlyCost = document.querySelector('.credit-monthly-cost');
+const creditMonthlyGain = document.querySelector('.credit-monthly-gain');
 
 const minProkatavoliSliderText = document.querySelector('.min-prokatavoli-no-credit-slider-text');
 const maxProkatavoliSliderText = document.querySelector('.max-prokatavoli-no-credit-slider-text');
@@ -171,7 +198,7 @@ function modifyFuelPriceSliders(value) {
 
 function initEasyPay() {
 	initNoCredit();
-
+	initCredit();
 	resetEasyPay();
 }
 
@@ -201,24 +228,71 @@ function initNoCredit() {
 		noVehicleNoCreditSliderOnChange(this.value);
 	});
 
-	prokatavoliMinus.addEventListener('click', () =>
+	noCreditProkatavoliMinus.addEventListener('click', () =>
 		prokatavoliNoCreditSliderOnChange(parseInt(prokatavoliNoCreditSlider.value) - parseInt(prokatavoliNoCreditSlider.step))
 	);
-	prokatavoliPlus.addEventListener('click', () =>
+	noCreditProkatavoliPlus.addEventListener('click', () =>
 		prokatavoliNoCreditSliderOnChange(parseInt(prokatavoliNoCreditSlider.value) + parseInt(prokatavoliNoCreditSlider.step))
 	);
 
-	doseisMinus.addEventListener('click', () =>
+	noCreditDoseisMinus.addEventListener('click', () =>
 		doseisNoCreditSliderOnChange(parseInt(doseisNoCreditSlider.value) - parseInt(doseisNoCreditSlider.step))
 	);
-	doseisPlus.addEventListener('click', () =>
+	noCreditDoseisPlus.addEventListener('click', () =>
 		doseisNoCreditSliderOnChange(parseInt(doseisNoCreditSlider.value) + parseInt(doseisNoCreditSlider.step))
 	);
 
-	noVehicleMinus.addEventListener('click', () =>
+	noCreditNoVehicleMinus.addEventListener('click', () =>
 		noVehicleNoCreditSliderOnChange(parseInt(noVehicleNoCreditSlider.value) - parseInt(noVehicleNoCreditSlider.step))
 	);
-	noVehiclePlus.addEventListener('click', () =>
+	noCreditNoVehiclePlus.addEventListener('click', () =>
+		noVehicleNoCreditSliderOnChange(parseInt(noVehicleNoCreditSlider.value) + parseInt(noVehicleNoCreditSlider.step))
+	);
+}
+function initCredit() {
+	prokatavoliCreditSlider.addEventListener('input', e => prokatavoliCreditSliderOnChange(e.target.value));
+	doseisNoCreditSlider.addEventListener('input', e => doseisNoCreditSliderOnChange(e.target.value));
+	noVehicleNoCreditSlider.addEventListener('input', e => noVehicleNoCreditSliderOnChange(e.target.value));
+
+	outputNoCreditProkatavoli.addEventListener('change', function () {
+		if (+this.value > +prokatavoliCreditSlider.max) this.value = prokatavoliCreditSlider.max;
+		if (+this.value < +prokatavoliCreditSlider.min) this.value = prokatavoliCreditSlider.min;
+		if (+this.value) this.value = Math.round(+this.value);
+		prokatavoliCreditSliderOnChange(this.value);
+	});
+
+	outputNoCreditDoseis.addEventListener('change', function () {
+		if (+this.value > +doseisNoCreditSlider.max) this.value = doseisNoCreditSlider.max;
+		if (+this.value < +doseisNoCreditSlider.min) this.value = doseisNoCreditSlider.min;
+		if (+this.value) this.value = Math.round(+this.value);
+		doseisNoCreditSliderOnChange(this.value);
+	});
+
+	outputNoCreditNoVehicle.addEventListener('change', function () {
+		if (+this.value > +noVehicleNoCreditSlider.max) this.value = doseisNoCreditSlider.max;
+		if (+this.value < +noVehicleNoCreditSlider.min) this.value = noVehicleNoCreditSlider.min;
+		if (+this.value) this.value = Math.round(+this.value);
+		noVehicleNoCreditSliderOnChange(this.value);
+	});
+
+	noCreditProkatavoliMinus.addEventListener('click', () =>
+		prokatavoliCreditSliderOnChange(parseInt(prokatavoliCreditSlider.value) - parseInt(prokatavoliCreditSlider.step))
+	);
+	noCreditProkatavoliPlus.addEventListener('click', () =>
+		prokatavoliCreditSliderOnChange(parseInt(prokatavoliCreditSlider.value) + parseInt(prokatavoliCreditSlider.step))
+	);
+
+	noCreditDoseisMinus.addEventListener('click', () =>
+		doseisNoCreditSliderOnChange(parseInt(doseisNoCreditSlider.value) - parseInt(doseisNoCreditSlider.step))
+	);
+	noCreditDoseisPlus.addEventListener('click', () =>
+		doseisNoCreditSliderOnChange(parseInt(doseisNoCreditSlider.value) + parseInt(doseisNoCreditSlider.step))
+	);
+
+	noCreditNoVehicleMinus.addEventListener('click', () =>
+		noVehicleNoCreditSliderOnChange(parseInt(noVehicleNoCreditSlider.value) - parseInt(noVehicleNoCreditSlider.step))
+	);
+	noCreditNoVehiclePlus.addEventListener('click', () =>
 		noVehicleNoCreditSliderOnChange(parseInt(noVehicleNoCreditSlider.value) + parseInt(noVehicleNoCreditSlider.step))
 	);
 }
