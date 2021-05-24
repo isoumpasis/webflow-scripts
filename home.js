@@ -130,7 +130,6 @@ function initSelects() {
 	yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
 	descriptionSelect.disabled = true;
 	descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
-	// makeSelect.focus();
 }
 
 function initFuelPrices() {
@@ -171,6 +170,12 @@ function modifyFuelPriceSliders(value) {
 }
 
 function initEasyPay() {
+	initNoCredit();
+
+	resetEasyPay();
+}
+
+function initNoCredit() {
 	prokatavoliNoCreditSlider.addEventListener('input', e => prokatavoliNoCreditSliderOnChange(e.target.value));
 	doseisNoCreditSlider.addEventListener('input', e => doseisNoCreditSliderOnChange(e.target.value));
 	noVehicleNoCreditSlider.addEventListener('input', e => noVehicleNoCreditSliderOnChange(e.target.value));
@@ -216,8 +221,6 @@ function initEasyPay() {
 	noVehiclePlus.addEventListener('click', () =>
 		noVehicleNoCreditSliderOnChange(parseInt(noVehicleNoCreditSlider.value) + parseInt(noVehicleNoCreditSlider.step))
 	);
-
-	resetEasyPay();
 }
 
 document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
@@ -302,10 +305,10 @@ minNoVehicleSliderText.addEventListener('click', e => noVehicleNoCreditSliderOnC
 maxNoVehicleSliderText.addEventListener('click', e => noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.max));
 
 function resetEasyPay() {
-	document.querySelector('.easy-pay-vehicle-container').style.display = 'none';
-	document.querySelector('.easy-pay-with-vehicle-container').style.display = 'none';
-	document.querySelector('.easy-pay-no-vehicle-container').style.display = 'flex';
-	document.querySelector('.easy-pay-vehicle-descr').style.display = 'flex';
+	[...document.querySelectorAll('.easy-pay-vehicle-container')].map(el => (el.style.display = 'none'));
+	[...document.querySelectorAll('.easy-pay-with-vehicle-container')].map(el => (el.style.display = 'none'));
+	[...document.querySelectorAll('.easy-pay-no-vehicle-container')].map(el => (el.style.display = 'flex'));
+	[...document.querySelectorAll('.easy-pay-no-vehicle-descr')].map(el => (el.style.display = 'flex'));
 
 	selectedEasyPaySystemPrice = +noVehicleNoCreditSlider.value;
 	noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.value);
@@ -1165,8 +1168,6 @@ sliders.forEach((slider, i) => {
 perMonthCheckbox.addEventListener('change', function () {
 	calcResult();
 });
-
-calcResult(); //init
 
 function calcResult() {
 	let petrolCostPerMonth, lpgCostPerMonth, cngCostPerMonth;
