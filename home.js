@@ -761,8 +761,8 @@ function showResults(fetchedModelObj) {
 		// document.querySelector('.car-result-block').scrollIntoView({ behavior: 'smooth', block: 'end' });
 
 		// document.querySelector('.step-2').style.marginBottom = '10vh';
-		configureCalculator();
-		configureEasyPay();
+		configureCalculatorAfterSuggestion();
+		configureEasyPayAfterSuggestion();
 		document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
 	} else {
 		resetCalc();
@@ -952,7 +952,7 @@ function hasUHPII(vehObj) {
 	return vehObj.hp > 180 && vehObj.cylinders <= 4 && !vehObj.hasOwnProperty('engineCodes');
 }
 
-function configureCalculator() {
+function configureCalculatorAfterSuggestion() {
 	document.querySelector('#calcTitle').textContent = 'Υπολόγισε πόσα θα εξοικονομείς με το αυτοκίνητό σου!';
 
 	document.querySelector('#makeImg').src = makeImgPrefix + makeImgDict[makeSelect.value];
@@ -1017,7 +1017,7 @@ function getCylinderDescrText() {
 	}
 }
 
-function configureEasyPay() {
+function configureEasyPayAfterSuggestion() {
 	configureModelEasyPay();
 	configureSystemsEasyPay();
 	configureNoCreditSliders();
