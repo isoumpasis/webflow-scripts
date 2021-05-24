@@ -132,12 +132,18 @@ const noCreditMonthlyGain = document.querySelector('.no-credit-monthly-gain');
 const creditMonthlyCost = document.querySelector('.credit-monthly-cost');
 const creditMonthlyGain = document.querySelector('.credit-monthly-gain');
 
-const minProkatavoliSliderText = document.querySelector('.min-prokatavoli-no-credit-slider-text');
-const maxProkatavoliSliderText = document.querySelector('.max-prokatavoli-no-credit-slider-text');
-const minDoseisSliderText = document.querySelector('.min-doseis-no-credit-slider-text');
-const maxDoseisSliderText = document.querySelector('.max-doseis-no-credit-slider-text');
-const minNoVehicleSliderText = document.querySelector('.min-no-vehicle-no-credit-slider-text');
-const maxNoVehicleSliderText = document.querySelector('.max-no-vehicle-no-credit-slider-text');
+const minProkatavoliNoCreditSliderText = document.querySelector('.min-prokatavoli-no-credit-slider-text');
+const maxProkatavoliNoCreditSliderText = document.querySelector('.max-prokatavoli-no-credit-slider-text');
+const minProkatavoliCreditSliderText = document.querySelector('.min-prokatavoli-credit-slider-text');
+const maxProkatavoliCreditSliderText = document.querySelector('.max-prokatavoli-credit-slider-text');
+
+const minDoseisNoCreditSliderText = document.querySelector('.min-doseis-no-credit-slider-text');
+const maxDoseisNoCreditSliderText = document.querySelector('.max-doseis-no-credit-slider-text');
+
+const minNoVehicleNoCreditSliderText = document.querySelector('.min-no-vehicle-no-credit-slider-text');
+const maxNoVehicleNoCreditSliderText = document.querySelector('.max-no-vehicle-no-credit-slider-text');
+const minNoVehicleCreditSliderText = document.querySelector('.min-no-vehicle-credit-slider-text');
+const maxNoVehicleCreditSliderText = document.querySelector('.max-no-vehicle-credit-slider-text');
 
 const noCreditInterest = 12.6;
 let selectedEasyPaySystemPrice;
@@ -222,7 +228,7 @@ function initNoCredit() {
 	});
 
 	outputNoCreditNoVehicle.addEventListener('change', function () {
-		if (+this.value > +noVehicleNoCreditSlider.max) this.value = doseisNoCreditSlider.max;
+		if (+this.value > +noVehicleNoCreditSlider.max) this.value = noVehicleNoCreditSlider.max;
 		if (+this.value < +noVehicleNoCreditSlider.min) this.value = noVehicleNoCreditSlider.min;
 		if (+this.value) this.value = Math.round(+this.value);
 		noVehicleNoCreditSliderOnChange(this.value);
@@ -251,49 +257,34 @@ function initNoCredit() {
 }
 function initCredit() {
 	prokatavoliCreditSlider.addEventListener('input', e => prokatavoliCreditSliderOnChange(e.target.value));
-	doseisNoCreditSlider.addEventListener('input', e => doseisNoCreditSliderOnChange(e.target.value));
-	noVehicleNoCreditSlider.addEventListener('input', e => noVehicleNoCreditSliderOnChange(e.target.value));
+	noVehicleCreditSlider.addEventListener('input', e => noVehicleCreditSliderOnChange(e.target.value));
 
-	outputNoCreditProkatavoli.addEventListener('change', function () {
+	outputCreditProkatavoli.addEventListener('change', function () {
 		if (+this.value > +prokatavoliCreditSlider.max) this.value = prokatavoliCreditSlider.max;
 		if (+this.value < +prokatavoliCreditSlider.min) this.value = prokatavoliCreditSlider.min;
 		if (+this.value) this.value = Math.round(+this.value);
 		prokatavoliCreditSliderOnChange(this.value);
 	});
 
-	outputNoCreditDoseis.addEventListener('change', function () {
-		if (+this.value > +doseisNoCreditSlider.max) this.value = doseisNoCreditSlider.max;
-		if (+this.value < +doseisNoCreditSlider.min) this.value = doseisNoCreditSlider.min;
+	outputCreditNoVehicle.addEventListener('change', function () {
+		if (+this.value > +noVehicleCreditSlider.max) this.value = noVehicleCreditSlider.max;
+		if (+this.value < +noVehicleCreditSlider.min) this.value = noVehicleCreditSlider.min;
 		if (+this.value) this.value = Math.round(+this.value);
-		doseisNoCreditSliderOnChange(this.value);
+		noVehicleCreditSliderOnChange(this.value);
 	});
 
-	outputNoCreditNoVehicle.addEventListener('change', function () {
-		if (+this.value > +noVehicleNoCreditSlider.max) this.value = doseisNoCreditSlider.max;
-		if (+this.value < +noVehicleNoCreditSlider.min) this.value = noVehicleNoCreditSlider.min;
-		if (+this.value) this.value = Math.round(+this.value);
-		noVehicleNoCreditSliderOnChange(this.value);
-	});
-
-	noCreditProkatavoliMinus.addEventListener('click', () =>
+	creditProkatavoliMinus.addEventListener('click', () =>
 		prokatavoliCreditSliderOnChange(parseInt(prokatavoliCreditSlider.value) - parseInt(prokatavoliCreditSlider.step))
 	);
-	noCreditProkatavoliPlus.addEventListener('click', () =>
+	creditProkatavoliPlus.addEventListener('click', () =>
 		prokatavoliCreditSliderOnChange(parseInt(prokatavoliCreditSlider.value) + parseInt(prokatavoliCreditSlider.step))
 	);
 
-	noCreditDoseisMinus.addEventListener('click', () =>
-		doseisNoCreditSliderOnChange(parseInt(doseisNoCreditSlider.value) - parseInt(doseisNoCreditSlider.step))
+	creditNoVehicleMinus.addEventListener('click', () =>
+		noVehicleCreditSliderOnChange(parseInt(noVehicleCreditSlider.value) - parseInt(noVehicleCreditSlider.step))
 	);
-	noCreditDoseisPlus.addEventListener('click', () =>
-		doseisNoCreditSliderOnChange(parseInt(doseisNoCreditSlider.value) + parseInt(doseisNoCreditSlider.step))
-	);
-
-	noCreditNoVehicleMinus.addEventListener('click', () =>
-		noVehicleNoCreditSliderOnChange(parseInt(noVehicleNoCreditSlider.value) - parseInt(noVehicleNoCreditSlider.step))
-	);
-	noCreditNoVehiclePlus.addEventListener('click', () =>
-		noVehicleNoCreditSliderOnChange(parseInt(noVehicleNoCreditSlider.value) + parseInt(noVehicleNoCreditSlider.step))
+	creditNoVehiclePlus.addEventListener('click', () =>
+		noVehicleCreditSliderOnChange(parseInt(noVehicleCreditSlider.value) + parseInt(noVehicleCreditSlider.step))
 	);
 }
 
@@ -310,6 +301,7 @@ document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 		console.log('new selected price = ', selectedEasyPaySystemPrice);
 
 		prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
+		prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
 	})
 );
 
@@ -328,14 +320,27 @@ function changePriceFontWeight(selectedSystemDiv) {
 function prokatavoliNoCreditSliderOnChange(value) {
 	const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
 	prokatavoliNoCreditSlider.max = floorPrice - 500;
-	maxProkatavoliSliderText.textContent = floorPrice - 500 + '€';
+	maxProkatavoliNoCreditSliderText.textContent = floorPrice - 500 + '€';
 
 	prokatavoliNoCreditSlider.value = value;
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
-	prokatavoliChangeMinMaxLabelsWeight();
+	prokatavoliNoCreditChangeMinMaxLabelsWeight();
 	noCreditEnapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliNoCreditSlider.value)).toFixed(1);
-	configureMaxDoseisSlider();
+	configureNoCreditMaxDoseisSlider();
+}
+
+function prokatavoliCreditSliderOnChange(value) {
+	const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
+	prokatavoliCreditSlider.max = floorPrice - 500;
+	maxProkatavoliCreditSliderText.textContent = floorPrice - 500 + '€';
+
+	prokatavoliCreditSlider.value = value;
+	outputCreditProkatavoli.value = prokatavoliCreditSlider.value;
+	prokatavoliCreditCover.style.width = calcCoverWidth(prokatavoliCreditSlider) + '%';
+	prokatavoliCreditChangeMinMaxLabelsWeight();
+	creditEnapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliCreditSlider.value)).toFixed(1);
+	//configureCreditMaxDoseisSlider();
 }
 
 function doseisNoCreditSliderOnChange(value) {
@@ -350,33 +355,57 @@ function noVehicleNoCreditSliderOnChange(value) {
 	noVehicleNoCreditSlider.value = value;
 	outputNoCreditNoVehicle.value = noVehicleNoCreditSlider.value;
 	noVehicleNoCreditCover.style.width = calcCoverWidth(noVehicleNoCreditSlider) + '%';
-	noVehicleChangeMinMaxLabelsWeight();
+	noVehicleNoCreditChangeMinMaxLabelsWeight();
 
 	selectedEasyPaySystemPrice = parseInt(noVehicleNoCreditSlider.value);
 	prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
+	prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
 }
 
-function prokatavoliChangeMinMaxLabelsWeight() {
-	maxProkatavoliSliderText.style.fontWeight = prokatavoliNoCreditSlider.value === prokatavoliNoCreditSlider.max ? 'bold' : 'normal';
-	minProkatavoliSliderText.style.fontWeight = prokatavoliNoCreditSlider.value === prokatavoliNoCreditSlider.min ? 'bold' : 'normal';
+function noVehicleCreditSliderOnChange(value) {
+	noVehicleCreditSlider.value = value;
+	outputCreditNoVehicle.value = noVehicleCreditSlider.value;
+	noVehicleCreditCover.style.width = calcCoverWidth(noVehicleCreditSlider) + '%';
+	noVehicleCreditChangeMinMaxLabelsWeight();
+
+	selectedEasyPaySystemPrice = parseInt(noVehicleCreditSlider.value);
+	prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
+	prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
+}
+
+function prokatavoliNoCreditChangeMinMaxLabelsWeight() {
+	maxProkatavoliNoCreditSliderText.style.fontWeight = prokatavoliNoCreditSlider.value === prokatavoliNoCreditSlider.max ? 'bold' : 'normal';
+	minProkatavoliNoCreditSliderText.style.fontWeight = prokatavoliNoCreditSlider.value === prokatavoliNoCreditSlider.min ? 'bold' : 'normal';
+}
+function prokatavoliCreditChangeMinMaxLabelsWeight() {
+	maxProkatavoliCreditSliderText.style.fontWeight = prokatavoliCreditSlider.value === prokatavoliCreditSlider.max ? 'bold' : 'normal';
+	minProkatavoliCreditSliderText.style.fontWeight = prokatavoliCreditSlider.value === prokatavoliCreditSlider.min ? 'bold' : 'normal';
 }
 function doseisChangeMinMaxLabelsWeight() {
-	maxDoseisSliderText.style.fontWeight = doseisNoCreditSlider.value === doseisNoCreditSlider.max ? 'bold' : 'normal';
-	minDoseisSliderText.style.fontWeight = doseisNoCreditSlider.value === doseisNoCreditSlider.min ? 'bold' : 'normal';
+	maxDoseisNoCreditSliderText.style.fontWeight = doseisNoCreditSlider.value === doseisNoCreditSlider.max ? 'bold' : 'normal';
+	minDoseisNoCreditSliderText.style.fontWeight = doseisNoCreditSlider.value === doseisNoCreditSlider.min ? 'bold' : 'normal';
 }
-function noVehicleChangeMinMaxLabelsWeight() {
-	maxNoVehicleSliderText.style.fontWeight = noVehicleNoCreditSlider.value === noVehicleNoCreditSlider.max ? 'bold' : 'normal';
-	minNoVehicleSliderText.style.fontWeight = noVehicleNoCreditSlider.value === noVehicleNoCreditSlider.min ? 'bold' : 'normal';
+function noVehicleNoCreditChangeMinMaxLabelsWeight() {
+	maxNoVehicleNoCreditSliderText.style.fontWeight = noVehicleNoCreditSlider.value === noVehicleNoCreditSlider.max ? 'bold' : 'normal';
+	minNoVehicleNoCreditSliderText.style.fontWeight = noVehicleNoCreditSlider.value === noVehicleNoCreditSlider.min ? 'bold' : 'normal';
+}
+function noVehicleCreditChangeMinMaxLabelsWeight() {
+	maxNoVehicleCreditSliderText.style.fontWeight = noVehicleCreditSlider.value === noVehicleCreditSlider.max ? 'bold' : 'normal';
+	minNoVehicleCreditSliderText.style.fontWeight = noVehicleCreditSlider.value === noVehicleCreditSlider.min ? 'bold' : 'normal';
 }
 
-minProkatavoliSliderText.addEventListener('click', e => prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.min));
-maxProkatavoliSliderText.addEventListener('click', e => prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.max));
+minProkatavoliNoCreditSliderText.addEventListener('click', e => prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.min));
+maxProkatavoliNoCreditSliderText.addEventListener('click', e => prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.max));
+minProkatavoliCreditSliderText.addEventListener('click', e => prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.min));
+maxProkatavoliCreditSliderText.addEventListener('click', e => prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.max));
 
-minDoseisSliderText.addEventListener('click', e => doseisNoCreditSliderOnChange(doseisNoCreditSlider.min));
-maxDoseisSliderText.addEventListener('click', e => doseisNoCreditSliderOnChange(doseisNoCreditSlider.max));
+minDoseisNoCreditSliderText.addEventListener('click', e => doseisNoCreditSliderOnChange(doseisNoCreditSlider.min));
+maxDoseisNoCreditSliderText.addEventListener('click', e => doseisNoCreditSliderOnChange(doseisNoCreditSlider.max));
 
-minNoVehicleSliderText.addEventListener('click', e => noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.min));
-maxNoVehicleSliderText.addEventListener('click', e => noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.max));
+minNoVehicleNoCreditSliderText.addEventListener('click', e => noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.min));
+maxNoVehicleNoCreditSliderText.addEventListener('click', e => noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.max));
+minNoVehicleCreditSliderText.addEventListener('click', e => noVehicleCreditSliderOnChange(noVehicleCreditSlider.min));
+maxNoVehicleCreditSliderText.addEventListener('click', e => noVehicleCreditSliderOnChange(noVehicleCreditSlider.max));
 
 function resetEasyPay() {
 	[...document.querySelectorAll('.easy-pay-vehicle-container')].map(el => (el.style.display = 'none'));
@@ -386,8 +415,10 @@ function resetEasyPay() {
 
 	selectedEasyPaySystemPrice = +noVehicleNoCreditSlider.value;
 	noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.value);
+	noVehicleCreditSliderOnChange(noVehicleCreditSlider.value);
 }
 
+/* STORAGE */
 function initStorage() {
 	const storageObj = JSON.parse(localStorage.getItem('userSelections'));
 	if (storageObj && Object.keys(storageObj.vehicle).length !== 0) {
@@ -1095,7 +1126,9 @@ function configureEasyPayAfterSuggestion() {
 	configureModelEasyPay();
 	configureSystemsEasyPay();
 	configureNoCreditSliders();
+	configureCreditSliders();
 	configureNoCreditResults();
+	configureCreditResults();
 }
 
 function configureModelEasyPay() {
@@ -1138,7 +1171,7 @@ function configureNoCreditSliders() {
 	const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
 
 	prokatavoliNoCreditSlider.max = floorPrice - 500;
-	maxProkatavoliSliderText.textContent = floorPrice - 500 + '€';
+	maxProkatavoliNoCreditSliderText.textContent = floorPrice - 500 + '€';
 
 	prokatavoliNoCreditCover.style.width = calcCoverWidth(prokatavoliNoCreditSlider) + '%';
 	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
@@ -1147,10 +1180,24 @@ function configureNoCreditSliders() {
 
 	noCreditEnapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliNoCreditSlider.value)).toFixed(1);
 
-	configureMaxDoseisSlider();
+	configureNoCreditMaxDoseisSlider();
 }
 
-function configureMaxDoseisSlider() {
+function configureCreditSliders() {
+	const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
+
+	prokatavoliCreditSlider.max = floorPrice - 500;
+	maxProkatavoliCreditSliderText.textContent = floorPrice - 500 + '€';
+
+	prokatavoliCreditCover.style.width = calcCoverWidth(prokatavoliCreditSlider) + '%';
+	outputCreditProkatavoli.value = prokatavoliCreditSlider.value;
+
+	creditEnapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliCreditSlider.value)).toFixed(1);
+
+	//configureCreditMaxDoseisSlider();
+}
+
+function configureNoCreditMaxDoseisSlider() {
 	const noCreditEnapomeinanPosoFloat = parseFloat(noCreditEnapomeinanPoso.textContent);
 	let monthlyCost,
 		doseisNum = 6;
@@ -1163,16 +1210,16 @@ function configureMaxDoseisSlider() {
 	let maxDoseis = doseisNum - 2;
 	if (maxDoseis > 36) maxDoseis = 36;
 	doseisNoCreditSlider.max = maxDoseis;
-	maxDoseisSliderText.textContent = maxDoseis + ' μήνες';
+	maxDoseisNoCreditSliderText.textContent = maxDoseis + ' μήνες';
 	if (parseInt(doseisNoCreditSlider.value) >= maxDoseis) doseisNoCreditSliderOnChange(maxDoseis);
 	else doseisNoCreditSliderOnChange(doseisNoCreditSlider.value);
 }
 
 function configureNoCreditResults() {
-	doseisSliderValueInt = parseInt(doseisNoCreditSlider.value);
-	prokatavoliSliderValueInt = parseInt(prokatavoliNoCreditSlider.value);
+	const doseisNoCreditSliderValueInt = parseInt(doseisNoCreditSlider.value);
+	const prokatavoliNoCreditSliderValueInt = parseInt(prokatavoliNoCreditSlider.value);
 
-	const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisSliderValueInt, parseFloat(noCreditEnapomeinanPoso.textContent));
+	const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisNoCreditSliderValueInt, parseFloat(noCreditEnapomeinanPoso.textContent));
 	noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
 	//DEBUG LPG RESULT OR CNG RESULT
@@ -1183,7 +1230,26 @@ function configureNoCreditResults() {
 	}
 	noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
 
-	noCreditFinalCost.textContent = (monthlyCost * doseisSliderValueInt + prokatavoliSliderValueInt).toFixed(2) + '€';
+	noCreditFinalCost.textContent = (monthlyCost * doseisNoCreditSliderValueInt + prokatavoliNoCreditSliderValueInt).toFixed(2) + '€';
+}
+
+function configureCreditResults() {
+	console.log('!!finito! configure credit results!');
+	// const doseisNoCreditSliderValueInt = parseInt(doseisNoCreditSlider.value);
+	// const prokatavoliNoCreditSliderValueInt = parseInt(prokatavoliNoCreditSlider.value);
+
+	// const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisNoCreditSliderValueInt, parseFloat(noCreditEnapomeinanPoso.textContent));
+	// noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
+
+	// //DEBUG LPG RESULT OR CNG RESULT
+	// let monthlyGain = parseFloat(lpgResult.textContent.replace('€', ''));
+	// if (!perMonthCheckbox.checked) {
+	// 	//DEBUG (&& selectedGas === LPG)
+	// 	monthlyGain /= 12;
+	// }
+	// noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
+
+	// noCreditFinalCost.textContent = (monthlyCost * doseisNoCreditSliderValueInt + prokatavoliNoCreditSliderValueInt).toFixed(2) + '€';
 }
 
 function PMT(interestPerMonth, doseis, cost) {
