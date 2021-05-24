@@ -1154,13 +1154,11 @@ sliders.forEach((slider, i) => {
 		outputs[i].value = slider.value;
 		calcCovers[i].style.width = calcCoverWidth(slider) + '%';
 		calcResult();
-		calcEasyPay();
 	});
 	outputs[i].addEventListener('input', function () {
 		slider.value = this.value;
 		calcCovers[i].style.width = calcCoverWidth(slider) + '%';
 		calcResult();
-		calcEasyPay();
 	});
 });
 
@@ -1169,7 +1167,6 @@ perMonthCheckbox.addEventListener('change', function () {
 });
 
 calcResult(); //init
-calcEasyPay(); //init
 
 function calcResult() {
 	let petrolCostPerMonth, lpgCostPerMonth, cngCostPerMonth;
