@@ -1032,10 +1032,10 @@ function configureModelEasyPay() {
 	document.querySelector('#modelNameNoCredit').textContent = modelNameText;
 	document.querySelector('#modelNameCredit').textContent = modelNameText;
 
-	document.querySelector('.easy-pay-vehicle-container').style.display = 'flex';
-	document.querySelector('.easy-pay-with-vehicle-container').style.display = 'flex';
-	document.querySelector('.easy-pay-no-vehicle-container').style.display = 'none';
-	document.querySelector('.easy-pay-vehicle-descr').style.display = 'none';
+	[...document.querySelectorAll('.easy-pay-vehicle-container')].map(el => (el.style.display = 'flex'));
+	[...document.querySelectorAll('.easy-pay-with-vehicle-container')].map(el => (el.style.display = 'flex'));
+	[...document.querySelectorAll('.easy-pay-no-vehicle-container')].map(el => (el.style.display = 'none'));
+	[...document.querySelectorAll('.easy-pay-no-vehicle-descr')].map(el => (el.style.display = 'none'));
 }
 
 function configureSystemsEasyPay() {
