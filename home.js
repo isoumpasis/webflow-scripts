@@ -115,10 +115,6 @@ const maxNoVehicleSliderText = document.querySelector('.max-no-vehicle-no-credit
 const noCreditInterest = 12.6;
 let selectedEasyPaySystemPrice;
 
-const creditCardPrice1 = document.querySelector('#creditCardPrice1');
-const creditCardPrice2 = document.querySelector('#creditCardPrice2');
-const creditCardInstallments = document.querySelector('#creditCardInstallments');
-
 document.addEventListener('DOMContentLoaded', () => {
 	initSelects();
 	initFuelPrices();
@@ -222,8 +218,6 @@ function initEasyPay() {
 	);
 
 	resetEasyPay();
-	// creditCardPrice1.previousElementSibling.checked = true;
-	// creditCardInstallmentsOnChange(creditCardInstallments.value);
 }
 
 document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
@@ -1025,23 +1019,6 @@ function configureEasyPay() {
 	configureSystemsEasyPay();
 	configureNoCreditSliders();
 	configureNoCreditResults();
-	// for (let container of suggestedContainers) {
-	// 	if (container.style.display !== 'none') {
-	// 		container.querySelectorAll('.suggested-price').forEach(priceEl => {
-	// 			let price = parseInt(priceEl.textContent.split(' ')[0].replace('€', ''));
-	// 			price *= VAT;
-	// 			suggestedSystemPrices.push(price);
-	// 		});
-	// 		container.querySelectorAll('.suggested-name').forEach(nameEl => {
-	// 			suggestedSystemNames.push(nameEl.textContent);
-	// 		});
-	// 		break;
-	// 	}
-	// }
-	// console.log(suggestedSystemPrices);
-	// console.log(suggestedSystemNames);
-
-	// setWithCreditCard();
 }
 
 function configureModelEasyPay() {
@@ -1115,8 +1092,6 @@ function configureMaxDoseisSlider() {
 }
 
 function configureNoCreditResults() {
-	// const monthlyCost = parseFloat(noCreditEnapomeinanPoso.textContent) / parseInt(doseisNoCreditSlider.value);
-	// noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 	doseisSliderValueInt = parseInt(doseisNoCreditSlider.value);
 	prokatavoliSliderValueInt = parseInt(prokatavoliNoCreditSlider.value);
 
@@ -1143,69 +1118,6 @@ function PMT(interestPerMonth, doseis, cost) {
 	pmt = (-interestPerMonth * (cost * pvif)) / (pvif - 1);
 
 	return pmt;
-}
-
-function setWithCreditCard() {
-	setCostWithCreditCard();
-	creditCardInstallmentsOnChange(creditCardInstallments.value);
-}
-
-function setCostWithCreditCard() {
-	creditCardPrice1.innerHTML = `${suggestedSystemPrices[0]}€ <br>(${suggestedSystemNames[0]})`;
-	creditCardPrice1.previousElementSibling.checked = true;
-	creditCardPrice2.parentElement.style.display = 'block';
-
-	if (suggestedSystemPrices.length === 2) {
-		creditCardPrice2.innerHTML = `${suggestedSystemPrices[1]}€ <br>(${suggestedSystemNames[1]})`;
-		creditCardPrice2.previousElementSibling.checked = true;
-	} else {
-		creditCardPrice2.parentElement.style.display = 'none';
-		creditCardPrice2.previousElementSibling.checked = false;
-	}
-}
-
-creditCardInstallments.addEventListener('change', e => creditCardInstallmentsOnChange(e.target.value));
-
-function creditCardInstallmentsOnChange(value) {
-	console.log({ suggestedSystemPrices });
-	let cost = creditCardPrice1.previousElementSibling.checked
-		? suggestedSystemPrices[0] || parseFloat(creditCardPrice1.textContent.replace(' €', ''))
-		: suggestedSystemPrices[1] || parseFloat(creditCardPrice2.textContent.replace(' €', ''));
-
-	let installments = +value;
-	console.log({ installments });
-	console.log({ cost });
-
-	document.querySelector('#creditCardFinalCost').textContent = `${cost}€`;
-	document.querySelector('#creditCardPerMonth').textContent = `${(cost / installments).toFixed(2)}€`;
-
-	// let lpgPerMonthOrYearCost = parseFloat(lpgResult.textContent.replace('€', ''));
-
-	if (!perMonthCheckbox.checked) {
-		// document.querySelector('#creditCardBenefitLabel').textContent = 'Ετήσιο όφελος LPG';
-	} else {
-		// document.querySelector('#creditCardBenefitLabel').textContent = 'Μηνιαίο όφελος LPG';
-	}
-
-	document.querySelector('#creditCardBenefit').textContent = lpgResult.textContent;
-}
-
-document.querySelectorAll('.credit-card-radio').forEach(radio => {
-	radio.addEventListener('change', e => {
-		creditCardInstallmentsOnChange(creditCardInstallments.value);
-	});
-});
-
-function calcEasyPay() {
-	creditCardInstallmentsOnChange(creditCardInstallments.value);
-}
-
-function updateEasyPay() {
-	if (!perMonthCheckbox.checked) {
-		// document.querySelector('#creditCardBenefitLabel').textContent = 'Ετήσιο όφελος LPG';
-	} else {
-		// document.querySelector('#creditCardBenefitLabel').textContent = 'Μηνιαίο όφελος LPG';
-	}
 }
 
 function getActiveContainer() {
@@ -1254,7 +1166,6 @@ sliders.forEach((slider, i) => {
 
 perMonthCheckbox.addEventListener('change', function () {
 	calcResult();
-	creditCardInstallmentsOnChange(creditCardInstallments.value);
 });
 
 calcResult(); //init
