@@ -1262,7 +1262,7 @@ function configureCreditResults() {
 	const doseisCreditSelectValueInt = +doseisCreditSelect.value;
 	const prokatavoliCreditSliderValueInt = +prokatavoliCreditSlider.value;
 
-	const monthlyCost = getCreditMonthlyCost(+noCreditEnapomeinanPoso.textContent, doseisCreditSelectValueInt);
+	const monthlyCost = getCreditMonthlyCost(+creditEnapomeinanPoso.textContent, doseisCreditSelectValueInt);
 	creditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
 	console.log({ monthlyCost }, { doseisCreditSelectValueInt }, { prokatavoliCreditSliderValueInt });
