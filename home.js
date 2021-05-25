@@ -205,6 +205,7 @@ function modifyFuelPriceSliders(value) {
 function initEasyPay() {
 	initNoCredit();
 	initCredit();
+	initEasyPayTabs();
 	resetEasyPay();
 }
 
@@ -285,6 +286,21 @@ function initCredit() {
 	);
 	creditNoVehiclePlus.addEventListener('click', () =>
 		noVehicleCreditSliderOnChange(parseInt(noVehicleCreditSlider.value) + parseInt(noVehicleCreditSlider.step))
+	);
+}
+
+function initEasyPayTabs() {
+	document.querySelectorAll('.easy-pay-tab').forEach(el =>
+		el.addEventListener('click', e => {
+			if (document.querySelector('.easy-pay-with-vehicle-container').style.display === 'none') {
+				if (e.target.classList.contains('no-credit-tab')) {
+					selectedEasyPaySystemPrice = +noVehicleNoCreditSlider.value;
+				} else {
+					selectedEasyPaySystemPrice = +noVehicleCreditSlider.value;
+				}
+				console.log(e.target, selectedEasyPaySystemPrice);
+			}
+		})
 	);
 }
 
