@@ -1275,7 +1275,7 @@ function configureCreditResults() {
 	}
 	creditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
 
-	creditFinalCost.textContent = (monthlyCost * doseisCreditSelectValueInt + prokatavoliCreditSliderValueInt).toFixed(2) + '€';
+	creditFinalCost.textContent = Math.round((monthlyCost * doseisCreditSelectValueInt + prokatavoliCreditSliderValueInt * 100) / 100) + '€';
 }
 
 function PMT(interestPerMonth, doseis, cost) {
