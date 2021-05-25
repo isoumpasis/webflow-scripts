@@ -1384,6 +1384,7 @@ function calcResult() {
 		monthlyGain /= 12;
 	}
 	noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
+	creditMonthlyGain.textContent = noCreditMonthlyGain.textContent;
 }
 
 function calcCoverWidth(slider) {
