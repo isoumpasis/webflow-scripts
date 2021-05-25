@@ -147,6 +147,7 @@ const minNoVehicleCreditSliderText = document.querySelector('.min-no-vehicle-cre
 const maxNoVehicleCreditSliderText = document.querySelector('.max-no-vehicle-credit-slider-text');
 
 let noCreditInterest = 12.6;
+let creditInterest = 8.91;
 let selectedEasyPaySystemPrice;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1243,7 +1244,7 @@ function configureNoCreditResults() {
 	const doseisNoCreditSliderValueInt = +doseisNoCreditSlider.value;
 	const prokatavoliNoCreditSliderValueInt = +prokatavoliNoCreditSlider.value;
 
-	const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisNoCreditSliderValueInt, parseFloat(noCreditEnapomeinanPoso.textContent));
+	const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisNoCreditSliderValueInt, +noCreditEnapomeinanPoso.textContent);
 	noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
 	//DEBUG LPG RESULT OR CNG RESULT
@@ -1261,7 +1262,7 @@ function configureCreditResults() {
 	const doseisCreditSelectValueInt = +doseisCreditSelect.value;
 	const prokatavoliCreditSliderValueInt = +prokatavoliCreditSlider.value;
 
-	const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisCreditSelectValueInt, parseFloat(creditEnapomeinanPoso.textContent));
+	const monthlyCost = getCreditMonthlyCost(+noCreditEnapomeinanPoso.textContent, doseisCreditSelectValueInt);
 	creditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
 	//DEBUG LPG RESULT OR CNG RESULT
@@ -1284,6 +1285,24 @@ function PMT(interestPerMonth, doseis, cost) {
 	pmt = (-interestPerMonth * (cost * pvif)) / (pvif - 1);
 
 	return pmt;
+}
+
+function getCreditMonthlyCost(poso, doseis) {
+	if (doseis <= 6) {
+		return Math.round((poso / doseis) * 100) / 100;
+	}
+
+	let posoEksoflisis = (poso / doseis) * 0.991 * ((1 - 1 / Math.pow(1 + creditInterest / 100 / 12, doseis)) / (creditInterest / 100 / 12));
+	posoEksoflisis = Math.round(posoEksoflisis * 100) / 100;
+	let posostoKostous = (poso - posoEksoflisis) / poso;
+	posostoKostous = Math.round(posostoKostous * 10000) / 10000;
+	let syntelesthsVAT = (VAT - 1) / VAT;
+	let syntelesthsEpibarinshs = (1 - syntelesthsVAT) / (1 - syntelesthsVAT - posostoKostous);
+	syntelesthsEpibarinshs = Math.round(syntelesthsEpibarinshs * 10000) / 10000;
+	let telikhTimh = syntelesthsEpibarinshs * poso;
+	let monthlyCost = telikhTimh / doseis;
+	monthlyCost = Math.round(monthlyCost * 100) / 100;
+	return monthlyCost;
 }
 
 function getActiveContainer() {
