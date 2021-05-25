@@ -358,7 +358,7 @@ function prokatavoliCreditSliderOnChange(value) {
 	prokatavoliCreditCover.style.width = calcCoverWidth(prokatavoliCreditSlider) + '%';
 	prokatavoliCreditChangeMinMaxLabelsWeight();
 	creditEnapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliCreditSlider.value)).toFixed(1);
-	//configureCreditMaxDoseisSlider();
+	doseisCreditSelectOnChange(+doseisCreditSelect.value);
 }
 
 function doseisNoCreditSliderOnChange(value) {
@@ -1256,7 +1256,7 @@ function configureNoCreditResults() {
 }
 
 function configureCreditResults() {
-	const doseisCreditSelectValueInt = +doseisCreditSlider.value;
+	const doseisCreditSelectValueInt = +doseisCreditSelect.value;
 	const prokatavoliCreditSliderValueInt = +prokatavoliCreditSlider.value;
 
 	const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisCreditSelectValueInt, parseFloat(creditEnapomeinanPoso.textContent));
