@@ -354,8 +354,9 @@ function prokatavoliNoCreditSliderOnChange(value) {
 }
 
 function prokatavoliCreditSliderOnChange(value) {
-	prokatavoliCreditSlider.max = selectedEasyPaySystemPrice;
-	maxProkatavoliCreditSliderText.textContent = selectedEasyPaySystemPrice + '€';
+	const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
+	prokatavoliCreditSlider.max = floorPrice;
+	maxProkatavoliCreditSliderText.textContent = floorPrice + '€';
 
 	prokatavoliCreditSlider.value = value;
 	outputCreditProkatavoli.value = prokatavoliCreditSlider.value;
@@ -1210,8 +1211,9 @@ function configureNoCreditSliders() {
 }
 
 function configureCreditSliders() {
-	prokatavoliCreditSlider.max = selectedEasyPaySystemPrice;
-	maxProkatavoliCreditSliderText.textContent = selectedEasyPaySystemPrice + '€';
+	const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
+	prokatavoliCreditSlider.max = floorPrice;
+	maxProkatavoliCreditSliderText.textContent = floorPrice + '€';
 
 	prokatavoliCreditCover.style.width = calcCoverWidth(prokatavoliCreditSlider) + '%';
 	outputCreditProkatavoli.value = prokatavoliCreditSlider.value;
