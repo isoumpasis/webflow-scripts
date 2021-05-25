@@ -290,6 +290,8 @@ function initCredit() {
 	creditNoVehiclePlus.addEventListener('click', () =>
 		noVehicleCreditSliderOnChange(parseInt(noVehicleCreditSlider.value) + parseInt(noVehicleCreditSlider.step))
 	);
+
+	doseisCreditSelect.selectedIndex = 9;
 }
 
 function initEasyPayTabs() {
