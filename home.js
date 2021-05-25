@@ -375,7 +375,7 @@ function noVehicleNoCreditSliderOnChange(value) {
 
 	selectedEasyPaySystemPrice = parseInt(noVehicleNoCreditSlider.value);
 	prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
-	prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
+	// prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
 }
 
 function noVehicleCreditSliderOnChange(value) {
@@ -386,7 +386,7 @@ function noVehicleCreditSliderOnChange(value) {
 
 	selectedEasyPaySystemPrice = parseInt(noVehicleCreditSlider.value);
 	prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
-	prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
+	// prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
 }
 
 function prokatavoliNoCreditChangeMinMaxLabelsWeight() {
