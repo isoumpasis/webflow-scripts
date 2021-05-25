@@ -207,6 +207,7 @@ function initEasyPay() {
 	initNoCredit();
 	initCredit();
 	initEasyPayTabs();
+	initEasyPaySystemSelection();
 	resetEasyPay();
 }
 
@@ -306,22 +307,24 @@ function initEasyPayTabs() {
 	);
 }
 
-document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
-	el.addEventListener('click', e => {
-		const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
-		changePriceFontWeight(selectedSystemDiv);
+function initEasyPaySystemSelection() {
+	document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
+		el.addEventListener('click', e => {
+			const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
+			changePriceFontWeight(selectedSystemDiv);
 
-		const priceText = selectedSystemDiv.querySelector('.system-price-credit').textContent;
+			const priceText = selectedSystemDiv.querySelector('.system-price-credit').textContent;
 
-		const oldSelectedEasyPaySystemPrice = selectedEasyPaySystemPrice;
-		selectedEasyPaySystemPrice = parseFloat(priceText.replace('€', ''));
-		if (oldSelectedEasyPaySystemPrice === selectedEasyPaySystemPrice) return;
-		console.log('new selected price = ', selectedEasyPaySystemPrice);
+			const oldSelectedEasyPaySystemPrice = selectedEasyPaySystemPrice;
+			selectedEasyPaySystemPrice = parseFloat(priceText.replace('€', ''));
+			if (oldSelectedEasyPaySystemPrice === selectedEasyPaySystemPrice) return;
+			console.log('new selected price = ', selectedEasyPaySystemPrice);
 
-		prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
-		prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
-	})
-);
+			prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
+			prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
+		})
+	);
+}
 
 function changePriceFontWeight(selectedSystemDiv) {
 	if (selectedSystemDiv.classList.contains('system-1st-selection')) {
@@ -336,9 +339,8 @@ function changePriceFontWeight(selectedSystemDiv) {
 }
 
 function prokatavoliNoCreditSliderOnChange(value) {
-	const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
-	prokatavoliNoCreditSlider.max = floorPrice - 500;
-	maxProkatavoliNoCreditSliderText.textContent = floorPrice - 500 + '€';
+	prokatavoliNoCreditSlider.max = selectedEasyPaySystemPrice;
+	maxProkatavoliNoCreditSliderText.textContent = selectedEasyPaySystemPrice + '€';
 
 	prokatavoliNoCreditSlider.value = value;
 	outputNoCreditProkatavoli.value = prokatavoliNoCreditSlider.value;
