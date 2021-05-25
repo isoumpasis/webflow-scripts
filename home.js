@@ -147,7 +147,7 @@ const minNoVehicleCreditSliderText = document.querySelector('.min-no-vehicle-cre
 const maxNoVehicleCreditSliderText = document.querySelector('.max-no-vehicle-credit-slider-text');
 
 let noCreditInterest = 12.6;
-let creditInterest = 8.91;
+let creditInterest = 7.2; //8.91;
 let selectedEasyPaySystemPrice;
 
 document.addEventListener('DOMContentLoaded', () => {
