@@ -1265,6 +1265,8 @@ function configureCreditResults() {
 	const monthlyCost = getCreditMonthlyCost(+noCreditEnapomeinanPoso.textContent, doseisCreditSelectValueInt);
 	creditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
+	console.log({ monthlyCost }, { doseisCreditSelectValueInt }, { prokatavoliCreditSliderValueInt });
+
 	//DEBUG LPG RESULT OR CNG RESULT
 	let monthlyGain = parseFloat(lpgResult.textContent.replace('€', ''));
 	if (!perMonthCheckbox.checked) {
