@@ -1296,13 +1296,13 @@ function getCreditMonthlyCost(poso, doseis) {
 	}
 
 	let posoEksoflisis = (poso / doseis) * 0.982 * ((1 - 1 / Math.pow(1 + creditInterest / 100 / 12, doseis)) / (creditInterest / 100 / 12));
-	posoEksoflisis = Math.round(posoEksoflisis * 100) / 100;
+	//posoEksoflisis = Math.round(posoEksoflisis * 100) / 100;
 	console.log(posoEksoflisis);
 	let posostoKostous = (poso - posoEksoflisis) / poso;
-	posostoKostous = Math.round(posostoKostous * 10000) / 10000;
+	//posostoKostous = Math.round(posostoKostous * 10000) / 10000;
 	let syntelesthsVAT = (VAT - 1) / VAT;
 	let syntelesthsEpibarinshs = (1 - syntelesthsVAT) / (1 - syntelesthsVAT - posostoKostous);
-	syntelesthsEpibarinshs = Math.round(syntelesthsEpibarinshs * 10000) / 10000;
+	//syntelesthsEpibarinshs = Math.round(syntelesthsEpibarinshs * 10000) / 10000;
 	let telikhTimh = syntelesthsEpibarinshs * poso;
 	let monthlyCost = telikhTimh / doseis;
 	monthlyCost = Math.round(monthlyCost * 100) / 100;
