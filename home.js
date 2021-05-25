@@ -88,6 +88,7 @@ const prokatavoliNoCreditSlider = document.querySelector('.prokatavoli-no-credit
 const prokatavoliCreditSlider = document.querySelector('.prokatavoli-credit-slider');
 
 const doseisNoCreditSlider = document.querySelector('.doseis-no-credit-slider');
+const doseisCreditSelect = document.querySelector('.doseis-credit-select');
 
 const noVehicleNoCreditSlider = document.querySelector('.no-vehicle-no-credit-slider');
 const noVehicleCreditSlider = document.querySelector('.no-vehicle-credit-slider');
@@ -257,8 +258,9 @@ function initNoCredit() {
 	);
 }
 function initCredit() {
-	prokatavoliCreditSlider.addEventListener('input', e => prokatavoliCreditSliderOnChange(e.target.value));
 	noVehicleCreditSlider.addEventListener('input', e => noVehicleCreditSliderOnChange(e.target.value));
+	prokatavoliCreditSlider.addEventListener('input', e => prokatavoliCreditSliderOnChange(e.target.value));
+	doseisCreditSelect.addEventListener('change', e => doseisCreditSelectOnChange(e.target.value));
 
 	outputCreditProkatavoli.addEventListener('change', function () {
 		if (+this.value > +prokatavoliCreditSlider.max) this.value = prokatavoliCreditSlider.max;
@@ -365,6 +367,10 @@ function doseisNoCreditSliderOnChange(value) {
 	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	doseisChangeMinMaxLabelsWeight();
 	configureNoCreditResults();
+}
+
+function doseisCreditSelectOnChange(value) {
+	configureCreditResults();
 }
 
 function noVehicleNoCreditSliderOnChange(value) {
@@ -1232,8 +1238,8 @@ function configureNoCreditMaxDoseisSlider() {
 }
 
 function configureNoCreditResults() {
-	const doseisNoCreditSliderValueInt = parseInt(doseisNoCreditSlider.value);
-	const prokatavoliNoCreditSliderValueInt = parseInt(prokatavoliNoCreditSlider.value);
+	const doseisNoCreditSliderValueInt = +doseisNoCreditSlider.value;
+	const prokatavoliNoCreditSliderValueInt = +prokatavoliNoCreditSlider.value;
 
 	const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisNoCreditSliderValueInt, parseFloat(noCreditEnapomeinanPoso.textContent));
 	noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
@@ -1250,22 +1256,21 @@ function configureNoCreditResults() {
 }
 
 function configureCreditResults() {
-	console.log('!!finito! configure credit results!');
-	// const doseisNoCreditSliderValueInt = parseInt(doseisNoCreditSlider.value);
-	// const prokatavoliNoCreditSliderValueInt = parseInt(prokatavoliNoCreditSlider.value);
+	const doseisCreditSelectValueInt = +doseisCreditSlider.value;
+	const prokatavoliCreditSliderValueInt = +prokatavoliCreditSlider.value;
 
-	// const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisNoCreditSliderValueInt, parseFloat(noCreditEnapomeinanPoso.textContent));
-	// noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
+	const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisCreditSelectValueInt, parseFloat(creditEnapomeinanPoso.textContent));
+	creditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
-	// //DEBUG LPG RESULT OR CNG RESULT
-	// let monthlyGain = parseFloat(lpgResult.textContent.replace('€', ''));
-	// if (!perMonthCheckbox.checked) {
-	// 	//DEBUG (&& selectedGas === LPG)
-	// 	monthlyGain /= 12;
-	// }
-	// noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
+	//DEBUG LPG RESULT OR CNG RESULT
+	let monthlyGain = parseFloat(lpgResult.textContent.replace('€', ''));
+	if (!perMonthCheckbox.checked) {
+		//DEBUG (&& selectedGas === LPG)
+		monthlyGain /= 12;
+	}
+	creditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
 
-	// noCreditFinalCost.textContent = (monthlyCost * doseisNoCreditSliderValueInt + prokatavoliNoCreditSliderValueInt).toFixed(2) + '€';
+	creditFinalCost.textContent = (monthlyCost * doseisCreditSelectValueInt + prokatavoliCreditSliderValueInt).toFixed(2) + '€';
 }
 
 function PMT(interestPerMonth, doseis, cost) {
