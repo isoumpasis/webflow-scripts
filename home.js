@@ -293,7 +293,7 @@ function initEasyPayTabs() {
 	document.querySelectorAll('.easy-pay-tab').forEach(el =>
 		el.addEventListener('click', e => {
 			if (document.querySelector('.easy-pay-with-vehicle-container').style.display === 'none') {
-				if (e.target.classList.contains('no-credit-tab')) {
+				if (e.target.classList.contains('no-credit-tab') || e.target.textContent === 'ΧΩΡΙΣ ΠΙΣΤΩΤΙΚΗ') {
 					selectedEasyPaySystemPrice = +noVehicleNoCreditSlider.value;
 				} else {
 					selectedEasyPaySystemPrice = +noVehicleCreditSlider.value;
