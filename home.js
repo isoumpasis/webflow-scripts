@@ -1194,7 +1194,7 @@ function configureCreditSliders() {
 
 	creditEnapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliCreditSlider.value)).toFixed(1);
 
-	//configureCreditMaxDoseisSlider();
+	//configureCreditMaxDoseisSlider(); //
 }
 
 function configureNoCreditMaxDoseisSlider() {
