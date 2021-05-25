@@ -381,7 +381,7 @@ function noVehicleNoCreditSliderOnChange(value) {
 	noVehicleNoCreditCover.style.width = calcCoverWidth(noVehicleNoCreditSlider) + '%';
 	noVehicleNoCreditChangeMinMaxLabelsWeight();
 
-	selectedEasyPaySystemPrice = parseInt(noVehicleNoCreditSlider.value);
+	selectedEasyPaySystemPrice = +noVehicleNoCreditSlider.value;
 	prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
 	// prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
 }
@@ -392,7 +392,7 @@ function noVehicleCreditSliderOnChange(value) {
 	noVehicleCreditCover.style.width = calcCoverWidth(noVehicleCreditSlider) + '%';
 	noVehicleCreditChangeMinMaxLabelsWeight();
 
-	selectedEasyPaySystemPrice = parseInt(noVehicleCreditSlider.value);
+	selectedEasyPaySystemPrice = +noVehicleCreditSlider.value;
 	prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
 	// prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
 }
@@ -1208,17 +1208,13 @@ function configureNoCreditSliders() {
 }
 
 function configureCreditSliders() {
-	const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
-
-	prokatavoliCreditSlider.max = floorPrice - 500;
-	maxProkatavoliCreditSliderText.textContent = floorPrice - 500 + '€';
+	prokatavoliCreditSlider.max = selectedEasyPaySystemPrice;
+	maxProkatavoliCreditSliderText.textContent = selectedEasyPaySystemPrice + '€';
 
 	prokatavoliCreditCover.style.width = calcCoverWidth(prokatavoliCreditSlider) + '%';
 	outputCreditProkatavoli.value = prokatavoliCreditSlider.value;
 
 	creditEnapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliCreditSlider.value)).toFixed(1);
-
-	//configureCreditMaxDoseisSlider(); //
 }
 
 function configureNoCreditMaxDoseisSlider() {
