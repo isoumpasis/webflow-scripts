@@ -31,7 +31,8 @@ const emulatorPriceDict = {
 	p: 85,
 	b6: 95,
 	b8: -250, // - from cobd 8cyl = 1000€
-	hp: 90
+	hp: 90,
+	'double-hp': 130
 };
 //90eurw sthn timh gia ta panw apo 180 hp
 const makeImgPrefix = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f';
@@ -1041,7 +1042,6 @@ function showCylinderResults(fetchedModelObj, years) {
 		cobdExrDiv.style.display = 'grid';
 	} else {
 		suggestedSystems = ['C-OBD II'];
-		// document.querySelector('#suggested-cobd .suggested-price').textContent = '750€ ΦΠΑ'; giati auto edw? lathos?
 		const cobdDiv = document.querySelector('#suggested-cobd');
 		cobdDiv.querySelector('.left-overlay-description').textContent = '2-4cyl' + getCylinderDescrText();
 		cobdDiv.style.display = 'grid';
@@ -1061,12 +1061,18 @@ function displayEmulatorInfo(suggestedContainer) {
 	suggestedContainer.querySelectorAll('.info-content-block').forEach(emCont => (emCont.style.display = 'none'));
 
 	if (foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj)) {
-		const vehicleEmulatorType = hasUHPII(foundVehicleObj) ? 'hp' : foundVehicleObj.emulators[0].toLowerCase();
+		const vehicleEmulatorType = getEmulatorType();
 
 		suggestedContainer.querySelectorAll('.suggested-lpg-system').forEach(lpgSystem => {
 			lpgSystem.querySelectorAll('.info-content-block').forEach(emCont => {
 				if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
-					if (vehicleEmulatorType === 'p' || vehicleEmulatorType === 'b6' || vehicleEmulatorType === 'b8' || vehicleEmulatorType === 'hp') {
+					if (
+						vehicleEmulatorType === 'p' ||
+						vehicleEmulatorType === 'b6' ||
+						vehicleEmulatorType === 'b8' ||
+						vehicleEmulatorType === 'hp' ||
+						vehicleEmulatorType === 'double-hp'
+					) {
 						const priceEl = lpgSystem.querySelector('.suggested-price');
 						const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
 						suggestedPricesChanges.push({ priceEl, defaultPrice });
@@ -1083,6 +1089,13 @@ function displayEmulatorInfo(suggestedContainer) {
 
 function hasUHPII(vehObj) {
 	return vehObj.hp > 180 && vehObj.cylinders <= 4 && !vehObj.hasOwnProperty('engineCodes');
+}
+
+function getEmulatorType() {
+	if (hasUHPII(foundVehicleObj)) {
+		return foundVehicleObj.hp > 360 ? 'double-hp' : 'hp';
+	}
+	return foundVehicleObj.emulators[0].toLowerCase();
 }
 
 function configureCalculatorAfterSuggestion() {
