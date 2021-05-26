@@ -885,7 +885,7 @@ function showResults(fetchedModelObj) {
 	const suggestedContainer = getActiveContainer();
 	containerId = suggestedContainer.id;
 
-	adjustSectionPaddings();
+	adjustSectionPaddings(); //ξ
 
 	//If there is a suggestion
 	if (suggestedContainer && !suggestedContainer.classList.contains('not-convertible-container')) {
