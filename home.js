@@ -293,7 +293,7 @@ function initCredit() {
 		noVehicleCreditSliderOnChange(parseInt(noVehicleCreditSlider.value) + parseInt(noVehicleCreditSlider.step))
 	);
 
-	doseisCreditSelect.selectedIndex = 9;
+	doseisCreditSelect.selectedIndex = 11;
 }
 
 function initEasyPayTabs() {
@@ -890,14 +890,10 @@ function showResults(fetchedModelObj) {
 		displayEmulatorInfo(suggestedContainer);
 		suggestedContainer.querySelectorAll('.suggested-overlay-block').forEach(el => (el.style.height = '0px'));
 
-		// [...suggestedContainers].filter(c => c.style.display !== 'none')[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
-		// document.querySelector('.suggest').scrollIntoView({ behavior: 'smooth', block: 'end' });
-		// document.querySelector('.car-result-block').scrollIntoView({ behavior: 'smooth', block: 'end' });
-
-		// document.querySelector('.step-2').style.marginBottom = '10vh';
+		document.querySelector('#vehicle').style.paddingBottom = '5%';
 		configureCalculatorAfterSuggestion();
 		configureEasyPayAfterSuggestion();
-		document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
+		//document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
 	} else {
 		resetCalc();
 		resetEasyPay();
@@ -1137,7 +1133,7 @@ function resetCalc() {
 	outputs[1].value = 8;
 	calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
-	// document.querySelector('.step-2').style.marginBottom = '40vh';
+	document.querySelector('#vehicle').style.paddingBottom = '9%';
 }
 
 document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
