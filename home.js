@@ -890,7 +890,8 @@ function showResults(fetchedModelObj) {
 		displayEmulatorInfo(suggestedContainer);
 		suggestedContainer.querySelectorAll('.suggested-overlay-block').forEach(el => (el.style.height = '0px'));
 
-		document.querySelector('#vehicle').style.paddingBottom = '5%';
+		adjustSectionPaddings();
+
 		configureCalculatorAfterSuggestion();
 		configureEasyPayAfterSuggestion();
 		//document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
@@ -900,6 +901,10 @@ function showResults(fetchedModelObj) {
 	}
 
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
+}
+function adjustSectionPaddings() {
+	document.querySelector('#vehicle').style.paddingBottom = '3%';
+	document.querySelector('#calculator').style.paddingTop = '3%';
 }
 
 function resetToDefaultPrices() {
@@ -1134,6 +1139,7 @@ function resetCalc() {
 	calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
 	document.querySelector('#vehicle').style.paddingBottom = '9%';
+	document.querySelector('#calculator').style.paddingTop = '7%';
 }
 
 document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
