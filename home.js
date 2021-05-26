@@ -885,12 +885,12 @@ function showResults(fetchedModelObj) {
 	const suggestedContainer = getActiveContainer();
 	containerId = suggestedContainer.id;
 
+	adjustSectionPaddings();
+
 	//If there is a suggestion
 	if (suggestedContainer && !suggestedContainer.classList.contains('not-convertible-container')) {
 		displayEmulatorInfo(suggestedContainer);
 		suggestedContainer.querySelectorAll('.suggested-overlay-block').forEach(el => (el.style.height = '0px'));
-
-		adjustSectionPaddings();
 
 		configureCalculatorAfterSuggestion();
 		configureEasyPayAfterSuggestion();
