@@ -996,7 +996,7 @@ function showCylinderResults(fetchedModelObj, years) {
 		suggestedSystems = ['C-OBD II 4x2=8cyl'];
 		const cobdDiv = document.querySelector('#suggested-cobd-8cyl');
 		cobdDiv.querySelector('.suggested-cylinder-text').textContent = '4x2 = 8cyl';
-		cobdDiv.querySelector('.left-overlay-description').textContent = '4x2 = 8cyl έως 190HP';
+		cobdDiv.querySelector('.left-overlay-description').textContent = '4x2 = 8cyl έως 180HP';
 		cobdDiv.style.display = 'grid';
 	} else if (cyls == 5 || cyls == 6) {
 		suggestedSystems = ['C-OBD II 6cyl'];
@@ -1156,11 +1156,8 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 });
 
 function getCylinderDescrText() {
-	if (foundVehicleObj.hasOwnProperty('hp')) {
-		return foundVehicleObj.hp > 180 ? ' έως 350HP' : ' έως 190HP';
-	} else {
-		return Number(foundVehicleObj.engineCodes[0].split(' ')[0]) > 180 ? ' έως 350HP' : ' έως 190HP';
-	}
+	const hp = foundVehicleObj.hasOwnProperty('hp') ? foundVehicleObj.hp : Number(foundVehicleObj.engineCodes[0].split(' ')[0]);
+	return hp <= 180 ? ' έως 180HP' : foundVehicleObj <= 360 ? ' έως 360HP' : ' άνω των 360HP';
 }
 
 function configureEasyPayAfterSuggestion() {
