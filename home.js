@@ -1138,8 +1138,10 @@ function resetCalc() {
 	outputs[1].value = 8;
 	calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
-	document.querySelector('#vehicle').style.paddingBottom = '9%';
-	document.querySelector('#calculator').style.paddingTop = '7%';
+	if (!getActiveContainer()) {
+		document.querySelector('#vehicle').style.paddingBottom = '9%';
+		document.querySelector('#calculator').style.paddingTop = '7%';
+	}
 }
 
 document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
