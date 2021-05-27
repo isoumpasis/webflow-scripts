@@ -1091,7 +1091,8 @@ function hasUHPII(vehObj) {
 
 function getEmulatorType() {
 	if (hasUHPII(foundVehicleObj)) {
-		return foundVehicleObj.hp > 360 ? 'double-hp' : 'hp'; //DEBUG FOR CNG
+		if (selectedFuel === 'lpg') return foundVehicleObj.hp > 360 ? 'double-hp' : 'hp';
+		else return 'hp';
 	}
 	return foundVehicleObj.emulators[0].toLowerCase();
 }
