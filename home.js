@@ -85,6 +85,10 @@ let suggestedSystemPrices = [];
 let suggestedSystemNames = [];
 const VAT = 1.24;
 
+//SELECTED FUEL
+lpgFuelSelectBtns = document.querySelectorAll('.lpg-fuel-select-btn');
+cngFuelSelectBtns = document.querySelectorAll('.cng-fuel-select-btn');
+
 //EASY PAY
 const prokatavoliNoCreditSlider = document.querySelector('.prokatavoli-no-credit-slider');
 const prokatavoliCreditSlider = document.querySelector('.prokatavoli-credit-slider');
@@ -149,12 +153,13 @@ const minNoVehicleCreditSliderText = document.querySelector('.min-no-vehicle-cre
 const maxNoVehicleCreditSliderText = document.querySelector('.max-no-vehicle-credit-slider-text');
 
 let noCreditInterest = 12.6;
-let creditInterest = 7.2; //8.91;
+let creditInterest = 7.2;
 let selectedEasyPaySystemPrice;
 
 document.addEventListener('DOMContentLoaded', () => {
 	initSelects();
 	initFuelPrices();
+	initSelectedFuelListeners();
 	initEasyPay();
 
 	//initStorage();
@@ -204,6 +209,37 @@ function modifyFuelPriceSliders(value) {
 	outputs[3].value = locationObj.lpg;
 	calcCovers[3].style.width = calcCoverWidth(sliders[3]) + '%';
 	calcResult();
+}
+
+function initSelectedFuelListeners() {
+	cngFuelSelectBtns.forEach(cngBtn => {
+		cngBtn.addEventListener('click', () => {
+			if (selectedFuel === 'cng') return;
+			selectedFuel = 'cng';
+
+			const activeContainer = getActiveContainer();
+			if (activeContainer) {
+				activeContainer.style.display = 'none';
+				console.log('fetched model obj for CNG: ', fetchedModelObj);
+				showResults(fetchedModelObj);
+			}
+			configureEasyPayMonthlyGain();
+		});
+	});
+	lpgFuelSelectBtns.forEach(lpgBtn => {
+		lpgBtn.addEventListener('click', () => {
+			if (selectedFuel === 'lpg') return;
+			selectedFuel = 'lpg';
+
+			const activeContainer = getActiveContainer();
+			if (activeContainer) {
+				activeContainer.style.display = 'none';
+				console.log('fetched model obj for LPG: ', fetchedModelObj);
+				showResults(fetchedModelObj);
+			}
+			configureEasyPayMonthlyGain();
+		});
+	});
 }
 
 function initEasyPay() {
@@ -886,7 +922,7 @@ function showResults(fetchedModelObj) {
 	const suggestedContainer = getActiveContainer();
 	containerId = suggestedContainer.id;
 
-	adjustSectionPaddings(); //ξ
+	adjustSectionPaddings();
 
 	//If there is a suggestion
 	if (suggestedContainer && !suggestedContainer.classList.contains(`not-convertible-${selectedFuel}-container`)) {
@@ -1277,11 +1313,7 @@ function configureNoCreditResults() {
 	const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisNoCreditSliderValueInt, +noCreditEnapomeinanPoso.textContent);
 	noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
-	const fuelResult = selectedFuel === 'lpg' ? lpgResult : cngResult;
-	let monthlyGain = parseFloat(fuelResult.textContent.replace('€', ''));
-	if (!perMonthCheckbox.checked) monthlyGain /= 12;
-
-	noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
+	configureEasyPayMonthlyGain();
 
 	noCreditFinalCost.textContent = (monthlyCost * doseisNoCreditSliderValueInt + prokatavoliNoCreditSliderValueInt).toFixed(2) + '€';
 }
@@ -1293,16 +1325,18 @@ function configureCreditResults() {
 	const monthlyCost = getCreditMonthlyCost(+creditEnapomeinanPoso.textContent, doseisCreditSelectValueInt);
 	creditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
-	console.log({ monthlyCost }, { doseisCreditSelectValueInt }, { prokatavoliCreditSliderValueInt });
+	configureEasyPayMonthlyGain();
 
+	creditFinalCost.textContent = (Math.round((monthlyCost * doseisCreditSelectValueInt + prokatavoliCreditSliderValueInt) * 10) / 10).toFixed(2) + '€';
+}
+
+function configureEasyPayMonthlyGain() {
 	const fuelResult = selectedFuel === 'lpg' ? lpgResult : cngResult;
 	let monthlyGain = parseFloat(fuelResult.textContent.replace('€', ''));
 	if (!perMonthCheckbox.checked) monthlyGain /= 12;
 
-	creditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
-
-	console.log('final cost ', monthlyCost * doseisCreditSelectValueInt + prokatavoliCreditSliderValueInt);
-	creditFinalCost.textContent = (Math.round((monthlyCost * doseisCreditSelectValueInt + prokatavoliCreditSliderValueInt) * 10) / 10).toFixed(2) + '€';
+	noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
+	creditMonthlyGain.textContent = noCreditMonthlyGain.textContent;
 }
 
 function PMT(interestPerMonth, doseis, cost) {
@@ -1429,13 +1463,7 @@ function calcResult() {
 		cngPercentageEl.textContent = cngPercentageValue.toFixed(1) + '%';
 	}
 
-	//EasyPay
-	const fuelResult = selectedFuel === 'lpg' ? lpgResult : cngResult;
-	let monthlyGain = parseFloat(fuelResult.textContent.replace('€', ''));
-	if (!perMonthCheckbox.checked) monthlyGain /= 12;
-
-	noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
-	creditMonthlyGain.textContent = noCreditMonthlyGain.textContent;
+	configureEasyPayMonthlyGain();
 }
 
 function calcCoverWidth(slider) {
