@@ -1061,8 +1061,8 @@ function displayEmulatorInfo(suggestedContainer) {
 	if (foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj)) {
 		const vehicleEmulatorType = getEmulatorType();
 
-		suggestedContainer.querySelectorAll('.suggested-lpg-system').forEach(lpgSystem => {
-			lpgSystem.querySelectorAll('.info-content-block').forEach(emCont => {
+		suggestedContainer.querySelectorAll(`.suggested-${selectedFuel}-system`).forEach(system => {
+			system.querySelectorAll('.info-content-block').forEach(emCont => {
 				if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
 					if (
 						vehicleEmulatorType === 'p' ||
@@ -1071,7 +1071,7 @@ function displayEmulatorInfo(suggestedContainer) {
 						vehicleEmulatorType === 'hp' ||
 						vehicleEmulatorType === 'double-hp'
 					) {
-						const priceEl = lpgSystem.querySelector('.suggested-price');
+						const priceEl = system.querySelector(`.suggested-${selectedFuel}-price`);
 						const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
 						suggestedPricesChanges.push({ priceEl, defaultPrice });
 						priceEl.textContent = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
@@ -1191,7 +1191,9 @@ function configureSystemsEasyPay() {
 	const systemLogoSrcs = [...activeContainer.querySelectorAll('.system-logo')].map(el => el.src);
 	const systemLogoCreditEls = document.querySelectorAll('.system-logo-credit');
 	const systemPriceCreditEls = document.querySelectorAll('.system-price-credit');
-	const suggestedPrices = [...activeContainer.querySelectorAll('.suggested-price')].map(el => el.textContent.split('€')[0] * VAT + '€');
+	const suggestedPrices = [...activeContainer.querySelectorAll(`.suggested-${selectedFuel}-price`)].map(
+		el => el.textContent.split('€')[0] * VAT + '€'
+	);
 
 	systemLogoCreditEls.forEach((el, i) => (el.src = systemLogoSrcs[i % 2]));
 	systemPriceCreditEls.forEach((el, i) => (el.textContent = suggestedPrices[i % 2]));
