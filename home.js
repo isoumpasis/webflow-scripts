@@ -213,7 +213,8 @@ function modifyFuelPriceSliders(value) {
 
 function initSelectedFuelListeners() {
 	cngFuelSelectBtns.forEach(cngBtn => {
-		cngBtn.addEventListener('click', () => {
+		cngBtn.addEventListener('click', e => {
+			console.log(e.target);
 			if (selectedFuel === 'cng') return;
 			selectedFuel = 'cng';
 
@@ -227,7 +228,8 @@ function initSelectedFuelListeners() {
 		});
 	});
 	lpgFuelSelectBtns.forEach(lpgBtn => {
-		lpgBtn.addEventListener('click', () => {
+		lpgBtn.addEventListener('click', e => {
+			console.log(e.target);
 			if (selectedFuel === 'lpg') return;
 			selectedFuel = 'lpg';
 
