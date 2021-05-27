@@ -1277,12 +1277,10 @@ function configureNoCreditResults() {
 	const monthlyCost = -PMT(noCreditInterest / 100 / 12, doseisNoCreditSliderValueInt, +noCreditEnapomeinanPoso.textContent);
 	noCreditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
-	//DEBUG LPG RESULT OR CNG RESULT
-	let monthlyGain = parseFloat(lpgResult.textContent.replace('€', ''));
-	if (!perMonthCheckbox.checked) {
-		//DEBUG (&& selectedGas === LPG)
-		monthlyGain /= 12;
-	}
+	const fuelResult = selectedFuel === 'lpg' ? lpgResult : cngResult;
+	let monthlyGain = parseFloat(fuelResult.textContent.replace('€', ''));
+	if (!perMonthCheckbox.checked) monthlyGain /= 12;
+
 	noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
 
 	noCreditFinalCost.textContent = (monthlyCost * doseisNoCreditSliderValueInt + prokatavoliNoCreditSliderValueInt).toFixed(2) + '€';
@@ -1297,12 +1295,10 @@ function configureCreditResults() {
 
 	console.log({ monthlyCost }, { doseisCreditSelectValueInt }, { prokatavoliCreditSliderValueInt });
 
-	//DEBUG LPG RESULT OR CNG RESULT
-	let monthlyGain = parseFloat(lpgResult.textContent.replace('€', ''));
-	if (!perMonthCheckbox.checked) {
-		//DEBUG (&& selectedGas === LPG)
-		monthlyGain /= 12;
-	}
+	const fuelResult = selectedFuel === 'lpg' ? lpgResult : cngResult;
+	let monthlyGain = parseFloat(fuelResult.textContent.replace('€', ''));
+	if (!perMonthCheckbox.checked) monthlyGain /= 12;
+
 	creditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
 
 	console.log('final cost ', monthlyCost * doseisCreditSelectValueInt + prokatavoliCreditSliderValueInt);
@@ -1434,11 +1430,10 @@ function calcResult() {
 	}
 
 	//EasyPay
-	let monthlyGain = parseFloat(lpgResult.textContent.replace('€', ''));
-	if (!perMonthCheckbox.checked) {
-		//DEBUG (&& selectedGas === LPG)
-		monthlyGain /= 12;
-	}
+	const fuelResult = selectedFuel === 'lpg' ? lpgResult : cngResult;
+	let monthlyGain = parseFloat(fuelResult.textContent.replace('€', ''));
+	if (!perMonthCheckbox.checked) monthlyGain /= 12;
+
 	noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
 	creditMonthlyGain.textContent = noCreditMonthlyGain.textContent;
 }
