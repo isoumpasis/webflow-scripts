@@ -214,11 +214,13 @@ function modifyFuelPriceSliders(value) {
 function initSelectedFuelListeners() {
 	cngFuelSelectBtns.forEach(cngBtn => {
 		cngBtn.addEventListener('click', e => {
-			console.log(e.target);
+			console.log(e.target, selectedFuel);
 			if (selectedFuel === 'cng') return;
 			selectedFuel = 'cng';
 
 			const activeContainer = getActiveContainer();
+			console.log('cng', activeContainer);
+
 			if (activeContainer) {
 				activeContainer.style.display = 'none';
 				console.log('fetched model obj for CNG: ', fetchedModelObj);
@@ -229,11 +231,13 @@ function initSelectedFuelListeners() {
 	});
 	lpgFuelSelectBtns.forEach(lpgBtn => {
 		lpgBtn.addEventListener('click', e => {
-			console.log(e.target);
+			console.log(e.target, selectedFuel);
+
 			if (selectedFuel === 'lpg') return;
 			selectedFuel = 'lpg';
 
 			const activeContainer = getActiveContainer();
+			console.log('lpg', activeContainer);
 			if (activeContainer) {
 				activeContainer.style.display = 'none';
 				console.log('fetched model obj for LPG: ', fetchedModelObj);
