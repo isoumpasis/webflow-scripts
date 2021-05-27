@@ -1155,8 +1155,7 @@ function configureCalculatorAfterSuggestion() {
 	consumptionRadios[1].dataset.cons = foundVehicleObj.consumption[1];
 	consumptionRadios[2].dataset.cons = foundVehicleObj.consumption[2];
 
-	consumptionRadios[2].click(); //DEBUG
-	consumptionRadios[2].blur(); //DEBUG
+	// consumptionRadios[2].click(); //DEBUG
 
 	document.querySelector('#calcContainerVehicle').style.display = 'grid';
 	document.querySelector('#calcContainerNoVehicle').style.display = 'none';
