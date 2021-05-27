@@ -20,6 +20,7 @@ const descriptionSelect = document.querySelector('#descriptionSelect');
 const suggestedContainers = document.querySelectorAll('.suggested-container');
 let containerId;
 let suggestedSystems;
+let selectedFuel = 'lpg';
 
 const systemQueryDict = {
 	'DI 3000B': 'di3000b',
@@ -888,7 +889,7 @@ function showResults(fetchedModelObj) {
 	adjustSectionPaddings(); //ξ
 
 	//If there is a suggestion
-	if (suggestedContainer && !suggestedContainer.classList.contains('not-convertible-container')) {
+	if (suggestedContainer && !suggestedContainer.classList.contains(`not-convertible-${selectedFuel}-container`)) {
 		displayEmulatorInfo(suggestedContainer);
 		suggestedContainer.querySelectorAll('.suggested-overlay-block').forEach(el => (el.style.height = '0px'));
 
@@ -932,16 +933,12 @@ function showDirectResults(fetchedModelObj) {
 	console.log({ foundVehicleObj });
 
 	if (foundVehicleObj.isConvertible) {
-		const directSystemDiv = document.querySelector(`#suggested-${systemQueryDict[foundVehicleObj.system]}`);
+		const directSystemDiv = document.querySelector(`#suggested-${selectedFuel}-${systemQueryDict[foundVehicleObj.system]}`);
 		let temp = descriptionSelect.value.split(' - ');
-		directSystemDiv.querySelector('.di-engine-code-overlay').textContent = temp[1] + ' - ' + temp[0].replace(' ', ''); //descriptionSelect.value.split(' - ')[1];
+		directSystemDiv.querySelector('.di-engine-code-overlay').textContent = temp[1] + ' - ' + temp[0].replace(' ', '');
 		directSystemDiv.style.display = 'grid';
 	} else {
-		//not convertible !!! here...TODO
-		document.querySelector('.not-convertible-container').style.display = 'grid';
-		// suggestedContainers.forEach(container => {
-		// 	container.style.display = 'none';
-		// });
+		document.querySelector(`.not-convertible-${selectedFuel}-container`).style.display = 'grid';
 	}
 }
 
@@ -955,7 +952,7 @@ function showMonouResults(fetchedModelObj) {
 		}
 	}
 	console.log({ foundVehicleObj });
-	document.querySelector('#suggested-monou').style.display = 'grid';
+	document.querySelector(`#suggested-${selectedFuel}-monou`).style.display = 'grid';
 }
 
 function showCylinderResults(fetchedModelObj, years) {
@@ -995,20 +992,20 @@ function showCylinderResults(fetchedModelObj, years) {
 
 	if (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'B8') {
 		suggestedSystems = ['C-OBD II 4x2=8cyl'];
-		const cobdDiv = document.querySelector('#suggested-cobd-8cyl');
+		const cobdDiv = document.querySelector(`#suggested-${selectedFuel}-cobd-8cyl`);
 		cobdDiv.querySelector('.suggested-cylinder-text').textContent = '4x2 = 8cyl';
 		cobdDiv.querySelector('.left-overlay-description').textContent = '4x2 = 8cyl έως 180HP';
 		cobdDiv.style.display = 'grid';
 	} else if (cyls == 5 || cyls == 6) {
 		suggestedSystems = ['C-OBD II 6cyl'];
-		const cobdDiv = document.querySelector('#suggested-cobd-6cyl');
+		const cobdDiv = document.querySelector(`#suggested-${selectedFuel}-cobd-6cyl`);
 		const cylinderDescrText = getCylinderDescrText();
 		cobdDiv.querySelector('.suggested-cylinder-text').textContent = '5-6cyl' + cylinderDescrText;
 		cobdDiv.querySelector('.left-overlay-description').textContent = '5-6cyl' + cylinderDescrText;
 		cobdDiv.style.display = 'grid';
 	} else if (cyls == 8) {
 		suggestedSystems = ['C-OBD II 8cyl'];
-		const cobdDiv = document.querySelector('#suggested-cobd-8cyl');
+		const cobdDiv = document.querySelector(`#suggested-${selectedFuel}-cobd-8cyl`);
 		const cylinderDescrText = getCylinderDescrText();
 		cobdDiv.querySelector('.suggested-cylinder-text').textContent = '8cyl' + cylinderDescrText;
 		cobdDiv.querySelector('.left-overlay-description').textContent = '8cyl' + cylinderDescrText;
@@ -1016,34 +1013,34 @@ function showCylinderResults(fetchedModelObj, years) {
 	} else if (years <= 1998) {
 		if (foundVehicleObj.hp > 180 || (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'T')) {
 			suggestedSystems = ['Smart ExR'];
-			const exrDiv = document.querySelector('#suggested-exr');
+			const exrDiv = document.querySelector(`#suggested-${selectedFuel}-exr`);
 			exrDiv.querySelector('.left-overlay-description').textContent = '2-4cyl' + getCylinderDescrText();
 			exrDiv.style.display = 'grid';
 		} else {
 			suggestedSystems = ['E-GO'];
-			document.querySelector('#suggested-ego').style.display = 'grid';
+			document.querySelector(`#suggested-${selectedFuel}-ego`).style.display = 'grid';
 		}
 	} else if (years >= 1999 && years <= 2004) {
 		if (foundVehicleObj.hp > 180 || (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'T')) {
 			suggestedSystems = ['Smart ExR'];
-			const exrDiv = document.querySelector('#suggested-exr');
+			const exrDiv = document.querySelector(`#suggested-${selectedFuel}-exr`);
 			exrDiv.querySelector('.left-overlay-description').textContent = '2-4cyl' + getCylinderDescrText();
 			exrDiv.style.display = 'grid';
 		} else {
 			suggestedSystems = ['Smart ExR', 'E-GO'];
-			const exrEgoDiv = document.querySelector('#suggested-exr-ego');
+			const exrEgoDiv = document.querySelector(`#suggested-${selectedFuel}-exr-ego`);
 			exrEgoDiv.querySelector('.left-overlay-description').textContent = '2-4cyl' + getCylinderDescrText();
 			exrEgoDiv.style.display = 'grid';
 		}
 	} else if (years >= 2005 && years <= 2013) {
 		suggestedSystems = ['C-OBD II', 'Smart ExR'];
-		const cobdExrDiv = document.querySelector('#suggested-cobd-exr');
+		const cobdExrDiv = document.querySelector(`#suggested-${selectedFuel}-cobd-exr`);
 		const cylinderDescrText = getCylinderDescrText();
 		cobdExrDiv.querySelectorAll('.left-overlay-description').forEach(el => (el.textContent = '2-4cyl' + cylinderDescrText));
 		cobdExrDiv.style.display = 'grid';
 	} else {
 		suggestedSystems = ['C-OBD II'];
-		const cobdDiv = document.querySelector('#suggested-cobd');
+		const cobdDiv = document.querySelector(`#suggested-${selectedFuel}-cobd`);
 		cobdDiv.querySelector('.left-overlay-description').textContent = '2-4cyl' + getCylinderDescrText();
 		cobdDiv.style.display = 'grid';
 	}
@@ -1094,7 +1091,7 @@ function hasUHPII(vehObj) {
 
 function getEmulatorType() {
 	if (hasUHPII(foundVehicleObj)) {
-		return foundVehicleObj.hp > 360 ? 'double-hp' : 'hp';
+		return foundVehicleObj.hp > 360 ? 'double-hp' : 'hp'; //DEBUG FOR CNG
 	}
 	return foundVehicleObj.emulators[0].toLowerCase();
 }
@@ -1162,6 +1159,8 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 function getCylinderDescrText() {
 	const hp = foundVehicleObj.hasOwnProperty('hp') ? foundVehicleObj.hp : Number(foundVehicleObj.engineCodes[0].split(' ')[0]);
 	return hp <= 180 ? ' έως 180HP' : foundVehicleObj <= 360 ? ' έως 360HP' : ' άνω των 360HP';
+
+	//DEBUG for cng
 }
 
 function configureEasyPayAfterSuggestion() {
