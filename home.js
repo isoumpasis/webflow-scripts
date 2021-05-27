@@ -1378,7 +1378,7 @@ function getCreditMonthlyCost(poso, doseis) {
 }
 
 function getActiveContainer() {
-	return [...suggestedContainers].filter(container => container.style.display !== 'none')[0];
+	return [...suggestedContainers].filter(container => container.style.display !== 'none' && container.style.display)[0];
 }
 
 /* System Identification END */
