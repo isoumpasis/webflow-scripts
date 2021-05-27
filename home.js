@@ -1158,11 +1158,11 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 
 function getCylinderDescrText() {
 	const hp = foundVehicleObj.hasOwnProperty('hp') ? foundVehicleObj.hp : Number(foundVehicleObj.engineCodes[0].split(' ')[0]);
-	hp <= 180 ? ' έως 180HP' : foundVehicleObj <= 360 ? ' έως 360HP' : ' άνω των 360HP';
+	//hp <= 180 ? ' έως 180HP' : foundVehicleObj <= 360 ? ' έως 360HP' : ' άνω των 360HP';
 
 	if (hp <= 180) {
 		return ' έως 180HP';
-	} else if (foundVehicleObj <= 360) {
+	} else if (hp <= 360) {
 		if (selectedFuel === 'lpg') {
 			return ' έως 360HP';
 		} else {
