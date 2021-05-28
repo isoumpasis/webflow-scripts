@@ -1043,14 +1043,14 @@ function showCylinderResults(fetchedModelObj, years) {
 		const cobdDiv = document.querySelector(`#suggested-${selectedFuel}-cobd-6cyl`);
 		// const cylinderDescrText = getCylinderDescrText();
 		// cobdDiv.querySelector('.suggested-descr-text').textContent = '5-6cyl' + cylinderDescrText;
-		cobdDiv.querySelector('.left-overlay-description').textContent = '5-6cyl' + cylinderDescrText;
+		// cobdDiv.querySelector('.left-overlay-description').textContent = '5-6cyl' + cylinderDescrText;
 		cobdDiv.style.display = 'grid';
 	} else if (cyls == 8) {
 		suggestedSystems = ['C-OBD II 8cyl'];
 		const cobdDiv = document.querySelector(`#suggested-${selectedFuel}-cobd-8cyl`);
 		// const cylinderDescrText = getCylinderDescrText();
 		// cobdDiv.querySelector('.suggested-descr-text').textContent = '8cyl' + cylinderDescrText;
-		cobdDiv.querySelector('.left-overlay-description').textContent = '8cyl' + cylinderDescrText;
+		// cobdDiv.querySelector('.left-overlay-description').textContent = '8cyl' + cylinderDescrText;
 		cobdDiv.style.display = 'grid';
 	} else if (years <= 1998) {
 		if (foundVehicleObj.hp > 180 || (foundVehicleObj.hasOwnProperty('emulators') && foundVehicleObj.emulators[0] === 'T')) {
@@ -1077,8 +1077,7 @@ function showCylinderResults(fetchedModelObj, years) {
 	} else if (years >= 2005 && years <= 2013) {
 		suggestedSystems = ['C-OBD II', 'Smart ExR'];
 		const cobdExrDiv = document.querySelector(`#suggested-${selectedFuel}-cobd-exr`);
-		const cylinderDescrText = getCylinderDescrText();
-		cobdExrDiv.querySelectorAll('.left-overlay-description').forEach(el => (el.textContent = '2-4cyl' + cylinderDescrText));
+		cobdExrDiv.querySelectorAll('.left-overlay-description').forEach(el => (el.textContent = '2-4cyl' + getCylinderDescrText()));
 		cobdExrDiv.style.display = 'grid';
 	} else {
 		suggestedSystems = ['C-OBD II'];
