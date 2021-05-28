@@ -1041,15 +1041,15 @@ function showCylinderResults(fetchedModelObj, years) {
 	} else if (cyls == 5 || cyls == 6) {
 		suggestedSystems = ['C-OBD II 6cyl'];
 		const cobdDiv = document.querySelector(`#suggested-${selectedFuel}-cobd-6cyl`);
-		const cylinderDescrText = getCylinderDescrText();
-		cobdDiv.querySelector('.suggested-descr-text').textContent = '5-6cyl' + cylinderDescrText;
+		// const cylinderDescrText = getCylinderDescrText();
+		// cobdDiv.querySelector('.suggested-descr-text').textContent = '5-6cyl' + cylinderDescrText;
 		cobdDiv.querySelector('.left-overlay-description').textContent = '5-6cyl' + cylinderDescrText;
 		cobdDiv.style.display = 'grid';
 	} else if (cyls == 8) {
 		suggestedSystems = ['C-OBD II 8cyl'];
 		const cobdDiv = document.querySelector(`#suggested-${selectedFuel}-cobd-8cyl`);
-		const cylinderDescrText = getCylinderDescrText();
-		cobdDiv.querySelector('.suggested-descr-text').textContent = '8cyl' + cylinderDescrText;
+		// const cylinderDescrText = getCylinderDescrText();
+		// cobdDiv.querySelector('.suggested-descr-text').textContent = '8cyl' + cylinderDescrText;
 		cobdDiv.querySelector('.left-overlay-description').textContent = '8cyl' + cylinderDescrText;
 		cobdDiv.style.display = 'grid';
 	} else if (years <= 1998) {
@@ -1128,6 +1128,7 @@ function displayEmulatorInfo(suggestedContainer) {
 }
 
 function hasUHPII(vehObj) {
+	if (selectedFuel === 'cng') return false;
 	return vehObj.hp > 180 && vehObj.cylinders <= 4 && !vehObj.hasOwnProperty('engineCodes');
 }
 
@@ -1201,24 +1202,10 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 });
 
 function getCylinderDescrText() {
-	const hp = foundVehicleObj.hasOwnProperty('hp') ? foundVehicleObj.hp : Number(foundVehicleObj.engineCodes[0].split(' ')[0]);
-	//hp <= 180 ? ' έως 180HP' : foundVehicleObj <= 360 ? ' έως 360HP' : ' άνω των 360HP';
+	if (selectedFuel === 'cng') return '';
 
-	if (hp <= 180) {
-		return ' έως 180HP';
-	} else if (hp <= 360) {
-		if (selectedFuel === 'lpg') {
-			return ' έως 360HP';
-		} else {
-			return ' άνω των 180HP';
-		}
-	} else {
-		if (selectedFuel === 'lpg') {
-			return ' άνω των 360HP';
-		} else {
-			return ' άνω των 180HP';
-		}
-	}
+	const hp = foundVehicleObj.hasOwnProperty('hp') ? foundVehicleObj.hp : Number(foundVehicleObj.engineCodes[0].split(' ')[0]);
+	return hp <= 180 ? ' έως 180HP' : hp <= 360 ? ' έως 360HP' : ' άνω των 360HP';
 }
 
 function configureEasyPayAfterSuggestion() {
