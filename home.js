@@ -1012,22 +1012,6 @@ function showCylinderResults(fetchedModelObj, years) {
 			break;
 		}
 	}
-
-	// for (let veh of fetchedModelObj.vehicles) {
-	//   if (descriptionValue.length === 1) {
-	//     //cyls mode
-	//     if (veh.cylinders == descriptionValue) {
-	//       foundVehicleObj = veh;
-	//       break;
-	//     }
-	//   } else {
-	//     //hp mode
-	//     if (veh.hp == descriptionValue) {
-	//       foundVehicleObj = veh;
-	//       break;
-	//     }
-	//   }
-	// }
 	console.log({ foundVehicleObj });
 
 	const cyls = foundVehicleObj.cylinders;

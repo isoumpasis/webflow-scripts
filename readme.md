@@ -32,15 +32,13 @@
 [x] value option x times klp
 [x] nea lovato direct codes
 [x] scroll
+[x] katw apo 6 cyls kai panw apo 180hp kai oxi direct epilogh analoga me tous ippous .. eksaerwths
+[x] emulators
+[x] επιλογη της περιοχής για τις τιμη βενζινης
 
 [] mnhmh session storage
 [] mhhmh gia session ti system page
-[] katw apo 6 cyls kai panw apo 180hp kai oxi direct epilogh analoga me tous ippous .. eksaerwths
-[] emulator
-[] επιλογη της περιοχής για τις τιμη βενζινης
 
 /_ EASY PAY _/
-na mpei ethsio ofelos credit card ? etisia eksoikonomish..?
-panta atokes oi doseis? ara den xreiazetai teliko poso plhrwmhs ?
-
-[] init stage without suggested vehicles
+[x] na mpei ethsio ofelos credit card ? etisia eksoikonomish..?
+[x] init stage without suggested vehicles
