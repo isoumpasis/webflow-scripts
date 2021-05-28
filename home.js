@@ -559,7 +559,7 @@ makeSelect.addEventListener('change', function () {
 	// userSelections.vehicle = { make: this.value };
 	userSelections.vehicle = {};
 	userSelections.systems = {};
-	localStorage.setItem('userSelections', JSON.stringify(userSelections));
+	//localStorage.setItem('userSelections', JSON.stringify(userSelections));
 
 	if (!this.value) {
 		yearSelect.disabled = true;
@@ -641,7 +641,7 @@ function yearOnChange(value) {
 	// userSelections.vehicle = { make: userSelections.vehicle.make, year: value };
 	userSelections.vehicle = {};
 	userSelections.systems = {};
-	localStorage.setItem('userSelections', JSON.stringify(userSelections));
+	//ocalStorage.setItem('userSelections', JSON.stringify(userSelections));
 	// sessionStorage.removeItem('selectedYear');
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
@@ -729,7 +729,7 @@ function modelOnChange(value) {
 	// userSelections.vehicleF = { make: userSelections.vehicle.make, year: userSelections.vehicle.year, model: value };
 	userSelections.vehicle = {};
 	userSelections.systems = {};
-	localStorage.setItem('userSelections', JSON.stringify(userSelections));
+	//localStorage.setItem('userSelections', JSON.stringify(userSelections));
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
 	//sessionStorage.removeItem('selectedSystem');
@@ -882,7 +882,7 @@ function descriptionOnChange(value) {
 		// delete userSelections.vehicle.foundVehicle;
 		userSelections.vehicle = {};
 		userSelections.systems = {};
-		localStorage.setItem('userSelections', JSON.stringify(userSelections));
+		//localStorage.setItem('userSelections', JSON.stringify(userSelections));
 		// sessionStorage.removeItem('selectedDescription');
 		//sessionStorage.removeItem('suggestedSystems');
 		//sessionStorage.removeItem('selectedSystem');
@@ -893,7 +893,21 @@ function descriptionOnChange(value) {
 	calcResult();
 
 	// userSelections.vehicle = { ...userSelections.vehicle, description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}` };
+	// userSelections = {
+	// 	vehicle: {
+	// 		make: makeSelect.value,
+	// 		year: yearSelect.value,
+	// 		model: modelSelect.value,
+	// 		description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}`,
+	// 		fetched: { fetchedYears, fetchedModels, fetchedModelObj }
+	// 	},
+	// 	foundVehicleObj,
+	// 	systems: {
+	// 		containerId
+	// 	}
+	// };
 	userSelections = {
+		...userSelections,
 		vehicle: {
 			make: makeSelect.value,
 			year: yearSelect.value,
@@ -907,8 +921,7 @@ function descriptionOnChange(value) {
 		}
 	};
 	console.log({ containerId });
-	localStorage.setItem('userSelections', JSON.stringify(userSelections));
-	// sessionStorage.selectedDescription = value;
+	//localStorage.setItem('userSelections', JSON.stringify(userSelections));
 }
 
 function showResults(fetchedModelObj) {
