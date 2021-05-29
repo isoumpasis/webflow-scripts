@@ -897,6 +897,10 @@ function showResults(fetchedModelObj) {
 	}
 
 	const suggestedContainer = getActiveContainer();
+
+	userSelections.vehicle.suggestions = { ...userSelections.vehicle.suggestions, containerId: suggestedContainer.id };
+	saveUserSelections();
+
 	adjustSectionPaddings();
 
 	//If there is a suggestion
