@@ -217,14 +217,14 @@ function initSelectedFuelListeners() {
 		cngBtn.addEventListener('click', e => {
 			if (userSelections.selectedFuel === 'cng') return;
 			userSelections.selectedFuel = 'cng';
-			saveUserSelections();
 
 			const activeContainer = getActiveContainer();
-
 			if (activeContainer) {
+				userSelections.suggestions = { ...userSelections.suggestions, containerId: activeContainer.id };
 				activeContainer.style.display = 'none';
 				showResults(fetchedModelObj);
 			}
+			saveUserSelections();
 			configureEasyPayMonthlyGain();
 		});
 	});
@@ -232,13 +232,14 @@ function initSelectedFuelListeners() {
 		lpgBtn.addEventListener('click', e => {
 			if (userSelections.selectedFuel === 'lpg') return;
 			userSelections.selectedFuel = 'lpg';
-			saveUserSelections();
 
 			const activeContainer = getActiveContainer();
 			if (activeContainer) {
+				userSelections.suggestions = { ...userSelections.suggestions, containerId: activeContainer.id };
 				activeContainer.style.display = 'none';
 				showResults(fetchedModelObj);
 			}
+			saveUserSelections();
 			configureEasyPayMonthlyGain();
 		});
 	});
