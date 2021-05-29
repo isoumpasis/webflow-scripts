@@ -1113,7 +1113,9 @@ function configureCalculatorAfterSuggestion() {
 	consumptionRadios[2].dataset.cons = foundVehicleObj.consumption[2];
 
 	// consumptionRadios[2].click(); //DEBUG
-	document.querySelectorAll('.consumption-radio-input')[2].checked = true;
+	combinedConsumptionRadio = document.querySelectorAll('.consumption-radio-input')[2];
+	combinedConsumptionRadio.checked = true;
+	combinedConsumptionRadio.classList.add('w--redirected-checked');
 
 	document.querySelector('#calcContainerVehicle').style.display = 'grid';
 	document.querySelector('#calcContainerNoVehicle').style.display = 'none';
