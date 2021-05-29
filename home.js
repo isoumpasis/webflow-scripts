@@ -1113,9 +1113,13 @@ function configureCalculatorAfterSuggestion() {
 	consumptionRadios[2].dataset.cons = foundVehicleObj.consumption[2];
 
 	// consumptionRadios[2].click(); //DEBUG
-	combinedConsumptionRadio = document.querySelectorAll('.consumption-radio-input')[2];
-	combinedConsumptionRadio.checked = true;
-	combinedConsumptionRadio.classList.add('w--redirected-checked');
+	consumptionRadios = document.querySelectorAll('.consumption-radio-input');
+	combinedConsumptionRadio[0].checked = false;
+	combinedConsumptionRadio[1].checked = false;
+	combinedConsumptionRadio[2].checked = true;
+	combinedConsumptionRadio[0].classList.remove('w--redirected-checked');
+	combinedConsumptionRadio[1].classList.remove('w--redirected-checked');
+	combinedConsumptionRadio[2].classList.add('w--redirected-checked');
 
 	document.querySelector('#calcContainerVehicle').style.display = 'grid';
 	document.querySelector('#calcContainerNoVehicle').style.display = 'none';
