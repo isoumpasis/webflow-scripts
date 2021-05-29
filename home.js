@@ -1112,7 +1112,6 @@ function configureCalculatorAfterSuggestion() {
 	consumptionRadios[1].dataset.cons = foundVehicleObj.consumption[1];
 	consumptionRadios[2].dataset.cons = foundVehicleObj.consumption[2];
 
-	// consumptionRadios[2].click(); //DEBUG
 	const hiddenRadiosCheck = document.querySelectorAll('.radio-button.w-radio input');
 	hiddenRadiosCheck[0].checked = false;
 	hiddenRadiosCheck[1].checked = false;
