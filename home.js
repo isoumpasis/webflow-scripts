@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	initSelectedFuelListeners();
 	initEasyPay();
 
-	localStorage.clear();
+	//localStorage.clear();
 	//initStorage();
 });
 
@@ -897,7 +897,7 @@ function showResults(fetchedModelObj) {
 	}
 
 	const suggestedContainer = getActiveContainer();
-	userSelections.suggestions = { ...userSelections.suggestions, containerId: activeContainer.id };
+	userSelections.suggestions = { ...userSelections.suggestions, containerId: suggestedContainer.id };
 	saveUserSelections();
 	adjustSectionPaddings();
 
