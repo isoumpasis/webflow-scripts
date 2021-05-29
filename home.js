@@ -1113,10 +1113,11 @@ function configureCalculatorAfterSuggestion() {
 	consumptionRadios[2].dataset.cons = foundVehicleObj.consumption[2];
 
 	// consumptionRadios[2].click(); //DEBUG
+	const hiddenRadiosCheck = document.querySelectorAll('.radio-button.w-radio input');
+	hiddenRadiosCheck[0].checked = false;
+	hiddenRadiosCheck[1].checked = false;
+	hiddenRadiosCheck[2].checked = true;
 	const hiddenRadiosConfig = document.querySelectorAll('.consumption-radio-input');
-	hiddenRadiosConfig[0].checked = false;
-	hiddenRadiosConfig[1].checked = false;
-	hiddenRadiosConfig[2].checked = true;
 	hiddenRadiosConfig[0].classList.remove('w--redirected-checked');
 	hiddenRadiosConfig[1].classList.remove('w--redirected-checked');
 	hiddenRadiosConfig[2].classList.add('w--redirected-checked');
