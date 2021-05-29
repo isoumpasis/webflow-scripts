@@ -11,6 +11,7 @@ let fetchedModelObj;
 let foundVehicleObj;
 let suggestedPricesChanges = [];
 let userSelections = { selectedFuel: 'lpg', vehicle: {} };
+const preferredStorage = localStorage;
 
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');
@@ -214,16 +215,14 @@ function modifyFuelPriceSliders(value) {
 function initSelectedFuelListeners() {
 	cngFuelSelectBtns.forEach(cngBtn => {
 		cngBtn.addEventListener('click', e => {
-			console.log(e.target, userSelections.selectedFuel);
 			if (userSelections.selectedFuel === 'cng') return;
 			userSelections.selectedFuel = 'cng';
+			saveUserSelections();
 
 			const activeContainer = getActiveContainer();
-			console.log('cng', activeContainer);
 
 			if (activeContainer) {
 				activeContainer.style.display = 'none';
-				console.log('fetched model obj for CNG: ', fetchedModelObj);
 				showResults(fetchedModelObj);
 			}
 			configureEasyPayMonthlyGain();
@@ -231,16 +230,13 @@ function initSelectedFuelListeners() {
 	});
 	lpgFuelSelectBtns.forEach(lpgBtn => {
 		lpgBtn.addEventListener('click', e => {
-			console.log(e.target, userSelections.selectedFuel);
-
 			if (userSelections.selectedFuel === 'lpg') return;
 			userSelections.selectedFuel = 'lpg';
+			saveUserSelections();
 
 			const activeContainer = getActiveContainer();
-			console.log('lpg', activeContainer);
 			if (activeContainer) {
 				activeContainer.style.display = 'none';
-				console.log('fetched model obj for LPG: ', fetchedModelObj);
 				showResults(fetchedModelObj);
 			}
 			configureEasyPayMonthlyGain();
@@ -556,9 +552,8 @@ makeSelect.addEventListener('change', function () {
 	resetEasyPay();
 	calcResult();
 
-	// userSelections.vehicle = { make: this.value };
 	userSelections.vehicle = {};
-	//localStorage.setItem('userSelections', JSON.stringify(userSelections));
+	saveUserSelections();
 
 	if (!this.value) {
 		yearSelect.disabled = true;
@@ -637,20 +632,13 @@ function yearOnChange(value) {
 	resetEasyPay();
 	calcResult();
 
-	// userSelections.vehicle = { make: userSelections.vehicle.make, year: value };
 	userSelections.vehicle = {};
-	//ocalStorage.setItem('userSelections', JSON.stringify(userSelections));
-	// sessionStorage.removeItem('selectedYear');
-	// sessionStorage.removeItem('selectedCylinder');
-	//sessionStorage.removeItem('suggestedSystems');
-	//sessionStorage.removeItem('selectedSystem');
+	saveUserSelections();
 
 	if (!value) {
 		modelSelect.disabled = true;
 		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
 		descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
-		// delete userSelections.vehicle.year;
-		// sessionStorage.removeItem('selectedVehicles');
 		return;
 	}
 	// selectedModel = fetchedModels.models.filter(model => model.name === this.value)[0];
@@ -724,21 +712,12 @@ function modelOnChange(value) {
 	resetEasyPay();
 	calcResult();
 
-	// userSelections.vehicleF = { make: userSelections.vehicle.make, year: userSelections.vehicle.year, model: value };
 	userSelections.vehicle = {};
-	//localStorage.setItem('userSelections', JSON.stringify(userSelections));
-	// sessionStorage.removeItem('selectedCylinder');
-	//sessionStorage.removeItem('suggestedSystems');
-	//sessionStorage.removeItem('selectedSystem');
+	saveUserSelections();
 
 	if (!value) {
 		descriptionSelect.disabled = true;
 		descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
-		// descriptionSelect.innerHTML = `<option value="">${
-		//   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
-		// }</option>`;
-		// delete userSelections.vehicle.model;
-		// sessionStorage.removeItem('selectedYear');
 		return;
 	}
 	// sessionStorage.selectedYear = value;
@@ -875,33 +854,15 @@ function descriptionOnChange(value) {
 		resetEasyPay();
 		calcResult();
 
-		// delete userSelections.vehicle.description;
-		// delete userSelections.vehicle.foundVehicle;
 		userSelections.vehicle = {};
-		//localStorage.setItem('userSelections', JSON.stringify(userSelections));
-		// sessionStorage.removeItem('selectedDescription');
-		//sessionStorage.removeItem('suggestedSystems');
-		//sessionStorage.removeItem('selectedSystem');
+		saveUserSelections();
+
 		return;
 	}
 
 	showResults(fetchedModelObj);
 	calcResult();
 
-	// userSelections.vehicle = { ...userSelections.vehicle, description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}` };
-	// userSelections = {
-	// 	vehicle: {
-	// 		make: makeSelect.value,
-	// 		year: yearSelect.value,
-	// 		model: modelSelect.value,
-	// 		description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}`,
-	// 		fetched: { fetchedYears, fetchedModels, fetchedModelObj }
-	// 	},
-	// 	foundVehicleObj,
-	// 	systems: {
-	// 		containerId
-	// 	}
-	// };
 	userSelections = {
 		...userSelections,
 		vehicle: {
@@ -918,8 +879,7 @@ function descriptionOnChange(value) {
 			}
 		}
 	};
-	console.log({ containerId });
-	//localStorage.setItem('userSelections', JSON.stringify(userSelections));
+	saveUserSelections();
 }
 
 function showResults(fetchedModelObj) {
@@ -1462,6 +1422,11 @@ function calcCoverWidth(slider) {
 }
 
 /* Calculator END */
+
+/* STORAGE */
+function saveUserSelections() {
+	preferredStorage.setItem('userSelections', JSON.stringify(userSelections));
+}
 
 /* PDF DOWNLOAD */
 document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
