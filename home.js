@@ -10,7 +10,7 @@ let fetchedModels;
 let fetchedModelObj;
 let foundVehicleObj;
 let suggestedPricesChanges = [];
-let userSelections = { selectedFuel: 'lpg', vehicle: {}, systems: {} };
+let userSelections = { selectedFuel: 'lpg', vehicle: {} };
 
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');
@@ -558,7 +558,6 @@ makeSelect.addEventListener('change', function () {
 
 	// userSelections.vehicle = { make: this.value };
 	userSelections.vehicle = {};
-	userSelections.systems = {};
 	//localStorage.setItem('userSelections', JSON.stringify(userSelections));
 
 	if (!this.value) {
@@ -640,7 +639,6 @@ function yearOnChange(value) {
 
 	// userSelections.vehicle = { make: userSelections.vehicle.make, year: value };
 	userSelections.vehicle = {};
-	userSelections.systems = {};
 	//ocalStorage.setItem('userSelections', JSON.stringify(userSelections));
 	// sessionStorage.removeItem('selectedYear');
 	// sessionStorage.removeItem('selectedCylinder');
@@ -728,7 +726,6 @@ function modelOnChange(value) {
 
 	// userSelections.vehicleF = { make: userSelections.vehicle.make, year: userSelections.vehicle.year, model: value };
 	userSelections.vehicle = {};
-	userSelections.systems = {};
 	//localStorage.setItem('userSelections', JSON.stringify(userSelections));
 	// sessionStorage.removeItem('selectedCylinder');
 	//sessionStorage.removeItem('suggestedSystems');
@@ -881,7 +878,6 @@ function descriptionOnChange(value) {
 		// delete userSelections.vehicle.description;
 		// delete userSelections.vehicle.foundVehicle;
 		userSelections.vehicle = {};
-		userSelections.systems = {};
 		//localStorage.setItem('userSelections', JSON.stringify(userSelections));
 		// sessionStorage.removeItem('selectedDescription');
 		//sessionStorage.removeItem('suggestedSystems');
@@ -909,15 +905,17 @@ function descriptionOnChange(value) {
 	userSelections = {
 		...userSelections,
 		vehicle: {
-			make: makeSelect.value,
-			year: yearSelect.value,
-			model: modelSelect.value,
-			description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}`,
-			fetched: { fetchedYears, fetchedModels, fetchedModelObj }
-		},
-		foundVehicleObj,
-		systems: {
-			containerId
+			identification: {
+				make: makeSelect.value,
+				year: yearSelect.value,
+				model: modelSelect.value,
+				description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}`,
+				fetched: { fetchedYears, fetchedModels, fetchedModelObj },
+				foundVehicleObj
+			},
+			suggestions: {
+				containerId
+			}
 		}
 	};
 	console.log({ containerId });
