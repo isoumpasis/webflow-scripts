@@ -19,7 +19,6 @@ const yearSelect = document.querySelector('#yearSelect');
 const descriptionSelect = document.querySelector('#descriptionSelect');
 
 const suggestedContainers = document.querySelectorAll('.suggested-container');
-let containerId;
 let suggestedSystems;
 
 const systemQueryDict = {
@@ -217,14 +216,13 @@ function initSelectedFuelListeners() {
 		cngBtn.addEventListener('click', e => {
 			if (userSelections.selectedFuel === 'cng') return;
 			userSelections.selectedFuel = 'cng';
+			saveUserSelections();
 
 			const activeContainer = getActiveContainer();
 			if (activeContainer) {
-				userSelections.suggestions = { ...userSelections.suggestions, containerId: activeContainer.id };
 				activeContainer.style.display = 'none';
 				showResults(fetchedModelObj);
 			}
-			saveUserSelections();
 			configureEasyPayMonthlyGain();
 		});
 	});
@@ -232,14 +230,13 @@ function initSelectedFuelListeners() {
 		lpgBtn.addEventListener('click', e => {
 			if (userSelections.selectedFuel === 'lpg') return;
 			userSelections.selectedFuel = 'lpg';
+			saveUserSelections();
 
 			const activeContainer = getActiveContainer();
 			if (activeContainer) {
-				userSelections.suggestions = { ...userSelections.suggestions, containerId: activeContainer.id };
 				activeContainer.style.display = 'none';
 				showResults(fetchedModelObj);
 			}
-			saveUserSelections();
 			configureEasyPayMonthlyGain();
 		});
 	});
@@ -900,8 +897,8 @@ function showResults(fetchedModelObj) {
 	}
 
 	const suggestedContainer = getActiveContainer();
-	containerId = suggestedContainer.id;
-
+	userSelections.suggestions = { ...userSelections.suggestions, containerId: activeContainer.id };
+	saveUserSelections();
 	adjustSectionPaddings();
 
 	//If there is a suggestion
