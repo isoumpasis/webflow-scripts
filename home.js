@@ -341,13 +341,15 @@ function initEasyPayTabs() {
 	document.querySelectorAll('.easy-pay-tab').forEach(el =>
 		el.addEventListener('click', e => {
 			if (document.querySelector('.easy-pay-with-vehicle-container').style.display === 'none') {
-				console.log('!!!!', e.target)
 				if (e.target.classList.contains('no-credit-tab')) { //DEBUG ΜΕΤΡΗΤΑ
 					selectedEasyPaySystemPrice = +noVehicleNoCreditSlider.value;
 					userSelections.easyPay.method = 'Χωρίς Πιστωτική Κάρτα';
-				} else {
+				} else if(e.target.classList.contains('credit-tab')) {
 					selectedEasyPaySystemPrice = +noVehicleCreditSlider.value;
 					userSelections.easyPay.method = 'Με Πιστωτική Κάρτα';
+				}else{
+					selectedEasyPaySystemPrice = +noVehicleCreditSlider.value;
+					userSelections.easyPay.method = 'metrhta';
 				}
 				console.log(e.target, selectedEasyPaySystemPrice);
 			}
