@@ -224,7 +224,7 @@ function initSelectedFuelListeners() {
 				showResults(fetchedModelObj);
 			}
 			configureEasyPayMonthlyGain();
-			updateBasketSection({ selectedFuel: true });
+			//updateBasketSection({ selectedFuel: true });
 		});
 	});
 	lpgFuelSelectBtns.forEach(lpgBtn => {
@@ -239,7 +239,7 @@ function initSelectedFuelListeners() {
 				showResults(fetchedModelObj);
 			}
 			configureEasyPayMonthlyGain();
-			updateBasketSection({ selectedFuel: true });
+			//updateBasketSection({ selectedFuel: true });
 		});
 	});
 }
@@ -551,7 +551,7 @@ makeSelect.addEventListener('change', function () {
 	resetCalc();
 	resetEasyPay();
 	calcResult();
-	updateBasketSection({ resetNoVehicle: true });
+	//updateBasketSection({ resetNoVehicle: true });
 
 	userSelections.vehicle = {};
 	saveUserSelections();
@@ -632,7 +632,7 @@ function yearOnChange(value) {
 	resetCalc();
 	resetEasyPay();
 	calcResult();
-	updateBasketSection({ resetNoVehicle: true });
+	//updateBasketSection({ resetNoVehicle: true });
 
 	userSelections.vehicle = {};
 	saveUserSelections();
@@ -713,7 +713,7 @@ function modelOnChange(value) {
 	resetCalc();
 	resetEasyPay();
 	calcResult();
-	updateBasketSection({ resetNoVehicle: true });
+	//updateBasketSection({ resetNoVehicle: true });
 
 	userSelections.vehicle = {};
 	saveUserSelections();
@@ -856,7 +856,7 @@ function descriptionOnChange(value) {
 		resetCalc();
 		resetEasyPay();
 		calcResult();
-		updateBasketSection({ resetNoVehicle: true });
+		//updateBasketSection({ resetNoVehicle: true });
 
 		userSelections.vehicle = {};
 		saveUserSelections();
@@ -866,6 +866,13 @@ function descriptionOnChange(value) {
 
 	showResults(fetchedModelObj);
 	calcResult();
+
+	configureUserSelections();
+	saveUserSelections();
+}
+
+function configureUserSelections() {
+	const activeContainerId = getActiveContainer().id;
 
 	userSelections = {
 		...userSelections,
@@ -879,11 +886,22 @@ function descriptionOnChange(value) {
 				foundVehicleObj
 			},
 			suggestions: {
-				containerId: getActiveContainer().id
+				containerId: activeContainerId,
+				hasResult: activeContainerId.indexOf('notConvertible') === -1
 			}
+		},
+		calculator: {
+			fuelPricesSelectedIndex: document.querySelector('#fuelPricesSelectVehicle').selectedIndex,
+			kmPerYearValue: document.querySelector('.km-year').value
 		}
 	};
-	saveUserSelections();
+
+	if (userSelections.vehicle.suggestions.hasResult) {
+		userSelections.calculator = {
+			...userSelections.calculator,
+			driveOftenIndex: 2 //default
+		};
+	}
 }
 
 function showResults(fetchedModelObj) {
@@ -916,12 +934,12 @@ function showResults(fetchedModelObj) {
 
 		configureCalculatorAfterSuggestion();
 		configureEasyPayAfterSuggestion();
-		updateBasketSection({ vehicle: true });
+		//updateBasketSection({ vehicle: true });
 		//document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
 	} else {
 		resetCalc();
 		resetEasyPay();
-		updateBasketSection({ resetNoVehicle: true });
+		//updateBasketSection({ resetNoVehicle: true });
 	}
 
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
