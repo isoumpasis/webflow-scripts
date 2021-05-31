@@ -1227,7 +1227,7 @@ function getDriveOftenIndex() {
 function getEasyPayMethod(target) {
 	let tabEl;
 	if (target) {
-		tabEl = target.closest('easy-pay-tab');
+		tabEl = target.closest('.easy-pay-tab');
 	} else {
 		tabEl = [...document.querySelectorAll('.easy-pay-tab')].find(tab => tab.classList.contains('w--current'));
 	}
