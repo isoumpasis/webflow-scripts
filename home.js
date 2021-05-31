@@ -10,7 +10,7 @@ let fetchedModels;
 let fetchedModelObj;
 let foundVehicleObj;
 let suggestedPricesChanges = [];
-let userSelections = { selectedFuel: 'lpg', vehicle: {}, calculator: {} };
+let userSelections = { selectedFuel: 'lpg', vehicle: {}, calculator: {}, easyPay: {} };
 const preferredStorage = localStorage;
 
 const makeSelect = document.querySelector('#makeSelect');
@@ -341,10 +341,12 @@ function initEasyPayTabs() {
 	document.querySelectorAll('.easy-pay-tab').forEach(el =>
 		el.addEventListener('click', e => {
 			if (document.querySelector('.easy-pay-with-vehicle-container').style.display === 'none') {
-				if (e.target.classList.contains('no-credit-tab')) {
+				if (e.target.classList.contains('no-credit-tab')) { //DEBUG ΜΕΤΡΗΤΑ
 					selectedEasyPaySystemPrice = +noVehicleNoCreditSlider.value;
+					userSelections.easyPay.method = 'Χωρίς Πιστωτική Κάρτα';
 				} else {
 					selectedEasyPaySystemPrice = +noVehicleCreditSlider.value;
+					userSelections.easyPay.method = 'Με Πιστωτική Κάρτα';
 				}
 				console.log(e.target, selectedEasyPaySystemPrice);
 			}
@@ -906,6 +908,9 @@ function configureUserSelectionsAfterResults() {
 		calculator: {
 			fuelPricesSelectedIndex: document.querySelector('#fuelPricesSelectVehicle').selectedIndex,
 			kmPerYearValue: +document.querySelector('.km-year').value
+		},
+		easyPay: {
+			method: getEasyPayMethod()
 		}
 	};
 
@@ -1214,6 +1219,17 @@ function getDriveOftenIndex(){
 		if(el.checked) index = i;
 	});
 	return index;
+}
+
+function getEasyPayMethod(){
+	const tabEl = [...document.querySelectorAll('.easy-pay-tab')].find(tab => tab.classList.contains('w--current'));
+	if(tabEl.classList.contains('no-credit-tab')){
+		return 'Χωρίς Πιστωτική Κάρτα';
+	}else if(tabEl.classList.contains('credit-tab')){
+		return 'Με Πιστωτική Κάρτα';
+	}else{
+		return 'metrhta';
+	}
 }
 
 function getCylinderDescrText() {
