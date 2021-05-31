@@ -341,13 +341,14 @@ function initEasyPayTabs() {
 	document.querySelectorAll('.easy-pay-tab').forEach(el =>
 		el.addEventListener('click', e => {
 			if (document.querySelector('.easy-pay-with-vehicle-container').style.display === 'none') {
-				if (e.target.classList.contains('no-credit-tab')) { //DEBUG ΜΕΤΡΗΤΑ
+				if (e.target.classList.contains('no-credit-tab')) {
+					//DEBUG ΜΕΤΡΗΤΑ
 					selectedEasyPaySystemPrice = +noVehicleNoCreditSlider.value;
 					userSelections.easyPay.method = 'Χωρίς Πιστωτική Κάρτα';
-				} else if(e.target.classList.contains('credit-tab')) {
+				} else if (e.target.classList.contains('credit-tab')) {
 					selectedEasyPaySystemPrice = +noVehicleCreditSlider.value;
 					userSelections.easyPay.method = 'Με Πιστωτική Κάρτα';
-				}else{
+				} else {
 					selectedEasyPaySystemPrice = +noVehicleCreditSlider.value;
 					userSelections.easyPay.method = 'metrhta';
 				}
@@ -879,7 +880,6 @@ function descriptionOnChange(value) {
 	showResults(fetchedModelObj);
 	calcResult();
 
-	
 	saveUserSelections();
 }
 
@@ -890,17 +890,17 @@ function configureUserSelectionsAfterResults() {
 		...userSelections,
 		vehicle: {
 			identification: {
-				vehicleValues = {
+				vehicleValues: {
 					make: makeSelect.value,
 					year: yearSelect.value,
 					model: modelSelect.value,
 					description:
-					descriptionSelect.value + `${descriptionSelect.value.length === 1 ? ' cyl' : descriptionSelect.value.includes(' - ') ? '' : ' hp'}`,
+						descriptionSelect.value + `${descriptionSelect.value.length === 1 ? ' cyl' : descriptionSelect.value.includes(' - ') ? '' : ' hp'}`
 				},
 				fetchedData: { fetchedYears, fetchedModels, fetchedModelObj },
 				foundVehicleObj,
 				emulators: {
-					hasEmulators: (foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj))
+					hasEmulators: foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj)
 					//types: foundVehicleObj.hasOwnProperty('emulators') ? foundVehicleObj.emulators : hasUHPII(foundVehicleObj) ?  : [];
 				}
 			},
@@ -1212,26 +1212,26 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 		calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 		calcResult();
 
-
 		userSelections.calculator.driveOftenIndex = getDriveOftenIndex();
 	});
 });
 
-function getDriveOftenIndex(){
+function getDriveOftenIndex() {
 	let index = 2;
 	[...document.querySelectorAll('.radio-button.w-radio input')].forEach((el, i) => {
-		if(el.checked) index = i;
+		if (el.checked) index = i;
 	});
 	return index;
 }
 
-function getEasyPayMethod(){
+function getEasyPayMethod() {
 	const tabEl = [...document.querySelectorAll('.easy-pay-tab')].find(tab => tab.classList.contains('w--current'));
-	if(tabEl.classList.contains('no-credit-tab')){
+	console.log('tabl el ', tabEl);
+	if (tabEl.classList.contains('no-credit-tab')) {
 		return 'Χωρίς Πιστωτική Κάρτα';
-	}else if(tabEl.classList.contains('credit-tab')){
+	} else if (tabEl.classList.contains('credit-tab')) {
 		return 'Με Πιστωτική Κάρτα';
-	}else{
+	} else {
 		return 'metrhta';
 	}
 }
