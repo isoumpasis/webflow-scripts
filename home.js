@@ -360,8 +360,13 @@ function initEasyPayTabs() {
 }
 
 function initEasyPaySystemSelection() {
+	userSelections.easyPay.system = getEasyPaySystem(); //init
+
 	document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 		el.addEventListener('click', e => {
+			userSelections.easyPay.systemSelect = getEasyPaySystem(e.target);
+			console.log(e.target);
+
 			const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
 			changePriceFontWeight(selectedSystemDiv);
 
@@ -1231,10 +1236,26 @@ function getEasyPayMethod(target) {
 	} else {
 		tabEl = [...document.querySelectorAll('.easy-pay-tab')].find(tab => tab.classList.contains('w--current'));
 	}
-	console.log('target', target, 'tabl el ', tabEl);
 	if (tabEl.classList.contains('no-credit-tab')) {
 		return 'Χωρίς Πιστωτική Κάρτα';
 	} else if (tabEl.classList.contains('credit-tab')) {
+		return 'Με Πιστωτική Κάρτα';
+	} else {
+		return 'metrhta';
+	}
+}
+
+function getEasyPaySystem(target) {
+	let systemEl;
+	if (target) {
+		systemEl = target.closest('.easy-pay-tab');
+	} else {
+		systemEl = [...document.querySelectorAll('.easy-pay-tab')].find(tab => tab.classList.contains('w--current'));
+	}
+	console.log('target', target, 'system el ', systemEl);
+	if (systemEl.classList.contains('no-credit-tab')) {
+		return 'Χωρίς Πιστωτική Κάρτα';
+	} else if (systemEl.classList.contains('credit-tab')) {
 		return 'Με Πιστωτική Κάρτα';
 	} else {
 		return 'metrhta';
@@ -1290,9 +1311,11 @@ function configureSystemsEasyPay() {
 		[...document.querySelectorAll('.easy-pay-first-suggestion-text')].map(el => (el.textContent = 'ΠΡΟΤΑΣΗ ΣΥΣΤΗΜΑΤΟΣ'));
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'none'));
 	}
-	document.querySelector('.easy-pay-suggested-system-div').click(); //default selection first suggestion
+	document.querySelector('.easy-pay-suggested-system-div').click(); //default selection first suggestion DEBUG
 	selectedEasyPaySystemPrice = +document.querySelector('.system-price-credit').textContent.replace('€', '');
 	console.log({ selectedEasyPaySystemPrice });
+
+	userSelections.easyPay.systemSelect = getEasyPaySystem();
 }
 
 function configureNoCreditSliders() {
