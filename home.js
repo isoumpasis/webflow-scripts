@@ -1358,7 +1358,7 @@ function updateBasketSection(sections) {
 		document.querySelector('#makeImgBasket').src = document.querySelector('#makeImg').src;
 		document.querySelector('#modelNameBasket').textContent = document.querySelector('#modelName').textContent;
 		document.querySelector('.vehicle-divider-basket').style.display = 'block';
-		document.querySelector('.vehicle-container-basket').style.display = 'block';
+		document.querySelector('.vehicle-container-basket').style.display = 'flex';
 	}
 
 	if (sections.resetNoVehicle) {
