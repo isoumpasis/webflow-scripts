@@ -355,6 +355,7 @@ function initEasyPayTabs() {
 			}
 		})
 	);
+	userSelections.easyPay.method = getEasyPayMethod();
 }
 
 function initEasyPaySystemSelection() {
