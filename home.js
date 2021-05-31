@@ -556,6 +556,7 @@ makeSelect.addEventListener('change', function () {
 	//updateBasketSection({ resetNoVehicle: true });
 
 	userSelections.vehicle = {};
+	delete userSelections.calculator.driveOftenIndex;
 	saveUserSelections();
 
 	if (!this.value) {
@@ -637,6 +638,7 @@ function yearOnChange(value) {
 	//updateBasketSection({ resetNoVehicle: true });
 
 	userSelections.vehicle = {};
+	delete userSelections.calculator.driveOftenIndex;
 	saveUserSelections();
 
 	if (!value) {
@@ -718,6 +720,7 @@ function modelOnChange(value) {
 	//updateBasketSection({ resetNoVehicle: true });
 
 	userSelections.vehicle = {};
+	delete userSelections.calculator.driveOftenIndex;
 	saveUserSelections();
 
 	if (!value) {
@@ -861,6 +864,7 @@ function descriptionOnChange(value) {
 		//updateBasketSection({ resetNoVehicle: true });
 
 		userSelections.vehicle = {};
+		delete userSelections.calculator.driveOftenIndex;
 		saveUserSelections();
 
 		return;
