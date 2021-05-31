@@ -342,7 +342,8 @@ function initEasyPayTabs() {
 
 	document.querySelectorAll('.easy-pay-tab').forEach(el =>
 		el.addEventListener('click', e => {
-			userSelections.easyPay.method = getEasyPayMethod();
+			userSelections.easyPay.method = getEasyPayMethod(e.target);
+			console.log(e.target);
 			if (document.querySelector('.easy-pay-with-vehicle-container').style.display === 'none') {
 				if (e.target.classList.contains('no-credit-tab')) {
 					//DEBUG ΜΕΤΡΗΤΑ
@@ -1223,8 +1224,13 @@ function getDriveOftenIndex() {
 	return index;
 }
 
-function getEasyPayMethod() {
-	const tabEl = [...document.querySelectorAll('.easy-pay-tab')].find(tab => tab.classList.contains('w--current'));
+function getEasyPayMethod(target) {
+	let tabEl;
+	if (target) {
+		tabEl = [...document.querySelectorAll('.easy-pay-tab')].find(tab => tab.classList.contains('w--current'));
+	} else {
+		tabEl = [...document.querySelectorAll('.easy-pay-tab')].find(tab => tab.classList.contains('w--current'));
+	}
 	console.log('tabl el ', tabEl);
 	if (tabEl.classList.contains('no-credit-tab')) {
 		return 'Χωρίς Πιστωτική Κάρτα';
