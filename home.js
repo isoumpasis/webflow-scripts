@@ -917,6 +917,7 @@ function showResults(fetchedModelObj) {
 	} else {
 		resetCalc();
 		resetEasyPay();
+		updateBasketSection({ resetNoVehicle: true });
 	}
 
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
@@ -1352,6 +1353,13 @@ function updateBasketSection(sections) {
 	if (sections.vehicle) {
 		document.querySelector('#makeImgBasket').src = document.querySelector('#makeImg').src;
 		document.querySelector('#modelNameBasket').textContent = document.querySelector('#modelName').textContent;
+		document.querySelector('.vehicle-divider-basket').style.display = 'block';
+		document.querySelector('.vehicle-container-basket').style.display = 'block';
+	}
+
+	if (sections.resetNoVehicle) {
+		document.querySelector('.vehicle-divider-basket').style.display = 'none';
+		document.querySelector('.vehicle-container-basket').style.display = 'none';
 	}
 }
 
