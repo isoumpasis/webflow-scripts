@@ -10,7 +10,7 @@ let fetchedModels;
 let fetchedModelObj;
 let foundVehicleObj;
 let suggestedPricesChanges = [];
-let userSelections = { selectedFuel: 'lpg', vehicle: {} };
+let userSelections = { selectedFuel: 'lpg', vehicle: {}, calculator: {} };
 const preferredStorage = localStorage;
 
 const makeSelect = document.querySelector('#makeSelect');
