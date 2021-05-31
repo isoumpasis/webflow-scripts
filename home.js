@@ -224,6 +224,7 @@ function initSelectedFuelListeners() {
 				showResults(fetchedModelObj);
 			}
 			configureEasyPayMonthlyGain();
+			updateBasketSection({ selectedFuel: true });
 		});
 	});
 	lpgFuelSelectBtns.forEach(lpgBtn => {
@@ -238,6 +239,7 @@ function initSelectedFuelListeners() {
 				showResults(fetchedModelObj);
 			}
 			configureEasyPayMonthlyGain();
+			updateBasketSection({ selectedFuel: true });
 		});
 	});
 }
@@ -910,6 +912,7 @@ function showResults(fetchedModelObj) {
 
 		configureCalculatorAfterSuggestion();
 		configureEasyPayAfterSuggestion();
+		updateBasketSection({ vehicle: true });
 		//document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
 	} else {
 		resetCalc();
@@ -1332,6 +1335,27 @@ function getActiveContainer() {
 }
 
 /* System Identification END */
+
+/* Basket */
+
+function updateBasketSection(sections) {
+	if (sections.selectedFuel) {
+		if (userSelections.selectedFuel === 'lpg') {
+			document.querySelector('.lpg-btn-basket').style.display = 'block';
+			document.querySelector('.cng-btn-basket').style.display = 'none';
+		} else {
+			document.querySelector('.lpg-btn-basket').style.display = 'none';
+			document.querySelector('.cng-btn-basket').style.display = 'block';
+		}
+	}
+
+	if (sections.vehicle) {
+		document.querySelector('#makeImgBasket').src = document.querySelector('#makeImg').src;
+		document.querySelector('#modelNameBasket').textContent = document.querySelector('#modelName').textContent;
+	}
+}
+
+/* Basket END */
 
 /* Calculator */
 const lpgConsumption = 1.15; //15% more than petrol
