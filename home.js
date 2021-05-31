@@ -209,6 +209,8 @@ function modifyFuelPriceSliders(value) {
 	outputs[3].value = locationObj.lpg;
 	calcCovers[3].style.width = calcCoverWidth(sliders[3]) + '%';
 	calcResult();
+
+	userSelections.calculator.fuelPricesSelectedIndex = document.querySelector('#fuelPricesSelectVehicle').selectedIndex;
 }
 
 function initSelectedFuelListeners() {
@@ -906,7 +908,7 @@ function configureUserSelectionsAfterResults() {
 	if (userSelections.vehicle.suggestions.hasResult) {
 		userSelections.calculator = {
 			...userSelections.calculator,
-			driveOftenIndex: 2 //default
+			driveOftenIndex: getDriveOftenIndex() //default
 		};
 	}
 }
@@ -1194,8 +1196,19 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 		outputs[1].value = consumptionLabelWithData.dataset.cons;
 		calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 		calcResult();
+
+
+		userSelections.calculator.driveOftenIndex = getDriveOftenIndex();
 	});
 });
+
+function getDriveOftenIndex(){
+	let index = 2;
+	[...document.querySelectorAll('.radio-button.w-radio input')].forEach((el, i) => {
+		if(el.checked) index = i;
+	});
+	return index;
+}
 
 function getCylinderDescrText() {
 	if (userSelections.selectedFuel === 'cng') return '';
@@ -1482,6 +1495,8 @@ function calcResult() {
 	}
 
 	configureEasyPayMonthlyGain();
+
+	userSelections.calculator.kmPerYearValue = kmPerYear;
 }
 
 function calcCoverWidth(slider) {
