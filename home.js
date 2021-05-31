@@ -867,24 +867,30 @@ function descriptionOnChange(value) {
 	showResults(fetchedModelObj);
 	calcResult();
 
-	configureUserSelections();
+	configureUserSelectionsAfterResults();
 	saveUserSelections();
 }
 
-function configureUserSelections() {
+function configureUserSelectionsAfterResults() {
 	const activeContainerId = getActiveContainer().id;
 
 	userSelections = {
 		...userSelections,
 		vehicle: {
 			identification: {
-				make: makeSelect.value,
-				year: yearSelect.value,
-				model: modelSelect.value,
-				description:
+				vehicleValues = {
+					make: makeSelect.value,
+					year: yearSelect.value,
+					model: modelSelect.value,
+					description:
 					descriptionSelect.value + `${descriptionSelect.value.length === 1 ? ' cyl' : descriptionSelect.value.includes(' - ') ? '' : ' hp'}`,
-				fetched: { fetchedYears, fetchedModels, fetchedModelObj },
-				foundVehicleObj
+				},
+				fetchedData: { fetchedYears, fetchedModels, fetchedModelObj },
+				foundVehicleObj,
+				emulators: {
+					hasEmulators: (foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj))
+					//types: foundVehicleObj.hasOwnProperty('emulators') ? foundVehicleObj.emulators : hasUHPII(foundVehicleObj) ?  : [];
+				}
 			},
 			suggestions: {
 				containerId: activeContainerId,
@@ -893,7 +899,7 @@ function configureUserSelections() {
 		},
 		calculator: {
 			fuelPricesSelectedIndex: document.querySelector('#fuelPricesSelectVehicle').selectedIndex,
-			kmPerYearValue: document.querySelector('.km-year').value
+			kmPerYearValue: +document.querySelector('.km-year').value
 		}
 	};
 
