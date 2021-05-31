@@ -1231,7 +1231,7 @@ function getEasyPayMethod(target) {
 	} else {
 		tabEl = [...document.querySelectorAll('.easy-pay-tab')].find(tab => tab.classList.contains('w--current'));
 	}
-	console.log('tabl el ', tabEl);
+	console.log('target', target, 'tabl el ', tabEl);
 	if (tabEl.classList.contains('no-credit-tab')) {
 		return 'Χωρίς Πιστωτική Κάρτα';
 	} else if (tabEl.classList.contains('credit-tab')) {
