@@ -881,7 +881,8 @@ function configureUserSelections() {
 				make: makeSelect.value,
 				year: yearSelect.value,
 				model: modelSelect.value,
-				description: value + `${value.length === 1 ? ' cyl' : value.includes(' - ') ? '' : ' hp'}`,
+				description:
+					descriptionSelect.value + `${descriptionSelect.value.length === 1 ? ' cyl' : descriptionSelect.value.includes(' - ') ? '' : ' hp'}`,
 				fetched: { fetchedYears, fetchedModels, fetchedModelObj },
 				foundVehicleObj
 			},
