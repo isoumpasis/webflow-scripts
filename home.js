@@ -869,7 +869,7 @@ function descriptionOnChange(value) {
 	showResults(fetchedModelObj);
 	calcResult();
 
-	configureUserSelectionsAfterResults();
+	
 	saveUserSelections();
 }
 
@@ -950,6 +950,8 @@ function showResults(fetchedModelObj) {
 		resetEasyPay();
 		//updateBasketSection({ resetNoVehicle: true });
 	}
+
+	configureUserSelectionsAfterResults();
 
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
