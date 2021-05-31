@@ -551,6 +551,7 @@ makeSelect.addEventListener('change', function () {
 	resetCalc();
 	resetEasyPay();
 	calcResult();
+	updateBasketSection({ resetNoVehicle: true });
 
 	userSelections.vehicle = {};
 	saveUserSelections();
@@ -631,6 +632,7 @@ function yearOnChange(value) {
 	resetCalc();
 	resetEasyPay();
 	calcResult();
+	updateBasketSection({ resetNoVehicle: true });
 
 	userSelections.vehicle = {};
 	saveUserSelections();
@@ -711,6 +713,7 @@ function modelOnChange(value) {
 	resetCalc();
 	resetEasyPay();
 	calcResult();
+	updateBasketSection({ resetNoVehicle: true });
 
 	userSelections.vehicle = {};
 	saveUserSelections();
@@ -853,6 +856,7 @@ function descriptionOnChange(value) {
 		resetCalc();
 		resetEasyPay();
 		calcResult();
+		updateBasketSection({ resetNoVehicle: true });
 
 		userSelections.vehicle = {};
 		saveUserSelections();
