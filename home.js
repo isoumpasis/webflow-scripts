@@ -389,10 +389,9 @@ function initEasyPayTabs() {
 function initEasyPaySystemSelection() {
 	document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 		el.addEventListener('click', e => {
-			userSelections.easyPay.systemSelect = getEasyPaySystem(e.target);
-			console.log(e.target);
-
 			const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
+
+			userSelections.easyPay.systemSelect = getEasyPaySystem(selectedSystemDiv);
 			changePriceFontWeight(selectedSystemDiv);
 
 			const priceText = selectedSystemDiv.querySelector('.system-price-credit').textContent;
@@ -1278,11 +1277,12 @@ function getEasyPayMethod(target) {
 	}
 }
 
-function getEasyPaySystem(target) {
+function getEasyPaySystem(selectedSystemDiv) {
 	if (!Object.keys(userSelections.vehicle).length) return;
-	let systemEl;
-	return 'no yet...';
-	systemEl = target.closest('.easy-pay-tab');
+
+	return selectedSystemDiv.classList.contains('system-1st-selection')
+		? userSelections.vehicle.suggestions.systemNames[0]
+		: userSelections.vehicle.suggestions.systemNames[1];
 }
 
 function getCylinderDescrText() {
@@ -1337,8 +1337,6 @@ function configureSystemsEasyPay() {
 	document.querySelector('.easy-pay-suggested-system-div').click(); //default selection first suggestion DEBUG
 	selectedEasyPaySystemPrice = +document.querySelector('.system-price-credit').textContent.replace('€', '');
 	console.log({ selectedEasyPaySystemPrice });
-
-	//userSelections.easyPay.systemSelect = getEasyPaySystem();
 }
 
 function configureNoCreditSliders() {
