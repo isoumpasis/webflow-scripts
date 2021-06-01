@@ -430,7 +430,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
 	noCreditEnapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliNoCreditSlider.value)).toFixed(1);
 	configureNoCreditMaxDoseisSlider();
 
-	if (!userSelections.vehicle.suggestions.systemNames) return;
+	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.noCreditSettings.prokatavoli = prokatavoliNoCreditSlider.value;
 }
 
@@ -446,7 +446,7 @@ function prokatavoliCreditSliderOnChange(value) {
 	creditEnapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliCreditSlider.value)).toFixed(1);
 	doseisCreditSelectOnChange(+doseisCreditSelect.value);
 
-	if (!userSelections.vehicle.suggestions.systemNames) return;
+	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.creditSettings.prokatavoli = prokatavoliCreditSlider.value;
 }
 
@@ -457,13 +457,13 @@ function doseisNoCreditSliderOnChange(value) {
 	doseisChangeMinMaxLabelsWeight();
 	configureNoCreditResults();
 
-	if (!userSelections.vehicle.suggestions.systemNames) return;
+	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.noCreditSettings.doseis = doseisNoCreditSlider.value;
 }
 
 function doseisCreditSelectOnChange(value) {
 	configureCreditResults();
-	if (!userSelections.vehicle.suggestions.systemNames) return;
+	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.creditSettings.doseis = doseisCreditSelect.value;
 }
 
