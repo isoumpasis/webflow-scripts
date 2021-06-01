@@ -391,7 +391,7 @@ function initEasyPaySystemSelection() {
 		el.addEventListener('click', e => {
 			const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
 
-			userSelections.easyPay.systemSelect = getEasyPaySystem(selectedSystemDiv);
+			userSelections.easyPay.system = getEasyPaySystem(selectedSystemDiv);
 			changePriceFontWeight(selectedSystemDiv);
 
 			const priceText = selectedSystemDiv.querySelector('.system-price-credit').textContent;
