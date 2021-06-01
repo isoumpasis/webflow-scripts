@@ -1286,7 +1286,7 @@ function getEasyPaySystem(selectedSystemDiv) {
 		? userSelections.vehicle.suggestions.systemNames[0]
 		: userSelections.vehicle.suggestions.systemNames[1];
 
-	const price = +selectedSystemDiv.querySelector('.system-price-credit').textContent;
+	const price = +selectedSystemDiv.querySelector('.system-price-credit').textContent.replace('€', '');
 
 	return { name, price };
 }
