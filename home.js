@@ -182,7 +182,6 @@ const maxNoVehicleCreditSliderText = document.querySelector('.max-no-vehicle-cre
 
 let noCreditInterest = 12.6;
 let creditInterest = 7.2;
-let selectedEasyPaySystemPrice;
 
 document.addEventListener('DOMContentLoaded', () => {
 	initSelects();
@@ -391,7 +390,7 @@ function initEasyPaySystemSelection() {
 		el.addEventListener('click', e => {
 			const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
 
-			userSelections.easyPay.system = getEasyPaySystem(selectedSystemDiv);
+			userSelections.easyPay.system.name = getEasyPaySystem(selectedSystemDiv);
 			changePriceFontWeight(selectedSystemDiv);
 
 			const priceText = selectedSystemDiv.querySelector('.system-price-credit').textContent;
@@ -959,7 +958,10 @@ function configureUserSelectionsAfterResults() {
 		};
 		userSelections.easyPay = {
 			...userSelections.easyPay,
-			system: userSelections.vehicle.suggestions.systemNames[0] //default
+			system: {
+				name: userSelections.vehicle.suggestions.systemNames[0], //default
+				price: selectedEasyPaySystemPrice
+			}
 		};
 	}
 }
@@ -1280,8 +1282,6 @@ function getEasyPayMethod(target) {
 function getEasyPaySystem(selectedSystemDiv) {
 	if (!userSelections.vehicle.suggestions.systemNames) return;
 
-	console.log({ userSelections });
-	console.log(selectedSystemDiv, selectedSystemDiv.classList.contains('system-1st-selection', userSelections.vehicle));
 	return selectedSystemDiv.classList.contains('system-1st-selection')
 		? userSelections.vehicle.suggestions.systemNames[0]
 		: userSelections.vehicle.suggestions.systemNames[1];
