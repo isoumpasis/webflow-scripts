@@ -429,6 +429,9 @@ function prokatavoliNoCreditSliderOnChange(value) {
 	prokatavoliNoCreditChangeMinMaxLabelsWeight();
 	noCreditEnapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliNoCreditSlider.value)).toFixed(1);
 	configureNoCreditMaxDoseisSlider();
+
+	if (!userSelections.vehicle.suggestions.systemNames) return;
+	userSelections.easyPay.noCreditSettings.prokatavoli = prokatavoliNoCreditSlider.value;
 }
 
 function prokatavoliCreditSliderOnChange(value) {
@@ -442,6 +445,9 @@ function prokatavoliCreditSliderOnChange(value) {
 	prokatavoliCreditChangeMinMaxLabelsWeight();
 	creditEnapomeinanPoso.textContent = (selectedEasyPaySystemPrice - parseInt(prokatavoliCreditSlider.value)).toFixed(1);
 	doseisCreditSelectOnChange(+doseisCreditSelect.value);
+
+	if (!userSelections.vehicle.suggestions.systemNames) return;
+	userSelections.easyPay.creditSettings.prokatavoli = prokatavoliCreditSlider.value;
 }
 
 function doseisNoCreditSliderOnChange(value) {
@@ -450,10 +456,15 @@ function doseisNoCreditSliderOnChange(value) {
 	doseisNoCreditCover.style.width = calcCoverWidth(doseisNoCreditSlider) + '%';
 	doseisChangeMinMaxLabelsWeight();
 	configureNoCreditResults();
+
+	if (!userSelections.vehicle.suggestions.systemNames) return;
+	userSelections.easyPay.noCreditSettings.doseis = doseisNoCreditSlider.value;
 }
 
 function doseisCreditSelectOnChange(value) {
 	configureCreditResults();
+	if (!userSelections.vehicle.suggestions.systemNames) return;
+	userSelections.easyPay.creditSettings.doseis = doseisCreditSelect.value;
 }
 
 function noVehicleNoCreditSliderOnChange(value) {
@@ -961,7 +972,10 @@ function configureUserSelectionsAfterResults() {
 			system: {
 				name: userSelections.vehicle.suggestions.systemNames[0], //default
 				price: selectedEasyPaySystemPrice
-			}
+			},
+			noCreditSettings: getNoCreditSettings(),
+			creditSettings: getCreditSettings()
+			//metrhtaSettings: getMetrhtaSettings(),
 		};
 	}
 }
@@ -1289,6 +1303,16 @@ function getEasyPaySystem(selectedSystemDiv) {
 	const price = +selectedSystemDiv.querySelector('.system-price-credit').textContent.replace('€', '');
 
 	return { name, price };
+}
+
+function getNoCreditSettings() {
+	if (!userSelections.vehicle.suggestions.systemNames) return;
+	return { prokatavoli: +prokatavoliNoCreditSlider.value, doseis: doseisNoCreditSlider };
+}
+
+function getCreditSettings() {
+	if (!userSelections.vehicle.suggestions.systemNames) return;
+	return { prokatavoli: +prokatavoliCreditSlider.value, doseis: doseisCreditSelect };
 }
 
 function getCylinderDescrText() {
