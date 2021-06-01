@@ -1502,7 +1502,7 @@ function updateBasketSection(sections) {
 		document.querySelector('.vehicle-container-basket').style.display = 'flex';
 
 		document.querySelector('.suggested-system-text-basket').textContent =
-			userSelections.vehicle.suggestions.systemNames.length > 1 ? 'Ιδανικότερη Πρόταση' : 'Πρόταση Συστήματος';
+			userSelections.vehicle.suggestions.systemNames.length > 1 ? 'Ιδανικότερη πρόταση' : 'Πρόταση συστήματος';
 
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.vehicle.suggestions.systemNames[0];
 
