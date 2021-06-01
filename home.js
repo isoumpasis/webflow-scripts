@@ -458,13 +458,13 @@ function doseisNoCreditSliderOnChange(value) {
 	configureNoCreditResults();
 
 	if (!userSelections.vehicle.suggestions) return;
-	userSelections.easyPay.noCreditSettings = { ...userSelections.easyPay.noCreditSettings, doseis: doseisNoCreditSlider.value };
+	userSelections.easyPay.noCreditSettings = { ...userSelections.easyPay.noCreditSettings, doseis: +doseisNoCreditSlider.value };
 }
 
 function doseisCreditSelectOnChange(value) {
 	configureCreditResults();
 	if (!userSelections.vehicle.suggestions) return;
-	userSelections.easyPay.creditSettings = { ...userSelections.easyPay.creditSettings, doseis: doseisCreditSelect.value };
+	userSelections.easyPay.creditSettings = { ...userSelections.easyPay.creditSettings, doseis: +doseisCreditSelect.value };
 }
 
 function noVehicleNoCreditSliderOnChange(value) {
@@ -1307,12 +1307,12 @@ function getEasyPaySystem(selectedSystemDiv) {
 
 function getNoCreditSettings() {
 	if (!userSelections.vehicle.suggestions.systemNames) return;
-	return { prokatavoli: +prokatavoliNoCreditSlider.value, doseis: doseisNoCreditSlider };
+	return { prokatavoli: +prokatavoliNoCreditSlider.value, doseis: +doseisNoCreditSlider.value };
 }
 
 function getCreditSettings() {
 	if (!userSelections.vehicle.suggestions.systemNames) return;
-	return { prokatavoli: +prokatavoliCreditSlider.value, doseis: doseisCreditSelect };
+	return { prokatavoli: +prokatavoliCreditSlider.value, doseis: +doseisCreditSelect.value };
 }
 
 function getCylinderDescrText() {
