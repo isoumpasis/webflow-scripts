@@ -960,7 +960,7 @@ function configureUserSelectionsAfterResults() {
 		};
 		userSelections.easyPay = {
 			...userSelections.easyPay,
-			system: getEasyPaySystem() //default
+			system: userSelections.suggestions.systemNames[0] //default
 		};
 	}
 }
@@ -1281,12 +1281,8 @@ function getEasyPayMethod(target) {
 function getEasyPaySystem(target) {
 	if (!Object.keys(userSelections.vehicle).length) return;
 	let systemEl;
-	if (target) {
-		return 'no yet...';
-		systemEl = target.closest('.easy-pay-tab');
-	} else {
-		return userSelections.suggestions.systemNames[0];
-	}
+	return 'no yet...';
+	systemEl = target.closest('.easy-pay-tab');
 }
 
 function getCylinderDescrText() {
