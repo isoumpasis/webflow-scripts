@@ -949,8 +949,7 @@ function configureUserSelectionsAfterResults() {
 			kmPerYearValue: +document.querySelector('.km-year').value
 		},
 		easyPay: {
-			method: getEasyPayMethod(),
-			system: getEasyPaySystem()
+			method: getEasyPayMethod()
 		}
 	};
 
@@ -958,6 +957,10 @@ function configureUserSelectionsAfterResults() {
 		userSelections.calculator = {
 			...userSelections.calculator,
 			driveOftenIndex: getDriveOftenIndex() //default
+		};
+		userSelections.easyPay = {
+			...userSelections.easyPay,
+			system: getEasyPaySystem() //default
 		};
 	}
 }
