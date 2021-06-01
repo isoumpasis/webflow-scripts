@@ -1501,16 +1501,25 @@ function updateBasketSection(sections) {
 		document.querySelector('.vehicle-divider-basket').style.display = 'block';
 		document.querySelector('.vehicle-container-basket').style.display = 'flex';
 
-		document.querySelector('.suggested-system-text-basket').textContent = 'Η ιδανικότερη πρόταση μας';
+		document.querySelector('.suggested-system-text-basket').textContent =
+			userSelections.vehicle.suggestions.systemNames.length > 1 ? 'Ιδανικότερη Πρόταση' : 'Πρόταση Συστήματος';
 
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.vehicle.suggestions.systemNames[0];
 
-		document.querySelector('.suggested-system-price-basket').textContent = userSelections.easyPay.system.price / VAT + ' + ΦΠΑ';
+		document.querySelector('.suggested-system-price-basket').textContent = Math.floor(userSelections.easyPay.system.price / VAT) + ' + ΦΠΑ';
+
+		document.querySelector('.suggestion-container-basket').style.display = 'block';
+		document.querySelector('.calculator-container-basket').style.display = 'block';
+		document.querySelector('.easy-pay-container-basket').style.display = 'block';
 	}
 
 	if (sections.resetNoVehicle) {
 		document.querySelector('.vehicle-divider-basket').style.display = 'none';
 		document.querySelector('.vehicle-container-basket').style.display = 'none';
+
+		document.querySelector('.suggestion-container-basket').style.display = 'none';
+		document.querySelector('.calculator-container-basket').style.display = 'none';
+		document.querySelector('.easy-pay-container-basket').style.display = 'none';
 	}
 }
 
