@@ -569,6 +569,7 @@ makeSelect.addEventListener('change', function () {
 
 	userSelections.vehicle = {};
 	delete userSelections.calculator.driveOftenIndex;
+	userSelections.easyPay = {};
 	saveUserSelections();
 
 	if (!this.value) {
@@ -651,6 +652,7 @@ function yearOnChange(value) {
 
 	userSelections.vehicle = {};
 	delete userSelections.calculator.driveOftenIndex;
+	userSelections.easyPay = {};
 	saveUserSelections();
 
 	if (!value) {
@@ -733,6 +735,7 @@ function modelOnChange(value) {
 
 	userSelections.vehicle = {};
 	delete userSelections.calculator.driveOftenIndex;
+	userSelections.easyPay = {};
 	saveUserSelections();
 
 	if (!value) {
@@ -877,6 +880,7 @@ function descriptionOnChange(value) {
 
 		userSelections.vehicle = {};
 		delete userSelections.calculator.driveOftenIndex;
+		userSelections.easyPay = {};
 		saveUserSelections();
 
 		return;
