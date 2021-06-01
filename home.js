@@ -390,7 +390,7 @@ function initEasyPaySystemSelection() {
 		el.addEventListener('click', e => {
 			const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
 
-			userSelections.easyPay.system.name = getEasyPaySystem(selectedSystemDiv);
+			userSelections.easyPay.system = getEasyPaySystem(selectedSystemDiv);
 			changePriceFontWeight(selectedSystemDiv);
 
 			const priceText = selectedSystemDiv.querySelector('.system-price-credit').textContent;
@@ -1282,9 +1282,13 @@ function getEasyPayMethod(target) {
 function getEasyPaySystem(selectedSystemDiv) {
 	if (!userSelections.vehicle.suggestions.systemNames) return;
 
-	return selectedSystemDiv.classList.contains('system-1st-selection')
+	const name = selectedSystemDiv.classList.contains('system-1st-selection')
 		? userSelections.vehicle.suggestions.systemNames[0]
 		: userSelections.vehicle.suggestions.systemNames[1];
+
+	const price = +selectedSystemDiv.querySelector('.system-price-credit').textContent;
+
+	return { name, price };
 }
 
 function getCylinderDescrText() {
