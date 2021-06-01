@@ -960,7 +960,7 @@ function configureUserSelectionsAfterResults() {
 		};
 		userSelections.easyPay = {
 			...userSelections.easyPay,
-			system: userSelections.suggestions.systemNames[0] //default
+			system: userSelections.vehicle.suggestions.systemNames[0] //default
 		};
 	}
 }
