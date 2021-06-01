@@ -458,13 +458,13 @@ function doseisNoCreditSliderOnChange(value) {
 	configureNoCreditResults();
 
 	if (!userSelections.vehicle.suggestions) return;
-	userSelections.easyPay.noCreditSettings.doseis = doseisNoCreditSlider.value;
+	userSelections.easyPay.noCreditSettings = { ...userSelections.easyPay.noCreditSettings, doseis: doseisNoCreditSlider.value };
 }
 
 function doseisCreditSelectOnChange(value) {
 	configureCreditResults();
 	if (!userSelections.vehicle.suggestions) return;
-	userSelections.easyPay.creditSettings.doseis = doseisCreditSelect.value;
+	userSelections.easyPay.creditSettings = { ...userSelections.easyPay.creditSettings, doseis: doseisCreditSelect.value };
 }
 
 function noVehicleNoCreditSliderOnChange(value) {
