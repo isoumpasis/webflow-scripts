@@ -254,7 +254,7 @@ function initSelectedFuelListeners() {
 				showResults(fetchedModelObj);
 			}
 			configureEasyPayMonthlyGain();
-			//updateBasketSection({ selectedFuel: true });
+			updateBasketSection({ selectedFuel: true });
 		});
 	});
 	lpgFuelSelectBtns.forEach(lpgBtn => {
@@ -269,7 +269,7 @@ function initSelectedFuelListeners() {
 				showResults(fetchedModelObj);
 			}
 			configureEasyPayMonthlyGain();
-			//updateBasketSection({ selectedFuel: true });
+			updateBasketSection({ selectedFuel: true });
 		});
 	});
 }
@@ -599,7 +599,7 @@ makeSelect.addEventListener('change', function () {
 	resetCalc();
 	resetEasyPay();
 	calcResult();
-	//updateBasketSection({ resetNoVehicle: true });
+	updateBasketSection({ resetNoVehicle: true });
 
 	userSelections.vehicle = {};
 	delete userSelections.calculator.driveOftenIndex;
@@ -682,7 +682,7 @@ function yearOnChange(value) {
 	resetCalc();
 	resetEasyPay();
 	calcResult();
-	//updateBasketSection({ resetNoVehicle: true });
+	updateBasketSection({ resetNoVehicle: true });
 
 	userSelections.vehicle = {};
 	delete userSelections.calculator.driveOftenIndex;
@@ -765,7 +765,7 @@ function modelOnChange(value) {
 	resetCalc();
 	resetEasyPay();
 	calcResult();
-	//updateBasketSection({ resetNoVehicle: true });
+	updateBasketSection({ resetNoVehicle: true });
 
 	userSelections.vehicle = {};
 	delete userSelections.calculator.driveOftenIndex;
@@ -910,7 +910,7 @@ function descriptionOnChange(value) {
 		resetCalc();
 		resetEasyPay();
 		calcResult();
-		//updateBasketSection({ resetNoVehicle: true });
+		updateBasketSection({ resetNoVehicle: true });
 
 		userSelections.vehicle = {};
 		delete userSelections.calculator.driveOftenIndex;
@@ -950,7 +950,7 @@ function configureUserSelectionsAfterResults() {
 			suggestions: {
 				containerId: activeContainerId,
 				hasResult: activeContainerId.indexOf('notConvertible') === -1,
-				systemNames: systemNamesFromIdDict[activeContainerId]
+				systemNames: 'Lovato ' + systemNamesFromIdDict[activeContainerId]
 			}
 		},
 		calculator: {
@@ -1008,12 +1008,12 @@ function showResults(fetchedModelObj) {
 
 		configureCalculatorAfterSuggestion();
 		configureEasyPayAfterSuggestion();
-		//updateBasketSection({ vehicle: true });
+		updateBasketSection({ vehicle: true });
 		//document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
 	} else {
 		resetCalc();
 		resetEasyPay();
-		//updateBasketSection({ resetNoVehicle: true });
+		updateBasketSection({ resetNoVehicle: true });
 	}
 
 	configureUserSelectionsAfterResults();
@@ -1465,7 +1465,6 @@ function getCreditMonthlyCost(poso, doseis) {
 
 	let posoEksoflisis = (poso / doseis) * 0.982 * ((1 - 1 / Math.pow(1 + creditInterest / 100 / 12, doseis)) / (creditInterest / 100 / 12));
 	posoEksoflisis = Math.round(posoEksoflisis * 100) / 100;
-	console.log(posoEksoflisis);
 	let posostoKostous = (poso - posoEksoflisis) / poso;
 	posostoKostous = Math.round(posostoKostous * 10000) / 10000;
 	let syntelesthsVAT = (VAT - 1) / VAT;
@@ -1485,7 +1484,6 @@ function getActiveContainer() {
 /* System Identification END */
 
 /* Basket */
-
 function updateBasketSection(sections) {
 	if (sections.selectedFuel) {
 		if (userSelections.selectedFuel === 'lpg') {
