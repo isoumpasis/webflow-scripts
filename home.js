@@ -1278,7 +1278,7 @@ function getEasyPayMethod(target) {
 }
 
 function getEasyPaySystem(selectedSystemDiv) {
-	if (!Object.keys(userSelections.vehicle.suggestions.systemNames).length) return;
+	if (!userSelections.vehicle.suggestions.systemNames) return;
 
 	console.log({ userSelections });
 	console.log(selectedSystemDiv, selectedSystemDiv.classList.contains('system-1st-selection', userSelections.vehicle));
