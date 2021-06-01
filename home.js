@@ -1231,6 +1231,7 @@ function getDriveOftenIndex() {
 }
 
 function getEasyPayMethod(target) {
+	if (!Object.keys(userSelections.vehicle).length) return;
 	let tabEl;
 	if (target) {
 		tabEl = target.closest('.easy-pay-tab');
@@ -1247,6 +1248,7 @@ function getEasyPayMethod(target) {
 }
 
 function getEasyPaySystem(target) {
+	if (!Object.keys(userSelections.vehicle).length) return;
 	return 'no yet...';
 	let systemEl;
 	if (target) {
