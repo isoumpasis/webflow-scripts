@@ -1008,7 +1008,6 @@ function showResults(fetchedModelObj) {
 
 		configureCalculatorAfterSuggestion();
 		configureEasyPayAfterSuggestion();
-		updateBasketSection({ vehicle: true });
 		//document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
 	} else {
 		resetCalc();
@@ -1017,7 +1016,8 @@ function showResults(fetchedModelObj) {
 	}
 
 	configureUserSelectionsAfterResults();
-
+	if (suggestedContainer && !suggestedContainer.classList.contains(`not-convertible-${userSelections.selectedFuel}-container`))
+		updateBasketSection({ vehicle: true });
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
 function adjustSectionPaddings() {
@@ -1500,6 +1500,12 @@ function updateBasketSection(sections) {
 		document.querySelector('#modelNameBasket').textContent = document.querySelector('#modelName').textContent;
 		document.querySelector('.vehicle-divider-basket').style.display = 'block';
 		document.querySelector('.vehicle-container-basket').style.display = 'flex';
+
+		document.querySelector('.suggestion-system-text-basket').textContent = 'Η ιδανικότερη πρόταση μας';
+
+		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
+
+		document.querySelector('.suggestion-system-price-basket').textContent = userSelections.easyPay.system.price / VAT + ' + ΦΠΑ';
 	}
 
 	if (sections.resetNoVehicle) {
