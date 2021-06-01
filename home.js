@@ -35,6 +35,37 @@ const emulatorPriceDict = {
 	'double-hp': 130
 };
 //90eurw sthn timh gia ta panw apo 180 hp
+
+const systemNamesFromIdDict = {
+	'notConvertible-lpg': ['not convertible lpg'],
+	'notConvertible-cng': ['not convertible cng'],
+
+	'suggested-lpg-ego': ['E-GO II'],
+	'suggested-lpg-exr': ['Smart ExR'],
+	'suggested-lpg-exr-ego': ['Smart ExR', 'E-GO II'],
+	'suggested-lpg-cobd-exr': ['C-OBD II', 'Smart ExR'],
+	'suggested-lpg-cobd': ['C-OBD II'],
+	'suggested-lpg-cobd-6cyl': ['C-OBD II 5-6cyl'],
+	'suggested-lpg-cobd-8cyl': ['C-OBD II 8cyl'],
+	'suggested-lpg-di3000b': ['Direct Injection'],
+	'suggested-lpg-di60': ['Direct Injection ExR'],
+	'suggested-lpg-di108': ['Direct Injection ExR 5-6cyl'],
+	'suggested-lpg-di108-8cyl': ['Direct Injection ExR 8cyl'],
+	'suggested-lpg-monou': ['Μονού Ψεκασμού'],
+	'suggested-cng-ego': ['E-GO II'],
+	'suggested-cng-exr': ['Smart ExR'],
+	'suggested-cng-exr-ego': ['Smart ExR', 'E-GO II'],
+	'suggested-cng-cobd-exr': ['C-OBD II', 'Smart ExR'],
+	'suggested-cng-cobd': ['C-OBD II'],
+	'suggested-cng-cobd-6cyl': ['C-OBD II 5-6cyl'],
+	'suggested-cng-cobd-8cyl': ['C-OBD II 8cyl'],
+	'suggested-cng-di3000b': ['Direct Injection'],
+	'suggested-cng-di60': ['Direct Injection ExR'],
+	'suggested-cng-di108': ['Direct Injection ExR 5-6cyl'],
+	'suggested-cng-di108-8cyl': ['Direct Injection ExR 8cyl'],
+	'suggested-cng-monou': ['Μονού Ψεκασμού']
+};
+
 const makeImgPrefix = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f';
 const makeImgDict = {
 	'ALFA ROMEO': '1d502c7ef4d03ff154b_Alfa_Romeo.png',
@@ -80,8 +111,6 @@ const makeImgDict = {
 	VW: '60f66bedc404ea5a800_VW.png'
 };
 
-let suggestedSystemPrices = [];
-let suggestedSystemNames = [];
 const VAT = 1.24;
 
 //SELECTED FUEL
@@ -338,8 +367,6 @@ function initCredit() {
 }
 
 function initEasyPayTabs() {
-	//userSelections.easyPay.method = getEasyPayMethod(); //init
-
 	document.querySelectorAll('.easy-pay-tab').forEach(el =>
 		el.addEventListener('click', e => {
 			userSelections.easyPay.method = getEasyPayMethod(e.target);
@@ -360,8 +387,6 @@ function initEasyPayTabs() {
 }
 
 function initEasyPaySystemSelection() {
-	// userSelections.easyPay.system = getEasyPaySystem(); //init
-
 	document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 		el.addEventListener('click', e => {
 			userSelections.easyPay.systemSelect = getEasyPaySystem(e.target);
@@ -915,7 +940,8 @@ function configureUserSelectionsAfterResults() {
 			},
 			suggestions: {
 				containerId: activeContainerId,
-				hasResult: activeContainerId.indexOf('notConvertible') === -1
+				hasResult: activeContainerId.indexOf('notConvertible') === -1,
+				systemNames: systemNamesFromIdDict[activeContainerId]
 			}
 		},
 		calculator: {
@@ -938,8 +964,6 @@ function configureUserSelectionsAfterResults() {
 
 function showResults(fetchedModelObj) {
 	const years = yearSelect.value;
-	suggestedSystemPrices = [];
-	suggestedSystemNames = [];
 
 	if (suggestedPricesChanges.length) resetToDefaultPrices();
 
@@ -1253,20 +1277,12 @@ function getEasyPayMethod(target) {
 
 function getEasyPaySystem(target) {
 	if (!Object.keys(userSelections.vehicle).length) return;
-	return 'no yet...';
 	let systemEl;
 	if (target) {
+		return 'no yet...';
 		systemEl = target.closest('.easy-pay-tab');
 	} else {
-		systemEl = [...document.querySelectorAll('.easy-pay-tab')].find(tab => tab.classList.contains('w--current'));
-	}
-	console.log('target', target, 'system el ', systemEl);
-	if (systemEl.classList.contains('no-credit-tab')) {
-		return 'Χωρίς Πιστωτική Κάρτα';
-	} else if (systemEl.classList.contains('credit-tab')) {
-		return 'Με Πιστωτική Κάρτα';
-	} else {
-		return 'metrhta';
+		return userSelections.suggestions.systemNames[0];
 	}
 }
 
@@ -1323,7 +1339,7 @@ function configureSystemsEasyPay() {
 	selectedEasyPaySystemPrice = +document.querySelector('.system-price-credit').textContent.replace('€', '');
 	console.log({ selectedEasyPaySystemPrice });
 
-	userSelections.easyPay.systemSelect = getEasyPaySystem();
+	//userSelections.easyPay.systemSelect = getEasyPaySystem();
 }
 
 function configureNoCreditSliders() {
