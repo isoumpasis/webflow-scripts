@@ -1501,11 +1501,11 @@ function updateBasketSection(sections) {
 		document.querySelector('.vehicle-divider-basket').style.display = 'block';
 		document.querySelector('.vehicle-container-basket').style.display = 'flex';
 
-		document.querySelector('.suggestion-system-text-basket').textContent = 'Η ιδανικότερη πρόταση μας';
+		document.querySelector('.suggested-system-text-basket').textContent = 'Η ιδανικότερη πρόταση μας';
 
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
 
-		document.querySelector('.suggestion-system-price-basket').textContent = userSelections.easyPay.system.price / VAT + ' + ΦΠΑ';
+		document.querySelector('.suggested-system-price-basket').textContent = userSelections.easyPay.system.price / VAT + ' + ΦΠΑ';
 	}
 
 	if (sections.resetNoVehicle) {
