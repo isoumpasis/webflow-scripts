@@ -40,30 +40,30 @@ const systemNamesFromIdDict = {
 	'notConvertible-lpg': ['not convertible lpg'],
 	'notConvertible-cng': ['not convertible cng'],
 
-	'suggested-lpg-ego': ['E-GO II'],
-	'suggested-lpg-exr': ['Smart ExR'],
-	'suggested-lpg-exr-ego': ['Smart ExR', 'E-GO II'],
-	'suggested-lpg-cobd-exr': ['C-OBD II', 'Smart ExR'],
-	'suggested-lpg-cobd': ['C-OBD II'],
-	'suggested-lpg-cobd-6cyl': ['C-OBD II 5-6cyl'],
-	'suggested-lpg-cobd-8cyl': ['C-OBD II 8cyl'],
-	'suggested-lpg-di3000b': ['Direct Injection'],
-	'suggested-lpg-di60': ['Direct Injection ExR'],
-	'suggested-lpg-di108': ['Direct Injection ExR 5-6cyl'],
-	'suggested-lpg-di108-8cyl': ['Direct Injection ExR 8cyl'],
-	'suggested-lpg-monou': ['Μονού Ψεκασμού'],
-	'suggested-cng-ego': ['E-GO II'],
-	'suggested-cng-exr': ['Smart ExR'],
-	'suggested-cng-exr-ego': ['Smart ExR', 'E-GO II'],
-	'suggested-cng-cobd-exr': ['C-OBD II', 'Smart ExR'],
-	'suggested-cng-cobd': ['C-OBD II'],
-	'suggested-cng-cobd-6cyl': ['C-OBD II 5-6cyl'],
-	'suggested-cng-cobd-8cyl': ['C-OBD II 8cyl'],
-	'suggested-cng-di3000b': ['Direct Injection'],
-	'suggested-cng-di60': ['Direct Injection ExR'],
-	'suggested-cng-di108': ['Direct Injection ExR 5-6cyl'],
-	'suggested-cng-di108-8cyl': ['Direct Injection ExR 8cyl'],
-	'suggested-cng-monou': ['Μονού Ψεκασμού']
+	'suggested-lpg-ego': ['Lovato E-GO II'],
+	'suggested-lpg-exr': ['Lovato Smart ExR'],
+	'suggested-lpg-exr-ego': ['Lovato Smart ExR', 'Lovato E-GO II'],
+	'suggested-lpg-cobd-exr': ['Lovato C-OBD II', 'Lovato Smart ExR'],
+	'suggested-lpg-cobd': ['Lovato C-OBD II'],
+	'suggested-lpg-cobd-6cyl': ['Lovato C-OBD II 5-6cyl'],
+	'suggested-lpg-cobd-8cyl': ['Lovato C-OBD II 8cyl'],
+	'suggested-lpg-di3000b': ['Lovato Direct Injection'],
+	'suggested-lpg-di60': ['Lovato Direct Injection ExR'],
+	'suggested-lpg-di108': ['Lovato Direct Injection ExR 5-6cyl'],
+	'suggested-lpg-di108-8cyl': ['Lovato Direct Injection ExR 8cyl'],
+	'suggested-lpg-monou': ['Lovato Μονού Ψεκασμού'],
+	'suggested-cng-ego': ['Lovato E-GO II'],
+	'suggested-cng-exr': ['Lovato Smart ExR'],
+	'suggested-cng-exr-ego': ['Lovato Smart ExR', 'Lovato E-GO II'],
+	'suggested-cng-cobd-exr': ['Lovato C-OBD II', 'Lovato Smart ExR'],
+	'suggested-cng-cobd': ['Lovato C-OBD II'],
+	'suggested-cng-cobd-6cyl': ['Lovato C-OBD II 5-6cyl'],
+	'suggested-cng-cobd-8cyl': ['Lovato C-OBD II 8cyl'],
+	'suggested-cng-di3000b': ['Lovato Direct Injection'],
+	'suggested-cng-di60': ['Lovato Direct Injection ExR'],
+	'suggested-cng-di108': ['Lovato Direct Injection ExR 5-6cyl'],
+	'suggested-cng-di108-8cyl': ['Lovato Direct Injection ExR 8cyl'],
+	'suggested-cng-monou': ['Lovato Μονού Ψεκασμού']
 };
 
 const makeImgPrefix = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f';
@@ -950,7 +950,7 @@ function configureUserSelectionsAfterResults() {
 			suggestions: {
 				containerId: activeContainerId,
 				hasResult: activeContainerId.indexOf('notConvertible') === -1,
-				systemNames: 'Lovato ' + systemNamesFromIdDict[activeContainerId]
+				systemNames: systemNamesFromIdDict[activeContainerId]
 			}
 		},
 		calculator: {
@@ -1503,7 +1503,7 @@ function updateBasketSection(sections) {
 
 		document.querySelector('.suggested-system-text-basket').textContent = 'Η ιδανικότερη πρόταση μας';
 
-		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
+		document.querySelector('.suggested-system-name-basket').textContent = userSelections.vehicle.suggestions.systemNames[0];
 
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.easyPay.system.price / VAT + ' + ΦΠΑ';
 	}
