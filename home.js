@@ -1247,6 +1247,7 @@ function getEasyPayMethod(target) {
 }
 
 function getEasyPaySystem(target) {
+	return 'no yet...';
 	let systemEl;
 	if (target) {
 		systemEl = target.closest('.easy-pay-tab');
