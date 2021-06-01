@@ -338,7 +338,7 @@ function initCredit() {
 }
 
 function initEasyPayTabs() {
-	userSelections.easyPay.method = getEasyPayMethod(); //init
+	//userSelections.easyPay.method = getEasyPayMethod(); //init
 
 	document.querySelectorAll('.easy-pay-tab').forEach(el =>
 		el.addEventListener('click', e => {
@@ -360,7 +360,7 @@ function initEasyPayTabs() {
 }
 
 function initEasyPaySystemSelection() {
-	userSelections.easyPay.system = getEasyPaySystem(); //init
+	// userSelections.easyPay.system = getEasyPaySystem(); //init
 
 	document.querySelectorAll('.easy-pay-suggested-system-div').forEach(el =>
 		el.addEventListener('click', e => {
@@ -919,7 +919,8 @@ function configureUserSelectionsAfterResults() {
 			kmPerYearValue: +document.querySelector('.km-year').value
 		},
 		easyPay: {
-			method: getEasyPayMethod()
+			method: getEasyPayMethod(),
+			system: getEasyPaySystem()
 		}
 	};
 
