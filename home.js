@@ -1593,6 +1593,10 @@ function updateBasketSection(sections) {
 			userSelections.calculator.driveOftenIndex === 0 ? 'Εντός πόλης' : userSelections.calculator.driveOftenIndex === 1 ? 'Εκτός πόλης' : 'Μικτά';
 		document.querySelector('.fuel-place-basket').textContent = fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].innerHTML;
 		document.querySelector('.km-per-year-text-basket').textContent = userSelections.calculator.kmPerYearValue + ' km';
+
+		document.querySelector('.gain-label-basket').textContent = userSelections.calculator.perMonthCheckbox ? 'Μηνιαίο όφελος' : 'Ετήσιο όφελος';
+		document.querySelector('.gain-text-basket').textContent = userSelections.calculator.gain;
+		document.querySelector('.percentage-text-basket').textContent = userSelections.calculator.percentage;
 	}
 
 	if (sections.selectEasyPaySystem) {
@@ -1679,6 +1683,8 @@ function calcResult() {
 
 		cngResult.textContent = ((petrolCostPerMonth - cngCostPerMonth) * 12).toFixed(2) + '€';
 		cngPercentageEl.textContent = cngPercentageValue.toFixed(1) + '%';
+
+		userSelections.calculator.perMonthCheckbox = false;
 	} else {
 		costLabels.forEach(label => (label.textContent = 'Μηνιαία Έξοδα:'));
 		lpgResultLabel.textContent = 'Μηνιαίο όφελος';
@@ -1693,11 +1699,15 @@ function calcResult() {
 
 		cngResult.textContent = (petrolCostPerMonth - cngCostPerMonth).toFixed(2) + '€';
 		cngPercentageEl.textContent = cngPercentageValue.toFixed(1) + '%';
+
+		userSelections.calculator.perMonthCheckbox = true;
 	}
 
 	configureEasyPayMonthlyGain();
 
 	userSelections.calculator.kmPerYearValue = kmPerYear;
+	userSelections.calculator.gain = userSelections.selectedFuel === 'lpg' ? lpgResult.textContent : cngResult.textContent;
+	userSelections.calculator.percentage = userSelections.selectedFuel === 'lpg' ? lpgPercentageEl.textContent : cngPercentageEl.textContent;
 	updateBasketSection({ calculator: true });
 }
 
