@@ -1279,7 +1279,7 @@ function getDriveOftenIndex() {
 }
 
 function getSystemsNamePrice(activeContainer) {
-	const names = systemNamesFromIdDict[activeContainerId];
+	const names = systemNamesFromIdDict[activeContainer.id];
 	const prices = [...activeContainer.querySelectorAll(`.suggested-${userSelections.selectedFuel}-price`)].map(priceEl => priceEl.textContent);
 
 	const array = [];
