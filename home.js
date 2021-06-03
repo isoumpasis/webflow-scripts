@@ -270,6 +270,7 @@ function initSelectedFuelListeners() {
 
 			const activeContainer = getActiveContainer();
 			if (activeContainer) {
+				console.log('active containercng');
 				activeContainer.style.display = 'none';
 				showResults(fetchedModelObj);
 			}
@@ -285,6 +286,7 @@ function initSelectedFuelListeners() {
 
 			const activeContainer = getActiveContainer();
 			if (activeContainer) {
+				console.log('active container lpg');
 				activeContainer.style.display = 'none';
 				showResults(fetchedModelObj);
 			}
