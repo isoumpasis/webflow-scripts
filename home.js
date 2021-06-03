@@ -960,7 +960,7 @@ function configureUserSelectionsAfterResults() {
 				systems: getSystemsNamePrice(activeContainer),
 				emulators: {
 					hasEmulators: hasValidEmulators(foundVehicleObj) || hasUHPII(foundVehicleObj),
-					type: (hasValidEmualators(foundVehicleObj) || hasUHPII(foundVehicleObj)) && getEmulatorType()
+					type: (hasValidEmulators(foundVehicleObj) || hasUHPII(foundVehicleObj)) && getEmulatorType()
 				}
 			}
 		},
