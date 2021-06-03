@@ -431,7 +431,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
 	configureNoCreditMaxDoseisSlider();
 
 	if (!userSelections.vehicle.suggestions) return;
-	userSelections.easyPay.noCreditSettings.prokatavoli = prokatavoliNoCreditSlider.value;
+	userSelections.easyPay.noCreditSettings.prokatavoli = +prokatavoliNoCreditSlider.value;
 }
 
 function prokatavoliCreditSliderOnChange(value) {
@@ -447,7 +447,7 @@ function prokatavoliCreditSliderOnChange(value) {
 	doseisCreditSelectOnChange(+doseisCreditSelect.value);
 
 	if (!userSelections.vehicle.suggestions) return;
-	userSelections.easyPay.creditSettings.prokatavoli = prokatavoliCreditSlider.value;
+	userSelections.easyPay.creditSettings.prokatavoli = +prokatavoliCreditSlider.value;
 }
 
 function doseisNoCreditSliderOnChange(value) {
