@@ -979,10 +979,9 @@ function configureUserSelectionsAfterResults() {
 			...userSelections.calculator,
 			driveOftenIndex: driveOftenIndexValue,
 			fuelPricesSelectedIndex: fuelPricesSelectVehicle.selectedIndex,
-			kmPerYearValue: +document.querySelector('.km-year').value
-			// userSelections.calculator.perMonthCheckbox = true,
-			// userSelections.calculator.gain = userSelections.selectedFuel === 'lpg' ? lpgResult.textContent : cngResult.textContent;
-			// userSelections.calculator.percentage = userSelections.selectedFuel === 'lpg' ? lpgPercentageEl.textContent : cngPercentageEl.textContent;
+			kmPerYearValue: +document.querySelector('.km-year').value,
+			gain: userSelections.selectedFuel === 'lpg' ? lpgResult.textContent : cngResult.textContent,
+			percentage: userSelections.selectedFuel === 'lpg' ? lpgPercentageEl.textContent : cngPercentageEl.textContent
 		},
 		easyPay: {
 			method: getEasyPayMethod()
@@ -1044,7 +1043,7 @@ function showResults(fetchedModelObj) {
 
 	configureUserSelectionsAfterResults();
 	if (suggestedContainer && !suggestedContainer.classList.contains(`not-convertible-${userSelections.selectedFuel}-container`)) {
-		console.log('updatingbasketSection !!', suggestedContainer);
+		console.log('updatingbasketSection !!', suggestedContainer, userSelections.calculator);
 		updateBasketSection({ vehicle: true, calculator: true });
 	}
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
