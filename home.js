@@ -395,7 +395,7 @@ function initEasyPaySystemSelection() {
 
 			changePriceFontWeight(selectedSystemDiv);
 
-			const priceText = selectedSystemDiv.querySelector('.system-price-credit').textContent;
+			const priceText = selectedSystemDiv.querySelector('.system-price-easy-pay').textContent;
 
 			const oldSelectedEasyPaySystemPrice = selectedEasyPaySystemPrice;
 			selectedEasyPaySystemPrice = parseFloat(priceText.replace('€', ''));
@@ -409,11 +409,11 @@ function initEasyPaySystemSelection() {
 
 function changePriceFontWeight(selectedSystemDiv) {
 	if (selectedSystemDiv.classList.contains('system-1st-selection')) {
-		[...document.querySelectorAll('.system-1st-selection .system-price-credit')].map(el => (el.style.fontWeight = 'bold'));
-		[...document.querySelectorAll('.system-2nd-selection .system-price-credit')].map(el => (el.style.fontWeight = 'normal'));
+		[...document.querySelectorAll('.system-1st-selection .system-price-easy-pay')].map(el => (el.style.fontWeight = 'bold'));
+		[...document.querySelectorAll('.system-2nd-selection .system-price-easy-pay')].map(el => (el.style.fontWeight = 'normal'));
 	} else {
-		[...document.querySelectorAll('.system-1st-selection .system-price-credit')].map(el => (el.style.fontWeight = 'normal'));
-		[...document.querySelectorAll('.system-2nd-selection .system-price-credit')].map(el => (el.style.fontWeight = 'bold'));
+		[...document.querySelectorAll('.system-1st-selection .system-price-easy-pay')].map(el => (el.style.fontWeight = 'normal'));
+		[...document.querySelectorAll('.system-2nd-selection .system-price-easy-pay')].map(el => (el.style.fontWeight = 'bold'));
 	}
 }
 
@@ -1310,7 +1310,7 @@ function getEasyPaySystem(selectedSystemDiv) {
 		? userSelections.vehicle.suggestions.systems[0].name
 		: userSelections.vehicle.suggestions.systems[1].name;
 
-	const priceWithVAT = +selectedSystemDiv.querySelector('.system-price-credit').textContent.replace('€', '');
+	const priceWithVAT = +selectedSystemDiv.querySelector('.system-price-easy-pay').textContent.replace('€', '');
 
 	return { name, priceWithVAT };
 }
@@ -1359,7 +1359,7 @@ function configureSystemsEasyPay() {
 	const activeContainer = getActiveContainer();
 	const systemLogoSrcs = [...activeContainer.querySelectorAll('.system-logo')].map(el => el.src);
 	const systemLogoCreditEls = document.querySelectorAll('.system-logo-credit');
-	const systemPriceCreditEls = document.querySelectorAll('.system-price-credit');
+	const systemPriceCreditEls = document.querySelectorAll('.system-price-easy-pay');
 	const suggestedPrices = [...activeContainer.querySelectorAll(`.suggested-${userSelections.selectedFuel}-price`)].map(
 		el => el.textContent.split('€')[0] * VAT + '€'
 	);
@@ -1382,7 +1382,7 @@ function configureSystemsEasyPay() {
 	[...document.querySelectorAll('.system-2st-selection .system-checkmark')].map(el => (el.style.display = 'none'));
 	changePriceFontWeight(document.querySelector('.system-1st-selection'));
 
-	selectedEasyPaySystemPrice = +document.querySelector('.system-price-credit').textContent.replace('€', '');
+	selectedEasyPaySystemPrice = +document.querySelector('.system-price-easy-pay').textContent.replace('€', '');
 	console.log({ selectedEasyPaySystemPrice });
 }
 
