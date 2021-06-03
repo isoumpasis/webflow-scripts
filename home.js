@@ -1199,7 +1199,7 @@ function displayEmulatorInfo(suggestedContainer) {
 }
 function hasValidEmulators(vehObj) {
 	if (userSelections.selectedFuel === 'lpg') return vehObj.hasOwnProperty('emulators');
-	return vehObj.hasOwnProperty('emulators') && cngOnlyEmulatorTypes.indexOf(vehObj.emulators[0] !== -1);
+	return vehObj.hasOwnProperty('emulators') && cngOnlyEmulatorTypes.indexOf(vehObj.emulators[0].toLowerCase()) !== -1;
 }
 
 function hasUHPII(vehObj) {
