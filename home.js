@@ -1419,9 +1419,9 @@ function configureSystemsEasyPay() {
 	// document.querySelector('.easy-pay-suggested-system-div').click(); //default selection first suggestion DEBUG
 	//Clicking first easy pay system manually
 	[...document.querySelectorAll('.system-1st-selection .suggested-system')].map(el => (el.style.backgroundColor = 'rgba(132, 184, 211, 0.34)'));
-	[...document.querySelectorAll('.system-2st-selection .suggested-system')].map(el => (el.style.backgroundColor = 'rgba(241, 241, 241)'));
+	[...document.querySelectorAll('.system-2nd-selection .suggested-system')].map(el => (el.style.backgroundColor = 'rgba(241, 241, 241)'));
 	[...document.querySelectorAll('.system-1st-selection .system-checkmark')].map(el => (el.style.display = 'block'));
-	[...document.querySelectorAll('.system-2st-selection .system-checkmark')].map(el => (el.style.display = 'none'));
+	[...document.querySelectorAll('.system-2nd-selection .system-checkmark')].map(el => (el.style.display = 'none'));
 	changePriceFontWeight(document.querySelector('.system-1st-selection'));
 
 	selectedEasyPaySystemPrice = +document.querySelector('.system-price-easy-pay').textContent.replace('€', '');
