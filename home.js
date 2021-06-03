@@ -1305,7 +1305,7 @@ function getEasyPayMethod(target) {
 }
 
 function getEasyPaySystem(selectedSystemDiv) {
-	if (!userSelections.vehicle.suggestions.systems.length) return;
+	if (!userSelections.vehicle.suggestions.systems) return;
 
 	const name = selectedSystemDiv.classList.contains('system-1st-selection')
 		? userSelections.vehicle.suggestions.systems[0].name
@@ -1317,12 +1317,12 @@ function getEasyPaySystem(selectedSystemDiv) {
 }
 
 function getNoCreditSettings() {
-	if (!userSelections.vehicle.suggestions.systems.length) return;
+	if (!userSelections.vehicle.suggestions.systems) return;
 	return { prokatavoli: +prokatavoliNoCreditSlider.value, doseis: +doseisNoCreditSlider.value };
 }
 
 function getCreditSettings() {
-	if (!userSelections.vehicle.suggestions.systems.length) return;
+	if (!userSelections.vehicle.suggestions.systems) return;
 	return { prokatavoli: +prokatavoliCreditSlider.value, doseis: +doseisCreditSelect.value };
 }
 
