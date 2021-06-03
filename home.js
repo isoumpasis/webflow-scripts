@@ -1592,6 +1592,7 @@ function updateBasketSection(sections) {
 		document.querySelector('.drive-often-text-basket').textContent =
 			userSelections.calculator.driveOftenIndex === 0 ? 'Εντός πόλης' : userSelections.calculator.driveOftenIndex === 1 ? 'Εκτός πόλης' : 'Μικτά';
 		document.querySelector('.fuel-place-basket').textContent = fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].innerHTML;
+		document.querySelector('.km-per-year-text-basket').textContent = userSelections.calculator.kmPerYearValue + ' km';
 	}
 
 	if (sections.selectEasyPaySystem) {
@@ -1697,6 +1698,7 @@ function calcResult() {
 	configureEasyPayMonthlyGain();
 
 	userSelections.calculator.kmPerYearValue = kmPerYear;
+	updateBasketSection({ calculator: true });
 }
 
 function calcCoverWidth(slider) {
