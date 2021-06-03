@@ -959,7 +959,7 @@ function configureUserSelectionsAfterResults() {
 				systems: getSystemsNamePrice(activeContainer),
 				emulators: {
 					hasEmulators: foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj),
-					type: getEmulatorType()
+					type: (foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj)) && getEmulatorType()
 				}
 			}
 		},
@@ -1539,13 +1539,14 @@ function updateBasketSection(sections) {
 		document.querySelector('.easy-pay-container-basket').style.display = 'block';
 
 		if (userSelections.vehicle.suggestions.emulators.hasEmulators) {
-			document.querySelector('.emulator-const-basket').style.display = 'block';
-			document.querySelector('.emulator-let-basket').style.display = 'block';
-
 			if (isApaitoumenoEmulatorType(userSelections.vehicle.suggestions.emulators.type)) {
 				document.querySelector('.emulator-const-text-basket').textContent = emulatorTextDict[userSelections.vehicle.suggestions.emulators.type];
+				document.querySelector('.emulator-const-basket').style.display = 'block';
+				document.querySelector('.emulator-let-basket').style.display = 'none';
 			} else {
 				document.querySelector('.emulator-let-text-basket').textContent = emulatorTextDict[userSelections.vehicle.suggestions.emulators.type];
+				document.querySelector('.emulator-const-basket').style.display = 'none';
+				document.querySelector('.emulator-let-basket').style.display = 'block';
 			}
 		} else {
 			document.querySelector('.emulator-const-basket').style.display = 'none';
