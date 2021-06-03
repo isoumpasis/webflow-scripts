@@ -274,7 +274,7 @@ function initSelectedFuelListeners() {
 				showResults(fetchedModelObj);
 			}
 			configureEasyPayMonthlyGain();
-			// updateBasketSection({ selectedFuel: true, vehicle: true, calculator: true, selectedEasyPaySystem: true });
+			updateBasketSection({ selectedFuel: true });
 		});
 	});
 	lpgFuelSelectBtns.forEach(lpgBtn => {
@@ -289,7 +289,7 @@ function initSelectedFuelListeners() {
 				showResults(fetchedModelObj);
 			}
 			configureEasyPayMonthlyGain();
-			// updateBasketSection({ selectedFuel: true, vehicle: true, calculator: true, selectedEasyPaySystem: true });
+			updateBasketSection({ selectedFuel: true });
 		});
 	});
 }
@@ -1038,7 +1038,7 @@ function showResults(fetchedModelObj) {
 
 	configureUserSelectionsAfterResults();
 	if (suggestedContainer && !suggestedContainer.classList.contains(`not-convertible-${userSelections.selectedFuel}-container`))
-		updateBasketSection({ vehicle: true });
+		updateBasketSection({ vehicle: true, calculator: true });
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
 function adjustSectionPaddings() {
