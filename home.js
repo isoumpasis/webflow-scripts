@@ -1557,7 +1557,7 @@ function updateBasketSection(sections) {
 			userSelections.vehicle.suggestions.systems.length > 1 ? 'Ιδανικότερη πρόταση' : 'Πρόταση συστήματος';
 
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.vehicle.suggestions.systems[0].name;
-		document.querySelector('.easy-pay-selected-system-name-basket').textContent = userSelections.vehicle.suggestions.systems[0].name;
+		document.querySelector('.easy-pay-system-name-basket').textContent = userSelections.vehicle.suggestions.systems[0].name;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[0].priceNoVAT;
 
 		document.querySelector('.suggestion-container-basket').style.display = 'block';
@@ -1602,7 +1602,7 @@ function updateBasketSection(sections) {
 
 	if (sections.selectEasyPaySystem) {
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
-		document.querySelector('.easy-pay-selected-system-name-basket').textContent = userSelections.vehicle.suggestions.systems[0].name;
+		document.querySelector('.easy-pay-system-name-basket').textContent = userSelections.easyPay.system.name;
 
 		const systemIndex = userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 0 : 1;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[systemIndex].priceNoVAT;
