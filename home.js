@@ -1541,12 +1541,12 @@ function updateBasketSection(sections) {
 		if (userSelections.vehicle.suggestions.emulators.hasEmulators) {
 			if (isApaitoumenoEmulatorType(userSelections.vehicle.suggestions.emulators.type)) {
 				document.querySelector('.emulator-const-text-basket').textContent = emulatorTextDict[userSelections.vehicle.suggestions.emulators.type];
-				document.querySelector('.emulator-const-basket').style.display = 'block';
+				document.querySelector('.emulator-const-basket').style.display = 'flex';
 				document.querySelector('.emulator-let-basket').style.display = 'none';
 			} else {
 				document.querySelector('.emulator-let-text-basket').textContent = emulatorTextDict[userSelections.vehicle.suggestions.emulators.type];
 				document.querySelector('.emulator-const-basket').style.display = 'none';
-				document.querySelector('.emulator-let-basket').style.display = 'block';
+				document.querySelector('.emulator-let-basket').style.display = 'flex';
 			}
 		} else {
 			document.querySelector('.emulator-const-basket').style.display = 'none';
