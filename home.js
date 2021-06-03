@@ -1602,6 +1602,8 @@ function updateBasketSection(sections) {
 
 	if (sections.selectEasyPaySystem) {
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
+		document.querySelector('.easy-pay-selected-system-name-basket').textContent = userSelections.vehicle.suggestions.systems[0].name;
+
 		const systemIndex = userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 0 : 1;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[systemIndex].priceNoVAT;
 	}
