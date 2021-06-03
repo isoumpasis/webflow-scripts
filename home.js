@@ -1557,6 +1557,7 @@ function updateBasketSection(sections) {
 			userSelections.vehicle.suggestions.systems.length > 1 ? 'Ιδανικότερη πρόταση' : 'Πρόταση συστήματος';
 
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.vehicle.suggestions.systems[0].name;
+		document.querySelector('.easy-pay-selected-system-name-basket').textContent = userSelections.vehicle.suggestions.systems[0].name;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[0].priceNoVAT;
 
 		document.querySelector('.suggestion-container-basket').style.display = 'block';
@@ -1594,7 +1595,7 @@ function updateBasketSection(sections) {
 		document.querySelector('.fuel-place-basket').textContent = fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].innerHTML;
 		document.querySelector('.km-per-year-text-basket').textContent = userSelections.calculator.kmPerYearValue + ' km';
 
-		document.querySelector('.gain-label-basket').textContent = userSelections.calculator.perMonthCheckbox ? 'Μηνιαίο όφελος' : 'Ετήσιο όφελος';
+		document.querySelector('.gain-label-basket').textContent = userSelections.calculator.perMonthCheckbox ? 'Μηνιαίο όφελος:' : 'Ετήσιο όφελος:';
 		document.querySelector('.gain-text-basket').textContent = userSelections.calculator.gain;
 		document.querySelector('.percentage-text-basket').textContent = userSelections.calculator.percentage;
 	}
