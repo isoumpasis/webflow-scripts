@@ -927,7 +927,8 @@ function descriptionOnChange(value) {
 }
 
 function configureUserSelectionsAfterResults() {
-	const activeContainerId = getActiveContainer().id;
+	const activeContainer = getActiveContainer();
+	const activeContainerId = activeContainer.id;
 
 	userSelections = {
 		...userSelections,
@@ -950,7 +951,8 @@ function configureUserSelectionsAfterResults() {
 			suggestions: {
 				containerId: activeContainerId,
 				hasResult: activeContainerId.indexOf('notConvertible') === -1,
-				systemNames: systemNamesFromIdDict[activeContainerId]
+				systems: getSystemsNamePrice(activeContainer)
+				// systemNames: systemNamesFromIdDict[activeContainerId]
 			}
 		},
 		calculator: {
@@ -970,8 +972,8 @@ function configureUserSelectionsAfterResults() {
 		userSelections.easyPay = {
 			...userSelections.easyPay,
 			system: {
-				name: userSelections.vehicle.suggestions.systemNames[0], //default
-				price: selectedEasyPaySystemPrice
+				name: userSelections.vehicle.suggestions.systems[0].name, //default
+				priceWithVAT: selectedEasyPaySystemPrice
 			},
 			noCreditSettings: getNoCreditSettings(),
 			creditSettings: getCreditSettings()
@@ -1276,6 +1278,15 @@ function getDriveOftenIndex() {
 	return index;
 }
 
+function getSystemsNamePrice(activeContainer) {
+	const names = systemNamesFromIdDict[activeContainerId];
+	const prices = [...activeContainer.querySelectorAll(`.suggested-${userSelections.selectedFuel}-price`)].map(priceEl => priceEl.textContent);
+
+	const array = [];
+	names.forEach((name, i) => array.push({ name, price: prices[i] }));
+	return array;
+}
+
 function getEasyPayMethod(target) {
 	if (!Object.keys(userSelections.vehicle).length) return;
 	let tabEl;
@@ -1294,11 +1305,11 @@ function getEasyPayMethod(target) {
 }
 
 function getEasyPaySystem(selectedSystemDiv) {
-	if (!userSelections.vehicle.suggestions.systemNames) return;
+	if (!userSelections.vehicle.suggestions.systems.length) return;
 
 	const name = selectedSystemDiv.classList.contains('system-1st-selection')
-		? userSelections.vehicle.suggestions.systemNames[0]
-		: userSelections.vehicle.suggestions.systemNames[1];
+		? userSelections.vehicle.suggestions.systems[0].name
+		: userSelections.vehicle.suggestions.systems[1].name;
 
 	const price = +selectedSystemDiv.querySelector('.system-price-credit').textContent.replace('€', '');
 
@@ -1306,12 +1317,12 @@ function getEasyPaySystem(selectedSystemDiv) {
 }
 
 function getNoCreditSettings() {
-	if (!userSelections.vehicle.suggestions.systemNames) return;
+	if (!userSelections.vehicle.suggestions.systems.length) return;
 	return { prokatavoli: +prokatavoliNoCreditSlider.value, doseis: +doseisNoCreditSlider.value };
 }
 
 function getCreditSettings() {
-	if (!userSelections.vehicle.suggestions.systemNames) return;
+	if (!userSelections.vehicle.suggestions.systems.length) return;
 	return { prokatavoli: +prokatavoliCreditSlider.value, doseis: +doseisCreditSelect.value };
 }
 
@@ -1502,11 +1513,12 @@ function updateBasketSection(sections) {
 		document.querySelector('.vehicle-container-basket').style.display = 'flex';
 
 		document.querySelector('.suggested-system-text-basket').textContent =
-			userSelections.vehicle.suggestions.systemNames.length > 1 ? 'Ιδανικότερη πρόταση' : 'Πρόταση συστήματος';
+			userSelections.vehicle.suggestions.systems.length > 1 ? 'Ιδανικότερη πρόταση' : 'Πρόταση συστήματος';
 
-		document.querySelector('.suggested-system-name-basket').textContent = userSelections.vehicle.suggestions.systemNames[0];
+		document.querySelector('.suggested-system-name-basket').textContent = userSelections.vehicle.suggestions.systems[0].name;
 
-		document.querySelector('.suggested-system-price-basket').textContent = Math.floor(userSelections.easyPay.system.price / VAT) + ' + ΦΠΑ';
+		// document.querySelector('.suggested-system-price-basket').textContent = Math.floor(userSelections.easyPay.system.price / VAT) + ' + ΦΠΑ';
+		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[0].priceWithVAT;
 
 		document.querySelector('.suggestion-container-basket').style.display = 'block';
 		document.querySelector('.calculator-container-basket').style.display = 'block';
