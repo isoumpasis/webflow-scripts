@@ -28,6 +28,7 @@ const systemQueryDict = {
 	'DI 108 8cyl': 'di108-8cyl'
 };
 const apaitoumenaEmulatorTypes = ['p', 'b6', 'b8', 'hp', 'double-hp'];
+const cngOnlyEmulatorTypes = ['b6', 'b8', 'f', 'p'];
 const emulatorTextDict = {
 	p: 'Fuel Pressure Emulator',
 	t: 'Reducer Lovato RGJ DD (90€)',
@@ -958,8 +959,8 @@ function configureUserSelectionsAfterResults() {
 				hasResult: activeContainerId.indexOf('notConvertible') === -1,
 				systems: getSystemsNamePrice(activeContainer),
 				emulators: {
-					hasEmulators: foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj),
-					type: (foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj)) && getEmulatorType()
+					hasEmulators: hasValidEmulators(foundVehicleObj) || hasUHPII(foundVehicleObj),
+					type: (hasValidEmualators(foundVehicleObj) || hasUHPII(foundVehicleObj)) && getEmulatorType()
 				}
 			}
 		},
@@ -1168,7 +1169,8 @@ function displayEmulatorInfo(suggestedContainer) {
 	//Hide all emulator containers first
 	suggestedContainer.querySelectorAll('.info-content-block').forEach(emCont => (emCont.style.display = 'none'));
 
-	if (foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj)) {
+	// if (foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj)) {
+	if (hasValidEmulators(foundVehicleObj) || hasUHPII(foundVehicleObj)) {
 		const vehicleEmulatorType = getEmulatorType();
 
 		suggestedContainer.querySelectorAll(`.suggested-${userSelections.selectedFuel}-system`).forEach(system => {
@@ -1194,6 +1196,10 @@ function displayEmulatorInfo(suggestedContainer) {
 			});
 		});
 	}
+}
+function hasValidEmulators(vehObj) {
+	if (userSelections.selectedFuel === 'lpg') return vehObj.hasOwnProperty('emulators');
+	return vehObj.hasOwnProperty('emulators') && cngOnlyEmulatorTypes.indexOf(vehObj.emulators[0] !== -1);
 }
 
 function hasUHPII(vehObj) {
