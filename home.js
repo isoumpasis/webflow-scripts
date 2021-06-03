@@ -391,6 +391,8 @@ function initEasyPaySystemSelection() {
 			const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
 
 			userSelections.easyPay.system = getEasyPaySystem(selectedSystemDiv);
+			updateBasketSection({ selectEasyPaySystem: true });
+
 			changePriceFontWeight(selectedSystemDiv);
 
 			const priceText = selectedSystemDiv.querySelector('.system-price-credit').textContent;
@@ -398,7 +400,6 @@ function initEasyPaySystemSelection() {
 			const oldSelectedEasyPaySystemPrice = selectedEasyPaySystemPrice;
 			selectedEasyPaySystemPrice = parseFloat(priceText.replace('€', ''));
 			if (oldSelectedEasyPaySystemPrice === selectedEasyPaySystemPrice) return;
-			console.log('new selected price = ', selectedEasyPaySystemPrice);
 
 			prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
 			prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
@@ -408,11 +409,9 @@ function initEasyPaySystemSelection() {
 
 function changePriceFontWeight(selectedSystemDiv) {
 	if (selectedSystemDiv.classList.contains('system-1st-selection')) {
-		console.log('contains -> bold 1st', [...document.querySelectorAll('.system-1st-selection .system-price-credit')]);
 		[...document.querySelectorAll('.system-1st-selection .system-price-credit')].map(el => (el.style.fontWeight = 'bold'));
 		[...document.querySelectorAll('.system-2nd-selection .system-price-credit')].map(el => (el.style.fontWeight = 'normal'));
 	} else {
-		console.log('contains -> bold 1st', [...document.querySelectorAll('.system-1st-selection .system-price-credit')]);
 		[...document.querySelectorAll('.system-1st-selection .system-price-credit')].map(el => (el.style.fontWeight = 'normal'));
 		[...document.querySelectorAll('.system-2nd-selection .system-price-credit')].map(el => (el.style.fontWeight = 'bold'));
 	}
@@ -1311,9 +1310,9 @@ function getEasyPaySystem(selectedSystemDiv) {
 		? userSelections.vehicle.suggestions.systems[0].name
 		: userSelections.vehicle.suggestions.systems[1].name;
 
-	const price = +selectedSystemDiv.querySelector('.system-price-credit').textContent.replace('€', '');
+	const priceWithVAT = +selectedSystemDiv.querySelector('.system-price-credit').textContent.replace('€', '');
 
-	return { name, price };
+	return { name, priceWithVAT };
 }
 
 function getNoCreditSettings() {
@@ -1516,8 +1515,6 @@ function updateBasketSection(sections) {
 			userSelections.vehicle.suggestions.systems.length > 1 ? 'Ιδανικότερη πρόταση' : 'Πρόταση συστήματος';
 
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.vehicle.suggestions.systems[0].name;
-
-		// document.querySelector('.suggested-system-price-basket').textContent = Math.floor(userSelections.easyPay.system.price / VAT) + ' + ΦΠΑ';
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[0].priceNoVAT;
 
 		document.querySelector('.suggestion-container-basket').style.display = 'block';
@@ -1532,6 +1529,11 @@ function updateBasketSection(sections) {
 		document.querySelector('.suggestion-container-basket').style.display = 'none';
 		document.querySelector('.calculator-container-basket').style.display = 'none';
 		document.querySelector('.easy-pay-container-basket').style.display = 'none';
+	}
+
+	if (sections.selectEasyPaySystem) {
+		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
+		document.querySelector('.suggested-system-price-basket').textContent = userSelections.easyPay.system.priceWithVAT;
 	}
 }
 
