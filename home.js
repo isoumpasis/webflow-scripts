@@ -28,6 +28,15 @@ const systemQueryDict = {
 	'DI 108 8cyl': 'di108-8cyl'
 };
 const apaitoumenaEmulatorTypes = ['p', 'b6', 'b8', 'hp', 'double-hp'];
+const emulatorTextDict = {
+	p: 'Fuel Pressure Emulator',
+	t: 'Reducer Lovato RGJ DD (90€)',
+	f: 'Petrol Level Emulator (85€)',
+	b6: 'Petrol Injectors Emulator',
+	b8: 'Dual Injector Engine 4x2 = 8cyl',
+	hp: 'Εξαερωτής RGJ UHPII έως 350HP',
+	'double-hp': 'Διπλός Εξαερωτής RGJ UHPII άνω των 350HP'
+};
 const emulatorPriceDict = {
 	p: 85,
 	b6: 95,
@@ -66,7 +75,6 @@ const systemNamesFromIdDict = {
 	'suggested-cng-di108-8cyl': ['Lovato Direct Injection ExR 8cyl'],
 	'suggested-cng-monou': ['Lovato Μονού Ψεκασμού']
 };
-
 
 const makeImgPrefix = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f';
 const makeImgDict = {
@@ -1173,7 +1181,7 @@ function displayEmulatorInfo(suggestedContainer) {
 					// 	vehicleEmulatorType === 'hp' ||
 					// 	vehicleEmulatorType === 'double-hp'
 					// ) {
-						if(isApaitoumenoEmulatorType(vehicleEmulatorType)){
+					if (isApaitoumenoEmulatorType(vehicleEmulatorType)) {
 						const priceEl = system.querySelector(`.suggested-${userSelections.selectedFuel}-price`);
 						const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
 						suggestedPricesChanges.push({ priceEl, defaultPrice });
@@ -1530,19 +1538,16 @@ function updateBasketSection(sections) {
 		document.querySelector('.calculator-container-basket').style.display = 'block';
 		document.querySelector('.easy-pay-container-basket').style.display = 'block';
 
-		if(userSelections.vehicle.suggestions.emulators.hasEmulators){
+		if (userSelections.vehicle.suggestions.emulators.hasEmulators) {
 			document.querySelector('.emulator-const-basket').style.display = 'block';
 			document.querySelector('.emulator-let-basket').style.display = 'block';
 
-
-			if(isApaitoumenoEmulatorType(userSelections.vehicle.suggestions.emulators.type){
-				document.querySelector('.emulator-const-text-basket').textContent = ;
-			}else{
-
-				document.querySelector('.emulator-let-text-basket').textContent = ;
-			} 
-
-		} else{
+			if (isApaitoumenoEmulatorType(userSelections.vehicle.suggestions.emulators.type)) {
+				document.querySelector('.emulator-const-text-basket').textContent = emulatorTextDict[userSelections.vehicle.suggestions.emulators.type];
+			} else {
+				document.querySelector('.emulator-let-text-basket').textContent = emulatorTextDict[userSelections.vehicle.suggestions.emulators.type];
+			}
+		} else {
 			document.querySelector('.emulator-const-basket').style.display = 'none';
 			document.querySelector('.emulator-let-basket').style.display = 'none';
 		}
@@ -1565,7 +1570,7 @@ function updateBasketSection(sections) {
 	}
 }
 
-function isApaitoumenoEmulatorType(type){
+function isApaitoumenoEmulatorType(type) {
 	return apaitoumenaEmulatorTypes.indexOf(type) !== -1;
 }
 
