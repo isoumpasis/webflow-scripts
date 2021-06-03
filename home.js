@@ -1532,7 +1532,7 @@ function updateBasketSection(sections) {
 	}
 
 	if (sections.selectEasyPaySystem) {
-		console.log('hakfjflkja', userSelections.easyPay.system);
+		console.log('hakfjflkja', userSelections.easyPay);
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
 		const systemIndex = userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 0 : 1;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[systemIndex].priceNoVAT;
