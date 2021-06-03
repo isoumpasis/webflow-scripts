@@ -27,6 +27,7 @@ const systemQueryDict = {
 	'DI 108': 'di108',
 	'DI 108 8cyl': 'di108-8cyl'
 };
+const apaitoumenaEmulatorTypes = ['p', 'b6', 'b8', 'hp', 'double-hp'];
 const emulatorPriceDict = {
 	p: 85,
 	b6: 95,
@@ -65,6 +66,7 @@ const systemNamesFromIdDict = {
 	'suggested-cng-di108-8cyl': ['Lovato Direct Injection ExR 8cyl'],
 	'suggested-cng-monou': ['Lovato Μονού Ψεκασμού']
 };
+
 
 const makeImgPrefix = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6077f';
 const makeImgDict = {
@@ -941,17 +943,16 @@ function configureUserSelectionsAfterResults() {
 						descriptionSelect.value + `${descriptionSelect.value.length === 1 ? ' cyl' : descriptionSelect.value.includes(' - ') ? '' : ' hp'}`
 				},
 				fetchedData: { fetchedYears, fetchedModels, fetchedModelObj },
-				foundVehicleObj,
-				emulators: {
-					hasEmulators: foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj)
-					//types: foundVehicleObj.hasOwnProperty('emulators') ? foundVehicleObj.emulators : hasUHPII(foundVehicleObj) ?  : [];
-				}
+				foundVehicleObj
 			},
 			suggestions: {
 				containerId: activeContainerId,
 				hasResult: activeContainerId.indexOf('notConvertible') === -1,
-				systems: getSystemsNamePrice(activeContainer)
-				// systemNames: systemNamesFromIdDict[activeContainerId]
+				systems: getSystemsNamePrice(activeContainer),
+				emulators: {
+					hasEmulators: foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj),
+					type: getEmulatorType()
+				}
 			}
 		},
 		calculator: {
@@ -1165,13 +1166,14 @@ function displayEmulatorInfo(suggestedContainer) {
 		suggestedContainer.querySelectorAll(`.suggested-${userSelections.selectedFuel}-system`).forEach(system => {
 			system.querySelectorAll('.info-content-block').forEach(emCont => {
 				if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
-					if (
-						vehicleEmulatorType === 'p' ||
-						vehicleEmulatorType === 'b6' ||
-						vehicleEmulatorType === 'b8' ||
-						vehicleEmulatorType === 'hp' ||
-						vehicleEmulatorType === 'double-hp'
-					) {
+					// if (
+					// 	vehicleEmulatorType === 'p' ||
+					// 	vehicleEmulatorType === 'b6' ||
+					// 	vehicleEmulatorType === 'b8' ||
+					// 	vehicleEmulatorType === 'hp' ||
+					// 	vehicleEmulatorType === 'double-hp'
+					// ) {
+						if(isApaitoumenoEmulatorType(vehicleEmulatorType)){
 						const priceEl = system.querySelector(`.suggested-${userSelections.selectedFuel}-price`);
 						const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
 						suggestedPricesChanges.push({ priceEl, defaultPrice });
@@ -1527,6 +1529,23 @@ function updateBasketSection(sections) {
 		document.querySelector('.suggestion-container-basket').style.display = 'block';
 		document.querySelector('.calculator-container-basket').style.display = 'block';
 		document.querySelector('.easy-pay-container-basket').style.display = 'block';
+
+		if(userSelections.vehicle.suggestions.emulators.hasEmulators){
+			document.querySelector('.emulator-const-basket').style.display = 'block';
+			document.querySelector('.emulator-let-basket').style.display = 'block';
+
+
+			if(isApaitoumenoEmulatorType(userSelections.vehicle.suggestions.emulators.type){
+				document.querySelector('.emulator-const-text-basket').textContent = ;
+			}else{
+
+				document.querySelector('.emulator-let-text-basket').textContent = ;
+			} 
+
+		} else{
+			document.querySelector('.emulator-const-basket').style.display = 'none';
+			document.querySelector('.emulator-let-basket').style.display = 'none';
+		}
 	}
 
 	if (sections.resetNoVehicle) {
@@ -1544,6 +1563,10 @@ function updateBasketSection(sections) {
 		const systemIndex = userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 0 : 1;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[systemIndex].priceNoVAT;
 	}
+}
+
+function isApaitoumenoEmulatorType(type){
+	return apaitoumenaEmulatorTypes.indexOf(type) !== -1;
 }
 
 /* Basket END */
