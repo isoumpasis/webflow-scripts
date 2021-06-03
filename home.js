@@ -20,6 +20,7 @@ const descriptionSelect = document.querySelector('#descriptionSelect');
 
 const suggestedContainers = document.querySelectorAll('.suggested-container');
 let suggestedSystems;
+let driveOftenIndexValue = 2; //default
 
 const systemQueryDict = {
 	'DI 3000B': 'di3000b',
@@ -968,6 +969,7 @@ function configureUserSelectionsAfterResults() {
 			}
 		},
 		calculator: {
+			driveOftenIndex: driveOftenIndexValue,
 			fuelPricesSelectedIndex: fuelPricesSelectVehicle.selectedIndex,
 			kmPerYearValue: +document.querySelector('.km-year').value
 		},
@@ -1294,6 +1296,7 @@ function getDriveOftenIndex() {
 	[...document.querySelectorAll('.radio-button.w-radio input')].forEach((el, i) => {
 		if (el.checked) index = i;
 	});
+	driveOftenIndexValue = index;
 	return index;
 }
 
