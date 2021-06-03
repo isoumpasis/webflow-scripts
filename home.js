@@ -977,10 +977,10 @@ function configureUserSelectionsAfterResults() {
 	};
 
 	if (userSelections.vehicle.suggestions.hasResult) {
-		userSelections.calculator = {
-			...userSelections.calculator,
-			driveOftenIndex: getDriveOftenIndex() //default
-		};
+		// userSelections.calculator = {
+		// 	...userSelections.calculator,
+		// 	driveOftenIndex: getDriveOftenIndex() //default
+		// };
 		userSelections.easyPay = {
 			...userSelections.easyPay,
 			system: {
