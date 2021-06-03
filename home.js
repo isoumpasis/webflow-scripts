@@ -1554,7 +1554,7 @@ function updateBasketSection(sections) {
 		document.querySelector('.vehicle-container-basket').style.display = 'flex';
 
 		document.querySelector('.suggested-system-text-basket').textContent =
-			userSelections.vehicle.suggestions.systems.length > 1 ? 'Ιδανικότερη πρόταση' : 'Πρόταση συστήματος';
+			userSelections.vehicle.suggestions.systems.length > 1 ? 'Ιδανικότερη πρόταση:' : 'Πρόταση συστήματος:';
 
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.vehicle.suggestions.systems[0].name;
 		document.querySelector('.easy-pay-system-name-basket').textContent = userSelections.vehicle.suggestions.systems[0].name;
