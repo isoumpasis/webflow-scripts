@@ -1605,7 +1605,7 @@ function updateBasketSection(sections) {
 		document.querySelector('.easy-pay-system-name-basket').textContent = userSelections.easyPay.system.name;
 
 		document.querySelector('.suggested-system-text-basket').textContent =
-			userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0] ? 'Ιδανικότερη πρόταση' : 'Οικονομικότερη πρόταση';
+			userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 'Ιδανικότερη πρόταση:' : 'Οικονομικότερη πρόταση:';
 
 		const systemIndex = userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 0 : 1;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[systemIndex].priceNoVAT;
