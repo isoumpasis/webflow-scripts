@@ -989,10 +989,6 @@ function configureUserSelectionsAfterResults() {
 	};
 
 	if (userSelections.vehicle.suggestions.hasResult) {
-		// userSelections.calculator = {
-		// 	...userSelections.calculator,
-		// 	driveOftenIndex: getDriveOftenIndex() //default
-		// };
 		userSelections.easyPay = {
 			...userSelections.easyPay,
 			system: {
@@ -1337,11 +1333,11 @@ function getEasyPayMethod(target) {
 		tabEl = [...document.querySelectorAll('.easy-pay-tab')].find(tab => tab.classList.contains('w--current'));
 	}
 	if (tabEl.classList.contains('no-credit-tab')) {
-		return 'Χωρίς Πιστωτική Κάρτα';
+		return 'Χωρίς πιστωτική κάρτα';
 	} else if (tabEl.classList.contains('credit-tab')) {
-		return 'Με Πιστωτική Κάρτα';
+		return 'Με πιστωτική κάρτα';
 	} else {
-		return 'metrhta';
+		return 'Με μετρητά';
 	}
 }
 
