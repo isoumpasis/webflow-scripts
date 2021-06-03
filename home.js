@@ -1283,7 +1283,7 @@ function getSystemsNamePrice(activeContainer) {
 	const prices = [...activeContainer.querySelectorAll(`.suggested-${userSelections.selectedFuel}-price`)].map(priceEl => priceEl.textContent);
 
 	const array = [];
-	names.forEach((name, i) => array.push({ name, price: prices[i] }));
+	names.forEach((name, i) => array.push({ name, priceNoVAT: prices[i] }));
 	return array;
 }
 
@@ -1518,7 +1518,7 @@ function updateBasketSection(sections) {
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.vehicle.suggestions.systems[0].name;
 
 		// document.querySelector('.suggested-system-price-basket').textContent = Math.floor(userSelections.easyPay.system.price / VAT) + ' + ΦΠΑ';
-		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[0].priceWithVAT;
+		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[0].priceNoVAT;
 
 		document.querySelector('.suggestion-container-basket').style.display = 'block';
 		document.querySelector('.calculator-container-basket').style.display = 'block';
