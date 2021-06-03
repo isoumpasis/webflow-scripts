@@ -1374,7 +1374,8 @@ function configureSystemsEasyPay() {
 		[...document.querySelectorAll('.easy-pay-first-suggestion-text')].map(el => (el.textContent = 'ΠΡΟΤΑΣΗ ΣΥΣΤΗΜΑΤΟΣ'));
 		[...document.querySelectorAll('.easy-pay-second-suggestion')].map(el => (el.style.display = 'none'));
 	}
-	document.querySelector('.easy-pay-suggested-system-div').click(); //default selection first suggestion DEBUG
+	// document.querySelector('.easy-pay-suggested-system-div').click(); //default selection first suggestion DEBUG
+
 	selectedEasyPaySystemPrice = +document.querySelector('.system-price-credit').textContent.replace('€', '');
 	console.log({ selectedEasyPaySystemPrice });
 }
