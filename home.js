@@ -1039,8 +1039,10 @@ function showResults(fetchedModelObj) {
 	}
 
 	configureUserSelectionsAfterResults();
-	if (suggestedContainer && !suggestedContainer.classList.contains(`not-convertible-${userSelections.selectedFuel}-container`))
+	if (suggestedContainer && !suggestedContainer.classList.contains(`not-convertible-${userSelections.selectedFuel}-container`)) {
+		console.log('updatingbasketSection !!', suggestedContainer);
 		updateBasketSection({ vehicle: true, calculator: true });
+	}
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
 function adjustSectionPaddings() {
