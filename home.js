@@ -391,7 +391,8 @@ function initEasyPayTabs() {
 	document.querySelectorAll('.easy-pay-tab').forEach(el =>
 		el.addEventListener('click', e => {
 			userSelections.easyPay.method = getEasyPayMethod(e.target);
-			console.log(e.target);
+			updateBasketSection({ easyPay: true });
+
 			if (document.querySelector('.easy-pay-with-vehicle-container').style.display === 'none') {
 				if (e.target.classList.contains('no-credit-tab')) {
 					//DEBUG ΜΕΤΡΗΤΑ
@@ -402,7 +403,6 @@ function initEasyPayTabs() {
 					selectedEasyPaySystemPrice = +noVehicleCreditSlider.value;
 				}
 			}
-			console.log(e.target, selectedEasyPaySystemPrice);
 		})
 	);
 }
