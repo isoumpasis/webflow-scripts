@@ -1243,7 +1243,7 @@ function configureCalculatorAfterSuggestion() {
 
 	// selectDriveOftenRadioInput(driveOftenIndexValue);
 
-	document.querySelector('#calcContainerVehicle').style.display = 'grid';
+	document.querySelector('#calcContainerVehicle').style.display = 'block';
 	document.querySelector('#calcContainerNoVehicle').style.display = 'none';
 
 	sliders[1].value = foundVehicleObj.consumption[2];
