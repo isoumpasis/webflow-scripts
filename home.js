@@ -200,6 +200,7 @@ let creditInterest = 7.2;
 document.addEventListener('DOMContentLoaded', () => {
 	initSelects();
 	initFuelPrices();
+	initDriveOftenRadio();
 	initSelectedFuelListeners();
 	initEasyPay();
 
@@ -229,6 +230,10 @@ function initFuelPrices() {
 			modifyFuelPriceSliders('ΑΤΤΙΚΗΣ');
 		})
 		.catch(e => console.error('Error on FuelPrices Fetch:', e));
+}
+
+function initDriveOftenRadio() {
+	selectDriveOftenRadioInput(2);
 }
 
 document.querySelector('#fuelPricesSelectNoVehicle').addEventListener('change', e => {
@@ -1250,19 +1255,19 @@ function configureCalculatorAfterSuggestion() {
 	document.querySelector('.combined-consumption').textContent = foundVehicleObj.consumption[2];
 }
 
-// function selectDriveOftenRadioInput(index) {
-// 	document.querySelectorAll('.radio-button.w-radio input').forEach((radio, i) => (radio.checked = i === index));
-// 	document
-// 		.querySelectorAll('.consumption-radio-input')
-// 		.forEach((radio, i) => (i === index ? radio.classList.add('w--redirected-checked') : radio.classList.remove('w--redirected-checked')));
+function selectDriveOftenRadioInput(index) {
+	document.querySelectorAll('.radio-button.w-radio input').forEach((radio, i) => (radio.checked = i === index));
+	document
+		.querySelectorAll('.consumption-radio-input')
+		.forEach((radio, i) => (i === index ? radio.classList.add('w--redirected-checked') : radio.classList.remove('w--redirected-checked')));
 
-// 	// hiddenRadiosCheck[0].checked = false;
-// 	// hiddenRadiosCheck[1].checked = false;
-// 	// hiddenRadiosCheck[2].checked = true;
-// 	// hiddenRadiosConfig[0].classList.remove('w--redirected-checked');
-// 	// hiddenRadiosConfig[1].classList.remove('w--redirected-checked');
-// 	// hiddenRadiosConfig[2].classList.add('w--redirected-checked');
-// }
+	// hiddenRadiosCheck[0].checked = false;
+	// hiddenRadiosCheck[1].checked = false;
+	// hiddenRadiosCheck[2].checked = true;
+	// hiddenRadiosConfig[0].classList.remove('w--redirected-checked');
+	// hiddenRadiosConfig[1].classList.remove('w--redirected-checked');
+	// hiddenRadiosConfig[2].classList.add('w--redirected-checked');
+}
 
 function resetCalc() {
 	document.querySelector('#calcTitle').innerHTML = 'Υπολόγισε πόσα θα εξοικονομείς με ένα σύστημα Lovato!';
