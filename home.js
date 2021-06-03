@@ -1714,6 +1714,7 @@ function calcResult() {
 	userSelections.calculator.kmPerYearValue = kmPerYear;
 	userSelections.calculator.gain = userSelections.selectedFuel === 'lpg' ? lpgResult.textContent : cngResult.textContent;
 	userSelections.calculator.percentage = userSelections.selectedFuel === 'lpg' ? lpgPercentageEl.textContent : cngPercentageEl.textContent;
+	console.log(userSelections.calculator.gain, userSelections.calculator.percentage);
 	updateBasketSection({ calculator: true });
 }
 
