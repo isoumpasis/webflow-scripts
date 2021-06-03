@@ -274,7 +274,7 @@ function initSelectedFuelListeners() {
 				showResults(fetchedModelObj);
 			}
 			configureEasyPayMonthlyGain();
-			updateBasketSection({ selectedFuel: true });
+			updateBasketSection({ selectedFuel: true, vehicle: true, calculator: true, selectedEasyPaySystem: true });
 		});
 	});
 	lpgFuelSelectBtns.forEach(lpgBtn => {
@@ -289,7 +289,7 @@ function initSelectedFuelListeners() {
 				showResults(fetchedModelObj);
 			}
 			configureEasyPayMonthlyGain();
-			updateBasketSection({ selectedFuel: true });
+			updateBasketSection({ selectedFuel: true, vehicle: true, calculator: true, selectedEasyPaySystem: true });
 		});
 	});
 }
