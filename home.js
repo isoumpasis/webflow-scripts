@@ -413,7 +413,7 @@ function initEasyPaySystemSelection() {
 			const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
 
 			userSelections.easyPay.system = getEasyPaySystem(selectedSystemDiv);
-			updateBasketSection({ selectEasyPaySystem: true });
+			updateBasketSection({ easyPay: true });
 
 			changePriceFontWeight(selectedSystemDiv);
 
@@ -1604,7 +1604,8 @@ function updateBasketSection(sections) {
 		document.querySelector('.percentage-text-basket').textContent = userSelections.calculator.percentage;
 	}
 
-	if (sections.selectEasyPaySystem) {
+	if (sections.easyPay) {
+		document.querySelector('.easy-pay-method-basket').textContent = userSelections.easyPay.method;
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
 		document.querySelector('.easy-pay-system-name-basket').textContent = userSelections.easyPay.system.name;
 
