@@ -191,6 +191,8 @@ const maxNoVehicleNoCreditSliderText = document.querySelector('.max-no-vehicle-n
 const minNoVehicleCreditSliderText = document.querySelector('.min-no-vehicle-credit-slider-text');
 const maxNoVehicleCreditSliderText = document.querySelector('.max-no-vehicle-credit-slider-text');
 
+const fuelPricesSelectVehicle = document.querySelector('#fuelPricesSelectVehicle');
+
 let noCreditInterest = 12.6;
 let creditInterest = 7.2;
 
@@ -229,12 +231,13 @@ function initFuelPrices() {
 }
 
 document.querySelector('#fuelPricesSelectNoVehicle').addEventListener('change', e => {
-	document.querySelector('#fuelPricesSelectVehicle').value = e.target.value;
+	fuelPricesSelectVehicle.value = e.target.value;
 	modifyFuelPriceSliders(e.target.value);
 });
-document.querySelector('#fuelPricesSelectVehicle').addEventListener('change', e => {
+fuelPricesSelectVehicle.addEventListener('change', e => {
 	document.querySelector('#fuelPricesSelectNoVehicle').value = e.target.value;
 	modifyFuelPriceSliders(e.target.value);
+	updateBasketSection({ calculator: true });
 });
 
 function modifyFuelPriceSliders(value) {
@@ -249,7 +252,7 @@ function modifyFuelPriceSliders(value) {
 	calcCovers[3].style.width = calcCoverWidth(sliders[3]) + '%';
 	calcResult();
 
-	userSelections.calculator.fuelPricesSelectedIndex = document.querySelector('#fuelPricesSelectVehicle').selectedIndex;
+	userSelections.calculator.fuelPricesSelectedIndex = fuelPricesSelectVehicle.selectedIndex;
 }
 
 function initSelectedFuelListeners() {
@@ -965,7 +968,7 @@ function configureUserSelectionsAfterResults() {
 			}
 		},
 		calculator: {
-			fuelPricesSelectedIndex: document.querySelector('#fuelPricesSelectVehicle').selectedIndex,
+			fuelPricesSelectedIndex: fuelPricesSelectVehicle.selectedIndex,
 			kmPerYearValue: +document.querySelector('.km-year').value
 		},
 		easyPay: {
@@ -1282,6 +1285,7 @@ document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
 		calcResult();
 
 		userSelections.calculator.driveOftenIndex = getDriveOftenIndex();
+		updateBasketSection({ calculator: true });
 	});
 });
 
@@ -1569,8 +1573,13 @@ function updateBasketSection(sections) {
 		document.querySelector('.easy-pay-container-basket').style.display = 'none';
 	}
 
+	if (sections.calculator) {
+		document.querySelector('.drive-often-text-basket').textContent =
+			userSelections.calculator.driveOftenIndex === 0 ? 'Εντός πόλης' : userSelections.calculator.driveOftenIndex === 1 ? 'Εκτός πόλης' : 'Μικτά';
+		document.querySelector('.fuel-place-basket').textContent = fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].innerHTML;
+	}
+
 	if (sections.selectEasyPaySystem) {
-		console.log('hakfjflkja', userSelections.easyPay);
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
 		const systemIndex = userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 0 : 1;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[systemIndex].priceNoVAT;
