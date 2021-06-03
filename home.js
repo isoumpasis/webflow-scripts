@@ -976,9 +976,13 @@ function configureUserSelectionsAfterResults() {
 			}
 		},
 		calculator: {
+			...userSelections.calculator,
 			driveOftenIndex: driveOftenIndexValue,
 			fuelPricesSelectedIndex: fuelPricesSelectVehicle.selectedIndex,
 			kmPerYearValue: +document.querySelector('.km-year').value
+			// userSelections.calculator.perMonthCheckbox = true,
+			// userSelections.calculator.gain = userSelections.selectedFuel === 'lpg' ? lpgResult.textContent : cngResult.textContent;
+			// userSelections.calculator.percentage = userSelections.selectedFuel === 'lpg' ? lpgPercentageEl.textContent : cngPercentageEl.textContent;
 		},
 		easyPay: {
 			method: getEasyPayMethod()
