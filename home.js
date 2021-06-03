@@ -1599,6 +1599,7 @@ function updateBasketSection(sections) {
 		document.querySelector('.fuel-place-basket').textContent = fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].innerHTML;
 		document.querySelector('.km-per-year-text-basket').textContent = userSelections.calculator.kmPerYearValue + ' km';
 
+		console.log(userSelections.calculator);
 		document.querySelector('.gain-label-basket').textContent = userSelections.calculator.perMonthCheckbox ? 'Μηνιαίο όφελος:' : 'Ετήσιο όφελος:';
 		document.querySelector('.gain-text-basket').textContent = userSelections.calculator.gain;
 		document.querySelector('.percentage-text-basket').textContent = userSelections.calculator.percentage;
