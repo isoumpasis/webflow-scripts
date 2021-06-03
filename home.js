@@ -1236,14 +1236,7 @@ function configureCalculatorAfterSuggestion() {
 	consumptionRadios[1].dataset.cons = foundVehicleObj.consumption[1];
 	consumptionRadios[2].dataset.cons = foundVehicleObj.consumption[2];
 
-	const hiddenRadiosCheck = document.querySelectorAll('.radio-button.w-radio input');
-	hiddenRadiosCheck[0].checked = false;
-	hiddenRadiosCheck[1].checked = false;
-	hiddenRadiosCheck[2].checked = true;
-	const hiddenRadiosConfig = document.querySelectorAll('.consumption-radio-input');
-	hiddenRadiosConfig[0].classList.remove('w--redirected-checked');
-	hiddenRadiosConfig[1].classList.remove('w--redirected-checked');
-	hiddenRadiosConfig[2].classList.add('w--redirected-checked');
+	checkConsumptionRadio(driveOftenIndexValue);
 
 	document.querySelector('#calcContainerVehicle').style.display = 'grid';
 	document.querySelector('#calcContainerNoVehicle').style.display = 'none';
@@ -1255,6 +1248,20 @@ function configureCalculatorAfterSuggestion() {
 	document.querySelector('.in-consumption').textContent = foundVehicleObj.consumption[0];
 	document.querySelector('.out-consumption').textContent = foundVehicleObj.consumption[1];
 	document.querySelector('.combined-consumption').textContent = foundVehicleObj.consumption[2];
+}
+
+function selectDriveOftenRadioInput(index) {
+	document.querySelectorAll('.radio-button.w-radio input').forEach((radio, i) => (radio.checked = i === index));
+	document
+		.querySelectorAll('.consumption-radio-input')
+		.forEach((radio, i) => (i === index ? radio.classList.add('w--redirected-checked') : radio.classList.remove('w--redirected-checked')));
+
+	// hiddenRadiosCheck[0].checked = false;
+	// hiddenRadiosCheck[1].checked = false;
+	// hiddenRadiosCheck[2].checked = true;
+	// hiddenRadiosConfig[0].classList.remove('w--redirected-checked');
+	// hiddenRadiosConfig[1].classList.remove('w--redirected-checked');
+	// hiddenRadiosConfig[2].classList.add('w--redirected-checked');
 }
 
 function resetCalc() {
