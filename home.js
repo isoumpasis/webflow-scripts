@@ -453,6 +453,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
 
 	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.noCreditSettings.prokatavoli = +prokatavoliNoCreditSlider.value;
+	updateBasketSection({ easyPay: true });
 }
 
 function prokatavoliCreditSliderOnChange(value) {
@@ -469,6 +470,7 @@ function prokatavoliCreditSliderOnChange(value) {
 
 	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.creditSettings.prokatavoli = +prokatavoliCreditSlider.value;
+	updateBasketSection({ easyPay: true });
 }
 
 function doseisNoCreditSliderOnChange(value) {
