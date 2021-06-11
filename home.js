@@ -1654,6 +1654,8 @@ function updateBasketSection(sections) {
 		document.querySelector('.percentage-text-basket').textContent = userSelections.calculator.percentage;
 	}
 
+	if (!userSelections.vehicle.suggestions) return;
+
 	if (sections.easyPay) {
 		document.querySelector('.easy-pay-method-basket').textContent = userSelections.easyPay.method;
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
