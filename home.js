@@ -1643,7 +1643,7 @@ function updateBasketSection(sections) {
 			[...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(el => (el.style.display = 'flex'));
 		} else {
 			//DEBUG ΜΕΤΡΗΤΑ
-			document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.system.priceWithVAT + '€';
+			// document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.noCreditSettings.finalCost;
 			[...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(el => (el.style.display = 'none'));
 		}
 	}
