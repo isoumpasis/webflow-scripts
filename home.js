@@ -412,6 +412,8 @@ function initEasyPaySystemSelection() {
 		el.addEventListener('click', e => {
 			const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
 
+			console.log(e.target, selectedSystemDiv);
+
 			userSelections.easyPay.system = getEasyPaySystem(selectedSystemDiv);
 			updateBasketSection({ easyPay: true });
 
@@ -1248,7 +1250,6 @@ function configureCalculatorAfterSuggestion() {
 	document.querySelector('#calcContainerNoVehicle').style.display = 'none';
 
 	sliders[1].value = foundVehicleObj.consumption[getDriveOftenIndex()];
-	console.log('!!!!!!!!!!!!!', sliders[1].value);
 	outputs[1].value = sliders[1].value;
 	calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
