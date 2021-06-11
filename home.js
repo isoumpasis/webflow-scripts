@@ -1627,14 +1627,14 @@ function updateBasketSection(sections) {
 		if (userSelections.easyPay.method === 'Χωρίς πιστωτική κάρτα') {
 			document.querySelector('.easy-pay-prokatavoli-basket').textContent = userSelections.easyPay.noCreditSettings.prokatavoli + '€';
 			document.querySelector('.easy-pay-doseis-basket').textContent = userSelections.easyPay.noCreditSettings.doseis;
-			document.querySelector('.easy-pay-prokatavoli-doseis-row-basket').display = 'flex';
+			document.querySelector('.easy-pay-prokatavoli-doseis-row-basket').style.display = 'flex';
 		} else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
 			document.querySelector('.easy-pay-prokatavoli-basket').textContent = userSelections.easyPay.creditSettings.prokatavoli + '€';
 			document.querySelector('.easy-pay-doseis-basket').textContent = userSelections.easyPay.creditSettings.doseis;
-			document.querySelector('.easy-pay-prokatavoli-doseis-row-basket').display = 'flex';
+			document.querySelector('.easy-pay-prokatavoli-doseis-row-basket').style.display = 'flex';
 		} else {
 			//DEBUG ΜΕΤΡΗΤΑ
-			document.querySelector('.easy-pay-prokatavoli-doseis-row-basket').display = 'none';
+			document.querySelector('.easy-pay-prokatavoli-doseis-row-basket').style.display = 'none';
 		}
 	}
 }
