@@ -412,8 +412,6 @@ function initEasyPaySystemSelection() {
 		el.addEventListener('click', e => {
 			const selectedSystemDiv = e.target.closest('.easy-pay-suggested-system-div');
 
-			console.log(e.target, selectedSystemDiv);
-
 			userSelections.easyPay.system = getEasyPaySystem(selectedSystemDiv);
 			updateBasketSection({ easyPay: true });
 
@@ -1482,6 +1480,9 @@ function configureNoCreditResults() {
 	configureEasyPayMonthlyGain();
 
 	noCreditFinalCost.textContent = (monthlyCost * doseisNoCreditSliderValueInt + prokatavoliNoCreditSliderValueInt).toFixed(2) + '€';
+
+	userSelections.easyPay.finalCost = noCreditFinalCost.textContent;
+	updateBasketSection({ easyPay: true });
 }
 
 function configureCreditResults() {
@@ -1617,6 +1618,8 @@ function updateBasketSection(sections) {
 
 		const systemIndex = userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 0 : 1;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[systemIndex].priceNoVAT;
+
+		document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.finalCost;
 	}
 }
 
