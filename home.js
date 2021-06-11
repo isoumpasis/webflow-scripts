@@ -1495,6 +1495,9 @@ function configureCreditResults() {
 	configureEasyPayMonthlyGain();
 
 	creditFinalCost.textContent = (Math.round((monthlyCost * doseisCreditSelectValueInt + prokatavoliCreditSliderValueInt) * 10) / 10).toFixed(2) + '€';
+
+	userSelections.easyPay.finalCost = creditFinalCost.textContent;
+	updateBasketSection({ easyPay: true });
 }
 
 function configureEasyPayMonthlyGain() {
