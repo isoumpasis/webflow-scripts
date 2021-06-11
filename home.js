@@ -391,7 +391,7 @@ function initEasyPayTabs() {
 	document.querySelectorAll('.easy-pay-tab').forEach(el =>
 		el.addEventListener('click', e => {
 			userSelections.easyPay.method = getEasyPayMethod(e.target);
-			updateBasketSection({ easyPay: true });
+			updateBasketSection({ easyPay: true, prokavoliDoseis: true });
 
 			if (document.querySelector('.easy-pay-with-vehicle-container').style.display === 'none') {
 				if (e.target.classList.contains('no-credit-tab')) {
@@ -482,14 +482,14 @@ function doseisNoCreditSliderOnChange(value) {
 
 	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.noCreditSettings = { ...userSelections.easyPay.noCreditSettings, doseis: +doseisNoCreditSlider.value };
-	updateBasketSection({ easyPay: true });
+	updateBasketSection({ prokatavoliDoseis: true });
 }
 
 function doseisCreditSelectOnChange(value) {
 	configureCreditResults();
 	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.creditSettings = { ...userSelections.easyPay.creditSettings, doseis: +doseisCreditSelect.value };
-	updateBasketSection({ easyPay: true });
+	updateBasketSection({ prokatavoliDoseis: true });
 }
 
 function noVehicleNoCreditSliderOnChange(value) {
@@ -1044,7 +1044,7 @@ function showResults(fetchedModelObj) {
 	configureUserSelectionsAfterResults();
 	if (suggestedContainer && !suggestedContainer.classList.contains(`not-convertible-${userSelections.selectedFuel}-container`)) {
 		console.log('updatingbasketSection !!', suggestedContainer, userSelections.calculator);
-		updateBasketSection({ vehicle: true, calculator: true, easyPay: true });
+		updateBasketSection({ vehicle: true, calculator: true, easyPay: true, prokatavoliDoseis: true });
 	}
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
@@ -1619,6 +1619,9 @@ function updateBasketSection(sections) {
 
 		const systemIndex = userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 0 : 1;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[systemIndex].priceNoVAT;
+	}
+
+	if (sections.prokatavoliDoseis) {
 		if (userSelections.easyPay.method === 'Χωρίς πιστωτική κάρτα') {
 			document.querySelector('.easy-pay-prokatavoli-basket').textContent = userSelections.easyPay.noCreditSettings.prokatavoli + '€';
 			document.querySelector('.easy-pay-doseis-basket').textContent = userSelections.easyPay.noCreditSettings.doseis;
@@ -1631,9 +1634,6 @@ function updateBasketSection(sections) {
 			//DEBUG ΜΕΤΡΗΤΑ
 			document.querySelector('.easy-pay-prokatavoli-doseis-row-basket').display = 'none';
 		}
-	}
-
-	if (sections.prokatavoliDoseis) {
 	}
 }
 
