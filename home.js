@@ -1615,6 +1615,19 @@ function updateBasketSection(sections) {
 
 		const systemIndex = userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 0 : 1;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[systemIndex].priceNoVAT;
+
+		if (userSelections.easyPay.method === 'Χωρίς πιστωτική κάρτα') {
+			document.querySelector('.easy-pay-prokatavoli-basket').textContent = userSelections.easyPay.noCreditSettings.prokatavoli + '€';
+			document.querySelector('.easy-pay-doseis-basket').textContent = userSelections.easyPay.noCreditSettings.doseis;
+			document.querySelector('.easy-pay-prokatavoli-doseis-row-basket').display = 'flex';
+		} else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
+			document.querySelector('.easy-pay-prokatavoli-basket').textContent = userSelections.easyPay.creditSettings.prokatavoli + '€';
+			document.querySelector('.easy-pay-doseis-basket').textContent = userSelections.easyPay.creditSettings.doseis;
+			document.querySelector('.easy-pay-prokatavoli-doseis-row-basket').display = 'flex';
+		} else {
+			//DEBUG ΜΕΤΡΗΤΑ
+			document.querySelector('.easy-pay-prokatavoli-doseis-row-basket').display = 'none';
+		}
 	}
 }
 
