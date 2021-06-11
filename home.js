@@ -453,7 +453,10 @@ function prokatavoliNoCreditSliderOnChange(value) {
 
 	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.noCreditSettings.prokatavoli = +prokatavoliNoCreditSlider.value;
-	updateBasketSection({ easyPay: true });
+
+	// userSelections.easyPay.noCreditSettings.finalCost = noCreditFinalCost.textContent;
+
+	updateBasketSection({ prokatavoliDoseis: true });
 }
 
 function prokatavoliCreditSliderOnChange(value) {
@@ -470,7 +473,8 @@ function prokatavoliCreditSliderOnChange(value) {
 
 	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.creditSettings.prokatavoli = +prokatavoliCreditSlider.value;
-	updateBasketSection({ easyPay: true });
+	// userSelections.easyPay.creditSettings.finalCost = creditFinalCost.textContent;
+	updateBasketSection({ prokatavoliDoseis: true });
 }
 
 function doseisNoCreditSliderOnChange(value) {
@@ -482,7 +486,7 @@ function doseisNoCreditSliderOnChange(value) {
 
 	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.noCreditSettings = { ...userSelections.easyPay.noCreditSettings, doseis: +doseisNoCreditSlider.value };
-	updateBasketSection({ prokatavoliDoseis: true });
+	// updateBasketSection({ prokatavoliDoseis: true });
 }
 
 function doseisCreditSelectOnChange(value) {
@@ -492,7 +496,7 @@ function doseisCreditSelectOnChange(value) {
 		...userSelections.easyPay.creditSettings,
 		doseis: +doseisCreditSelect.value !== 1 ? +doseisCreditSelect.value : 'Χωρίς Δόσεις'
 	};
-	updateBasketSection({ prokatavoliDoseis: true });
+	// updateBasketSection({ prokatavoliDoseis: true });
 }
 
 function noVehicleNoCreditSliderOnChange(value) {
