@@ -1481,7 +1481,9 @@ function configureNoCreditResults() {
 
 	noCreditFinalCost.textContent = (monthlyCost * doseisNoCreditSliderValueInt + prokatavoliNoCreditSliderValueInt).toFixed(2) + '€';
 
+	console.log('before', userSelections.easyPay);
 	userSelections.easyPay.finalCost = noCreditFinalCost.textContent;
+	console.log('after', userSelections.easyPay);
 	updateBasketSection({ easyPay: true });
 }
 
