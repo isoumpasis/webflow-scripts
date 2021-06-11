@@ -1250,6 +1250,7 @@ function configureCalculatorAfterSuggestion() {
 	document.querySelector('#calcContainerNoVehicle').style.display = 'none';
 
 	sliders[1].value = foundVehicleObj.consumption[userSelections.calculator.driveOftenIndex];
+	console.log(sliders[1].value, foundVehicleObj.consumption[userSelections.calculator.driveOftenIndex]);
 	outputs[1].value = sliders[1].value;
 	calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
