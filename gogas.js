@@ -55,8 +55,8 @@ typeSelect.addEventListener('change', function () {
 				litresSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
 				return;
 			}
+			console.log('Litres Fetch:', data);
 			fetchedLitres = data;
-			console.log(fetchedLitres);
 
 			populateLitresSelect(fetchedLitres);
 			endLoadingSelect(litresSelect);
@@ -72,7 +72,7 @@ function populateLitresSelect(fetchedLitres) {
 	let litresOptionsArray = ['<option value="">Επιλέξτε Λίτρα</option>'];
 
 	fetchedLitres.forEach(litre => {
-		litresOptionsArray.push(`<option value="${litre}">${litre}LT</option>`);
+		litresOptionsArray.push(`<option value="${litre}">${litre} LT</option>`);
 	});
 
 	litresSelect.innerHTML = litresOptionsArray.join('');
@@ -114,14 +114,13 @@ function litresOnChange(value) {
 			return response.json();
 		})
 		.then(data => {
-			console.log('Success Vehicles Fetch:', data);
 			if (status !== 200) {
 				endLoadingSelect(dimensionSelect);
 				litresSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
 				return;
 			}
+			console.log('Dimensions Fetch:', data);
 			fetchedDimensions = data;
-			console.log(fetchedDimensions);
 			populateDimensionSelect(fetchedDimensions);
 			endLoadingSelect(dimensionSelect);
 		})
@@ -135,7 +134,7 @@ function litresOnChange(value) {
 function populateDimensionSelect(fetchedDimensions) {
 	let dimensionOptionsArray = ['<option value="">Επιλέξτε Διάσταση</option>'];
 	fetchedDimensions.forEach(dimension => {
-		const dimensionLabel = `${dimension.diameter}/${dimension.length} - ${litresSelect.value}LT`;
+		const dimensionLabel = `${dimension.diameter}/${dimension.length} - ${litresSelect.value} LT`;
 		dimensionOptionsArray.push(`<option value="${dimension.id}">${dimensionLabel}</option>`);
 	});
 
@@ -158,13 +157,13 @@ function dimensionOnChange(value) {
 	suggestedContainers.forEach(container => {
 		container.style.display = 'none';
 	});
-	if (!value) return;
+	if (value !== 0 && !value) return;
 
 	showResults();
 }
 
 function showResults() {
-	foundTankObj = fetchedDimensions.find(dim => dimensionSelect.value === dim.id);
+	foundTankObj = fetchedDimensions.find(dim => +dimensionSelect.value == dim.id);
 	document.querySelector('.tank-price').textContent = foundTankObj.price + '€';
 	console.log({ foundTankObj });
 }
