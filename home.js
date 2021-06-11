@@ -1686,7 +1686,9 @@ function updateBasketSection(sections) {
 			// document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.noCreditSettings.finalCost;
 			[...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(el => (el.style.display = 'none'));
 		}
-		document.querySelector('.easy-pay-monthly-gain-basket').textContent = +userSelections.calculator.gain.replace('€', '') / 12 + '€';
+		document.querySelector('.easy-pay-monthly-gain-basket').textContent = perMonthCheckbox.checked
+			? userSelections.calculator.gain
+			: Math.round((userSelections.calculator.gain.replace('€', '') / 12) * 100) / 100 + '€';
 	}
 }
 
