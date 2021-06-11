@@ -16,7 +16,7 @@ let fetchedLitres, fetchedDimensions, foundTankObj, activeContainer;
 const typeContainerIdDict = {
 	ΕΣΩΤΕΡΙΚΗ: 'eswterikhContainer',
 	ΕΞΩΤΕΡΙΚΗ: 'ekswterikhContainer',
-	ΚΥΛΙΝΔΡΙΚΗ: 'kylindrikhContainer'
+	ΚΥΛΙΝΔΡΙΚΗ: 'kylindrikhContainer' //he/
 };
 
 function startLoadingSelect(select) {
