@@ -140,7 +140,8 @@ function litresOnChange(value) {
 function populateDimensionSelect(fetchedDimensions) {
 	let dimensionOptionsArray = ['<option value="">Επιλέξτε Διάσταση</option>'];
 	fetchedDimensions.forEach(dimension => {
-		const dimensionLabel = `${dimension.diameter}/${dimension.length} - ${litresSelect.value} LT`;
+		const typeLabel = typeSelect.value === 'unknown' ? ` ${dimension.type} ` : '';
+		const dimensionLabel = `${dimension.diameter}/${dimension.length}${typeLabel} - ${litresSelect.value} LT`;
 		dimensionOptionsArray.push(`<option value="${dimension.id}">${dimensionLabel}</option>`);
 	});
 
@@ -172,7 +173,8 @@ function showResults() {
 	foundTankObj = fetchedDimensions.find(dim => +dimensionSelect.value == dim.id);
 	console.log({ foundTankObj });
 
-	activeContainer = document.getElementById(typeContainerIdDict[typeSelect.value]);
+	const typeOfFoundObj = typeSelect.value === 'unknown' ? foundTankObj.type : typeSelect.value;
+	activeContainer = document.getElementById(typeContainerIdDict[typeOfFoundObj]);
 
 	activeContainer.querySelector('.tank-price').textContent = foundTankObj.price + '€';
 
