@@ -1,244 +1,168 @@
-// /* System Identification */
-// const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
-// const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
-// const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
-// const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
-// const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
+/* System Identification */
+const baseUrl = 'https://lovatohellas.herokuapp.com/vehicleDB/get';
+const urlLitres = '/litres';
+const urlDimensions = '/dimensions';
 
-// const makeSelect = document.querySelector('#makeSelect');
-// const modelSelect = document.querySelector('#modelSelect');
-// const yearSelect = document.querySelector('#yearSelect');
-// const descriptionSelect = document.querySelector('#descriptionSelect');
+const typeSelect = document.querySelector('#typeSelect');
+const litresSelect = document.querySelector('#litresSelect');
+const dimensionSelect = document.querySelector('#dimensionSelect');
 
-// makeSelect.addEventListener('change', function () {
-// 	console.log('make changed', this.value);
+const suggestedContainers = document.querySelectorAll('.suggested-tank-container');
 
-// 	modelSelect.disabled = true;
-// 	descriptionSelect.disabled = true;
-// 	modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-// 	descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
-// 	suggestedContainers.forEach(container => {
-// 		container.style.display = 'none';
-// 	});
-// 	resetCalc();
-// 	resetEasyPay();
-// 	calcResult();
-// 	updateBasketSection({ resetNoVehicle: true });
+let fetchedLitres, fetchedDimensions, foundTankObj;
 
-// 	userSelections.vehicle = {};
-// 	delete userSelections.calculator.driveOftenIndex;
-// 	userSelections.easyPay = {};
-// 	saveUserSelections();
+function startLoadingSelect(select) {
+	select.classList.add('loading-select');
+}
+function endLoadingSelect(select) {
+	select.classList.remove('loading-select');
+}
 
-// 	if (!this.value) {
-// 		yearSelect.disabled = true;
-// 		yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-// 		// sessionStorage.clear(); //reset //DO YOU WANT TO ERASE EVERYTHING? maybe there is an autonomous var you want to keep
-// 		return;
-// 	}
-// 	yearSelect.disabled = false;
-// 	yearSelect.innerHTML = '';
-// 	startLoadingSelect(yearSelect);
+typeSelect.addEventListener('change', function () {
+	console.log('type changed', this.value);
 
-// 	let status;
-// 	fetch(urlYears, {
-// 		method: 'POST',
-// 		headers: {
-// 			'Content-Type': 'application/json'
-// 		},
-// 		body: JSON.stringify({ make: this.value })
-// 	})
-// 		.then(response => {
-// 			status = response.status;
-// 			return response.json();
-// 		})
-// 		.then(data => {
-// 			if (status !== 200) {
-// 				endLoadingSelect(yearSelect);
-// 				yearSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
-// 				return;
-// 			}
-// 			fetchedYears = data;
-// 			// sessionStorage.clear(); //reset every time make changes
-// 			// sessionStorage.fetchedYears = JSON.stringify(fetchedYears);
+	litresSelect.disabled = true;
+	dimensionSelect.disabled = true;
+	litresSelect.innerHTML = '<option value="">Λίτρα Δεξαμενής</option>';
+	dimensionSelect.innerHTML = '<option value="">Διαστάσεις Δεξαμενής</option>';
+	suggestedContainers.forEach(container => {
+		container.style.display = 'none';
+	});
 
-// 			populateYearSelect(fetchedYears);
-// 			endLoadingSelect(yearSelect);
-// 		})
-// 		.catch(error => {
-// 			endLoadingSelect(yearSelect);
-// 			yearSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
-// 			console.error('Error Fetch:', error);
-// 		});
-// });
+	if (!this.value) return;
 
-// function startLoadingSelect(select) {
-// 	select.classList.add('loading-select');
-// }
-// function endLoadingSelect(select) {
-// 	select.classList.remove('loading-select');
-// }
+	litresSelect.disabled = false;
+	litresSelect.innerHTML = '';
+	startLoadingSelect(litresSelect);
 
-// function populateModelSelect(fetchedModels) {
-// 	let modelOptionsArray = ['<option value="">Επιλέξτε Μοντέλο</option>'];
-// 	fetchedModels.forEach(model => {
-// 		modelOptionsArray.push(`<option value="${model}">${model}</option>`);
-// 	});
+	let status;
+	fetch(baseUrl + urlLitres, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ type: this.value })
+	})
+		.then(response => {
+			status = response.status;
+			return response.json();
+		})
+		.then(data => {
+			if (status !== 200) {
+				endLoadingSelect(litresSelect);
+				litresSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
+				return;
+			}
+			fetchedLitres = data;
+			console.log(fetchedLitres);
 
-// 	modelSelect.innerHTML = modelOptionsArray.join('');
-// 	modelSelect.disabled = false;
-// 	modelSelect.focus();
+			populateLitresSelect(fetchedLitres);
+			endLoadingSelect(litresSelect);
+		})
+		.catch(error => {
+			endLoadingSelect(litresSelect);
+			litresSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
+			console.error('Error Fetch:', error);
+		});
+});
 
-// 	if (modelOptionsArray.length === 2) {
-// 		modelSelect.selectedIndex = 1;
-// 		modelOnChange(modelSelect.value);
-// 		return;
-// 	}
-// }
+function populateLitresSelect(fetchedLitres) {
+	let litresOptionsArray = ['<option value="">Επιλέξτε Λίτρα</option>'];
 
-// yearSelect.addEventListener('change', e => yearOnChange(e.target.value));
-// function yearOnChange(value) {
-// 	descriptionSelect.disabled = true;
-// 	descriptionSelect.innerHTML = '<option>Περιγραφή</option>';
-// 	suggestedContainers.forEach(container => {
-// 		container.style.display = 'none';
-// 	});
-// 	resetCalc();
-// 	resetEasyPay();
-// 	calcResult();
-// 	updateBasketSection({ resetNoVehicle: true });
+	fetchedLitres.forEach(litre => {
+		litresOptionsArray.push(`<option value="${litre}">${litre}LT</option>`);
+	});
 
-// 	userSelections.vehicle = {};
-// 	delete userSelections.calculator.driveOftenIndex;
-// 	userSelections.easyPay = {};
-// 	saveUserSelections();
+	litresSelect.innerHTML = litresOptionsArray.join('');
+	litresSelect.disabled = false;
+	litresSelect.focus();
+	//One option -> auto populate
+	if (litresOptionsArray.length === 2) {
+		litresSelect.selectedIndex = 1;
+		litresOnChange(litresSelect.value);
+		return;
+	}
+}
 
-// 	if (!value) {
-// 		modelSelect.disabled = true;
-// 		modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
-// 		descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
-// 		return;
-// 	}
-// 	// selectedModel = fetchedModels.models.filter(model => model.name === this.value)[0];
-// 	// console.log('selectedModel', selectedModel);
-// 	// sessionStorage.selectedModel = JSON.stringify(selectedModel);
-// 	modelSelect.disabled = false;
-// 	modelSelect.innerHTML = '';
-// 	startLoadingSelect(modelSelect);
-// 	let status;
-// 	fetch(urlModels, {
-// 		method: 'POST',
-// 		headers: {
-// 			'Content-Type': 'application/json'
-// 		},
-// 		body: JSON.stringify({ make: makeSelect.value, year: value })
-// 	})
-// 		.then(response => {
-// 			status = response.status;
-// 			return response.json();
-// 		})
-// 		.then(data => {
-// 			console.log('Success Vehicles Fetch:', data);
-// 			if (status !== 200) {
-// 				endLoadingSelect(modelSelect);
-// 				yearSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
-// 				return;
-// 			}
-// 			fetchedModels = data;
+litresSelect.addEventListener('change', e => litresOnChange(e.target.value));
+function litresOnChange(value) {
+	console.log('liters changed', value);
+	dimensionSelect.disabled = true;
+	dimensionSelect.innerHTML = '<option>Διαστάσεις Δεξαμενής</option>';
+	suggestedContainers.forEach(container => {
+		container.style.display = 'none';
+	});
 
-// 			// sessionStorage.selectedVehicles = JSON.stringify(selectedVehicles);
+	if (!value) return;
 
-// 			// descriptionSelect.innerHTML = `<option value="">${
-// 			//   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
-// 			// }</option>`;
-// 			populateModelSelect(fetchedModels);
-// 			endLoadingSelect(modelSelect);
-// 		})
-// 		.catch(error => {
-// 			endLoadingSelect(modelSelect);
-// 			yearSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
-// 			console.error('Error Fetch:', error);
-// 		});
-// }
+	dimensionSelect.disabled = false;
+	dimensionSelect.innerHTML = '';
+	startLoadingSelect(dimensionSelect);
 
-// function populateYearSelect(fetchedYears) {
-// 	let yearOptionsArray = ['<option value="">Επιλέξτε Χρονολογία</option>'];
+	let status;
+	fetch(baseUrl + urlDimensions, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ type: typeSelect.value, litres: value })
+	})
+		.then(response => {
+			status = response.status;
+			return response.json();
+		})
+		.then(data => {
+			console.log('Success Vehicles Fetch:', data);
+			if (status !== 200) {
+				endLoadingSelect(dimensionSelect);
+				litresSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
+				return;
+			}
+			fetchedDimensions = data;
+			console.log(fetchedDimensions);
+			populateDimensionSelect(fetchedDimensions);
+			endLoadingSelect(dimensionSelect);
+		})
+		.catch(error => {
+			endLoadingSelect(dimensionSelect);
+			litresSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
+			console.error('Error Fetch:', error);
+		});
+}
 
-// 	fetchedYears.forEach(year => {
-// 		yearOptionsArray.push(`<option value="${year}">${year}</option>`);
-// 	});
+function populateDimensionSelect(fetchedDimensions) {
+	let dimensionOptionsArray = ['<option value="">Επιλέξτε Διάσταση</option>'];
+	fetchedDimensions.forEach(dimension => {
+		const dimensionLabel = `${dimension.diameter}/${dimension.length} - ${litresSelect.value}LT`;
+		dimensionOptionsArray.push(`<option value="${dimension.id}">${dimensionLabel}</option>`);
+	});
 
-// 	yearSelect.innerHTML = yearOptionsArray.join('');
-// 	yearSelect.disabled = false;
-// 	yearSelect.focus();
-// 	//One option -> auto populate
-// 	if (yearOptionsArray.length === 2) {
-// 		yearSelect.selectedIndex = 1;
-// 		yearOnChange(yearSelect.value);
-// 		return;
-// 	}
-// }
+	dimensionSelect.innerHTML = dimensionOptionsArray.join('');
+	dimensionSelect.disabled = false;
+	dimensionSelect.focus();
 
-// modelSelect.addEventListener('change', e => modelOnChange(e.target.value));
+	if (dimensionOptionsArray.length === 2) {
+		dimensionSelect.selectedIndex = 1;
+		dimensionOnChange(dimensionSelect.value);
+		return;
+	}
+}
 
-// function modelOnChange(value) {
-// 	console.log('model changed', value);
-// 	suggestedContainers.forEach(container => {
-// 		container.style.display = 'none';
-// 	});
-// 	resetCalc();
-// 	resetEasyPay();
-// 	calcResult();
-// 	updateBasketSection({ resetNoVehicle: true });
+dimensionSelect.addEventListener('change', e => dimensionOnChange(e.target.value));
 
-// 	userSelections.vehicle = {};
-// 	delete userSelections.calculator.driveOftenIndex;
-// 	userSelections.easyPay = {};
-// 	saveUserSelections();
+function dimensionOnChange(value) {
+	console.log('dimension changed', value);
 
-// 	if (!value) {
-// 		descriptionSelect.disabled = true;
-// 		descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
-// 		return;
-// 	}
-// 	// sessionStorage.selectedYear = value;
+	suggestedContainers.forEach(container => {
+		container.style.display = 'none';
+	});
+	if (!value) return;
 
-// 	descriptionSelect.disabled = false;
-// 	descriptionSelect.innerHTML = '';
-// 	startLoadingSelect(descriptionSelect);
-// 	let status;
-// 	fetch(urlDescriptions, {
-// 		method: 'POST',
-// 		headers: {
-// 			'Content-Type': 'application/json'
-// 		},
-// 		body: JSON.stringify({ make: makeSelect.value, year: yearSelect.value, model: value })
-// 	})
-// 		.then(response => {
-// 			status = response.status;
-// 			return response.json();
-// 		})
-// 		.then(data => {
-// 			console.log('Success Descriptions Fetch:', data);
-// 			if (status !== 200) {
-// 				endLoadingSelect(modelSelect);
-// 				descriptionSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
-// 				return;
-// 			}
-// 			fetchedModelObj = data;
+	showResults();
+}
 
-// 			// sessionStorage.selectedVehicles = JSON.stringify(selectedVehicles);
-
-// 			// descriptionSelect.innerHTML = `<option value="">${
-// 			//   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
-// 			// }</option>`;
-// 			populateDescriptionSelect(fetchedModelObj);
-// 			endLoadingSelect(descriptionSelect);
-// 		})
-// 		.catch(error => {
-// 			endLoadingSelect(descriptionSelect);
-// 			descriptionSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
-// 			console.error('Error Fetch:', error);
-// 		});
-// }
-console.log('gogas page!');
+function showResults() {
+	foundTankObj = fetchedDimensions.find(dim => dimensionSelect.value === dim.id);
+	document.querySelector('.tank-price').textContent = foundTankObj.price + '€';
+	console.log({ foundTankObj });
+}
