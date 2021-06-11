@@ -1615,6 +1615,7 @@ function updateBasketSection(sections) {
 		document.querySelector('.easy-pay-method-basket').textContent = userSelections.easyPay.method;
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
 		document.querySelector('.easy-pay-system-name-basket').textContent = userSelections.easyPay.system.name;
+		document.querySelector('.easy-pay-system-vat-basket').textContent = userSelections.easyPay.system.priceWithVAT + '€';
 
 		document.querySelector('.suggested-system-text-basket').textContent =
 			userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 'Ιδανικότερη πρόταση:' : 'Οικονομικότερη πρόταση:';
