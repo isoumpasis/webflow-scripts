@@ -11,7 +11,13 @@ locationSelect.style.display = 'none';
 
 const suggestedContainers = document.querySelectorAll('.suggested-tank-container');
 
-let fetchedLitres, fetchedDimensions, foundTankObj;
+let fetchedLitres, fetchedDimensions, foundTankObj, activeContainer;
+
+const typeContainerIdDict = {
+	ΕΣΩΤΕΡΙΚΗ: 'eswterikhContainer',
+	ΕΞΩΤΕΡΙΚΗ: 'ekswterikhContainer',
+	ΚΥΛΙΝΔΡΙΚΗ: 'kylindrikhContainer'
+};
 
 function startLoadingSelect(select) {
 	select.classList.add('loading-select');
@@ -164,6 +170,11 @@ function dimensionOnChange(value) {
 
 function showResults() {
 	foundTankObj = fetchedDimensions.find(dim => +dimensionSelect.value == dim.id);
-	document.querySelector('.tank-price').textContent = foundTankObj.price + '€';
 	console.log({ foundTankObj });
+
+	activeContainer = document.getElementById(typeContainerIdDict[typeSelect.value]);
+
+	activeContainer.querySelector('.tank-price').textContent = foundTankObj.price + '€';
+
+	activeContainer.style.display = 'grid';
 }
