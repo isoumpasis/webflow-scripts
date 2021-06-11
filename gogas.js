@@ -1,5 +1,5 @@
 /* System Identification */
-const baseUrl = 'https://lovatohellas.herokuapp.com/vehicleDB/get';
+const baseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
 const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
 
