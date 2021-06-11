@@ -452,9 +452,16 @@ function prokatavoliNoCreditSliderOnChange(value) {
 	configureNoCreditMaxDoseisSlider();
 
 	if (!userSelections.vehicle.suggestions) return;
-	userSelections.easyPay.noCreditSettings.prokatavoli = +prokatavoliNoCreditSlider.value;
+	// userSelections.easyPay.noCreditSettings.prokatavoli = +prokatavoliNoCreditSlider.value;
 
-	userSelections.easyPay.noCreditSettings.finalCost = noCreditFinalCost.textContent;
+	// userSelections.easyPay.noCreditSettings.finalCost = noCreditFinalCost.textContent;
+
+	userSelections.easyPay.noCreditSettings = {
+		...userSelections.easyPay.noCreditSettings,
+		prokatavoli: +prokatavoliNoCreditSlider.value,
+		finalCost: noCreditFinalCost.textContent,
+		monthlyCost: noCreditMonthlyCost.textContent
+	};
 
 	updateBasketSection({ prokatavoliDoseis: true });
 }
@@ -472,8 +479,15 @@ function prokatavoliCreditSliderOnChange(value) {
 	doseisCreditSelectOnChange(+doseisCreditSelect.value);
 
 	if (!userSelections.vehicle.suggestions) return;
-	userSelections.easyPay.creditSettings.prokatavoli = +prokatavoliCreditSlider.value;
-	userSelections.easyPay.creditSettings.finalCost = creditFinalCost.textContent;
+	// userSelections.easyPay.creditSettings.prokatavoli = +prokatavoliCreditSlider.value;
+	// userSelections.easyPay.creditSettings.finalCost = creditFinalCost.textContent;
+
+	userSelections.easyPay.creditSettings = {
+		...userSelections.easyPay.creditSettings,
+		prokatavoli: +prokatavoliCreditSlider.value,
+		finalCost: creditFinalCost.textContent,
+		monthlyCost: creditMonthlyCost.textContent
+	};
 	updateBasketSection({ prokatavoliDoseis: true });
 }
 
@@ -485,19 +499,32 @@ function doseisNoCreditSliderOnChange(value) {
 	configureNoCreditResults();
 
 	if (!userSelections.vehicle.suggestions) return;
-	userSelections.easyPay.noCreditSettings = { ...userSelections.easyPay.noCreditSettings, doseis: +doseisNoCreditSlider.value };
-	userSelections.easyPay.noCreditSettings.finalCost = noCreditFinalCost.textContent;
+	// userSelections.easyPay.noCreditSettings = { ...userSelections.easyPay.noCreditSettings, doseis: +doseisNoCreditSlider.value };
+	// userSelections.easyPay.noCreditSettings.finalCost = noCreditFinalCost.textContent;
+
+	userSelections.easyPay.noCreditSettings = {
+		...userSelections.easyPay.noCreditSettings,
+		doseis: +doseisNoCreditSlider.value,
+		finalCost: noCreditFinalCost.textContent,
+		monthlyCost: noCreditMonthlyCost.textContent
+	};
 	updateBasketSection({ prokatavoliDoseis: true });
 }
 
 function doseisCreditSelectOnChange(value) {
 	configureCreditResults();
 	if (!userSelections.vehicle.suggestions) return;
+	// userSelections.easyPay.creditSettings = {
+	// 	...userSelections.easyPay.creditSettings,
+	// 	doseis: +doseisCreditSelect.value !== 1 ? +doseisCreditSelect.value : 'Χωρίς Δόσεις'
+	// };
+	// userSelections.easyPay.creditSettings.finalCost = creditFinalCost.textContent;
 	userSelections.easyPay.creditSettings = {
 		...userSelections.easyPay.creditSettings,
-		doseis: +doseisCreditSelect.value !== 1 ? +doseisCreditSelect.value : 'Χωρίς Δόσεις'
+		doseis: +doseisCreditSelect.value !== 1 ? +doseisCreditSelect.value : 'Χωρίς Δόσεις',
+		finalCost: creditFinalCost.textContent,
+		monthlyCost: creditMonthlyCost.textContent
 	};
-	userSelections.easyPay.creditSettings.finalCost = creditFinalCost.textContent;
 	updateBasketSection({ prokatavoliDoseis: true });
 }
 
@@ -1368,12 +1395,22 @@ function getEasyPaySystem(selectedSystemDiv) {
 
 function getNoCreditSettings() {
 	if (!userSelections.vehicle.suggestions.systems) return;
-	return { prokatavoli: +prokatavoliNoCreditSlider.value, doseis: +doseisNoCreditSlider.value, finalCost: noCreditFinalCost.textContent };
+	return {
+		prokatavoli: +prokatavoliNoCreditSlider.value,
+		doseis: +doseisNoCreditSlider.value,
+		finalCost: noCreditFinalCost.textContent,
+		monthlyCost: noCreditMonthlyCost.textContent
+	};
 }
 
 function getCreditSettings() {
 	if (!userSelections.vehicle.suggestions.systems) return;
-	return { prokatavoli: +prokatavoliCreditSlider.value, doseis: +doseisCreditSelect.value, finalCost: creditFinalCost.textContent };
+	return {
+		prokatavoli: +prokatavoliCreditSlider.value,
+		doseis: +doseisCreditSelect.value,
+		finalCost: creditFinalCost.textContent,
+		monthlyCost: creditMonthlyCost.textContent
+	};
 }
 
 function getCylinderDescrText() {
@@ -1635,11 +1672,13 @@ function updateBasketSection(sections) {
 			document.querySelector('.easy-pay-prokatavoli-basket').textContent = userSelections.easyPay.noCreditSettings.prokatavoli + '€';
 			document.querySelector('.easy-pay-doseis-basket').textContent = userSelections.easyPay.noCreditSettings.doseis;
 			document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.noCreditSettings.finalCost;
+			document.querySelector('.easy-pay-monthly-cost-basket').textContent = userSelections.easyPay.noCreditSettings.monthlyCost;
 			[...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(el => (el.style.display = 'flex'));
 		} else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
 			document.querySelector('.easy-pay-prokatavoli-basket').textContent = userSelections.easyPay.creditSettings.prokatavoli + '€';
 			document.querySelector('.easy-pay-doseis-basket').textContent = userSelections.easyPay.creditSettings.doseis;
 			document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.creditSettings.finalCost;
+			document.querySelector('.easy-pay-monthly-cost-basket').textContent = userSelections.easyPay.creditSettings.monthlyCost;
 			[...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(el => (el.style.display = 'flex'));
 		} else {
 			//DEBUG ΜΕΤΡΗΤΑ
