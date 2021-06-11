@@ -1610,6 +1610,7 @@ function updateBasketSection(sections) {
 
 	if (sections.easyPay) {
 		document.querySelector('.easy-pay-method-basket').textContent = userSelections.easyPay.method;
+		console.log('!!!!!!!!', userSelections.easyPay);
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
 		document.querySelector('.easy-pay-system-name-basket').textContent = userSelections.easyPay.system.name;
 
