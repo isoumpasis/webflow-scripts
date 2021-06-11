@@ -482,12 +482,14 @@ function doseisNoCreditSliderOnChange(value) {
 
 	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.noCreditSettings = { ...userSelections.easyPay.noCreditSettings, doseis: +doseisNoCreditSlider.value };
+	updateBasketSection({ easyPay: true });
 }
 
 function doseisCreditSelectOnChange(value) {
 	configureCreditResults();
 	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.creditSettings = { ...userSelections.easyPay.creditSettings, doseis: +doseisCreditSelect.value };
+	updateBasketSection({ easyPay: true });
 }
 
 function noVehicleNoCreditSliderOnChange(value) {
@@ -1380,6 +1382,7 @@ function configureEasyPayAfterSuggestion() {
 	configureCreditSliders();
 	configureNoCreditResults();
 	configureCreditResults();
+	updateBasketSection({ easyPay: true });
 }
 
 function configureModelEasyPay() {
