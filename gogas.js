@@ -6,6 +6,8 @@ const urlDimensions = '/dimensions';
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
 const dimensionSelect = document.querySelector('#dimensionSelect');
+const locationSelect = document.querySelector('#locationSelect');
+locationSelect.style.display = 'none';
 
 const suggestedContainers = document.querySelectorAll('.suggested-tank-container');
 
