@@ -391,7 +391,7 @@ function initEasyPayTabs() {
 	document.querySelectorAll('.easy-pay-tab').forEach(el =>
 		el.addEventListener('click', e => {
 			userSelections.easyPay.method = getEasyPayMethod(e.target);
-			updateBasketSection({ easyPay: true, prokavoliDoseis: true });
+			updateBasketSection({ easyPay: true, prokatavoliDoseis: true });
 
 			if (document.querySelector('.easy-pay-with-vehicle-container').style.display === 'none') {
 				if (e.target.classList.contains('no-credit-tab')) {
@@ -1043,7 +1043,6 @@ function showResults(fetchedModelObj) {
 
 	configureUserSelectionsAfterResults();
 	if (suggestedContainer && !suggestedContainer.classList.contains(`not-convertible-${userSelections.selectedFuel}-container`)) {
-		console.log('updatingbasketSection !!', suggestedContainer, userSelections.calculator);
 		updateBasketSection({ vehicle: true, calculator: true, easyPay: true, prokatavoliDoseis: true });
 	}
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
