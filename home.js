@@ -1006,11 +1006,12 @@ function configureUserSelectionsAfterResults() {
 			...userSelections.easyPay,
 			system: {
 				name: userSelections.vehicle.suggestions.systems[0].name, //default
-				priceWithVAT: selectedEasyPaySystemPrice
+				priceWithVAT: selectedEasyPaySystemPrice + '€'
 			},
 			noCreditSettings: getNoCreditSettings(),
-			creditSettings: getCreditSettings()
+			creditSettings: getCreditSettings(),
 			//metrhtaSettings: getMetrhtaSettings(),
+
 		};
 	}
 }
@@ -1361,19 +1362,19 @@ function getEasyPaySystem(selectedSystemDiv) {
 		? userSelections.vehicle.suggestions.systems[0].name
 		: userSelections.vehicle.suggestions.systems[1].name;
 
-	const priceWithVAT = +selectedSystemDiv.querySelector('.system-price-easy-pay').textContent.replace('€', '');
+	const priceWithVAT = selectedSystemDiv.querySelector('.system-price-easy-pay').textContent;
 
 	return { name, priceWithVAT };
 }
 
 function getNoCreditSettings() {
 	if (!userSelections.vehicle.suggestions.systems) return;
-	return { prokatavoli: +prokatavoliNoCreditSlider.value, doseis: +doseisNoCreditSlider.value };
+	return { prokatavoli: +prokatavoliNoCreditSlider.value, doseis: +doseisNoCreditSlider.value, finalCost: noCreditFinalCost.textContent };
 }
 
 function getCreditSettings() {
 	if (!userSelections.vehicle.suggestions.systems) return;
-	return { prokatavoli: +prokatavoliCreditSlider.value, doseis: +doseisCreditSelect.value };
+	return { prokatavoli: +prokatavoliCreditSlider.value, doseis: +doseisCreditSelect.value, , finalCost: creditFinalCost.textContent };
 }
 
 function getCylinderDescrText() {
@@ -1621,7 +1622,7 @@ function updateBasketSection(sections) {
 		document.querySelector('.easy-pay-method-basket').textContent = userSelections.easyPay.method;
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
 		document.querySelector('.easy-pay-system-name-basket').textContent = userSelections.easyPay.system.name;
-		document.querySelector('.easy-pay-system-vat-basket').textContent = userSelections.easyPay.system.priceWithVAT + '€';
+		document.querySelector('.easy-pay-system-vat-basket').textContent = userSelections.easyPay.system.priceWithVAT;
 
 		document.querySelector('.suggested-system-text-basket').textContent =
 			userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 'Ιδανικότερη πρόταση:' : 'Οικονομικότερη πρόταση:';
