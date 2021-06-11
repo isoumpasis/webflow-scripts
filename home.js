@@ -1686,7 +1686,7 @@ function updateBasketSection(sections) {
 			// document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.noCreditSettings.finalCost;
 			[...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(el => (el.style.display = 'none'));
 		}
-		console.log('userselection calculator gain', userSelection.calculator.gain);
+		console.log('userselection calculator gain', userSelections.calculator.gain);
 		document.querySelector('.easy-pay-monthly-gain-basket').textContent = perMonthCheckbox.checked
 			? userSelections.calculator.gain
 			: Math.round((userSelections.calculator.gain.replace('€', '') / 12) * 100) / 100 + '€';
