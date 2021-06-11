@@ -1079,7 +1079,7 @@ function showResults(fetchedModelObj) {
 
 	configureUserSelectionsAfterResults();
 	if (suggestedContainer && !suggestedContainer.classList.contains(`not-convertible-${userSelections.selectedFuel}-container`)) {
-		updateBasketSection({ vehicle: true, calculator: true, easyPay: true, prokatavoliDoseis: true });
+		updateBasketSection({ vehicle: true, calculator: true, easyPay: true, prokatavoliDoseis: true, easyPayMonthlyGain: true });
 	}
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
