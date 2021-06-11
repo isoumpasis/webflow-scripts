@@ -1673,6 +1673,7 @@ function updateBasketSection(sections) {
 			document.querySelector('.easy-pay-doseis-basket').textContent = userSelections.easyPay.noCreditSettings.doseis;
 			document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.noCreditSettings.finalCost;
 			document.querySelector('.easy-pay-monthly-cost-basket').textContent = userSelections.easyPay.noCreditSettings.monthlyCost;
+
 			[...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(el => (el.style.display = 'flex'));
 		} else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
 			document.querySelector('.easy-pay-prokatavoli-basket').textContent = userSelections.easyPay.creditSettings.prokatavoli + '€';
@@ -1685,6 +1686,7 @@ function updateBasketSection(sections) {
 			// document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.noCreditSettings.finalCost;
 			[...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(el => (el.style.display = 'none'));
 		}
+		document.querySelector('.easy-pay-monthly-gain-basket').textContent = +userSelections.calculator.gain.replace('€', '') / 12 + '€';
 	}
 }
 
