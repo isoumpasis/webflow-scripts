@@ -1009,9 +1009,8 @@ function configureUserSelectionsAfterResults() {
 				priceWithVAT: selectedEasyPaySystemPrice + '€'
 			},
 			noCreditSettings: getNoCreditSettings(),
-			creditSettings: getCreditSettings(),
+			creditSettings: getCreditSettings()
 			//metrhtaSettings: getMetrhtaSettings(),
-
 		};
 	}
 }
@@ -1374,7 +1373,7 @@ function getNoCreditSettings() {
 
 function getCreditSettings() {
 	if (!userSelections.vehicle.suggestions.systems) return;
-	return { prokatavoli: +prokatavoliCreditSlider.value, doseis: +doseisCreditSelect.value, , finalCost: creditFinalCost.textContent };
+	return { prokatavoli: +prokatavoliCreditSlider.value, doseis: +doseisCreditSelect.value, finalCost: creditFinalCost.textContent };
 }
 
 function getCylinderDescrText() {
