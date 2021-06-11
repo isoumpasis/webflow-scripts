@@ -25,8 +25,8 @@ typeSelect.addEventListener('change', function () {
 
 	litresSelect.disabled = true;
 	dimensionSelect.disabled = true;
-	litresSelect.innerHTML = '<option value="">Λίτρα Δεξαμενής</option>';
-	dimensionSelect.innerHTML = '<option value="">Διαστάσεις Δεξαμενής</option>';
+	litresSelect.innerHTML = '<option value="">Λίτρα</option>';
+	dimensionSelect.innerHTML = '<option value="">Διαστάσεις</option>';
 	suggestedContainers.forEach(container => {
 		container.style.display = 'none';
 	});
@@ -90,7 +90,7 @@ litresSelect.addEventListener('change', e => litresOnChange(e.target.value));
 function litresOnChange(value) {
 	console.log('liters changed', value);
 	dimensionSelect.disabled = true;
-	dimensionSelect.innerHTML = '<option>Διαστάσεις Δεξαμενής</option>';
+	dimensionSelect.innerHTML = '<option>Διαστάσεις</option>';
 	suggestedContainers.forEach(container => {
 		container.style.display = 'none';
 	});
