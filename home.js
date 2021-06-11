@@ -1482,7 +1482,7 @@ function configureNoCreditResults() {
 	noCreditFinalCost.textContent = (monthlyCost * doseisNoCreditSliderValueInt + prokatavoliNoCreditSliderValueInt).toFixed(2) + '€';
 
 	console.log('before', JSON.stringify(userSelections.easyPay));
-	userSelections.easyPay = { ...userSelections.easyPay, finalCost: creditFinalCost.textContent };
+	// userSelections.easyPay = { ...userSelections.easyPay, finalCost: creditFinalCost.textContent };
 	console.log('after', JSON.stringify(userSelections.easyPay));
 	updateBasketSection({ easyPay: true });
 }
@@ -1498,7 +1498,7 @@ function configureCreditResults() {
 
 	creditFinalCost.textContent = (Math.round((monthlyCost * doseisCreditSelectValueInt + prokatavoliCreditSliderValueInt) * 10) / 10).toFixed(2) + '€';
 
-	userSelections.easyPay = { ...userSelections.easyPay, finalCost: creditFinalCost.textContent };
+	// userSelections.easyPay = { ...userSelections.easyPay, finalCost: creditFinalCost.textContent };
 	updateBasketSection({ easyPay: true });
 }
 
