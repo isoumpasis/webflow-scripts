@@ -488,7 +488,10 @@ function doseisNoCreditSliderOnChange(value) {
 function doseisCreditSelectOnChange(value) {
 	configureCreditResults();
 	if (!userSelections.vehicle.suggestions) return;
-	userSelections.easyPay.creditSettings = { ...userSelections.easyPay.creditSettings, doseis: +doseisCreditSelect.value };
+	userSelections.easyPay.creditSettings = {
+		...userSelections.easyPay.creditSettings,
+		doseis: +doseisCreditSelect.value !== 1 ? +doseisCreditSelect.value : 'Χωρίς Δόσεις'
+	};
 	updateBasketSection({ prokatavoliDoseis: true });
 }
 
