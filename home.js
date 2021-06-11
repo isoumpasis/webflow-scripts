@@ -1044,7 +1044,7 @@ function showResults(fetchedModelObj) {
 	configureUserSelectionsAfterResults();
 	if (suggestedContainer && !suggestedContainer.classList.contains(`not-convertible-${userSelections.selectedFuel}-container`)) {
 		console.log('updatingbasketSection !!', suggestedContainer, userSelections.calculator);
-		updateBasketSection({ vehicle: true, calculator: true });
+		updateBasketSection({ vehicle: true, calculator: true, easyPay: true });
 	}
 	// sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
 }
@@ -1382,7 +1382,6 @@ function configureEasyPayAfterSuggestion() {
 	configureCreditSliders();
 	configureNoCreditResults();
 	configureCreditResults();
-	updateBasketSection({ easyPay: true });
 }
 
 function configureModelEasyPay() {
