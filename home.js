@@ -1665,6 +1665,11 @@ function updateBasketSection(sections) {
 
 		const systemIndex = userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 0 : 1;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[systemIndex].priceNoVAT;
+
+		console.log('userselection calculator gain', userSelections.calculator.gain);
+		document.querySelector('.easy-pay-monthly-gain-basket').textContent = perMonthCheckbox.checked
+			? userSelections.calculator.gain
+			: Math.round((userSelections.calculator.gain.replace('€', '') / 12) * 100) / 100 + '€';
 	}
 
 	if (sections.prokatavoliDoseis) {
@@ -1686,10 +1691,6 @@ function updateBasketSection(sections) {
 			// document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.noCreditSettings.finalCost;
 			[...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(el => (el.style.display = 'none'));
 		}
-		console.log('userselection calculator gain', userSelections.calculator.gain);
-		document.querySelector('.easy-pay-monthly-gain-basket').textContent = perMonthCheckbox.checked
-			? userSelections.calculator.gain
-			: Math.round((userSelections.calculator.gain.replace('€', '') / 12) * 100) / 100 + '€';
 	}
 }
 
