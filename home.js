@@ -454,7 +454,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
 	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.noCreditSettings.prokatavoli = +prokatavoliNoCreditSlider.value;
 
-	// userSelections.easyPay.noCreditSettings.finalCost = noCreditFinalCost.textContent;
+	userSelections.easyPay.noCreditSettings.finalCost = noCreditFinalCost.textContent;
 
 	updateBasketSection({ prokatavoliDoseis: true });
 }
@@ -473,7 +473,7 @@ function prokatavoliCreditSliderOnChange(value) {
 
 	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.creditSettings.prokatavoli = +prokatavoliCreditSlider.value;
-	// userSelections.easyPay.creditSettings.finalCost = creditFinalCost.textContent;
+	userSelections.easyPay.creditSettings.finalCost = creditFinalCost.textContent;
 	updateBasketSection({ prokatavoliDoseis: true });
 }
 
@@ -486,7 +486,8 @@ function doseisNoCreditSliderOnChange(value) {
 
 	if (!userSelections.vehicle.suggestions) return;
 	userSelections.easyPay.noCreditSettings = { ...userSelections.easyPay.noCreditSettings, doseis: +doseisNoCreditSlider.value };
-	// updateBasketSection({ prokatavoliDoseis: true });
+	userSelections.easyPay.noCreditSettings.finalCost = noCreditFinalCost.textContent;
+	updateBasketSection({ prokatavoliDoseis: true });
 }
 
 function doseisCreditSelectOnChange(value) {
@@ -496,7 +497,8 @@ function doseisCreditSelectOnChange(value) {
 		...userSelections.easyPay.creditSettings,
 		doseis: +doseisCreditSelect.value !== 1 ? +doseisCreditSelect.value : 'Χωρίς Δόσεις'
 	};
-	// updateBasketSection({ prokatavoliDoseis: true });
+	userSelections.easyPay.creditSettings.finalCost = creditFinalCost.textContent;
+	updateBasketSection({ prokatavoliDoseis: true });
 }
 
 function noVehicleNoCreditSliderOnChange(value) {
@@ -1632,13 +1634,16 @@ function updateBasketSection(sections) {
 		if (userSelections.easyPay.method === 'Χωρίς πιστωτική κάρτα') {
 			document.querySelector('.easy-pay-prokatavoli-basket').textContent = userSelections.easyPay.noCreditSettings.prokatavoli + '€';
 			document.querySelector('.easy-pay-doseis-basket').textContent = userSelections.easyPay.noCreditSettings.doseis;
+			document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.noCreditSettings.finalCost;
 			[...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(el => (el.style.display = 'flex'));
 		} else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
 			document.querySelector('.easy-pay-prokatavoli-basket').textContent = userSelections.easyPay.creditSettings.prokatavoli + '€';
 			document.querySelector('.easy-pay-doseis-basket').textContent = userSelections.easyPay.creditSettings.doseis;
+			document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.creditSettings.finalCost;
 			[...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(el => (el.style.display = 'flex'));
 		} else {
 			//DEBUG ΜΕΤΡΗΤΑ
+			document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.system.priceWithVAT + '€';
 			[...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(el => (el.style.display = 'none'));
 		}
 	}
