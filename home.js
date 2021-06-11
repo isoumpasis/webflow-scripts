@@ -194,6 +194,8 @@ const maxNoVehicleCreditSliderText = document.querySelector('.max-no-vehicle-cre
 
 const fuelPricesSelectVehicle = document.querySelector('#fuelPricesSelectVehicle');
 
+const notificationIconBasket = document.querySelector('.notification-icon-basket');
+
 let noCreditInterest = 12.6;
 let creditInterest = 7.2;
 
@@ -1601,6 +1603,7 @@ function updateBasketSection(sections) {
 	}
 
 	if (sections.vehicle) {
+		notificationIconBasket.style.display = 'flex';
 		document.querySelector('#makeImgBasket').src = document.querySelector('#makeImg').src;
 		document.querySelector('#modelNameBasket').textContent = document.querySelector('#modelName').textContent;
 		document.querySelector('.vehicle-divider-basket').style.display = 'block';
@@ -1634,6 +1637,7 @@ function updateBasketSection(sections) {
 	}
 
 	if (sections.resetNoVehicle) {
+		notificationIconBasket.style.display = 'none';
 		document.querySelector('.vehicle-divider-basket').style.display = 'none';
 		document.querySelector('.vehicle-container-basket').style.display = 'none';
 
