@@ -1480,11 +1480,6 @@ function configureNoCreditResults() {
 	configureEasyPayMonthlyGain();
 
 	noCreditFinalCost.textContent = (monthlyCost * doseisNoCreditSliderValueInt + prokatavoliNoCreditSliderValueInt).toFixed(2) + '€';
-
-	console.log('before', JSON.stringify(userSelections.easyPay));
-	// userSelections.easyPay = { ...userSelections.easyPay, finalCost: creditFinalCost.textContent };
-	console.log('after', JSON.stringify(userSelections.easyPay));
-	updateBasketSection({ easyPay: true });
 }
 
 function configureCreditResults() {
@@ -1497,9 +1492,6 @@ function configureCreditResults() {
 	configureEasyPayMonthlyGain();
 
 	creditFinalCost.textContent = (Math.round((monthlyCost * doseisCreditSelectValueInt + prokatavoliCreditSliderValueInt) * 10) / 10).toFixed(2) + '€';
-
-	// userSelections.easyPay = { ...userSelections.easyPay, finalCost: creditFinalCost.textContent };
-	updateBasketSection({ easyPay: true });
 }
 
 function configureEasyPayMonthlyGain() {
@@ -1615,7 +1607,6 @@ function updateBasketSection(sections) {
 
 	if (sections.easyPay) {
 		document.querySelector('.easy-pay-method-basket').textContent = userSelections.easyPay.method;
-		console.log('!!!!!!!!', userSelections.easyPay);
 		document.querySelector('.suggested-system-name-basket').textContent = userSelections.easyPay.system.name;
 		document.querySelector('.easy-pay-system-name-basket').textContent = userSelections.easyPay.system.name;
 
@@ -1624,8 +1615,6 @@ function updateBasketSection(sections) {
 
 		const systemIndex = userSelections.easyPay.system.name === userSelections.vehicle.suggestions.systems[0].name ? 0 : 1;
 		document.querySelector('.suggested-system-price-basket').textContent = userSelections.vehicle.suggestions.systems[systemIndex].priceNoVAT;
-
-		document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.finalCost;
 	}
 }
 
