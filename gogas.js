@@ -176,7 +176,14 @@ function showResults() {
 	const typeOfFoundObj = typeSelect.value === 'unknown' ? foundTankObj.type : typeSelect.value;
 	activeContainer = document.getElementById(typeContainerIdDict[typeOfFoundObj]);
 
-	activeContainer.querySelector('.tank-price').textContent = foundTankObj.price + '€';
+	renderResultContainer(activeContainer);
+}
 
-	activeContainer.style.display = 'grid';
+function renderResultContainer(container) {
+	container.querySelector('.litres-result').textContent = litresSelect.value + 'LT';
+	container.querySelector('.diameter-result').textContent = foundTankObj.diameter / 10;
+	container.querySelector('.length-result').textContent = foundTankObj.length / 10;
+	container.querySelector('.price-result').textContent = foundTankObj.price + '€';
+
+	container.style.display = 'grid';
 }
