@@ -6,13 +6,13 @@ const urlDimensions = '/dimensions';
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
 const dimensionSelect = document.querySelector('#dimensionSelect');
-const locationSelect = document.querySelector('#locationSelect');
+const locationBtn = document.querySelector('#myLocationBtn');
 
 document.addEventListener('DOMContentLoaded', () => {
   litresSelect.disabled = true;
   dimensionSelect.disabled = true;
 
-  locationSelect.style.display = 'none';
+  locationBtn.style.display = 'none';
 });
 
 const suggestedContainers = document.querySelectorAll('.suggested-tank-container');
