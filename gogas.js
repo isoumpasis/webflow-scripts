@@ -2,6 +2,7 @@
 const baseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
 const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
+const pinsUrl = 'https://lovatohellas.herokuapp.com/map/pins/getAll/nocache';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const suggestedContainers = document.querySelectorAll('.suggested-tank-container');
 
-let fetchedLitres, fetchedDimensions, foundTankObj, activeContainer;
+let fetchedLitres, fetchedDimensions, fetchedPins, foundTankObj, activeContainer;
 let isLocationSelected = false; // DEBUG from arxiki kai localStorage
 
 const typeContainerIdDict = {
@@ -214,6 +215,37 @@ function locationOnChange(value) {
   }
   isLocationSelected = true;
 
+  fetch(pinsUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ place: locationSelect.value })
+  })
+    .then(response => {
+      status = response.status;
+      return response.json();
+    })
+    .then(data => {
+      if (status !== 200) {
+        //DEBUG
+        // start loading in pins result
+        // endLoadingSelect(dimensionSelect);
+        // litresSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
+        console.error(status);
+        return;
+      }
+      console.log('Pins Fetch:', data);
+      fetchedPins = data;
+      populatePinsResult(fetchedPins);
+      // endLoadingSelect(dimensionSelect);
+    })
+    .catch(error => {
+      //endLoadingSelect(dimensionSelect);
+      //litresSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
+      console.error('Pins Error Fetch:', error);
+    });
+
   showResults();
 }
 
@@ -222,14 +254,18 @@ function showResults() {
   console.log({ foundTankObj });
 
   activeContainer = document.getElementById(typeContainerIdDict[foundTankObj.type]);
-  renderResultContainer(activeContainer);
+  renderResultsContainer(activeContainer);
 }
 
-function renderResultContainer(container) {
+function renderResultsContainer(container) {
   container.querySelector('.litres-result').textContent = foundTankObj.litres + ' LT';
   container.querySelector('.diameter-result').textContent = foundTankObj.diameter / 10;
   container.querySelector('.length-result').textContent = foundTankObj.length / 10;
   container.querySelector('.price-result').textContent = foundTankObj.price + '€';
 
   container.style.display = 'grid';
+}
+
+function populatePinsResult(fetchedPins) {
+  console.log('populate pins result', fetchedPins);
 }
