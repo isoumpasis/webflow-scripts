@@ -86,6 +86,7 @@ typeSelect.addEventListener('change', function () {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  resetLocationContainer();
 
   if (!this.value) return;
 
@@ -161,6 +162,7 @@ function litresOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  resetLocationContainer();
 
   if (!value) return;
 
@@ -227,6 +229,8 @@ function dimensionOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  resetLocationContainer();
+
   if (value !== 0 && !value) return;
 
   setLocationSelectHeader('Επιλέξτε Τοποθεσία');
@@ -243,6 +247,8 @@ function locationOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  resetLocationContainer();
+
   if (!value) {
     isLocationSelected = false;
     return;
@@ -311,7 +317,10 @@ function renderResultsContainer(container) {
 function populateLocationContainerResults(fetchedPins) {
   console.log('populate pins result', fetchedPins);
   document.querySelector('.found-places-text-location').textContent = fetchedPins.length;
+  resetLocationContainer();
+}
 
+function resetLocationContainer() {
   document.querySelector('.searching-location').style.display = 'none';
   document.querySelector('.location-results-container').style.display = 'block';
 }
