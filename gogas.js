@@ -188,6 +188,19 @@ function dimensionOnChange(value) {
   if (locationSelect.value) showResults();
 }
 
+locationSelect.addEventListener('change', e => locationOnChange(e.target.value));
+
+function locationOnChange(value) {
+  console.log('location changed', value);
+
+  suggestedContainers.forEach(container => {
+    container.style.display = 'none';
+  });
+  if (!value) return;
+
+  showResults();
+}
+
 function showResults() {
   foundTankObj = fetchedDimensions.find(dim => +dimensionSelect.value == dim.id);
   console.log({ foundTankObj });
