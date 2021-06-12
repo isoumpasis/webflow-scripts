@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const suggestedContainers = document.querySelectorAll('.suggested-tank-container');
 
 let fetchedLitres, fetchedDimensions, foundTankObj, activeContainer;
-let hasSelectedLocation = false; // DEBUG from arxiki kai localStorage
+let isLocationSelected = false; // DEBUG from arxiki kai localStorage
 
 const typeContainerIdDict = {
   ΕΣΩΤΕΡΙΚΗ: 'eswterikhContainer',
@@ -32,8 +32,7 @@ function endLoadingSelect(select) {
   select.classList.remove('loading-select');
 }
 function setLocationSelectHeader(label) {
-  console.log(label);
-  if (hasSelectedLocation) return;
+  if (isLocationSelected) return;
   const temp = [...locationSelect.options].map(option => option.outerHTML);
   temp[0] = `<option value="">${label}</option>`;
   locationSelect.innerHTML = temp.join('');
@@ -209,7 +208,11 @@ function locationOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
-  if (!value) return;
+  if (!value) {
+    isLocationSelected = false;
+    return;
+  }
+  isLocationSelected = true;
 
   showResults();
 }
