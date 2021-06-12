@@ -2,7 +2,8 @@
 const baseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
 const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
-const pinsUrl = 'https://lovatohellas.herokuapp.com/map/pins/getAll/nocache';
+// const pinsUrl = 'https://lovatohellas.herokuapp.com/map/pins/getAll/nocache'; //DEBUG witch url
+const pinsUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest/nocache';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -220,7 +221,7 @@ function locationOnChange(value) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ place: locationSelect.value })
+    body: JSON.stringify({ place: locationSelect.value, limit: 5, lovatoServices: ['gogasTanks'] })
   })
     .then(response => {
       status = response.status;
