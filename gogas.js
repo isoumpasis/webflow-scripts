@@ -26,17 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
   dimensionSelect.disabled = true;
   locationSelect.disabled = true;
 
-  document.querySelector('.open-map-btn').addEventListener('click', () => {
-    const url = `https://lovato-hellas.webflow.io/diktyo-synergaton?addr=ΝΟΜΟΣ%20${
-      locationSelect.options[locationSelect.selectedIndex].innerHTML
-    }`;
-    window.open(url, '_blank');
-  });
+  [...document.querySelectorAll('.open-map-btn')].map(el =>
+    el.addEventListener('click', () => {
+      const url = `https://lovato-hellas.webflow.io/diktyo-synergaton?addr=ΝΟΜΟΣ%20${
+        locationSelect.options[locationSelect.selectedIndex].innerHTML
+      }`;
+      window.open(url, '_blank');
+    })
+  );
 
-  document.querySelector('.enable-gps-btn').addEventListener('click', async () => {
-    const currentLatLng = await getCurrentPosition();
-    console.log(currentLatLng);
-  });
+  [...document.querySelectorAll('.enable-gps-btn')].map(el =>
+    el.addEventListener('click', async () => {
+      const currentLatLng = await getCurrentPosition();
+      console.log(currentLatLng);
+    })
+  );
 });
 
 function getCurrentPosition() {
