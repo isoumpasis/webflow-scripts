@@ -237,6 +237,8 @@ function dimensionOnChange(value) {
   locationSelect.disabled = false;
 
   if (locationSelect.value) {
+    document.querySelector('.searching-place-text-location').textContent =
+      locationSelect.options[locationSelect.selectedIndex].innerHTML;
     showResults();
     populateLocationContainerResults(fetchedPins);
   }
