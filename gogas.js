@@ -236,7 +236,10 @@ function dimensionOnChange(value) {
   setLocationSelectHeader('Επιλέξτε Τοποθεσία');
   locationSelect.disabled = false;
 
-  if (locationSelect.value) showResults();
+  if (locationSelect.value) {
+    showResults();
+    populateLocationContainerResults(fetchedPins);
+  }
 }
 
 locationSelect.addEventListener('change', e => locationOnChange(e.target.value));
