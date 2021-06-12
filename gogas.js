@@ -224,7 +224,7 @@ function locationOnChange(value) {
     body: JSON.stringify({ place: locationSelect.value, limit: 5, lovatoServices: ['gogasTanks'] })
   })
     .then(response => {
-      status = response.status;
+      status = +response.status;
       return response.json();
     })
     .then(data => {
