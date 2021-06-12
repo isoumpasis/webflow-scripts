@@ -141,7 +141,7 @@ function populateDimensionSelect(fetchedDimensions) {
 	let dimensionOptionsArray = ['<option value="">Επιλέξτε Διαστάσεις</option>'];
 	fetchedDimensions.forEach(dimension => {
 		const typeLabel = typeSelect.value === 'unknown' ? ` ${dimension.type} ` : '';
-		const dimensionLabel = `${dimension.diameter}/${dimension.length}${typeLabel} - ${litresSelect.value} LT`;
+		const dimensionLabel = `${dimension.diameter}/${dimension.length}${typeLabel} - ${dimension.litres} LT`;
 		dimensionOptionsArray.push(`<option value="${dimension.id}">${dimensionLabel}</option>`);
 	});
 
@@ -173,7 +173,6 @@ function showResults() {
 	foundTankObj = fetchedDimensions.find(dim => +dimensionSelect.value == dim.id);
 	console.log({ foundTankObj });
 
-	// const typeOfFoundObj = typeSelect.value === 'unknown' ? foundTankObj.type : typeSelect.value;
 	activeContainer = document.getElementById(typeContainerIdDict[foundTankObj.type]);
 	renderResultContainer(activeContainer);
 }
