@@ -234,6 +234,9 @@ function dimensionOnChange(value) {
   locationSelect.disabled = false;
 
   if (locationSelect.value) {
+    [...document.querySelectorAll('.searching-place-text-location')].map(
+      el => (el.textContent = locationSelect.options[locationSelect.selectedIndex].innerHTML)
+    );
     showResults();
     populateLocationContainerResults(fetchedPins);
   }
@@ -253,6 +256,9 @@ function locationOnChange(value) {
     return;
   }
   isLocationSelected = true;
+  [...document.querySelectorAll('.searching-place-text-location')].map(
+    el => (el.textContent = locationSelect.options[locationSelect.selectedIndex].innerHTML)
+  );
   resetLocationContainer();
 
   fetch(pinsUrl, {
