@@ -1166,7 +1166,7 @@ async function urlParamsConfig() {
     const searchInput = document.querySelector('#searchInput');
     try {
       const res = await geocoderSolution(gps);
-      console.log(res);
+      console.log('gps = ', gps, 'geocoder = ', res);
 
       searchInput.value = res.address;
       userMarker.setOptions({
