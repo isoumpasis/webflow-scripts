@@ -76,7 +76,10 @@ typeSelect.addEventListener('change', function () {
 
 function populateLitresSelect(fetchedLitres) {
 	let litresOptionsArray = ['<option value="">Επιλέξτε Λίτρα</option>'];
-	litresOptionsArray.push('<option value="allDimensions">Όλες οι διαστάσεις</option>');
+
+	const allDimensionsTypeLabel = typeSelect.value !== 'unknown' ? ` για ${typeSelect.options[typeSelect.selectedIndex].textContent}` : '';
+	litresOptionsArray.push(`<option value="allDimensions">Όλες οι διαστάσεις${allDimensionsTypeLabel}</option>`);
+
 	fetchedLitres.forEach(litre => {
 		litresOptionsArray.push(`<option value="${litre}">${litre} LT</option>`);
 	});
