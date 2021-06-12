@@ -6,13 +6,12 @@ const urlDimensions = '/dimensions';
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
 const dimensionSelect = document.querySelector('#dimensionSelect');
-const locationBtn = document.querySelector('#myLocationBtn');
+const locationSelect = document.querySelector('#locationSelect');
 
 document.addEventListener('DOMContentLoaded', () => {
   litresSelect.disabled = true;
   dimensionSelect.disabled = true;
-
-  locationBtn.style.display = 'none';
+  locationSelect.disabled = true;
 });
 
 const suggestedContainers = document.querySelectorAll('.suggested-tank-container');
@@ -37,8 +36,10 @@ typeSelect.addEventListener('change', function () {
 
   litresSelect.disabled = true;
   dimensionSelect.disabled = true;
+  locationSelect.disabled = true;
   litresSelect.innerHTML = '<option value="">Λίτρα</option>';
   dimensionSelect.innerHTML = '<option value="">Διαστάσεις</option>';
+
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
@@ -110,6 +111,7 @@ litresSelect.addEventListener('change', e => litresOnChange(e.target.value));
 function litresOnChange(value) {
   console.log('liters changed', value);
   dimensionSelect.disabled = true;
+  locationSelect.disabled = true;
   dimensionSelect.innerHTML = '<option>Διαστάσεις</option>';
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
@@ -174,13 +176,16 @@ dimensionSelect.addEventListener('change', e => dimensionOnChange(e.target.value
 
 function dimensionOnChange(value) {
   console.log('dimension changed', value);
+  locationSelect.disabled = true;
 
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
   if (value !== 0 && !value) return;
 
-  showResults();
+  locationSelect.disabled = false;
+
+  if (locationSelect.value) showResults();
 }
 
 function showResults() {
