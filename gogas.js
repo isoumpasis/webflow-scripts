@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const suggestedContainers = document.querySelectorAll('.suggested-tank-container');
 
 let fetchedLitres, fetchedDimensions, foundTankObj, activeContainer;
+let hasSelectedLocation = false; // DEBUG from arxiki kai localStorage
 
 const typeContainerIdDict = {
   ΕΣΩΤΕΡΙΚΗ: 'eswterikhContainer',
@@ -30,6 +31,12 @@ function startLoadingSelect(select) {
 function endLoadingSelect(select) {
   select.classList.remove('loading-select');
 }
+function setLocationSelectHeader(label) {
+  if (hasSelectedLocation) return;
+  const temp = [...locationSelect.options].map(option => option.outerHTML);
+  temp[0] = `<option value="">${label}</option>`;
+  locationSelect.innerHTML = temp.join('');
+}
 
 typeSelect.addEventListener('change', function () {
   console.log('type changed', this.value);
@@ -39,6 +46,7 @@ typeSelect.addEventListener('change', function () {
   locationSelect.disabled = true;
   litresSelect.innerHTML = '<option value="">Λίτρα</option>';
   dimensionSelect.innerHTML = '<option value="">Διαστάσεις</option>';
+  setLocationSelectHeader('Τοποθεσία');
 
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
@@ -113,6 +121,8 @@ function litresOnChange(value) {
   dimensionSelect.disabled = true;
   locationSelect.disabled = true;
   dimensionSelect.innerHTML = '<option>Διαστάσεις</option>';
+  setLocationSelectHeader('Τοποθεσία');
+
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
@@ -177,12 +187,14 @@ dimensionSelect.addEventListener('change', e => dimensionOnChange(e.target.value
 function dimensionOnChange(value) {
   console.log('dimension changed', value);
   locationSelect.disabled = true;
+  setLocationSelectHeader('Τοποθεσία');
 
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
   if (value !== 0 && !value) return;
 
+  setLocationSelectHeader('Επιλέξτε Τοποθεσία');
   locationSelect.disabled = false;
 
   if (locationSelect.value) showResults();
