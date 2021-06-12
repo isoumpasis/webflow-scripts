@@ -250,7 +250,6 @@ function locationOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
-  resetLocationContainer();
 
   if (!value) {
     isLocationSelected = false;
@@ -259,7 +258,7 @@ function locationOnChange(value) {
   isLocationSelected = true;
   document.querySelector('.searching-place-text-location').textContent =
     locationSelect.options[locationSelect.selectedIndex].innerHTML;
-  console.log(locationSelect.options[locationSelect.selectedIndex].innerHTML);
+  resetLocationContainer();
 
   fetch(pinsUrl, {
     method: 'POST',
