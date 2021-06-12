@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   [...document.querySelectorAll('.open-map-btn')].map(el =>
     el.addEventListener('click', () => {
-      const url = `https://lovato-hellas.webflow.io/diktyo-synergaton?addr=ΝΟΜΟΣ%20${
+      const url = `https://lovato-hellas.webflow.io/diktyo-synergaton?gps=ΝΟΜΟΣ%20${
         locationSelect.options[locationSelect.selectedIndex].innerHTML
       }`;
       window.open(url, '_blank');
