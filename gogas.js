@@ -10,12 +10,6 @@ const litresSelect = document.querySelector('#litresSelect');
 const dimensionSelect = document.querySelector('#dimensionSelect');
 const locationSelect = document.querySelector('#locationSelect');
 
-document.addEventListener('DOMContentLoaded', () => {
-  litresSelect.disabled = true;
-  dimensionSelect.disabled = true;
-  locationSelect.disabled = true;
-});
-
 const suggestedContainers = document.querySelectorAll('.suggested-tank-container');
 
 let fetchedLitres, fetchedDimensions, fetchedPins, foundTankObj, activeContainer;
@@ -26,6 +20,45 @@ const typeContainerIdDict = {
   ΕΞΩΤΕΡΙΚΗ: 'ekswterikhContainer',
   ΚΥΛΙΝΔΡΙΚΗ: 'kylindrikhContainer'
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  litresSelect.disabled = true;
+  dimensionSelect.disabled = true;
+  locationSelect.disabled = true;
+
+  document.querySelector('.open-map-btn').addEventListener('click', () => {
+    const url = `https://lovato-hellas.webflow.io/diktyo-synergaton?addr=ΝΟΜΟΣ%20${
+      locationSelect.options[locationSelect.selectedIndex].innerHTML
+    }`;
+    window.open(url, '_blank');
+  });
+
+  document.querySelector('.enable-gps-btn').addEventListener('click', async () => {
+    const currentLatLng = await getCurrentPosition();
+    console.log(currentLatLng);
+  });
+});
+
+function getCurrentPosition() {
+  return new Promise((resolve, reject) => {
+    let geolocationOptions = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        resolve([pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy]);
+      },
+      err => {
+        console.warn(`Error on geolocation: ${err.code}: ${err.message}`);
+        reject(err.message);
+      },
+      geolocationOptions
+    );
+  });
+}
 
 function startLoadingSelect(select) {
   select.classList.add('loading-select');
@@ -238,7 +271,7 @@ function locationOnChange(value) {
       }
       console.log('Pins Fetch:', data);
       fetchedPins = data;
-      populatePinsResult(fetchedPins);
+      populateLocationContainerResults(fetchedPins);
       // endLoadingSelect(dimensionSelect);
     })
     .catch(error => {
@@ -254,8 +287,16 @@ function showResults() {
   foundTankObj = fetchedDimensions.find(dim => +dimensionSelect.value == dim.id);
   console.log({ foundTankObj });
 
+  doLocationContainerTasks();
+
   activeContainer = document.getElementById(typeContainerIdDict[foundTankObj.type]);
   renderResultsContainer(activeContainer);
+}
+function doLocationContainerTasks() {
+  document.querySelector('.searching-place-text-location').textContent =
+    locationSelect.options[locationSelect.selectedIndex].innerHTML;
+  document.querySelector('.searching-location').style.display = 'flex';
+  document.querySelector('.location-results-container').style.display = 'none';
 }
 
 function renderResultsContainer(container) {
@@ -267,6 +308,10 @@ function renderResultsContainer(container) {
   container.style.display = 'grid';
 }
 
-function populatePinsResult(fetchedPins) {
+function populateLocationContainerResults(fetchedPins) {
   console.log('populate pins result', fetchedPins);
+  document.querySelector('.found-places-text-location').textContent = fetchedPins.length;
+
+  document.querySelector('.searching-location').style.display = 'none';
+  document.querySelector('.location-results-container').style.display = 'block';
 }
