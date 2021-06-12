@@ -304,8 +304,7 @@ function showResults() {
 function doLocationContainerTasks() {
   document.querySelector('.searching-place-text-location').textContent =
     locationSelect.options[locationSelect.selectedIndex].innerHTML;
-  document.querySelector('.searching-location').style.display = 'flex';
-  document.querySelector('.location-results-container').style.display = 'none';
+  resetLocationContainer();
 }
 
 function renderResultsContainer(container) {
@@ -320,10 +319,11 @@ function renderResultsContainer(container) {
 function populateLocationContainerResults(fetchedPins) {
   console.log('populate pins result', fetchedPins);
   document.querySelector('.found-places-text-location').textContent = fetchedPins.length;
-  resetLocationContainer();
+  document.querySelector('.searching-location').style.display = 'none';
+  document.querySelector('.location-results-container').style.display = 'block';
 }
 
 function resetLocationContainer() {
-  document.querySelector('.searching-location').style.display = 'none';
-  document.querySelector('.location-results-container').style.display = 'block';
+  document.querySelector('.searching-location').style.display = 'flex';
+  document.querySelector('.location-results-container').style.display = 'none';
 }
