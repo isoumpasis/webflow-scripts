@@ -32,6 +32,7 @@ function endLoadingSelect(select) {
   select.classList.remove('loading-select');
 }
 function setLocationSelectHeader(label) {
+  console.log(label);
   if (hasSelectedLocation) return;
   const temp = [...locationSelect.options].map(option => option.outerHTML);
   temp[0] = `<option value="">${label}</option>`;
