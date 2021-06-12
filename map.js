@@ -11,6 +11,7 @@ const markerClustererIcon =
 const mapCenter = { lat: 38.64, lng: 24.16 };
 const startZoom = 6;
 const searchZoom = 14;
+const gpsZoom = 11;
 const maxZoomClusterer = 10;
 let markers = [],
   markerClusterer;
@@ -1176,7 +1177,7 @@ async function urlParamsConfig() {
         animation: google.maps.Animation.DROP,
         zIndex: google.maps.Marker.MAX_ZINDEX
       });
-      map.setZoom(searchZoom);
+      map.setZoom(gpsZoom);
       map.setCenter(userMarker.position);
     } catch (e) {
       console.log('error on params geocoding', e);
