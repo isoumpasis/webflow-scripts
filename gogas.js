@@ -86,7 +86,7 @@ typeSelect.addEventListener('change', function () {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
-  resetLocationContainer();
+  // resetLocationContainer();
 
   if (!this.value) return;
 
@@ -162,7 +162,7 @@ function litresOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
-  resetLocationContainer();
+  // resetLocationContainer();
 
   if (!value) return;
 
@@ -229,7 +229,7 @@ function dimensionOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
-  resetLocationContainer();
+  // resetLocationContainer();
 
   if (value !== 0 && !value) return;
 
