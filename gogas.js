@@ -308,11 +308,11 @@ function renderResultsContainer(container) {
 
 function populateLocationContainerResults(fetchedPins) {
   console.log('populate pins result', fetchedPins);
-  [...document.querySelector('.found-places-text-location')].map(
+  [...document.querySelectorAll('.found-places-text-location')].map(
     el => (el.textContent = fetchedPins.length)
   );
-  [...document.querySelector('.searching-location')].map(el => (el.style.display = 'none'));
-  [...document.querySelector('.location-results-container')].map(
+  [...document.querySelectorAll('.searching-location')].map(el => (el.style.display = 'none'));
+  [...document.querySelectorAll('.location-results-container')].map(
     el => (el.style.display = 'block')
   );
 }
