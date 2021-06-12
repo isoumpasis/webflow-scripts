@@ -16,7 +16,7 @@ let fetchedLitres, fetchedDimensions, foundTankObj, activeContainer;
 const typeContainerIdDict = {
 	ΕΣΩΤΕΡΙΚΗ: 'eswterikhContainer',
 	ΕΞΩΤΕΡΙΚΗ: 'ekswterikhContainer',
-	ΚΥΛΙΝΔΡΙΚΗ: 'kylindrikhContainer' //he/
+	ΚΥΛΙΝΔΡΙΚΗ: 'kylindrikhContainer'
 };
 
 function startLoadingSelect(select) {
@@ -76,7 +76,7 @@ typeSelect.addEventListener('change', function () {
 
 function populateLitresSelect(fetchedLitres) {
 	let litresOptionsArray = ['<option value="">Επιλέξτε Λίτρα</option>'];
-
+	litresOptionsArray.push('<option value="allDimensions">Όλες οι διαστάσεις</option>');
 	fetchedLitres.forEach(litre => {
 		litresOptionsArray.push(`<option value="${litre}">${litre} LT</option>`);
 	});
@@ -138,7 +138,7 @@ function litresOnChange(value) {
 }
 
 function populateDimensionSelect(fetchedDimensions) {
-	let dimensionOptionsArray = ['<option value="">Επιλέξτε Διάσταση</option>'];
+	let dimensionOptionsArray = ['<option value="">Επιλέξτε Διαστάσεις</option>'];
 	fetchedDimensions.forEach(dimension => {
 		const typeLabel = typeSelect.value === 'unknown' ? ` ${dimension.type} ` : '';
 		const dimensionLabel = `${dimension.diameter}/${dimension.length}${typeLabel} - ${litresSelect.value} LT`;
@@ -173,14 +173,13 @@ function showResults() {
 	foundTankObj = fetchedDimensions.find(dim => +dimensionSelect.value == dim.id);
 	console.log({ foundTankObj });
 
-	const typeOfFoundObj = typeSelect.value === 'unknown' ? foundTankObj.type : typeSelect.value;
-	activeContainer = document.getElementById(typeContainerIdDict[typeOfFoundObj]);
-
+	// const typeOfFoundObj = typeSelect.value === 'unknown' ? foundTankObj.type : typeSelect.value;
+	activeContainer = document.getElementById(typeContainerIdDict[foundTankObj.type]);
 	renderResultContainer(activeContainer);
 }
 
 function renderResultContainer(container) {
-	container.querySelector('.litres-result').textContent = litresSelect.value + ' LT';
+	container.querySelector('.litres-result').textContent = foundTankObj.litres + ' LT';
 	container.querySelector('.diameter-result').textContent = foundTankObj.diameter / 10;
 	container.querySelector('.length-result').textContent = foundTankObj.length / 10;
 	container.querySelector('.price-result').textContent = foundTankObj.price + '€';
