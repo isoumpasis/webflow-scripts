@@ -215,7 +215,7 @@ function locationOnChange(value) {
     return;
   }
   isLocationSelected = true;
-
+  console.log({ place: locationSelect.value, limit: 5, lovatoServices: ['gogasTanks'] });
   fetch(pinsUrl, {
     method: 'POST',
     headers: {
@@ -224,11 +224,11 @@ function locationOnChange(value) {
     body: JSON.stringify({ place: locationSelect.value, limit: 5, lovatoServices: ['gogasTanks'] })
   })
     .then(response => {
-      status = +response.status;
+      status = response.status;
       return response.json();
     })
     .then(data => {
-      if (status !== 200) {
+      if (status != 200) {
         //DEBUG
         // start loading in pins result
         // endLoadingSelect(dimensionSelect);
