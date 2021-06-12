@@ -86,7 +86,6 @@ typeSelect.addEventListener('change', function () {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
-  // resetLocationContainer();
 
   if (!this.value) return;
 
@@ -162,7 +161,6 @@ function litresOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
-  // resetLocationContainer();
 
   if (!value) return;
 
@@ -229,7 +227,6 @@ function dimensionOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
-  // resetLocationContainer();
 
   if (value !== 0 && !value) return;
 
@@ -237,8 +234,6 @@ function dimensionOnChange(value) {
   locationSelect.disabled = false;
 
   if (locationSelect.value) {
-    document.querySelector('.searching-place-text-location').textContent =
-      locationSelect.options[locationSelect.selectedIndex].innerHTML;
     showResults();
     populateLocationContainerResults(fetchedPins);
   }
@@ -258,8 +253,6 @@ function locationOnChange(value) {
     return;
   }
   isLocationSelected = true;
-  document.querySelector('.searching-place-text-location').textContent =
-    locationSelect.options[locationSelect.selectedIndex].innerHTML;
   resetLocationContainer();
 
   fetch(pinsUrl, {
@@ -315,12 +308,18 @@ function renderResultsContainer(container) {
 
 function populateLocationContainerResults(fetchedPins) {
   console.log('populate pins result', fetchedPins);
-  document.querySelector('.found-places-text-location').textContent = fetchedPins.length;
-  document.querySelector('.searching-location').style.display = 'none';
-  document.querySelector('.location-results-container').style.display = 'block';
+  [...document.querySelector('.found-places-text-location')].map(
+    el => (el.textContent = fetchedPins.length)
+  );
+  [...document.querySelector('.searching-location')].map(el => (el.style.display = 'none'));
+  [...document.querySelector('.location-results-container')].map(
+    el => (el.style.display = 'block')
+  );
 }
 
 function resetLocationContainer() {
-  document.querySelector('.searching-location').style.display = 'flex';
-  document.querySelector('.location-results-container').style.display = 'none';
+  [...document.querySelectorAll('.searching-location')].map(el => (el.style.display = 'flex'));
+  [...document.querySelectorAll('.location-results-container')].map(
+    el => (el.style.display = 'none')
+  );
 }
