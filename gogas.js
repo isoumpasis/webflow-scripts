@@ -259,6 +259,7 @@ function locationOnChange(value) {
   isLocationSelected = true;
   document.querySelector('.searching-place-text-location').textContent =
     locationSelect.options[locationSelect.selectedIndex].innerHTML;
+  console.log(locationSelect.options[locationSelect.selectedIndex].innerHTML);
 
   fetch(pinsUrl, {
     method: 'POST',
