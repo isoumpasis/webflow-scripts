@@ -257,13 +257,15 @@ function locationOnChange(value) {
     return;
   }
   isLocationSelected = true;
-  console.log({ place: locationSelect.value, limit: 5, lovatoServices: ['gogasTanks'] });
+  document.querySelector('.searching-place-text-location').textContent =
+    locationSelect.options[locationSelect.selectedIndex].innerHTML;
+
   fetch(pinsUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ place: locationSelect.value, limit: 5, lovatoServices: ['gogasTanks'] })
+    body: JSON.stringify({ place: locationSelect.value, lovatoServices: ['gogasTanks'] })
   })
     .then(response => {
       status = response.status;
@@ -296,15 +298,8 @@ function showResults() {
   foundTankObj = fetchedDimensions.find(dim => +dimensionSelect.value == dim.id);
   console.log({ foundTankObj });
 
-  doLocationContainerTasks();
-
   activeContainer = document.getElementById(typeContainerIdDict[foundTankObj.type]);
   renderResultsContainer(activeContainer);
-}
-function doLocationContainerTasks() {
-  document.querySelector('.searching-place-text-location').textContent =
-    locationSelect.options[locationSelect.selectedIndex].innerHTML;
-  resetLocationContainer();
 }
 
 function renderResultsContainer(container) {
