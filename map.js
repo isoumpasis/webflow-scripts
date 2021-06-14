@@ -1061,6 +1061,7 @@ function initDOMEvents() {
   initFilters();
 }
 
+let temp;
 async function geocoderSolution(address) {
   return new Promise((resolve, reject) => {
     if (!address) {
@@ -1077,6 +1078,7 @@ async function geocoderSolution(address) {
       },
       (results, status) => {
         if (status === 'OK') {
+          temp = results;
           console.log(results);
           console.log('geocoding for', address);
           console.log('geocoder address result', results[0].formatted_address);
