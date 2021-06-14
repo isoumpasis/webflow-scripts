@@ -1077,6 +1077,7 @@ async function geocoderSolution(address) {
       },
       (results, status) => {
         if (status === 'OK') {
+          console.log(results);
           console.log('geocoding for', address);
           console.log('geocoder address result', results[0].formatted_address);
           resolve({
