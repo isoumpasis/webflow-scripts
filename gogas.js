@@ -3,7 +3,7 @@ const baseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
 const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
 // const pinsUrl = 'https://lovatohellas.herokuapp.com/map/pins/getAll/nocache'; //DEBUG witch url
-const pinsUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest/nocache';
+const pinsUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace/nocache';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
