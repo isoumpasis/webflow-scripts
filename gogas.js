@@ -336,6 +336,10 @@ function resetLocationContainer() {
 }
 
 function populateClosestsPins(userLatLng) {
+  console.log('open loading ....');
+  [...document.querySelectorAll('.searching-closests')].map(el => (el.style.display = 'flex'));
+  console.log('opened loading ....');
+
   fetch(closestUrl, {
     method: 'POST',
     headers: {
@@ -360,13 +364,16 @@ function populateClosestsPins(userLatLng) {
       console.log('Closest Fetch:', data);
       fetchedClosests = data;
       populateClosestsList(fetchedClosests);
-      // endLoadingSelect(dimensionSelect);
+      console.log('close loading ....');
+      [...document.querySelectorAll('.searching-closests')].map(el => (el.style.display = 'none'));
+      console.log('closed loading ....');
     })
     .catch(error => {
       //endLoadingSelect(dimensionSelect);
       //litresSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
       console.error('Pins Error Fetch:', error);
     });
+  console.log('after promise....');
 }
 
 function populateClosestsList(fetchedClosests) {
