@@ -1,22 +1,24 @@
 select::-webkit-scrollbar-track {
-	border-radius: 10px;
-	background-color: #dfdfdf;
+  border-radius: 10px;
+  background-color: #dfdfdf;
 }
 select::-webkit-scrollbar {
-	width: 10px;
-	border-radius: 10px;
-	background-color: #dfdfdf;
+  width: 10px;
+  border-radius: 10px;
+  background-color: #dfdfdf;
 }
 select::-webkit-scrollbar-thumb {
-	background-color: #00a1d8; /*#00679c5d;*/
-	border-radius: 10px;
+  background-color: #00a1d8; /*#00679c5d;*/
+  border-radius: 10px;
 }
 
 .loading-select {
-	-webkit-appearance: none;
-	background: #ffffff url(https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/604fdd781484d9192decddd2_Spin-1s-200px.gif) no-repeat center center;
-	background-size: 40px 40px;
-	appearance: none;
-	-moz-appearance: none;
-	-webkit-appearance: none;
+  -webkit-appearance: none;
+  background: #ffffff
+    url(https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/604fdd781484d9192decddd2_Spin-1s-200px.gif)
+    no-repeat center center;
+  background-size: 40px 40px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
