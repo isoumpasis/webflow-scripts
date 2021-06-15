@@ -382,9 +382,7 @@ function populateClosestsList(fetchedClosests) {
       names[i].textContent = closest.pin.properties.name;
       addresses[i].textContent = closest.pin.properties.address;
       phones[i].textContent = closest.pin.properties.phone;
-      emails[i].textContent = closest.pin.properties.email
-        ? closest.pin.properties.email
-        : 'no email';
+      emails[i].textContent = closest.pin.properties.email ? closest.pin.properties.email : '';
       distances[i].textContent = Math.round(closest.distance * 100) / 100;
     });
   });
