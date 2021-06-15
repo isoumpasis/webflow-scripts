@@ -385,7 +385,7 @@ function populateClosestsList(fetchedClosests) {
       emails[i].textContent = closest.pin.properties.email
         ? closest.pin.properties.email
         : 'no email';
-      distances[i].textContent = closest.distance;
+      distances[i].textContent = Math.round(closest.distance * 100) / 100;
     });
   });
 }
