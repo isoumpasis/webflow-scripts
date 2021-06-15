@@ -380,7 +380,7 @@ function populateClosestsList(fetchedClosests) {
 
     fetchedClosests.forEach((closest, i) => {
       names[i].textContent = closest.pin.properties.name;
-      adresses[i].textContent = closest.pin.properties.address;
+      addresses[i].textContent = closest.pin.properties.address;
       phones[i].textContent = closest.pin.properties.phone;
       emails[i].textContent = closest.pin.properties.email
         ? closest.pin.properties.email
