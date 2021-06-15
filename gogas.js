@@ -1,5 +1,6 @@
 /* System Identification */
 const baseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
+const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
 const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest/nocache'; //DEBUG witch url
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   [...document.querySelectorAll('.open-map-btn')].map(el =>
     el.addEventListener('click', () => {
-      const url = `https://lovato-hellas.webflow.io/diktyo-synergaton?gps=ΝΟΜΟΣ%20${
+      const url = `${mapBaseUrl}?gps=ΝΟΜΟΣ%20${
         locationSelect.options[locationSelect.selectedIndex].innerHTML
       }`;
       window.open(url, '_blank');
@@ -375,15 +376,19 @@ function populateClosestsPins(userLatLng) {
     });
   console.log('after promise....');
 }
-
+/**
+ * @param  {} fetchedClosests
+ * TODO: openMaps[i].href = `${mapBaseUrl}?gps=${encodeURI(closest.pin.properties.address)}`; xreiazetai na dw pws to kanw kai gia GEOMETRY
+ */
 function populateClosestsList(fetchedClosests) {
-  let names, addresses, phones, emails, distances;
+  let names, addresses, phones, emails, distances, openMaps;
   suggestedContainers.forEach(container => {
     names = [...container.querySelectorAll('.closest-name')];
     addresses = [...container.querySelectorAll('.closest-address')];
     phones = [...container.querySelectorAll('.closest-phone')];
     emails = [...container.querySelectorAll('.closest-email')];
     distances = [...container.querySelectorAll('.closest-distance')];
+    openMaps = [...container.querySelectorAll('.closest-open-map')];
 
     fetchedClosests.forEach((closest, i) => {
       names[i].textContent = closest.pin.properties.name;
@@ -391,6 +396,9 @@ function populateClosestsList(fetchedClosests) {
       phones[i].textContent = closest.pin.properties.phone;
       emails[i].textContent = closest.pin.properties.email ? closest.pin.properties.email : '';
       distances[i].textContent = Math.round(closest.distance * 100) / 100;
+      openMaps[i].href = `${mapBaseUrl}?gps=${encodeURI(closest.pin.properties.address)}`;
     });
   });
 }
+
+document.querySelectorAll('.list-item');
