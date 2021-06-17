@@ -332,11 +332,10 @@ function populateLocationContainerResults(fetchedPins) {
   [...document.querySelectorAll('.found-places-text-location')].map(
     el => (el.textContent = fetchedPins.length)
   );
-  [...document.querySelectorAll('.selected-location-string')].map(
-    el =>
-      (el.textContent =
-        locationSelect.value.charAt(0).toUpperCase() + locationSelect.value.slice(1).toLowerCase())
-  );
+  [...document.querySelectorAll('.selected-location-string')].forEach(el => {
+    const locationStr = locationSelect.options[locationSelect.selectedIndex];
+    el.textContent = locationStr.charAt(0).toUpperCase() + locationStr.slice(1).toLowerCase();
+  });
   //
   [...document.querySelectorAll('.searching-location')].map(el => (el.style.display = 'none'));
   [...document.querySelectorAll('.location-results-container')].map(
