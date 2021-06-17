@@ -336,6 +336,7 @@ function populateLocationContainerResults(fetchedPins) {
       (el.textContent =
         locationSelect.value.charAt(0).toUpperCase() + locationSelect.value.slice(1))
   );
+  //
   [...document.querySelectorAll('.searching-location')].map(el => (el.style.display = 'none'));
   [...document.querySelectorAll('.location-results-container')].map(
     el => (el.style.display = 'block')
