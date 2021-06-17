@@ -378,7 +378,7 @@ function populateClosestsPins(userLatLng) {
       }
       console.log('Closest Fetch:', data);
       fetchedClosests = data.closestPins;
-      addLocationStr(data.locationStr);
+      addLocationStr(data.location);
       populateClosestsList(fetchedClosests);
       console.log('close loading ....');
       [...document.querySelectorAll('.searching-closests')].map(el => (el.style.display = 'none'));
