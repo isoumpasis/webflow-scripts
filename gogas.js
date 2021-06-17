@@ -315,11 +315,24 @@ function renderResultsContainer(container) {
 
   container.style.display = 'grid';
 }
-
+/**
+ * @param  {} fetchedPins
+ *
+ * TODO clean code
+ * ! this is important!
+ * * Hello world?
+ * ? Is this life?
+ *
+ */
 function populateLocationContainerResults(fetchedPins) {
   console.log('populate pins result', fetchedPins);
   [...document.querySelectorAll('.found-places-text-location')].map(
     el => (el.textContent = fetchedPins.length)
+  );
+  [...document.querySelectorAll('.selected-location-string')].map(
+    el =>
+      (el.textContent =
+        locationSelect.value.charAt(0).toUpperCase() + locationSelect.value.slice(1))
   );
   [...document.querySelectorAll('.searching-location')].map(el => (el.style.display = 'none'));
   [...document.querySelectorAll('.location-results-container')].map(
