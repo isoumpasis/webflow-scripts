@@ -1,10 +1,8 @@
-const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/getAll';
-
+const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
 // const episimosIconUrl =
 // 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
 const episimosIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60663eb3c347c9975c35d5d9_location-icon-white.svg';
-
 const markerClustererIcon =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6059ab2542758022d1e784de_m1.png';
 
@@ -34,9 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   generateInitHtml();
   initDOMEvents();
   startLoader();
-  console.log('2'); //3.6
   cachedPins = await getCachedPins();
-  console.log('3');
   endLoader();
   console.log(cachedPins);
   await initMap();
@@ -45,12 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function getCachedPins() {
   try {
-    const res = await fetch(urlCachedPins, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    const res = await fetch(urlCachedPins);
     return await res.json();
   } catch (e) {
     console.error('Error Fetching Cached Pins:', error);
@@ -1061,6 +1052,7 @@ function initDOMEvents() {
   initFilters();
 }
 
+let temp;
 async function geocoderSolution(address) {
   return new Promise((resolve, reject) => {
     if (!address) {
@@ -1077,6 +1069,8 @@ async function geocoderSolution(address) {
       },
       (results, status) => {
         if (status === 'OK') {
+          temp = results;
+          console.log(results);
           console.log('geocoding for', address);
           console.log('geocoder address result', results[0].formatted_address);
           resolve({

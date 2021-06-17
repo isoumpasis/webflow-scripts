@@ -1,9 +1,10 @@
 /* System Identification */
 const baseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
+const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
 const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
-// const pinsUrl = 'https://lovatohellas.herokuapp.com/map/pins/getAll/nocache'; //DEBUG witch url
-const pinsUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest/nocache';
+const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest/nocache'; //DEBUG witch url
+const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace/nocache';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -12,7 +13,7 @@ const locationSelect = document.querySelector('#locationSelect');
 
 const suggestedContainers = document.querySelectorAll('.suggested-tank-container');
 
-let fetchedLitres, fetchedDimensions, fetchedPins, foundTankObj, activeContainer;
+let fetchedLitres, fetchedDimensions, fetchedPins, fetchedClosests, foundTankObj, activeContainer;
 let isLocationSelected = false; // DEBUG from arxiki kai localStorage
 
 const typeContainerIdDict = {
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   [...document.querySelectorAll('.open-map-btn')].map(el =>
     el.addEventListener('click', () => {
-      const url = `https://lovato-hellas.webflow.io/diktyo-synergaton?gps=ΝΟΜΟΣ%20${
+      const url = `${mapBaseUrl}?gps=ΝΟΜΟΣ%20${
         locationSelect.options[locationSelect.selectedIndex].innerHTML
       }`;
       window.open(url, '_blank');
@@ -38,7 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
   [...document.querySelectorAll('.enable-gps-btn')].map(el =>
     el.addEventListener('click', async () => {
       const currentLatLng = await getCurrentPosition();
-      console.log(currentLatLng);
+      console.log('my current position', currentLatLng);
+      populateClosestsPins({ lat: currentLatLng[0], lng: currentLatLng[1] });
     })
   );
 });
@@ -265,7 +267,7 @@ function locationOnChange(value) {
   );
   resetLocationContainer();
 
-  fetch(pinsUrl, {
+  fetch(numPlaceUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -346,3 +348,70 @@ function resetLocationContainer() {
     el => (el.style.display = 'none')
   );
 }
+
+function populateClosestsPins(userLatLng) {
+  console.log('open loading ....');
+  [...document.querySelectorAll('.searching-closests')].map(el => (el.style.display = 'flex'));
+  console.log('opened loading ....');
+
+  fetch(closestUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      geometry: userLatLng,
+      lovatoServices: ['gogasTanks'],
+      kmLimit: 150,
+      pinsLimit: 5
+    })
+  })
+    .then(response => {
+      status = response.status;
+      return response.json();
+    })
+    .then(data => {
+      if (status != 200) {
+        console.error(status);
+        return;
+      }
+      console.log('Closest Fetch:', data);
+      fetchedClosests = data;
+      populateClosestsList(fetchedClosests);
+      console.log('close loading ....');
+      [...document.querySelectorAll('.searching-closests')].map(el => (el.style.display = 'none'));
+      console.log('closed loading ....');
+    })
+    .catch(error => {
+      //endLoadingSelect(dimensionSelect);
+      //litresSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
+      console.error('Pins Error Fetch:', error);
+    });
+  console.log('after promise....');
+}
+/**
+ * @param  {} fetchedClosests
+ * TODO: openMaps[i].href = `${mapBaseUrl}?gps=${encodeURI(closest.pin.properties.address)}`; xreiazetai na dw pws to kanw kai gia GEOMETRY
+ */
+function populateClosestsList(fetchedClosests) {
+  let names, addresses, phones, emails, distances, openMaps;
+  suggestedContainers.forEach(container => {
+    names = [...container.querySelectorAll('.closest-name')];
+    addresses = [...container.querySelectorAll('.closest-address')];
+    phones = [...container.querySelectorAll('.closest-phone')];
+    emails = [...container.querySelectorAll('.closest-email')];
+    distances = [...container.querySelectorAll('.closest-distance')];
+    openMaps = [...container.querySelectorAll('.closest-open-map')];
+
+    fetchedClosests.forEach((closest, i) => {
+      names[i].textContent = closest.pin.properties.name;
+      addresses[i].textContent = closest.pin.properties.address;
+      phones[i].textContent = closest.pin.properties.phone;
+      emails[i].textContent = closest.pin.properties.email ? closest.pin.properties.email : '';
+      distances[i].textContent = Math.round(closest.distance * 100) / 100;
+      openMaps[i].href = `${mapBaseUrl}?gps=${encodeURI(closest.pin.properties.address)}`;
+    });
+  });
+}
+
+document.querySelectorAll('.list-item');
