@@ -238,6 +238,7 @@ function dimensionOnChange(value) {
 
   setLocationSelectHeader('Επιλέξτε Τοποθεσία');
   locationSelect.disabled = false;
+  locationSelect.focus();
 
   if (locationSelect.value) {
     [...document.querySelectorAll('.searching-place-text-location')].map(
@@ -334,7 +335,7 @@ function populateLocationContainerResults(fetchedPins) {
   [...document.querySelectorAll('.selected-location-string')].map(
     el =>
       (el.textContent =
-        locationSelect.value.charAt(0).toUpperCase() + locationSelect.value.slice(1))
+        locationSelect.value.charAt(0).toUpperCase() + locationSelect.value.slice(1).toLowerCase())
   );
   //
   [...document.querySelectorAll('.searching-location')].map(el => (el.style.display = 'none'));
