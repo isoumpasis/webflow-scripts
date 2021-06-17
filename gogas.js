@@ -333,7 +333,7 @@ function populateLocationContainerResults(fetchedPins) {
     el => (el.textContent = fetchedPins.length)
   );
   [...document.querySelectorAll('.selected-location-string')].forEach(el => {
-    const locationStr = locationSelect.options[locationSelect.selectedIndex];
+    const locationStr = locationSelect.options[locationSelect.selectedIndex].innerHTML;
     el.textContent = locationStr.charAt(0).toUpperCase() + locationStr.slice(1).toLowerCase();
   });
   //
