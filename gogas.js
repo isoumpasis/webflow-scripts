@@ -377,7 +377,8 @@ function populateClosestsPins(userLatLng) {
         return;
       }
       console.log('Closest Fetch:', data);
-      fetchedClosests = data;
+      fetchedClosests = data.closestPins;
+      addLocationStr(data.locationStr);
       populateClosestsList(fetchedClosests);
       console.log('close loading ....');
       [...document.querySelectorAll('.searching-closests')].map(el => (el.style.display = 'none'));
@@ -415,4 +416,6 @@ function populateClosestsList(fetchedClosests) {
   });
 }
 
-document.querySelectorAll('.list-item');
+function addLocationStr(location) {
+  [...document.querySelectorAll('.location-address-string')].map(el => (el.textContent = location));
+}
