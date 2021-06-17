@@ -3,8 +3,8 @@ const baseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
 const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
 const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
-const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest/nocache'; //DEBUG witch url
-const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace/nocache';
+const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
+const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
