@@ -38,9 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   [...document.querySelectorAll('.enable-gps-btn')].map(el =>
     el.addEventListener('click', async () => {
-      const currentLatLng = await getCurrentPosition();
-      console.log('my current position', currentLatLng);
-      populateClosestsPins({ lat: currentLatLng[0], lng: currentLatLng[1] });
+      try {
+        const currentLatLng = await getCurrentPosition();
+        console.log('my current position', currentLatLng);
+        populateClosestsPins({ lat: currentLatLng[0], lng: currentLatLng[1] });
+      } catch (e) {
+        console.log('error on geolocation', e);
+      }
     })
   );
 });
