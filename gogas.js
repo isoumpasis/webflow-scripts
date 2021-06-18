@@ -382,6 +382,7 @@ function populateClosestsPins(userLatLng) {
       }
       console.log('Closest Fetch:', data);
       fetchedClosests = data.closestPins;
+      openLocationListContainer();
       addLocationStr(data.location);
       populateClosestsList(fetchedClosests);
       console.log('close loading ....');
@@ -422,4 +423,8 @@ function populateClosestsList(fetchedClosests) {
 
 function addLocationStr(location) {
   [...document.querySelectorAll('.location-address-string')].map(el => (el.textContent = location));
+}
+
+function openLocationListContainer() {
+  document.querySelector('.location-list-container').style.height = 'auto';
 }
