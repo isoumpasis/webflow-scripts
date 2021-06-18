@@ -426,7 +426,7 @@ function addLocationStr(location) {
 }
 
 function openLocationListContainer() {
-  const locationListContainer = document.querySelector('.location-list-container');
-  locationListContainer.style.display = 'flex';
-  locationListContainer.style.height = 'auto';
+  const locationListContainer = [...document.querySelectorAll('.location-list-container')];
+  locationListContainer.map(el => (el.style.display = 'flex'));
+  locationListContainer.map(el => (el.style.height = 'auto'));
 }
