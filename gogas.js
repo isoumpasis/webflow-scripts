@@ -15,6 +15,7 @@ const suggestedContainers = document.querySelectorAll('.suggested-tank-container
 
 let fetchedLitres, fetchedDimensions, fetchedPins, fetchedClosests, foundTankObj, activeContainer;
 let isLocationSelected = false; // DEBUG from arxiki kai localStorage
+let geolocationError = false;
 
 const typeContainerIdDict = {
   ΕΣΩΤΕΡΙΚΗ: 'eswterikhContainer',
@@ -44,9 +45,20 @@ document.addEventListener('DOMContentLoaded', () => {
         populateClosestsPins({ lat: currentLatLng[0], lng: currentLatLng[1] });
       } catch (e) {
         console.log('error on geolocation', e);
+        geolocationError = true;
+        [...document.querySelectorAll('.geolocation-error')].map(
+          el => (el.style.display = 'block')
+        );
       }
     })
   );
+});
+
+document.addEventListener('click', () => {
+  if (geolocationError) {
+    [...document.querySelectorAll('.geolocation-error')].map(el => (el.style.display = 'none'));
+    geolocationError = false;
+  }
 });
 
 function getCurrentPosition() {
