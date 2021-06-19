@@ -350,9 +350,18 @@ function renderResultsContainer(container) {
  */
 function populateLocationContainerResults(fetchedPins) {
   console.log('populate pins result', fetchedPins);
-  [...document.querySelectorAll('.found-places-text-location')].map(
-    el => (el.textContent = fetchedPins.length)
-  );
+
+  if (fetchedPins.length) {
+    [...document.querySelectorAll('.pins-found')].map(el => (el.style.display = 'block'));
+    [...document.querySelectorAll('.pins-not-found')].map(el => (el.style.display = 'none'));
+    [...document.querySelectorAll('.found-places-text-location')].map(
+      el => (el.textContent = fetchedPins.length)
+    );
+  } else {
+    [...document.querySelectorAll('.pins-found')].map(el => (el.style.display = 'none'));
+    [...document.querySelectorAll('.pins-not-found')].map(el => (el.style.display = 'block'));
+  }
+
   [...document.querySelectorAll('.selected-location-string')].forEach(el => {
     const locationStr = locationSelect.options[locationSelect.selectedIndex].innerHTML;
     el.textContent = locationStr.charAt(0).toUpperCase() + locationStr.slice(1).toLowerCase();
