@@ -108,6 +108,7 @@ typeSelect.addEventListener('change', function () {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  document.querySelector('init-container').style.display = 'flex';
 
   if (!this.value) return;
 
@@ -183,6 +184,7 @@ function litresOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  document.querySelector('init-container').style.display = 'flex';
 
   if (!value) return;
 
@@ -249,6 +251,7 @@ function dimensionOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  document.querySelector('init-container').style.display = 'flex';
 
   if (value !== 0 && !value) return;
 
@@ -273,6 +276,7 @@ function locationOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  document.querySelector('init-container').style.display = 'flex';
 
   if (!value) {
     isLocationSelected = false;
@@ -332,6 +336,7 @@ function renderResultsContainer(container) {
   container.querySelector('.length-result').textContent = foundTankObj.length / 10;
   container.querySelector('.price-result').textContent = foundTankObj.price + '€';
 
+  document.querySelector('.init-container').style.display = 'none';
   container.style.display = 'grid';
 }
 /**
