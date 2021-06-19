@@ -433,11 +433,11 @@ function prepareClosestList(fetchedClosests) {
 }
 
 function generateListItems(fetchedClosests) {
-  const listItem = document.querySelector('.list-item');
+  const listItem = document.querySelector('.list-item').cloneNode(true);
 
   suggestedContainers.forEach(container => {
     const containerList = container.querySelector('.location-list-block');
-    containerList.innerHTML = '';
+    [...containerList.querySelectorAll('.list-item')].map(el => el.remove());
     for (let i = 0; i < fetchedClosests.length - 1; i++) {
       const cloneListItem = listItem.cloneNode(true);
       containerList.appendChild(cloneListItem);
