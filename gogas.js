@@ -437,6 +437,7 @@ function generateListItems(fetchedClosests) {
 
   suggestedContainers.forEach(container => {
     const containerList = container.querySelector('.location-list-block');
+    containerList.innerHTML = '';
     for (let i = 0; i < fetchedClosests.length - 1; i++) {
       const cloneListItem = listItem.cloneNode(true);
       containerList.appendChild(cloneListItem);
