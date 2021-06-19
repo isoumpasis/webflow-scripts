@@ -460,7 +460,7 @@ function populateClosestsList(fetchedClosests) {
     distances = [...container.querySelectorAll('.closest-distance')];
     openMaps = [...container.querySelectorAll('.closest-open-map')];
 
-    console.log(names, container.querySelectorAll('.closest-name'));
+    console.log(names[0].textContent, container.querySelectorAll('.closest-name'));
     fetchedClosests.forEach((closest, i) => {
       names[i].innerText = closest.pin.properties.name;
       addresses[i].innerText = closest.pin.properties.address;
