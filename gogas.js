@@ -442,7 +442,7 @@ function generateListItems(fetchedClosests) {
       console.log(container, el);
       el.remove();
     });
-    for (let i = 0; i < fetchedClosests.length - 1; i++) {
+    for (let i = 0; i < fetchedClosests.length; i++) {
       const cloneListItem = listItem.cloneNode(true);
       containerList.appendChild(cloneListItem);
       console.log(containerList, cloneListItem);
