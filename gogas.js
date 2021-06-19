@@ -434,18 +434,14 @@ function prepareClosestList(fetchedClosests) {
 
 function generateListItems(fetchedClosests) {
   const listItem = document.querySelector('.list-item').cloneNode(true);
-  console.log(listItem);
-
   suggestedContainers.forEach(container => {
     const containerList = container.querySelector('.location-list-block');
     [...containerList.querySelectorAll('.list-item')].forEach(el => {
-      console.log(container, el);
       el.remove();
     });
     for (let i = 0; i < fetchedClosests.length; i++) {
       const cloneListItem = listItem.cloneNode(true);
       containerList.appendChild(cloneListItem);
-      console.log(containerList, cloneListItem);
     }
   });
 }
@@ -461,7 +457,6 @@ function populateClosestsList(fetchedClosests) {
     openMaps = [...container.querySelectorAll('.closest-open-map')];
 
     fetchedClosests.forEach((closest, i) => {
-      console.log(names[i].textContent);
       names[i].textContent = closest.pin.properties.name;
       addresses[i].textContent = closest.pin.properties.address;
       phones[i].textContent = closest.pin.properties.phone;
