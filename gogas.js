@@ -434,10 +434,14 @@ function prepareClosestList(fetchedClosests) {
 
 function generateListItems(fetchedClosests) {
   const listItem = document.querySelector('.list-item').cloneNode(true);
+  console.log(listItem);
 
   suggestedContainers.forEach(container => {
     const containerList = container.querySelector('.location-list-block');
-    [...containerList.querySelectorAll('.list-item')].map(el => el.remove());
+    [...containerList.querySelectorAll('.list-item')].forEach(el => {
+      console.log(container, el);
+      el.remove();
+    });
     for (let i = 0; i < fetchedClosests.length - 1; i++) {
       const cloneListItem = listItem.cloneNode(true);
       containerList.appendChild(cloneListItem);
@@ -456,6 +460,7 @@ function populateClosestsList(fetchedClosests) {
     distances = [...container.querySelectorAll('.closest-distance')];
     openMaps = [...container.querySelectorAll('.closest-open-map')];
 
+    console.log(names, container.querySelectorAll('.closest-name'));
     fetchedClosests.forEach((closest, i) => {
       names[i].textContent = closest.pin.properties.name;
       addresses[i].textContent = closest.pin.properties.address;
