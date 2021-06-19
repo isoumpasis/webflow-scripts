@@ -108,7 +108,7 @@ typeSelect.addEventListener('change', function () {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
-  document.querySelector('init-container').style.display = 'flex';
+  document.querySelector('.init-container').style.display = 'flex';
 
   if (!this.value) return;
 
@@ -184,7 +184,7 @@ function litresOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
-  document.querySelector('init-container').style.display = 'flex';
+  document.querySelector('.init-container').style.display = 'flex';
 
   if (!value) return;
 
@@ -251,7 +251,7 @@ function dimensionOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
-  document.querySelector('init-container').style.display = 'flex';
+  document.querySelector('.init-container').style.display = 'flex';
 
   if (value !== 0 && !value) return;
 
@@ -276,7 +276,7 @@ function locationOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
-  document.querySelector('init-container').style.display = 'flex';
+  document.querySelector('.init-container').style.display = 'flex';
 
   if (!value) {
     isLocationSelected = false;
