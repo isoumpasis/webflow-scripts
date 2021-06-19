@@ -394,7 +394,7 @@ function populateClosestsPins(userLatLng) {
       geometry: userLatLng,
       lovatoServices: ['gogasTanks'],
       kmLimit: 150,
-      pinsLimit: 450
+      pinsLimit: 20
     })
   })
     .then(response => {
