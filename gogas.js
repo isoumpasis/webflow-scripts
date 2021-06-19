@@ -410,7 +410,7 @@ function populateClosestsPins(userLatLng) {
       fetchedClosests = data.closestPins;
       openLocationListContainer();
       addLocationStr(data.location);
-      populateClosestsList(fetchedClosests);
+      prepareClosestList(fetchedClosests);
       console.log('close loading ....');
       [...document.querySelectorAll('.searching-closests')].map(el => (el.style.display = 'none'));
       console.log('closed loading ....');
@@ -426,6 +426,25 @@ function populateClosestsPins(userLatLng) {
  * @param  {} fetchedClosests
  * TODO: openMaps[i].href = `${mapBaseUrl}?gps=${encodeURI(closest.pin.properties.address)}`; xreiazetai na dw pws to kanw kai gia GEOMETRY
  */
+
+function prepareClosestList(fetchedClosests) {
+  generateListItems(fetchedClosests);
+  populateClosestsList(fetchedClosests);
+}
+
+function generateListItems(fetchedClosests) {
+  const listItem = document.querySelector('.list-item');
+
+  suggestedContainers.forEach(container => {
+    const containerList = container.querySelector('.location-list-block');
+    fetchedClosests.forEach((closest, i) => {
+      const cloneListItem = listItem.cloneNode(true);
+      containerList.appendChild(cloneListItem);
+      console.log(containerList, cloneListItem);
+    });
+  });
+}
+
 function populateClosestsList(fetchedClosests) {
   let names, addresses, phones, emails, distances, openMaps;
   suggestedContainers.forEach(container => {
