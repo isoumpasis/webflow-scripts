@@ -460,13 +460,13 @@ function populateClosestsList(fetchedClosests) {
     distances = [...container.querySelectorAll('.closest-distance')];
     openMaps = [...container.querySelectorAll('.closest-open-map')];
 
-    console.log(names[0].textContent, container.querySelectorAll('.closest-name'));
     fetchedClosests.forEach((closest, i) => {
-      names[i].innerText = closest.pin.properties.name;
-      addresses[i].innerText = closest.pin.properties.address;
-      phones[i].innerText = closest.pin.properties.phone;
-      emails[i].innerText = closest.pin.properties.email ? closest.pin.properties.email : '';
-      distances[i].innerText = Math.round(closest.distance * 100) / 100;
+      console.log(names[i].textContent);
+      names[i].textContent = closest.pin.properties.name;
+      addresses[i].textContent = closest.pin.properties.address;
+      phones[i].textContent = closest.pin.properties.phone;
+      emails[i].textContent = closest.pin.properties.email ? closest.pin.properties.email : '';
+      distances[i].textContent = Math.round(closest.distance * 100) / 100;
       openMaps[i].href = `${mapBaseUrl}?gps=${encodeURI(closest.pin.properties.address)}`;
     });
   });
