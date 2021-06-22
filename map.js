@@ -1218,6 +1218,6 @@ async function urlParamsConfig() {
     });
     selectedMarker = foundMarker;
     selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
-    openInfoWindow(marker);
+    openInfoWindow(foundMarker);
   }
 }
