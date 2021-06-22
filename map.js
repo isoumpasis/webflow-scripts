@@ -427,9 +427,8 @@ async function initMap() {
       // map.setCenter(marker.position);
 
       if (selectedMarker === marker) return;
-      if (selectedMarker) {
-        selectedMarker.setAnimation(null);
-      }
+      if (selectedMarker) selectedMarker.setAnimation(null);
+
       marker.setIcon({
         ...marker.getIcon(),
         scaledSize: new google.maps.Size(50, 50),
@@ -1167,7 +1166,7 @@ function setMarkerVisibility(marker, labels) {
 async function urlParamsConfig() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  let gps, filters;
+  let gps, filters, name;
   if (urlParams.has('gps')) {
     gps = urlParams.get('gps');
     const searchInput = document.querySelector('#searchInput');
@@ -1203,5 +1202,22 @@ async function urlParamsConfig() {
       labels[filter - 1].nextElementSibling.checked = true;
     });
     filterMarkers();
+  }
+  if (urlParams.has('name')) {
+    name = urlParams.get('name');
+    const foundMarker = markers.find(marker => marker.properties.name === name);
+
+    map.setZoom(gpsZoom);
+    map.setCenter(foundMarker.position);
+    if (selectedMarker === foundMarker) return;
+    if (selectedMarker) selectedMarker.setAnimation(null);
+    foundMarker.setIcon({
+      ...foundMarker.getIcon(),
+      scaledSize: new google.maps.Size(50, 50),
+      origin: new google.maps.Point(0, 0)
+    });
+    selectedMarker = foundMarker;
+    selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
+    openInfoWindow(marker);
   }
 }

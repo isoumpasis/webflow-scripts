@@ -444,7 +444,8 @@ function generateListItems(fetchedClosests) {
 function populateClosestsList(fetchedClosests) {
   let names, addresses, phones, emails, distances, openMaps;
 
-  let gpsParam;
+  // let gpsParam;
+  let nameParam;
   const filtersParam = '2';
 
   suggestedContainers.forEach(container => {
@@ -462,8 +463,10 @@ function populateClosestsList(fetchedClosests) {
       emails[i].textContent = closest.pin.properties.email ? closest.pin.properties.email : '';
       distances[i].textContent = Math.round(closest.distance * 100) / 100;
 
-      gpsParam = encodeURI(closest.pin.properties.address);
-      openMaps[i].href = `${mapBaseUrl}?gps=${gpsParam}&filters=${filtersParam}`;
+      // gpsParam = encodeURI(closest.pin.properties.address);
+      // openMaps[i].href = `${mapBaseUrl}?gps=${gpsParam}&filters=${filtersParam}`;
+      nameParam = encodeURI(closest.pin.properties.name);
+      openMaps[i].href = `${mapBaseUrl}?name=${nameParam}&filters=${filtersParam}`;
     });
   });
 }
