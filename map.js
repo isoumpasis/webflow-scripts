@@ -1205,7 +1205,7 @@ async function urlParamsConfig() {
   }
   if (urlParams.has('name')) {
     name = urlParams.get('name');
-    const foundMarker = markers.find(marker => marker.properties.name === name);
+    const foundMarker = markers.find(marker => marker.props.name === name);
 
     map.setZoom(gpsZoom);
     map.setCenter(foundMarker.position);
