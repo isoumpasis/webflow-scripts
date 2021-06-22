@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('click', () => {
       const url = `${mapBaseUrl}?gps=ΝΟΜΟΣ%20${
         locationSelect.options[locationSelect.selectedIndex].innerHTML
-      }`;
+      }&filters=2`;
       window.open(url, '_blank');
     })
   );
