@@ -11,7 +11,8 @@ const markerClustererIcon =
 const mapCenter = { lat: 38.64, lng: 24.16 };
 const startZoom = 6;
 const searchZoom = 14;
-const gpsZoom = 11;
+const gpsZoom = 11,
+  foundMarkerZoom = 14;
 const maxZoomClusterer = 10;
 let markers = [],
   markerClusterer;
@@ -1207,7 +1208,7 @@ async function urlParamsConfig() {
     name = urlParams.get('name');
     const foundMarker = markers.find(marker => marker.props.name === name);
 
-    map.setZoom(gpsZoom);
+    map.setZoom(foundMarkerZoom);
     map.setCenter(foundMarker.position);
     if (selectedMarker === foundMarker) return;
     if (selectedMarker) selectedMarker.setAnimation(null);
