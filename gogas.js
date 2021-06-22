@@ -467,6 +467,7 @@ function populateClosestsList(fetchedClosests) {
       // openMaps[i].href = `${mapBaseUrl}?gps=${gpsParam}&filters=${filtersParam}`;
       nameParam = encodeURI(closest.pin.properties.name);
       openMaps[i].href = `${mapBaseUrl}?name=${nameParam}&filters=${filtersParam}`;
+      openMaps[i].target = '_blank';
     });
   });
 }
