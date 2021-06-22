@@ -375,7 +375,8 @@ async function initMap() {
       cursor: 'pointer',
       animation: google.maps.Animation.DROP,
       visible: true,
-      props: cachedPin.properties
+      props: cachedPin.properties,
+      zIndex: google.maps.Marker.MAX_ZINDEX + 1
     });
   });
   markerClusterer = new MarkerClusterer(map, markers, {
