@@ -1046,7 +1046,7 @@ function initDOMEvents() {
           animation: google.maps.Animation.DROP,
           zIndex: google.maps.Marker.MAX_ZINDEX,
           icon: {
-            scaledSize: new google.maps.Size(50, 50)
+            scaledSize: new google.maps.Size(20, 20)
           }
         });
 
