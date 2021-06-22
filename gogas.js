@@ -443,6 +443,10 @@ function generateListItems(fetchedClosests) {
 
 function populateClosestsList(fetchedClosests) {
   let names, addresses, phones, emails, distances, openMaps;
+
+  let gpsParam;
+  const filtersParam = '2';
+
   suggestedContainers.forEach(container => {
     names = [...container.querySelectorAll('.closest-name')];
     addresses = [...container.querySelectorAll('.closest-address')];
@@ -457,7 +461,9 @@ function populateClosestsList(fetchedClosests) {
       phones[i].textContent = closest.pin.properties.phone;
       emails[i].textContent = closest.pin.properties.email ? closest.pin.properties.email : '';
       distances[i].textContent = Math.round(closest.distance * 100) / 100;
-      openMaps[i].href = `${mapBaseUrl}?gps=${encodeURI(closest.pin.properties.address)}`;
+
+      gpsParam = encodeURI(closest.pin.properties.address);
+      openMaps[i].href = `${mapBaseUrl}?gps=${gpsParam}&filters=${filtersParam}`;
     });
   });
 }
