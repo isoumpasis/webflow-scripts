@@ -3,8 +3,8 @@ const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
 // 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
 const episimosIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60663eb3c347c9975c35d5d9_location-icon-white.svg';
-// TODO gogas icon url icon
-// const gogasIconUrl = 'https://uploads-ssl.webflow.com/60';
+const gogasIconUrl =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60c7e4838a662c9a1bee7789_go-gas-location-icon-01.svg';
 const markerClustererIcon =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6059ab2542758022d1e784de_m1.png';
 
@@ -1132,6 +1132,15 @@ function filterMarkers() {
 
   if (!checkedLabels.length) markers.map(m => m.setVisible(true));
   else markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
+
+  if (
+    checkedLabels.some(l => l.id === 'gogasTanks') &&
+    checkedLabels.every(l => l.id !== 'lovatoSystems')
+  ) {
+    markers.map(m => m.setIcon({ ...marker.getIcon(), url: gogasIconUrl }));
+  } else {
+    markers.map(m => m.setIcon({ ...marker.getIcon(), url: episimosIconUrl }));
+  }
 
   markerClusterer.repaint();
 
