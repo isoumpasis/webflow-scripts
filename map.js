@@ -1137,9 +1137,9 @@ function filterMarkers() {
     checkedLabels.some(l => l.id === 'gogasTanks') &&
     checkedLabels.every(l => l.id !== 'lovatoSystems')
   ) {
-    markers.map(m => m.setIcon({ ...marker.getIcon(), url: gogasIconUrl }));
+    markers.map(m => m.setIcon({ ...m.getIcon(), url: gogasIconUrl }));
   } else {
-    markers.map(m => m.setIcon({ ...marker.getIcon(), url: episimosIconUrl }));
+    markers.map(m => m.setIcon({ ...m.getIcon(), url: episimosIconUrl }));
   }
 
   markerClusterer.repaint();
