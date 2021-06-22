@@ -3,7 +3,7 @@ const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
 // 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
 const episimosIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60663eb3c347c9975c35d5d9_location-icon-white.svg';
-// TODO gogas icon url
+// TODO gogas icon url icon
 // const gogasIconUrl = 'https://uploads-ssl.webflow.com/60';
 const markerClustererIcon =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6059ab2542758022d1e784de_m1.png';
@@ -377,8 +377,8 @@ async function initMap() {
       cursor: 'pointer',
       animation: google.maps.Animation.DROP,
       visible: true,
-      props: cachedPin.properties
-      // zIndex: google.maps.Marker.MAX_ZINDEX + 1
+      props: cachedPin.properties,
+      zIndex: google.maps.Marker.MAX_ZINDEX + 1
     });
   });
   markerClusterer = new MarkerClusterer(map, markers, {
@@ -992,10 +992,7 @@ function initDOMEvents() {
       title: autocompleteInput.value,
       position: searchPosition,
       animation: google.maps.Animation.DROP,
-      zIndex: google.maps.Marker.MAX_ZINDEX,
-      icon: {
-        scaledSize: new google.maps.Size(50, 50)
-      }
+      zIndex: google.maps.Marker.MAX_ZINDEX
     });
     map.setZoom(searchZoom);
     map.setCenter(userMarker.position);
@@ -1015,10 +1012,7 @@ function initDOMEvents() {
         title: autocompleteInput.value,
         position: res.location,
         animation: google.maps.Animation.DROP,
-        zIndex: google.maps.Marker.MAX_ZINDEX,
-        icon: {
-          scaledSize: new google.maps.Size(50, 50)
-        }
+        zIndex: google.maps.Marker.MAX_ZINDEX
       });
       map.setZoom(searchZoom);
       map.setCenter(userMarker.position);
@@ -1044,10 +1038,7 @@ function initDOMEvents() {
           map: map,
           title: 'Είστε εδώ',
           animation: google.maps.Animation.DROP,
-          zIndex: google.maps.Marker.MAX_ZINDEX,
-          icon: {
-            scaledSize: new google.maps.Size(20, 20)
-          }
+          zIndex: google.maps.Marker.MAX_ZINDEX
         });
 
         console.log(`Accuracy ${currentLatLng[2]} meters.`);
@@ -1181,10 +1172,7 @@ async function urlParamsConfig() {
         title: searchInput.value,
         position: res.location,
         animation: google.maps.Animation.DROP,
-        zIndex: google.maps.Marker.MAX_ZINDEX,
-        icon: {
-          scaledSize: new google.maps.Size(50, 50)
-        }
+        zIndex: google.maps.Marker.MAX_ZINDEX
       });
       map.setZoom(gpsZoom);
       map.setCenter(userMarker.position);
