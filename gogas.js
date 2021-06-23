@@ -13,7 +13,12 @@ const locationSelect = document.querySelector('#locationSelect');
 
 const suggestedContainers = document.querySelectorAll('.suggested-tank-container');
 
-let fetchedLitres, fetchedDimensions, fetchedPins, fetchedClosests, foundTankObj, activeContainer;
+let fetchedLitres,
+  fetchedDimensions,
+  fetchedPinsLength,
+  fetchedClosests,
+  foundTankObj,
+  activeContainer;
 let isLocationSelected = false; // DEBUG from arxiki kai localStorage
 let geolocationError = false;
 
@@ -39,7 +44,7 @@ function loadGogasSelections() {
   foundTankObj = gogasSelections.results.foundTankObj;
   fetchedLitres = gogasSelections.form.fetchedValues.fetchedLitres;
   fetchedDimensions = gogasSelections.form.fetchedValues.fetchedDimensions;
-  fetchedPins = gogasSelections.form.fetchedValues.fetchedPins;
+  fetchedPinsLength = gogasSelections.form.fetchedValues.fetchedPinsLength;
 
   // First activate type selection value
   let activeIndex;
@@ -60,7 +65,7 @@ function loadGogasSelections() {
   activateSelections();
 
   showResults();
-  populateLocationContainerResults(fetchedPins);
+  populateLocationContainerResults(fetchedPinsLength);
 }
 
 function activateSelections() {
@@ -335,7 +340,7 @@ function dimensionOnChange(value) {
       el => (el.textContent = locationSelect.options[locationSelect.selectedIndex].innerHTML)
     );
     showResults();
-    populateLocationContainerResults(fetchedPins);
+    populateLocationContainerResults(fetchedPinsLength);
   }
 }
 
@@ -380,10 +385,10 @@ function locationOnChange(value) {
         return;
       }
       console.log('Pins Fetch:', data);
-      fetchedPins = data;
-      gogasSelections.form.fetchedValues.fetchedPins = fetchedPins;
+      fetchedPinsLength = data;
+      gogasSelections.form.fetchedValues.fetchedPinsLength = fetchedPinsLength;
       saveUserResults();
-      populateLocationContainerResults(fetchedPins);
+      populateLocationContainerResults(fetchedPinsLength);
       // endLoadingSelect(dimensionSelect);
     })
     .catch(error => {
@@ -427,7 +432,7 @@ function saveUserResults() {
       fetchedValues: {
         fetchedLitres,
         fetchedDimensions,
-        fetchedPins
+        fetchedPinsLength
       }
     },
     results: {
@@ -439,7 +444,7 @@ function saveUserResults() {
 }
 
 /**
- * @param  {} fetchedPins
+ * @param  {} fetchedPinsLength
  *
  * TODO clean code
  * ! this is important!
@@ -447,14 +452,14 @@ function saveUserResults() {
  * ? Is this life?
  *
  */
-function populateLocationContainerResults(fetchedPins) {
-  console.log('populate pins result', fetchedPins);
+function populateLocationContainerResults(fetchedPinsLength) {
+  console.log('populate pins result', fetchedPinsLength);
 
-  if (fetchedPins.length) {
+  if (fetchedPinsLength) {
     [...document.querySelectorAll('.pins-found')].map(el => (el.style.display = 'block'));
     [...document.querySelectorAll('.pins-not-found')].map(el => (el.style.display = 'none'));
     [...document.querySelectorAll('.found-places-text-location')].map(
-      el => (el.textContent = fetchedPins.length)
+      el => (el.textContent = fetchedPinsLength)
     );
   } else {
     [...document.querySelectorAll('.pins-found')].map(el => (el.style.display = 'none'));
