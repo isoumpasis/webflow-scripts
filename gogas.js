@@ -24,7 +24,7 @@ const typeContainerIdDict = {
 };
 
 const preferredStorage = localStorage;
-const gogasSelections = {};
+let gogasSelections = {};
 
 /* STORAGE */
 function saveGogasSelections() {
