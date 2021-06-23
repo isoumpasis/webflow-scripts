@@ -28,6 +28,7 @@ const gogasSelections = {};
 
 /* STORAGE */
 function saveGogasSelections() {
+  console.log(gogasSelections, preferredStorage);
   preferredStorage.setItem('gogasSelections', JSON.stringify(gogasSelections));
 }
 
