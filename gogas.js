@@ -434,8 +434,7 @@ function saveUserResults() {
       }
     },
     results: {
-      foundTankObj,
-      location
+      foundTankObj
     }
   };
   setGogasSelections();
