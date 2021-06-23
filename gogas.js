@@ -353,7 +353,7 @@ function saveUserResults(foundTankObj, location) {
     userResults: {
       foundTankObj,
       location
-    }
+    } //
   };
   saveGogasSelections();
 }
