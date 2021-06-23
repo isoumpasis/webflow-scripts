@@ -381,6 +381,8 @@ function locationOnChange(value) {
       }
       console.log('Pins Fetch:', data);
       fetchedPins = data;
+      gogasSelections.form.fetchedValues.fetchedPins = fetchedPins;
+      saveUserResults();
       populateLocationContainerResults(fetchedPins);
       // endLoadingSelect(dimensionSelect);
     })
@@ -399,7 +401,7 @@ function showResults() {
 
   activeContainer = document.getElementById(typeContainerIdDict[foundTankObj.type]);
   renderResultsContainer(activeContainer);
-  saveUserResults(foundTankObj, locationSelect.value);
+  saveUserResults();
 }
 
 function renderResultsContainer(container) {
@@ -412,7 +414,7 @@ function renderResultsContainer(container) {
   container.style.display = 'grid';
 }
 
-function saveUserResults(foundTankObj, location) {
+function saveUserResults() {
   gogasSelections = {
     ...gogasSelections,
     form: {
