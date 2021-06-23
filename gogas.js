@@ -42,7 +42,11 @@ function loadGogasSelections() {
   populateDimensionSelect(gogasSelections.form.fetchedValues.fetchedDimensions, {
     storageMode: true
   });
+  locationSelect.disabled = false;
+  activateSelections();
+}
 
+function activateSelections() {
   let activeIndex;
   [...typeSelect.options].forEach((option, index) => {
     if (option.value === gogasSelections.form.activeValues.type) {
@@ -51,6 +55,30 @@ function loadGogasSelections() {
     }
   });
   typeSelect.selectedIndex = activeIndex;
+
+  [...litresSelect.options].forEach((option, index) => {
+    if (option.value === gogasSelections.form.activeValues.litres) {
+      console.log('found litres active index ', index);
+      activeIndex = index;
+    }
+  });
+  litresSelect.selectedIndex = activeIndex;
+
+  [...dimensionSelect.options].forEach((option, index) => {
+    if (option.value === gogasSelections.form.activeValues.dimension) {
+      console.log('found dimension active index ', index);
+      activeIndex = index;
+    }
+  });
+  dimensionSelect.selectedIndex = activeIndex;
+
+  [...locationSelect.options].forEach((option, index) => {
+    if (option.value === gogasSelections.form.activeValues.location) {
+      console.log('found location active index ', index);
+      activeIndex = index;
+    }
+  });
+  locationSelect.selectedIndex = activeIndex;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
