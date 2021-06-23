@@ -24,6 +24,12 @@ const typeContainerIdDict = {
 };
 
 const preferredStorage = localStorage;
+const gogasSelections = {};
+
+/* STORAGE */
+function saveGogasSelections() {
+  preferredStorage.setItem('gogasSelections', JSON.stringify(gogasSelections));
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   litresSelect.disabled = true;
@@ -328,6 +334,7 @@ function showResults() {
 
   activeContainer = document.getElementById(typeContainerIdDict[foundTankObj.type]);
   renderResultsContainer(activeContainer);
+  saveUserResults(foundTankObj, locationSelect.value);
 }
 
 function renderResultsContainer(container) {
@@ -339,6 +346,18 @@ function renderResultsContainer(container) {
   document.querySelector('.init-container').style.display = 'none';
   container.style.display = 'grid';
 }
+
+function saveUserResults(foundTankObj, location) {
+  gogasSelections = {
+    ...gogasSelections,
+    userResults: {
+      foundTankObj,
+      location
+    }
+  };
+  saveGogasSelections();
+}
+
 /**
  * @param  {} fetchedPins
  *
