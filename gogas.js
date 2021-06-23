@@ -27,15 +27,23 @@ const preferredStorage = localStorage;
 let gogasSelections = {};
 
 /* STORAGE */
-function saveGogasSelections() {
+function setGogasSelections() {
   console.log(gogasSelections, preferredStorage);
   preferredStorage.setItem('gogasSelections', JSON.stringify(gogasSelections));
+}
+function getGogasSelections() {
+  return JSON.parse(preferredStorage.getItem('gogasSelections'));
+}
+
+function loadGogasSelections() {
+  console.log('loadGogasSelections: ', getGogasSelections());
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   litresSelect.disabled = true;
   dimensionSelect.disabled = true;
   locationSelect.disabled = true;
+  loadGogasSelections();
 });
 
 [...document.querySelectorAll('.open-map-btn')].map(el =>
@@ -368,7 +376,7 @@ function saveUserResults(foundTankObj, location) {
       location
     }
   };
-  saveGogasSelections();
+  setGogasSelections();
 }
 
 /**
