@@ -45,6 +45,8 @@ function loadGogasSelections() {
   locationSelect.disabled = false;
   activateSelections();
   foundTankObj = gogasSelections.results.foundTankObj;
+  fetchedLitres = gogasSelections.form.fetchedValues.fetchedLitres;
+  fetchedDimensions = gogasSelections.form.fetchedValues.fetchedDimensions;
   showResults();
 }
 
