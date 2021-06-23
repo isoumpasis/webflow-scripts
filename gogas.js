@@ -28,7 +28,6 @@ let gogasSelections = {};
 
 /* STORAGE */
 function setGogasSelections() {
-  console.log(gogasSelections, preferredStorage);
   preferredStorage.setItem('gogasSelections', JSON.stringify(gogasSelections));
 }
 function getGogasSelections() {
@@ -40,12 +39,13 @@ function loadGogasSelections() {
   foundTankObj = gogasSelections.results.foundTankObj;
   fetchedLitres = gogasSelections.form.fetchedValues.fetchedLitres;
   fetchedDimensions = gogasSelections.form.fetchedValues.fetchedDimensions;
+  fetchedPins = gogasSelections.form.fetchedValues.fetchedPins;
 
   // First activate type selection value
   let activeIndex;
   [...typeSelect.options].forEach((option, index) => {
     if (option.value === gogasSelections.form.activeValues.type) {
-      console.log('found type active index ', index);
+      // console.log('found type active index ', index);
       activeIndex = index;
     }
   });
@@ -60,12 +60,14 @@ function loadGogasSelections() {
   activateSelections();
 
   showResults();
+  populateLocationContainerResults(fetchedPins);
 }
 
 function activateSelections() {
+  let activeIndex;
   [...litresSelect.options].forEach((option, index) => {
     if (option.value === gogasSelections.form.activeValues.litres) {
-      console.log('found litres active index ', index);
+      // console.log('found litres active index ', index);
       activeIndex = index;
     }
   });
@@ -73,7 +75,7 @@ function activateSelections() {
 
   [...dimensionSelect.options].forEach((option, index) => {
     if (option.value === gogasSelections.form.activeValues.dimension) {
-      console.log('found dimension active index ', index);
+      // console.log('found dimension active index ', index);
       activeIndex = index;
     }
   });
@@ -81,7 +83,7 @@ function activateSelections() {
 
   [...locationSelect.options].forEach((option, index) => {
     if (option.value === gogasSelections.form.activeValues.location) {
-      console.log('found location active index ', index);
+      // console.log('found location active index ', index);
       activeIndex = index;
     }
   });
@@ -422,7 +424,8 @@ function saveUserResults(foundTankObj, location) {
       },
       fetchedValues: {
         fetchedLitres,
-        fetchedDimensions
+        fetchedDimensions,
+        fetchedPins
       }
     },
     results: {
