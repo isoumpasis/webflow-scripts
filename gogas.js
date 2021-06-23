@@ -351,7 +351,19 @@ function renderResultsContainer(container) {
 function saveUserResults(foundTankObj, location) {
   gogasSelections = {
     ...gogasSelections,
-    userResults: {
+    form: {
+      activeValues: {
+        type: typeSelect.value,
+        litres: litresSelect.value,
+        dimension: dimensionSelect.value,
+        location: locationSelect.value
+      },
+      fetchedValues: {
+        fetchedLitres,
+        fetchedDimensions
+      }
+    },
+    results: {
       foundTankObj,
       location
     }
