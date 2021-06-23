@@ -42,6 +42,15 @@ function loadGogasSelections() {
   populateDimensionSelect(gogasSelections.form.fetchedValues.fetchedDimensions, {
     storageMode: true
   });
+
+  let activeIndex;
+  [...typeSelect.options].forEach((option, index) => {
+    if (option.value === gogasSelections.form.activeValues.type) {
+      console.log('found type active index ', index);
+      activeIndex = index;
+    }
+  });
+  typeSelect.selectedIndex = activeIndex;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
