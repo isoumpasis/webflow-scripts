@@ -44,6 +44,7 @@ function loadGogasSelections() {
   });
   locationSelect.disabled = false;
   activateSelections();
+  foundTankObj = gogasSelections.results.foundTankObj;
   showResults();
 }
 
