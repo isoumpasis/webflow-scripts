@@ -39,6 +39,9 @@ function loadGogasSelections() {
   gogasSelections = getGogasSelections();
 
   populateLitresSelect(gogasSelections.form.fetchedValues.fetchedLitres, { storageMode: true });
+  populateDimensionSelect(gogasSelections.form.fetchedValues.fetchedDimensions, {
+    storageMode: true
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -241,7 +244,7 @@ function litresOnChange(value) {
     });
 }
 
-function populateDimensionSelect(fetchedDimensions) {
+function populateDimensionSelect(fetchedDimensions, options = {}) {
   let dimensionOptionsArray = ['<option value="">Επιλέξτε Διαστάσεις</option>'];
   fetchedDimensions.forEach(dimension => {
     const typeLabel = typeSelect.value === 'unknown' ? ` ${dimension.type} ` : '';
@@ -251,6 +254,9 @@ function populateDimensionSelect(fetchedDimensions) {
 
   dimensionSelect.innerHTML = dimensionOptionsArray.join('');
   dimensionSelect.disabled = false;
+
+  if (options.storageMode) return;
+
   dimensionSelect.focus();
 
   if (dimensionOptionsArray.length === 2) {
