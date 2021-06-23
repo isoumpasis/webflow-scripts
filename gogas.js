@@ -36,7 +36,9 @@ function getGogasSelections() {
 }
 
 function loadGogasSelections() {
-  console.log('loadGogasSelections: ', getGogasSelections());
+  gogasSelections = getGogasSelections();
+
+  populateLitresSelect(gogasSelections.form.fetchedValues.fetchedLitres, { storageMode: true });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -162,7 +164,7 @@ typeSelect.addEventListener('change', function () {
     });
 });
 
-function populateLitresSelect(fetchedLitres) {
+function populateLitresSelect(fetchedLitres, options = {}) {
   let litresOptionsArray = ['<option value="">Επιλέξτε Λίτρα</option>'];
 
   const allDimensionsTypeLabel =
@@ -178,6 +180,8 @@ function populateLitresSelect(fetchedLitres) {
   });
 
   litresSelect.innerHTML = litresOptionsArray.join('');
+  if (options.storageMode) return;
+
   litresSelect.disabled = false;
   litresSelect.focus();
   //One option -> auto populate
