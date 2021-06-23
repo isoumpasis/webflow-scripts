@@ -44,6 +44,7 @@ function loadGogasSelections() {
   });
   locationSelect.disabled = false;
   activateSelections();
+  showResults();
 }
 
 function activateSelections() {
