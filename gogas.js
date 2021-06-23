@@ -23,36 +23,36 @@ const typeContainerIdDict = {
   ΚΥΛΙΝΔΡΙΚΗ: 'kylindrikhContainer'
 };
 
+const preferredStorage = localStorage;
+
 document.addEventListener('DOMContentLoaded', () => {
   litresSelect.disabled = true;
   dimensionSelect.disabled = true;
   locationSelect.disabled = true;
-
-  [...document.querySelectorAll('.open-map-btn')].map(el =>
-    el.addEventListener('click', () => {
-      const url = `${mapBaseUrl}?gps=ΝΟΜΟΣ%20${
-        locationSelect.options[locationSelect.selectedIndex].innerHTML
-      }&filters=2`;
-      window.open(url, '_blank');
-    })
-  );
-
-  [...document.querySelectorAll('.enable-gps-btn')].map(el =>
-    el.addEventListener('click', async () => {
-      try {
-        const currentLatLng = await getCurrentPosition();
-        console.log('my current position', currentLatLng);
-        populateClosestsPins({ lat: currentLatLng[0], lng: currentLatLng[1] });
-      } catch (e) {
-        console.log('error on geolocation', e);
-        geolocationError = true;
-        [...document.querySelectorAll('.geolocation-error')].map(
-          el => (el.style.display = 'block')
-        );
-      }
-    })
-  );
 });
+
+[...document.querySelectorAll('.open-map-btn')].map(el =>
+  el.addEventListener('click', () => {
+    const url = `${mapBaseUrl}?gps=ΝΟΜΟΣ%20${
+      locationSelect.options[locationSelect.selectedIndex].innerHTML
+    }&filters=2`;
+    window.open(url, '_blank');
+  })
+);
+
+[...document.querySelectorAll('.enable-gps-btn')].map(el =>
+  el.addEventListener('click', async () => {
+    try {
+      const currentLatLng = await getCurrentPosition();
+      console.log('my current position', currentLatLng);
+      populateClosestsPins({ lat: currentLatLng[0], lng: currentLatLng[1] });
+    } catch (e) {
+      console.log('error on geolocation', e);
+      geolocationError = true;
+      [...document.querySelectorAll('.geolocation-error')].map(el => (el.style.display = 'block'));
+    }
+  })
+);
 
 document.addEventListener('click', () => {
   if (geolocationError) {
