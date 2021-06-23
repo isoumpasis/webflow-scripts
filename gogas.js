@@ -402,8 +402,6 @@ function locationOnChange(value) {
 
 function showResults() {
   foundTankObj = fetchedDimensions.find(dim => +dimensionSelect.value == dim.id);
-  console.log({ foundTankObj });
-
   activeContainer = document.getElementById(typeContainerIdDict[foundTankObj.type]);
   renderResultsContainer(activeContainer);
   saveUserResults();
@@ -453,8 +451,6 @@ function saveUserResults() {
  *
  */
 function populateLocationContainerResults(fetchedPinsLength) {
-  console.log('populate pins result', fetchedPinsLength);
-
   if (fetchedPinsLength) {
     [...document.querySelectorAll('.pins-found')].map(el => (el.style.display = 'block'));
     [...document.querySelectorAll('.pins-not-found')].map(el => (el.style.display = 'none'));
