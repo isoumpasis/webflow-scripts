@@ -180,9 +180,9 @@ function populateLitresSelect(fetchedLitres, options = {}) {
   });
 
   litresSelect.innerHTML = litresOptionsArray.join('');
+  litresSelect.disabled = false;
   if (options.storageMode) return;
 
-  litresSelect.disabled = false;
   litresSelect.focus();
   //One option -> auto populate
   if (litresOptionsArray.length === 2) {
