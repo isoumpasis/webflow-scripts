@@ -37,20 +37,11 @@ function getGogasSelections() {
 
 function loadGogasSelections() {
   gogasSelections = getGogasSelections();
-
-  populateLitresSelect(gogasSelections.form.fetchedValues.fetchedLitres, { storageMode: true });
-  populateDimensionSelect(gogasSelections.form.fetchedValues.fetchedDimensions, {
-    storageMode: true
-  });
-  locationSelect.disabled = false;
-  activateSelections();
   foundTankObj = gogasSelections.results.foundTankObj;
   fetchedLitres = gogasSelections.form.fetchedValues.fetchedLitres;
   fetchedDimensions = gogasSelections.form.fetchedValues.fetchedDimensions;
-  showResults();
-}
 
-function activateSelections() {
+  // First activate type selection value
   let activeIndex;
   [...typeSelect.options].forEach((option, index) => {
     if (option.value === gogasSelections.form.activeValues.type) {
@@ -60,6 +51,18 @@ function activateSelections() {
   });
   typeSelect.selectedIndex = activeIndex;
 
+  populateLitresSelect(gogasSelections.form.fetchedValues.fetchedLitres, { storageMode: true });
+  populateDimensionSelect(gogasSelections.form.fetchedValues.fetchedDimensions, {
+    storageMode: true
+  });
+  locationSelect.disabled = false;
+
+  activateSelections();
+
+  showResults();
+}
+
+function activateSelections() {
   [...litresSelect.options].forEach((option, index) => {
     if (option.value === gogasSelections.form.activeValues.litres) {
       console.log('found litres active index ', index);
