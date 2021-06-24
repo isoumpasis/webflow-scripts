@@ -797,6 +797,7 @@ makeSelect.addEventListener('change', function () {
     })
     .catch(error => {
       endLoadingSelect(yearSelect);
+      console.log(status, error.message);
       yearSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
       console.error('Error Fetch:', error);
     });
