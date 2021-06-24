@@ -1167,7 +1167,7 @@ function setMarkerVisibility(marker, labels) {
 async function urlParamsConfig() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  let gps, filters, name;
+  let gps, filters, geometry;
   if (urlParams.has('gps')) {
     gps = urlParams.get('gps');
     const searchInput = document.querySelector('#searchInput');
@@ -1204,9 +1204,16 @@ async function urlParamsConfig() {
     });
     filterMarkers();
   }
-  if (urlParams.has('name')) {
-    name = urlParams.get('name');
-    const foundMarker = markers.find(marker => marker.props.name === name);
+
+  if (urlParams.has('geometry')) {
+    geometry = urlParams.get('geometry').split(',');
+    if (geometry.some(el => isNaN(el)) || geometry.length !== 2) return;
+
+    const foundMarker = markers.find(
+      m => m.props.geometry.lat === geometry[0] && m.props.geometry.lng === geometry[1]
+    );
+
+    if (!foundMarker) return console.log(`marker on ${geometry} not found`);
 
     map.setZoom(foundMarkerZoom);
     map.setCenter(foundMarker.position);
@@ -1220,6 +1227,23 @@ async function urlParamsConfig() {
     selectedMarker = foundMarker;
     selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
     openInfoWindow(foundMarker);
-    //test
   }
+
+  // if (urlParams.has('name')) {
+  //   name = urlParams.get('name');
+  //   const foundMarker = markers.find(marker => marker.props.name === name);
+
+  //   map.setZoom(foundMarkerZoom);
+  //   map.setCenter(foundMarker.position);
+  //   if (selectedMarker === foundMarker) return;
+  //   if (selectedMarker) selectedMarker.setAnimation(null);
+  //   foundMarker.setIcon({
+  //     ...foundMarker.getIcon(),
+  //     scaledSize: new google.maps.Size(50, 50),
+  //     origin: new google.maps.Point(0, 0)
+  //   });
+  //   selectedMarker = foundMarker;
+  //   selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
+  //   openInfoWindow(foundMarker);
+  // }
 }

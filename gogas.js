@@ -547,7 +547,8 @@ function populateClosestsList(fetchedClosests) {
   let names, addresses, phones, emails, distances, openMaps;
 
   // let gpsParam;
-  let nameParam;
+  // let nameParam;
+  let geometryParam;
   const filtersParam = '2';
 
   suggestedContainers.forEach(container => {
@@ -567,8 +568,11 @@ function populateClosestsList(fetchedClosests) {
 
       // gpsParam = encodeURI(closest.pin.properties.address);
       // openMaps[i].href = `${mapBaseUrl}?gps=${gpsParam}&filters=${filtersParam}`;
-      nameParam = encodeURI(closest.pin.properties.name);
-      openMaps[i].href = `${mapBaseUrl}?name=${nameParam}&filters=${filtersParam}`;
+      // nameParam = encodeURI(closest.pin.properties.name);
+      // openMaps[i].href = `${mapBaseUrl}?name=${nameParam}&filters=${filtersParam}`;
+      let { lat, lng } = closest.pin.geometry;
+      geometryParam = lat + ',' + lng;
+      openMaps[i].href = `${mapBaseUrl}?geometry=${geometryParam}&filters=${filtersParam}`;
       openMaps[i].target = '_blank';
     });
   });
