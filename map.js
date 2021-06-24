@@ -1206,7 +1206,10 @@ async function urlParamsConfig() {
   }
 
   if (urlParams.has('geometry')) {
-    geometry = urlParams.get('geometry').split(',');
+    geometry = urlParams
+      .get('geometry')
+      .split(',')
+      .map(el => +el);
     if (geometry.some(el => isNaN(el)) || geometry.length !== 2) return;
 
     const foundMarker = markers.find(
