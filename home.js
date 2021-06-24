@@ -778,10 +778,12 @@ makeSelect.addEventListener('change', function () {
     body: JSON.stringify({ make: this.value })
   })
     .then(response => {
+      console.log({ response });
       status = response.status;
       return response.json();
     })
     .then(data => {
+      console.log({ data });
       if (status !== 200) {
         endLoadingSelect(yearSelect);
         yearSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
