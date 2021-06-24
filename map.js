@@ -1175,16 +1175,16 @@ async function urlParamsConfig() {
       const res = await geocoderSolution(gps);
       console.log('gps = ', gps, 'geocoder = ', res);
 
-      searchInput.value = res.address;
-      userMarker.setOptions({
-        map,
-        title: searchInput.value,
-        position: res.location,
-        animation: google.maps.Animation.DROP,
-        zIndex: google.maps.Marker.MAX_ZINDEX
-      });
+      // searchInput.value = res.address;
+      // userMarker.setOptions({
+      //   map,
+      //   title: searchInput.value,
+      //   position: res.location,
+      //   animation: google.maps.Animation.DROP,
+      //   zIndex: google.maps.Marker.MAX_ZINDEX
+      // });
       map.setZoom(gpsZoom);
-      map.setCenter(userMarker.position);
+      map.setCenter(res.location);
     } catch (e) {
       console.log('error on params geocoding', e);
     }
