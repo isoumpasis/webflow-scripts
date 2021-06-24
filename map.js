@@ -1216,7 +1216,12 @@ async function urlParamsConfig() {
       m => m.getPosition().lat() === geometry[0] && m.getPosition().lng() === geometry[1]
     );
 
-    if (!foundMarker) return console.log(`marker on ${geometry} not found`);
+    if (!foundMarker) {
+      map.setZoom(gpsZoom);
+      map.setCenter({ lat: geometry[0], lng: geometry[1] });
+      console.log(`marker on ${geometry} not found`);
+      return;
+    }
 
     map.setZoom(foundMarkerZoom);
     map.setCenter(foundMarker.position);
