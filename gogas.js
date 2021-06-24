@@ -33,10 +33,13 @@ let gogasSelections = {};
 
 /* STORAGE */
 function setGogasSelections() {
-  preferredStorage.setItem('gogasSelections', JSON.stringify(gogasSelections));
+  if (typeof Storage !== 'undefined')
+    preferredStorage.setItem('gogasSelections', JSON.stringify(gogasSelections));
 }
 function getGogasSelections() {
-  return JSON.parse(preferredStorage.getItem('gogasSelections'));
+  if (typeof Storage !== 'undefined')
+    return JSON.parse(preferredStorage.getItem('gogasSelections'));
+  return null;
 }
 
 function loadGogasSelections() {
@@ -99,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
   litresSelect.disabled = true;
   dimensionSelect.disabled = true;
   locationSelect.disabled = true;
-  loadGogasSelections();
+  if (getGogasSelections()) loadGogasSelections();
 });
 
 [...document.querySelectorAll('.open-map-btn')].map(el =>
