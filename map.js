@@ -1210,7 +1210,7 @@ async function urlParamsConfig() {
     if (geometry.some(el => isNaN(el)) || geometry.length !== 2) return;
 
     const foundMarker = markers.find(
-      m => m.geometry.lat === geometry[0] && m.geometry.lng === geometry[1]
+      m => m.getPosition().lat() === geometry[0] && m.getPosition().lng() === geometry[1]
     );
 
     if (!foundMarker) return console.log(`marker on ${geometry} not found`);
