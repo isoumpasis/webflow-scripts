@@ -1255,6 +1255,7 @@ function showResults(fetchedModelObj) {
   }
 
   configureUserSelectionsAfterResults();
+  console.log('userSelections after results', JSON.stringify(userSelections));
   if (
     suggestedContainer &&
     !suggestedContainer.classList.contains(
