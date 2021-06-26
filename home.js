@@ -1665,6 +1665,7 @@ function configureEasyPayAfterSuggestion() {
   configureCreditSliders();
   configureNoCreditResults();
   configureCreditResults();
+  configureMetrhtaResults();
 }
 
 function configureModelEasyPay() {
@@ -1825,6 +1826,10 @@ function configureCreditResults() {
         (monthlyCost * doseisCreditSelectValueInt + prokatavoliCreditSliderValueInt) * 10
       ) / 10
     ).toFixed(2) + '€';
+}
+
+function configureMetrhtaResults() {
+  metrhtaFinalCost.textContent = selectedEasyPaySystemPrice.toFixed(2) + '€';
 }
 
 function configureEasyPayMonthlyGain() {
