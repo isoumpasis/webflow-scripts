@@ -1136,15 +1136,16 @@ function configureUserSelectionsAfterResults() {
         userSelections.selectedFuel === 'lpg'
           ? lpgPercentageEl.textContent
           : cngPercentageEl.textContent
-    },
-    easyPay: {
-      method: getEasyPayMethod()
     }
+    // easyPay: {
+    //   method: getEasyPayMethod()
+    // }
   };
 
   if (userSelections.vehicle.suggestions.hasResult) {
     userSelections.easyPay = {
       ...userSelections.easyPay,
+      method: getEasyPayMethod(),
       system: {
         name: userSelections.vehicle.suggestions.systems[0].name, //default
         priceWithVAT: selectedEasyPaySystemPrice + '€'
