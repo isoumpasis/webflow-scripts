@@ -2007,6 +2007,9 @@ function updateBasketSection(sections) {
       [...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(
         el => (el.style.display = 'flex')
       );
+      [...document.querySelectorAll('.needed-row-metrhta-basket')].map(
+        el => (el.style.display = 'none')
+      );
     } else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
       document.querySelector('.easy-pay-prokatavoli-basket').textContent =
         userSelections.easyPay.creditSettings.prokatavoli + '€';
@@ -2019,11 +2022,21 @@ function updateBasketSection(sections) {
       [...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(
         el => (el.style.display = 'flex')
       );
+      [...document.querySelectorAll('.needed-row-metrhta-basket')].map(
+        el => (el.style.display = 'none')
+      );
     } else if (userSelections.easyPay.method === 'Μετρητά') {
       document.querySelector('.easy-pay-final-cost-basket').textContent =
         userSelections.easyPay.system.priceWithVAT;
+      document.querySelector('easy-pay-yearly-gain').textContent = userSelections.calculator
+        .perMonthCheckbox
+        ? (+userSelections.calculator.gain.replace('€', '') * 12).toFixed(2) + '€'
+        : userSelections.calculator.gain;
       [...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(
         el => (el.style.display = 'none')
+      );
+      [...document.querySelectorAll('.needed-row-metrhta-basket')].map(
+        el => (el.style.display = 'flex')
       );
     }
   }
