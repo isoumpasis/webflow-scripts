@@ -183,6 +183,8 @@ const noCreditMonthlyCost = document.querySelector('.no-credit-monthly-cost');
 const noCreditMonthlyGain = document.querySelector('.no-credit-monthly-gain');
 const creditMonthlyCost = document.querySelector('.credit-monthly-cost');
 const creditMonthlyGain = document.querySelector('.credit-monthly-gain');
+const metrhtaFinalCost = document.querySelector('.metrhta-final-cost');
+const metrhtaYearlyGain = document.querySelector('.metrhta-yearly-gain');
 
 const minProkatavoliNoCreditSliderText = document.querySelector(
   '.min-prokatavoli-no-credit-slider-text'
@@ -639,6 +641,7 @@ function noVehicleMetrhtaSliderOnChange(value) {
   outputMetrhtaNoVehicle.value = noVehicleMetrhtaSlider.value;
   noVehicleMetrhtaCover.style.width = calcCoverWidth(noVehicleMetrhtaSlider) + '%';
   noVehicleMetrhtaChangeMinMaxLabelsWeight();
+  metrhtaFinalCost.textContent = noVehicleMetrhtaSlider.value.toFixed(2) + '€';
 
   selectedEasyPaySystemPrice = +noVehicleMetrhtaSlider.value;
   // prokatavoliMetrhtaSliderOnChange(prokatavoliMetrhtaSlider.value);
@@ -1829,6 +1832,7 @@ function configureEasyPayMonthlyGain() {
 
   noCreditMonthlyGain.textContent = monthlyGain.toFixed(2) + '€';
   creditMonthlyGain.textContent = noCreditMonthlyGain.textContent;
+  metrhtaYearlyGain.textContent = (monthlyGain * 12).toFixed(2) + '€';
 }
 
 function PMT(interestPerMonth, doseis, cost) {
