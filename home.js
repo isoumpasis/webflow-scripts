@@ -1671,6 +1671,7 @@ function configureModelEasyPay() {
   const modelNameText = document.querySelector('#modelName').textContent;
   document.querySelector('#makeImgNoCredit').src = makeImgSrc;
   document.querySelector('#makeImgCredit').src = makeImgSrc;
+  document.querySelector('#makeImgMetrhta').src = makeImgSrc;
   document.querySelector('#modelNameNoCredit').textContent = modelNameText;
   document.querySelector('#modelNameCredit').textContent = modelNameText;
   document.querySelector('#modelNameMetrhta').textContent = modelNameText;
