@@ -1257,7 +1257,12 @@ function showResults(fetchedModelObj) {
   }
 
   configureUserSelectionsAfterResults();
-  console.log('userSelections after results', JSON.stringify(userSelections));
+  console.log(
+    lpgResult.textContent,
+    cngResult.textContent,
+    'userSelections after results',
+    JSON.stringify(userSelections)
+  );
   if (
     suggestedContainer &&
     !suggestedContainer.classList.contains(
