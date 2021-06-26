@@ -292,7 +292,6 @@ function initSelectedFuelListeners() {
 
       const activeContainer = getActiveContainer();
       if (activeContainer) {
-        console.log('active containercng');
         activeContainer.style.display = 'none';
         showResults(fetchedModelObj);
       }
@@ -308,7 +307,6 @@ function initSelectedFuelListeners() {
 
       const activeContainer = getActiveContainer();
       if (activeContainer) {
-        console.log('active container lpg');
         activeContainer.style.display = 'none';
         showResults(fetchedModelObj);
       }
@@ -1206,7 +1204,6 @@ function configureUserSelectionsAfterResults() {
       },
       noCreditSettings: getNoCreditSettings(),
       creditSettings: getCreditSettings()
-      //metrhtaSettings: getMetrhtaSettings(),
     };
   }
 }
@@ -1255,12 +1252,7 @@ function showResults(fetchedModelObj) {
   }
 
   configureUserSelectionsAfterResults();
-  console.log(
-    lpgResult.textContent,
-    cngResult.textContent,
-    'userSelections after results',
-    JSON.stringify(userSelections)
-  );
+
   if (
     suggestedContainer &&
     !suggestedContainer.classList.contains(
@@ -1567,7 +1559,6 @@ function resetCalc() {
 document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
   el.addEventListener('change', e => {
     const consumptionLabelWithData = e.target.closest('.radio-button.w-radio');
-    console.log(consumptionLabelWithData);
 
     document
       .querySelectorAll('.radio-button.w-radio .consumption-choice')
@@ -1965,7 +1956,6 @@ function updateBasketSection(sections) {
     document.querySelector('.km-per-year-text-basket').textContent =
       userSelections.calculator.kmPerYearValue + ' km';
 
-    console.log(userSelections.calculator);
     document.querySelector('.gain-label-basket').textContent = userSelections.calculator
       .perMonthCheckbox
       ? 'Μηνιαίο όφελος:'
@@ -2032,14 +2022,12 @@ function updateBasketSection(sections) {
         el => (el.style.display = 'none')
       );
     } else if (userSelections.easyPay.method === 'Μετρητά') {
-      console.log('methrta!!!');
       document.querySelector('.easy-pay-final-cost-basket').textContent =
         userSelections.easyPay.system.priceWithVAT;
       document.querySelector('.easy-pay-yearly-gain').textContent = userSelections.calculator
         .perMonthCheckbox
         ? (+userSelections.calculator.gain.replace('€', '') * 12).toFixed(2) + '€'
         : userSelections.calculator.gain;
-      console.log('methrta!!!', JSON.stringify(userSelections.calculator));
       [...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(
         el => (el.style.display = 'none')
       );
@@ -2049,7 +2037,6 @@ function updateBasketSection(sections) {
     }
   }
   if (sections.easyPayMonthlyGain) {
-    console.log('userselection calculator gain', userSelections.calculator.gain);
     document.querySelector('.easy-pay-monthly-gain-basket').textContent = perMonthCheckbox.checked
       ? userSelections.calculator.gain
       : Math.round((userSelections.calculator.gain.replace('€', '') / 12) * 100) / 100 + '€';
@@ -2162,7 +2149,6 @@ function calcResult() {
     userSelections.selectedFuel === 'lpg'
       ? lpgPercentageEl.textContent
       : cngPercentageEl.textContent;
-  console.log(userSelections.calculator.gain, userSelections.calculator.percentage);
   updateBasketSection({ calculator: true, easyPayMonthlyGain: true, prokatavoliDoseis: true });
 }
 
