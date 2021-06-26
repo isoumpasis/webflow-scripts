@@ -641,7 +641,7 @@ function noVehicleMetrhtaSliderOnChange(value) {
   outputMetrhtaNoVehicle.value = noVehicleMetrhtaSlider.value;
   noVehicleMetrhtaCover.style.width = calcCoverWidth(noVehicleMetrhtaSlider) + '%';
   noVehicleMetrhtaChangeMinMaxLabelsWeight();
-  metrhtaFinalCost.textContent = noVehicleMetrhtaSlider.value.toFixed(2) + '€';
+  metrhtaFinalCost.textContent = (+noVehicleMetrhtaSlider.value).toFixed(2) + '€';
 
   selectedEasyPaySystemPrice = +noVehicleMetrhtaSlider.value;
   // prokatavoliMetrhtaSliderOnChange(prokatavoliMetrhtaSlider.value);
