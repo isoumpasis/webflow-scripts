@@ -437,11 +437,10 @@ function initEasyPayTabs() {
 
       if (document.querySelector('.easy-pay-with-vehicle-container').style.display === 'none') {
         if (e.target.classList.contains('no-credit-tab')) {
-          //DEBUG ΜΕΤΡΗΤΑ
           selectedEasyPaySystemPrice = +noVehicleNoCreditSlider.value;
         } else if (e.target.classList.contains('credit-tab')) {
           selectedEasyPaySystemPrice = +noVehicleCreditSlider.value;
-        } else {
+        } else if (e.target.classList.contains('metrhta-tab')) {
           selectedEasyPaySystemPrice = +noVehicleCreditSlider.value;
         }
       }
@@ -503,9 +502,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
   ).toFixed(1);
   configureNoCreditMaxDoseisSlider();
 
-  console.log('111111222222222', JSON.stringify(userSelections.easyPay));
   if (!userSelections.vehicle.suggestions) return;
-  if (userSelections.vehicle.suggestions.containerId.indexOf('notConvertible') !== -1) return;
 
   // userSelections.easyPay.noCreditSettings.prokatavoli = +prokatavoliNoCreditSlider.value;
   // userSelections.easyPay.noCreditSettings.finalCost = noCreditFinalCost.textContent;
@@ -1139,9 +1136,6 @@ function configureUserSelectionsAfterResults() {
           ? lpgPercentageEl.textContent
           : cngPercentageEl.textContent
     }
-    // easyPay: {
-    //   method: getEasyPayMethod()
-    // }
   };
 
   if (userSelections.vehicle.suggestions.hasResult) {
@@ -1196,17 +1190,13 @@ function showResults(fetchedModelObj) {
 
     configureCalculatorAfterSuggestion();
     configureEasyPayAfterSuggestion();
-    //document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
   } else {
-    console.log('1111111', JSON.stringify(userSelections.easyPay));
     resetCalc();
     resetEasyPay();
     updateBasketSection({ resetNoVehicle: true });
   }
 
-  console.log('1.51.51.51.5', JSON.stringify(userSelections.easyPay));
   configureUserSelectionsAfterResults();
-  console.log('222222', JSON.stringify(userSelections.easyPay));
   if (
     suggestedContainer &&
     !suggestedContainer.classList.contains(
@@ -1221,9 +1211,6 @@ function showResults(fetchedModelObj) {
       easyPayMonthlyGain: true
     });
   }
-  // sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
-
-  console.log('33333', JSON.stringify(userSelections.easyPay));
 }
 function adjustSectionPaddings() {
   document.querySelector('#vehicle').style.paddingBottom = '3%';
@@ -1567,7 +1554,7 @@ function getEasyPayMethod(target) {
     return 'Χωρίς πιστωτική κάρτα';
   } else if (tabEl.classList.contains('credit-tab')) {
     return 'Με πιστωτική κάρτα';
-  } else {
+  } else if (tabEl.classList.contains('metrhta-tab')) {
     return 'Με μετρητά';
   }
 }
@@ -1629,6 +1616,7 @@ function configureModelEasyPay() {
   document.querySelector('#makeImgCredit').src = makeImgSrc;
   document.querySelector('#modelNameNoCredit').textContent = modelNameText;
   document.querySelector('#modelNameCredit').textContent = modelNameText;
+  document.querySelector('#modelNameMetrhta').textContent = modelNameText;
 
   [...document.querySelectorAll('.easy-pay-vehicle-container')].map(
     el => (el.style.display = 'flex')
@@ -1966,8 +1954,7 @@ function updateBasketSection(sections) {
       [...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(
         el => (el.style.display = 'flex')
       );
-    } else {
-      //DEBUG ΜΕΤΡΗΤΑ
+    } else if (userSelections.easyPay.method === 'Με μετρητά') {
       // document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.noCreditSettings.finalCost;
       [...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(
         el => (el.style.display = 'none')
