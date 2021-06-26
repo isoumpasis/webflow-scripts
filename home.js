@@ -503,7 +503,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
   ).toFixed(1);
   configureNoCreditMaxDoseisSlider();
 
-  if (!userSelections.vehicle.suggestions) return;
+  if (!userSelections.vehicle.suggestions.hasResult) return;
   // userSelections.easyPay.noCreditSettings.prokatavoli = +prokatavoliNoCreditSlider.value;
 
   // userSelections.easyPay.noCreditSettings.finalCost = noCreditFinalCost.textContent;
