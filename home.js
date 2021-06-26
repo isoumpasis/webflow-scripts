@@ -1208,7 +1208,8 @@ function configureUserSelectionsAfterResults() {
       creditSettings: getCreditSettings()
       //metrhtaSettings: getMetrhtaSettings(),
     };
-    userSelections.calculator.gain = userSelections.selectedFuel === 'lpg' ? lpgResult.textContent : cngResult.textContent,
+    userSelections.calculator.gain =
+      userSelections.selectedFuel === 'lpg' ? lpgResult.textContent : cngResult.textContent;
   }
 }
 
@@ -1263,7 +1264,6 @@ function showResults(fetchedModelObj) {
       `not-convertible-${userSelections.selectedFuel}-container`
     )
   ) {
-
     updateBasketSection({
       vehicle: true,
       calculator: true,
