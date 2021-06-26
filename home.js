@@ -744,6 +744,7 @@ function resetEasyPay() {
   selectedEasyPaySystemPrice = +noVehicleNoCreditSlider.value;
   noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.value);
   noVehicleCreditSliderOnChange(noVehicleCreditSlider.value);
+  noVehicleMetrhtaSliderOnChange(noVehicleMetrhtaSlider.value);
 }
 
 /* STORAGE */
