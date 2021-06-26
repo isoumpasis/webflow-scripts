@@ -1203,6 +1203,7 @@ function showResults(fetchedModelObj) {
     updateBasketSection({ resetNoVehicle: true });
   }
 
+  console.log('1.51.51.51.5', JSON.stringify(userSelections.easyPay));
   configureUserSelectionsAfterResults();
   console.log('222222', JSON.stringify(userSelections.easyPay));
   if (
