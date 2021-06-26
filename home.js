@@ -138,6 +138,7 @@ const doseisCreditSelect = document.querySelector('.doseis-credit-select');
 
 const noVehicleNoCreditSlider = document.querySelector('.no-vehicle-no-credit-slider');
 const noVehicleCreditSlider = document.querySelector('.no-vehicle-credit-slider');
+const noVehicleMetrhtaSlider = document.querySelector('.no-vehicle-metrhta-slider');
 
 const prokatavoliNoCreditCover = document.querySelector('.prokatavoli-no-credit-cover');
 const prokatavoliCreditCover = document.querySelector('.prokatavoli-credit-cover');
@@ -146,6 +147,7 @@ const doseisNoCreditCover = document.querySelector('.doseis-no-credit-cover');
 
 const noVehicleNoCreditCover = document.querySelector('.no-vehicle-no-credit-cover');
 const noVehicleCreditCover = document.querySelector('.no-vehicle-credit-cover');
+const noVehicleMetrhtaCover = document.querySelector('.no-vehicle-metrhta-cover');
 
 const outputNoCreditProkatavoli = document.querySelector('.output-no-credit-prokatavoli');
 const outputCreditProkatavoli = document.querySelector('.output-credit-prokatavoli');
@@ -154,6 +156,7 @@ const outputNoCreditDoseis = document.querySelector('.output-no-credit-doseis');
 
 const outputNoCreditNoVehicle = document.querySelector('.output-no-credit-no-vehicle');
 const outputCreditNoVehicle = document.querySelector('.output-credit-no-vehicle');
+const outputMetrhtaNoVehicle = document.querySelector('.output-metrhta-no-vehicle');
 
 const noCreditProkatavoliMinus = document.querySelector('.no-credit-prokatavoli-minus');
 const noCreditProkatavoliPlus = document.querySelector('.no-credit-prokatavoli-plus');
@@ -166,7 +169,9 @@ const noCreditDoseisPlus = document.querySelector('.no-credit-doseis-plus');
 const noCreditNoVehicleMinus = document.querySelector('.no-credit-no-vehicle-minus');
 const noCreditNoVehiclePlus = document.querySelector('.no-credit-no-vehicle-plus');
 const creditNoVehicleMinus = document.querySelector('.credit-no-vehicle-minus');
+const metrhtaNoVehicleMinus = document.querySelector('.metrhta-no-vehicle-minus');
 const creditNoVehiclePlus = document.querySelector('.credit-no-vehicle-plus');
+const metrhtaNoVehiclePlus = document.querySelector('.metrhta-no-vehicle-plus');
 
 const noCreditEnapomeinanPoso = document.querySelector('.no-credit-enapomeinan-poso');
 const creditEnapomeinanPoso = document.querySelector('.credit-enapomeinan-poso');
@@ -203,6 +208,8 @@ const maxNoVehicleNoCreditSliderText = document.querySelector(
 );
 const minNoVehicleCreditSliderText = document.querySelector('.min-no-vehicle-credit-slider-text');
 const maxNoVehicleCreditSliderText = document.querySelector('.max-no-vehicle-credit-slider-text');
+const minNoVehicleMetrhtaSliderText = document.querySelector('.min-no-vehicle-metrhta-slider-text');
+const maxNoVehicleMetrhtaSliderText = document.querySelector('.max-no-vehicle-metrhta-slider-text');
 
 const fuelPricesSelectVehicle = document.querySelector('#fuelPricesSelectVehicle');
 
@@ -313,6 +320,7 @@ function initSelectedFuelListeners() {
 function initEasyPay() {
   initNoCredit();
   initCredit();
+  initMetrhta();
   initEasyPayTabs();
   initEasyPaySystemSelection();
   resetEasyPay();
@@ -404,6 +412,13 @@ function initCredit() {
     noVehicleCreditSliderOnChange(this.value);
   });
 
+  outputMetrhtaNoVehicle.addEventListener('change', function () {
+    if (+this.value > +noVehicleMetrhtaSlider.max) this.value = noVehicleMetrhtaSlider.max;
+    if (+this.value < +noVehicleMetrhtaSlider.min) this.value = noVehicleMetrhtaSlider.min;
+    if (+this.value) this.value = Math.round(+this.value);
+    noVehicleMetrhtaSliderOnChange(this.value);
+  });
+
   creditProkatavoliMinus.addEventListener('click', () =>
     prokatavoliCreditSliderOnChange(
       parseInt(prokatavoliCreditSlider.value) - parseInt(prokatavoliCreditSlider.step)
@@ -427,6 +442,30 @@ function initCredit() {
   );
 
   doseisCreditSelect.selectedIndex = 11;
+}
+
+function initMetrhta() {
+  noVehicleMetrhtaSlider.addEventListener('input', e =>
+    noVehicleMetrhtaSliderOnChange(e.target.value)
+  );
+
+  outputMetrhtaNoVehicle.addEventListener('change', function () {
+    if (+this.value > +noVehicleMetrhtaSlider.max) this.value = noVehicleMetrhtaSlider.max;
+    if (+this.value < +noVehicleMetrhtaSlider.min) this.value = noVehicleMetrhtaSlider.min;
+    if (+this.value) this.value = Math.round(+this.value);
+    noVehicleMetrhtaSliderOnChange(this.value);
+  });
+
+  metrhtaNoVehicleMinus.addEventListener('click', () =>
+    noVehicleMetrhtaSliderOnChange(
+      parseInt(noVehicleMetrhtaSlider.value) - parseInt(noVehicleMetrhtaSlider.step)
+    )
+  );
+  metrhtaNoVehiclePlus.addEventListener('click', () =>
+    noVehicleMetrhtaSliderOnChange(
+      parseInt(noVehicleMetrhtaSlider.value) + parseInt(noVehicleMetrhtaSlider.step)
+    )
+  );
 }
 
 function initEasyPayTabs() {
@@ -602,6 +641,15 @@ function noVehicleCreditSliderOnChange(value) {
   prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
   // prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
 }
+function noVehicleMetrhtaSliderOnChange(value) {
+  noVehicleMetrhtaSlider.value = value;
+  outputMetrhtaNoVehicle.value = noVehicleMetrhtaSlider.value;
+  noVehicleMetrhtaCover.style.width = calcCoverWidth(noVehicleMetrhtaSlider) + '%';
+  noVehicleMetrhtaChangeMinMaxLabelsWeight();
+
+  selectedEasyPaySystemPrice = +noVehicleMetrhtaSlider.value;
+  // prokatavoliMetrhtaSliderOnChange(prokatavoliMetrhtaSlider.value);
+}
 
 function prokatavoliNoCreditChangeMinMaxLabelsWeight() {
   maxProkatavoliNoCreditSliderText.style.fontWeight =
@@ -632,6 +680,12 @@ function noVehicleCreditChangeMinMaxLabelsWeight() {
     noVehicleCreditSlider.value === noVehicleCreditSlider.max ? 'bold' : 'normal';
   minNoVehicleCreditSliderText.style.fontWeight =
     noVehicleCreditSlider.value === noVehicleCreditSlider.min ? 'bold' : 'normal';
+}
+function noVehicleMetrhtaChangeMinMaxLabelsWeight() {
+  maxNoVehicleMetrhtaSliderText.style.fontWeight =
+    noVehicleMetrhtaSlider.value === noVehicleMetrhtaSlider.max ? 'bold' : 'normal';
+  minNoVehicleMetrhtaSliderText.style.fontWeight =
+    noVehicleMetrhtaSlider.value === noVehicleMetrhtaSlider.min ? 'bold' : 'normal';
 }
 
 minProkatavoliNoCreditSliderText.addEventListener('click', e =>
