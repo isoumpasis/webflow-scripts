@@ -458,6 +458,7 @@ function initMetrhta() {
       parseInt(noVehicleMetrhtaSlider.value) + parseInt(noVehicleMetrhtaSlider.step)
     )
   );
+  document.querySelector('#metrhtaFormDisable').onSubmit = e => e.preventDefault();
 }
 
 function initEasyPayTabs() {
