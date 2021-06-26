@@ -2026,12 +2026,14 @@ function updateBasketSection(sections) {
         el => (el.style.display = 'none')
       );
     } else if (userSelections.easyPay.method === 'Μετρητά') {
+      console.log('methrta!!!');
       document.querySelector('.easy-pay-final-cost-basket').textContent =
         userSelections.easyPay.system.priceWithVAT;
       document.querySelector('.easy-pay-yearly-gain').textContent = userSelections.calculator
         .perMonthCheckbox
         ? (+userSelections.calculator.gain.replace('€', '') * 12).toFixed(2) + '€'
         : userSelections.calculator.gain;
+      console.log('methrta!!!', JSON.stringify(userSelections.calculator));
       [...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(
         el => (el.style.display = 'none')
       );
