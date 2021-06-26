@@ -503,9 +503,10 @@ function prokatavoliNoCreditSliderOnChange(value) {
   ).toFixed(1);
   configureNoCreditMaxDoseisSlider();
 
-  if (!userSelections.vehicle.suggestions.hasResult) return;
-  // userSelections.easyPay.noCreditSettings.prokatavoli = +prokatavoliNoCreditSlider.value;
+  if (!userSelections.vehicle.suggestions) return;
+  if (userSelections.vehicle.suggestions.containerId.indexOf('notConvertible') !== -1) return;
 
+  // userSelections.easyPay.noCreditSettings.prokatavoli = +prokatavoliNoCreditSlider.value;
   // userSelections.easyPay.noCreditSettings.finalCost = noCreditFinalCost.textContent;
 
   userSelections.easyPay.noCreditSettings = {
@@ -1176,7 +1177,6 @@ function showResults(fetchedModelObj) {
     ...userSelections.vehicle.suggestions,
     containerId: suggestedContainer.id
   };
-  // if (suggestedContainer.id.indexOf(''))
   saveUserSelections();
 
   adjustSectionPaddings();
