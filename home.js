@@ -1197,13 +1197,14 @@ function showResults(fetchedModelObj) {
     configureEasyPayAfterSuggestion();
     //document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
   } else {
-    console.log('1111111');
+    console.log('1111111', JSON.stringify(userSelections.easyPay));
     resetCalc();
     resetEasyPay();
     updateBasketSection({ resetNoVehicle: true });
   }
 
   configureUserSelectionsAfterResults();
+  console.log('222222', JSON.stringify(userSelections.easyPay));
   if (
     suggestedContainer &&
     !suggestedContainer.classList.contains(
@@ -1219,6 +1220,8 @@ function showResults(fetchedModelObj) {
     });
   }
   // sessionStorage.suggestedSystems = JSON.stringify(suggestedSystems);
+
+  console.log('33333', JSON.stringify(userSelections.easyPay));
 }
 function adjustSectionPaddings() {
   document.querySelector('#vehicle').style.paddingBottom = '3%';
