@@ -1612,7 +1612,7 @@ function getEasyPayMethod(target) {
   } else if (tabEl.classList.contains('credit-tab')) {
     return 'Με πιστωτική κάρτα';
   } else if (tabEl.classList.contains('metrhta-tab')) {
-    return 'Με μετρητά';
+    return 'Μετρητά';
   }
 }
 
@@ -2013,8 +2013,9 @@ function updateBasketSection(sections) {
       [...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(
         el => (el.style.display = 'flex')
       );
-    } else if (userSelections.easyPay.method === 'Με μετρητά') {
-      // document.querySelector('.easy-pay-final-cost-basket').textContent = userSelections.easyPay.noCreditSettings.finalCost;
+    } else if (userSelections.easyPay.method === 'Μετρητά') {
+      document.querySelector('.easy-pay-final-cost-basket').textContent =
+        userSelections.easyPay.system.priceWithVAT;
       [...document.querySelectorAll('.not-needed-row-metrhta-basket')].map(
         el => (el.style.display = 'none')
       );
