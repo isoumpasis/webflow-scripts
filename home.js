@@ -720,6 +720,12 @@ minNoVehicleCreditSliderText.addEventListener('click', e =>
 maxNoVehicleCreditSliderText.addEventListener('click', e =>
   noVehicleCreditSliderOnChange(noVehicleCreditSlider.max)
 );
+minNoVehicleMetrhtaSliderText.addEventListener('click', e =>
+  noVehicleMetrhtaSliderOnChange(noVehicleMetrhtaSlider.min)
+);
+maxNoVehicleMetrhtaSliderText.addEventListener('click', e =>
+  noVehicleMetrhtaSliderOnChange(noVehicleMetrhtaSlider.max)
+);
 
 function resetEasyPay() {
   [...document.querySelectorAll('.easy-pay-vehicle-container')].map(
@@ -1756,7 +1762,7 @@ function configureNoCreditSliders() {
 function configureCreditSliders() {
   const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
   prokatavoliCreditSlider.max = floorPrice;
-  maxProkatavoliCreditSliderText.textContent = floorPrice + '€';
+  maxProkatavoliCreditSliderText.textContent = floorPrice - 100 + '€';
 
   prokatavoliCreditCover.style.width = calcCoverWidth(prokatavoliCreditSlider) + '%';
   outputCreditProkatavoli.value = prokatavoliCreditSlider.value;
