@@ -503,6 +503,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
   ).toFixed(1);
   configureNoCreditMaxDoseisSlider();
 
+  console.log('111111222222222', JSON.stringify(userSelections.easyPay));
   if (!userSelections.vehicle.suggestions) return;
   if (userSelections.vehicle.suggestions.containerId.indexOf('notConvertible') !== -1) return;
 
