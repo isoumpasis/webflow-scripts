@@ -1166,7 +1166,6 @@ function showResults(fetchedModelObj) {
   } else if (fetchedModelObj.isMonou) {
     showMonouResults(fetchedModelObj);
   } else {
-    console.log(fetchedModelObj);
     showCylinderResults(fetchedModelObj, years);
   }
 
@@ -1176,6 +1175,7 @@ function showResults(fetchedModelObj) {
     ...userSelections.vehicle.suggestions,
     containerId: suggestedContainer.id
   };
+  // if (suggestedContainer.id.indexOf(''))
   saveUserSelections();
 
   adjustSectionPaddings();
@@ -1196,6 +1196,7 @@ function showResults(fetchedModelObj) {
     configureEasyPayAfterSuggestion();
     //document.querySelector('#vehicleForm').scrollIntoView({ behavior: 'smooth' });
   } else {
+    console.log('1111111');
     resetCalc();
     resetEasyPay();
     updateBasketSection({ resetNoVehicle: true });
