@@ -558,8 +558,8 @@ function prokatavoliNoCreditSliderOnChange(value) {
 
 function prokatavoliCreditSliderOnChange(value) {
   const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
-  prokatavoliCreditSlider.max = floorPrice;
-  maxProkatavoliCreditSliderText.textContent = floorPrice + '€';
+  prokatavoliCreditSlider.max = floorPrice - 100;
+  maxProkatavoliCreditSliderText.textContent = floorPrice - 100 + '€';
 
   prokatavoliCreditSlider.value = value;
   outputCreditProkatavoli.value = prokatavoliCreditSlider.value;
@@ -1761,7 +1761,7 @@ function configureNoCreditSliders() {
 
 function configureCreditSliders() {
   const floorPrice = Math.floor(selectedEasyPaySystemPrice / 10) * 10;
-  prokatavoliCreditSlider.max = floorPrice;
+  prokatavoliCreditSlider.max = floorPrice - 100;
   maxProkatavoliCreditSliderText.textContent = floorPrice - 100 + '€';
 
   prokatavoliCreditCover.style.width = calcCoverWidth(prokatavoliCreditSlider) + '%';
