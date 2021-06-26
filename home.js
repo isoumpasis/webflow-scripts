@@ -500,7 +500,7 @@ function initEasyPaySystemSelection() {
 
       prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
       prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
-      metrhtaFinalCost.textContent = (+noVehicleMetrhtaSlider.value).toFixed(2) + '€';
+      metrhtaFinalCost.textContent = selectedEasyPaySystemPrice.toFixed(2) + '€';
     })
   );
 }
