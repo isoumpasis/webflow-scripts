@@ -458,7 +458,7 @@ function initMetrhta() {
       parseInt(noVehicleMetrhtaSlider.value) + parseInt(noVehicleMetrhtaSlider.step)
     )
   );
-  document.querySelector('#metrhtaFormDisable').addEventListener('sumbit', e => e.preventDefault());
+  document.querySelector('#metrhtaFormDisable').addEventListener('submit', e => e.preventDefault());
 }
 
 function initEasyPayTabs() {
