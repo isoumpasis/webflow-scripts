@@ -224,7 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initDriveOftenRadio();
   initSelectedFuelListeners();
   initEasyPay();
-
   //localStorage.clear();
   //initStorage();
 });
@@ -410,13 +409,6 @@ function initCredit() {
     if (+this.value < +noVehicleCreditSlider.min) this.value = noVehicleCreditSlider.min;
     if (+this.value) this.value = Math.round(+this.value);
     noVehicleCreditSliderOnChange(this.value);
-  });
-
-  outputMetrhtaNoVehicle.addEventListener('change', function () {
-    if (+this.value > +noVehicleMetrhtaSlider.max) this.value = noVehicleMetrhtaSlider.max;
-    if (+this.value < +noVehicleMetrhtaSlider.min) this.value = noVehicleMetrhtaSlider.min;
-    if (+this.value) this.value = Math.round(+this.value);
-    noVehicleMetrhtaSliderOnChange(this.value);
   });
 
   creditProkatavoliMinus.addEventListener('click', () =>
