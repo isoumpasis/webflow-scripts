@@ -4,6 +4,8 @@ const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
 const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
 const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
 const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
+const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
+const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 
 let fetchedYears;
 let fetchedModels;
@@ -12,6 +14,8 @@ let foundVehicleObj;
 let suggestedPricesChanges = [];
 let userSelections = { selectedFuel: 'lpg', vehicle: {}, calculator: {}, easyPay: {} };
 const preferredStorage = localStorage;
+let fetchedPinsLength,
+  isLocationSelected = false;
 
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');
@@ -216,6 +220,8 @@ const maxNoVehicleMetrhtaSliderText = document.querySelector('.max-no-vehicle-me
 const fuelPricesSelectVehicle = document.querySelector('#fuelPricesSelectVehicle');
 
 const notificationIconBasket = document.querySelector('.notification-icon-basket');
+
+const storesLocationSelect = document.querySelector('#selectStores');
 
 let noCreditInterest = 12.6;
 let creditInterest = 7.2;
@@ -2216,4 +2222,93 @@ function downloadFile(blob, fileName) {
 
   // in case the Blob uses a lot of memory
   setTimeout(() => URL.revokeObjectURL(link.href), 7000);
+}
+
+/* STORES */
+document.addEventListener('click', () => {
+  if (geolocationError) {
+    document.querySelector('.geolocation-error').style.display = 'none';
+    geolocationError = false;
+  }
+});
+
+document.querySelectorAll('.open-map-btn').addEventListener('click', () => {
+  const url = `${mapBaseUrl}?gps=ΝΟΜΟΣ%20${
+    storesLocationSelect.options[storesLocationSelect.selectedIndex].innerHTML
+  }&filters=1`;
+  window.open(url, '_blank');
+});
+
+storesLocationSelect.addEventListener('change', e => locationOnChange(e.target.value));
+function locationOnChange(value) {
+  console.log('location changed', value);
+
+  //TODO change all location selects value
+
+  if (!value) {
+    isLocationSelected = false;
+    return;
+  }
+  isLocationSelected = true;
+  document.querySelector('.searching-place-text-location').textContent =
+    storesLocationSelect.options[storesLocationSelect.selectedIndex].innerHTML;
+  resetLocationContainer();
+
+  fetch(numPlaceUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ place: storesLocationSelect.value, lovatoServices: ['lovatoSystems'] })
+  })
+    .then(response => {
+      status = response.status;
+      return response.json();
+    })
+    .then(data => {
+      if (status != 200) {
+        //DEBUG
+        // start loading in pins result
+        // endLoadingSelect(dimensionSelect);
+        // litresSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
+        console.error(status);
+        return;
+      }
+      console.log('Pins Fetch:', data);
+      fetchedPinsLength = data;
+      // gogasSelections.form.fetchedValues.fetchedPinsLength = fetchedPinsLength;
+      // saveUserResults();
+      populateLocationContainerResults(fetchedPinsLength);
+      // endLoadingSelect(dimensionSelect);
+    })
+    .catch(error => {
+      //endLoadingSelect(dimensionSelect);
+      //litresSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
+      console.error('Pins Error Fetch:', error);
+    });
+
+  // showResults();
+}
+
+function resetLocationContainer() {
+  document.querySelector('.searching-location').style.display = 'flex';
+  document.querySelector('.location-results-container').style.display = 'none';
+}
+
+function populateLocationContainerResults(fetchedPinsLength) {
+  if (fetchedPinsLength) {
+    document.querySelector('.pins-found').style.display = 'block';
+    document.querySelector('.pins-not-found').style.display = 'none';
+    document.querySelector('.found-places-text-location').textContent = fetchedPinsLength;
+  } else {
+    document.querySelector('.pins-found').style.display = 'none';
+    document.querySelector('.pins-not-found').style.display = 'block';
+  }
+
+  const locationStr = storesLocationSelect.options[storesLocationSelect.selectedIndex].innerHTML;
+  document.querySelector('.selected-location-string').textContent =
+    locationStr.charAt(0).toUpperCase() + locationStr.slice(1).toLowerCase();
+
+  document.querySelector('.searching-location').style.display = 'none';
+  document.querySelector('.location-results-container').style.display = 'block';
 }
