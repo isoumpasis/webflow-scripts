@@ -15,7 +15,8 @@ let suggestedPricesChanges = [];
 let userSelections = { selectedFuel: 'lpg', vehicle: {}, calculator: {}, easyPay: {} };
 const preferredStorage = localStorage;
 let fetchedPinsLength,
-  isLocationSelected = false;
+  isLocationSelected = false,
+  geolocationError = false;
 
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');

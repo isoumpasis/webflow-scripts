@@ -19,7 +19,7 @@ let fetchedLitres,
   fetchedClosests,
   foundTankObj,
   activeContainer;
-let isLocationSelected = false; // DEBUG from arxiki kai localStorage
+let isLocationSelected = false;
 let geolocationError = false;
 
 const typeContainerIdDict = {
