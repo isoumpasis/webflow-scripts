@@ -2250,7 +2250,7 @@ document.querySelector('.enable-gps-btn').addEventListener('click', async () => 
   } catch (e) {
     console.log('error on geolocation', e);
     geolocationError = true;
-    document.querySelectorAll('.geolocation-error').style.display = 'block';
+    document.querySelector('.geolocation-error').style.display = 'block';
   }
 });
 
