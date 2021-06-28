@@ -2293,7 +2293,7 @@ function locationOnChange(value) {
 
 function resetLocationContainer() {
   document.querySelector('.searching-location').style.display = 'flex';
-  document.querySelector('.location-results-container').style.display = 'none';
+  // document.querySelector('.location-results-container').style.display = 'none';
 }
 
 function populateLocationContainerResults(fetchedPinsLength) {
