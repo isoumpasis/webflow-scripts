@@ -2385,7 +2385,7 @@ function populateClosestsPins(userLatLng) {
       openLocationListContainer();
       addLocationStr(data.location);
       prepareClosestList(fetchedClosests);
-      document.querySelectorAll('.searching-closests').style.display = 'none';
+      document.querySelector('.searching-closests').style.display = 'none';
     })
     .catch(error => {
       //endLoadingSelect(dimensionSelect);
