@@ -232,7 +232,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initMails() {
-  [...document.querySelectorAll('.info-mail')].map(el => (el.textContent = 'info@lovatohellas.gr'));
+  [...document.querySelectorAll('.info-email')].map(
+    el => (el.textContent = 'info@lovatohellas.gr')
+  );
 }
 
 function initSelects() {
