@@ -2357,7 +2357,7 @@ function getCurrentPosition() {
 }
 
 function populateClosestsPins(userLatLng) {
-  document.querySelectorAll('.searching-closests').style.display = 'flex';
+  document.querySelector('.searching-closests').style.display = 'flex';
 
   fetch(closestUrl, {
     method: 'POST',
