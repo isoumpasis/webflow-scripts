@@ -226,9 +226,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initDriveOftenRadio();
   initSelectedFuelListeners();
   initEasyPay();
+  initMails();
   //localStorage.clear();
   //initStorage();
 });
+
+function initMails() {
+  [...document.querySelectorAll('.info-mail')].map(el => (el.textContent = 'info@lovatohellas.gr'));
+}
 
 function initSelects() {
   modelSelect.disabled = true;
