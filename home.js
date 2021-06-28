@@ -2240,6 +2240,13 @@ document.querySelector('.open-map-btn').addEventListener('click', () => {
   window.open(url, '_blank');
 });
 
+function setLocationSelectHeader(label) {
+  if (isLocationSelected) return;
+  const temp = [...locationSelect.options].map(option => option.outerHTML);
+  temp[0] = `<option value="">${label}</option>`;
+  locationSelect.innerHTML = temp.join('');
+}
+
 storesLocationSelect.addEventListener('change', e => locationOnChange(e.target.value));
 function locationOnChange(value) {
   console.log('location changed', value);
