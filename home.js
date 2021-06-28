@@ -288,6 +288,10 @@ function modifyFuelPriceSliders(value) {
   calcResult();
 
   userSelections.calculator.fuelPricesSelectedIndex = fuelPricesSelectVehicle.selectedIndex;
+  userSelections.location = {
+    index: fuelPricesSelectVehicle.selectedIndex,
+    place: fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent
+  };
 }
 
 function initSelectedFuelListeners() {
