@@ -519,10 +519,6 @@ function populateClosestsPins(userLatLng) {
       console.error('Pins Error Fetch:', error);
     });
 }
-/**
- * @param  {} fetchedClosests
- * TODO: openMaps[i].href = `${mapBaseUrl}?gps=${encodeURI(closest.pin.properties.address)}`; xreiazetai na dw pws to kanw kai gia GEOMETRY
- */
 
 function prepareClosestList(fetchedClosests) {
   generateListItems(fetchedClosests);

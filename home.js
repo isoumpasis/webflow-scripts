@@ -6,6 +6,7 @@ const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
 const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
 const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
+const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 
 let fetchedYears;
 let fetchedModels;
@@ -15,6 +16,7 @@ let suggestedPricesChanges = [];
 let userSelections = { selectedFuel: 'lpg', vehicle: {}, calculator: {}, easyPay: {} };
 const preferredStorage = localStorage;
 let fetchedPinsLength,
+  fetchedClosests,
   isLocationSelected = false,
   geolocationError = false;
 
@@ -2240,6 +2242,18 @@ document.querySelector('.open-map-btn').addEventListener('click', () => {
   window.open(url, '_blank');
 });
 
+document.querySelector('.enable-gps-btn').addEventListener('click', async () => {
+  try {
+    const currentLatLng = await getCurrentPosition();
+    console.log('my current position', currentLatLng);
+    populateClosestsPins({ lat: currentLatLng[0], lng: currentLatLng[1] });
+  } catch (e) {
+    console.log('error on geolocation', e);
+    geolocationError = true;
+    document.querySelectorAll('.geolocation-error').style.display = 'block';
+  }
+});
+
 function setLocationSelectHeader(label) {
   if (isLocationSelected) return;
   const temp = [...locationSelect.options].map(option => option.outerHTML);
@@ -2319,4 +2333,121 @@ function populateLocationContainerResults(fetchedPinsLength) {
 
   document.querySelector('.searching-location').style.display = 'none';
   document.querySelector('.location-results-container').style.display = 'block';
+}
+
+function getCurrentPosition() {
+  return new Promise((resolve, reject) => {
+    let geolocationOptions = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        resolve([pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy]);
+      },
+      err => {
+        console.warn(`Error on geolocation: ${err.code}: ${err.message}`);
+        reject(err.message);
+      },
+      geolocationOptions
+    );
+  });
+}
+
+function populateClosestsPins(userLatLng) {
+  document.querySelectorAll('.searching-closests').style.display = 'flex';
+
+  fetch(closestUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      geometry: userLatLng,
+      lovatoServices: ['lovatoSystems'],
+      kmLimit: 150,
+      pinsLimit: 20
+    })
+  })
+    .then(response => {
+      status = response.status;
+      return response.json();
+    })
+    .then(data => {
+      if (status != 200) {
+        console.error(status);
+        return;
+      }
+      console.log('Closest Fetch:', data);
+      fetchedClosests = data.closestPins;
+      openLocationListContainer();
+      addLocationStr(data.location);
+      prepareClosestList(fetchedClosests);
+      document.querySelectorAll('.searching-closests').style.display = 'none';
+    })
+    .catch(error => {
+      //endLoadingSelect(dimensionSelect);
+      //litresSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
+      console.error('Pins Error Fetch:', error);
+    });
+}
+
+function openLocationListContainer() {
+  const locationListContainer = document.querySelector('.location-list-container');
+  locationListContainer.style.display = 'flex';
+  locationListContainer.style.height = 'auto';
+}
+
+function addLocationStr(location) {
+  document.querySelector('.location-address-string').textContent = location;
+}
+
+function prepareClosestList(fetchedClosests) {
+  generateListItems(fetchedClosests);
+  populateClosestsList(fetchedClosests);
+}
+
+function generateListItems(fetchedClosests) {
+  const listItem = document.querySelector('.list-item').cloneNode(true);
+  const containerList = document.querySelector('.location-list-block');
+  [...containerList.querySelectorAll('.list-item')].forEach(el => {
+    el.remove();
+  });
+  for (let i = 0; i < fetchedClosests.length; i++) {
+    const cloneListItem = listItem.cloneNode(true);
+    containerList.appendChild(cloneListItem);
+  }
+}
+
+function populateClosestsList(fetchedClosests) {
+  let names, addresses, phones, emails, distances, openMaps;
+
+  let geometryParam;
+  const filtersParam = '1';
+
+  names = [...document.querySelectorAll('.closest-name')];
+  addresses = [...document.querySelectorAll('.closest-address')];
+  phones = [...document.querySelectorAll('.closest-phone')];
+  emails = [...document.querySelectorAll('.closest-email')];
+  distances = [...document.querySelectorAll('.closest-distance')];
+  openMaps = [...document.querySelectorAll('.closest-open-map')];
+
+  fetchedClosests.forEach((closest, i) => {
+    names[i].textContent = closest.pin.properties.name;
+    addresses[i].textContent = closest.pin.properties.address;
+    phones[i].textContent = closest.pin.properties.phone;
+    emails[i].textContent = closest.pin.properties.email ? closest.pin.properties.email : '';
+    distances[i].textContent = Math.round(closest.distance * 100) / 100;
+
+    // gpsParam = encodeURI(closest.pin.properties.address);
+    // openMaps[i].href = `${mapBaseUrl}?gps=${gpsParam}&filters=${filtersParam}`;
+    // nameParam = encodeURI(closest.pin.properties.name);
+    // openMaps[i].href = `${mapBaseUrl}?name=${nameParam}&filters=${filtersParam}`;
+    let { lat, lng } = closest.pin.geometry;
+    geometryParam = lat + ',' + lng;
+    openMaps[i].href = `${mapBaseUrl}?geometry=${geometryParam}&filters=${filtersParam}`;
+    openMaps[i].target = '_blank';
+  });
 }
