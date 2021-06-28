@@ -2232,7 +2232,7 @@ document.addEventListener('click', () => {
   }
 });
 
-document.querySelectorAll('.open-map-btn').addEventListener('click', () => {
+document.querySelector('.open-map-btn').addEventListener('click', () => {
   const url = `${mapBaseUrl}?gps=ΝΟΜΟΣ%20${
     storesLocationSelect.options[storesLocationSelect.selectedIndex].innerHTML
   }&filters=1`;
