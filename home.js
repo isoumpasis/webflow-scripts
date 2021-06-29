@@ -2197,7 +2197,8 @@ function saveUserSelections() {
 document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
   e.preventDefault();
   console.log(e.target);
-  const dataToSend = document.querySelector('#pdfName').value;
+  // const dataToSend = document.querySelector('#pdfName').value;
+  dataToSend = userSelections;
 
   startLoadingSelect(e.target);
   fetch(downloadPdfUrl, {
@@ -2205,7 +2206,7 @@ document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name: dataToSend })
+    body: JSON.stringify({ data: dataToSend })
   })
     .then(res => res.blob())
     .then(blob => {
