@@ -265,6 +265,7 @@ function initFuelPrices() {
   })
     .then(res => res.json())
     .then(data => {
+      data.pop(); //removes m.o.
       fuelPrices = data;
       modifyFuelPriceSliders('ΑΤΤΙΚΗΣ');
     })
@@ -293,7 +294,7 @@ fuelPricesSelectVehicle.addEventListener('change', e => {
 });
 
 function modifyFuelPriceSliders(value) {
-  const locationObj = fuelPrices.filter(obj => obj.place.indexOf(value) !== -1)[0];
+  const locationObj = fuelPrices.find(obj => obj.place.indexOf(value) !== -1);
   if (!locationObj) return;
 
   sliders[2].value = locationObj.petrol;
