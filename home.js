@@ -2251,7 +2251,7 @@ document.querySelector('.open-map-btn').addEventListener('click', () => {
 
 document.querySelector('.enable-gps-btn').addEventListener('click', enableGPSButtonClick);
 
-async function enableGPSButtonClick({ showError = true }) {
+async function enableGPSButtonClick({ showError = true } = {}) {
   try {
     const currentLatLng = await getCurrentPosition();
     console.log('my current position', currentLatLng);
