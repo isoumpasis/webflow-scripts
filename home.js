@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDriveOftenRadio();
   initSelectedFuelListeners();
   initEasyPay();
-  calcStores();
+  initStores();
   //localStorage.clear();
   //initStorage();
   initMails();
@@ -280,13 +280,15 @@ document.querySelector('#fuelPricesSelectNoVehicle').addEventListener('change', 
   modifyFuelPriceSliders(e.target.value);
 
   storesLocationSelect.value = e.target.value;
-  calcStores();
+  locationOnChange(storesLocationSelect.value);
 });
 fuelPricesSelectVehicle.addEventListener('change', e => {
   document.querySelector('#fuelPricesSelectNoVehicle').value = e.target.value;
   modifyFuelPriceSliders(e.target.value);
+
   storesLocationSelect.value = e.target.value;
-  calcStores();
+  locationOnChange(storesLocationSelect.value);
+
   updateBasketSection({ calculator: true });
 });
 
@@ -2235,7 +2237,7 @@ function downloadFile(blob, fileName) {
 
 /* STORES */
 
-function calcStores() {
+function initStores() {
   locationOnChange(storesLocationSelect.value);
   enableGPSButtonClick();
 }
