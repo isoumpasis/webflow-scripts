@@ -1,19 +1,20 @@
 {
-	"name": "webflow-scripts",
-	"version": "1.0.0",
-	"description": "/_ Map _/\r [x] infowindow offset\r [x] loading\r [x] image clusterer color (white hover bold etc.) and format\r [x] offset for marker icon",
-	"main": "home.js",
-	"scripts": {
-		"push": "git add . && git commit -m \"webflow push\" && git push origin master"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/isoumpasis/webflow-scripts.git"
-	},
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/isoumpasis/webflow-scripts/issues"
-	},
-	"homepage": "https://github.com/isoumpasis/webflow-scripts#readme"
+  "name": "webflow-scripts",
+  "version": "1.0.0",
+  "description": "/_ Map _/\r [x] infowindow offset\r [x] loading\r [x] image clusterer color (white hover bold etc.) and format\r [x] offset for marker icon",
+  "main": "home.js",
+  "scripts": {
+    "push": "git add . && git commit -m \"webflow push\" && git push origin master",
+    "pull": "git pull origin master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isoumpasis/webflow-scripts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isoumpasis/webflow-scripts/issues"
+  },
+  "homepage": "https://github.com/isoumpasis/webflow-scripts#readme"
 }

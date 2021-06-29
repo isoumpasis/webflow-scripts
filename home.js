@@ -235,9 +235,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initDriveOftenRadio();
   initSelectedFuelListeners();
   initEasyPay();
-  initMails();
+  initStores();
   //localStorage.clear();
   //initStorage();
+  initMails();
 });
 
 function initMails() {
@@ -2228,6 +2229,12 @@ function downloadFile(blob, fileName) {
 }
 
 /* STORES */
+
+function initStores() {
+  locationOnChange(storesLocationSelect.value);
+  enableGPSButtonClick();
+}
+
 document.addEventListener('click', () => {
   if (geolocationError) {
     document.querySelector('.geolocation-error').style.display = 'none';
@@ -2242,17 +2249,21 @@ document.querySelector('.open-map-btn').addEventListener('click', () => {
   window.open(url, '_blank');
 });
 
-document.querySelector('.enable-gps-btn').addEventListener('click', async () => {
+document.querySelector('.enable-gps-btn').addEventListener('click', enableGPSButtonClick);
+
+async function enableGPSButtonClick({ showError = true }) {
   try {
     const currentLatLng = await getCurrentPosition();
     console.log('my current position', currentLatLng);
     populateClosestsPins({ lat: currentLatLng[0], lng: currentLatLng[1] });
   } catch (e) {
     console.log('error on geolocation', e);
+    if (!showError) return;
+    //TODO error or alert or both
     geolocationError = true;
     document.querySelector('.geolocation-error').style.display = 'block';
   }
-});
+}
 
 function setLocationSelectHeader(label) {
   if (isLocationSelected) return;
@@ -2266,7 +2277,6 @@ function locationOnChange(value) {
   console.log('location changed', value);
 
   //TODO change all location selects value
-
   if (!value) {
     isLocationSelected = false;
     return;
