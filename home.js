@@ -285,6 +285,8 @@ document.querySelector('#fuelPricesSelectNoVehicle').addEventListener('change', 
 fuelPricesSelectVehicle.addEventListener('change', e => {
   document.querySelector('#fuelPricesSelectNoVehicle').value = e.target.value;
   modifyFuelPriceSliders(e.target.value);
+  storesLocationSelect.value = e.target.value;
+  calcStores();
   updateBasketSection({ calculator: true });
 });
 
