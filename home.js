@@ -2212,7 +2212,7 @@ document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
     .then(blob => {
       const newBlob = new Blob([blob], { type: 'application/pdf' });
       console.log(newBlob);
-      downloadFile(newBlob, dataToSend);
+      downloadFile(newBlob, 'Η προσφορά μου');
       endLoadingSelect(e.target);
     })
     .catch(error => {
