@@ -2328,8 +2328,18 @@ function locationOnChange(value) {
     storesLocationSelect.options[storesLocationSelect.selectedIndex].innerHTML;
   resetLocationContainer();
 
-  if (userSelections.location && userSelections.location.numPlaces) {
-    console.log('Num places cached:', userSelections.location.numPlaces);
+  if (
+    userSelections.location &&
+    userSelections.location.numPlaces &&
+    userSelections.location.place === value
+  ) {
+    console.log(
+      'Num places cached:',
+      userSelections.location.numPlaces,
+      'for',
+      userSelections.location.place,
+      value
+    );
     fetchedPinsLength = userSelections.location.numPlaces;
     populateLocationContainerResults(fetchedPinsLength);
     return;
