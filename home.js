@@ -2328,6 +2328,13 @@ function locationOnChange(value) {
     storesLocationSelect.options[storesLocationSelect.selectedIndex].innerHTML;
   resetLocationContainer();
 
+  if (userSelections.location && userSelections.location.numPlaces) {
+    console.log('Num places cached:', userSelections.location.numPlaces);
+    fetchedPinsLength = userSelections.location.numPlaces;
+    populateLocationContainerResults(fetchedPinsLength);
+    return;
+  }
+
   fetch(numPlaceUrl, {
     method: 'POST',
     headers: {
@@ -2350,10 +2357,9 @@ function locationOnChange(value) {
       }
       console.log('Pins Fetch:', data);
       fetchedPinsLength = data;
-      // gogasSelections.form.fetchedValues.fetchedPinsLength = fetchedPinsLength;
-      // saveUserResults();
       populateLocationContainerResults(fetchedPinsLength);
-      // endLoadingSelect(dimensionSelect);
+      userSelections.location.numPlaces = fetchedPinsLength;
+      saveUserSelections();
     })
     .catch(error => {
       //endLoadingSelect(dimensionSelect);
