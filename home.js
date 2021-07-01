@@ -2562,3 +2562,11 @@ function populateClosestsList(fetchedClosests) {
     openMaps[i].target = '_blank';
   });
 }
+
+/* css */
+
+document.querySelectorAll('.suggested-system-value-block').forEach(el => {
+  el.addEventListener('onMouseOver', e => {
+    console.log('onMouseOver', el, e);
+  });
+});
