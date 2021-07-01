@@ -15,8 +15,9 @@ let foundVehicleObj;
 let suggestedPricesChanges = [];
 let userSelections = { selectedFuel: 'lpg', vehicle: {}, calculator: {}, easyPay: {} };
 const preferredStorage = localStorage;
-const fuelPricesCacheTime = 1000 * 60; //TODO CHANGE TO 1 WEEK
-const numPlacesCacheTime = 1000 * 60; //TODO CHANGE TO ...
+//one week and one hour
+const fuelPricesCacheTime = 1000 * 60 * 60 * 24 * 7 + 1000 * 60 * 60;
+const numPlacesCacheTime = 1000 * 60 * 60 * 24 * 7 + 1000 * 60 * 60;
 let fetchedPinsLength,
   fetchedClosests,
   isLocationSelected = false,
