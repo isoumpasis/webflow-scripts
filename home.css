@@ -207,6 +207,6 @@ input[type='range']::-ms-thumb:hover {
   height: auto;
 } */
 
-.suggested-system-value-block {
+.suggested-system-value-block:hover {
   background: red;
 }
