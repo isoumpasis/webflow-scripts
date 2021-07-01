@@ -162,6 +162,18 @@ input[type='range']::-ms-thumb:hover {
   float: right;
 }
 
+.cover-easy-pay {
+  position: absolute;
+  height: 11px;
+  right: 0px;
+  bottom: 5px;
+  background: #f1f1f1;
+  border-radius: 25px;
+  z-index: 0;
+  width: 76%;
+  float: right;
+}
+
 .range-slider-no-credit,
 .range-slider-credit,
 .range-slider-metrhta {
