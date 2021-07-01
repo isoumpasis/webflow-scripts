@@ -2259,7 +2259,11 @@ function downloadFile(blob, fileName) {
 /* STORES */
 
 function initStores() {
-  locationOnChange(storesLocationSelect.value);
+  if (userSelections.location) {
+    locationOnChange(userSelections.location.place);
+  } else {
+    locationOnChange(storesLocationSelect.value);
+  }
   enableGPSButtonClick();
 }
 
