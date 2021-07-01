@@ -2330,7 +2330,7 @@ function locationOnChange(value) {
 
   if (
     userSelections.location &&
-    userSelections.location.numPlaces &&
+    (userSelections.location.numPlaces || userSelections.location.numPlaces === 0) &&
     userSelections.location.place === value
   ) {
     console.log(
