@@ -2567,6 +2567,22 @@ function populateClosestsList(fetchedClosests) {
 
 document.querySelectorAll('.suggested-system-value-block').forEach(el => {
   el.addEventListener('mouseover', e => {
-    console.log('mouseover', el, e);
+    const parent = el.closest('.suggested-cng-system');
+    const target = parent.document.querySelector('.suggested-overlay-block-cng');
+
+    // target.style.display = 'block';
+    target.style.height = 'auto';
+
+    console.log('mouseover', el, parent, target);
+  });
+
+  el.addEventListener('mouseout', e => {
+    const parent = el.closest('.suggested-cng-system');
+    const target = parent.document.querySelector('.suggested-overlay-block-cng');
+
+    // target.style.display = 'none';
+    target.style.height = '0px';
+
+    console.log('mouseout', el, parent, target);
   });
 });
