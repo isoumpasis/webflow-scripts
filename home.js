@@ -297,6 +297,7 @@ function setExpDate(ms) {
 }
 
 function isExpired(expDate) {
+  if (!expDate) return true;
   return new Date().getTime > expDate;
 }
 
