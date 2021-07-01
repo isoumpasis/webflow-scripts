@@ -2565,7 +2565,7 @@ function populateClosestsList(fetchedClosests) {
 
 /* css */
 
-document.querySelectorAll('.suggested-system-value-text-cng').forEach(el => {
+document.querySelectorAll('.suggested-system-value-block').forEach(el => {
   el.addEventListener('mouseenter', e => {
     const parent = el.closest('.suggested-cng-system');
     const target = parent.querySelector('.suggested-overlay-block-cng');
