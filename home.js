@@ -293,12 +293,13 @@ function initFuelPrices() {
 }
 
 function setExpDate(ms) {
+  console.log('date now', new Date().getTime(), 'new expDate', new Date().getTime() + ms);
   return new Date().getTime() + ms;
 }
 
 function isExpired(expDate) {
   if (!expDate) return true;
-  console.log(new Date().getTime(), expDate);
+  console.log(new Date().getTime(), expDate, new Date().getTime() > expDate);
   return new Date().getTime > expDate;
 }
 
