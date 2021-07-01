@@ -201,3 +201,7 @@ input[type='range']::-ms-thumb:hover {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently */
 }
+
+.suggested-system-value-block:hover .suggested-overlay-block-cng.a {
+  height: auto;
+}
