@@ -221,6 +221,7 @@ const minNoVehicleMetrhtaSliderText = document.querySelector('.min-no-vehicle-me
 const maxNoVehicleMetrhtaSliderText = document.querySelector('.max-no-vehicle-metrhta-slider-text');
 
 const fuelPricesSelectVehicle = document.querySelector('#fuelPricesSelectVehicle');
+const fuelPricesSelectNoVehicle = document.querySelector('#fuelPricesSelectNoVehicle');
 
 const notificationIconBasket = document.querySelector('.notification-icon-basket');
 
@@ -262,6 +263,7 @@ function initFuelPrices() {
   if (userSelections && userSelections.location && userSelections.fuelPrices) {
     console.log('has location and prices! cached!');
     fuelPrices = userSelections.fuelPrices;
+    initPlaceSelects(userSelections.location.place);
     modifyFuelPriceSliders(userSelections.location.place);
   } else {
     console.log('no location and fuelPrices! missed! xhr to', urlFuelPrices);
@@ -286,7 +288,13 @@ function initDriveOftenRadio() {
   selectDriveOftenRadioInput(2);
 }
 
-document.querySelector('#fuelPricesSelectNoVehicle').addEventListener('change', e => {
+function initPlaceSelects(placeValue) {
+  fuelPricesSelectVehicle.value = placeValue;
+  fuelPricesSelectNoVehicle.value = placeValue;
+  locationSelect.value = placeValue;
+}
+
+fuelPricesSelectNoVehicle.addEventListener('change', e => {
   fuelPricesSelectVehicle.value = e.target.value;
   modifyFuelPriceSliders(e.target.value, { save: true });
 
@@ -294,8 +302,8 @@ document.querySelector('#fuelPricesSelectNoVehicle').addEventListener('change', 
   locationOnChange(storesLocationSelect.value);
 });
 fuelPricesSelectVehicle.addEventListener('change', e => {
-  document.querySelector('#fuelPricesSelectNoVehicle').value = e.target.value;
-  modifyFuelPriceSliders(e.target.value), { save: true };
+  fuelPricesSelectNoVehicle.value = e.target.value;
+  modifyFuelPriceSliders(e.target.value, { save: true });
 
   storesLocationSelect.value = e.target.value;
   locationOnChange(storesLocationSelect.value);
