@@ -2566,7 +2566,7 @@ function populateClosestsList(fetchedClosests) {
 /* css */
 
 document.querySelectorAll('.suggested-system-value-block').forEach(el => {
-  el.addEventListener('onMouseOver', e => {
-    console.log('onMouseOver', el, e);
+  el.addEventListener('mouseover', e => {
+    console.log('mouseover', el, e);
   });
 });
