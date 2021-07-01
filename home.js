@@ -315,7 +315,7 @@ function modifyFuelPriceSliders(value, { save = false } = {}) {
   calcCovers[3].style.width = calcCoverWidth(sliders[3]) + '%';
   calcResult();
 
-  console.log('save is:', save);
+  console.log('value is:', value, 'save is:', save);
   if (save) {
     userSelections.calculator.fuelPricesSelectedIndex = fuelPricesSelectVehicle.selectedIndex;
     userSelections.location = {
