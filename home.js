@@ -2566,7 +2566,7 @@ function populateClosestsList(fetchedClosests) {
 /* css */
 
 document.querySelectorAll('.suggested-system-value-text-cng').forEach(el => {
-  el.addEventListener('mouseover', e => {
+  el.addEventListener('mouseenter', e => {
     const parent = el.closest('.suggested-cng-system');
     const target = parent.querySelector('.suggested-overlay-block-cng');
 
@@ -2579,7 +2579,7 @@ document.querySelectorAll('.suggested-system-value-text-cng').forEach(el => {
 });
 
 document.querySelectorAll('.suggested-overlay-block-cng').forEach(el => {
-  el.addEventListener('mouseout', e => {
+  el.addEventListener('mouseleave', e => {
     const parent = el.closest('.suggested-cng-system');
     const target = parent.querySelector('.suggested-overlay-block-cng');
 
