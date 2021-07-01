@@ -260,9 +260,14 @@ function initSelects() {
 }
 
 function initFuelPrices() {
-  if (userSelections && userSelections.location && userSelections.fuelPrices) {
+  if (
+    userSelections &&
+    userSelections.location &&
+    userSelections.fuelPrices &&
+    !isExpired(userSelections.fuelPrices.expDate)
+  ) {
     console.log('has location and prices! cached!');
-    fuelPrices = userSelections.fuelPrices;
+    fuelPrices = userSelections.fuelPrices.prices;
     initPlaceSelects(userSelections.location.place);
     modifyFuelPriceSliders(userSelections.location.place);
   } else {
@@ -277,11 +282,22 @@ function initFuelPrices() {
       .then(data => {
         data.pop(); //removes m.o.
         fuelPrices = data;
-        userSelections.fuelPrices = fuelPrices;
+        userSelections.fuelPrices = {
+          prices: fuelPrices,
+          expDate: setExpDate(1000 * 20)
+        };
         modifyFuelPriceSliders('ΑΤΤΙΚΗΣ', { save: true });
       })
       .catch(e => console.error('Error on FuelPrices Fetch:', e));
   }
+}
+
+function setExpDate(ms) {
+  return new Date().getTime() + ms;
+}
+
+function isExpired(expDate) {
+  return new Date().getTime > expDate;
 }
 
 function initDriveOftenRadio() {
