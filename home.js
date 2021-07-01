@@ -291,7 +291,7 @@ function initDriveOftenRadio() {
 function initPlaceSelects(placeValue) {
   fuelPricesSelectVehicle.value = placeValue;
   fuelPricesSelectNoVehicle.value = placeValue;
-  locationSelect.value = placeValue;
+  storesLocationSelect.value = placeValue;
 }
 
 fuelPricesSelectNoVehicle.addEventListener('change', e => {
