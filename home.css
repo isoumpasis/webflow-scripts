@@ -140,6 +140,18 @@ input[type='range']::-ms-thumb {
   transition: transform 200ms ease-in-out;
 }
 
+input[type='range'].easy-pay::-webkit-slider-thumb {
+  background: #565656;
+}
+/* All same stuff for Mozila */
+input[type='range'].easy-pay::-moz-range-thumb {
+  background: #565656;
+}
+/* All the same stuff for IE */
+input[type='range'].easy-pay::-ms-thumb {
+  background: #565656;
+}
+
 input[type='range']::-webkit-slider-thumb:hover {
   transform: scale(1.175);
 }
@@ -163,15 +175,8 @@ input[type='range']::-ms-thumb:hover {
 }
 
 .cover-easy-pay {
-  position: absolute;
-  height: 11px;
-  right: 0px;
-  bottom: 5px;
   background: #f1f1f1;
-  border-radius: 25px;
-  z-index: 0;
-  width: 76%;
-  float: right;
+  border: 1px solid #ddd;
 }
 
 .range-slider-no-credit,
