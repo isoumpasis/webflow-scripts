@@ -202,7 +202,11 @@ input[type='range']::-ms-thumb:hover {
   user-select: none; /* Non-prefixed version, currently */
 }
 
-.suggested-system-value-block:hover .suggested-overlay-block-cng.a {
+/* .suggested-system-value-block:hover .suggested-overlay-block-cng.a {
   display: block;
   height: auto;
+} */
+
+.suggested-system-value-block {
+  background: red;
 }
