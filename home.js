@@ -2356,11 +2356,11 @@ function locationOnChange(value) {
   ) {
     console.log(
       'numPlaces CACHED!',
-      userSelections.location.numPlaces,
+      userSelections.location.numPlaces.places,
       'for',
       userSelections.location.place
     );
-    fetchedPinsLength = userSelections.location.numPlaces;
+    fetchedPinsLength = userSelections.location.numPlaces.places;
     populateLocationContainerResults(fetchedPinsLength);
     return;
   }
