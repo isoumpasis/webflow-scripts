@@ -286,7 +286,6 @@ function initFuelPrices() {
         fuelPrices = data;
 
         let newValue = 'ΑΤΤΙΚΗΣ';
-
         if (
           userSelections &&
           userSelections.location &&
@@ -301,6 +300,7 @@ function initFuelPrices() {
           expDate: setExpDate(fuelPricesCacheTime)
         };
 
+        initPlaceSelects(newValue);
         modifyFuelPriceSliders(newValue, { save: true });
       })
       .catch(e => console.error('Error on FuelPrices Fetch:', e));
