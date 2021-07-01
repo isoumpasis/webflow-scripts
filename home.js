@@ -310,6 +310,7 @@ function modifyFuelPriceSliders(value) {
     index: fuelPricesSelectVehicle.selectedIndex,
     place: fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent
   };
+  saveUserSelections();
 }
 
 function initSelectedFuelListeners() {
@@ -2285,7 +2286,6 @@ storesLocationSelect.addEventListener('change', e => locationOnChange(e.target.v
 function locationOnChange(value) {
   console.log('location changed', value);
 
-  //TODO change all location selects value
   if (!value) {
     isLocationSelected = false;
     return;
