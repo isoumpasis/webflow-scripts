@@ -2244,7 +2244,7 @@ function initStores() {
   enableGPSButtonClick();
 }
 
-document.addEventListener('click', () => {
+document.querySelector('#stores').addEventListener('click', () => {
   if (geolocationError) {
     document.querySelector('.geolocation-error').style.display = 'none';
     geolocationError = false;
