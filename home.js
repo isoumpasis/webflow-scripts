@@ -260,7 +260,7 @@ function initSelects() {
 
 function initFuelPrices() {
   if (userSelections && userSelections.location && userSelections.fuelPrices) {
-    console.log('has location and prices! cached!', JSON.stringify(userSelections));
+    console.log('has location and prices! cached!');
     fuelPrices = userSelections.fuelPrices;
     modifyFuelPriceSliders(userSelections.location.place);
   } else {
@@ -320,7 +320,8 @@ function modifyFuelPriceSliders(value, { save = false } = {}) {
     userSelections.calculator.fuelPricesSelectedIndex = fuelPricesSelectVehicle.selectedIndex;
     userSelections.location = {
       index: fuelPricesSelectVehicle.selectedIndex,
-      place: fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent
+      place: fuelPricesSelectVehicle.value
+      // place: fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent
     };
     saveUserSelections();
   }
