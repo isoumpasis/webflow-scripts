@@ -2313,6 +2313,8 @@ function locationOnChange(value) {
     return;
   }
   isLocationSelected = true;
+
+  storesLocationSelect.value = value;
   document.querySelector('.searching-place-text-location').textContent =
     storesLocationSelect.options[storesLocationSelect.selectedIndex].innerHTML;
   resetLocationContainer();
@@ -2322,7 +2324,7 @@ function locationOnChange(value) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ place: storesLocationSelect.value, lovatoServices: ['lovatoSystems'] })
+    body: JSON.stringify({ place: value, lovatoServices: ['lovatoSystems'] })
   })
     .then(response => {
       status = response.status;
