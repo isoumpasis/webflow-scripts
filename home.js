@@ -260,6 +260,7 @@ function initSelects() {
 }
 
 function initFuelPrices() {
+  console.log(!isExpired(userSelections.fuelPrices.expDate));
   if (
     userSelections &&
     userSelections.location &&
