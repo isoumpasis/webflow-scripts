@@ -2572,6 +2572,7 @@ document.querySelectorAll('.suggested-system-value-text-cng').forEach(el => {
 
     // target.style.display = 'block';
     target.style.height = 'auto';
+    target.style.opacity = '1';
 
     console.log('mouseover', el, parent, target);
   });
@@ -2584,6 +2585,7 @@ document.querySelectorAll('.suggested-overlay-block-cng').forEach(el => {
 
     // target.style.display = 'none';
     target.style.height = '0px';
+    target.style.opacity = '0';
 
     console.log('mouseout', el, parent, target);
   });
