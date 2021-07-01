@@ -203,5 +203,6 @@ input[type='range']::-ms-thumb:hover {
 }
 
 .suggested-system-value-block:hover .suggested-overlay-block-cng.a {
+  display: block;
   height: auto;
 }
