@@ -260,7 +260,6 @@ function initSelects() {
 }
 
 function initFuelPrices() {
-  console.log(isExpired(userSelections.fuelPrices.expDate));
   if (
     userSelections &&
     userSelections.location &&
@@ -301,7 +300,7 @@ function setExpDate(ms) {
 function isExpired(expDate) {
   if (!expDate) return true;
   console.log(new Date().getTime(), expDate, new Date().getTime() > expDate);
-  return new Date().getTime > expDate;
+  return new Date().getTime() > expDate;
 }
 
 function initDriveOftenRadio() {
