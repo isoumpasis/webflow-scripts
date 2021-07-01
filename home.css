@@ -208,5 +208,5 @@ input[type='range']::-ms-thumb:hover {
 } */
 
 .suggested-system-value-block:hover .suggested-cng-price {
-  background: red;
+  background: red !important;
 }
