@@ -2365,6 +2365,7 @@ function locationOnChange(value) {
     userSelections.location.numPlaces &&
     (userSelections.location.numPlaces.places || userSelections.location.numPlaces.places === 0) &&
     userSelections.location.place === value &&
+    userSelections.location.place === userSelections.location.numPlaces.place &&
     !isExpired(userSelections.location.numPlaces.expDate)
   ) {
     console.log(
@@ -2403,6 +2404,7 @@ function locationOnChange(value) {
       fetchedPinsLength = data;
       populateLocationContainerResults(fetchedPinsLength);
       userSelections.location.numPlaces = {
+        place: storesLocationSelect.value,
         places: fetchedPinsLength,
         expDate: setExpDate(numPlacesCacheTime)
       };
