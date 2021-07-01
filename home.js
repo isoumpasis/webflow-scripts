@@ -260,7 +260,7 @@ function initSelects() {
 
 function initFuelPrices() {
   if (userSelections && userSelections.location && userSelections.fuelPrices) {
-    console.log('has location and prices! cached!');
+    console.log('has location and prices! cached!', JSON.strigify(userSelections));
     fuelPrices = userSelections.fuelPrices;
     modifyFuelPriceSliders(userSelections.location.place);
   } else {
