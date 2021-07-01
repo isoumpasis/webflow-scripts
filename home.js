@@ -2407,7 +2407,9 @@ function locationOnChange(value) {
       userSelections.location.numPlaces = {
         place: storesLocationSelect.value,
         places: fetchedPinsLength,
-        expDate: setExpDate(numPlacesCacheTime)
+        expDate: isExpired(userSelections.location.numPlaces.expDate)
+          ? setExpDate(numPlacesCacheTime)
+          : userSelections.location.numPlaces.expDate
       };
       saveUserSelections();
     })
