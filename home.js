@@ -284,11 +284,24 @@ function initFuelPrices() {
       .then(data => {
         data.pop(); //removes m.o.
         fuelPrices = data;
+
+        let newValue = 'ΑΤΤΙΚΗΣ';
+
+        if (
+          userSelections &&
+          userSelections.location &&
+          userSelections.fuelPrices &&
+          isExpired(userSelections.fuelPrices.expDate)
+        ) {
+          newValue = userSelections.location.place;
+        }
+
         userSelections.fuelPrices = {
           prices: fuelPrices,
           expDate: setExpDate(fuelPricesCacheTime)
         };
-        modifyFuelPriceSliders('ΑΤΤΙΚΗΣ', { save: true });
+
+        modifyFuelPriceSliders(newValue, { save: true });
       })
       .catch(e => console.error('Error on FuelPrices Fetch:', e));
   }
