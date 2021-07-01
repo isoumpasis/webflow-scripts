@@ -15,6 +15,8 @@ let foundVehicleObj;
 let suggestedPricesChanges = [];
 let userSelections = { selectedFuel: 'lpg', vehicle: {}, calculator: {}, easyPay: {} };
 const preferredStorage = localStorage;
+const fuelPricesCacheTime = 1000 * 60; //TODO CHANGE TO 1 WEEK
+const numPlacesCacheTime = 1000 * 60; //TODO CHANGE TO ...
 let fetchedPinsLength,
   fetchedClosests,
   isLocationSelected = false,
@@ -266,12 +268,12 @@ function initFuelPrices() {
     userSelections.fuelPrices &&
     !isExpired(userSelections.fuelPrices.expDate)
   ) {
-    console.log('has location and prices! cached!');
+    console.log('fuel prices CACHED!');
     fuelPrices = userSelections.fuelPrices.prices;
     initPlaceSelects(userSelections.location.place);
     modifyFuelPriceSliders(userSelections.location.place);
   } else {
-    console.log('no location and fuelPrices! missed! xhr to', urlFuelPrices);
+    console.log('fuelPrices missed! XHR to:', urlFuelPrices);
     fetch(urlFuelPrices, {
       method: 'POST',
       headers: {
@@ -284,7 +286,7 @@ function initFuelPrices() {
         fuelPrices = data;
         userSelections.fuelPrices = {
           prices: fuelPrices,
-          expDate: setExpDate(1000 * 20)
+          expDate: setExpDate(fuelPricesCacheTime)
         };
         modifyFuelPriceSliders('ΑΤΤΙΚΗΣ', { save: true });
       })
@@ -293,13 +295,11 @@ function initFuelPrices() {
 }
 
 function setExpDate(ms) {
-  console.log('date now', new Date().getTime(), 'new expDate', new Date().getTime() + ms);
   return new Date().getTime() + ms;
 }
 
 function isExpired(expDate) {
   if (!expDate) return true;
-  console.log(new Date().getTime(), expDate, new Date().getTime() > expDate);
   return new Date().getTime() > expDate;
 }
 
@@ -2349,21 +2349,23 @@ function locationOnChange(value) {
 
   if (
     userSelections.location &&
-    (userSelections.location.numPlaces || userSelections.location.numPlaces === 0) &&
-    userSelections.location.place === value
+    userSelections.location.numPlaces &&
+    (userSelections.location.numPlaces.places || userSelections.location.numPlaces.places === 0) &&
+    userSelections.location.place === value &&
+    !isExpired(userSelections.location.numPlaces.expDate)
   ) {
     console.log(
-      'Num places cached:',
+      'numPlaces CACHED!',
       userSelections.location.numPlaces,
       'for',
-      userSelections.location.place,
-      value
+      userSelections.location.place
     );
     fetchedPinsLength = userSelections.location.numPlaces;
     populateLocationContainerResults(fetchedPinsLength);
     return;
   }
 
+  console.log('numPlaces missed! XHR to:', numPlaceUrl);
   fetch(numPlaceUrl, {
     method: 'POST',
     headers: {
@@ -2387,7 +2389,10 @@ function locationOnChange(value) {
       console.log('Pins Fetch:', data);
       fetchedPinsLength = data;
       populateLocationContainerResults(fetchedPinsLength);
-      userSelections.location.numPlaces = fetchedPinsLength;
+      userSelections.location.numPlaces = {
+        places: fetchedPinsLength,
+        expDate: setExpDate(numPlacesCacheTime)
+      };
       saveUserSelections();
     })
     .catch(error => {
