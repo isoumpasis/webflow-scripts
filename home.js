@@ -230,6 +230,8 @@ let noCreditInterest = 12.6;
 let creditInterest = 7.2;
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (preferredStorage.userSelections) userSelections = getUserSelections();
+
   initSelects();
   initFuelPrices();
   initDriveOftenRadio();
@@ -257,19 +259,27 @@ function initSelects() {
 }
 
 function initFuelPrices() {
-  fetch(urlFuelPrices, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(res => res.json())
-    .then(data => {
-      data.pop(); //removes m.o.
-      fuelPrices = data;
-      modifyFuelPriceSliders('ΑΤΤΙΚΗΣ');
+  if (userSelections && userSelections.location && userSelections.fuelPrices) {
+    console.log('has location and prices! cached!');
+    fuelPrices = userSelections.fuelPrices;
+    modifyFuelPriceSliders(userSelections.location.place);
+  } else {
+    console.log('no location and fuelPrices! missed! xhr to', urlFuelPrices);
+    fetch(urlFuelPrices, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
-    .catch(e => console.error('Error on FuelPrices Fetch:', e));
+      .then(res => res.json())
+      .then(data => {
+        data.pop(); //removes m.o.
+        fuelPrices = data;
+        userSelections.fuelPrices = fuelPrices;
+        modifyFuelPriceSliders('ΑΤΤΙΚΗΣ', { save: true });
+      })
+      .catch(e => console.error('Error on FuelPrices Fetch:', e));
+  }
 }
 
 function initDriveOftenRadio() {
@@ -278,14 +288,14 @@ function initDriveOftenRadio() {
 
 document.querySelector('#fuelPricesSelectNoVehicle').addEventListener('change', e => {
   fuelPricesSelectVehicle.value = e.target.value;
-  modifyFuelPriceSliders(e.target.value);
+  modifyFuelPriceSliders(e.target.value, { save: true });
 
   storesLocationSelect.value = e.target.value;
   locationOnChange(storesLocationSelect.value);
 });
 fuelPricesSelectVehicle.addEventListener('change', e => {
   document.querySelector('#fuelPricesSelectNoVehicle').value = e.target.value;
-  modifyFuelPriceSliders(e.target.value);
+  modifyFuelPriceSliders(e.target.value), { save: true };
 
   storesLocationSelect.value = e.target.value;
   locationOnChange(storesLocationSelect.value);
@@ -293,7 +303,7 @@ fuelPricesSelectVehicle.addEventListener('change', e => {
   updateBasketSection({ calculator: true });
 });
 
-function modifyFuelPriceSliders(value) {
+function modifyFuelPriceSliders(value, { save = false } = {}) {
   const locationObj = fuelPrices.find(obj => obj.place.indexOf(value) !== -1);
   if (!locationObj) return;
 
@@ -305,12 +315,15 @@ function modifyFuelPriceSliders(value) {
   calcCovers[3].style.width = calcCoverWidth(sliders[3]) + '%';
   calcResult();
 
-  userSelections.calculator.fuelPricesSelectedIndex = fuelPricesSelectVehicle.selectedIndex;
-  userSelections.location = {
-    index: fuelPricesSelectVehicle.selectedIndex,
-    place: fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent
-  };
-  saveUserSelections();
+  console.log('save is:', save);
+  if (save) {
+    userSelections.calculator.fuelPricesSelectedIndex = fuelPricesSelectVehicle.selectedIndex;
+    userSelections.location = {
+      index: fuelPricesSelectVehicle.selectedIndex,
+      place: fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent
+    };
+    saveUserSelections();
+  }
 }
 
 function initSelectedFuelListeners() {
@@ -774,7 +787,7 @@ function resetEasyPay() {
 
 /* STORAGE */
 function initStorage() {
-  const storageObj = JSON.parse(localStorage.getItem('userSelections'));
+  const storageObj = JSON.parse(preferredStorage.getItem('userSelections'));
   if (storageObj && Object.keys(storageObj.vehicle).length !== 0) {
     userSelections = storageObj;
     console.log('Parsed json local storage', userSelections);
@@ -2191,7 +2204,12 @@ function calcCoverWidth(slider) {
 
 /* STORAGE */
 function saveUserSelections() {
-  preferredStorage.setItem('userSelections', JSON.stringify(userSelections));
+  if (typeof Storage !== 'undefined')
+    preferredStorage.setItem('userSelections', JSON.stringify(userSelections));
+}
+function getUserSelections() {
+  if (typeof Storage !== 'undefined') return JSON.parse(preferredStorage.getItem('userSelections'));
+  return null;
 }
 
 /* PDF DOWNLOAD */
