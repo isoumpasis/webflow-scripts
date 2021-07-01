@@ -2575,7 +2575,9 @@ document.querySelectorAll('.suggested-system-value-block').forEach(el => {
 
     console.log('mouseover', el, parent, target);
   });
+});
 
+document.querySelectorAll('.suggested-system-content').forEach(el => {
   el.addEventListener('mouseout', e => {
     const parent = el.closest('.suggested-cng-system');
     const target = parent.querySelector('.suggested-overlay-block-cng');
