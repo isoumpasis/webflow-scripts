@@ -140,15 +140,15 @@ input[type='range']::-ms-thumb {
   transition: transform 200ms ease-in-out;
 }
 
-input[type='range'].easy-pay::-webkit-slider-thumb {
+input[type='range'].slider-easy-pay::-webkit-slider-thumb {
   background: #565656;
 }
 /* All same stuff for Mozila */
-input[type='range'].easy-pay::-moz-range-thumb {
+input[type='range'].slider-easy-pay::-moz-range-thumb {
   background: #565656;
 }
 /* All the same stuff for IE */
-input[type='range'].easy-pay::-ms-thumb {
+input[type='range'].slider-easy-pay::-ms-thumb {
   background: #565656;
 }
 
