@@ -203,5 +203,5 @@ input[type='range']::-ms-thumb:hover {
 }
 
 .suggested-overlay-block-cng {
-  transition: all 400ms ease-in-out;
+  transition: opacity 300ms ease-in-out;
 }
