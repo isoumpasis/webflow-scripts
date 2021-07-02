@@ -2571,7 +2571,7 @@ document.querySelectorAll('.suggested-system-value-block').forEach(el => {
     // target.style.visibility = 'visible';
     // target.style.height = 'auto';
     target.style.top = '0px';
-    target.style.opacity = '1';
+    // target.style.opacity = '1';
   });
 });
 
@@ -2582,6 +2582,6 @@ document.querySelectorAll('.suggested-overlay-block-cng').forEach(el => {
     // target.style.visibility = 'hidden';
     // target.style.height = '0px';
     target.style.top = '100%';
-    target.style.opacity = '0';
+    // target.style.opacity = '0';
   });
 });
