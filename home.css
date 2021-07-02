@@ -202,10 +202,6 @@ input[type='range']::-ms-thumb:hover {
   user-select: none; /* Non-prefixed version, currently */
 }
 
-/* .suggested-overlay-block-cng {
-  transition: opacity 400ms ease-in-out;
-} */
-
 .fade-in {
   visibility: visible;
   opacity: 1;
