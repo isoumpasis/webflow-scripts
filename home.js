@@ -2577,7 +2577,7 @@ document.querySelectorAll('.suggested-system-value-block').forEach(el => {
 });
 
 document.querySelectorAll('.suggested-overlay-block-cng').forEach(el => {
-  el.addEventListener('mouseleave', mouseLeaveSuggestedOverlay(el));
+  el.addEventListener('mouseleave', e => mouseLeaveSuggestedOverlay(el));
 });
 
 function mouseEnterSuggestedOverlay(el) {
@@ -2594,5 +2594,5 @@ function mouseLeaveSuggestedOverlay(el) {
   target.style.visibility = 'hidden';
   target.style.top = '100%';
   target.style.opacity = '0';
-  console.log(target, 'leave')
+  console.log(target, 'leave');
 }
