@@ -2583,16 +2583,17 @@ document.querySelectorAll('.suggested-overlay-block-cng').forEach(el => {
 function mouseEnterSuggestedOverlay(el) {
   const parent = el.closest('.suggested-cng-system');
   const target = parent.querySelector('.suggested-overlay-block-cng');
-  target.style.visibility = 'visible';
-  // target.style.top = '0px';
-  target.style.opacity = '1';
+  target.classList.remove('fade-out');
+  target.classList.add('fade-in');
+  // target.style.visibility = 'visible';
+  // target.style.opacity = '1';
 }
 
 function mouseLeaveSuggestedOverlay(el) {
   const parent = el.closest('.suggested-cng-system');
   const target = parent.querySelector('.suggested-overlay-block-cng');
-  // target.classList.toggle('fade-out');
-  target.style.visibility = 'hidden';
-  // target.style.top = '100%';
-  target.style.opacity = '0';
+  target.classList.remove('fade-in');
+  target.classList.add('fade-out');
+  // target.style.visibility = 'hidden';
+  // target.style.opacity = '0';
 }

@@ -202,6 +202,17 @@ input[type='range']::-ms-thumb:hover {
   user-select: none; /* Non-prefixed version, currently */
 }
 
-.suggested-overlay-block-cng {
-  transition: opacity 500ms ease-in-out;
+/* .suggested-overlay-block-cng {
+  transition: opacity 400ms ease-in-out;
+} */
+
+.fade-in {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
+.fade-out {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 300ms, opacity 300ms;
 }
