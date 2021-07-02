@@ -205,7 +205,3 @@ input[type='range']::-ms-thumb:hover {
 .suggested-overlay-block-cng {
   transition: opacity 500ms ease-in-out;
 }
-/* .suggested-system-content {
-  overflow-y: hidden;
-  overflow-x: 
-} */
