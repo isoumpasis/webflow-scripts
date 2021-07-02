@@ -2588,6 +2588,7 @@ function initCss() {
 
 function mouseEnterSuggestedOverlayLPG(el) {
   const parent = el.closest('.suggested-lpg-system');
+  if (!parent) return;
   const target = parent.querySelector('.suggested-overlay-block');
   target.classList.remove('fade-out');
   target.classList.add('fade-in');
@@ -2600,6 +2601,7 @@ function mouseLeaveSuggestedOverlayLPG(el) {
 }
 function mouseEnterSuggestedOverlayCNG(el) {
   const parent = el.closest('.suggested-cng-system');
+  if (!parent) return;
   const target = parent.querySelector('.suggested-overlay-block-cng');
   target.classList.remove('fade-out');
   target.classList.add('fade-in');
