@@ -2569,7 +2569,6 @@ document.querySelectorAll('.suggested-system-value-block').forEach(el => {
     const parent = el.closest('.suggested-cng-system');
     const target = parent.querySelector('.suggested-overlay-block-cng');
     target.style.visibility = 'visible';
-    // target.style.height = 'auto';
     target.style.top = '0px';
     target.style.opacity = '1';
   });
@@ -2580,9 +2579,7 @@ document.querySelectorAll('.suggested-overlay-block-cng').forEach(el => {
     const parent = el.closest('.suggested-cng-system');
     const target = parent.querySelector('.suggested-overlay-block-cng');
     target.style.visibility = 'hidden';
-    // target.style.height = '0px';
     target.style.top = '100%';
     target.style.opacity = '0';
-    //
   });
 });

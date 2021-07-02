@@ -203,6 +203,8 @@ input[type='range']::-ms-thumb:hover {
 }
 
 .suggested-overlay-block-cng {
-  transition-delay: 0.5s;
   transition: opacity 500ms ease-in-out;
+}
+.suggested-system-content {
+  overflow-y: hidden;
 }
