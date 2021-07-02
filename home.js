@@ -2583,5 +2583,6 @@ document.querySelectorAll('.suggested-overlay-block-cng').forEach(el => {
     // target.style.height = '0px';
     target.style.top = '100%';
     target.style.opacity = '0';
+    //
   });
 });
