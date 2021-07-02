@@ -2594,4 +2594,5 @@ function mouseLeaveSuggestedOverlay(el) {
   target.style.visibility = 'hidden';
   target.style.top = '100%';
   target.style.opacity = '0';
+  console.log(target, 'leave')
 }
