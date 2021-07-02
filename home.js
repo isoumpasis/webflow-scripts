@@ -2567,33 +2567,46 @@ function populateClosestsList(fetchedClosests) {
 /* CSS */
 
 function initCss() {
+  //LPG
+  document.querySelectorAll('.suggested-overlay-block').forEach(el => {
+    mouseLeaveSuggestedOverlayLPG(el);
+    el.addEventListener('mouseleave', e => mouseLeaveSuggestedOverlayLPG(el));
+  });
+  document.querySelectorAll('.suggested-system-value-block').forEach(el => {
+    el.addEventListener('mouseenter', e => mouseEnterSuggestedOverlayLPG(el));
+  });
+
+  //CNG
   document.querySelectorAll('.suggested-overlay-block-cng').forEach(el => {
-    mouseLeaveSuggestedOverlay(el);
+    mouseLeaveSuggestedOverlayCNG(el);
+    el.addEventListener('mouseleave', e => mouseLeaveSuggestedOverlayCNG(el));
+  });
+  document.querySelectorAll('.suggested-system-value-block').forEach(el => {
+    el.addEventListener('mouseenter', e => mouseEnterSuggestedOverlayCNG(el));
   });
 }
 
-document.querySelectorAll('.suggested-system-value-block').forEach(el => {
-  el.addEventListener('mouseenter', e => mouseEnterSuggestedOverlay(el));
-});
-
-document.querySelectorAll('.suggested-overlay-block-cng').forEach(el => {
-  el.addEventListener('mouseleave', e => mouseLeaveSuggestedOverlay(el));
-});
-
-function mouseEnterSuggestedOverlay(el) {
+function mouseEnterSuggestedOverlayLPG(el) {
+  const parent = el.closest('.suggested-lpg-system');
+  const target = parent.querySelector('.suggested-overlay-block');
+  target.classList.remove('fade-out');
+  target.classList.add('fade-in');
+}
+function mouseLeaveSuggestedOverlayLPG(el) {
+  const parent = el.closest('.suggested-lpg-system');
+  const target = parent.querySelector('.suggested-overlay-block');
+  target.classList.remove('fade-in');
+  target.classList.add('fade-out');
+}
+function mouseEnterSuggestedOverlayCNG(el) {
   const parent = el.closest('.suggested-cng-system');
   const target = parent.querySelector('.suggested-overlay-block-cng');
   target.classList.remove('fade-out');
   target.classList.add('fade-in');
-  // target.style.visibility = 'visible';
-  // target.style.opacity = '1';
 }
-
-function mouseLeaveSuggestedOverlay(el) {
+function mouseLeaveSuggestedOverlayCNG(el) {
   const parent = el.closest('.suggested-cng-system');
   const target = parent.querySelector('.suggested-overlay-block-cng');
   target.classList.remove('fade-in');
   target.classList.add('fade-out');
-  // target.style.visibility = 'hidden';
-  // target.style.opacity = '0';
 }
