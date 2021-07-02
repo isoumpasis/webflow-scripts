@@ -1325,9 +1325,9 @@ function showResults(fetchedModelObj) {
     )
   ) {
     displayEmulatorInfo(suggestedContainer);
-    suggestedContainer
-      .querySelectorAll('.suggested-overlay-block')
-      .forEach(el => (el.style.height = '0px'));
+    // suggestedContainer
+    //   .querySelectorAll('.suggested-overlay-block')
+    //   .forEach(el => (el.style.height = '0px')); //not needed after fade in out
 
     configureCalculatorAfterSuggestion();
     configureEasyPayAfterSuggestion();
