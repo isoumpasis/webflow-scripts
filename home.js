@@ -2563,7 +2563,7 @@ function populateClosestsList(fetchedClosests) {
   });
 }
 
-/* css */
+/* CSS */
 document.querySelectorAll('.suggested-system-value-block').forEach(el => {
   el.addEventListener('mouseenter', e => {
     const parent = el.closest('.suggested-cng-system');
