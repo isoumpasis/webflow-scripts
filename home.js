@@ -2567,7 +2567,7 @@ function populateClosestsList(fetchedClosests) {
 /* CSS */
 
 function initCss() {
-  document.querySelectorAll('.suggested-system-value-block').forEach(el => {
+  document.querySelectorAll('.suggested-overlay-block-cng').forEach(el => {
     mouseLeaveSuggestedOverlay(el);
   });
 }
