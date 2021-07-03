@@ -1487,8 +1487,6 @@ function showCylinderResults(fetchedModelObj, years) {
       .querySelectorAll('.left-overlay-description')
       .forEach(el => (el.textContent = '2-4cyl' + getCylinderDescrText()));
     cobdExrDiv.style.display = 'grid';
-    cobdExrDiv.classList.remove('fade-out');
-    cobdExrDiv.classList.add('fade-in');
   } else {
     suggestedSystems = ['C-OBD II'];
     const cobdDiv = document.querySelector(`#suggested-${userSelections.selectedFuel}-cobd`);
@@ -2583,8 +2581,6 @@ function initCss() {
   document.querySelectorAll('.suggested-system-value-block').forEach(el => {
     el.addEventListener('mouseenter', e => mouseEnterSuggestedOverlayCNG(el));
   });
-
-  document.querySelectorAll('.suggested-container').forEach(el => el.classList.add('fade-out'));
 }
 
 function mouseEnterSuggestedOverlayLPG(el) {
