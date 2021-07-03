@@ -212,8 +212,3 @@ input[type='range']::-ms-thumb:hover {
   opacity: 0;
   transition: visibility 0s ease-in-out 500ms, opacity 500ms;
 }
-
-.suggested-container {
-  visibility: hidden;
-  opacity: 0;
-}

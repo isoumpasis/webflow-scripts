@@ -2583,6 +2583,8 @@ function initCss() {
   document.querySelectorAll('.suggested-system-value-block').forEach(el => {
     el.addEventListener('mouseenter', e => mouseEnterSuggestedOverlayCNG(el));
   });
+
+  document.querySelectorAll('.suggested-container').forEach(el => el.classList.add('fade-out'));
 }
 
 function mouseEnterSuggestedOverlayLPG(el) {
