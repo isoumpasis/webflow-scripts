@@ -1486,7 +1486,9 @@ function showCylinderResults(fetchedModelObj, years) {
     cobdExrDiv
       .querySelectorAll('.left-overlay-description')
       .forEach(el => (el.textContent = '2-4cyl' + getCylinderDescrText()));
-    cobdExrDiv.style.display = 'grid';
+    // cobdExrDiv.style.display = 'grid';
+    cobdExrDiv.classList.remove('fade-out');
+    cobdExrDiv.classList.add('fade-in');
   } else {
     suggestedSystems = ['C-OBD II'];
     const cobdDiv = document.querySelector(`#suggested-${userSelections.selectedFuel}-cobd`);
