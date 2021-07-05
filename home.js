@@ -2304,7 +2304,7 @@ function initStores() {
   } else {
     locationOnChange(storesLocationSelect.value);
   }
-  enableGPSButtonClick();
+  // enableGPSButtonClick();
 }
 
 document.querySelector('#stores').addEventListener('click', () => {
