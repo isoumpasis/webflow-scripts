@@ -205,10 +205,10 @@ input[type='range']::-ms-thumb:hover {
 .fade-in {
   visibility: visible;
   opacity: 1;
-  transition: visibility 0s ease-in-out 0s, opacity 500ms;
+  transition: visibility 0s ease-in-out 0s, opacity 500ms ease-in-out 500ms;
 }
 .fade-out {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s ease-in-out 500ms, opacity 500ms;
+  transition: visibility 0s ease-in-out 500ms, opacity 500ms ease-in-out 0s;
 }

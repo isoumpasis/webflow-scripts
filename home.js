@@ -2609,5 +2609,3 @@ function mouseLeaveSuggestedOverlayCNG(el) {
   target.classList.remove('fade-in');
   target.classList.add('fade-out');
 }
-
-//
