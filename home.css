@@ -202,7 +202,7 @@ input[type='range']::-ms-thumb:hover {
   user-select: none; /* Non-prefixed version, currently */
 }
 
-.fade-in {
+/* .fade-in {
   visibility: visible;
   opacity: 1;
   transition: visibility 0s ease-in-out 0s, opacity 500ms ease-in-out 500ms;
@@ -211,4 +211,4 @@ input[type='range']::-ms-thumb:hover {
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s ease-in-out 500ms, opacity 500ms ease-in-out 0s;
-}
+} */

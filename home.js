@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //localStorage.clear();
   //initStorage();
   initMails();
-  initCss();
+  // initCss();
 });
 
 function initMails() {
