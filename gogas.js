@@ -579,7 +579,7 @@ function addLocationStr(location) {
 }
 
 function openLocationListContainer() {
-  const locationListContainer = [...document.querySelectorAll('.location-list-container')];
+  const locationListContainer = [...document.querySelectorAll('.location-list-container-gogas')];
   locationListContainer.map(el => (el.style.display = 'flex'));
   locationListContainer.map(el => (el.style.height = 'auto'));
 }

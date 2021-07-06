@@ -2323,7 +2323,7 @@ document.querySelector('.open-map-btn').addEventListener('click', () => {
 
 [...document.querySelectorAll('.enable-gps-btn')].forEach(btn =>
   btn.addEventListener('click', enableGPSButtonClick)
-); //
+);
 
 async function enableGPSButtonClick({ showError = true } = {}) {
   try {
