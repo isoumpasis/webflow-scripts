@@ -2441,7 +2441,7 @@ function populateLocationContainerResults(fetchedPinsLength) {
     locationStr.charAt(0).toUpperCase() + locationStr.slice(1).toLowerCase();
 
   document.querySelector('.searching-location').style.display = 'none';
-  document.querySelector('#locationResultsContainer').style.display = 'block';
+  // document.querySelector('#locationResultsContainer').style.display = 'flex';
 }
 
 function getCurrentPosition() {
