@@ -957,7 +957,7 @@ function prepareModal(photosContainer, markerProps) {
 //Map UI
 function initDOMEvents() {
   document.querySelector('#mapForm').addEventListener('submit', e => e.preventDefault());
-  document.querySelector('#searchBtn').type = 'button';
+  // document.querySelector('#searchBtn').type = 'button';
 
   //Autocomplete
   const autocompleteOptions = {
@@ -999,29 +999,29 @@ function initDOMEvents() {
   });
 
   //Search Icon click
-  google.maps.event.addDomListener(document.querySelector('#searchBtn'), 'click', async e => {
-    try {
-      console.log('test', e.target);
-      const address = document.querySelector('#searchInput').value;
-      const res = await geocoderSolution(address);
-      console.log(res);
-      address.value = res.address;
+  // google.maps.event.addDomListener(document.querySelector('#searchBtn'), 'click', async e => {
+  //   try {
+  //     console.log('test', e.target);
+  //     const address = document.querySelector('#searchInput').value;
+  //     const res = await geocoderSolution(address);
+  //     console.log(res);
+  //     address.value = res.address;
 
-      userMarker.setOptions({
-        map,
-        title: autocompleteInput.value,
-        position: res.location,
-        animation: google.maps.Animation.DROP,
-        zIndex: google.maps.Marker.MAX_ZINDEX
-      });
-      map.setZoom(searchZoom);
-      map.setCenter(userMarker.position);
-    } catch (e) {
-      console.log('error on geocoding', e);
-    }
+  //     userMarker.setOptions({
+  //       map,
+  //       title: autocompleteInput.value,
+  //       position: res.location,
+  //       animation: google.maps.Animation.DROP,
+  //       zIndex: google.maps.Marker.MAX_ZINDEX
+  //     });
+  //     map.setZoom(searchZoom);
+  //     map.setCenter(userMarker.position);
+  //   } catch (e) {
+  //     console.log('error on geocoding', e);
+  //   }
 
-    //automatic scroll to #map
-  });
+  //   //automatic scroll to #map
+  // });
 
   //Geolocation Btn Click
   document.querySelectorAll('.my-location-btn').forEach(el => {
