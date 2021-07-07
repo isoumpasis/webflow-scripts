@@ -30,6 +30,7 @@ let map,
   infoWindowDiv,
   slideIndex = 1,
   cachedPins;
+const geocodeErr = document.querySelector('.geocode-error');
 
 document.addEventListener('DOMContentLoaded', async () => {
   generateInitHtml();
@@ -957,7 +958,9 @@ function prepareModal(photosContainer, markerProps) {
 //Map UI
 function initDOMEvents() {
   document.querySelector('#mapForm').addEventListener('submit', e => e.preventDefault());
-  // document.querySelector('#searchBtn').type = 'button';
+  document
+    .querySelector('body')
+    .addEventListener('click', () => (geocodeErr.style.display = 'none'));
 
   //Autocomplete
   const autocompleteOptions = {
@@ -982,7 +985,7 @@ function initDOMEvents() {
         autocompleteInput.value = res.address;
         searchPosition = res.location;
       } catch (e) {
-        console.log(e);
+        geocodeErr.style.display = 'block';
         return;
       }
     } else searchPosition = place.geometry.location;
@@ -1036,7 +1039,7 @@ function initDOMEvents() {
         userMarker.setOptions({
           position: myLatLng,
           map: map,
-          title: 'Είστε εδώ',
+          title: 'Είσαι εδώ',
           animation: google.maps.Animation.DROP,
           zIndex: google.maps.Marker.MAX_ZINDEX
         });
@@ -1059,7 +1062,6 @@ let temp;
 async function geocoderSolution(address) {
   return new Promise((resolve, reject) => {
     if (!address) {
-      alert('Παρακαλώ προσθέστε μια περιοχή!');
       reject('Παρακαλώ προσθέστε μια περιοχή!');
       return;
     }
