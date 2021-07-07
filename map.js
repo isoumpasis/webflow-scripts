@@ -30,7 +30,6 @@ let map,
   infoWindowDiv,
   slideIndex = 1,
   cachedPins;
-const geocodeErr = document.querySelector('.geocode-error');
 
 document.addEventListener('DOMContentLoaded', async () => {
   generateInitHtml();
@@ -958,9 +957,6 @@ function prepareModal(photosContainer, markerProps) {
 //Map UI
 function initDOMEvents() {
   document.querySelector('#mapForm').addEventListener('submit', e => e.preventDefault());
-  document
-    .querySelector('body')
-    .addEventListener('click', () => (geocodeErr.style.display = 'none'));
 
   //Autocomplete
   const autocompleteOptions = {
@@ -985,7 +981,7 @@ function initDOMEvents() {
         autocompleteInput.value = res.address;
         searchPosition = res.location;
       } catch (e) {
-        geocodeErr.style.display = 'block';
+        console.log(e);
         return;
       }
     } else searchPosition = place.geometry.location;
