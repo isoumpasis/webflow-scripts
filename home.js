@@ -1288,7 +1288,10 @@ function configureUserSelectionsAfterResults() {
       method: getEasyPayMethod(),
       system: {
         name: userSelections.vehicle.suggestions.systems[0].name, //default
-        priceWithVAT: selectedEasyPaySystemPrice + '€'
+        priceWithVAT: selectedEasyPaySystemPrice + '€',
+        priceNoVAT: userSelections.vehicle.suggestions.systems.find(
+          system => system.name === userSelections.vehicle.suggestions.systems[0].name
+        ).priceNoVAT
       },
       noCreditSettings: getNoCreditSettings(),
       creditSettings: getCreditSettings()
@@ -1707,8 +1710,11 @@ function getEasyPaySystem(selectedSystemDiv) {
     : userSelections.vehicle.suggestions.systems[1].name;
 
   const priceWithVAT = selectedSystemDiv.querySelector('.system-price-easy-pay').textContent;
+  const priceNoVAT = userSelections.vehicle.suggestions.systems.find(
+    system => system.name === name
+  ).priceNoVAT;
 
-  return { name, priceWithVAT };
+  return { name, priceWithVAT, priceNoVAT };
 }
 
 function getNoCreditSettings() {
