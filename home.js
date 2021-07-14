@@ -1252,7 +1252,8 @@ function configureUserSelectionsAfterResults() {
                 : descriptionSelect.value.includes(' - ')
                 ? ''
                 : ' hp'
-            }`
+            }`,
+          makeImgUrl: makeImgPrefix + makeImgDict[makeSelect.value]
         },
         fetchedData: { fetchedYears, fetchedModels, fetchedModelObj },
         foundVehicleObj
