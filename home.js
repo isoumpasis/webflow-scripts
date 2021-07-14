@@ -50,6 +50,15 @@ const emulatorTextDict = {
   hp: 'Εξαερωτής RGJ UHPII έως 350HP',
   'double-hp': 'Διπλός Εξαερωτής RGJ UHPII άνω των 350HP'
 };
+const emulatorIsMandatoryDict = {
+  p: true,
+  t: false,
+  f: false,
+  b6: true,
+  b8: true,
+  hp: true,
+  'double-hp': true
+};
 const emulatorPriceDict = {
   p: 85,
   b6: 95,
@@ -1323,7 +1332,8 @@ function configureUserSelectionsAfterResults() {
 
     userSelections.vehicle.suggestions.emulators = {
       ...userSelections.vehicle.suggestions.emulators,
-      emulatorText: emulatorTextDict[userSelections.vehicle.suggestions.emulators.type]
+      emulatorText: emulatorTextDict[userSelections.vehicle.suggestions.emulators.type],
+      isMandatory: emulatorIsMandatoryDict[userSelections.vehicle.suggestions.emulators.type]
     };
   }
 }
