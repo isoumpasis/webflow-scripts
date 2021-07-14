@@ -43,8 +43,8 @@ const apaitoumenaEmulatorTypes = ['p', 'b6', 'b8', 'hp', 'double-hp'];
 const cngOnlyEmulatorTypes = ['b6', 'b8', 'f', 'p'];
 const emulatorTextDict = {
   p: 'Fuel Pressure Emulator',
-  t: 'Reducer Lovato RGJ DD (90€)',
-  f: 'Petrol Level Emulator (85€)',
+  t: 'Reducer Lovato RGJ DD (+90€)',
+  f: 'Petrol Level Emulator (+85€)',
   b6: 'Petrol Injectors Emulator',
   b8: 'Dual Injector Engine 4x2 = 8cyl',
   hp: 'Εξαερωτής RGJ UHPII έως 350HP',
@@ -1319,6 +1319,11 @@ function configureUserSelectionsAfterResults() {
       },
       noCreditSettings: getNoCreditSettings(),
       creditSettings: getCreditSettings()
+    };
+
+    userSelections.vehicle.suggestions.emulators = {
+      ...userSelections.vehicle.suggestions.emulators,
+      emulatorText: emulatorTextDict[userSelections.vehicle.suggestions.emulators.type]
     };
   }
 }
