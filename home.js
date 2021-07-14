@@ -134,6 +134,29 @@ const makeImgDict = {
   VW: '60f66bedc404ea5a800_VW.png'
 };
 
+const systemLogoDict = {
+  'Lovato E-GO II':
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6088406ac599186f8b2b6a24_ego-logo-02.svg',
+  'Lovato Smart ExR':
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/609c30dacc06e8cd8c6ea9e5_smart-exrlogo-03.svg',
+  'Lovato C-OBD II':
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
+  'Lovato C-OBD II 5-6cyl':
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
+  'Lovato C-OBD II 8cyl':
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
+  'Lovato Direct Injection':
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608843a4610d5c0d5968174c_direct-logo-04.svg',
+  'Lovato Direct Injection ExR':
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg',
+  'Lovato Direct Injection ExR 5-6cyl':
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg',
+  'Lovato Direct Injection ExR 8cyl':
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg', //TODO
+  'Lovato Μονού Ψεκασμού':
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60a7d730fbc8089bc98263ae_monou-psekasmou-05.svg'
+};
+
 const VAT = 1.24;
 
 //SELECTED FUEL
@@ -1291,7 +1314,8 @@ function configureUserSelectionsAfterResults() {
         priceWithVAT: selectedEasyPaySystemPrice + '€',
         priceNoVAT: userSelections.vehicle.suggestions.systems.find(
           system => system.name === userSelections.vehicle.suggestions.systems[0].name
-        ).priceNoVAT
+        ).priceNoVAT,
+        systemLogoUrl: systemLogoDict[userSelections.vehicle.suggestions.systems[0].name]
       },
       noCreditSettings: getNoCreditSettings(),
       creditSettings: getCreditSettings()
@@ -1713,8 +1737,9 @@ function getEasyPaySystem(selectedSystemDiv) {
   const priceNoVAT = userSelections.vehicle.suggestions.systems.find(
     system => system.name === name
   ).priceNoVAT;
+  const systemLogoUrl = systemLogoDict[name];
 
-  return { name, priceWithVAT, priceNoVAT };
+  return { name, priceWithVAT, priceNoVAT, systemLogoUrl };
 }
 
 function getNoCreditSettings() {
