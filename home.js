@@ -2401,8 +2401,8 @@ document.querySelector('#downloadPdfBtn').addEventListener('click', downloadSumm
 
 function hasNoUserInfo() {
   const ret = getUserInfo();
-  console.log(ret);
-  if (ret) return false;
+
+  if (Object.values(ret).every(v => !!v)) return false;
   else return true;
 }
 
