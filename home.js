@@ -2304,16 +2304,16 @@ function getUserSelections() {
 document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
   e.preventDefault();
   console.log(e.target);
-  // const dataToSend = document.querySelector('#pdfName').value;
   dataToSend = userSelections;
+
+  console.log(dataToSend);
 
   startLoadingSelect(e.target);
   fetch(downloadPdfUrl, {
     method: 'POST',
-    // headers: {
-    //   // 'Content-Type': 'application/json'
-    //   'Content-Type': 'image/png'
-    // },
+    headers: {
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify({ data: dataToSend })
   })
     .then(res => res.blob())
