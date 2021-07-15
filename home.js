@@ -2310,10 +2310,10 @@ document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
   startLoadingSelect(e.target);
   fetch(downloadPdfUrl, {
     method: 'POST',
-    headers: {
-      // 'Content-Type': 'application/json'
-      'Content-Type': 'image/png'
-    },
+    // headers: {
+    //   // 'Content-Type': 'application/json'
+    //   'Content-Type': 'image/png'
+    // },
     body: JSON.stringify({ data: dataToSend })
   })
     .then(res => res.blob())
