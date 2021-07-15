@@ -2405,14 +2405,22 @@ function hasNoUserInfo() {
   else return true;
 }
 
+function hasResult() {
+  if (
+    !Object.keys(userSelections.vehicle).length ||
+    (userSelections.vehicle.suggestions && userSelections.vehicle.suggestions.hasResult)
+  ) {
+    return false;
+  } else return true;
+}
+
 function downloadSummarySubmit(e) {
   e.preventDefault();
   console.log(e.target);
 
   console.log(userSelections);
 
-  if (!Object.keys(userSelections.vehicle).length || hasNoUserInfo())
-    return handleInvalidDownload();
+  if (hasResult() || hasNoUserInfo()) return handleInvalidDownload();
 
   dataToSend = userSelections;
 
@@ -2438,7 +2446,7 @@ function downloadSummarySubmit(e) {
 }
 
 function handleInvalidDownload() {
-  if (!Object.keys(userSelections.vehicle).length) {
+  if (!hasResult()) {
     console.log('αυτοκινητο πρωτα');
   } else {
     console.log('στοιχεια προσωπικα πρωτα');
