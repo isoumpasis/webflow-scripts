@@ -2399,10 +2399,10 @@ document.querySelector('.user-info-submit').addEventListener('click', downloadSu
 
 document.querySelector('#downloadPdfBtn').addEventListener('click', downloadSummarySubmit);
 
-function hasNoUserInfo() {
+function hasUserInfo() {
   const ret = getUserInfo();
 
-  if (Object.values(ret).every(v => !!v)) return false;
+  if (Object.values(ret).some(v => !v)) return false;
   else return true;
 }
 
@@ -2421,7 +2421,7 @@ function downloadSummarySubmit(e) {
 
   console.log(userSelections);
 
-  if (hasResult() || hasNoUserInfo()) return handleInvalidDownload();
+  if (!hasResult() || !hasUserInfo()) return handleInvalidDownload();
 
   dataToSend = userSelections;
 
