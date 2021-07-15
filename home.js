@@ -2312,14 +2312,14 @@ document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
     method: 'POST',
     headers: {
       // 'Content-Type': 'application/json'
-      'Content-Type': 'image/jpeg'
+      'Content-Type': 'image/png'
     },
     body: JSON.stringify({ data: dataToSend })
   })
     .then(res => res.blob())
     .then(blob => {
       // const newBlob = new Blob([blob], { type: 'application/pdf' });
-      const newBlob = new Blob([blob], { type: 'image/jpeg' });
+      const newBlob = new Blob([blob], { type: 'image/png' });
       console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου');
       endLoadingSelect(e.target);
@@ -2338,7 +2338,7 @@ function downloadFile(blob, fileName) {
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
   // link.download = fileName + '.pdf';
-  link.download = fileName + '.jpeg';
+  link.download = fileName + '.png';
   document.body.append(link);
   link.click();
   link.remove();
