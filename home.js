@@ -3,8 +3,8 @@ const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
 const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
 const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
-// const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
-const downloadPdfUrl = 'http://localhost:1917/pdf';
+const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
+// const downloadPdfUrl = 'http://localhost:1917/pdf';
 const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
@@ -2448,7 +2448,7 @@ function downloadSummarySubmit(e) {
   dataToSend = userSelections;
   dataToSend.userInfo = userInfo;
 
-  // startLoadingSelect(e.target);
+  startLoadingSelect(e.target);
   fetch(downloadPdfUrl, {
     method: 'POST',
     headers: {
@@ -2461,10 +2461,10 @@ function downloadSummarySubmit(e) {
       const newBlob = new Blob([blob], { type: 'image/png' });
       console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου');
-      // endLoadingSelect(e.target);
+      endLoadingSelect(e.target);
     })
     .catch(error => {
-      // endLoadingSelect(e.target);
+      endLoadingSelect(e.target);
       console.error('Error Fetch:', error);
     });
 }
