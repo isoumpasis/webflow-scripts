@@ -2,8 +2,8 @@
 const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
 const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
-const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices'; ////
-// const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf'; //
+const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
+// const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
 const downloadPdfUrl = 'http://localhost:1917/pdf';
 const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
@@ -170,6 +170,7 @@ const systemFullKitLogoUrlDict = {
       lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee733d5512eddeaba0e27_6-cyl-lpg-cobd.jpg',
       cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef675387535ba8bd37a04b_6-cyl-cng-cobd.jpg'
     },
+    cylsDescr: '5-6cyl',
     logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60883f7a4d700e4999151d5c_c-obd-logo-01.svg'
   },
   'Lovato C-OBD II 8cyl': {
@@ -177,6 +178,7 @@ const systemFullKitLogoUrlDict = {
       lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73479dd0f4e870b8c45_8-cyl-lpg-cobd.jpg',
       cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6755572ae6790a962780_8-cyl-cng-cobd.jpg'
     },
+    cylsDescr: '8cyl',
     logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60883f7a4d700e4999151d5c_c-obd-logo-01.svg'
   },
   'Lovato Direct Injection': {
@@ -198,6 +200,7 @@ const systemFullKitLogoUrlDict = {
       lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73479dd0f30d40b8c44_6-cyl-lpg-DI-exr.jpg',
       cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6753d4f2f6533da6f5d7_6-cyl-cng-DI-exr.jpg'
     },
+    cylsDescr: '5-6cyl',
     logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg'
   },
   'Lovato Direct Injection ExR 8cyl': {
@@ -205,6 +208,7 @@ const systemFullKitLogoUrlDict = {
       lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73410da6d79bf573625_8-cyl-lpg-DI-exr.jpg',
       cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6759d2274958726b8934_8-cyl-cng-DI-exr.jpg'
     },
+    cylsDescr: '8cyl',
     logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg'
   },
   'Lovato Μονού Ψεκασμού': {
@@ -1379,7 +1383,9 @@ function configureUserSelectionsAfterResults() {
         fullKitUrl:
           systemFullKitLogoUrlDict[userSelections.vehicle.suggestions.systems[0].name].fullKit[
             userSelections.selectedFuel
-          ]
+          ],
+        cylsDescr:
+          systemFullKitLogoUrlDict[userSelections.vehicle.suggestions.systems[0].name].cylsDescr
       },
       noCreditSettings: getNoCreditSettings(),
       creditSettings: getCreditSettings()
@@ -1809,8 +1815,9 @@ function getEasyPaySystem(selectedSystemDiv) {
   ).priceNoVAT;
   const systemLogoUrl = systemFullKitLogoUrlDict[name].logo;
   const fullKitUrl = systemFullKitLogoUrlDict[name].fullKit[userSelections.selectedFuel];
+  const cylsDescr = systemFullKitLogoUrlDict[name].cylsDescr;
 
-  return { name, priceWithVAT, priceNoVAT, systemLogoUrl, fullKitUrl };
+  return { name, priceWithVAT, priceNoVAT, systemLogoUrl, fullKitUrl, cylsDescr };
 }
 
 function getNoCreditSettings() {
