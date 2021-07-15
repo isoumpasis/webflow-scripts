@@ -15,7 +15,7 @@ let fetchedModelObj;
 let foundVehicleObj;
 let suggestedPricesChanges = [];
 let userSelections = { selectedFuel: 'lpg', vehicle: {}, calculator: {}, easyPay: {} };
-let userInfo = {};
+let userInfo = { username: '', email: '', phone: '' };
 const preferredStorage = localStorage;
 //one week and one hour
 const fuelPricesCacheTime = 1000 * 60 * 60 * 24 * 7 + 1000 * 60 * 60;
@@ -344,8 +344,9 @@ function initMails() {
 }
 
 function initUserInfo() {
-  userInfo = getUserInfo();
-  if (!userInfo) return;
+  let tempUserInfo = getUserInfo();
+  if (!tempUserInfo || Object.keys(tempUserInfo).length !== 3) return;
+  userInfo = tempUserInfo;
   document.querySelector('.user-info-username').value = userInfo.username || '';
   document.querySelector('.user-info-email').value = userInfo.email || '';
   document.querySelector('.user-info-phone').value = userInfo.phone || '';
