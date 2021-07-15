@@ -2337,7 +2337,8 @@ function downloadFile(blob, fileName) {
   }
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
-  link.download = fileName + '.pdf';
+  // link.download = fileName + '.pdf';
+  link.download = fileName + '.jpeg';
   document.body.append(link);
   link.click();
   link.remove();
