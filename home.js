@@ -2426,6 +2426,7 @@ function downloadSummarySubmit(e) {
   if (!hasResult() || !hasUserInfo()) return handleInvalidDownload();
 
   dataToSend = userSelections;
+  dataToSend.userInfo = userInfo;
 
   startLoadingSelect(e.target);
   fetch(downloadPdfUrl, {
