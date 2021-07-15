@@ -2386,12 +2386,13 @@ function getUserInfo() {
 
 /* PDF DOWNLOAD */
 
-[...document.querySelectorAll('.user-info-username')].map(el =>
-  el.addEventListener('input', e => {
+document.querySelector('.user-info-username').addEventListener('input', e => {
+  [...document.querySelectorAll('.user-info-username')].map(el => {
+    el.value = e.target.value;
     userInfo.username = e.target.value;
     saveUserInfo();
-  })
-);
+  });
+});
 document.querySelector('.user-info-email').addEventListener('input', e => {
   userInfo.email = e.target.value;
   saveUserInfo();
