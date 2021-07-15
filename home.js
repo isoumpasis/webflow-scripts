@@ -2409,7 +2409,7 @@ function hasUserInfo() {
 function hasResult() {
   if (
     !Object.keys(userSelections.vehicle).length ||
-    (userSelections.vehicle.suggestions && userSelections.vehicle.suggestions.hasResult)
+    (userSelections.vehicle.suggestions && !userSelections.vehicle.suggestions.hasResult)
   ) {
     return false;
   } else return true;
