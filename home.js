@@ -347,7 +347,9 @@ function initUserInfo() {
   let tempUserInfo = getUserInfo();
   if (!tempUserInfo || Object.keys(tempUserInfo).length !== 3) return;
   userInfo = tempUserInfo;
-  document.querySelector('.user-info-username').value = userInfo.username || '';
+  [...document.querySelector('.user-info-username')].map(
+    el => (el.value = userInfo.username || '')
+  );
   document.querySelector('.user-info-email').value = userInfo.email || '';
   document.querySelector('.user-info-phone').value = userInfo.phone || '';
 }
@@ -2384,10 +2386,12 @@ function getUserInfo() {
 
 /* PDF DOWNLOAD */
 
-document.querySelector('.user-info-username').addEventListener('input', e => {
-  userInfo.username = e.target.value;
-  saveUserInfo();
-});
+[...document.querySelector('.user-info-username')].map(el =>
+  el.addEventListener('input', e => {
+    userInfo.username = e.target.value;
+    saveUserInfo();
+  })
+);
 document.querySelector('.user-info-email').addEventListener('input', e => {
   userInfo.email = e.target.value;
   saveUserInfo();
