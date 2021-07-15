@@ -213,8 +213,8 @@ const systemFullKitLogoUrlDict = {
   },
   'Lovato Μονού Ψεκασμού': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee7346ab570f60d7bb37a_4cyl-lpg-ego.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754280dc37314e8f73e_4cyl-cng-ego.jpg'
+      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f01499ce19af4ccee7b7ea_lpg-monou-simeiou.jpg',
+      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f014997b549b2900dc2d28_cng-monou-simeiou.jpg'
     },
     logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60a7d730fbc8089bc98263ae_monou-psekasmou-05.svg'
   }
