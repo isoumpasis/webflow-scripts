@@ -350,8 +350,8 @@ function initUserInfo() {
   [...document.querySelectorAll('.user-info-username')].map(
     el => (el.value = userInfo.username || '')
   );
-  document.querySelector('.user-info-email').value = userInfo.email || '';
-  document.querySelector('.user-info-phone').value = userInfo.phone || '';
+  [...document.querySelectorAll('.user-info-email')].map(el => (el.value = userInfo.email || ''));
+  [...document.querySelectorAll('.user-info-phone')].map(el => (el.value = userInfo.phone || ''));
 }
 
 function initSelects() {
@@ -2396,14 +2396,26 @@ function getUserInfo() {
     saveUserInfo();
   })
 );
-document.querySelector('.user-info-email').addEventListener('input', e => {
-  userInfo.email = e.target.value;
-  saveUserInfo();
-});
-document.querySelector('.user-info-phone').addEventListener('input', e => {
-  userInfo.phone = e.target.value;
-  saveUserInfo();
-});
+[...document.querySelectorAll('.user-info-email')].map(element =>
+  element.addEventListener('input', e => {
+    [...document.querySelectorAll('.user-info-email')].map(el => {
+      el.value = e.target.value;
+      console.log(el, el.value, e.target.value);
+    });
+    userInfo.email = e.target.value;
+    saveUserInfo();
+  })
+);
+[...document.querySelectorAll('.user-info-phone')].map(element =>
+  element.addEventListener('input', e => {
+    [...document.querySelectorAll('.user-info-phone')].map(el => {
+      el.value = e.target.value;
+      console.log(el, el.value, e.target.value);
+    });
+    userInfo.phone = e.target.value;
+    saveUserInfo();
+  })
+);
 
 document.querySelector('.user-info-submit').addEventListener('click', downloadSummarySubmit);
 
@@ -2436,7 +2448,7 @@ function downloadSummarySubmit(e) {
   dataToSend = userSelections;
   dataToSend.userInfo = userInfo;
 
-  startLoadingSelect(e.target);
+  // startLoadingSelect(e.target);
   fetch(downloadPdfUrl, {
     method: 'POST',
     headers: {
@@ -2449,10 +2461,10 @@ function downloadSummarySubmit(e) {
       const newBlob = new Blob([blob], { type: 'image/png' });
       console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου');
-      endLoadingSelect(e.target);
+      // endLoadingSelect(e.target);
     })
     .catch(error => {
-      endLoadingSelect(e.target);
+      // endLoadingSelect(e.target);
       console.error('Error Fetch:', error);
     });
 }
