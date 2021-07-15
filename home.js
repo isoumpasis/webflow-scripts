@@ -15,6 +15,7 @@ let fetchedModelObj;
 let foundVehicleObj;
 let suggestedPricesChanges = [];
 let userSelections = { selectedFuel: 'lpg', vehicle: {}, calculator: {}, easyPay: {} };
+let userInfo = {};
 const preferredStorage = localStorage;
 //one week and one hour
 const fuelPricesCacheTime = 1000 * 60 * 60 * 24 * 7 + 1000 * 60 * 60;
@@ -2362,14 +2363,50 @@ function getUserSelections() {
   if (typeof Storage !== 'undefined') return JSON.parse(preferredStorage.getItem('userSelections'));
   return null;
 }
+function saveUserInfo() {
+  if (typeof Storage !== 'undefined')
+    preferredStorage.setItem('userInfo', JSON.stringify(userInfo));
+}
+function getUserInfo() {
+  if (typeof Storage !== 'undefined') return JSON.parse(preferredStorage.getItem('userInfo'));
+  return null;
+}
 
 /* PDF DOWNLOAD */
-document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
+
+document.querySelector('.user-info-username').addEventListener('input', e => {
+  userInfo.username = e.target.value;
+  saveUserInfo();
+});
+document.querySelector('.user-info-email').addEventListener('input', e => {
+  userInfo.email = e.target.value;
+  saveUserInfo();
+});
+document.querySelector('.user-info-phone').addEventListener('input', e => {
+  userInfo.phone = e.target.value;
+  saveUserInfo();
+});
+
+document.querySelector('.user-info-submit').addEventListener('click', downloadSummarySubmit);
+
+document.querySelector('#downloadPdfBtn').addEventListener('click', downloadSummarySubmit);
+
+function hasNoUserInfo() {
+  const ret = getUserInfo();
+  if (ret) return false;
+  else return true;
+}
+
+function downloadSummarySubmit(e) {
   e.preventDefault();
   console.log(e.target);
-  dataToSend = userSelections;
 
-  console.log(dataToSend);
+  console.log(userSelections);
+
+  if (!Object.keys(userSelections.vehicle).length || hasNoUserInfo())
+    return handleInvalidDownload();
+
+  dataToSend = userSelections;
 
   startLoadingSelect(e.target);
   fetch(downloadPdfUrl, {
@@ -2381,7 +2418,6 @@ document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
   })
     .then(res => res.blob())
     .then(blob => {
-      // const newBlob = new Blob([blob], { type: 'application/pdf' });
       const newBlob = new Blob([blob], { type: 'image/png' });
       console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου');
@@ -2391,7 +2427,15 @@ document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
       endLoadingSelect(e.target);
       console.error('Error Fetch:', error);
     });
-});
+}
+
+function handleInvalidDownload() {
+  if (!Object.keys(userSelections.vehicle).length) {
+    console.log('αυτοκινητο πρωτα');
+  } else {
+    console.log('στοιχεια προσωπικα πρωτα');
+  }
+}
 
 function downloadFile(blob, fileName) {
   if (window.navigator && window.navigator.msSaveOrOpenBlob) {
