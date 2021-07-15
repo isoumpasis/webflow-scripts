@@ -2311,13 +2311,15 @@ document.querySelector('#downloadPdfBtn').addEventListener('click', e => {
   fetch(downloadPdfUrl, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/json'
+      'Content-Type': 'image/jpeg'
     },
     body: JSON.stringify({ data: dataToSend })
   })
     .then(res => res.blob())
     .then(blob => {
-      const newBlob = new Blob([blob], { type: 'application/pdf' });
+      // const newBlob = new Blob([blob], { type: 'application/pdf' });
+      const newBlob = new Blob([blob], { type: 'image/jpeg' });
       console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου');
       endLoadingSelect(e.target);
