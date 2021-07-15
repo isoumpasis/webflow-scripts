@@ -347,7 +347,7 @@ function initUserInfo() {
   let tempUserInfo = getUserInfo();
   if (!tempUserInfo || Object.keys(tempUserInfo).length !== 3) return;
   userInfo = tempUserInfo;
-  [...document.querySelector('.user-info-username')].map(
+  [...document.querySelectorAll('.user-info-username')].map(
     el => (el.value = userInfo.username || '')
   );
   document.querySelector('.user-info-email').value = userInfo.email || '';
@@ -2386,7 +2386,7 @@ function getUserInfo() {
 
 /* PDF DOWNLOAD */
 
-[...document.querySelector('.user-info-username')].map(el =>
+[...document.querySelectorAll('.user-info-username')].map(el =>
   el.addEventListener('input', e => {
     userInfo.username = e.target.value;
     saveUserInfo();
