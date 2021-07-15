@@ -345,6 +345,7 @@ function initMails() {
 
 function initUserInfo() {
   userInfo = getUserInfo();
+  if (!userInfo) return;
   document.querySelector('.user-info-username').value = userInfo.username || '';
   document.querySelector('.user-info-email').value = userInfo.email || '';
   document.querySelector('.user-info-phone').value = userInfo.phone || '';
