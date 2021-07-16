@@ -2443,6 +2443,7 @@ function downloadSummarySubmit(e) {
 
   console.log(userSelections);
 
+  console.log(validateUserForm());
   if (!validateUserForm()) return handleInvalidDownload();
   if (!hasResult() || !hasUserInfo()) return handleInvalidDownload();
 
