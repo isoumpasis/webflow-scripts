@@ -2390,7 +2390,6 @@ function getUserInfo() {
   element.addEventListener('input', e => {
     [...document.querySelectorAll('.user-info-username')].map(el => {
       el.value = e.target.value;
-      console.log(el, el.value, e.target.value);
     });
     userInfo.username = e.target.value;
     saveUserInfo();
@@ -2400,7 +2399,6 @@ function getUserInfo() {
   element.addEventListener('input', e => {
     [...document.querySelectorAll('.user-info-email')].map(el => {
       el.value = e.target.value;
-      console.log(el, el.value, e.target.value);
     });
     userInfo.email = e.target.value;
     saveUserInfo();
@@ -2410,7 +2408,6 @@ function getUserInfo() {
   element.addEventListener('input', e => {
     [...document.querySelectorAll('.user-info-phone')].map(el => {
       el.value = e.target.value;
-      console.log(el, el.value, e.target.value);
     });
     userInfo.phone = e.target.value;
     saveUserInfo();
@@ -2475,10 +2472,8 @@ function validateUserForm() {
   if (!document.querySelector('.user-info-username').value) return false;
   if (!isEmail(document.querySelector('.user-info-email').value)) return false;
   if (
-    isNaN(
-      document.querySelector('.user-info-phone').value ||
-        document.querySelector('.user-info-phone').value.length != 10
-    )
+    isNaN(document.querySelector('.user-info-phone').value) ||
+    document.querySelector('.user-info-phone').value.length != 10
   )
     return false;
   return true;
