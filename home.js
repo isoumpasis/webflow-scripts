@@ -2443,6 +2443,7 @@ function downloadSummarySubmit(e) {
 
   console.log(userSelections);
 
+  if (!validateUserForm()) return handleInvalidDownload();
   if (!hasResult() || !hasUserInfo()) return handleInvalidDownload();
 
   dataToSend = userSelections;
@@ -2467,6 +2468,24 @@ function downloadSummarySubmit(e) {
       endLoadingSelect(e.target);
       console.error('Error Fetch:', error);
     });
+}
+
+function validateUserForm() {
+  if (!document.querySelector('.user-info-username').value) return false;
+  if (!isEmail(document.querySelector('.user-info-email').value)) return false;
+  if (
+    isNaN(
+      document.querySelector('.user-info-phone').value ||
+        document.querySelector('.user-info-phone').value.length != 10
+    )
+  )
+    return false;
+  return true;
+}
+function isEmail(email) {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 }
 
 function handleInvalidDownload() {
