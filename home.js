@@ -2507,6 +2507,11 @@ function handleInvalidDownload(msg) {
   const formErrorEls = [...document.querySelectorAll('.summary-form-error')];
   formErrorEls.map(el => (el.style.display = 'block'));
   formErrorEls.map(el => (el.textContent = msg));
+
+  setTimeout(
+    formErrorEls.map(el => (el.style.display = 'none')),
+    3000
+  );
 }
 
 function downloadFile(blob, fileName) {
