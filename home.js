@@ -1044,7 +1044,6 @@ makeSelect.addEventListener('change', function () {
   if (!this.value) {
     yearSelect.disabled = true;
     yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-    // sessionStorage.clear(); //reset //DO YOU WANT TO ERASE EVERYTHING? maybe there is an autonomous var you want to keep
     return;
   }
   yearSelect.disabled = false;
@@ -2460,7 +2459,6 @@ function downloadSummarySubmit(e) {
   dataToSend = userSelections;
   dataToSend.userInfo = userInfo;
 
-  console.log('before start');
   startLoadingSelect(e.target);
   fetch(downloadPdfUrl, {
     method: 'POST',
@@ -2472,16 +2470,13 @@ function downloadSummarySubmit(e) {
     .then(res => {
       if (res.status !== 200) {
         endLoadingSelect(e.target);
-
         if (res.status === 429) {
-          console.log(res);
           handleInvalidDownload(
             'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
           );
         }
         return null;
       }
-
       return res.blob();
     })
     .then(blob => {
