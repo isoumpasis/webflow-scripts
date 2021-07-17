@@ -2484,7 +2484,7 @@ function validateUserForm() {
       msg: 'Για να κατεβάσετε προσφορά θα πρέπει πρώτα να επιλέξετε το όχημα σας από το Βήμα 2!'
     };
   if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
-  return true;
+  return { valid: true };
 }
 
 function isEmail(email) {
