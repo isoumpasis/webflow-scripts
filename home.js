@@ -2384,8 +2384,6 @@ function getUserInfo() {
   return null;
 }
 
-/* PDF DOWNLOAD */
-
 [...document.querySelectorAll('.user-info-username')].map(element =>
   element.addEventListener('input', e => {
     [...document.querySelectorAll('.user-info-username')].map(el => {
@@ -2414,6 +2412,7 @@ function getUserInfo() {
   })
 );
 
+/* PDF DOWNLOAD */
 document.querySelector('.user-info-submit').addEventListener('click', downloadSummarySubmit);
 
 document.querySelector('#downloadPdfBtn').addEventListener('click', downloadSummarySubmit);
