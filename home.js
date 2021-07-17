@@ -1414,6 +1414,7 @@ function configureUserSelectionsAfterResults() {
       driveOftenIndex: driveOftenIndexValue,
       fuelPricesSelectedIndex: fuelPricesSelectVehicle.selectedIndex,
       kmPerYearValue: +document.querySelector('.km-year').value,
+      trueConsumption: +document.querySelector('.lt-100km').value,
       gain: userSelections.selectedFuel === 'lpg' ? lpgResult.textContent : cngResult.textContent,
       percentage:
         userSelections.selectedFuel === 'lpg'
@@ -2391,6 +2392,7 @@ function calcResult() {
   configureEasyPayMonthlyGain();
 
   userSelections.calculator.kmPerYearValue = kmPerYear;
+  userSelections.calculator.trueConsumption = ltPer100Km;
   userSelections.calculator.gain =
     userSelections.selectedFuel === 'lpg' ? lpgResult.textContent : cngResult.textContent;
   userSelections.calculator.percentage =
@@ -2471,7 +2473,7 @@ function downloadSummarySubmit(e) {
     .then(blob => {
       const newBlob = new Blob([blob], { type: 'image/png' });
       console.log(newBlob);
-      downloadFile(newBlob, 'Η προσφορά μου');
+      downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
       endLoadingSelect(e.target);
     })
     .catch(error => {
@@ -2508,7 +2510,7 @@ function handleInvalidDownload(msg) {
   formErrorEls.map(el => (el.style.display = 'block'));
   formErrorEls.map(el => (el.textContent = msg));
 
-  setTimeout(() => formErrorEls.forEach(el => (el.style.display = 'none')), 3000);
+  setTimeout(() => formErrorEls.forEach(el => (el.style.display = 'none')), 4000);
 }
 
 function downloadFile(blob, fileName) {
