@@ -2473,6 +2473,7 @@ function downloadSummarySubmit(e) {
       if (res.status !== 200) {
         if (res.status === 429) {
           console.log(res);
+          handleInvalidDownload(res.statusText);
         }
       }
 
