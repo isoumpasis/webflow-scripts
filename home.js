@@ -322,7 +322,7 @@ let noCreditInterest = 12.6;
 let creditInterest = 7.2;
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (preferredStorage.userSelections) userSelections = getUserSelections();
+  // if (preferredStorage.userSelections) userSelections = getUserSelections();
 
   initSelects();
   initFuelPrices();
