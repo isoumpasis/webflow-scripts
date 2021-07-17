@@ -2475,7 +2475,9 @@ function downloadSummarySubmit(e) {
 
         if (res.status === 429) {
           console.log(res);
-          handleInvalidDownload(res.statusText);
+          handleInvalidDownload(
+            'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
+          );
         }
         return null;
       }
