@@ -2437,7 +2437,7 @@ document.querySelector('#downloadPdfBtn').addEventListener('click', downloadSumm
 function hasUserInfo() {
   const ret = getUserInfo();
 
-  if (!ret || Object.values(ret).some(v => !v)) return false;
+  if (!ret || !ret.username || !ret.email || !ret.phone) return false;
   else return true;
 }
 
