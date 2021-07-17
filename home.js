@@ -2445,6 +2445,7 @@ function downloadSummarySubmit(e) {
   dataToSend = userSelections;
   dataToSend.userInfo = userInfo;
 
+  console.log('before start');
   startLoadingSelect(e.target);
   fetch(downloadPdfUrl, {
     method: 'POST',
