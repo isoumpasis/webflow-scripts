@@ -2438,6 +2438,7 @@ function downloadSummarySubmit(e) {
   e.preventDefault();
 
   const validationResult = validateUserForm();
+  console.log(validationResult);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   document.querySelector('.summary-form-error').style.display = 'none';
