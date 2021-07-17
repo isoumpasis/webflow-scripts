@@ -2475,13 +2475,15 @@ function downloadSummarySubmit(e) {
 
         if (res.status === 429) {
           console.log(res);
-          return handleInvalidDownload(res.statusText);
+          handleInvalidDownload(res.statusText);
         }
+        return null;
       }
 
       return res.blob();
     })
     .then(blob => {
+      if (!blob) return;
       const newBlob = new Blob([blob], { type: 'image/png' });
       console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
