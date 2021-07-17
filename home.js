@@ -2436,13 +2436,11 @@ function hasResult() {
 
 function downloadSummarySubmit(e) {
   e.preventDefault();
-  console.log(e.target);
 
-  console.log(userSelections);
+  const validationResult = validateUserForm();
+  if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
-  console.log(validateUserForm());
-  if (!validateUserForm()) return handleInvalidDownload();
-  if (!hasResult() || !hasUserInfo()) return handleInvalidDownload();
+  document.querySelector('.summary-form-error').style.display = 'none';
 
   dataToSend = userSelections;
   dataToSend.userInfo = userInfo;
@@ -2469,25 +2467,32 @@ function downloadSummarySubmit(e) {
 }
 
 function validateUserForm() {
-  if (!document.querySelector('.user-info-username').value) return false;
-  if (!isEmail(document.querySelector('.user-info-email').value)) return false;
+  if (!document.querySelector('.user-info-username').value)
+    return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
+  if (!isEmail(document.querySelector('.user-info-email').value))
+    return { valid: false, msg: 'Απαιτείται έγκυρο email' };
   if (
     isNaN(document.querySelector('.user-info-phone').value) ||
     document.querySelector('.user-info-phone').value.length != 10
   )
-    return false;
+    return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνο (10ψηφία)' };
+  if (!hasResult())
+    return {
+      valid: false,
+      msg: 'Για να κατεβάσετε προσφορά θα πρέπει πρώτα να επιλέξετε το όχημα σας από το Βήμα 2!'
+    };
+  if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
   return true;
 }
+
 function isEmail(email) {
   return /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(String(email).toLowerCase());
 }
 
-function handleInvalidDownload() {
-  if (!hasResult()) {
-    console.log('αυτοκινητο πρωτα');
-  } else {
-    console.log('στοιχεια προσωπικα πρωτα');
-  }
+function handleInvalidDownload(msg) {
+  const formErrorEl = document.querySelector('.summary-form-error');
+  formErrorEl.style.display = 'block';
+  formErrorEl.textContent = msg;
 }
 
 function downloadFile(blob, fileName) {
