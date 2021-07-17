@@ -2469,7 +2469,15 @@ function downloadSummarySubmit(e) {
     },
     body: JSON.stringify({ data: dataToSend })
   })
-    .then(res => res.blob())
+    .then(res => {
+      if (res.status !== 200) {
+        if (res.status === 429) {
+          console.log(res);
+        }
+      }
+
+      return res.blob();
+    })
     .then(blob => {
       const newBlob = new Blob([blob], { type: 'image/png' });
       console.log(newBlob);
