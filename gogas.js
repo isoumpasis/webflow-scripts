@@ -120,6 +120,9 @@ function initUserInfo() {
   );
   [...document.querySelectorAll('.user-info-email')].map(el => (el.value = userInfo.email || ''));
   [...document.querySelectorAll('.user-info-phone')].map(el => (el.value = userInfo.phone || ''));
+  [...document.querySelectorAll('.user-info-address')].map(
+    el => (el.value = userInfo.address || '')
+  );
 
   [...document.querySelectorAll('.user-info-username')].map(element =>
     element.addEventListener('input', e => {
