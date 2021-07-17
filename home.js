@@ -2453,7 +2453,7 @@ function downloadSummarySubmit(e) {
   console.log(validationResult);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
-  document.querySelector('.summary-form-error').style.display = 'none';
+  [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
 
   dataToSend = userSelections;
   dataToSend.userInfo = userInfo;
@@ -2504,9 +2504,9 @@ function isEmail(email) {
 }
 
 function handleInvalidDownload(msg) {
-  const formErrorEl = document.querySelector('.summary-form-error');
-  formErrorEl.style.display = 'block';
-  formErrorEl.textContent = msg;
+  const formErrorEls = [...document.querySelectorAll('.summary-form-error')];
+  formErrorEls.map(el => (el.style.display = 'block'));
+  formErrorEls.map(el => (el.textContent = msg));
 }
 
 function downloadFile(blob, fileName) {
