@@ -2508,10 +2508,7 @@ function handleInvalidDownload(msg) {
   formErrorEls.map(el => (el.style.display = 'block'));
   formErrorEls.map(el => (el.textContent = msg));
 
-  setTimeout(
-    formErrorEls.map(el => (el.style.display = 'none')),
-    3000
-  );
+  setTimeout(() => formErrorEls.forEach(el => (el.style.display = 'none')), 3000);
 }
 
 function downloadFile(blob, fileName) {
