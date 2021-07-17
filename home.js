@@ -2471,9 +2471,11 @@ function downloadSummarySubmit(e) {
   })
     .then(res => {
       if (res.status !== 200) {
+        endLoadingSelect(e.target);
+
         if (res.status === 429) {
           console.log(res);
-          handleInvalidDownload(res.statusText);
+          return handleInvalidDownload(res.statusText);
         }
       }
 
