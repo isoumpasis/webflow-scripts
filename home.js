@@ -334,8 +334,13 @@ document.addEventListener('DOMContentLoaded', () => {
   //initStorage();
   initMails();
   initUserInfo();
+  initBasket();
   // initCss();
 });
+
+function initBasket() {
+  updateBasketSection({ resetNoVehicle: true });
+}
 
 function initMails() {
   [...document.querySelectorAll('.info-email')].map(
@@ -2443,6 +2448,7 @@ function hasUserInfo() {
 
 function hasResult() {
   if (
+    !userSelections ||
     !Object.keys(userSelections.vehicle).length ||
     (userSelections.vehicle.suggestions && !userSelections.vehicle.suggestions.hasResult)
   ) {
