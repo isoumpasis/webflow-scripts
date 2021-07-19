@@ -109,12 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initUserInfo() {
   let tempUserInfo = getUserInfo();
-  if (
-    !tempUserInfo
-    // || Object.keys(tempUserInfo).length !== 4
-  )
-    return;
-  userInfo = tempUserInfo;
+  // if (
+  //   !tempUserInfo
+  //   // || Object.keys(tempUserInfo).length !== 4
+  // )
+  //   return;
+  userInfo = tempUserInfo || {};
   [...document.querySelectorAll('.user-info-username')].map(el => {
     el.value = userInfo.username || '';
     el.autocomplete = 'name';
