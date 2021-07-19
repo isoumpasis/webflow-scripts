@@ -356,14 +356,22 @@ function initUserInfo() {
   )
     return;
   userInfo = tempUserInfo;
-  [...document.querySelectorAll('.user-info-username')].map(
-    el => (el.value = userInfo.username || '')
-  );
-  [...document.querySelectorAll('.user-info-email')].map(el => (el.value = userInfo.email || ''));
-  [...document.querySelectorAll('.user-info-phone')].map(el => (el.value = userInfo.phone || ''));
-  [...document.querySelectorAll('.user-info-address')].map(
-    el => (el.value = userInfo.address || '')
-  );
+  [...document.querySelectorAll('.user-info-username')].map(el => {
+    el.value = userInfo.username || '';
+    el.autocomplete = 'name';
+  });
+  [...document.querySelectorAll('.user-info-email')].map(el => {
+    el.value = userInfo.email || '';
+    el.autocomplete = 'email';
+  });
+  [...document.querySelectorAll('.user-info-phone')].map(el => {
+    el.value = userInfo.phone || '';
+    el.autocomplete = 'phone';
+  });
+  [...document.querySelectorAll('.user-info-address')].map(el => {
+    el.value = userInfo.address || '';
+    el.autocomplete = 'street-address';
+  });
 }
 [...document.querySelectorAll('.user-info-username')].map(element =>
   element.addEventListener('input', e => {
@@ -2510,7 +2518,7 @@ function validateUserForm() {
     isNaN(document.querySelector('.user-info-phone').value) ||
     document.querySelector('.user-info-phone').value.length != 10
   )
-    return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνο (10ψηφία)' };
+    return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
   if (!hasResult())
     return {
       valid: false,
