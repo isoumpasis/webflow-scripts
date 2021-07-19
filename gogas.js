@@ -30,6 +30,7 @@ const typeContainerIdDict = {
 
 const preferredStorage = localStorage;
 let gogasSelections = {};
+let userInfo = { username: '', email: '', phone: '' };
 
 /* STORAGE */
 function setGogasSelections() {

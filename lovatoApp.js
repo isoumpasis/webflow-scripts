@@ -1,4 +1,5 @@
 const preferredStorage = localStorage;
+let userInfo = { username: '', email: '', phone: '' };
 
 document.addEventListener('DOMContentLoaded', () => {
   initUserInfo();
