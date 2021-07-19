@@ -1,5 +1,5 @@
 const preferredStorage = localStorage;
-let userInfo = { username: '', email: '', phone: '' };
+let userInfo = { username: '', email: '', phone: '', address: '' };
 
 document.addEventListener('DOMContentLoaded', () => {
   initUserInfo();
@@ -15,13 +15,7 @@ function getUserInfo() {
 }
 
 function initUserInfo() {
-  let tempUserInfo = getUserInfo();
-  if (
-    !tempUserInfo
-    // || Object.keys(tempUserInfo).length !== 4
-  )
-    return;
-  userInfo = tempUserInfo;
+  userInfo = getUserInfo() || {};
   [...document.querySelectorAll('.user-info-username')].map(el => {
     el.value = userInfo.username || '';
     el.autocomplete = 'name';

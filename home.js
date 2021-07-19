@@ -349,13 +349,7 @@ function initMails() {
 }
 
 function initUserInfo() {
-  let tempUserInfo = getUserInfo();
-  if (
-    !tempUserInfo
-    // || Object.keys(tempUserInfo).length !== 4
-  )
-    return;
-  userInfo = tempUserInfo;
+  userInfo = getUserInfo() || {};
   [...document.querySelectorAll('.user-info-username')].map(el => {
     el.value = userInfo.username || '';
     el.autocomplete = 'name';
