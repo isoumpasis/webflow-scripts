@@ -94,7 +94,6 @@ function activateSelections() {
 
   [...dimensionSelect.options].forEach((option, index) => {
     if (option.value === gogasSelections.form.activeValues.dimension) {
-      // console.log('found dimension active index ', index);
       activeIndex = index;
     }
   });
@@ -102,7 +101,6 @@ function activateSelections() {
 
   [...locationSelect.options].forEach((option, index) => {
     if (option.value === gogasSelections.form.activeValues.location) {
-      // console.log('found location active index ', index);
       activeIndex = index;
     }
   });
