@@ -1098,11 +1098,21 @@ makeSelect.addEventListener('change', function () {
     });
 });
 
-function startLoadingSelect(select) {
-  select.classList.add('loading-select');
+function startLoadingSelect(select, triggeredFrom = null) {
+  if (!triggeredFrom) select.classList.add('loading-select');
+  else {
+    if (triggeredFrom === 'form') {
+      document.querySelector('.user-info-submit').textContent = 'Ετοιμάζουμε την προσφορά σου...';
+    }
+  }
 }
-function endLoadingSelect(select) {
-  select.classList.remove('loading-select');
+function endLoadingSelect(select, triggeredFrom = null) {
+  if (!triggeredFrom) select.classList.remove('loading-select');
+  else {
+    if (triggeredFrom === 'form') {
+      document.querySelector('.user-info-submit').textContent = 'Πάρε την προσφορά!';
+    }
+  }
 }
 
 function populateModelSelect(fetchedModels) {
@@ -2437,9 +2447,13 @@ function getUserInfo() {
 }
 
 /* PDF DOWNLOAD */
-document.querySelector('.user-info-submit').addEventListener('click', downloadSummarySubmit);
+document
+  .querySelector('.user-info-submit')
+  .addEventListener('click', e => downloadSummarySubmit(e, 'form'));
 
-document.querySelector('#downloadPdfBtn').addEventListener('click', downloadSummarySubmit);
+document
+  .querySelector('#summaryDownloadBtn')
+  .addEventListener('click', e => downloadSummarySubmit(e, 'basket'));
 
 function hasUserInfo() {
   const ret = getUserInfo();
@@ -2458,7 +2472,7 @@ function hasResult() {
   } else return true;
 }
 
-function downloadSummarySubmit(e) {
+function downloadSummarySubmit(e, triggeredFrom) {
   e.preventDefault();
 
   const validationResult = validateUserForm();
@@ -2470,7 +2484,7 @@ function downloadSummarySubmit(e) {
   dataToSend = userSelections;
   dataToSend.userInfo = userInfo;
 
-  startLoadingSelect(e.target);
+  startLoadingSelect(e.target, triggeredFrom);
   fetch(downloadSystemSummaryUrl, {
     method: 'POST',
     headers: {
@@ -2480,7 +2494,7 @@ function downloadSummarySubmit(e) {
   })
     .then(res => {
       if (res.status !== 200) {
-        endLoadingSelect(e.target);
+        endLoadingSelect(e.target, triggeredFrom);
         if (res.status === 429) {
           handleInvalidDownload(
             'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
@@ -2495,11 +2509,11 @@ function downloadSummarySubmit(e) {
       const newBlob = new Blob([blob], { type: 'image/png' });
       console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
-      endLoadingSelect(e.target);
+      endLoadingSelect(e.target, triggeredFrom);
       closeSummaryForm();
     })
     .catch(error => {
-      endLoadingSelect(e.target);
+      endLoadingSelect(e.target, triggeredFrom);
       console.error('Error Fetch:', error);
     });
 }
