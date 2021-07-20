@@ -3,8 +3,10 @@ const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
 const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
 const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
-const downloadPdfUrl = 'https://lovatohellas.herokuapp.com/pdf';
-// const downloadPdfUrl = 'http://localhost:1917/pdf';
+const downloadSystemSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/system';
+// const downloadSystemSummaryUrl = 'http://localhost:1917/summaries/system';
+const downloadGogasSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
+// const downloadGogasSummaryUrl = 'http://localhost:1917/summaries/gogas';
 const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
@@ -2471,7 +2473,7 @@ function downloadSummarySubmit(e) {
   dataToSend.userInfo = userInfo;
 
   startLoadingSelect(e.target);
-  fetch(downloadPdfUrl, {
+  fetch(downloadSystemSummaryUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
