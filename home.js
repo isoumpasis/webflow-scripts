@@ -5,8 +5,6 @@ const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descri
 const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
 const downloadSystemSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/system';
 // const downloadSystemSummaryUrl = 'http://localhost:1917/summaries/system';
-// const downloadGogasSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
-const downloadGogasSummaryUrl = 'http://localhost:1917/summaries/gogas';
 const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
@@ -2518,7 +2516,7 @@ function validateUserForm() {
   if (!hasResult())
     return {
       valid: false,
-      msg: 'Για να κατεβάσετε προσφορά θα πρέπει πρώτα να επιλέξετε το όχημα σας από το Βήμα 2!'
+      msg: 'Για να κατεβάσετε την προσφορά θα πρέπει πρώτα να επιλέξετε το όχημα σας από το Βήμα 2!'
     };
   if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
   return { valid: true };

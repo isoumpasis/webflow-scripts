@@ -5,6 +5,8 @@ const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
+// const downloadGogasSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
+const downloadGogasSummaryUrl = 'http://localhost:1917/summaries/gogas';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -651,4 +653,112 @@ function openLocationListContainer() {
   const locationListContainer = [...document.querySelectorAll('.location-list-container-gogas')];
   locationListContainer.map(el => (el.style.display = 'flex'));
   locationListContainer.map(el => (el.style.height = 'auto'));
+}
+
+/* SUMMARY DOWNLOAD */
+
+document.querySelector('#downloadSummaryBtn').addEventListener('click', downloadSummarySubmit);
+
+function hasUserInfo() {
+  const ret = getUserInfo();
+
+  if (!ret || !ret.username || !ret.email || !ret.phone) return false;
+  else return true;
+}
+
+function hasResult() {
+  return suggestedContainers.some(container => container.style.display !== 'none');
+}
+
+function downloadSummarySubmit(e) {
+  e.preventDefault();
+
+  const validationResult = validateUserForm();
+  console.log(validationResult);
+  if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
+
+  [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
+
+  dataToSend = gogasSelections.results.foundTankObj;
+  dataToSend.userInfo = userInfo;
+
+  startLoadingSelect(e.target);
+  fetch(downloadSystemSummaryUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ data: dataToSend })
+  })
+    .then(res => {
+      if (res.status !== 200) {
+        endLoadingSelect(e.target);
+        if (res.status === 429) {
+          handleInvalidDownload(
+            'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
+          );
+        }
+        return null;
+      }
+      return res.blob();
+    })
+    .then(blob => {
+      if (!blob) return;
+      const newBlob = new Blob([blob], { type: 'image/png' });
+      console.log(newBlob);
+      downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
+      endLoadingSelect(e.target);
+    })
+    .catch(error => {
+      endLoadingSelect(e.target);
+      console.error('Error Fetch:', error);
+    });
+}
+
+function validateUserForm() {
+  if (!document.querySelector('.user-info-username').value)
+    return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
+  if (!isEmail(document.querySelector('.user-info-email').value))
+    return { valid: false, msg: 'Απαιτείται έγκυρο email' };
+  if (
+    isNaN(document.querySelector('.user-info-phone').value) ||
+    document.querySelector('.user-info-phone').value.length != 10
+  )
+    return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
+  if (!hasResult())
+    return {
+      valid: false,
+      msg: 'Για να κατεβάσετε την προσφορά θα πρέπει πρώτα να επιλέξετε τη δεξαμενή σας από τις "Τιμές Αντικατάστασης"!'
+    };
+  if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
+  return { valid: true };
+}
+
+function isEmail(email) {
+  return /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(String(email).toLowerCase());
+}
+
+function handleInvalidDownload(msg) {
+  const formErrorEls = [...document.querySelectorAll('.summary-form-error')];
+  formErrorEls.map(el => (el.style.display = 'block'));
+  formErrorEls.map(el => (el.textContent = msg));
+
+  setTimeout(() => formErrorEls.forEach(el => (el.style.display = 'none')), 4000);
+}
+
+function downloadFile(blob, fileName) {
+  if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(newBlob);
+    return;
+  }
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  // link.download = fileName + '.pdf';
+  link.download = fileName + '.png';
+  document.body.append(link);
+  link.click();
+  link.remove();
+
+  // in case the Blob uses a lot of memory
+  setTimeout(() => URL.revokeObjectURL(link.href), 7000);
 }
