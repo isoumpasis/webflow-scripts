@@ -1157,7 +1157,7 @@ function yearOnChange(value) {
   }
   // selectedModel = fetchedModels.models.filter(model => model.name === this.value)[0];
   // console.log('selectedModel', selectedModel);
-  // sessionStorage.selectedModel = JSON.stringify(selectedModel);
+  // sessionStorage.selectedModel = JSON.stringify(selectedModel);//
   modelSelect.disabled = false;
   modelSelect.innerHTML = '';
   startLoadingSelect(modelSelect);
