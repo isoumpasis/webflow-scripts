@@ -501,6 +501,8 @@ function renderResultsContainer(container) {
 }
 
 function saveUserResults() {
+  console.log('foundtankobj type ' + foundTankObj.type);
+  const tempType = foundTankObj.type;
   gogasSelections = {
     ...gogasSelections,
     form: {
@@ -519,7 +521,7 @@ function saveUserResults() {
     results: {
       foundTankObj: {
         ...foundTankObj,
-        tankImgUrl: tankImgUrlDict[foundTankObj.type]
+        tankImgUrl: tankImgUrlDict[tempType]
       }
     }
   };
