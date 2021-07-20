@@ -519,7 +519,7 @@ function saveUserResults() {
     results: {
       foundTankObj: {
         ...foundTankObj,
-        tankImgUrl: tankImgUrlDict[typeSelect.value]
+        tankImgUrl: tankImgUrlDict[foundTankObj.type]
       }
     }
   };
