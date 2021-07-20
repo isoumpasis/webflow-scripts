@@ -5,8 +5,8 @@ const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
-// const downloadGogasSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
-const downloadGogasSummaryUrl = 'http://localhost:1917/summaries/gogas';
+const downloadGogasSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
+// const downloadGogasSummaryUrl = 'http://localhost:1917/summaries/gogas';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
