@@ -1102,7 +1102,6 @@ function startLoadingSelect(select, triggeredFrom = null) {
   if (!triggeredFrom) select.classList.add('loading-select');
   else {
     if (triggeredFrom === 'form') {
-      console.log(document.querySelector('#downloadSummaryBtn'));
       document.querySelector('#downloadSummaryBtn').value = 'Ετοιμάζουμε την προσφορά σου...';
     }
   }
@@ -1111,7 +1110,6 @@ function endLoadingSelect(select, triggeredFrom = null) {
   if (!triggeredFrom) select.classList.remove('loading-select');
   else {
     if (triggeredFrom === 'form') {
-      console.log(document.querySelector('#downloadSummaryBtn'));
       document.querySelector('#downloadSummaryBtn').value = 'Πάρε την προσφορά!';
     }
   }
