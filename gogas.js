@@ -30,6 +30,15 @@ const typeContainerIdDict = {
   ΚΥΛΙΝΔΡΙΚΗ: 'kylindrikhContainer'
 };
 
+const tankImgUrlDict = {
+  ΕΣΩΤΕΡΙΚΗ:
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f5a4ecd2e4fdcbaf601c52_internal-tank-img.jpg',
+  ΕΞΩΤΕΡΙΚΗ:
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f69aa32026daab0635fb21_external-tank-img.jpg',
+  ΚΥΛΙΝΔΡΙΚΗ:
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f69aa7f98ed9cb9321ed98_cylindrical-tank-img.jpg'
+};
+
 const preferredStorage = localStorage;
 let gogasSelections = {};
 let userInfo = { username: '', email: '', phone: '', address: '' };
@@ -508,7 +517,10 @@ function saveUserResults() {
       }
     },
     results: {
-      foundTankObj
+      foundTankObj: {
+        ...foundTankObj,
+        tankImgUrl: tankImgUrlDict[typeSelect.value]
+      }
     }
   };
   setGogasSelections();
