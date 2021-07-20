@@ -671,7 +671,7 @@ function hasResult() {
 }
 
 function downloadSummarySubmit(e) {
-  e.preventDefault();
+  e.preventDefault(); //
 
   const validationResult = validateUserForm();
   console.log(validationResult);
