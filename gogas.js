@@ -87,7 +87,6 @@ function activateSelections() {
   let activeIndex;
   [...litresSelect.options].forEach((option, index) => {
     if (option.value === gogasSelections.form.activeValues.litres) {
-      // console.log('found litres active index ', index);
       activeIndex = index;
     }
   });
