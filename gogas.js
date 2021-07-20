@@ -683,7 +683,7 @@ function downloadSummarySubmit(e) {
   dataToSend.userInfo = userInfo;
 
   startLoadingSelect(e.target);
-  fetch(downloadSystemSummaryUrl, {
+  fetch(downloadGogasSummaryUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
