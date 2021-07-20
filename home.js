@@ -2459,7 +2459,6 @@ function hasResult() {
 }
 
 function downloadSummarySubmit(e) {
-  console.log(e);
   e.preventDefault();
 
   const validationResult = validateUserForm();
