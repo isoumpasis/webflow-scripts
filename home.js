@@ -1103,7 +1103,7 @@ function startLoadingSelect(select, triggeredFrom = null) {
   else {
     if (triggeredFrom === 'form') {
       console.log(document.querySelector('.user-info-submit'));
-      document.querySelector('.user-info-submit').textContent = 'Ετοιμάζουμε την προσφορά σου...';
+      document.querySelector('.user-info-submit').value = 'Ετοιμάζουμε την προσφορά σου...';
     }
   }
 }
@@ -1112,7 +1112,7 @@ function endLoadingSelect(select, triggeredFrom = null) {
   else {
     if (triggeredFrom === 'form') {
       console.log(document.querySelector('.user-info-submit'));
-      document.querySelector('.user-info-submit').textContent = 'Πάρε την προσφορά!';
+      document.querySelector('.user-info-submit').value = 'Πάρε την προσφορά!';
     }
   }
 }
