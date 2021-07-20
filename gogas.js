@@ -720,7 +720,7 @@ function downloadSummarySubmit(e) {
       console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
       endLoadingSelect(e.target);
-      closeSummaryForm();
+      closeSummaryForm(); //
     })
     .catch(error => {
       endLoadingSelect(e.target);
