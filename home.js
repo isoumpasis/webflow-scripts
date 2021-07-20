@@ -2496,11 +2496,17 @@ function downloadSummarySubmit(e) {
       console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
       endLoadingSelect(e.target);
+      closeSummaryForm();
     })
     .catch(error => {
       endLoadingSelect(e.target);
       console.error('Error Fetch:', error);
     });
+}
+
+function closeSummaryForm() {
+  document.querySelector('.contact-info-container').style.display = 'none';
+  document.querySelector('.contact-info-overlay').style.display = 'none';
 }
 
 function validateUserForm() {
