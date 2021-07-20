@@ -13,7 +13,7 @@ const litresSelect = document.querySelector('#litresSelect');
 const dimensionSelect = document.querySelector('#dimensionSelect');
 const locationSelect = document.querySelector('#locationSelect');
 
-const suggestedContainers = document.querySelectorAll('.suggested-tank-container');
+const suggestedContainers = [...document.querySelectorAll('.suggested-tank-container')];
 
 let fetchedLitres,
   fetchedDimensions,
