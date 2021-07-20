@@ -735,7 +735,8 @@ function validateUserForm() {
 }
 
 function isEmail(email) {
-  return /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(String(email).toLowerCase());
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 }
 
 function handleInvalidDownload(msg) {
