@@ -5,8 +5,8 @@ const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
-// const downloadGogasSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
-const downloadGogasSummaryUrl = 'http://localhost:1917/summaries/gogas';
+const downloadGogasSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
+// const downloadGogasSummaryUrl = 'http://localhost:1917/summaries/gogas';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -233,12 +233,25 @@ function getCurrentPosition() {
   });
 }
 
-function startLoadingSelect(select) {
-  select.classList.add('loading-select');
+function startLoadingSelect(select, triggeredFrom = null) {
+  if (!triggeredFrom) select.classList.add('loading-select');
+  else {
+    if (triggeredFrom === 'form') {
+      console.log(document.querySelector('downloadSummaryBtn'));
+      document.querySelector('downloadSummaryBtn').value = 'Ετοιμάζουμε την προσφορά σου...';
+    }
+  }
 }
-function endLoadingSelect(select) {
-  select.classList.remove('loading-select');
+function endLoadingSelect(select, triggeredFrom = null) {
+  if (!triggeredFrom) select.classList.remove('loading-select');
+  else {
+    if (triggeredFrom === 'form') {
+      console.log(document.querySelector('downloadSummaryBtn'));
+      document.querySelector('downloadSummaryBtn').value = 'Πάρε την προσφορά!';
+    }
+  }
 }
+
 function setLocationSelectHeader(label) {
   if (isLocationSelected) return;
   const temp = [...locationSelect.options].map(option => option.outerHTML);
@@ -498,7 +511,6 @@ function renderResultsContainer(container) {
 }
 
 function saveUserResults() {
-  console.log('foundtankobj type ' + foundTankObj.type);
   const tempType = foundTankObj.type;
   gogasSelections = {
     ...gogasSelections,
@@ -668,7 +680,9 @@ function openLocationListContainer() {
 
 /* SUMMARY DOWNLOAD */
 
-document.querySelector('#downloadSummaryBtn').addEventListener('click', downloadSummarySubmit);
+document
+  .querySelector('#downloadSummaryBtn')
+  .addEventListener('click', e => downloadSummarySubmit(e, 'form'));
 
 function hasUserInfo() {
   const ret = getUserInfo();
@@ -681,7 +695,7 @@ function hasResult() {
   return suggestedContainers.some(container => container.style.display !== 'none');
 }
 
-function downloadSummarySubmit(e) {
+function downloadSummarySubmit(e, triggeredFrom) {
   e.preventDefault(); //
 
   const validationResult = validateUserForm();
@@ -693,7 +707,7 @@ function downloadSummarySubmit(e) {
   dataToSend = gogasSelections.results.foundTankObj;
   dataToSend.userInfo = userInfo;
 
-  startLoadingSelect(e.target);
+  startLoadingSelect(e.target, triggeredFrom);
   fetch(downloadGogasSummaryUrl, {
     method: 'POST',
     headers: {
@@ -703,7 +717,7 @@ function downloadSummarySubmit(e) {
   })
     .then(res => {
       if (res.status !== 200) {
-        endLoadingSelect(e.target);
+        endLoadingSelect(e.target, triggeredFrom);
         if (res.status === 429) {
           handleInvalidDownload(
             'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
@@ -718,11 +732,11 @@ function downloadSummarySubmit(e) {
       const newBlob = new Blob([blob], { type: 'image/png' });
       console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
-      endLoadingSelect(e.target);
+      endLoadingSelect(e.target, triggeredFrom);
       closeSummaryForm(); //
     })
     .catch(error => {
-      endLoadingSelect(e.target);
+      endLoadingSelect(e.target, triggeredFrom);
       console.error('Error Fetch:', error);
     });
 }

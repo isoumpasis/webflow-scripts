@@ -1102,8 +1102,8 @@ function startLoadingSelect(select, triggeredFrom = null) {
   if (!triggeredFrom) select.classList.add('loading-select');
   else {
     if (triggeredFrom === 'form') {
-      console.log(document.querySelector('.user-info-submit'));
-      document.querySelector('.user-info-submit').value = 'Ετοιμάζουμε την προσφορά σου...';
+      console.log(document.querySelector('#downloadSummaryBtn'));
+      document.querySelector('#downloadSummaryBtn').value = 'Ετοιμάζουμε την προσφορά σου...';
     }
   }
 }
@@ -1111,8 +1111,8 @@ function endLoadingSelect(select, triggeredFrom = null) {
   if (!triggeredFrom) select.classList.remove('loading-select');
   else {
     if (triggeredFrom === 'form') {
-      console.log(document.querySelector('.user-info-submit'));
-      document.querySelector('.user-info-submit').value = 'Πάρε την προσφορά!';
+      console.log(document.querySelector('#downloadSummaryBtn'));
+      document.querySelector('#downloadSummaryBtn').value = 'Πάρε την προσφορά!';
     }
   }
 }
@@ -2450,11 +2450,11 @@ function getUserInfo() {
 
 /* PDF DOWNLOAD */
 document
-  .querySelector('.user-info-submit')
+  .querySelector('#downloadSummaryBtn')
   .addEventListener('click', e => downloadSummarySubmit(e, 'form'));
 
 document
-  .querySelector('#summaryDownloadBtn')
+  .querySelector('#downloadSummaryBtnBasket')
   .addEventListener('click', e => downloadSummarySubmit(e, 'basket'));
 
 function hasUserInfo() {
