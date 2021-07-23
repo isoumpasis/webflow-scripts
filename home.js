@@ -1507,9 +1507,11 @@ function showResults(fetchedModelObj) {
 
     configureCalculatorAfterSuggestion();
     configureEasyPayAfterSuggestion();
+    configureLastStepAfterSuggestion();
   } else {
     resetCalc();
     resetEasyPay();
+    resetLastStep();
     updateBasketSection({ resetNoVehicle: true });
   }
 
@@ -1530,6 +1532,15 @@ function showResults(fetchedModelObj) {
     });
   }
 }
+
+function configureLastStepAfterSuggestion() {
+  const modelName = document.querySelector('#modelNameNoCredit');
+  document.querySelector('.finish-step-model').textContent = `${makeSelect.value} ${modelName}`;
+}
+function resetLastStep() {
+  document.querySelector('.finish-step-model').textContent = 'όχημα σου';
+}
+
 function adjustSectionPaddings() {
   document.querySelector('#vehicle').style.paddingBottom = '3%';
   document.querySelector('#calculator').style.paddingTop = '3%';
