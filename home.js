@@ -1531,7 +1531,7 @@ function showResults(fetchedModelObj) {
 }
 
 function configureLastStepAfterSuggestion() {
-  const modelName = document.querySelector('#modelNameNoCredit');
+  const modelName = document.querySelector('#modelNameNoCredit').textContent;
   document.querySelector('.finish-step-model').textContent = `${makeSelect.value} ${modelName}`;
 }
 function resetLastStep() {
