@@ -974,6 +974,8 @@ function resetEasyPay() {
   noVehicleNoCreditSliderOnChange(noVehicleNoCreditSlider.value);
   noVehicleCreditSliderOnChange(noVehicleCreditSlider.value);
   noVehicleMetrhtaSliderOnChange(noVehicleMetrhtaSlider.value);
+
+  resetLastStep();
 }
 
 /* STORAGE */
@@ -1508,7 +1510,6 @@ function showResults(fetchedModelObj) {
   } else {
     resetCalc();
     resetEasyPay();
-    resetLastStep();
     updateBasketSection({ resetNoVehicle: true });
   }
 
