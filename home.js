@@ -421,7 +421,6 @@ function initFuelPrices() {
     userSelections.fuelPrices &&
     !isExpired(userSelections.fuelPrices.expDate)
   ) {
-    console.log('fuel prices CACHED!');
     fuelPrices = userSelections.fuelPrices.prices;
     initPlaceSelects(userSelections.location.place);
     modifyFuelPriceSliders(userSelections.location.place);
@@ -507,8 +506,6 @@ function modifyFuelPriceSliders(value, { save = false } = {}) {
   outputs[3].value = locationObj.lpg;
   calcCovers[3].style.width = calcCoverWidth(sliders[3]) + '%';
   calcResult();
-
-  console.log('value is:', value, 'save is:', save);
   if (save) {
     userSelections.calculator.fuelPricesSelectedIndex = fuelPricesSelectVehicle.selectedIndex;
     userSelections.location = {
@@ -2487,7 +2484,6 @@ function downloadSummarySubmit(e, triggeredFrom) {
   e.preventDefault();
 
   const validationResult = validateUserForm();
-  console.log(validationResult);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
@@ -2636,8 +2632,6 @@ function setLocationSelectHeader(label) {
 
 storesLocationSelect.addEventListener('change', e => locationOnChange(e.target.value));
 function locationOnChange(value) {
-  console.log('location changed', value);
-
   if (!value) {
     isLocationSelected = false;
     return;
@@ -2657,12 +2651,6 @@ function locationOnChange(value) {
     userSelections.location.place === userSelections.location.numPlaces.place &&
     !isExpired(userSelections.location.numPlaces.expDate)
   ) {
-    console.log(
-      'numPlaces CACHED!',
-      userSelections.location.numPlaces.places,
-      'for',
-      userSelections.location.place
-    );
     fetchedPinsLength = userSelections.location.numPlaces.places;
     populateLocationContainerResults(fetchedPinsLength);
     return;
