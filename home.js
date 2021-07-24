@@ -1104,8 +1104,8 @@ function startLoadingSelect(select, triggeredFrom = null) {
       document.querySelector('#downloadSummaryBtn').value = 'Ετοιμάζουμε την προσφορά σου...';
     }
     if (triggeredFrom === 'basket') {
-      document.querySelector('.download-summary-basket-descr').textContent =
-        'Ετοιμάζουμε την προσφορά σου...';
+      document.querySelector('.download-summary-basket-descr').innerHTML =
+        'Ετοιμάζουμε την<br>προσφορά σου...';
     }
   }
 }
@@ -1116,8 +1116,8 @@ function endLoadingSelect(select, triggeredFrom = null) {
       document.querySelector('#downloadSummaryBtn').value = 'Πάρε την προσφορά!';
     }
     if (triggeredFrom === 'basket') {
-      document.querySelector('.download-summary-basket-descr').textContent =
-        'Κατέβασε και εκτύπωσε!';
+      document.querySelector('.download-summary-basket-descr').innerHTML =
+        'Κατέβασε<br>και εκτύπωσε!';
     }
   }
 }
