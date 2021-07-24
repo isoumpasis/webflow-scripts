@@ -1103,6 +1103,10 @@ function startLoadingSelect(select, triggeredFrom = null) {
     if (triggeredFrom === 'form') {
       document.querySelector('#downloadSummaryBtn').value = 'Ετοιμάζουμε την προσφορά σου...';
     }
+    if (triggeredFrom === 'basket') {
+      document.querySelector('.download-summary-basket-descr').textContent =
+        'Ετοιμάζουμε την προσφορά σου...';
+    }
   }
 }
 function endLoadingSelect(select, triggeredFrom = null) {
@@ -1110,6 +1114,10 @@ function endLoadingSelect(select, triggeredFrom = null) {
   else {
     if (triggeredFrom === 'form') {
       document.querySelector('#downloadSummaryBtn').value = 'Πάρε την προσφορά!';
+    }
+    if (triggeredFrom === 'basket') {
+      document.querySelector('.download-summary-basket-descr').textContent =
+        'Κατέβασε και εκτύπωσε!';
     }
   }
 }
