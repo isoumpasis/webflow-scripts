@@ -767,7 +767,10 @@ function downloadSummarySubmitEmail(e, triggeredFrom) {
           handleInvalidDownload(
             'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
           );
+        } else {
+          handleInvalidDownload(res.msg);
         }
+
         return null;
       }
       return res.json();
