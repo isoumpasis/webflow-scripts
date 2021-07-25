@@ -7,6 +7,8 @@ const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 // const downloadGogasSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
 const downloadGogasSummaryUrl = 'http://localhost:1917/summaries/gogas';
+// const downloadGogasSummaryEmailUrl = 'https://lovatohellas.herokuapp.com/summaries/email/gogas';
+const downloadGogasSummaryEmailUrl = 'http://localhost:1917/summaries/email/gogas';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -680,7 +682,7 @@ function openLocationListContainer() {
 
 document
   .querySelector('#downloadSummaryBtn')
-  .addEventListener('click', e => downloadSummarySubmit(e, 'form'));
+  .addEventListener('click', e => downloadSummarySubmitEmail(e, 'form'));
 
 function hasUserInfo() {
   const ret = getUserInfo();
@@ -732,6 +734,48 @@ function downloadSummarySubmit(e, triggeredFrom) {
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
       endLoadingSelect(e.target, triggeredFrom);
       closeSummaryForm(); //
+    })
+    .catch(error => {
+      endLoadingSelect(e.target, triggeredFrom);
+      console.error('Error Fetch:', error);
+    });
+}
+function downloadSummarySubmitEmail(e, triggeredFrom) {
+  e.preventDefault();
+
+  const validationResult = validateUserForm();
+  console.log(validationResult);
+  if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
+
+  [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
+
+  dataToSend = gogasSelections.results.foundTankObj;
+  dataToSend.userInfo = userInfo;
+
+  startLoadingSelect(e.target, triggeredFrom);
+  fetch(downloadGogasSummaryEmailUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ data: dataToSend })
+  })
+    .then(res => {
+      if (res.status !== 200) {
+        endLoadingSelect(e.target, triggeredFrom);
+        if (res.status === 429) {
+          handleInvalidDownload(
+            'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
+          );
+        }
+        return null;
+      }
+      return res.json();
+    })
+    .then(data => {
+      console.log('data', data);
+      endLoadingSelect(e.target, triggeredFrom);
+      closeSummaryForm();
     })
     .catch(error => {
       endLoadingSelect(e.target, triggeredFrom);
