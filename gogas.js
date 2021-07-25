@@ -769,7 +769,9 @@ function downloadSummarySubmitEmail(e, triggeredFrom) {
             'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
           );
         } else {
-          handleInvalidDownload(res.msg);
+          handleInvalidDownload(
+            'Δεν έχει αποστελεί email, παρακαλούμε επαληθεύστε την εγκυρότητα του παραπάνω email που καταχωρήσατε'
+          );
         }
 
         return null;
