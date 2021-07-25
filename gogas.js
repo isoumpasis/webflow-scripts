@@ -770,15 +770,15 @@ function downloadSummarySubmitEmail(e, triggeredFrom) {
           );
         } else {
           handleInvalidDownload(
-            'Δεν έχει αποστελεί email, παρακαλούμε επαληθεύστε την εγκυρότητα του παραπάνω email που καταχωρήσατε'
+            'Παρακαλούμε επαληθεύστε την εγκυρότητα του παραπάνω email που καταχωρήσατε και ξαναπροσπαθήστε'
           );
         }
-
-        return null;
+        return;
       }
       return res.json();
     })
     .then(data => {
+      if (!data) return;
       console.log('data', data);
       endLoadingSelect(e.target, triggeredFrom);
       closeSummaryForm();
