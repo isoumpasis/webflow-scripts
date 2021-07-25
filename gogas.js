@@ -7,8 +7,8 @@ const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 // const downloadGogasSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
 const downloadGogasSummaryUrl = 'http://localhost:1917/summaries/gogas';
-// const downloadGogasSummaryEmailUrl = 'https://lovatohellas.herokuapp.com/summaries/email/gogas';
-const downloadGogasSummaryEmailUrl = 'http://localhost:1917/summaries/email/gogas';
+const downloadGogasSummaryEmailUrl = 'https://lovatohellas.herokuapp.com/summaries/email/gogas';
+// const downloadGogasSummaryEmailUrl = 'http://localhost:1917/summaries/email/gogas';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -763,7 +763,6 @@ function downloadSummarySubmitEmail(e, triggeredFrom) {
     .then(res => {
       if (res.status !== 200) {
         endLoadingSelect(e.target, triggeredFrom);
-        console.log(res);
         if (res.status === 429) {
           handleInvalidDownload(
             'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
