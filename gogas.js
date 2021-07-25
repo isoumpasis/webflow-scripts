@@ -763,6 +763,7 @@ function downloadSummarySubmitEmail(e, triggeredFrom) {
     .then(res => {
       if (res.status !== 200) {
         endLoadingSelect(e.target, triggeredFrom);
+        console.log(res);
         if (res.status === 429) {
           handleInvalidDownload(
             'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
