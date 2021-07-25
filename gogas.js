@@ -5,8 +5,8 @@ const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
-const downloadGogasSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
-// const downloadGogasSummaryUrl = 'http://localhost:1917/summaries/gogas';//
+// const downloadGogasSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
+const downloadGogasSummaryUrl = 'http://localhost:1917/summaries/gogas'; //
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -32,11 +32,11 @@ const typeContainerIdDict = {
 
 const tankImgUrlDict = {
   ΕΣΩΤΕΡΙΚΗ:
-    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f5a4ecd2e4fdcbaf601c52_internal-tank-img.jpg',
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f9ee45e6ea190e6455e9f7_internal-tank-wmv.jpg',
   ΕΞΩΤΕΡΙΚΗ:
-    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f69aa32026daab0635fb21_external-tank-img.jpg',
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f9ee7fbd49ae0779fc2cad_externall-tank-wmv.jpg',
   ΚΥΛΙΝΔΡΙΚΗ:
-    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f69aa7f98ed9cb9321ed98_cylindrical-tank-img.jpg'
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f9ee7fc8df88ee62a068d3_cyl-tank-wmv.jpg'
 };
 
 const preferredStorage = localStorage;
