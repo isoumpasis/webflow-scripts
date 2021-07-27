@@ -5,10 +5,10 @@ const urlLitres = '/litres'; //
 const urlDimensions = '/dimensions';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
-// const downloadGogasSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
-const downloadGogasSummaryUrl = 'http://localhost:1917/summaries/gogas';
-const downloadGogasSummaryEmailUrl = 'https://lovatohellas.herokuapp.com/summaries/email/gogas';
-// const downloadGogasSummaryEmailUrl = 'http://localhost:1917/summaries/email/gogas';
+// const downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
+const downloadSummaryUrl = 'http://localhost:1917/summaries/gogas';
+const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/gogas';
+// const emailSummaryUrl = 'http://localhost:1917/summaries/email/gogas';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -682,7 +682,10 @@ function openLocationListContainer() {
 
 document
   .querySelector('#downloadSummaryBtn')
-  .addEventListener('click', e => downloadSummarySubmitEmail(e, 'form'));
+  .addEventListener('click', e => downloadSummarySubmit(e, 'form'));
+document
+  .querySelector('#emailSummaryBtn')
+  .addEventListener('click', e => emailSummarySubmit(e, 'form'));
 
 function hasUserInfo() {
   const ret = getUserInfo();
@@ -708,7 +711,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
   dataToSend.userInfo = userInfo;
 
   startLoadingSelect(e.target, triggeredFrom);
-  fetch(downloadGogasSummaryUrl, {
+  fetch(downloadSummaryUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -740,7 +743,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
       console.error('Error Fetch:', error);
     });
 }
-function downloadSummarySubmitEmail(e, triggeredFrom) {
+function emailSummarySubmit(e, triggeredFrom) {
   e.preventDefault();
 
   const validationResult = validateUserForm();
@@ -753,7 +756,7 @@ function downloadSummarySubmitEmail(e, triggeredFrom) {
   dataToSend.userInfo = userInfo;
 
   startLoadingSelect(e.target, triggeredFrom);
-  fetch(downloadGogasSummaryEmailUrl, {
+  fetch(emailSummaryUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
