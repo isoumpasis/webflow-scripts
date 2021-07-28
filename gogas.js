@@ -681,10 +681,10 @@ function openLocationListContainer() {
 
 /* SUMMARY DOWNLOAD */
 [...document.querySelectorAll('.open-download-form')].map(el =>
-  el.addEventListerner(() => (formType = 'DOWNLOAD'))
+  el.addEventListener(() => (formType = 'DOWNLOAD'))
 );
 [...document.querySelectorAll('.open-email-form')].map(el =>
-  el.addEventListerner(() => (formType = 'EMAIL'))
+  el.addEventListener(() => (formType = 'EMAIL'))
 );
 
 document
