@@ -689,9 +689,10 @@ function openLocationListContainer() {
 
 document
   .querySelector('#submitSummaryBtn')
-  .addEventListener('click', e => handleSummarySubmit(e, 'form', isDownloadForm));
+  .addEventListener('click', e => handleSummarySubmit(e, 'form', formType));
 
 function handleSummarySubmit(e, triggeredFrom, formType) {
+  e.preventDefault();
   formType === 'DOWNLOAD'
     ? downloadSummarySubmit(e, triggeredFrom)
     : emailSummarySubmit(e, triggeredFrom);
@@ -709,8 +710,6 @@ function hasResult() {
 }
 
 function downloadSummarySubmit(e, triggeredFrom) {
-  e.preventDefault(); //
-
   const validationResult = validateUserForm();
   console.log(validationResult);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
@@ -754,8 +753,6 @@ function downloadSummarySubmit(e, triggeredFrom) {
     });
 }
 function emailSummarySubmit(e, triggeredFrom) {
-  e.preventDefault();
-
   const validationResult = validateUserForm();
   console.log(validationResult);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
