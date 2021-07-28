@@ -236,19 +236,20 @@ function getCurrentPosition() {
   });
 }
 
-function startLoadingSelect(select, triggeredFrom = null) {
+function startLoadingSelect(select, triggeredFrom = null, formType) {
   if (!triggeredFrom) select.classList.add('loading-select');
   else {
     if (triggeredFrom === 'form') {
-      document.querySelector('#downloadSummaryBtn').value = 'Ετοιμάζουμε την προσφορά σου...';
+      document.querySelector('#submitSummaryBtn').value = 'Ετοιμάζουμε την προσφορά σου...';
     }
   }
 }
-function endLoadingSelect(select, triggeredFrom = null) {
+function endLoadingSelect(select, triggeredFrom = null, formType) {
   if (!triggeredFrom) select.classList.remove('loading-select');
   else {
     if (triggeredFrom === 'form') {
-      document.querySelector('#downloadSummaryBtn').value = 'Πάρε την προσφορά!';
+      document.querySelector('#submitSummaryBtn').value =
+        formType === 'DOWNLOAD' ? 'Κατέβασε την προσφορά' : 'Πάρε την προσφορά με email!';
     }
   }
 }
