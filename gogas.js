@@ -790,7 +790,12 @@ function emailSummarySubmit(e, triggeredFrom) {
       if (!data) return;
       console.log('data', data);
       endLoadingSelect(e.target, triggeredFrom);
-      closeSummaryForm();
+      document.querySelector('.summary-success-form').style.display = 'block';
+      document.querySelector('.success-msg-email').textContent = userInfo.email;
+      setTimeout(() => {
+        closeSummaryForm();
+        document.querySelector('.summary-success-form').style.display = 'none';
+      }, 2000);
     })
     .catch(error => {
       endLoadingSelect(e.target, triggeredFrom);
