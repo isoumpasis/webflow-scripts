@@ -240,17 +240,16 @@ function startLoadingSelect(select, triggeredFrom = null) {
   if (!triggeredFrom) select.classList.add('loading-select');
   else {
     if (triggeredFrom === 'form') {
-      //
       document.querySelector('#submitSummaryBtn').value = 'Ετοιμάζουμε την προσφορά σου...';
     }
   }
 }
-function endLoadingSelect(select, triggeredFrom = null, formType) {
+function endLoadingSelect(select, triggeredFrom = null) {
   if (!triggeredFrom) select.classList.remove('loading-select');
   else {
     if (triggeredFrom === 'form') {
       document.querySelector('#submitSummaryBtn').value =
-        fromType === 'DOWNLOAD' ? 'Κατέβασε την προσφορά!' : 'Πάρε Email με την προσφορά!';
+        formType === 'DOWNLOAD' ? 'Κατέβασε την προσφορά!' : 'Πάρε Email με την προσφορά!';
     }
   }
 }
@@ -684,12 +683,14 @@ function openLocationListContainer() {
 /* SUMMARY DOWNLOAD */
 [...document.querySelectorAll('.open-download-form')].map(el =>
   el.addEventListener('click', e => {
+    console.log('clicked download');
     formType = 'DOWNLOAD';
     document.querySelector('#submitSummaryBtn').value = 'Κατέβασε την προσφορά!';
   })
 );
 [...document.querySelectorAll('.open-email-form')].map(el =>
   el.addEventListener('click', e => {
+    console.log('clicked email');
     formType = 'EMAIL';
     document.querySelector('#submitSummaryBtn').value = 'Πάρε email με την προσφορά!';
   })
