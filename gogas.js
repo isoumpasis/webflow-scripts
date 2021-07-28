@@ -681,10 +681,16 @@ function openLocationListContainer() {
 
 /* SUMMARY DOWNLOAD */
 [...document.querySelectorAll('.open-download-form')].map(el =>
-  el.addEventListener('click', e => (formType = 'DOWNLOAD'))
+  el.addEventListener('click', e => {
+    formType = 'DOWNLOAD';
+    document.querySelector('#submitSummaryBtn').textContent = 'Κατέβασε την προσφορά!';
+  })
 );
 [...document.querySelectorAll('.open-email-form')].map(el =>
-  el.addEventListener('click', e => (formType = 'EMAIL'))
+  el.addEventListener('click', e => {
+    formType = 'EMAIL';
+    document.querySelector('#submitSummaryBtn').textContent = 'Πάρε email με την προσφορά!';
+  })
 );
 
 document
