@@ -25,6 +25,7 @@ let fetchedLitres,
   activeContainer;
 let isLocationSelected = false;
 let geolocationError = false;
+let formType = 'DOWNLOAD';
 
 const typeContainerIdDict = {
   ΕΣΩΤΕΡΙΚΗ: 'eswterikhContainer',
@@ -679,13 +680,22 @@ function openLocationListContainer() {
 }
 
 /* SUMMARY DOWNLOAD */
+[...document.querySelectorAll('.open-download-form')].map(el =>
+  el.addEventListerner(() => (formType = 'DOWNLOAD'))
+);
+[...document.querySelectorAll('.open-email-form')].map(el =>
+  el.addEventListerner(() => (formType = 'EMAIL'))
+);
 
 document
-  .querySelector('#downloadSummaryBtn')
-  .addEventListener('click', e => downloadSummarySubmit(e, 'form'));
-document
-  .querySelector('#emailSummaryBtn')
-  .addEventListener('click', e => emailSummarySubmit(e, 'form'));
+  .querySelector('#submitSummaryBtn')
+  .addEventListener('click', e => handleSummarySubmit(e, 'form', isDownloadForm));
+
+function handleSummarySubmit(e, triggeredFrom, formType) {
+  formType === 'DOWNLOAD'
+    ? downloadSummarySubmit(e, triggeredFrom)
+    : emailSummarySubmit(e, triggeredFrom);
+}
 
 function hasUserInfo() {
   const ret = getUserInfo();
