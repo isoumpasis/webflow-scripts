@@ -249,7 +249,8 @@ function endLoadingSelect(select, triggeredFrom = null, formType) {
   if (!triggeredFrom) select.classList.remove('loading-select');
   else {
     if (triggeredFrom === 'form') {
-      document.querySelector('#submitSummaryBtn').value = fromType ? 'DOWNLOAD' ? 'Κατέβασε την προσφορά!' : 'Πάρε Email με την προσφορά!'
+      document.querySelector('#submitSummaryBtn').value =
+        fromType === 'DOWNLOAD' ? 'Κατέβασε την προσφορά!' : 'Πάρε Email με την προσφορά!';
     }
   }
 }
