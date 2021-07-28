@@ -683,13 +683,13 @@ function openLocationListContainer() {
 [...document.querySelectorAll('.open-download-form')].map(el =>
   el.addEventListener('click', e => {
     formType = 'DOWNLOAD';
-    document.querySelector('#submitSummaryBtn').textContent = 'Κατέβασε την προσφορά!';
+    document.querySelector('#submitSummaryBtn').value = 'Κατέβασε την προσφορά!';
   })
 );
 [...document.querySelectorAll('.open-email-form')].map(el =>
   el.addEventListener('click', e => {
     formType = 'EMAIL';
-    document.querySelector('#submitSummaryBtn').textContent = 'Πάρε email με την προσφορά!';
+    document.querySelector('#submitSummaryBtn').value = 'Πάρε email με την προσφορά!';
   })
 );
 
