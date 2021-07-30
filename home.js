@@ -2564,7 +2564,7 @@ function emailSummarySubmit(e, triggeredFrom) {
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
 
-  dataToSend = gogasSelections.results.foundTankObj;
+  dataToSend = userSelections;
   dataToSend.userInfo = userInfo;
 
   startLoadingSelect(e.target, triggeredFrom);
