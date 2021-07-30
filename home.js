@@ -3,8 +3,10 @@ const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
 const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
 const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
-const downloadSystemSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/system';
-// const downloadSystemSummaryUrl = 'http://localhost:1917/summaries/system';//
+const downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/system';
+// const downloadSummaryUrl = 'http://localhost:1917/summaries/system';
+// const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/system';
+const emailSummaryUrl = 'http://localhost:1917/summaries/email/system';
 const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
@@ -24,6 +26,7 @@ let fetchedPinsLength,
   fetchedClosests,
   isLocationSelected = false,
   geolocationError = false;
+let formType = 'DOWNLOAD';
 
 const makeSelect = document.querySelector('#makeSelect');
 const modelSelect = document.querySelector('#modelSelect');
@@ -322,7 +325,7 @@ let noCreditInterest = 12.6;
 let creditInterest = 7.2;
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (preferredStorage.userSelections) userSelections = getUserSelections();
+  // if (preferredStorage.userSelections) userSelections = getUserSelections();
 
   initSelects();
   initFuelPrices();
@@ -1113,7 +1116,10 @@ function endLoadingSelect(select, triggeredFrom = null) {
   if (!triggeredFrom) select.classList.remove('loading-select');
   else {
     if (triggeredFrom === 'form') {
-      document.querySelector('#downloadSummaryBtn').value = 'Πάρε την προσφορά!';
+      document.querySelector('#downloadSummaryBtn').value =
+        formType === 'DOWNLOAD'
+          ? 'Κατέβασε και εκτύπωσε την προσφορά!'
+          : 'Πάρε Email με την προσφορά!';
     }
     if (triggeredFrom === 'basket') {
       document.querySelector('.download-summary-basket-descr').innerHTML =
@@ -2463,14 +2469,21 @@ function getUserInfo() {
   return null;
 }
 
-/* PDF DOWNLOAD */
+/* SUMMARY DOWNLOAD */
 document
-  .querySelector('#downloadSummaryBtn')
-  .addEventListener('click', e => downloadSummarySubmit(e, 'form'));
+  .querySelector('#submitSummaryBtn')
+  .addEventListener('click', e => handleSummarySubmit(e, 'form'));
 
 document
   .querySelector('#downloadSummaryBtnBasket')
   .addEventListener('click', e => downloadSummarySubmit(e, 'basket'));
+
+function handleSummarySubmit(e, triggeredFrom) {
+  e.preventDefault();
+  formType === 'DOWNLOAD'
+    ? downloadSummarySubmit(e, triggeredFrom)
+    : emailSummarySubmit(e, triggeredFrom);
+}
 
 function hasUserInfo() {
   const ret = getUserInfo();
@@ -2490,8 +2503,6 @@ function hasResult() {
 }
 
 function downloadSummarySubmit(e, triggeredFrom) {
-  e.preventDefault();
-
   const validationResult = validateUserForm();
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
@@ -2501,7 +2512,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
   dataToSend.userInfo = userInfo;
 
   startLoadingSelect(e.target, triggeredFrom);
-  fetch(downloadSystemSummaryUrl, {
+  fetch(downloadSummaryUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -2527,6 +2538,55 @@ function downloadSummarySubmit(e, triggeredFrom) {
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
       endLoadingSelect(e.target, triggeredFrom);
       closeSummaryForm();
+    })
+    .catch(error => {
+      endLoadingSelect(e.target, triggeredFrom);
+      console.error('Error Fetch:', error);
+    });
+}
+
+function emailSummarySubmit(e, triggeredFrom) {
+  const validationResult = validateUserForm();
+  console.log(validationResult);
+  if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
+
+  [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
+
+  dataToSend = gogasSelections.results.foundTankObj;
+  dataToSend.userInfo = userInfo;
+
+  startLoadingSelect(e.target, triggeredFrom);
+  fetch(emailSummaryUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ data: dataToSend })
+  })
+    .then(res => {
+      if (res.status !== 200) {
+        endLoadingSelect(e.target, triggeredFrom);
+        if (res.status === 429) {
+          handleInvalidDownload(
+            'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
+          );
+        } else {
+          handleInvalidDownload('Το email που καταχωρήσατε δεν είναι έγκυρο, ξαναπροσπαθήστε');
+        }
+        return;
+      }
+      return res.json();
+    })
+    .then(data => {
+      if (!data) return;
+      console.log('data', data);
+      endLoadingSelect(e.target, triggeredFrom);
+      document.querySelector('.summary-success-form').style.display = 'block';
+      document.querySelector('.success-msg-email').textContent = userInfo.email;
+      setTimeout(() => {
+        closeSummaryForm();
+        document.querySelector('.summary-success-form').style.display = 'none';
+      }, 3000);
     })
     .catch(error => {
       endLoadingSelect(e.target, triggeredFrom);
