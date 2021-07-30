@@ -1105,7 +1105,7 @@ function startLoadingSelect(select, triggeredFrom = null) {
   if (!triggeredFrom) select.classList.add('loading-select');
   else {
     if (triggeredFrom === 'form') {
-      document.querySelector('#downloadSummaryBtn').value = 'Ετοιμάζουμε την προσφορά σου...';
+      document.querySelector('#submitSummaryBtn').value = 'Ετοιμάζουμε την προσφορά σου...';
     }
     if (triggeredFrom === 'basket') {
       document.querySelector('.download-summary-basket-descr').innerHTML =
@@ -1117,7 +1117,7 @@ function endLoadingSelect(select, triggeredFrom = null) {
   if (!triggeredFrom) select.classList.remove('loading-select');
   else {
     if (triggeredFrom === 'form') {
-      document.querySelector('#downloadSummaryBtn').value =
+      document.querySelector('#submitSummaryBtn').value =
         formType === 'DOWNLOAD'
           ? 'Κατέβασε και εκτύπωσε την προσφορά!'
           : 'Πάρε Email με την προσφορά!';
