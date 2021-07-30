@@ -2480,7 +2480,7 @@ document.querySelector('.open-email-form').addEventListener('click', e => {
   console.log('clicked email');
   formType = 'EMAIL';
   document.querySelector('#submitSummaryBtn').value = 'Πάρε Email με την προσφορά!';
-});
+}); //
 
 document
   .querySelector('#submitSummaryBtn')
