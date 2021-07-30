@@ -694,7 +694,7 @@ function openLocationListContainer() {
   el.addEventListener('click', e => {
     console.log('clicked email');
     formType = 'EMAIL';
-    document.querySelector('#submitSummaryBtn').value = 'Πάρε email με την προσφορά!';
+    document.querySelector('#submitSummaryBtn').value = 'Πάρε Email με την προσφορά!';
   })
 );
 
