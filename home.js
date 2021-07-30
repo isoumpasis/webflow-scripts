@@ -325,7 +325,8 @@ let noCreditInterest = 12.6;
 let creditInterest = 7.2;
 
 document.addEventListener('DOMContentLoaded', () => {
-  // if (preferredStorage.userSelections) userSelections = getUserSelections();
+  if (preferredStorage.userSelections) userSelections = getUserSelections();
+  // userSelections.summary = false;
 
   initSelects();
   initFuelPrices();
@@ -2470,6 +2471,17 @@ function getUserInfo() {
 }
 
 /* SUMMARY DOWNLOAD */
+document.querySelector('.open-download-form').addEventListener('click', e => {
+  console.log('clicked download');
+  formType = 'DOWNLOAD';
+  document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε την προσφορά!';
+});
+document.querySelector('.open-email-form').addEventListener('click', e => {
+  console.log('clicked email');
+  formType = 'EMAIL';
+  document.querySelector('#submitSummaryBtn').value = 'Πάρε Email με την προσφορά!';
+});
+
 document
   .querySelector('#submitSummaryBtn')
   .addEventListener('click', e => handleSummarySubmit(e, 'form'));

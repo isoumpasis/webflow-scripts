@@ -756,13 +756,14 @@ function downloadSummarySubmit(e, triggeredFrom) {
       console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
       endLoadingSelect(e.target, triggeredFrom);
-      closeSummaryForm(); //
+      closeSummaryForm();
     })
     .catch(error => {
       endLoadingSelect(e.target, triggeredFrom);
       console.error('Error Fetch:', error);
     });
 }
+
 function emailSummarySubmit(e, triggeredFrom) {
   const validationResult = validateUserForm();
   console.log(validationResult);
