@@ -728,6 +728,8 @@ function downloadSummarySubmit(e, triggeredFrom) {
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
 
   dataToSend = gogasSelections.results.foundTankObj;
+  dataToSend.location = gogasSelections.form.activeValues.location;
+  dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
 
   startLoadingSelect(e.target, triggeredFrom);
