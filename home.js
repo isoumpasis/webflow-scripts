@@ -3,10 +3,10 @@ const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
 const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
 const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
-// const downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/system';
-const downloadSummaryUrl = 'http://localhost:1917/summaries/system';
-// const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/system';
-const emailSummaryUrl = 'http://localhost:1917/summaries/email/system';
+const downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/system';
+// const downloadSummaryUrl = 'http://localhost:1917/summaries/system';
+const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/system';
+// const emailSummaryUrl = 'http://localhost:1917/summaries/email/system';
 const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
@@ -2591,8 +2591,6 @@ function emailSummarySubmit(e, triggeredFrom) {
   dataToSend = userSelections;
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
-
-  console.log(dataToSend);
 
   startLoadingSelect(e.target, triggeredFrom);
   fetch(emailSummaryUrl, {
