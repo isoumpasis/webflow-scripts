@@ -776,7 +776,11 @@ function emailSummarySubmit(e, triggeredFrom) {
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
 
   dataToSend = gogasSelections.results.foundTankObj;
+  dataToSend.location = gogasSelections.form.activeValues.location;
+  dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
+
+  console.log(dataToSend);
 
   startLoadingSelect(e.target, triggeredFrom);
   fetch(emailSummaryUrl, {
