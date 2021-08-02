@@ -2544,6 +2544,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
 
   dataToSend = userSelections;
+  dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
 
   startLoadingSelect(e.target, triggeredFrom);
@@ -2588,7 +2589,10 @@ function emailSummarySubmit(e, triggeredFrom) {
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
 
   dataToSend = userSelections;
+  dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
+
+  console.log(dataToSend);
 
   startLoadingSelect(e.target, triggeredFrom);
   fetch(emailSummaryUrl, {

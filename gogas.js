@@ -732,7 +732,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
 
-  console.log(dataToSend);
+  // console.log(dataToSend);
 
   startLoadingSelect(e.target, triggeredFrom);
   fetch(downloadSummaryUrl, {
@@ -780,7 +780,7 @@ function emailSummarySubmit(e, triggeredFrom) {
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
 
-  console.log(dataToSend);
+  // console.log(dataToSend);
 
   startLoadingSelect(e.target, triggeredFrom);
   fetch(emailSummaryUrl, {
