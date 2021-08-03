@@ -1138,9 +1138,7 @@ function endLoadingSelect(select, triggeredFrom = null) {
   else {
     if (triggeredFrom === 'form') {
       document.querySelector('#submitSummaryBtn').value =
-        formType === 'DOWNLOAD'
-          ? 'Κατέβασε και εκτύπωσε την προσφορά!'
-          : 'Πάρε Email με την προσφορά!';
+        formType === 'DOWNLOAD' ? 'Κατέβασε και εκτύπωσε!' : 'Πάρε με Email!';
     }
     if (triggeredFrom === 'basket') {
       document.querySelector('.download-summary-basket-descr').innerHTML =
@@ -2497,12 +2495,12 @@ function getUserInfo() {
 document.querySelector('.open-download-form').addEventListener('click', e => {
   console.log('clicked download');
   formType = 'DOWNLOAD';
-  document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε την προσφορά!';
+  document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
 });
 document.querySelector('.open-email-form').addEventListener('click', e => {
   console.log('clicked email');
   formType = 'EMAIL';
-  document.querySelector('#submitSummaryBtn').value = 'Πάρε Email με την προσφορά!';
+  document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
 }); //
 
 document
