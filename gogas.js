@@ -503,7 +503,7 @@ function showResults() {
 }
 
 function renderResultsContainer(container) {
-  container.querySelector('.litres-result').textContent = foundTankObj.litres + ' LT';
+  container.querySelector('.litres-result').textContent = foundTankObj.litres + 'Λίτρα';
   container.querySelector('.diameter-result').textContent = foundTankObj.diameter / 10;
   container.querySelector('.length-result').textContent = foundTankObj.length / 10;
   container.querySelector('.price-result').textContent = foundTankObj.price + '€';
