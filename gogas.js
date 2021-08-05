@@ -117,16 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (getGogasSelections()) loadGogasSelections();
 
   initUserInfo();
-  showFacebookBrowserProblem();
+  showFacebookBrowserProblem(isFacebookBrowser());
 });
 
-function showFacebookBrowserProblem(hide = false) {
-  const fbBrowserDiv = document.querySelector('.facebook-browser-div');
-  if (hide) {
-    fbBrowserDiv.style.display = 'none';
-    return;
+function showFacebookBrowserProblem(show) {
+  if (isFacebookBrowser()) {
+    document.querySelector('.facebook-browser-div').style.display = show ? 'block' : 'none';
   }
-  fbBrowserDiv.style.display = isFacebookBrowser() ? 'block' : 'none';
 }
 
 function initUserInfo() {
@@ -727,6 +724,7 @@ function hasResult() {
 }
 
 function downloadSummarySubmit(e, triggeredFrom) {
+  showFacebookBrowserProblem(true);
   const validationResult = validateUserForm();
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
@@ -779,7 +777,7 @@ function isFacebookBrowser() {
 }
 
 function emailSummarySubmit(e, triggeredFrom) {
-  showFacebookBrowserProblem(true);
+  showFacebookBrowserProblem(false);
   const validationResult = validateUserForm();
   console.log(validationResult);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
