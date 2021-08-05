@@ -117,6 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (getGogasSelections()) loadGogasSelections();
 
   initUserInfo();
+  if (isFacebookBrowser()) {
+    document.querySelector('.h1-42').textContent = 'Facebook In-App-Browser';
+  }
 });
 
 function initUserInfo() {
@@ -762,6 +765,11 @@ function downloadSummarySubmit(e, triggeredFrom) {
       endLoadingSelect(e.target, triggeredFrom);
       console.error('Error Fetch:', error);
     });
+}
+
+function isFacebookBrowser() {
+  let ua = navigator.userAgent || navigator.vendor || window.opera;
+  return ua.indexOf('FBAN') > -1 || ua.indexOf('FBAV') > -1;
 }
 
 function emailSummarySubmit(e, triggeredFrom) {
