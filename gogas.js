@@ -117,13 +117,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (getGogasSelections()) loadGogasSelections();
 
   initUserInfo();
-  showFacebookBrowserProblem();
+  showFacebookBrowserProblem(true);
 });
 
-function showFacebookBrowserProblem() {
-  document.querySelector('.facebook-browser-div').style.display = isFacebookBrowser()
-    ? 'block'
-    : 'none';
+function showFacebookBrowserProblem(hide = false) {
+  const fbBrowserDiv = document.querySelector('.facebook-browser-div');
+  if (hide) {
+    fbBrowserDiv.style.display = 'none';
+    return;
+  }
+  fbBrowserDiv.style.display = isFacebookBrowser() ? 'block' : 'none';
 }
 
 function initUserInfo() {
@@ -776,6 +779,7 @@ function isFacebookBrowser() {
 }
 
 function emailSummarySubmit(e, triggeredFrom) {
+  showFacebookBrowserProblem(true);
   const validationResult = validateUserForm();
   console.log(validationResult);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
