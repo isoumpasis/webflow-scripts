@@ -117,10 +117,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (getGogasSelections()) loadGogasSelections();
 
   initUserInfo();
-  if (isFacebookBrowser()) {
-    document.querySelector('.h1-42').textContent = 'Facebook In-App-Browser';
-  }
+  showFacebookBrowserProblem();
 });
+
+function showFacebookBrowserProblem() {
+  document.querySelector('.facebook-browser-div').style.display = isFacebookBrowser()
+    ? 'block'
+    : 'none';
+}
 
 function initUserInfo() {
   userInfo = getUserInfo() || {};
@@ -721,7 +725,6 @@ function hasResult() {
 
 function downloadSummarySubmit(e, triggeredFrom) {
   const validationResult = validateUserForm();
-  console.log(validationResult);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
