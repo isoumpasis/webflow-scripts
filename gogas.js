@@ -503,7 +503,7 @@ function showResults() {
 }
 
 function renderResultsContainer(container) {
-  container.querySelector('.litres-result').textContent = foundTankObj.litres + 'Λίτρα';
+  container.querySelector('.litres-result').textContent = foundTankObj.litres + ' Λίτρα';
   container.querySelector('.diameter-result').textContent = foundTankObj.diameter / 10;
   container.querySelector('.length-result').textContent = foundTankObj.length / 10;
   container.querySelector('.price-result').textContent = foundTankObj.price + '€';
@@ -683,14 +683,12 @@ function openLocationListContainer() {
 /* SUMMARY DOWNLOAD */
 [...document.querySelectorAll('.open-download-form')].map(el =>
   el.addEventListener('click', e => {
-    console.log('clicked download');
     formType = 'DOWNLOAD';
     document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
   })
 );
 [...document.querySelectorAll('.open-email-form')].map(el =>
   el.addEventListener('click', e => {
-    console.log('clicked email');
     formType = 'EMAIL';
     document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
   })
