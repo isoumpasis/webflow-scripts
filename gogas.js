@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (getGogasSelections()) loadGogasSelections();
 
   initUserInfo();
-  showFacebookBrowserProblem(true);
+  showFacebookBrowserProblem();
 });
 
 function showFacebookBrowserProblem(hide = false) {
