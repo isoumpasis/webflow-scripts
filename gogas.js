@@ -691,12 +691,14 @@ function openLocationListContainer() {
 [...document.querySelectorAll('.open-download-form')].map(el =>
   el.addEventListener('click', e => {
     formType = 'DOWNLOAD';
+    showFacebookBrowserProblem(true);
     document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
   })
 );
 [...document.querySelectorAll('.open-email-form')].map(el =>
   el.addEventListener('click', e => {
     formType = 'EMAIL';
+    showFacebookBrowserProblem(false);
     document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
   })
 );
@@ -724,7 +726,6 @@ function hasResult() {
 }
 
 function downloadSummarySubmit(e, triggeredFrom) {
-  showFacebookBrowserProblem(true);
   const validationResult = validateUserForm();
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
