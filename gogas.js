@@ -778,7 +778,6 @@ function isFacebookBrowser() {
 }
 
 function emailSummarySubmit(e, triggeredFrom) {
-  showFacebookBrowserProblem(false);
   const validationResult = validateUserForm();
   console.log(validationResult);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
