@@ -1820,6 +1820,10 @@ function configureCalculatorAfterSuggestion() {
   document.querySelector('.in-consumption').textContent = foundVehicleObj.consumption[0];
   document.querySelector('.out-consumption').textContent = foundVehicleObj.consumption[1];
   document.querySelector('.combined-consumption').textContent = foundVehicleObj.consumption[2];
+
+  document.querySelector(
+    '.consumption-model-name-calculator'
+  ).textContent = `${makeSelect.value} ${modelSelect.value} (${yearSelect.value})`;
 }
 
 function selectDriveOftenRadioInput(index) {
@@ -1848,6 +1852,8 @@ function getDriveOftenRadioIndex() {
 function resetCalc() {
   document.querySelector('#calcTitle').innerHTML =
     'Υπολόγισε πόσα θα εξοικονομείς με ένα σύστημα Lovato!';
+
+  document.querySelector('.consumption-model-name-calculator').textContent = 'αυτοκίνητο';
 
   document.querySelector('#calcContainerVehicle').style.display = 'none';
   document.querySelector('#calcContainerNoVehicle').style.display = 'flex';
