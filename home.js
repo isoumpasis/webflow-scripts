@@ -1853,7 +1853,7 @@ function resetCalc() {
   document.querySelector('#calcTitle').innerHTML =
     'Υπολόγισε πόσα θα εξοικονομείς με ένα σύστημα Lovato!';
 
-  document.querySelector('.consumption-model-name-calculator').textContent = 'αυτοκίνητο';
+  document.querySelector('.consumption-model-name-calculator').textContent = 'αυτοκίνητό σας';
 
   document.querySelector('#calcContainerVehicle').style.display = 'none';
   document.querySelector('#calcContainerNoVehicle').style.display = 'flex';
