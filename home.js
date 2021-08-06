@@ -352,6 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFuelPrices();
   initDriveOftenRadio();
   initSelectedFuelListeners();
+  initCalcOptions();
   initEasyPay();
   initStores();
   //localStorage.clear();
@@ -361,6 +362,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initBasket();
   // initCss();
 });
+
+function initCalcOptions() {
+  document.querySelector('.consumption-model-name-calculator').textContent = 'αυτοκίνητό σας';
+  document
+    .querySelector('.consumption-model-name-calculator')
+    .classList.remove('consumption-model-name-style');
+}
 
 function initBasket() {
   updateBasketSection({ resetNoVehicle: true });
