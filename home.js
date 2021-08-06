@@ -1142,19 +1142,23 @@ makeSelect.addEventListener('change', function () {
     });
 });
 
-function startLoadingSelect(select, triggeredFrom = null) {
+function startLoadingSelect(select, triggeredFrom = null, type = null) {
   if (!triggeredFrom) select.classList.add('loading-select');
   else {
     if (triggeredFrom === 'form') {
       document.querySelector('#submitSummaryBtn').value = 'Ετοιμάζουμε την προσφορά σου...';
     }
     if (triggeredFrom === 'basket') {
-      document.querySelector('.download-summary-basket-descr').innerHTML =
-        'Ετοιμάζουμε την<br>προσφορά σου...';
+      if (type === 'download')
+        document.querySelector('.download-summary-basket-descr').innerHTML =
+          'Ετοιμάζουμε την<br>προσφορά σου...';
+      else if (type === 'email')
+        document.querySelector('.email-summary-basket-descr').innerHTML =
+          'Ετοιμάζουμε την<br>προσφορά σου...';
     }
   }
 }
-function endLoadingSelect(select, triggeredFrom = null) {
+function endLoadingSelect(select, triggeredFrom = null, type = null) {
   if (!triggeredFrom) select.classList.remove('loading-select');
   else {
     if (triggeredFrom === 'form') {
@@ -1162,8 +1166,11 @@ function endLoadingSelect(select, triggeredFrom = null) {
         formType === 'DOWNLOAD' ? 'Κατέβασε και εκτύπωσε!' : 'Πάρε με Email!';
     }
     if (triggeredFrom === 'basket') {
-      document.querySelector('.download-summary-basket-descr').innerHTML =
-        'Κατέβασε<br>και εκτύπωσε!';
+      if (type === 'download')
+        document.querySelector('.download-summary-basket-descr').innerHTML =
+          'Κατέβασε<br>και εκτύπωσε!';
+      else if (type === 'email')
+        document.querySelector('.email-summary-basket-descr').innerHTML = 'Πάρε<br>σε email!';
     }
   }
 }
@@ -2539,6 +2546,9 @@ document
 document
   .querySelector('#downloadSummaryBtnBasket')
   .addEventListener('click', e => downloadSummarySubmit(e, 'basket'));
+document
+  .querySelector('#emailSummaryBtnBasket')
+  .addEventListener('click', e => emailSummarySubmit(e, 'basket'));
 
 function handleSummarySubmit(e, triggeredFrom) {
   e.preventDefault();
@@ -2574,7 +2584,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
 
-  startLoadingSelect(e.target, triggeredFrom);
+  startLoadingSelect(e.target, triggeredFrom, 'download');
   fetch(downloadSummaryUrl, {
     method: 'POST',
     headers: {
@@ -2619,7 +2629,7 @@ function emailSummarySubmit(e, triggeredFrom) {
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
 
-  startLoadingSelect(e.target, triggeredFrom);
+  startLoadingSelect(e.target, triggeredFrom, 'email');
   fetch(emailSummaryUrl, {
     method: 'POST',
     headers: {
@@ -2645,12 +2655,20 @@ function emailSummarySubmit(e, triggeredFrom) {
       if (!data) return;
       console.log('data', data);
       endLoadingSelect(e.target, triggeredFrom);
-      document.querySelector('.summary-success-form').style.display = 'block';
-      document.querySelector('.success-msg-email').textContent = userInfo.email;
-      setTimeout(() => {
-        closeSummaryForm();
-        document.querySelector('.summary-success-form').style.display = 'none';
-      }, 3000);
+      if (triggeredFrom === 'form') {
+        document.querySelector('.summary-success-form').style.display = 'block';
+        document.querySelector('.success-msg-email').textContent = userInfo.email;
+        setTimeout(() => {
+          closeSummaryForm();
+          document.querySelector('.summary-success-form').style.display = 'none';
+        }, 3000);
+      } else if (triggeredFrom === 'email') {
+        document.querySelector('.summary-form-success').style.display = 'block';
+        document.querySelector('.success-msg-email-basket').textContent = userInfo.email;
+        setTimeout(() => {
+          document.querySelector('.summary-form-success').style.display = 'none';
+        }, 3000);
+      }
     })
     .catch(error => {
       endLoadingSelect(e.target, triggeredFrom);
