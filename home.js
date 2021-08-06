@@ -2566,6 +2566,7 @@ function hasUserInfo() {
 
 function hasResult() {
   if (
+    !getActiveContainer() ||
     !userSelections ||
     !Object.keys(userSelections.vehicle).length ||
     (userSelections.vehicle.suggestions && !userSelections.vehicle.suggestions.hasResult)
