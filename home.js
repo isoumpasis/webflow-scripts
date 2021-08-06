@@ -2695,7 +2695,7 @@ function validateUserForm() {
   if (!hasResult())
     return {
       valid: false,
-      msg: 'Για να κατεβάσετε την προσφορά θα πρέπει πρώτα να επιλέξετε το όχημα σας από το Βήμα 2!'
+      msg: 'Θα πρέπει πρώτα να επιλέξετε το όχημα σας από το Βήμα 2!'
     };
   if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
   return { valid: true };
