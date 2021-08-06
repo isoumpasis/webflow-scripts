@@ -505,12 +505,14 @@ function initDriveOftenRadio() {
 function initPlaceSelects(placeValue) {
   fuelPricesSelectVehicle.value = placeValue;
   fuelPricesSelectNoVehicle.value = placeValue;
+  [...document.querySelectorAll('.place-calc-descr')].map(el => (el.textContent = placeValue));
   storesLocationSelect.value = placeValue;
 }
 
 fuelPricesSelectNoVehicle.addEventListener('change', e => {
   fuelPricesSelectVehicle.value = e.target.value;
   modifyFuelPriceSliders(e.target.value, { save: true });
+  [...document.querySelectorAll('.place-calc-descr')].map(el => (el.textContent = e.target.value));
 
   storesLocationSelect.value = e.target.value;
   locationOnChange(storesLocationSelect.value);
@@ -518,6 +520,7 @@ fuelPricesSelectNoVehicle.addEventListener('change', e => {
 fuelPricesSelectVehicle.addEventListener('change', e => {
   fuelPricesSelectNoVehicle.value = e.target.value;
   modifyFuelPriceSliders(e.target.value, { save: true });
+  [...document.querySelectorAll('.place-calc-descr')].map(el => (el.textContent = e.target.value));
 
   storesLocationSelect.value = e.target.value;
   locationOnChange(storesLocationSelect.value);
