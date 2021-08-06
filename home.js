@@ -2620,7 +2620,6 @@ function downloadSummarySubmit(e, triggeredFrom) {
 }
 
 function emailSummarySubmit(e, triggeredFrom) {
-  console.log('email summary submit', e, triggeredFrom);
   const validationResult = validateUserForm();
   console.log(validationResult);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
@@ -2664,7 +2663,7 @@ function emailSummarySubmit(e, triggeredFrom) {
           closeSummaryForm();
           document.querySelector('.summary-success-form').style.display = 'none';
         }, 3000);
-      } else if (triggeredFrom === 'email') {
+      } else if (triggeredFrom === 'basket') {
         document.querySelector('.summary-form-success').style.display = 'block';
         document.querySelector('.success-msg-email-basket').textContent = userInfo.email;
         setTimeout(() => {
