@@ -2594,7 +2594,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
   })
     .then(res => {
       if (res.status !== 200) {
-        endLoadingSelect(e.target, triggeredFrom);
+        endLoadingSelect(e.target, triggeredFrom, 'download');
         if (res.status === 429) {
           handleInvalidDownload(
             'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
@@ -2609,11 +2609,11 @@ function downloadSummarySubmit(e, triggeredFrom) {
       const newBlob = new Blob([blob], { type: 'image/png' });
       console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
-      endLoadingSelect(e.target, triggeredFrom);
+      endLoadingSelect(e.target, triggeredFrom, 'download');
       closeSummaryForm();
     })
     .catch(error => {
-      endLoadingSelect(e.target, triggeredFrom);
+      endLoadingSelect(e.target, triggeredFrom, 'download');
       console.error('Error Fetch:', error);
     });
 }
@@ -2640,7 +2640,7 @@ function emailSummarySubmit(e, triggeredFrom) {
   })
     .then(res => {
       if (res.status !== 200) {
-        endLoadingSelect(e.target, triggeredFrom);
+        endLoadingSelect(e.target, triggeredFrom, 'email');
         if (res.status === 429) {
           handleInvalidDownload(
             'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
@@ -2655,7 +2655,7 @@ function emailSummarySubmit(e, triggeredFrom) {
     .then(data => {
       if (!data) return;
       console.log('data', data);
-      endLoadingSelect(e.target, triggeredFrom);
+      endLoadingSelect(e.target, triggeredFrom, 'email');
       if (triggeredFrom === 'form') {
         document.querySelector('.summary-success-form').style.display = 'block';
         document.querySelector('.success-msg-email').textContent = userInfo.email;
@@ -2672,7 +2672,7 @@ function emailSummarySubmit(e, triggeredFrom) {
       }
     })
     .catch(error => {
-      endLoadingSelect(e.target, triggeredFrom);
+      endLoadingSelect(e.target, triggeredFrom, 'email');
       console.error('Error Fetch:', error);
     });
 }
