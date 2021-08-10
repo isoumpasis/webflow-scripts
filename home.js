@@ -3079,6 +3079,7 @@ function sendContactEmail() {
   };
   console.log(emailData);
 
+  document.querySelector('#contactSubmit').value = 'Γίνεται η αποστολή...';
   fetch(urlContactForm, {
     method: 'POST',
     headers: {
@@ -3089,6 +3090,7 @@ function sendContactEmail() {
     .then(data => {
       console.log('email ok', data);
       document.querySelector('.contact-form-success').style.display = 'block';
+      document.querySelector('#contactSubmit').value = 'Αποστολή';
       setTimeout(
         () => (document.querySelector('.contact-form-success').style.display = 'none'),
         4000
@@ -3097,5 +3099,6 @@ function sendContactEmail() {
     .catch(e => {
       console.error('Error on contact form email:', e);
       handleInvalidContactForm('Error on contact form email: ' + e);
+      document.querySelector('#contactSubmit').value = 'Αποστολή';
     });
 }
