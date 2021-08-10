@@ -405,7 +405,6 @@ function initUserInfo() {
       el.value = e.target.value;
     });
     userInfo.username = e.target.value;
-    console.log(userInfo);
     saveUserInfo();
   })
 );
@@ -3079,7 +3078,6 @@ function sendContactEmail() {
       date: `${new Date().toLocaleDateString('el')}, ${new Date().toLocaleTimeString('el')}`
     }
   };
-  console.log(data);
 
   document.querySelector('#contactSubmit').value = 'Γίνεται η αποστολή...';
   fetch(urlContactForm, {
@@ -3091,7 +3089,6 @@ function sendContactEmail() {
   })
     .then(res => res.json())
     .then(data => {
-      console.log('email ok', data);
       document.querySelector('.contact-form-success').style.display = 'block';
       document.querySelector('#contactSubmit').value = 'Αποστολή';
       document.querySelector('#contactMsg').value = '';
@@ -3101,7 +3098,7 @@ function sendContactEmail() {
     })
     .catch(e => {
       console.error('Error on contact form email:', e);
-      handleInvalidContactForm('Error on contact form email: ' + e);
+      handleInvalidContactForm('Υπήρξε πρόβλημα κατά την αποστολή, προσπαθήστε αργότερα');
       document.querySelector('#contactSubmit').value = 'Αποστολή';
     });
 }
