@@ -3069,7 +3069,7 @@ function handleInvalidContactForm(msg) {
 }
 
 function sendContactEmail() {
-  const emailData = {
+  const data = {
     user: userInfo,
     msg: document.querySelector('#contactMsg').value,
     form: {
@@ -3077,14 +3077,15 @@ function sendContactEmail() {
       name: document.querySelector('#contactForm').dataset.name
     }
   };
-  console.log(emailData);
+  console.log(data);
 
   document.querySelector('#contactSubmit').value = 'Γίνεται η αποστολή...';
   fetch(urlContactForm, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
-    }
+    },
+    body: JSON.stringify({ data })
   })
     .then(res => res.json())
     .then(data => {
