@@ -3039,3 +3039,45 @@ function mouseLeaveSuggestedOverlayCNG(el) {
   target.classList.remove('fade-in');
   target.classList.add('fade-out');
 }
+
+/* CONTACT FORM */
+document.querySelector('#contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const validationResult = validateContactForm();
+  if (!validationResult.valid) return handleInvalidContactForm(validationResult.msg);
+
+  sendContactEmail();
+});
+
+function validateContactForm() {
+  console.log(userInfo);
+  if (userInfo.username) return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
+  if (!isEmail(userInfo.email)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
+  if (isNaN(userInfo.phone) || userInfo.phone.length != 10)
+    return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
+  if (!document.querySelector('#contactMsg').textContent)
+    return { valid: false, msg: 'Παρακαλούμε γράψτε πρώτα το μήνυμα σας' };
+  if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
+  return { valid: true };
+}
+
+function handleInvalidContactForm(msg) {
+  const formErrorEl = document.querySelector('.contact-form-error');
+  formErrorEl.style.display = 'block';
+  formErrorEl.textContent = msg;
+  setTimeout(() => (formErrorEl.style.display = 'none'), 4000);
+}
+
+function sendContactEmail() {
+  const contactMsg = document.querySelector('#contactMsg').textContent;
+  const emailData = {
+    user: userInfo,
+    msg: contactMsg,
+    form: {
+      url: location.href,
+      name: document.querySelector('#contactForm').dataset.name
+    }
+  };
+
+  console.log(emailData);
+}
