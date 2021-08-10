@@ -10,8 +10,8 @@ const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/syst
 const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
-// const urlContactForm = 'http://localhost:1917/contact/';
-const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
+const urlContactForm = 'http://localhost:1917/contact/';
+// const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
 
 let fetchedYears;
 let fetchedModels;
