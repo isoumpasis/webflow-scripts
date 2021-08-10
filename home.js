@@ -3055,7 +3055,7 @@ function validateContactForm() {
   if (!isEmail(userInfo.email)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
   if (isNaN(userInfo.phone) || userInfo.phone.length != 10)
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
-  if (!document.querySelector('#contactMsg').textContent)
+  if (!document.querySelector('#contactMsg').value)
     return { valid: false, msg: 'Παρακαλούμε γράψτε πρώτα το μήνυμα σας' };
   if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
   return { valid: true };
