@@ -10,6 +10,7 @@ const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/syst
 const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
+const urlContactForm = 'http://localhost:1917/contact/';
 
 let fetchedYears;
 let fetchedModels;
@@ -3076,6 +3077,17 @@ function sendContactEmail() {
       name: document.querySelector('#contactForm').dataset.name
     }
   };
-
   console.log(emailData);
+
+  fetch(urlContactForm, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log('email ok', data);
+    })
+    .catch(e => console.error('Error on contact form email:', e));
 }
