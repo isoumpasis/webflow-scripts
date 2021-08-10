@@ -3051,7 +3051,7 @@ document.querySelector('#contactForm').addEventListener('submit', e => {
 
 function validateContactForm() {
   console.log(userInfo);
-  if (userInfo.username) return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
+  if (!userInfo.username) return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
   if (!isEmail(userInfo.email)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
   if (isNaN(userInfo.phone) || userInfo.phone.length != 10)
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
