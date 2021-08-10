@@ -3050,7 +3050,6 @@ document.querySelector('#contactForm').addEventListener('submit', e => {
 });
 
 function validateContactForm() {
-  console.log(userInfo);
   if (!userInfo.username) return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
   if (!isEmail(userInfo.email)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
   if (isNaN(userInfo.phone) || userInfo.phone.length != 10)
@@ -3069,10 +3068,9 @@ function handleInvalidContactForm(msg) {
 }
 
 function sendContactEmail() {
-  const contactMsg = document.querySelector('#contactMsg').textContent;
   const emailData = {
     user: userInfo,
-    msg: contactMsg,
+    msg: document.querySelector('#contactMsg').value,
     form: {
       url: location.href,
       name: document.querySelector('#contactForm').dataset.name
