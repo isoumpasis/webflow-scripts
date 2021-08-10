@@ -3076,7 +3076,8 @@ function sendContactEmail() {
       url: location.origin + location.pathname,
       name: document.querySelector('#contactForm').dataset.name,
       date: `${new Date().toLocaleDateString('el')}, ${new Date().toLocaleTimeString('el')}`
-    }
+    },
+    userSelections
   };
 
   document.querySelector('#contactSubmit').value = 'Γίνεται η αποστολή...';
@@ -3094,7 +3095,7 @@ function sendContactEmail() {
       document.querySelector('#contactMsg').value = '';
       setTimeout(() => {
         document.querySelector('.contact-form-success').style.display = 'none';
-      }, 4000);
+      }, 6000);
     })
     .catch(e => {
       console.error('Error on contact form email:', e);
