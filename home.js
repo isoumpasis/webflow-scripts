@@ -3088,6 +3088,14 @@ function sendContactEmail() {
     .then(res => res.json())
     .then(data => {
       console.log('email ok', data);
+      document.querySelector('.contact-form-success').style.display = 'block';
+      setTimeout(
+        () => (document.querySelector('.contact-form-success').style.display = 'none'),
+        4000
+      );
     })
-    .catch(e => console.error('Error on contact form email:', e));
+    .catch(e => {
+      console.error('Error on contact form email:', e);
+      handleInvalidContactForm('Error on contact form email: ' + e);
+    });
 }
