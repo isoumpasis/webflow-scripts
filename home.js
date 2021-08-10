@@ -3073,7 +3073,7 @@ function sendContactEmail() {
     user: userInfo,
     msg: document.querySelector('#contactMsg').value,
     form: {
-      url: location.href,
+      url: location.origin + location.pathname,
       name: document.querySelector('#contactForm').dataset.name
     }
   };
