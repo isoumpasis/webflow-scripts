@@ -3074,7 +3074,8 @@ function sendContactEmail() {
     msg: document.querySelector('#contactMsg').value,
     form: {
       url: location.origin + location.pathname,
-      name: document.querySelector('#contactForm').dataset.name
+      name: document.querySelector('#contactForm').dataset.name,
+      date: `${new Date().toLocaleDateString('el')}, ${new Date().toLocaleTimeString('el')}`
     }
   };
   console.log(data);
