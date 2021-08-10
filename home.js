@@ -3094,9 +3094,9 @@ function sendContactEmail() {
       console.log('email ok', data);
       document.querySelector('.contact-form-success').style.display = 'block';
       document.querySelector('#contactSubmit').value = 'Αποστολή';
+      document.querySelector('#contactMsg').value = '';
       setTimeout(() => {
         document.querySelector('.contact-form-success').style.display = 'none';
-        document.querySelector('#contactMsg').value = '';
       }, 4000);
     })
     .catch(e => {
