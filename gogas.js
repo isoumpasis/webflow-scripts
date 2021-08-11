@@ -9,8 +9,8 @@ const downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
 // const downloadSummaryUrl = 'http://localhost:1917/summaries/gogas';
 const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/gogas';
 // const emailSummaryUrl = 'http://localhost:1917/summaries/email/gogas';
-const urlContactForm = 'http://localhost:1917/contact/';
-// const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
+// const urlContactForm = 'http://localhost:1917/contact/';
+const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
