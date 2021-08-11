@@ -22,3 +22,7 @@ select::-webkit-scrollbar-thumb {
   -moz-appearance: none;
   -webkit-appearance: none;
 }
+
+.no-horiz-scroll {
+  overflow-x: hidden;
+}
