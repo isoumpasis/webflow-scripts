@@ -924,7 +924,7 @@ function sendContactEmail() {
       name: document.querySelector('#contactForm').dataset.name,
       date: `${new Date().toLocaleDateString('el')}, ${new Date().toLocaleTimeString('el')}`
     },
-    userSelections: hasResult() && userSelections
+    gogasSelections: hasResult() && gogasSelections
   };
 
   document.querySelector('#contactSubmit').value = 'Γίνεται η αποστολή...';
