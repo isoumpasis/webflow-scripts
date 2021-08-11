@@ -9,6 +9,8 @@ const downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
 // const downloadSummaryUrl = 'http://localhost:1917/summaries/gogas';
 const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/gogas';
 // const emailSummaryUrl = 'http://localhost:1917/summaries/email/gogas';
+const urlContactForm = 'http://localhost:1917/contact/';
+// const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -883,4 +885,68 @@ function downloadFile(blob, fileName) {
 
   // in case the Blob uses a lot of memory
   setTimeout(() => URL.revokeObjectURL(link.href), 7000);
+}
+
+/* CONTACT FORM */
+document.querySelector('#contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const validationResult = validateContactForm();
+  if (!validationResult.valid) return handleInvalidContactForm(validationResult.msg);
+
+  sendContactEmail();
+});
+
+function validateContactForm() {
+  if (!userInfo.username) return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
+  if (!userInfo.address) return { valid: false, msg: 'Απαιτείται διεύθυνση' };
+  if (!isEmail(userInfo.email)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
+  if (isNaN(userInfo.phone) || userInfo.phone.length != 10)
+    return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
+  if (!document.querySelector('#contactMsg').value)
+    return { valid: false, msg: 'Παρακαλούμε γράψτε πρώτα το μήνυμα σας' };
+  if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
+  return { valid: true };
+}
+
+function handleInvalidContactForm(msg) {
+  const formErrorEl = document.querySelector('.contact-form-error');
+  formErrorEl.style.display = 'block';
+  formErrorEl.textContent = msg;
+  setTimeout(() => (formErrorEl.style.display = 'none'), 4000);
+}
+
+function sendContactEmail() {
+  const data = {
+    user: userInfo,
+    msg: document.querySelector('#contactMsg').value,
+    form: {
+      url: location.origin + location.pathname,
+      name: document.querySelector('#contactForm').dataset.name,
+      date: `${new Date().toLocaleDateString('el')}, ${new Date().toLocaleTimeString('el')}`
+    },
+    userSelections: hasResult() && userSelections
+  };
+
+  document.querySelector('#contactSubmit').value = 'Γίνεται η αποστολή...';
+  fetch(urlContactForm, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ data })
+  })
+    .then(res => res.json())
+    .then(data => {
+      document.querySelector('.contact-form-success').style.display = 'block';
+      document.querySelector('#contactSubmit').value = 'Αποστολή';
+      document.querySelector('#contactMsg').value = '';
+      setTimeout(() => {
+        document.querySelector('.contact-form-success').style.display = 'none';
+      }, 6000);
+    })
+    .catch(e => {
+      console.error('Error on contact form email:', e);
+      handleInvalidContactForm('Υπήρξε πρόβλημα κατά την αποστολή, προσπαθήστε αργότερα');
+      document.querySelector('#contactSubmit').value = 'Αποστολή';
+    });
 }
