@@ -3077,7 +3077,7 @@ function sendContactEmail() {
       name: document.querySelector('#contactForm').dataset.name,
       date: `${new Date().toLocaleDateString('el')}, ${new Date().toLocaleTimeString('el')}`
     },
-    userSelections
+    userSelections: hasResult() && userSelections
   };
 
   document.querySelector('#contactSubmit').value = 'Γίνεται η αποστολή...';
