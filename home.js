@@ -1846,9 +1846,15 @@ function configureCalculatorAfterSuggestion() {
   outputs[1].value = sliders[1].value;
   calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
-  document.querySelector('.in-consumption').textContent = foundVehicleObj.consumption[0];
-  document.querySelector('.out-consumption').textContent = foundVehicleObj.consumption[1];
-  document.querySelector('.combined-consumption').textContent = foundVehicleObj.consumption[2];
+  [...document.querySelectorAll('.in-consumption')].map(
+    el => (el.textContent = foundVehicleObj.consumption[0])
+  );
+  [...document.querySelectorAll('.out-consumption')].map(
+    el => (el.textContent = foundVehicleObj.consumption[1])
+  );
+  [...document.querySelectorAll('.combined-consumption')].map(
+    el => (el.textContent = foundVehicleObj.consumption[2])
+  );
 
   document.querySelector(
     '#consumptionModelNameCalc'
