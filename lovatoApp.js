@@ -86,7 +86,7 @@ document.querySelector('#contactForm').addEventListener('submit', e => {
 function validateContactForm() {
   if (!userInfo.username) return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
   if (!isEmail(userInfo.email)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
-  if (!document.querySelector('#numberPlates'))
+  if (!document.querySelector('#numberPlates').value)
     return {
       valid: false,
       msg: 'Απαιτείται αριθμός κυκλοφορίας του οχήματος στο οποίο θέλετε να συνδεθείτε'
