@@ -363,7 +363,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initUserInfo();
   initBasket();
   // initCss();
+
+  showFacebookBrowserProblem(isFacebookBrowser());
 });
+
+function showFacebookBrowserProblem(show) {
+  if (isFacebookBrowser()) {
+    document.querySelector('.facebook-browser-div').style.display = show ? 'block' : 'none';
+  }
+}
 
 function initCalcOptions() {
   document.querySelector('#consumptionModelNameCalc').textContent = 'αυτοκίνητό σας';
@@ -2534,17 +2542,24 @@ function getUserInfo() {
   return null;
 }
 
+function isFacebookBrowser() {
+  let ua = navigator.userAgent || navigator.vendor || window.opera;
+  return ua.indexOf('FBAN') > -1 || ua.indexOf('FBAV') > -1;
+}
+
 /* SUMMARY DOWNLOAD */
 document.querySelector('.open-download-form').addEventListener('click', e => {
   console.log('clicked download');
   formType = 'DOWNLOAD';
+  showFacebookBrowserProblem(true);
   document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
 });
 document.querySelector('.open-email-form').addEventListener('click', e => {
   console.log('clicked email');
   formType = 'EMAIL';
+  showFacebookBrowserProblem(false);
   document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
-}); //
+});
 
 document
   .querySelector('#submitSummaryBtn')
@@ -3111,12 +3126,12 @@ function sendContactEmail() {
 }
 
 /* gps # only on mobile */
-
-document.querySelector('.gps-btn-after-img').addEventListener('click', function () {
-  if (isMobile()) {
-    document.querySelector('#storesGPS').scrollIntoView({ behavior: 'smooth' });
-  }
-});
+document
+  .querySelector('.gps-btn-after-img')
+  .addEventListener(
+    'click',
+    () => isMobile() && document.querySelector('#storesGPS').scrollIntoView({ behavior: 'smooth' })
+  );
 
 function isMobile() {
   return window.matchMedia('screen and (max-width: 768px)').matches;
