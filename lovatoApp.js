@@ -155,3 +155,7 @@ function sendContactEmail() {
       document.querySelector('#contactSubmit').value = 'Αποστολή';
     });
 }
+
+document.querySelector('#numberPlates').addEventListener('input', function () {
+  this.value = this.value.toUpperCase();
+});
