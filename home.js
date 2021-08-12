@@ -3109,3 +3109,15 @@ function sendContactEmail() {
       document.querySelector('#contactSubmit').value = 'Αποστολή';
     });
 }
+
+/* gps # only on mobile */
+
+document.querySelector('.gps-btn-after-img').addEventListener('click', function () {
+  if (isMobile()) {
+    document.querySelector('#storesGPS').scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+function isMobile() {
+  return window.matchMedia('screen and (max-width: 768px)').matches;
+}
