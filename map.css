@@ -555,6 +555,9 @@ hr {
     margin-left: 0.2rem;
     margin-right: 0.2rem;
   }
+  .info-image img {
+    height: 150px;
+  }
   .info-name-container {
     height: 65px;
   }
