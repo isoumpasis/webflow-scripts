@@ -387,6 +387,8 @@ hr {
   font-weight: 700;
   width: 20px;
   height: 20px;
+  min-width: 20px;
+  min-height: 20px;
   margin-right: 1.2rem;
 }
 
@@ -426,6 +428,8 @@ hr {
 .google-directions-container svg {
   width: 20px;
   height: 20px;
+  min-width: 20px;
+  min-height: 20px;
   padding-right: 3px;
   cursor: pointer;
 }
