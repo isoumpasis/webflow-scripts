@@ -345,6 +345,10 @@ svg {
   max-width: 60%;
   overflow-wrap: normal;
 }
+.info-email-value,
+.info-website-value {
+  overflow-wrap: anywhere;
+}
 
 a {
   text-decoration: none;
