@@ -551,6 +551,10 @@ hr {
 /* END OF CLUSTER */
 
 @media screen and (max-width: 430px) {
+  .info-body-container {
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+  }
   .info-name-container {
     height: 65px;
   }
