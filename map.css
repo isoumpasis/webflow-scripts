@@ -543,3 +543,9 @@ hr {
   color: #f5f5f5;
 }
 /* END OF CLUSTER */
+
+@media screen and (max-width: 400px) {
+  .info-name-value-container {
+    margin: 0 auto;
+  }
+}
