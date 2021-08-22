@@ -371,6 +371,12 @@ function showFacebookBrowserProblem(show) {
   if (isFacebookBrowser()) {
     document.querySelector('.facebook-browser-div').style.display = show ? 'block' : 'none';
   }
+  console.log(
+    'show facebook browser problem. show: ' +
+      show +
+      '  facebook-browser-div: ' +
+      document.querySelector('.facebook-browser-div').style.display
+  );
 }
 
 function initCalcOptions() {
@@ -2549,13 +2555,11 @@ function isFacebookBrowser() {
 
 /* SUMMARY DOWNLOAD */
 document.querySelector('.open-download-form').addEventListener('click', e => {
-  console.log('clicked download');
   formType = 'DOWNLOAD';
   showFacebookBrowserProblem(true);
   document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
 });
 document.querySelector('.open-email-form').addEventListener('click', e => {
-  console.log('clicked email');
   formType = 'EMAIL';
   showFacebookBrowserProblem(false);
   document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
