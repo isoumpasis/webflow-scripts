@@ -335,6 +335,8 @@ svg {
 .info-information svg {
   width: 15px;
   height: 15px;
+  min-width: 15px;
+  min-height: 15px;
   margin-right: 1.5rem;
   margin-top: 3px;
 }
@@ -544,7 +546,10 @@ hr {
 }
 /* END OF CLUSTER */
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 430px) {
+  .info-name-container {
+    height: 65px;
+  }
   .info-name-value-container {
     margin: 0 auto;
   }
