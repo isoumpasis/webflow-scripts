@@ -697,8 +697,8 @@ function prepareInformation(markerProps) {
     infoWindowDiv.querySelector('.info-body-container').style.marginTop = '1rem';
     let lovatoIconHeader = infoWindowDiv.querySelector('.lovato-icon-header');
     lovatoIconHeader.style.bottom = '-25%';
-    lovatoIconHeader.style.width = '5rem';
-    lovatoIconHeader.style.height = '5rem';
+    lovatoIconHeader.style.width = window.matchMedia('(max-width: 430px)') ? '2rem' : '5rem';
+    lovatoIconHeader.style.height = window.matchMedia('(max-width: 430px)') ? '2rem' : '5rem';
     infoWindowDiv.querySelector('.svg-lovato-icon-header').style.marginLeft = '1px';
     infoWindowDiv.querySelector('.photos-container').style.width = '500px';
   }
