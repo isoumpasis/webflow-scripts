@@ -348,7 +348,7 @@ let creditInterest = 7.2;
 
 document.addEventListener('DOMContentLoaded', () => {
   if (preferredStorage.userSelections) userSelections = getUserSelections();
-  // userSelections.summary = false;
+  userSelections.selectedFuel = 'lpg';
 
   initSelects();
   initFuelPrices();
