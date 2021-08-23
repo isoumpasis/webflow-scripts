@@ -39,7 +39,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   // console.log(cachedPins);
   await initMap();
   await urlParamsConfig();
-  setTimeout(() => endLoader(), 2000);
+  // setTimeout(() => endLoader(), 2000);
+  endLoader();
 });
 
 async function getCachedPins() {
