@@ -524,13 +524,20 @@ hr {
   background: rgb(233 243 255 / 40%);
 
   width: 100%;
-  height: 1000px;
+  height: 100%;
 
   display: flex;
   align-items: center;
   justify-content: center;
 }
-@keyframes lds-roller {
+
+.loading-stores-logo {
+  width: 10%;
+  position: absolute;
+  animation: loadingStoresLogoAnim 500ms ease-in-out infinite;
+}
+
+@keyframes loadingStoresLogoAnim {
   0% {
     transform: rotate(0deg);
   }
