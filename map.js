@@ -984,7 +984,7 @@ function initDOMEvents() {
         console.log('res', res);
         autocompleteInput.value = res.address;
         searchPosition = res.location;
-        closeMapMenu();
+        window.matchMedia('(max-width: 950px)').matches && closeMapMenu();
       } catch (e) {
         console.log(e);
         return;
@@ -1048,7 +1048,7 @@ function initDOMEvents() {
         console.log(`Accuracy ${currentLatLng[2]} meters.`);
         map.setZoom(searchZoom);
         map.setCenter(userMarker.position);
-        closeMapMenu();
+        window.matchMedia('(max-width: 950px)').matches && closeMapMenu();
       } catch (e) {
         alert(
           'Για να χρησιμοποιήσετε την υπηρεσία της εύρεσης των κοντινότερων συνεργείων, χρειάζεται να επιτρέψετε την εύρεση τοποθεσίας για το παρών site από τις ρυθμίσεις του περιηγητή σας και να ξαναπροσπαθήσετε! Για το Google Chrome πηγαίνετε στο: chrome://settings/content/location'
