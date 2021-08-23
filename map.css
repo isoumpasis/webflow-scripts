@@ -532,17 +532,23 @@ hr {
 }
 
 .loading-stores-logo {
-  width: 10%;
   position: absolute;
-  animation: loadingStoresLogoAnim 500ms ease-in-out infinite;
+  width: 10%;
+  opacity: 0.85;
+  animation: loadingStoresLogoAnim 700ms ease-in-out infinite;
 }
 
 @keyframes loadingStoresLogoAnim {
   0% {
     transform: rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
   }
   100% {
     transform: rotate(360deg);
+    opacity: 1;
   }
 }
 
