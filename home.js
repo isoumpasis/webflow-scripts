@@ -1580,7 +1580,6 @@ function showResults(fetchedModelObj) {
       `not-convertible-${userSelections.selectedFuel}-container`
     )
   ) {
-    console.log('afjlfjalkfj');
     displayEmulatorInfo(suggestedContainer);
 
     configureCalculatorAfterSuggestion();
@@ -2029,11 +2028,13 @@ function getCylinderDescrText() {
 function configureEasyPayAfterSuggestion() {
   configureModelEasyPay();
   configureSystemsEasyPay();
+  console.log('ok');
   configureNoCreditSliders();
   configureCreditSliders();
   configureNoCreditResults();
   configureCreditResults();
   configureMetrhtaResults();
+  console.log('ok1');
 }
 
 function configureModelEasyPay() {
