@@ -696,7 +696,7 @@ function prepareInformation(markerProps) {
     infoNameContainer.style.borderTopRightRadius = '5px';
     infoWindowDiv.querySelector('.info-body-container').style.marginTop = '1rem';
     let lovatoIconHeader = infoWindowDiv.querySelector('.lovato-icon-header');
-    lovatoIconHeader.style.bottom = '-25%';
+    // lovatoIconHeader.style.bottom = '-25%';
     // lovatoIconHeader.style.width = window.matchMedia('(max-width: 430px)').matches
     //   ? '2rem'
     //   : '5rem';
