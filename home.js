@@ -2360,7 +2360,7 @@ function updateBasketSection(sections) {
       userSelections.vehicle.suggestions.systems[systemIndex].priceNoVAT;
   }
 
-  if (sections.prokatavoliDoseis) {
+  if (hasResult() && sections.prokatavoliDoseis) {
     if (userSelections.easyPay.method === 'Χωρίς πιστωτική κάρτα') {
       document.querySelector('.easy-pay-prokatavoli-basket').textContent =
         userSelections.easyPay.noCreditSettings.prokatavoli + '€';
