@@ -1048,6 +1048,7 @@ function initDOMEvents() {
         console.log(`Accuracy ${currentLatLng[2]} meters.`);
         map.setZoom(searchZoom);
         map.setCenter(userMarker.position);
+        closeMapMenu();
       } catch (e) {
         alert(
           'Για να χρησιμοποιήσετε την υπηρεσία της εύρεσης των κοντινότερων συνεργείων, χρειάζεται να επιτρέψετε την εύρεση τοποθεσίας για το παρών site από τις ρυθμίσεις του περιηγητή σας και να ξαναπροσπαθήσετε! Για το Google Chrome πηγαίνετε στο: chrome://settings/content/location'
@@ -1260,6 +1261,7 @@ async function urlParamsConfig() {
 }
 
 function closeMapMenu() {
-  document.querySelector('.store-finder').style.height = '60px';
-  document.querySelector('.div-block-299').style.transform = 'rotateX(0deg)';
+  // document.querySelector('.store-finder').style.height = '60px';
+  // document.querySelector('.div-block-299').style.transform = 'rotateX(0deg)';
+  document.querySelector('.div-block-299').click();
 }
