@@ -555,6 +555,11 @@ hr {
 /* END OF CLUSTER */
 
 @media screen and (max-width: 430px) {
+  .gm-style-iw {
+    width: 90vw;
+    min-width: 90vw;
+    max-width: 90vw;
+  }
   .info-body-container {
     margin-left: 0.2rem;
     margin-right: 0.2rem;
