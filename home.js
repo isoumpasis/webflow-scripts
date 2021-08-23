@@ -2252,7 +2252,6 @@ function getActiveContainer() {
 
 /* Basket */
 function updateBasketSection(sections) {
-  if (!hasResult()) return;
   if (sections.selectedFuel) {
     if (userSelections.selectedFuel === 'lpg') {
       document.querySelector('.lpg-btn-basket').style.display = 'block';
@@ -2263,6 +2262,7 @@ function updateBasketSection(sections) {
     }
   }
 
+  if (!hasResult()) return;
   if (sections.vehicle) {
     notificationIconBasket.style.display = 'flex';
     document.querySelector('#makeImgBasket').src = document.querySelector('#makeImg').src;
