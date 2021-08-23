@@ -1599,6 +1599,7 @@ function showResults(fetchedModelObj) {
       `not-convertible-${userSelections.selectedFuel}-container`
     )
   ) {
+    console.log('akfjajfl');
     updateBasketSection({
       vehicle: true,
       calculator: true,
