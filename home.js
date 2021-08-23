@@ -2262,7 +2262,7 @@ function updateBasketSection(sections) {
     }
   }
 
-  if (!hasResult()) return;
+  // if (!hasResult()) return;
   if (sections.vehicle) {
     notificationIconBasket.style.display = 'flex';
     document.querySelector('#makeImgBasket').src = document.querySelector('#makeImg').src;
