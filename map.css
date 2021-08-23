@@ -531,11 +531,19 @@ hr {
   justify-content: center;
 }
 
+.small-loading-circle {
+  position: absolute;
+  width: 20%;
+  opacity: 0.4;
+}
+.big-loading-circle {
+  position: absolute;
+  width: 30%;
+}
 .loading-stores-logo {
   position: absolute;
-  width: 10%;
-  opacity: 0.85;
-  animation: loadingStoresLogoAnim 700ms ease-in-out infinite;
+  width: 5%;
+  animation: loadingStoresLogoAnim 1.2s cubic-bezier(0.74, -0.01, 0, 1.24) infinite;
 }
 
 @keyframes loadingStoresLogoAnim {
@@ -544,7 +552,7 @@ hr {
     opacity: 1;
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.8;
   }
   100% {
     transform: rotate(360deg);
