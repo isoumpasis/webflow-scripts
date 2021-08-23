@@ -1580,6 +1580,7 @@ function showResults(fetchedModelObj) {
       `not-convertible-${userSelections.selectedFuel}-container`
     )
   ) {
+    console.log('afjlfjalkfj');
     displayEmulatorInfo(suggestedContainer);
 
     configureCalculatorAfterSuggestion();
