@@ -280,6 +280,7 @@ img {
 }
 
 .lovato-icon-header {
+  align-self: flex-end;
   position: relative;
   right: 5%;
   bottom: -20px;
