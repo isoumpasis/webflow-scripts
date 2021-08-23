@@ -272,6 +272,7 @@ img {
   align-items: center;
   background: linear-gradient(to right, #00a1d8 0%, #00679c 55%);
   /* height: 55px; */
+  min-height: 40px;
   position: relative;
   left: 0;
   right: 0;
