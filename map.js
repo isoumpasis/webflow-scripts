@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   cachedPins = await getCachedPins();
   // console.log(cachedPins);
   await initMap();
-  endLoader();
   await urlParamsConfig();
+  setTimeout(() => endLoader(), 2000);
 });
 
 async function getCachedPins() {
