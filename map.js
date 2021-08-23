@@ -359,10 +359,9 @@ async function initMap() {
   infoWindow = new google.maps.InfoWindow({
     disableAutoPan: false,
     maxWidth: 500,
-    minWidth: 300,
+    minWidth: 290,
     zIndex: 1001
   });
-  // if (window.matchMedia('(max-width: 430px)').matches) infoWindow.setOptions({ minWidth: 300 });
 
   userMarker = new google.maps.Marker();
   selectedMarker = new google.maps.Marker();
@@ -977,7 +976,6 @@ function initDOMEvents() {
   autoComplete.addListener('place_changed', async () => {
     let searchPosition;
     const place = autoComplete.getPlace();
-    console.log(place);
 
     if (Object.keys(place).length === 1) {
       console.log('handling with geocoder for unknown or enter');
@@ -986,6 +984,7 @@ function initDOMEvents() {
         console.log('res', res);
         autocompleteInput.value = res.address;
         searchPosition = res.location;
+        closeMapMenu();
       } catch (e) {
         console.log(e);
         return;
@@ -1258,4 +1257,9 @@ async function urlParamsConfig() {
   //   selectedMarker.setAnimation(google.maps.Animation.BOUNCE);
   //   openInfoWindow(foundMarker);
   // }
+}
+
+function closeMapMenu() {
+  document.querySelector('.store-finder').style.height = '60px';
+  document.querySelector('.div-block-299').style.transform = 'rotateX(0deg)';
 }
