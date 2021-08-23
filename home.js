@@ -2153,8 +2153,10 @@ function configureNoCreditMaxDoseisSlider() {
   if (maxDoseis > 36) maxDoseis = 36;
   doseisNoCreditSlider.max = maxDoseis;
   maxDoseisNoCreditSliderText.textContent = maxDoseis + ' μήνες';
-  if (parseInt(doseisNoCreditSlider.value) >= maxDoseis) doseisNoCreditSliderOnChange(maxDoseis);
-  else doseisNoCreditSliderOnChange(doseisNoCreditSlider.value);
+  if (hasResult()) {
+    if (parseInt(doseisNoCreditSlider.value) >= maxDoseis) doseisNoCreditSliderOnChange(maxDoseis);
+    else doseisNoCreditSliderOnChange(doseisNoCreditSlider.value);
+  }
 }
 
 function configureNoCreditResults() {
