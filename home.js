@@ -1585,6 +1585,7 @@ function showResults(fetchedModelObj) {
     configureCalculatorAfterSuggestion();
     configureEasyPayAfterSuggestion();
     configureLastStepAfterSuggestion();
+    console.log('ok2');
   } else {
     resetCalc();
     resetEasyPay();
