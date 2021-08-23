@@ -511,7 +511,6 @@ async function initMap() {
   });
 
   userMarker.addListener('click', () => {
-    console.log('userMarker clicked');
     map.setZoom(searchZoom);
     map.setCenter(userMarker.position);
   });
@@ -981,7 +980,6 @@ function initDOMEvents() {
       console.log('handling with geocoder for unknown or enter');
       try {
         const res = await geocoderSolution(autocompleteInput.value);
-        console.log('res', res);
         autocompleteInput.value = res.address;
         searchPosition = res.location;
         window.matchMedia('(max-width: 950px)').matches && closeMapMenu();
@@ -1081,8 +1079,8 @@ async function geocoderSolution(address) {
         if (status === 'OK') {
           temp = results;
           console.log(results);
-          console.log('geocoding for', address);
-          console.log('geocoder address result', results[0].formatted_address);
+          // console.log('geocoding for', address);
+          // console.log('geocoder address result', results[0].formatted_address);
           resolve({
             location: results[0].geometry.location,
             address: results[0].formatted_address
@@ -1151,13 +1149,14 @@ function filterMarkers() {
 
   markerClusterer.repaint();
 
-  counter = 0;
-  markers.forEach(marker => {
-    if (marker.getVisible()) {
-      counter++;
-    }
-  });
-  console.log({ counter });
+  // counter = 0;
+  // markers.forEach(marker => {
+  //   if (marker.getVisible()) {
+  //     counter++;
+  //   }
+  // });
+  // console.log({ counter });
+
   infoWindow.close();
   if (selectedMarker) selectedMarker.setAnimation(null);
   selectedMarker = null;
@@ -1180,7 +1179,7 @@ async function urlParamsConfig() {
     const searchInput = document.querySelector('#searchInput');
     try {
       const res = await geocoderSolution(gps);
-      console.log('gps = ', gps, 'geocoder = ', res);
+      // console.log('gps = ', gps, 'geocoder = ', res);
 
       // searchInput.value = res.address;
       // userMarker.setOptions({
