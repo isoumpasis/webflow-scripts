@@ -1608,6 +1608,7 @@ function showResults(fetchedModelObj) {
       easyPayMonthlyGain: true
     });
   }
+  console.log('ok3');
 }
 
 function configureLastStepAfterSuggestion() {
