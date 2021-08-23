@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // console.log(cachedPins);
   await initMap();
   await urlParamsConfig();
-  setTimeout(() => endLoader(), 400);
+  setTimeout(() => endLoader(), 300);
   // endLoader();
 });
 
