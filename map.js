@@ -361,6 +361,7 @@ async function initMap() {
     maxWidth: 500,
     zIndex: 1001
   });
+  if (window.matchMedia('(max-width: 430px)').matches) infoWindow.setOptions({ minWidth: 300 });
 
   userMarker = new google.maps.Marker();
   selectedMarker = new google.maps.Marker();
