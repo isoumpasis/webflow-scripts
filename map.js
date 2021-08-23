@@ -359,9 +359,10 @@ async function initMap() {
   infoWindow = new google.maps.InfoWindow({
     disableAutoPan: false,
     maxWidth: 500,
+    minWidth: 300,
     zIndex: 1001
   });
-  if (window.matchMedia('(max-width: 430px)').matches) infoWindow.setOptions({ minWidth: 300 });
+  // if (window.matchMedia('(max-width: 430px)').matches) infoWindow.setOptions({ minWidth: 300 });
 
   userMarker = new google.maps.Marker();
   selectedMarker = new google.maps.Marker();
