@@ -933,8 +933,8 @@ function generateInitHtml() {
   //Generate Loader Html
   const loaderEl = document.createElement('div');
   loaderEl.className = 'lds-roller hide-roller';
-  // loaderEl.innerHTML = `<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>`;
-  loaderEl.innerHTML = `<img src='https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6066396962c725d882040aba_Ripple-2s-800px.svg' alt='loading...'/>`;
+  loaderEl.innerHTML = `<img src='https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6066396962c725d882040aba_Ripple-2s-800px.svg' alt='loading stores'/>
+  <img src="https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60da84940a1f6e5438b279a9_location-icon-menu-01-01.svg" alt="loading stores logo" class="loading-stores-logo">`;
 
   document.querySelector('#map').parentElement.prepend(loaderEl);
 }
