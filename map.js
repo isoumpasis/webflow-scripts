@@ -989,7 +989,10 @@ function initDOMEvents() {
         console.log(e);
         return;
       }
-    } else searchPosition = place.geometry.location;
+    } else {
+      searchPosition = place.geometry.location;
+      window.matchMedia('(max-width: 950px)').matches && closeMapMenu();
+    }
 
     userMarker.setOptions({
       map,
