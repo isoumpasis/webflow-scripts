@@ -689,23 +689,23 @@ function prepareInformation(markerProps) {
     });
 
   //styles when there is no img
-  if (!markerProps.imgs.length) {
-    let infoNameContainer = infoWindowDiv.querySelector('.info-name-container');
-    infoNameContainer.style.position = 'static';
-    infoNameContainer.style.borderTopLeftRadius = '5px';
-    infoNameContainer.style.borderTopRightRadius = '5px';
-    infoWindowDiv.querySelector('.info-body-container').style.marginTop = '1rem';
-    let lovatoIconHeader = infoWindowDiv.querySelector('.lovato-icon-header');
-    lovatoIconHeader.style.bottom = '-25%';
-    lovatoIconHeader.style.width = window.matchMedia('(max-width: 430px)').matches
-      ? '2rem'
-      : '5rem';
-    lovatoIconHeader.style.height = window.matchMedia('(max-width: 430px)').matches
-      ? '2rem'
-      : '5rem';
-    infoWindowDiv.querySelector('.svg-lovato-icon-header').style.marginLeft = '1px';
-    infoWindowDiv.querySelector('.photos-container').style.width = '500px';
-  }
+  // if (!markerProps.imgs.length) {
+  //   let infoNameContainer = infoWindowDiv.querySelector('.info-name-container');
+  //   infoNameContainer.style.position = 'static';
+  //   infoNameContainer.style.borderTopLeftRadius = '5px';
+  //   infoNameContainer.style.borderTopRightRadius = '5px';
+  //   infoWindowDiv.querySelector('.info-body-container').style.marginTop = '1rem';
+  //   let lovatoIconHeader = infoWindowDiv.querySelector('.lovato-icon-header');
+  //   lovatoIconHeader.style.bottom = '-25%';
+  //   lovatoIconHeader.style.width = window.matchMedia('(max-width: 430px)').matches
+  //     ? '2rem'
+  //     : '5rem';
+  //   lovatoIconHeader.style.height = window.matchMedia('(max-width: 430px)').matches
+  //     ? '2rem'
+  //     : '5rem';
+  //   infoWindowDiv.querySelector('.svg-lovato-icon-header').style.marginLeft = '1px';
+  //   infoWindowDiv.querySelector('.photos-container').style.width = '500px';
+  // }
 
   //Information
   const infoEmailEl = infoWindowDiv.querySelector('.info-email');
