@@ -542,7 +542,7 @@ hr {
 }
 .loading-stores-logo {
   position: absolute;
-  width: 10%;
+  width: 6%;
   animation: loadingStoresLogoAnim 1.2s cubic-bezier(0.74, -0.01, 0, 1.24) infinite;
 }
 
