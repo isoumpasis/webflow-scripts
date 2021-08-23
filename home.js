@@ -2153,10 +2153,8 @@ function configureNoCreditMaxDoseisSlider() {
   if (maxDoseis > 36) maxDoseis = 36;
   doseisNoCreditSlider.max = maxDoseis;
   maxDoseisNoCreditSliderText.textContent = maxDoseis + ' μήνες';
-  if (hasResult()) {
-    if (parseInt(doseisNoCreditSlider.value) >= maxDoseis) doseisNoCreditSliderOnChange(maxDoseis);
-    else doseisNoCreditSliderOnChange(doseisNoCreditSlider.value);
-  }
+  if (parseInt(doseisNoCreditSlider.value) >= maxDoseis) doseisNoCreditSliderOnChange(maxDoseis);
+  else doseisNoCreditSliderOnChange(doseisNoCreditSlider.value);
 }
 
 function configureNoCreditResults() {
@@ -2254,6 +2252,7 @@ function getActiveContainer() {
 
 /* Basket */
 function updateBasketSection(sections) {
+  if (!hasResult()) return;
   if (sections.selectedFuel) {
     if (userSelections.selectedFuel === 'lpg') {
       document.querySelector('.lpg-btn-basket').style.display = 'block';
