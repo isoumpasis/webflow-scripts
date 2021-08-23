@@ -759,7 +759,7 @@ function initEasyPayTabs() {
   document.querySelectorAll('.easy-pay-tab').forEach(el =>
     el.addEventListener('click', e => {
       userSelections.easyPay.method = getEasyPayMethod(e.target);
-      updateBasketSection({ easyPay: true, prokatavoliDoseis: true });
+      hasResult() && updateBasketSection({ easyPay: true, prokatavoliDoseis: true });
 
       if (document.querySelector('.easy-pay-with-vehicle-container').style.display === 'none') {
         if (e.target.classList.contains('no-credit-tab')) {
@@ -1599,7 +1599,6 @@ function showResults(fetchedModelObj) {
       `not-convertible-${userSelections.selectedFuel}-container`
     )
   ) {
-    console.log('akfjajfl');
     updateBasketSection({
       vehicle: true,
       calculator: true,
