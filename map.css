@@ -345,6 +345,10 @@ svg {
   margin-top: 3px;
 }
 
+.info-phone-value:focus {
+  outline: none;
+}
+
 .info-address-value {
   max-width: 60%;
   overflow-wrap: normal;
