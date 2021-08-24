@@ -1100,6 +1100,7 @@ makeSelect.addEventListener('change', function () {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  showGuarantee(false);
   resetCalc();
   resetEasyPay();
   calcResult();
@@ -1214,6 +1215,7 @@ function yearOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  showGuarantee(false);
   resetCalc();
   resetEasyPay();
   calcResult();
@@ -1297,6 +1299,7 @@ function modelOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  showGuarantee(false);
   resetCalc();
   resetEasyPay();
   calcResult();
@@ -1447,6 +1450,7 @@ function descriptionOnChange(value) {
   suggestedContainers.forEach(cont => (cont.style.display = 'none'));
 
   if (!value) {
+    showGuarantee(false);
     resetCalc();
     resetEasyPay();
     calcResult();
