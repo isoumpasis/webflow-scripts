@@ -762,10 +762,7 @@ function initDOMEvents() {
       position: searchPosition,
       animation: google.maps.Animation.DROP,
       zIndex: google.maps.Marker.MAX_ZINDEX,
-
-      scaledSize: new google.maps.Size(50, 50),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(0, 0)
+      size: new google.maps.Size(20, 20)
     });
     map.setZoom(searchZoom);
     map.setCenter(userMarker.position);
