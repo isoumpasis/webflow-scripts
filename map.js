@@ -123,7 +123,11 @@ async function initMap() {
     zIndex: 1001
   });
 
-  userMarker = new google.maps.Marker();
+  userMarker = new google.maps.Marker({
+    scaledSize: new google.maps.Size(50, 50),
+    origin: new google.maps.Point(0, 0),
+    anchor: new google.maps.Point(0, 0)
+  });
   selectedMarker = new google.maps.Marker();
 
   markers = cachedPins.map(cachedPin => {
