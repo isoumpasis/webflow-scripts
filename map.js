@@ -12,7 +12,8 @@ const mapCenter = { lat: 38.64, lng: 24.16 };
 const startZoom = 6;
 const searchZoom = 14;
 const gpsZoom = 11,
-  foundMarkerZoom = 14;
+  gpsZoomMobile = 6;
+foundMarkerZoom = 14;
 const maxZoomClusterer = 10;
 let markers = [],
   markerClusterer;
@@ -947,7 +948,7 @@ async function urlParamsConfig() {
       //   animation: google.maps.Animation.DROP,
       //   zIndex: google.maps.Marker.MAX_ZINDEX
       // });
-      map.setZoom(gpsZoom);
+      map.setZoom(window.matchMedia('(max-width: 430px)').matches ? gpsZoomMobile : gpsZoomMobile);
       map.setCenter(res.location);
     } catch (e) {
       console.log('error on params geocoding', e);
