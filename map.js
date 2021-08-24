@@ -19,7 +19,7 @@ let markers = [],
   markerClusterer;
 
 const gridSizesDependedOnZoom = { 6: 40, 7: 35, 8: 30, 9: 25, 10: 30 };
-const gridSizesDependedOnZoomMobile = { 6: 40, 7: 35, 8: 30, 9: 25, 10: 10 };
+const gridSizesDependedOnZoomMobile = { 6: 40, 7: 35, 8: 30, 9: 25, 10: 15 };
 const zoomLevelsDependedOnZoom = { 6: 9, 7: 10, 8: 10, 9: 12, 10: 12 };
 
 let map,
