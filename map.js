@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await initMap();
   await urlParamsConfig();
   setTimeout(() => endLoader(), 250);
-  // endLoader();
+  document.querySelector('body').focus();
 });
 
 async function getCachedPins() {
