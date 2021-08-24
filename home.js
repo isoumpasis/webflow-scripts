@@ -1580,6 +1580,7 @@ function showResults(fetchedModelObj) {
       `not-convertible-${userSelections.selectedFuel}-container`
     )
   ) {
+    showGuarantee(true);
     displayEmulatorInfo(suggestedContainer);
 
     configureCalculatorAfterSuggestion();
@@ -1587,6 +1588,7 @@ function showResults(fetchedModelObj) {
     configureLastStepAfterSuggestion();
     console.log('ok2');
   } else {
+    showGuarantee(false);
     resetCalc();
     resetEasyPay();
     updateBasketSection({ resetNoVehicle: true });
@@ -1609,6 +1611,10 @@ function showResults(fetchedModelObj) {
     });
   }
   console.log('ok3');
+}
+
+function showGuarantee(show) {
+  document.querySelector('.3-year-guarantee').style.display = show ? 'flex' : 'none';
 }
 
 function configureLastStepAfterSuggestion() {
