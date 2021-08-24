@@ -1614,7 +1614,7 @@ function showResults(fetchedModelObj) {
 }
 
 function showGuarantee(show) {
-  document.querySelector('.3-year-guarantee').style.display = show ? 'flex' : 'none';
+  document.querySelector('.three-year-guarantee').style.display = show ? 'flex' : 'none';
 }
 
 function configureLastStepAfterSuggestion() {
