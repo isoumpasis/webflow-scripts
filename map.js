@@ -19,6 +19,7 @@ let markers = [],
   markerClusterer;
 
 const gridSizesDependedOnZoom = { 6: 40, 7: 35, 8: 30, 9: 25, 10: 30 };
+const gridSizesDependedOnZoomMobile = { 6: 40, 7: 35, 8: 30, 9: 25, 10: 35 };
 const zoomLevelsDependedOnZoom = { 6: 9, 7: 10, 8: 10, 9: 12, 10: 12 };
 
 let map,
@@ -161,7 +162,9 @@ async function initMap() {
     zoomOnClick: false,
     //minimumClusterSize: 3,
     maxZoom: maxZoomClusterer,
-    gridSize: gridSizesDependedOnZoom[startZoom], //default=60,
+    gridSize: isMobile()
+      ? gridSizesDependedOnZoomMobile[startZoom]
+      : gridSizesDependedOnZoom[startZoom], //default=60,
     ignoreHidden: true
   });
 
@@ -231,7 +234,9 @@ async function initMap() {
     let currentZoom = map.getZoom();
     //console.log('current zoom', currentZoom);
     if (currentZoom > maxZoomClusterer) return;
-    markerClusterer.setGridSize(gridSizesDependedOnZoom[currentZoom]);
+    markerClusterer.setGridSize(
+      isMobile() ? gridSizesDependedOnZoomMobile[currentZoom] : gridSizesDependedOnZoom[currentZoom]
+    );
   });
 
   google.maps.event.addListener(markerClusterer, 'clusterclick', cluster => {
@@ -449,20 +454,9 @@ function prepareInformation(markerProps) {
   //styles when there is no img
   if (!markerProps.imgs.length) {
     let infoNameContainer = infoWindowDiv.querySelector('.info-name-container');
-    // infoNameContainer.style.position = 'static';
     infoNameContainer.style.borderTopLeftRadius = '5px';
     infoNameContainer.style.borderTopRightRadius = '5px';
     infoWindowDiv.querySelector('.info-body-container').style.marginTop = '1rem';
-    let lovatoIconHeader = infoWindowDiv.querySelector('.lovato-icon-header');
-    // lovatoIconHeader.style.bottom = '-25%';
-    // lovatoIconHeader.style.width = window.matchMedia('(max-width: 430px)').matches
-    //   ? '2rem'
-    //   : '5rem';
-    // lovatoIconHeader.style.height = window.matchMedia('(max-width: 430px)').matches
-    //   ? '2rem'
-    //   : '5rem';
-    // infoWindowDiv.querySelector('.svg-lovato-icon-header').style.marginLeft = '1px';
-    // infoWindowDiv.querySelector('.photos-container').style.width = '500px';
   }
 
   //Information
@@ -948,7 +942,7 @@ async function urlParamsConfig() {
       //   animation: google.maps.Animation.DROP,
       //   zIndex: google.maps.Marker.MAX_ZINDEX
       // });
-      map.setZoom(window.matchMedia('(max-width: 430px)').matches ? gpsZoomMobile : gpsZoom);
+      map.setZoom(isMobile() ? gpsZoomMobile : gpsZoom);
       map.setCenter(res.location);
     } catch (e) {
       console.log('error on params geocoding', e);
@@ -1025,4 +1019,8 @@ function closeMapMenu() {
   // document.querySelector('.store-finder').style.height = '60px';
   // document.querySelector('.div-block-299').style.transform = 'rotateX(0deg)';
   document.querySelector('.div-block-299').click();
+}
+
+function isMobile() {
+  return window.matchMedia('(max-width: 430px)').matches;
 }
