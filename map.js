@@ -124,11 +124,6 @@ async function initMap() {
   });
 
   userMarker = new google.maps.Marker();
-  userMarker.setOptions({
-    scaledSize: new google.maps.Size(50, 50),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(0, 0)
-  });
   selectedMarker = new google.maps.Marker();
 
   markers = cachedPins.map(cachedPin => {
@@ -761,8 +756,7 @@ function initDOMEvents() {
       title: autocompleteInput.value,
       position: searchPosition,
       animation: google.maps.Animation.DROP,
-      zIndex: google.maps.Marker.MAX_ZINDEX,
-      size: new google.maps.Size(20, 20)
+      zIndex: google.maps.Marker.MAX_ZINDEX
     });
     map.setZoom(searchZoom);
     map.setCenter(userMarker.position);
