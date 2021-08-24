@@ -837,7 +837,7 @@ async function geocoderSolution(address) {
       (results, status) => {
         if (status === 'OK') {
           temp = results;
-          console.log(results);
+          // console.log(results);
           // console.log('geocoding for', address);
           // console.log('geocoder address result', results[0].formatted_address);
           resolve({
@@ -948,7 +948,7 @@ async function urlParamsConfig() {
       //   animation: google.maps.Animation.DROP,
       //   zIndex: google.maps.Marker.MAX_ZINDEX
       // });
-      map.setZoom(window.matchMedia('(max-width: 430px)').matches ? gpsZoomMobile : gpsZoomMobile);
+      map.setZoom(window.matchMedia('(max-width: 430px)').matches ? gpsZoomMobile : gpsZoom);
       map.setCenter(res.location);
     } catch (e) {
       console.log('error on params geocoding', e);
