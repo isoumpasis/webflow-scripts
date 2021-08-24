@@ -2626,6 +2626,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
   delete dataToSend.fuelPrices;
+  delete dataToSend.vehicle.identification.fetchedData;
 
   startLoadingSelect(e.target, triggeredFrom, 'download');
   fetch(downloadSummaryUrl, {
@@ -2672,6 +2673,7 @@ function emailSummarySubmit(e, triggeredFrom) {
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
   delete dataToSend.fuelPrices;
+  delete dataToSend.vehicle.identification.fetchedData;
 
   startLoadingSelect(e.target, triggeredFrom, 'email');
   fetch(emailSummaryUrl, {
