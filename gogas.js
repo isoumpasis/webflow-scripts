@@ -997,10 +997,10 @@ function calculateTime(remainingMilliseconds) {
 }
 
 function populateCountdown(days, hours, minutes, seconds) {
-  daysCountdown.textContent = days.length === 1 ? '0' + days : days;
-  hoursCountdown.textContent = hours.length === 1 ? '0' + hours : hours;
-  minutesCountdown.textContent = minutes.length === 1 ? '0' + minutes : minutes;
-  secondsCountdown.textContent = seconds.length === 1 ? '0' + seconds : seconds;
+  daysCountdown.textContent = days.toString().length === 1 ? '0' + days : days;
+  hoursCountdown.textContent = hours.toString().length === 1 ? '0' + hours : hours;
+  minutesCountdown.textContent = minutes.toString().length === 1 ? '0' + minutes : minutes;
+  secondsCountdown.textContent = seconds.toString().length === 1 ? '0' + seconds : seconds;
 }
 
 function getNextLotteryDate(date) {
