@@ -996,7 +996,7 @@ function calculateTime(remainingMilliseconds) {
   populateCountdown(days, hours, minutes, seconds);
 }
 
-function populateCountdown(countdays, hours, minutes, seconds) {
+function populateCountdown(days, hours, minutes, seconds) {
   daysCountdown.textContent = days;
   hoursCountdown.textContent = hours;
   minutesCountdown.textContent = minutes;
