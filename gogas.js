@@ -955,6 +955,8 @@ function sendContactEmail() {
     });
 }
 
+// const seedDate = new Date(2021, 8, 10);
+const seedDate = new Date(2021, 7, 28, 43);
 const _second = 1000;
 const _minute = _second * 60;
 const _hour = _minute * 60;
@@ -965,7 +967,7 @@ const minutesCountdown = document.querySelector('#minutes');
 const secondsCountdown = document.querySelector('#seconds');
 
 function initLotteryCountdown() {
-  let baseDate = new Date(2021, 7, 31, 0, 23);
+  let baseDate = setBaseDate(seedDate);
   let nextLotteryDate = baseDate;
   let remainingMilliseconds = nextLotteryDate - new Date();
   calculateTime(remainingMilliseconds);
@@ -1002,4 +1004,16 @@ function getNextLotteryDate(date) {
   // const minutes = 60*24*10;
   const minutes = 1;
   return new Date(date.getTime() + minutes * 60000);
+}
+
+function setBaseDate(seedDate) {
+  const baseDate = seedDate;
+  const day =
+    baseDate.getDate().toString().length === 1 ? '0' + baseDate.getDate() : baseDate.getDate();
+  const month =
+    (baseDate.getMonth() + 1).toString().length === 1
+      ? '0' + baseDate.getMonth() + 1
+      : baseDate.getMonth() + 1;
+  const year = baseDate.getFullYear().toString().substring(2, baseDate.getFullYear().length);
+  document.querySelector('.base-date').textContent = `${day}/${month}/${year}`;
 }
