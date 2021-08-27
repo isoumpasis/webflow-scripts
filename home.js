@@ -1,5 +1,5 @@
 /* System Identification */
-const baseUrl = 'https://lovato-hellas.webflow.io'; //TODO change
+const baseUrl = location.origin; //'https://lovato-hellas.webflow.io'; //TODO change
 const mapUrl = '/stores';
 const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';

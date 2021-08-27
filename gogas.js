@@ -1,10 +1,10 @@
 /* System Identification */
-const baseUrl = 'https://lovato-hellas.webflow.io';
+const baseUrl = location.origin; // 'https://lovato-hellas.webflow.io';
 const mapUrl = '/stores';
-const mapBaseUrl = baseUrl + mapUrl;
-const serverBaseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
 const urlLitres = '/litres'; //
 const urlDimensions = '/dimensions';
+const mapBaseUrl = baseUrl + mapUrl;
+const serverBaseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 const downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/gogas';
