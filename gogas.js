@@ -1016,4 +1016,5 @@ function setBaseDate(seedDate) {
       : baseDate.getMonth() + 1;
   const year = baseDate.getFullYear().toString().substring(2, baseDate.getFullYear().length);
   document.querySelector('.base-date').textContent = `${day}/${month}/${year}`;
+  console.log('setting base date', baseDate.toLocaleDateString());
 }
