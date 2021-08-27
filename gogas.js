@@ -956,7 +956,7 @@ function sendContactEmail() {
 }
 
 // const seedDate = new Date(2021, 8, 10);
-const seedDate = new Date(2021, 7, 28, 43);
+const seedDate = new Date('8/29/21');
 const _second = 1000;
 const _minute = _second * 60;
 const _hour = _minute * 60;
