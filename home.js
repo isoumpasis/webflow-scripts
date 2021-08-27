@@ -12,7 +12,7 @@ const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/syst
 const mapBaseUrl = baseUrl + mapUrl;
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
-// const urlContactForm = 'http://localhost:1917/contact/';
+// const urlContactForm = 'http://localhost:1917/contact/'; //
 const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
 
 let fetchedYears;
