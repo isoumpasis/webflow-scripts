@@ -972,5 +972,5 @@ function initLotteryCountdown() {
 }
 
 function calculateTime(days, hours, minutes, seconds) {
-  console.log({ milliseconds }, { seconds }, { minutes }, { hours }, { days });
+  console.log({ seconds }, { minutes }, { hours }, { days });
 }
