@@ -955,21 +955,29 @@ function sendContactEmail() {
     });
 }
 
-function initLotteryCountdown() {
-  const nextLotteryDate = new Date(2021, 7, 28);
-  const remainingMilliseconds = nextLotteryDate - new Date();
-  calculateTime(remainingMilliseconds);
-  setInterval(() => {
-    const nextLotteryDate = new Date(2021, 7, 28);
-    const remainingMilliseconds = nextLotteryDate - new Date();
-    calculateTime(remainingMilliseconds);
-  }, 10000);
-}
-
 const _second = 1000;
 const _minute = _second * 60;
 const _hour = _minute * 60;
 const _day = _hour * 24;
+const daysCounter = document.querySelector('#days');
+const hoursCounter = document.querySelector('#hours');
+const minutesCounter = document.querySelector('#minutes');
+const secondsCounter = document.querySelector('#seconds');
+
+function initLotteryCountdown() {
+  const baseDate = new Date(2021, 7, 27, 23, 41);
+  let nextLotteryDate = getNextLotteryDate(baseDate);
+  const remainingMilliseconds = nextLotteryDate - new Date();
+  calculateTime(remainingMilliseconds);
+  setInterval(() => {
+    nextLotteryDate = getNextLotteryDate(baseDate);
+    const remainingMilliseconds = nextLotteryDate - new Date();
+    if (remainingMilliseconds < 0) {
+      nextLotteryDate = getNextLotteryDate(getNextLotteryDate(nextLotteryDate));
+    }
+    calculateTime(remainingMilliseconds);
+  }, 1000);
+}
 
 function calculateTime(remainingMilliseconds) {
   const seconds = Math.floor((remainingMilliseconds % _minute) / _second);
@@ -981,4 +989,17 @@ function calculateTime(remainingMilliseconds) {
   console.log({ hours });
   console.log({ minutes });
   console.log({ seconds });
+  populateCountdown(days, hours, minutes, seconds);
+}
+
+function populateCountdown(countdays, hours, minutes, seconds) {
+  daysCountdown.textContent = days;
+  hoursCountdown.textContent = hours;
+  minutesCountdown.textContent = minutes;
+  secondsCountdown.textContent = seconds;
+}
+
+function getNextLotteryDate(date) {
+  const minutes = 60 * 24 * 10; // 10 days
+  return new Date(date.getTime() + minutes * 60000);
 }
