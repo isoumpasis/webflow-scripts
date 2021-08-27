@@ -955,8 +955,8 @@ function sendContactEmail() {
     });
 }
 
-const seedDate = new Date(2021, 7, 28, 1, 8);
-// const seedDate = new Date('8/29/21');
+// const seedDate = new Date(2021, 7, 28, 1, 8);
+const seedDate = new Date('9/10/21');
 let baseDate;
 const _second = 1000;
 const _minute = _second * 60;
@@ -1020,7 +1020,11 @@ function setBaseDate(seedDate) {
   console.log('setting base date', baseDate.toLocaleDateString());
   return baseDate;
 }
-//server init: calc a base date from a set seed date
-//local init: get base date from server
-//when expires locally start a 10 day countdown
-//when expires on the server set a new 10 day distance server base date
+/*
+
+[] server init: calc a base date from a set seed date
+[] local init: get base date from server
+[x] when expires locally start a 10 day countdown
+[] when expires on the server set a new 10 day distance server base date
+
+*/
