@@ -965,7 +965,7 @@ const minutesCountdown = document.querySelector('#minutes');
 const secondsCountdown = document.querySelector('#seconds');
 
 function initLotteryCountdown() {
-  let baseDate = new Date(2021, 7, 28, 0, 23);
+  let baseDate = new Date(2021, 7, 31, 0, 23);
   let nextLotteryDate = baseDate;
   let remainingMilliseconds = nextLotteryDate - new Date();
   calculateTime(remainingMilliseconds);
