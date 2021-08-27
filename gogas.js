@@ -959,10 +959,10 @@ const _second = 1000;
 const _minute = _second * 60;
 const _hour = _minute * 60;
 const _day = _hour * 24;
-const daysCounter = document.querySelector('#days');
-const hoursCounter = document.querySelector('#hours');
-const minutesCounter = document.querySelector('#minutes');
-const secondsCounter = document.querySelector('#seconds');
+const daysCountdown = document.querySelector('#days');
+const hoursCountdown = document.querySelector('#hours');
+const minutesCountdown = document.querySelector('#minutes');
+const secondsCountdown = document.querySelector('#seconds');
 
 function initLotteryCountdown() {
   let baseDate = new Date(2021, 7, 28, 0, 13);
