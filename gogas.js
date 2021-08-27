@@ -957,11 +957,11 @@ function sendContactEmail() {
 
 function initLotteryCountdown() {
   const nextLotteryDate = new Date(2021, 7, 28);
-
   const remainingMilliseconds = nextLotteryDate - new Date();
-
   calculateTime(remainingMilliseconds);
   setInterval(() => {
+    const nextLotteryDate = new Date(2021, 7, 28);
+    const remainingMilliseconds = nextLotteryDate - new Date();
     calculateTime(remainingMilliseconds);
   }, 10000);
 }
