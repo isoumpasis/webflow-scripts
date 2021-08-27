@@ -965,15 +965,19 @@ const minutesCounter = document.querySelector('#minutes');
 const secondsCounter = document.querySelector('#seconds');
 
 function initLotteryCountdown() {
-  const baseDate = new Date(2021, 7, 27, 23, 41);
-  let nextLotteryDate = getNextLotteryDate(baseDate);
-  const remainingMilliseconds = nextLotteryDate - new Date();
+  let baseDate = new Date(2021, 7, 28, 0, 13);
+  let nextLotteryDate = baseDate;
+  let remainingMilliseconds = nextLotteryDate - new Date();
   calculateTime(remainingMilliseconds);
   setInterval(() => {
-    nextLotteryDate = getNextLotteryDate(baseDate);
-    const remainingMilliseconds = nextLotteryDate - new Date();
+    nextLotteryDate = baseDate;
+    remainingMilliseconds = nextLotteryDate - new Date();
+    console.log(remainingMilliseconds);
     if (remainingMilliseconds < 0) {
-      nextLotteryDate = getNextLotteryDate(getNextLotteryDate(nextLotteryDate));
+      baseDate = getNextLotteryDate(baseDate);
+      nextLotteryDate = baseDate;
+
+      remainingMilliseconds = nextLotteryDate - new Date();
     }
     calculateTime(remainingMilliseconds);
   }, 1000);
@@ -1000,6 +1004,7 @@ function populateCountdown(countdays, hours, minutes, seconds) {
 }
 
 function getNextLotteryDate(date) {
-  const minutes = 60 * 24 * 10; // 10 days
+  // const minutes = 60*24*10;
+  const minutes = 1;
   return new Date(date.getTime() + minutes * 60000);
 }
