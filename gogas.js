@@ -958,19 +958,32 @@ function sendContactEmail() {
 function initLotteryCountdown() {
   const nextLotteryDate = new Date(2021, 7, 28);
 
-  const milliseconds = nextLotteryDate - new Date();
+  const remainingMilliseconds = nextLotteryDate - new Date();
 
   const seconds = milliseconds / 1000;
   const minutes = seconds / 60;
   const hours = minutes / 60;
   const days = hours / 24;
 
-  calculateTime(days, hours, minutes, seconds);
+  calculateTime(remainingMilliseconds);
   setInterval(() => {
-    calculateTime(days, hours, minutes, seconds);
+    calculateTime(remainingMilliseconds);
   }, 10000);
 }
 
-function calculateTime(days, hours, minutes, seconds) {
-  console.log({ seconds }, { minutes }, { hours }, { days });
+const _second = 1000;
+const _minute = _second * 60;
+const _hour = _minute * 60;
+const _day = _hour * 24;
+
+function calculateTime(remainingMilliseconds) {
+  const seconds = Math.floor((remainingMilliseconds % _minute) / _second);
+  const minutes = Math.floor((remainingMilliseconds % _hour) / _minute);
+  const hours = Math.floor((remainingMilliseconds % _day) / _hour);
+  const days = Math.floor(remainingMilliseconds / _day);
+
+  console.log({ days });
+  console.log({ hours });
+  console.log({ minutes });
+  console.log({ seconds });
 }
