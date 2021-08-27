@@ -122,6 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initUserInfo();
   showFacebookBrowserProblem(isFacebookBrowser());
+
+  initLotteryCountdown();
 });
 
 function showFacebookBrowserProblem(show) {
@@ -951,4 +953,17 @@ function sendContactEmail() {
       handleInvalidContactForm('Υπήρξε πρόβλημα κατά την αποστολή, προσπαθήστε αργότερα');
       document.querySelector('#contactSubmit').value = 'Αποστολή';
     });
+}
+
+function initLotteryCountdown() {
+  const nextLotteryDate = new Date(2021, 7, 28);
+
+  const milliseconds = nextLotteryDate - new Date();
+
+  const seconds = milliseconds / 1000;
+  const minutes = seconds / 60;
+  const hours = minutes / 60;
+  const days = hours / 24;
+
+  console.table([milliseconds, seconds, minutes, hours, days]);
 }
