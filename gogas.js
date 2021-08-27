@@ -955,8 +955,9 @@ function sendContactEmail() {
     });
 }
 
-// const seedDate = new Date(2021, 8, 10);
-const seedDate = new Date('8/29/21');
+const seedDate = new Date(2021, 7, 28, 0, 5);
+// const seedDate = new Date('8/29/21');
+let baseDate;
 const _second = 1000;
 const _minute = _second * 60;
 const _hour = _minute * 60;
@@ -967,7 +968,7 @@ const minutesCountdown = document.querySelector('#minutes');
 const secondsCountdown = document.querySelector('#seconds');
 
 function initLotteryCountdown() {
-  let baseDate = setBaseDate(seedDate);
+  baseDate = setBaseDate(seedDate);
   let nextLotteryDate = baseDate;
   let remainingMilliseconds = nextLotteryDate - new Date();
   calculateTime(remainingMilliseconds);
@@ -1001,13 +1002,13 @@ function populateCountdown(days, hours, minutes, seconds) {
 }
 
 function getNextLotteryDate(date) {
-  // const minutes = 60*24*10;
-  const minutes = 1;
+  const minutes = 60 * 24 * 10;
+  // const minutes = 1;
   return new Date(date.getTime() + minutes * 60000);
 }
 
 function setBaseDate(seedDate) {
-  const baseDate = seedDate;
+  baseDate = seedDate;
   const day =
     baseDate.getDate().toString().length === 1 ? '0' + baseDate.getDate() : baseDate.getDate();
   const month =
@@ -1019,3 +1020,7 @@ function setBaseDate(seedDate) {
   console.log('setting base date', baseDate.toLocaleDateString());
   return baseDate;
 }
+//server init: calc a base date from a set seed date
+//local init: get base date from server
+//when expires locally start a 10 day countdown
+//when expires on the server set a new 10 day distance server base date
