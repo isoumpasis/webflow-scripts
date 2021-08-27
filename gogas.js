@@ -965,11 +965,10 @@ function initLotteryCountdown() {
   const hours = minutes / 60;
   const days = hours / 24;
 
-  while (1) {
-    setTimeout(() => {
-      calculateTime(days, hours, minutes, seconds);
-    }, 10000);
-  }
+  calculateTime(days, hours, minutes, seconds);
+  setInterval(() => {
+    calculateTime(days, hours, minutes, seconds);
+  }, 10000);
 }
 
 function calculateTime(days, hours, minutes, seconds) {
