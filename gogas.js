@@ -1,7 +1,9 @@
 /* System Identification */
-const baseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
-const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
-const urlLitres = '/litres'; //
+const baseUrl = 'https://lovato-hellas.webflow.io';
+const mapUrl = '/stores';
+const mapBaseUrl = baseUrl + mapUrl;
+const serverBaseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
+const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
@@ -292,7 +294,7 @@ typeSelect.addEventListener('change', function () {
   startLoadingSelect(litresSelect);
 
   let status;
-  fetch(baseUrl + urlLitres, {
+  fetch(serverBaseUrl + urlLitres, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -370,7 +372,7 @@ function litresOnChange(value) {
   startLoadingSelect(dimensionSelect);
 
   let status;
-  fetch(baseUrl + urlDimensions, {
+  fetch(serverBaseUrl + urlDimensions, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

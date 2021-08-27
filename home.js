@@ -1,4 +1,6 @@
 /* System Identification */
+const baseUrl = 'https://lovato-hellas.webflow.io'; //TODO change
+const mapUrl = '/stores';
 const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
 const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
@@ -7,7 +9,7 @@ const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
 const downloadSummaryUrl = 'http://localhost:1917/summaries/system';
 // const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/system';
 const emailSummaryUrl = 'http://localhost:1917/summaries/email/system';
-const mapBaseUrl = 'https://lovato-hellas.webflow.io/diktyo-synergaton';
+const mapBaseUrl = baseUrl + mapUrl;
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 // const urlContactForm = 'http://localhost:1917/contact/';
