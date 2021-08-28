@@ -1794,7 +1794,6 @@ function displayEmulatorInfo(suggestedContainer) {
     .querySelectorAll('.info-content-block')
     .forEach(emCont => (emCont.style.display = 'none'));
 
-  // if (foundVehicleObj.hasOwnProperty('emulators') || hasUHPII(foundVehicleObj)) {
   if (hasValidEmulators(foundVehicleObj) || hasUHPII(foundVehicleObj)) {
     const vehicleEmulatorType = getEmulatorType();
 
@@ -1803,13 +1802,6 @@ function displayEmulatorInfo(suggestedContainer) {
       .forEach(system => {
         system.querySelectorAll('.info-content-block').forEach(emCont => {
           if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
-            // if (
-            // 	vehicleEmulatorType === 'p' ||
-            // 	vehicleEmulatorType === 'b6' ||
-            // 	vehicleEmulatorType === 'b8' ||
-            // 	vehicleEmulatorType === 'hp' ||
-            // 	vehicleEmulatorType === 'double-hp'
-            // ) {
             if (isApaitoumenoEmulatorType(vehicleEmulatorType)) {
               const priceEl = system.querySelector(
                 `.suggested-${userSelections.selectedFuel}-price`
@@ -1837,7 +1829,7 @@ function hasValidEmulators(vehObj) {
 
 function hasUHPII(vehObj) {
   if (userSelections.selectedFuel === 'cng') return false;
-  return vehObj.hp > 180 && vehObj.cylinders <= 4 && !vehObj.hasOwnProperty('engineCodes');
+  return vehObj.hp > 180 && vehObj.cylinders <= 4;
 }
 
 function getEmulatorType() {
