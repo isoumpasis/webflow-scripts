@@ -983,7 +983,7 @@ function initLotteryCountdown() {
         return;
       }
       console.log('Base Date:', data);
-      baseDate = data;
+      baseDate = new Date(data);
       showBaseDate();
       startCountdown();
     })
@@ -1047,7 +1047,7 @@ function startCountdown() {
 }
 /*
 
-[] server init: calc a base date from a set seed date
+[x] server init: calc a base date from a set seed date
 [] local init: get base date from server
 [x] when expires locally start a 10 day countdown and update base date locally
 [] when expires on the server set a new 10 day distance server base date
