@@ -13,7 +13,8 @@ const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/goga
 // const emailSummaryUrl = 'http://localhost:1917/summaries/email/gogas';
 // const urlContactForm = 'http://localhost:1917/contact/';
 const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
-const baseDateUrl = 'http://localhost:1917/lottery/base-date';
+const baseDateUrl = 'https://lovatohellas.herokuapp.com/lottery/base-date';
+// const baseDateUrl = 'http://localhost:1917/lottery/base-date';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -1011,7 +1012,6 @@ function populateCountdown(days, hours, minutes, seconds) {
 
 function getNextLotteryDate(date) {
   const minutes = 60 * 24 * 10;
-  // const minutes = 1;
   return new Date(date.getTime() + minutes * 60000);
 }
 
@@ -1034,7 +1034,6 @@ function startCountdown() {
   setInterval(() => {
     nextLotteryDate = baseDate;
     remainingMilliseconds = nextLotteryDate - new Date();
-    console.log(remainingMilliseconds);
     if (remainingMilliseconds < 0) {
       //TODO update base date locally
       baseDate = getNextLotteryDate(baseDate);
