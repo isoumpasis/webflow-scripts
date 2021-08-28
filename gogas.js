@@ -1047,8 +1047,8 @@ function startCountdown() {
 /*
 
 [x] server init: calc a base date from a set seed date
-[] local init: get base date from server
-[x] when expires locally start a 10 day countdown and update base date locally
-[] when expires on the server set a new 10 day distance server base date
+[x] local init: get base date from server
+[] when expires locally start a 10 day countdown and update base date locally
+[x] when expires on the server set a new 10 day distance server base date
 
 */
