@@ -3221,8 +3221,8 @@ function populateCountdown(days, hours, minutes, seconds) {
 }
 
 function getNextLotteryDate(date) {
-  // const minutes = 60 * 24 * 10;
-  const minutes = 1;
+  const minutes = 60 * 24 * 10;
+  // const minutes = 1;
   return new Date(date.getTime() + minutes * 60000);
 }
 
