@@ -1035,8 +1035,8 @@ function startCountdown() {
     nextLotteryDate = baseDate;
     remainingMilliseconds = nextLotteryDate - new Date();
     if (remainingMilliseconds < 0) {
-      //TODO update base date locally
       baseDate = getNextLotteryDate(baseDate);
+      showBaseDate();
       nextLotteryDate = baseDate;
 
       remainingMilliseconds = nextLotteryDate - new Date();

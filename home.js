@@ -3193,8 +3193,8 @@ function initLotteryCountdown() {
         return;
       }
       console.log('Base Date:', data);
-      // baseDate = new Date(data);
-      baseDate = new Date(new Date().getTime() + 60000);
+      baseDate = new Date(data);
+      // baseDate = new Date(new Date().getTime() + 60000);
       showBaseDate();
       startCountdown();
     })
@@ -3222,7 +3222,6 @@ function populateCountdown(days, hours, minutes, seconds) {
 
 function getNextLotteryDate(date) {
   const minutes = 60 * 24 * 10;
-  // const minutes = 1;
   return new Date(date.getTime() + minutes * 60000);
 }
 
@@ -3246,7 +3245,6 @@ function startCountdown() {
     nextLotteryDate = baseDate;
     remainingMilliseconds = nextLotteryDate - new Date();
     if (remainingMilliseconds < 0) {
-      //TODO update base date locally
       baseDate = getNextLotteryDate(baseDate);
       showBaseDate();
       nextLotteryDate = baseDate;
