@@ -976,9 +976,10 @@ function initLotteryCountdown() {
       return response.json();
     })
     .then(data => {
-      if (status !== 200) {
+      if (status != 200) {
         console.error('Error Status Base Date Fetch:', status);
         baseDate = new Date('1/1/2001');
+
         return;
       }
       console.log('Base Date:', data);
