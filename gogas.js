@@ -1,7 +1,7 @@
 /* System Identification */
 const baseUrl = location.origin; // 'https://lovato-hellas.webflow.io';
 const mapUrl = '/stores';
-const urlLitres = '/litres'; //
+const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
 const mapBaseUrl = baseUrl + mapUrl;
 const serverBaseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
@@ -13,6 +13,7 @@ const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/goga
 // const emailSummaryUrl = 'http://localhost:1917/summaries/email/gogas';
 // const urlContactForm = 'http://localhost:1917/contact/';
 const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
+const baseDateUrl = 'http://localhost:1917/lottery/base-date';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -956,8 +957,9 @@ function sendContactEmail() {
 }
 
 // const seedDate = new Date(2021, 7, 28, 1, 8);
-const seedDate = new Date('9/10/21');
+// const seedDate = new Date('9/10/21');
 let baseDate;
+
 const _second = 1000;
 const _minute = _second * 60;
 const _hour = _minute * 60;
@@ -968,22 +970,27 @@ const minutesCountdown = document.querySelector('#minutes');
 const secondsCountdown = document.querySelector('#seconds');
 
 function initLotteryCountdown() {
-  baseDate = setBaseDate(seedDate);
-  let nextLotteryDate = baseDate;
-  let remainingMilliseconds = nextLotteryDate - new Date();
-  calculateTime(remainingMilliseconds);
-  setInterval(() => {
-    nextLotteryDate = baseDate;
-    remainingMilliseconds = nextLotteryDate - new Date();
-    console.log(remainingMilliseconds);
-    if (remainingMilliseconds < 0) {
-      baseDate = getNextLotteryDate(baseDate);
-      nextLotteryDate = baseDate;
-
-      remainingMilliseconds = nextLotteryDate - new Date();
-    }
-    calculateTime(remainingMilliseconds);
-  }, 1000);
+  fetch(baseDateUrl)
+    .then(response => {
+      status = response.status;
+      return response.json();
+    })
+    .then(data => {
+      if (status !== 200) {
+        console.error('Error Status Base Date Fetch:', status);
+        baseDate = new Date('1/1/2001');
+        return;
+      }
+      console.log('Base Date:', data);
+      baseDate = data;
+      showBaseDate();
+      startCountdown();
+    })
+    .catch(error => {
+      baseDate = new Date('2/1/2001');
+      showBaseDate();
+      console.error('Error Base Date Fetch:', error);
+    });
 }
 
 function calculateTime(remainingMilliseconds) {
@@ -1007,8 +1014,7 @@ function getNextLotteryDate(date) {
   return new Date(date.getTime() + minutes * 60000);
 }
 
-function setBaseDate(seedDate) {
-  baseDate = seedDate;
+function showBaseDate() {
   const day =
     baseDate.getDate().toString().length === 1 ? '0' + baseDate.getDate() : baseDate.getDate();
   const month =
@@ -1018,13 +1024,31 @@ function setBaseDate(seedDate) {
   const year = baseDate.getFullYear().toString().substring(2, baseDate.getFullYear().length);
   document.querySelector('.base-date').textContent = `${day}/${month}/${year}`;
   console.log('setting base date', baseDate.toLocaleDateString());
-  return baseDate;
+}
+
+function startCountdown() {
+  let nextLotteryDate = baseDate;
+  let remainingMilliseconds = nextLotteryDate - new Date();
+  calculateTime(remainingMilliseconds);
+  setInterval(() => {
+    nextLotteryDate = baseDate;
+    remainingMilliseconds = nextLotteryDate - new Date();
+    console.log(remainingMilliseconds);
+    if (remainingMilliseconds < 0) {
+      //TODO update base date locally
+      baseDate = getNextLotteryDate(baseDate);
+      nextLotteryDate = baseDate;
+
+      remainingMilliseconds = nextLotteryDate - new Date();
+    }
+    calculateTime(remainingMilliseconds);
+  }, 1000);
 }
 /*
 
 [] server init: calc a base date from a set seed date
 [] local init: get base date from server
-[x] when expires locally start a 10 day countdown
+[x] when expires locally start a 10 day countdown and update base date locally
 [] when expires on the server set a new 10 day distance server base date
 
 */
