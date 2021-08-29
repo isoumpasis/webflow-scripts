@@ -3212,11 +3212,6 @@ function populateCountdown(days, hours, minutes, seconds) {
   secondsCountdown.textContent = seconds.toString().length === 1 ? '0' + seconds : seconds;
 }
 
-function getNextLotteryDate(date) {
-  const minutes = 60 * 24 * 10;
-  return new Date(date.getTime() + minutes * 60000);
-}
-
 function showBaseDate() {
   const day =
     baseDate.getDate().toString().length === 1 ? '0' + baseDate.getDate() : baseDate.getDate();
@@ -3246,6 +3241,12 @@ function startCountdown() {
     calculateTime(remainingMilliseconds);
   }, 1000);
 }
+
+function getNextLotteryDate(date) {
+  const minutes = 60 * 24 * 10;
+  return new Date(date.getTime() + minutes * 60000);
+}
+
 /*
 
 [x] server init: calc a base date from a set seed date
