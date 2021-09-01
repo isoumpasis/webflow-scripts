@@ -1,7 +1,7 @@
 /* System Identification */
 const baseUrl = location.origin; // 'https://lovato-hellas.webflow.io';
 const mapUrl = '/stores';
-const urlLitres = '/litres'; //
+const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
 const mapBaseUrl = baseUrl + mapUrl;
 const serverBaseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
@@ -13,6 +13,8 @@ const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/goga
 // const emailSummaryUrl = 'http://localhost:1917/summaries/email/gogas';
 // const urlContactForm = 'http://localhost:1917/contact/';
 const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
+const baseDateUrl = 'https://lovatohellas.herokuapp.com/lottery/base-date';
+// const baseDateUrl = 'http://localhost:1917/lottery/base-date';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -121,6 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initUserInfo();
   showFacebookBrowserProblem(isFacebookBrowser());
+
+  initLotteryCountdown();
 });
 
 function showFacebookBrowserProblem(show) {
@@ -934,3 +938,99 @@ function sendContactEmail() {
       document.querySelector('#contactSubmit').value = 'Αποστολή';
     });
 }
+
+// const seedDate = new Date(2021, 7, 28, 1, 8);
+// const seedDate = new Date('9/10/21');
+let baseDate;
+
+const _second = 1000;
+const _minute = _second * 60;
+const _hour = _minute * 60;
+const _day = _hour * 24;
+const daysCountdown = document.querySelector('#days');
+const hoursCountdown = document.querySelector('#hours');
+const minutesCountdown = document.querySelector('#minutes');
+const secondsCountdown = document.querySelector('#seconds');
+
+function initLotteryCountdown() {
+  fetch(baseDateUrl)
+    .then(response => {
+      status = response.status;
+      return response.json();
+    })
+    .then(data => {
+      if (status != 200) {
+        console.error('Error Status Base Date Fetch:', status);
+        baseDate = new Date('1/1/2001');
+
+        return;
+      }
+      console.log('Base Date:', data);
+      baseDate = new Date(data);
+      showBaseDate();
+      startCountdown();
+    })
+    .catch(error => {
+      baseDate = new Date('2/1/2001');
+      showBaseDate();
+      console.error('Error Base Date Fetch:', error);
+    });
+}
+
+function calculateTime(remainingMilliseconds) {
+  const seconds = Math.floor((remainingMilliseconds % _minute) / _second);
+  const minutes = Math.floor((remainingMilliseconds % _hour) / _minute);
+  const hours = Math.floor((remainingMilliseconds % _day) / _hour);
+  const days = Math.floor(remainingMilliseconds / _day);
+  populateCountdown(days, hours, minutes, seconds);
+}
+
+function populateCountdown(days, hours, minutes, seconds) {
+  daysCountdown.textContent = days.toString().length === 1 ? '0' + days : days;
+  hoursCountdown.textContent = hours.toString().length === 1 ? '0' + hours : hours;
+  minutesCountdown.textContent = minutes.toString().length === 1 ? '0' + minutes : minutes;
+  secondsCountdown.textContent = seconds.toString().length === 1 ? '0' + seconds : seconds;
+}
+
+function getNextLotteryDate(date) {
+  const minutes = 60 * 24 * 10;
+  return new Date(date.getTime() + minutes * 60000);
+}
+
+function showBaseDate() {
+  const day =
+    baseDate.getDate().toString().length === 1 ? '0' + baseDate.getDate() : baseDate.getDate();
+  const month =
+    (baseDate.getMonth() + 1).toString().length === 1
+      ? '0' + (baseDate.getMonth() + 1)
+      : baseDate.getMonth() + 1;
+  const year = baseDate.getFullYear().toString().substring(2, baseDate.getFullYear().length);
+  document.querySelector('.base-date').textContent = `${day}/${month}/${year}`;
+  console.log('setting base date', baseDate.toLocaleDateString());
+}
+
+function startCountdown() {
+  let nextLotteryDate = baseDate;
+  let remainingMilliseconds = nextLotteryDate - new Date();
+  calculateTime(remainingMilliseconds);
+  setInterval(() => {
+    nextLotteryDate = baseDate;
+    remainingMilliseconds = nextLotteryDate - new Date();
+    if (remainingMilliseconds < 0) {
+      baseDate = getNextLotteryDate(baseDate);
+      showBaseDate();
+      nextLotteryDate = baseDate;
+
+      remainingMilliseconds = nextLotteryDate - new Date();
+    }
+    calculateTime(remainingMilliseconds);
+  }, 1000);
+}
+/*
+
+[x] server init: calc a base date from a set seed date
+[x] local init: get base date from server
+[] when expires locally start a 10 day countdown and update base date locally
+[x] when expires on the server set a new 10 day distance server base date
+
+*/
