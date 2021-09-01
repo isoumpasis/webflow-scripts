@@ -2036,11 +2036,7 @@ function configureSystemsEasyPay() {
     ...activeContainer.querySelectorAll(`.suggested-${userSelections.selectedFuel}-price`)
   ].map(el => el.textContent.split('€')[0] * VAT + '€');
 
-  systemLogoCreditEls.forEach(
-    (el, i) =>
-      el.src.substr(el.src.length - 9, el.src.length) != 'undefined' &&
-      (el.src = systemLogoSrcs[i % 2])
-  );
+  systemLogoCreditEls.forEach((el, i) => (el.src = systemLogoSrcs[i % 2]));
   systemPriceCreditEls.forEach((el, i) => (el.textContent = suggestedPrices[i % 2]));
 
   if (systemLogoSrcs.length === 2) {
