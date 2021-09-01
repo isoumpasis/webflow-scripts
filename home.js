@@ -373,12 +373,6 @@ function showFacebookBrowserProblem(show) {
   if (isFacebookBrowser()) {
     document.querySelector('.facebook-browser-div').style.display = show ? 'block' : 'none';
   }
-  console.log(
-    'show facebook browser problem. show: ' +
-      show +
-      '  facebook-browser-div: ' +
-      document.querySelector('.facebook-browser-div').style.display
-  );
 }
 
 function initCalcOptions() {
@@ -472,7 +466,6 @@ function initFuelPrices() {
     initPlaceSelects(userSelections.location.place);
     modifyFuelPriceSliders(userSelections.location.place);
   } else {
-    console.log('fuelPrices missed! XHR to:', urlFuelPrices);
     fetch(urlFuelPrices, {
       method: 'POST',
       headers: {
@@ -1045,8 +1038,6 @@ function initStorage() {
   const storageObj = JSON.parse(preferredStorage.getItem('userSelections'));
   if (storageObj && Object.keys(storageObj.vehicle).length !== 0) {
     userSelections = storageObj;
-    console.log('Parsed json local storage', userSelections);
-
     populateAndSelectAllOptions(userSelections.vehicle);
   }
 }
@@ -1093,8 +1084,6 @@ function populateAndSelectAllOptions(vehicle) {
 /* STORAGE END */
 
 makeSelect.addEventListener('change', function () {
-  console.log('make changed', this.value);
-
   modelSelect.disabled = true;
   descriptionSelect.disabled = true;
   modelSelect.innerHTML = '<option value="">Μοντέλο</option>';
@@ -1131,12 +1120,10 @@ makeSelect.addEventListener('change', function () {
     body: JSON.stringify({ make: this.value })
   })
     .then(response => {
-      console.log({ response });
       status = response.status;
       return response.json();
     })
     .then(data => {
-      console.log({ data });
       if (status !== 200) {
         endLoadingSelect(yearSelect);
         yearSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
@@ -1234,9 +1221,7 @@ function yearOnChange(value) {
     descriptionSelect.innerHTML = '<option value="">Περιγραφή</option>';
     return;
   }
-  // selectedModel = fetchedModels.models.filter(model => model.name === this.value)[0];
-  // console.log('selectedModel', selectedModel);
-  // sessionStorage.selectedModel = JSON.stringify(selectedModel);//
+
   modelSelect.disabled = false;
   modelSelect.innerHTML = '';
   startLoadingSelect(modelSelect);
@@ -1253,7 +1238,6 @@ function yearOnChange(value) {
       return response.json();
     })
     .then(data => {
-      console.log('Success Vehicles Fetch:', data);
       if (status !== 200) {
         endLoadingSelect(modelSelect);
         yearSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
@@ -1261,11 +1245,6 @@ function yearOnChange(value) {
       }
       fetchedModels = data;
 
-      // sessionStorage.selectedVehicles = JSON.stringify(selectedVehicles);
-
-      // descriptionSelect.innerHTML = `<option value="">${
-      //   selectedVehicles.isDirect ? 'Κινητήρας' : 'Κύλινδροι'
-      // }</option>`;
       populateModelSelect(fetchedModels);
       endLoadingSelect(modelSelect);
     })
@@ -1297,7 +1276,6 @@ function populateYearSelect(fetchedYears) {
 modelSelect.addEventListener('change', e => modelOnChange(e.target.value));
 
 function modelOnChange(value) {
-  console.log('model changed', value);
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
@@ -1335,7 +1313,6 @@ function modelOnChange(value) {
       return response.json();
     })
     .then(data => {
-      console.log('Success Descriptions Fetch:', data);
       if (status !== 200) {
         endLoadingSelect(modelSelect);
         descriptionSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
@@ -1359,7 +1336,6 @@ function modelOnChange(value) {
 }
 
 function populateDescriptionSelect(fetchedModelObj) {
-  console.log({ fetchedModelObj });
   let optionsArray;
 
   if (fetchedModelObj.isDirect) {
@@ -1382,8 +1358,6 @@ function populateDescriptionSelect(fetchedModelObj) {
     });
   } else {
     const filteredVehicles = fetchedModelObj.vehicles.slice();
-
-    console.log({ filteredVehicles });
 
     if (
       filteredVehicles.length === 1 ||
@@ -1435,20 +1409,16 @@ function haveSameEmulators(vehicles) {
   vehicles.forEach(veh => {
     if (veh.hasOwnProperty('emulators')) {
       emulators.push(veh.emulators[0]);
-      console.log(veh, 'veh contains emulator');
     } else {
       emulators.push(null);
     }
   });
-  console.log('emulators', { emulators });
   return [...new Set(emulators)].length === 1;
 }
 
 descriptionSelect.addEventListener('change', e => descriptionOnChange(e.target.value));
 
 function descriptionOnChange(value) {
-  console.log('description changed', value);
-
   suggestedContainers.forEach(cont => (cont.style.display = 'none'));
 
   if (!value) {
@@ -1592,7 +1562,6 @@ function showResults(fetchedModelObj) {
     configureCalculatorAfterSuggestion();
     configureEasyPayAfterSuggestion();
     configureLastStepAfterSuggestion();
-    console.log('ok2');
   } else {
     showGuarantee(false);
     resetCalc();
@@ -1616,7 +1585,6 @@ function showResults(fetchedModelObj) {
       easyPayMonthlyGain: true
     });
   }
-  console.log('ok3');
 }
 
 function showGuarantee(show) {
@@ -1653,12 +1621,7 @@ function showDirectResults(fetchedModelObj) {
   }
 
   const consumptionsRace = runConsumptionRace(possibleVehicleObjs);
-
-  console.log({ consumptionsRace });
-
   foundVehicleObj = consumptionsRace[0].veh;
-
-  console.log({ foundVehicleObj });
 
   if (foundVehicleObj.isConvertible) {
     const directSystemDiv = document.querySelector(
@@ -1684,7 +1647,6 @@ function showMonouResults(fetchedModelObj) {
       break;
     }
   }
-  console.log({ foundVehicleObj });
   document.querySelector(`#suggested-${userSelections.selectedFuel}-monou`).style.display = 'grid';
 }
 
@@ -1694,8 +1656,6 @@ function showCylinderResults(fetchedModelObj, years) {
   const descriptionValue = descriptionSelect.value;
   const consumptionsRace = runConsumptionRace(fetchedModelObj.vehicles);
 
-  console.log({ consumptionsRace });
-
   for (const consumptionObj of consumptionsRace) {
     const vehAttribute =
       descriptionValue.length === 1 ? consumptionObj.veh.cylinders : consumptionObj.veh.hp;
@@ -1704,7 +1664,6 @@ function showCylinderResults(fetchedModelObj, years) {
       break;
     }
   }
-  console.log({ foundVehicleObj });
 
   const cyls = foundVehicleObj.cylinders;
 
@@ -1814,7 +1773,6 @@ function displayEmulatorInfo(suggestedContainer) {
               suggestedPricesChanges.push({ priceEl, defaultPrice });
               priceEl.textContent =
                 defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
-              console.log({ suggestedPricesChanges });
             }
             emCont.querySelector('.info-content').style.height = '0px';
             emCont.style.display = 'block';
@@ -2042,13 +2000,11 @@ function getCylinderDescrText() {
 function configureEasyPayAfterSuggestion() {
   configureModelEasyPay();
   configureSystemsEasyPay();
-  console.log('ok');
   configureNoCreditSliders();
   configureCreditSliders();
   configureNoCreditResults();
   configureCreditResults();
   configureMetrhtaResults();
-  console.log('ok1');
 }
 
 function configureModelEasyPay() {
@@ -2121,7 +2077,6 @@ function configureSystemsEasyPay() {
   selectedEasyPaySystemPrice = +document
     .querySelector('.system-price-easy-pay')
     .textContent.replace('€', '');
-  console.log({ selectedEasyPaySystemPrice });
 }
 
 function configureNoCreditSliders() {
@@ -2653,7 +2608,6 @@ function downloadSummarySubmit(e, triggeredFrom) {
     .then(blob => {
       if (!blob) return;
       const newBlob = new Blob([blob], { type: 'image/png' });
-      console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
       endLoadingSelect(e.target, triggeredFrom, 'download');
       closeSummaryForm();
@@ -2666,7 +2620,6 @@ function downloadSummarySubmit(e, triggeredFrom) {
 
 function emailSummarySubmit(e, triggeredFrom) {
   const validationResult = validateUserForm();
-  console.log(validationResult);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
@@ -2701,7 +2654,6 @@ function emailSummarySubmit(e, triggeredFrom) {
     })
     .then(data => {
       if (!data) return;
-      console.log('data', data);
       endLoadingSelect(e.target, triggeredFrom, 'email');
       if (triggeredFrom === 'form') {
         document.querySelector('.summary-success-form').style.display = 'block';
@@ -2855,7 +2807,6 @@ function locationOnChange(value) {
     return;
   }
 
-  console.log('numPlaces missed! XHR to:', numPlaceUrl);
   fetch(numPlaceUrl, {
     method: 'POST',
     headers: {
@@ -2876,7 +2827,6 @@ function locationOnChange(value) {
         console.error(status);
         return;
       }
-      console.log('Pins Fetch:', data);
       fetchedPinsLength = data;
       populateLocationContainerResults(fetchedPinsLength);
       userSelections.location.numPlaces = {
@@ -2966,7 +2916,6 @@ function populateClosestsPins(userLatLng) {
         console.error(status);
         return;
       }
-      console.log('Closest Fetch:', data);
       fetchedClosests = data.closestPins;
       openLocationListContainer();
       addLocationStr(data.location);

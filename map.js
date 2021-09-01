@@ -445,7 +445,6 @@ function prepareInformation(markerProps) {
     .querySelector('.google-directions-container')
     .addEventListener('click', async () => {
       const currentLatLng = await getCurrentPosition();
-      console.log(currentLatLng);
       let url = `https://www.google.com/maps?saddr=${currentLatLng[0]},${currentLatLng[1]}&daddr=${markerGeometry}`;
       window.open(url, '_blank');
     });
@@ -729,7 +728,6 @@ function initDOMEvents() {
     const place = autoComplete.getPlace();
 
     if (Object.keys(place).length === 1) {
-      console.log('handling with geocoder for unknown or enter');
       try {
         const res = await geocoderSolution(autocompleteInput.value);
         autocompleteInput.value = res.address;
@@ -754,31 +752,6 @@ function initDOMEvents() {
     map.setZoom(searchZoom);
     map.setCenter(userMarker.position);
   });
-
-  //Search Icon click
-  // google.maps.event.addDomListener(document.querySelector('#searchBtn'), 'click', async e => {
-  //   try {
-  //     console.log('test', e.target);
-  //     const address = document.querySelector('#searchInput').value;
-  //     const res = await geocoderSolution(address);
-  //     console.log(res);
-  //     address.value = res.address;
-
-  //     userMarker.setOptions({
-  //       map,
-  //       title: autocompleteInput.value,
-  //       position: res.location,
-  //       animation: google.maps.Animation.DROP,
-  //       zIndex: google.maps.Marker.MAX_ZINDEX
-  //     });
-  //     map.setZoom(searchZoom);
-  //     map.setCenter(userMarker.position);
-  //   } catch (e) {
-  //     console.log('error on geocoding', e);
-  //   }
-
-  //   //automatic scroll to #map
-  // });
 
   //Geolocation Btn Click
   document.querySelectorAll('.my-location-btn').forEach(el => {
@@ -830,9 +803,6 @@ async function geocoderSolution(address) {
       (results, status) => {
         if (status === 'OK') {
           temp = results;
-          // console.log(results);
-          // console.log('geocoding for', address);
-          // console.log('geocoder address result', results[0].formatted_address);
           resolve({
             location: results[0].geometry.location,
             address: results[0].formatted_address
@@ -901,14 +871,6 @@ function filterMarkers() {
 
   markerClusterer.repaint();
 
-  // counter = 0;
-  // markers.forEach(marker => {
-  //   if (marker.getVisible()) {
-  //     counter++;
-  //   }
-  // });
-  // console.log({ counter });
-
   infoWindow.close();
   if (selectedMarker) selectedMarker.setAnimation(null);
   selectedMarker = null;
@@ -931,16 +893,6 @@ async function urlParamsConfig() {
     const searchInput = document.querySelector('#searchInput');
     try {
       const res = await geocoderSolution(gps);
-      // console.log('gps = ', gps, 'geocoder = ', res);
-
-      // searchInput.value = res.address;
-      // userMarker.setOptions({
-      //   map,
-      //   title: searchInput.value,
-      //   position: res.location,
-      //   animation: google.maps.Animation.DROP,
-      //   zIndex: google.maps.Marker.MAX_ZINDEX
-      // });
       map.setZoom(isMobile() ? gpsZoomMobile : gpsZoom);
       map.setCenter(res.location);
     } catch (e) {
@@ -953,7 +905,7 @@ async function urlParamsConfig() {
     filters = [...new Set(filters)];
 
     if (filters.some(f => !Number(f) || f < 1 || f > 5))
-      return console.log('Not valid filters query');
+      return console.error('Not valid filters query');
 
     const labels = document.querySelectorAll('.f-label div');
     filters.forEach(filter => {

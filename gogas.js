@@ -72,7 +72,6 @@ function loadGogasSelections() {
   let activeIndex;
   [...typeSelect.options].forEach((option, index) => {
     if (option.value === gogasSelections.form.activeValues.type) {
-      // console.log('found type active index ', index);
       activeIndex = index;
     }
   });
@@ -273,8 +272,6 @@ function setLocationSelectHeader(label) {
 }
 
 typeSelect.addEventListener('change', function () {
-  console.log('type changed', this.value);
-
   litresSelect.disabled = true;
   dimensionSelect.disabled = true;
   locationSelect.disabled = true;
@@ -311,7 +308,6 @@ typeSelect.addEventListener('change', function () {
         litresSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
         return;
       }
-      console.log('Litres Fetch:', data);
       fetchedLitres = data;
 
       populateLitresSelect(fetchedLitres);
@@ -354,7 +350,6 @@ function populateLitresSelect(fetchedLitres, options = {}) {
 
 litresSelect.addEventListener('change', e => litresOnChange(e.target.value));
 function litresOnChange(value) {
-  console.log('liters changed', value);
   dimensionSelect.disabled = true;
   locationSelect.disabled = true;
   dimensionSelect.innerHTML = '<option>Διαστάσεις</option>';
@@ -389,7 +384,6 @@ function litresOnChange(value) {
         litresSelect.innerHTML = `<option value="">Προσπαθήστε ξανά ${data.msg}</option>`;
         return;
       }
-      console.log('Dimensions Fetch:', data);
       fetchedDimensions = data;
       populateDimensionSelect(fetchedDimensions);
       endLoadingSelect(dimensionSelect);
@@ -426,7 +420,6 @@ function populateDimensionSelect(fetchedDimensions, options = {}) {
 dimensionSelect.addEventListener('change', e => dimensionOnChange(e.target.value));
 
 function dimensionOnChange(value) {
-  console.log('dimension changed', value);
   locationSelect.disabled = true;
   setLocationSelectHeader('Τοποθεσία');
 
@@ -453,8 +446,6 @@ function dimensionOnChange(value) {
 locationSelect.addEventListener('change', e => locationOnChange(e.target.value));
 
 function locationOnChange(value) {
-  console.log('location changed', value);
-
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
@@ -490,7 +481,6 @@ function locationOnChange(value) {
         console.error(status);
         return;
       }
-      console.log('Pins Fetch:', data);
       fetchedPinsLength = data;
       gogasSelections.form.fetchedValues.fetchedPinsLength = fetchedPinsLength;
       saveUserResults();
@@ -613,7 +603,6 @@ function populateClosestsPins(userLatLng) {
         console.error(status);
         return;
       }
-      console.log('Closest Fetch:', data);
       fetchedClosests = data.closestPins;
       openLocationListContainer();
       addLocationStr(data.location);
@@ -740,8 +729,6 @@ function downloadSummarySubmit(e, triggeredFrom) {
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
 
-  // console.log(dataToSend);
-
   startLoadingSelect(e.target, triggeredFrom);
   fetch(downloadSummaryUrl, {
     method: 'POST',
@@ -765,7 +752,6 @@ function downloadSummarySubmit(e, triggeredFrom) {
     .then(blob => {
       if (!blob) return;
       const newBlob = new Blob([blob], { type: 'image/png' });
-      console.log(newBlob);
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
       endLoadingSelect(e.target, triggeredFrom);
       closeSummaryForm();
@@ -783,7 +769,6 @@ function isFacebookBrowser() {
 
 function emailSummarySubmit(e, triggeredFrom) {
   const validationResult = validateUserForm();
-  console.log(validationResult);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
@@ -792,8 +777,6 @@ function emailSummarySubmit(e, triggeredFrom) {
   dataToSend.location = gogasSelections.form.activeValues.location;
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
-
-  // console.log(dataToSend);
 
   startLoadingSelect(e.target, triggeredFrom);
   fetch(emailSummaryUrl, {
@@ -819,7 +802,6 @@ function emailSummarySubmit(e, triggeredFrom) {
     })
     .then(data => {
       if (!data) return;
-      console.log('data', data);
       endLoadingSelect(e.target, triggeredFrom);
       document.querySelector('.summary-success-form').style.display = 'block';
       document.querySelector('.success-msg-email').textContent = userInfo.email;
