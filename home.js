@@ -3197,16 +3197,30 @@ function getNextLotteryDate(date) {
 
 /* GTAG */
 
+function triggerGtagEvent(eventName, params = {}) {
+  if (typeof gtag === 'undefined') return { status: 'Error', message: 'gtag undefined' };
+  if (typeof eventName === 'undefined' || eventName === '')
+    return { status: 'Error', message: 'eventName undefined' };
+
+  params.event_callback = () =>
+    console.log(
+      `${eventName} event triggered with params ${
+        Object.keys(params).length && JSON.stringify(params)
+      }`
+    );
+  gtag('event', eventName, params);
+  return {
+    status: 'OK',
+    message: `${eventName} event triggered with params ${
+      Object.keys(params).length && JSON.stringify(params)
+    }`
+  };
+}
+
 // Mathe perissotera TEST
 const testBtn = document.querySelector('.link-block-6');
 
 testBtn.addEventListener('click', e => {
   console.log('test btn clicked', e);
-
-  gtag('event', 'learn_more', {
-    hash: location.hash,
-    event_callback: function () {
-      console.log('event learn_more triggered');
-    }
-  });
+  triggerGtagEvent('learn_more', { hash: location.hash });
 });
