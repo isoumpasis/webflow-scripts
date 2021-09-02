@@ -3208,12 +3208,13 @@ function triggerGtagEvent(eventName, params = {}) {
         Object.keys(params).length && JSON.stringify(params)
       }`
     );
-  gtag('event', eventName, params);
+  // gtag('event', eventName, params);
+  gtag('event', 'test_eventt');
   return {
     status: 'OK',
-    message: `${eventName} event triggered with params ${
+    message: `"${eventName}" event triggered with params: "${
       Object.keys(params).length && JSON.stringify(params)
-    }`
+    }"`
   };
 }
 
