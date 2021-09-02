@@ -3203,5 +3203,10 @@ const testBtn = document.querySelector('.link-block-6');
 testBtn.addEventListener('click', e => {
   console.log('test btn clicked', e);
 
-  gtag('event', 'learn_more', { hash: location.hash });
+  gtag('event', 'learn_more', {
+    hash: location.hash,
+    event_callback: function () {
+      console.log('event learn_more triggered');
+    }
+  });
 });
