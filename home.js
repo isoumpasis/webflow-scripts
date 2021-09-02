@@ -3195,11 +3195,13 @@ function getNextLotteryDate(date) {
   return new Date(date.getTime() + minutes * 60000);
 }
 
-/*
+/* GTAG */
 
-[x] server init: calc a base date from a set seed date
-[x] local init: get base date from server
-[] when expires locally start a 10 day countdown and update base date locally
-[x] when expires on the server set a new 10 day distance server base date
+// Mathe perissotera TEST
+const testBtn = document.querySelector('.link-block-6');
 
-*/
+testBtn.addEventListener('click', e => {
+  console.log('test btn clicked', e);
+
+  gtag('event', 'learn_more', { hash: location.hash });
+});
