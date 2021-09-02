@@ -3208,8 +3208,7 @@ function triggerGtagEvent(eventName, params = {}) {
         Object.keys(params).length && JSON.stringify(params)
       }`
     );
-  // gtag('event', eventName, params);
-  gtag('event', 'test_eventt');
+  gtag('event', eventName, params);
   return {
     status: 'OK',
     message: `"${eventName}" event triggered with params: "${
@@ -3223,6 +3222,7 @@ const testBtn = document.querySelector('.link-block-6');
 
 testBtn.addEventListener('click', e => {
   console.log('test btn clicked', e);
-  const res = triggerGtagEvent('learn_more', { hash: location.hash });
+  // const res = triggerGtagEvent('learn_more', { hash: location.hash });
+  const res = triggerGtagEvent('test_eventt');
   console.log('res', res);
 });
