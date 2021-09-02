@@ -3222,5 +3222,6 @@ const testBtn = document.querySelector('.link-block-6');
 
 testBtn.addEventListener('click', e => {
   console.log('test btn clicked', e);
-  triggerGtagEvent('learn_more', { hash: location.hash });
+  const res = triggerGtagEvent('learn_more', { hash: location.hash });
+  console.log('res', res);
 });
