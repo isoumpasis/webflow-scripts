@@ -3221,8 +3221,6 @@ function triggerGtagEvent(eventName, params = {}) {
 const testBtn = document.querySelector('.link-block-6');
 
 testBtn.addEventListener('click', e => {
-  console.log('test btn clicked', e);
-  // const res = triggerGtagEvent('learn_more', { hash: location.hash });
-  const res = triggerGtagEvent('test_eventt');
-  console.log('res', res);
+  const res = triggerGtagEvent('learn_more', { hash: location.hash });
+  console.log(res);
 });
