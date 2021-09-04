@@ -3231,3 +3231,23 @@ function triggerStep2Ok() {
   const res = triggerGtagEvent('step_2_ok');
   console.log(res);
 }
+
+function isElementInViewport(el) {
+  var rect = el.getBoundingClientRect();
+
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+const doraEl = document.querySelector('#dora');
+document.addEventListener('scroll', e => {
+  console.log('scrolll');
+  if (isElementInViewport(doraEl)) {
+    console.log('on');
+  } else {
+    console.log('off');
+  }
+});
