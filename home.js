@@ -3236,9 +3236,10 @@ function isElementInViewport(el) {
   var rect = el.getBoundingClientRect();
 
   return (
-    rect.top >= 0 &&
+    (Math.abs(rect.top) / (window.innerHeight || document.documentElement.clientHeight) <= 0.5 ||
+      Math.abs(rect.bottom) / (window.innerHeight || document.documentElement.clientHeight) <=
+        0.5) &&
     rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
