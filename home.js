@@ -3244,7 +3244,6 @@ function isElementInViewport(el) {
 }
 const doraEl = document.querySelector('#dora');
 document.addEventListener('scroll', e => {
-  console.log('scrolll');
   if (isElementInViewport(doraEl)) {
     console.log('on');
   } else {
