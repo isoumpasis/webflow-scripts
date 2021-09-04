@@ -3232,14 +3232,15 @@ function triggerStep2Ok() {
   console.log(res);
 }
 
+let top1, bottom1;
+
 function isElementInViewport(el) {
   const rect = el.getBoundingClientRect();
-  const top = rect.top / (window.innerHeight || document.documentElement.clientHeight);
-  const bottom =
-    Math.abs(rect.bottom) / (window.innerHeight || document.documentElement.clientHeight);
+  top1 = rect.top / (window.innerHeight || document.documentElement.clientHeight);
+  bottom1 = Math.abs(rect.bottom) / (window.innerHeight || document.documentElement.clientHeight);
 
   return (
-    top <= 0.5 && // || (bottom <= 0.5 && bottom >= 0)) &&
+    ((top1 <= 0.5 && top1 >= 0) || (bottom1 <= 0.5 && bottom1 >= 0)) &&
     rect.left >= 0 &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
