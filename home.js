@@ -3249,7 +3249,7 @@ function isElementInViewport(el) {
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
-const doraEl = document.querySelector('#dora');
+const doraEl = document.querySelector('#hero');
 document.addEventListener('scroll', e => {
   if (isElementInViewport(doraEl)) {
     console.log('on');
