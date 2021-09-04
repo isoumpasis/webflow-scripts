@@ -1,5 +1,5 @@
 /* System Identification */
-const baseUrl = location.origin; // 'https://lovato-hellas.webflow.io';
+const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlLitres = '/litres';
 const urlDimensions = '/dimensions';

@@ -1,5 +1,5 @@
 /* System Identification */
-const baseUrl = location.origin; //'https://lovato-hellas.webflow.io'; //TODO change
+const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
@@ -1588,6 +1588,7 @@ function showResults(fetchedModelObj) {
       prokatavoliDoseis: true,
       easyPayMonthlyGain: true
     });
+    triggerStep2Ok();
   }
 }
 
@@ -3217,10 +3218,16 @@ function triggerGtagEvent(eventName, params = {}) {
   };
 }
 
-// Mathe perissotera TEST
-const testBtn = document.querySelector('.link-block-6');
-
-testBtn.addEventListener('click', e => {
-  const res = triggerGtagEvent('learn_more', { hash: location.hash });
+// learn_more
+const learnMoreLotteryBtn = document.querySelector('.link-block-6');
+learnMoreLotteryBtn.addEventListener('click', e => {
+  const res = triggerGtagEvent('learn_more');
   console.log(res);
 });
+
+// step_2_ok
+function triggerStep2Ok() {
+  console.log(userSelections);
+  const res = triggerGtagEvent('step_2_ok');
+  console.log(res);
+}
