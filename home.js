@@ -3237,7 +3237,7 @@ let top1, bottom1;
 function isElementInViewport(el) {
   const rect = el.getBoundingClientRect();
   top1 = rect.top / (window.innerHeight || document.documentElement.clientHeight);
-  bottom1 = Math.abs(rect.bottom) / (window.innerHeight || document.documentElement.clientHeight);
+  bottom1 = rect.bottom / (window.innerHeight || document.documentElement.clientHeight);
 
   return (
     ((top1 <= 0.5 && top1 >= 0) || (bottom1 <= 1 && bottom1 >= 0.5)) &&
