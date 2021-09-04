@@ -3233,12 +3233,13 @@ function triggerStep2Ok() {
 }
 
 function isElementInViewport(el) {
-  var rect = el.getBoundingClientRect();
+  const rect = el.getBoundingClientRect();
+  const top = rect.top / (window.innerHeight || document.documentElement.clientHeight);
+  // const bottom =
+  //   Math.abs(rect.bottom) / (window.innerHeight || document.documentElement.clientHeight);
 
   return (
-    (Math.abs(rect.top) / (window.innerHeight || document.documentElement.clientHeight) <= 0.5 ||
-      Math.abs(rect.bottom) / (window.innerHeight || document.documentElement.clientHeight) <=
-        0.5) &&
+    Math.abs(top) <= 0.5 &&
     rect.left >= 0 &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
