@@ -3242,7 +3242,9 @@ function isElementInViewport(el) {
   return (
     ((top1 <= 0.5 && top1 >= 0) ||
       (bottom1 <= 1 && bottom1 >= 0.5) ||
-      rect.height >= (window.innerHeight || document.documentElement.clientHeight)) &&
+      (rect.height >= (window.innerHeight || document.documentElement.clientHeight) &&
+        top1 >= 0.5 &&
+        bottom1 >= 0.5)) &&
     rect.left >= 0 &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
