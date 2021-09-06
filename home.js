@@ -2765,7 +2765,6 @@ async function enableGPSButtonClick({ showError = true } = {}) {
   } catch (e) {
     console.log('error on geolocation', e);
     if (!showError) return;
-    //TODO error or alert or both
     geolocationError = true;
     const error = document.querySelector('.geolocation-error');
     error.textContent = isFacebookBrowser()
