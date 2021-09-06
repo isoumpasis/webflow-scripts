@@ -470,6 +470,7 @@ function locationOnChange(value) {
   );
   resetLocationContainer();
 
+  let status;
   fetch(numPlaceUrl, {
     method: 'POST',
     headers: {
@@ -510,6 +511,7 @@ function showResults() {
   activeContainer = document.getElementById(typeContainerIdDict[foundTankObj.type]);
   renderResultsContainer(activeContainer);
   saveUserResults();
+  trigger_gogas_results();
 }
 
 function renderResultsContainer(container) {
@@ -590,7 +592,7 @@ function resetLocationContainer() {
 
 function populateClosestsPins(userLatLng) {
   [...document.querySelectorAll('.searching-closests')].map(el => (el.style.display = 'flex'));
-
+  let status;
   fetch(closestUrl, {
     method: 'POST',
     headers: {
@@ -958,6 +960,7 @@ const minutesCountdown = document.querySelector('#minutes');
 const secondsCountdown = document.querySelector('#seconds');
 
 function initLotteryCountdown() {
+  let status;
   fetch(baseDateUrl)
     .then(response => {
       status = response.status;
@@ -1030,11 +1033,34 @@ function startCountdown() {
     calculateTime(remainingMilliseconds);
   }, 1000);
 }
-/*
 
-[x] server init: calc a base date from a set seed date
-[x] local init: get base date from server
-[] when expires locally start a 10 day countdown and update base date locally
-[x] when expires on the server set a new 10 day distance server base date
+/* GTAG */
+function triggerGtagEvent(eventName, params = {}) {
+  if (typeof gtag === 'undefined') return { status: 'Error', message: 'gtag undefined' };
+  if (typeof eventName === 'undefined' || eventName === '')
+    return { status: 'Error', message: 'eventName undefined' };
 
-*/
+  params.event_callback = () =>
+    console.log(
+      `${eventName} event triggered with params ${
+        Object.keys(params).length && JSON.stringify(params)
+      }`
+    );
+  gtag('event', eventName, params);
+  return {
+    status: 'OK',
+    message: `"${eventName}" event triggered with params: "${
+      Object.keys(params).length && JSON.stringify(params)
+    }"`
+  };
+}
+
+function trigger_gogas_results() {
+  triggerGtagEvent('gogas_results', {
+    type: gogasSelections.foundTankObj.type,
+    price: gogasSelections.foundTankObj.price,
+    litres: gogasSelections.foundTankObj.litres,
+    diameter: gogasSelections.foundTankObj.diameter,
+    length: gogasSelections.foundTankObj.length
+  });
+}
