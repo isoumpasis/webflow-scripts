@@ -2768,7 +2768,7 @@ async function enableGPSButtonClick({ showError = true } = {}) {
     geolocationError = true;
     const error = document.querySelector('.geolocation-error');
     error.textContent = isFacebookBrowser()
-      ? 'Ανοίξτε τη σελίδα σε άλλον περιηγητή (Chrome, Firefox κλπ) γιατί το GPS δεν υποστηρίζεται από το περιηγητή του Facebook'
+      ? 'Ανοίξτε τη σελίδα σε άλλον περιηγητή (Chrome, Firefox κλπ) γιατί το GPS δεν υποστηρίζεται από το περιηγητή του Facebook. Επιλέξτε τις τρεις κουκίδες πάνω δεξιά στις ρυθμίσεις και στη συνέχεια άνοιγμα στο Chrome (ή άλλον περιηγητή).'
       : 'Η τοποθεσία σας είναι απενεργοποιημένη, προσπαθήστε ξανά';
     error.style.display = 'block';
   }
