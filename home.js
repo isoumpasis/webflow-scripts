@@ -2767,7 +2767,11 @@ async function enableGPSButtonClick({ showError = true } = {}) {
     if (!showError) return;
     //TODO error or alert or both
     geolocationError = true;
-    document.querySelector('.geolocation-error').style.display = 'block';
+    const error = document.querySelector('.geolocation-error');
+    error.textContent = isFacebookBrowser()
+      ? 'Ανοίξτε τη σελίδα σε άλλον περιηγητή (Chrome, Firefox κλπ) γιατί το GPS δεν υποστηρίζεται από το περιηγητή του Facebook'
+      : 'Η τοποθεσία σας είναι απενεργοποιημένη, προσπαθήστε ξανά';
+    error.style.display = 'block';
   }
 }
 
