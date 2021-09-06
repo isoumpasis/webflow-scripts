@@ -2608,6 +2608,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
       endLoadingSelect(e.target, triggeredFrom, 'download');
       closeSummaryForm();
+      trigger_system_summary('download');
     })
     .catch(error => {
       endLoadingSelect(e.target, triggeredFrom, 'download');
@@ -2666,6 +2667,7 @@ function emailSummarySubmit(e, triggeredFrom) {
           document.querySelector('.summary-form-success').style.display = 'none';
         }, 3000);
       }
+      trigger_system_summary('email');
     })
     .catch(error => {
       endLoadingSelect(e.target, triggeredFrom, 'email');
@@ -3262,3 +3264,7 @@ function isElementInViewport(el) {
 //     console.log('off');
 //   }
 // });
+
+function trigger_system_summary(type) {
+  triggerGtagEvent('system_summary', { type });
+}

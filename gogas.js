@@ -766,6 +766,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
       endLoadingSelect(e.target, triggeredFrom);
       closeSummaryForm();
+      trigger_gogas_summary('download');
     })
     .catch(error => {
       endLoadingSelect(e.target, triggeredFrom);
@@ -820,6 +821,7 @@ function emailSummarySubmit(e, triggeredFrom) {
         closeSummaryForm();
         document.querySelector('.summary-success-form').style.display = 'none';
       }, 3000);
+      trigger_gogas_summary('email');
     })
     .catch(error => {
       endLoadingSelect(e.target, triggeredFrom);
@@ -1063,4 +1065,8 @@ function trigger_gogas_results() {
     diameter: gogasSelections.results.foundTankObj.diameter,
     length: gogasSelections.results.foundTankObj.length
   });
+}
+
+function trigger_gogas_summary(type) {
+  triggerGtagEvent('gogas_summary', { type });
 }
