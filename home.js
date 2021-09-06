@@ -3235,3 +3235,29 @@ function triggerStep2Ok() {
   const res = triggerGtagEvent('step_2_ok');
   console.log(res);
 }
+
+let top1, bottom1;
+
+function isElementInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  top1 = rect.top / (window.innerHeight || document.documentElement.clientHeight);
+  bottom1 = rect.bottom / (window.innerHeight || document.documentElement.clientHeight);
+
+  return (
+    ((top1 <= 0.5 && top1 >= 0) ||
+      (bottom1 <= 1 && bottom1 >= 0.5) ||
+      (rect.height >= (window.innerHeight || document.documentElement.clientHeight) &&
+        top1 <= 0.5 &&
+        bottom1 >= 0.5)) &&
+    rect.left >= 0 &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+const doraEl = document.querySelector('#fuelPricesSelectNoVehicle');
+document.addEventListener('scroll', e => {
+  if (isElementInViewport(doraEl)) {
+    console.log('on');
+  } else {
+    console.log('off');
+  }
+});
