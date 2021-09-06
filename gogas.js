@@ -1059,14 +1059,14 @@ function triggerGtagEvent(eventName, params = {}) {
 
 function trigger_gogas_results() {
   triggerGtagEvent('gogas_results', {
-    type: gogasSelections.results.foundTankObj.type,
-    price: gogasSelections.results.foundTankObj.price,
-    litres: gogasSelections.results.foundTankObj.litres,
-    diameter: gogasSelections.results.foundTankObj.diameter,
-    length: gogasSelections.results.foundTankObj.length
+    gogas_type: gogasSelections.results.foundTankObj.type,
+    gogas_price: gogasSelections.results.foundTankObj.price,
+    gogas_litres: gogasSelections.results.foundTankObj.litres,
+    gogas_diameter: gogasSelections.results.foundTankObj.diameter,
+    gogas_length: gogasSelections.results.foundTankObj.length
   });
 }
 
 function trigger_gogas_summary(type) {
-  triggerGtagEvent('gogas_summary', { type });
+  triggerGtagEvent('gogas_summary', { summary_type: type });
 }

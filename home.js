@@ -3233,12 +3233,6 @@ learnMoreLotteryBtn.addEventListener('click', e => {
 function trigger_car_step_2() {
   triggerGtagEvent('car_step_2', {
     selected_fuel: userSelections.selectedFuel,
-    vehicle: {
-      make: userSelections.vehicle.identification.vehicleValues.make,
-      year: userSelections.vehicle.identification.vehicleValues.year,
-      model: userSelections.vehicle.identification.vehicleValues.model,
-      description: userSelections.vehicle.identification.vehicleValues.description
-    },
     vehicle_make: userSelections.vehicle.identification.vehicleValues.make,
     vehicle_year: userSelections.vehicle.identification.vehicleValues.year,
     vehicle_model: userSelections.vehicle.identification.vehicleValues.model,
@@ -3272,5 +3266,5 @@ function isElementInViewport(el) {
 // });
 
 function trigger_system_summary(type) {
-  triggerGtagEvent('system_summary', { type });
+  triggerGtagEvent('system_summary', { summary_type: type });
 }
