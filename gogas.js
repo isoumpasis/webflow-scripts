@@ -1042,12 +1042,13 @@ function triggerGtagEvent(eventName, params = {}) {
   if (typeof eventName === 'undefined' || eventName === '')
     return { status: 'Error', message: 'eventName undefined' };
 
-  params.event_callback = () =>
-    console.log(
-      `${eventName} event triggered with params ${
-        Object.keys(params).length && JSON.stringify(params)
-      }`
-    );
+  // params.event_callback = () =>
+  //   console.log(
+  //     `${eventName} event triggered with params ${
+  //       Object.keys(params).length && JSON.stringify(params)
+  //     }`
+  //   );
+
   gtag('event', eventName, params);
   return {
     status: 'OK',
