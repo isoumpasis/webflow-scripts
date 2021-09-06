@@ -3224,14 +3224,12 @@ function triggerGtagEvent(eventName, params = {}) {
 // learn_more
 const learnMoreLotteryBtn = document.querySelector('.link-block-6');
 learnMoreLotteryBtn.addEventListener('click', e => {
-  const res = triggerGtagEvent('learn_more');
-  console.log(res);
+  triggerGtagEvent('learn_more');
 });
 
 // step_2_ok
 function triggerStep2Ok() {
-  console.log(userSelections);
-  const res = triggerGtagEvent('step_2_ok', {
+  triggerGtagEvent('car_step_2', {
     selectedFuel: userSelections.selectedFuel,
     make: userSelections.vehicle.identification.vehicleValues.make,
     year: userSelections.vehicle.identification.vehicleValues.year,
@@ -3239,29 +3237,26 @@ function triggerStep2Ok() {
     description: userSelections.vehicle.identification.vehicleValues.description,
     system: userSelections.vehicle.suggestions.systems[0].name
   });
-  console.log(res);
 }
-
-let top1, bottom1;
 
 function isElementInViewport(el) {
   const rect = el.getBoundingClientRect();
-  top1 = rect.top / (window.innerHeight || document.documentElement.clientHeight);
-  bottom1 = rect.bottom / (window.innerHeight || document.documentElement.clientHeight);
+  const top = rect.top / (window.innerHeight || document.documentElement.clientHeight);
+  const bottom = rect.bottom / (window.innerHeight || document.documentElement.clientHeight);
 
   return (
-    ((top1 <= 0.5 && top1 >= 0) ||
-      (bottom1 <= 1 && bottom1 >= 0.5) ||
+    ((top <= 0.5 && top >= 0) ||
+      (bottom <= 1 && bottom >= 0.5) ||
       (rect.height >= (window.innerHeight || document.documentElement.clientHeight) &&
-        top1 <= 0.5 &&
-        bottom1 >= 0.5)) &&
+        top <= 0.5 &&
+        bottom >= 0.5)) &&
     rect.left >= 0 &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
-const doraEl = document.querySelector('#fuelPricesSelectNoVehicle');
+const viewEl = document.querySelector('#calculator');
 document.addEventListener('scroll', e => {
-  if (isElementInViewport(doraEl)) {
+  if (isElementInViewport(viewEl)) {
     console.log('on');
   } else {
     console.log('off');
