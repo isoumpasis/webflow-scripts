@@ -3231,7 +3231,14 @@ learnMoreLotteryBtn.addEventListener('click', e => {
 // step_2_ok
 function triggerStep2Ok() {
   console.log(userSelections);
-  const res = triggerGtagEvent('step_2_ok');
+  const res = triggerGtagEvent('step_2_ok', {
+    selectedFuel: userSelections.selectedFuel,
+    make: userSelections.vehicle.identification.vehicleValues.make,
+    year: userSelections.vehicle.identification.vehicleValues.year,
+    model: userSelections.vehicle.identification.vehicleValues.model,
+    description: userSelections.vehicle.identification.vehicleValues.description,
+    system: userSelections.vehicle.suggestions.systems[0].name
+  });
   console.log(res);
 }
 
