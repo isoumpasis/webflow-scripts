@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
   litresSelect.disabled = true;
   dimensionSelect.disabled = true;
   locationSelect.disabled = true;
-  if (getGogasSelections()) loadGogasSelections();
+  // if (getGogasSelections()) loadGogasSelections();
 
   initUserInfo();
   showFacebookBrowserProblem(isFacebookBrowser());

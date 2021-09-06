@@ -1588,7 +1588,7 @@ function showResults(fetchedModelObj) {
       prokatavoliDoseis: true,
       easyPayMonthlyGain: true
     });
-    triggerStep2Ok();
+    trigger_car_step_2();
   }
 }
 
@@ -3228,7 +3228,7 @@ learnMoreLotteryBtn.addEventListener('click', e => {
 });
 
 // step_2_ok
-function triggerStep2Ok() {
+function trigger_car_step_2() {
   triggerGtagEvent('car_step_2', {
     selectedFuel: userSelections.selectedFuel,
     make: userSelections.vehicle.identification.vehicleValues.make,
