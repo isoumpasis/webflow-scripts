@@ -3232,12 +3232,18 @@ learnMoreLotteryBtn.addEventListener('click', e => {
 // step_2_ok
 function trigger_car_step_2() {
   triggerGtagEvent('car_step_2', {
-    selectedFuel: userSelections.selectedFuel,
-    make: userSelections.vehicle.identification.vehicleValues.make,
-    year: userSelections.vehicle.identification.vehicleValues.year,
-    model: userSelections.vehicle.identification.vehicleValues.model,
-    description: userSelections.vehicle.identification.vehicleValues.description,
-    system: userSelections.vehicle.suggestions.systems[0].name
+    selected_fuel: userSelections.selectedFuel,
+    vehicle: {
+      make: userSelections.vehicle.identification.vehicleValues.make,
+      year: userSelections.vehicle.identification.vehicleValues.year,
+      model: userSelections.vehicle.identification.vehicleValues.model,
+      description: userSelections.vehicle.identification.vehicleValues.description
+    },
+    vehicle_make: userSelections.vehicle.identification.vehicleValues.make,
+    vehicle_year: userSelections.vehicle.identification.vehicleValues.year,
+    vehicle_model: userSelections.vehicle.identification.vehicleValues.model,
+    vehicle_description: userSelections.vehicle.identification.vehicleValues.description,
+    suggested_system: userSelections.vehicle.suggestions.systems[0].name
   });
 }
 
