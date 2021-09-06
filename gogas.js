@@ -217,7 +217,12 @@ function getUserInfo() {
     } catch (e) {
       console.log('error on geolocation', e);
       geolocationError = true;
-      [...document.querySelectorAll('.geolocation-error')].map(el => (el.style.display = 'block'));
+      [...document.querySelectorAll('.geolocation-error')].map(el => {
+        el.textContent = isFacebookBrowser()
+          ? 'Ανοίξτε τη σελίδα σε άλλον περιηγητή (Chrome, Firefox κλπ) γιατί το GPS δεν υποστηρίζεται από το περιηγητή του Facebook. Επιλέξτε τις τρεις κουκίδες πάνω δεξιά στις ρυθμίσεις και στη συνέχεια άνοιγμα στο Chrome (ή άλλον περιηγητή).'
+          : 'Η τοποθεσία σας είναι απενεργοποιημένη, προσπαθήστε ξανά';
+        el.style.display = 'block';
+      });
     }
   })
 );
