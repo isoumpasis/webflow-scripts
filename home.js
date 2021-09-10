@@ -1640,6 +1640,16 @@ function showDirectResults(fetchedModelObj) {
     document.querySelector(
       `.not-convertible-${userSelections.selectedFuel}-container`
     ).style.display = 'grid';
+    //send not convertible here
+    console.log('!!!!!', userSelections);
+    // triggerGtagEvent('not_convertible', {
+    //   selected_fuel: userSelections.selectedFuel,
+    //   vehicle_make: userSelections.vehicle.identification.vehicleValues.make,
+    //   vehicle_year: userSelections.vehicle.identification.vehicleValues.year,
+    //   vehicle_model: userSelections.vehicle.identification.vehicleValues.model,
+    //   vehicle_description: userSelections.vehicle.identification.vehicleValues.description,
+    //   suggested_system: userSelections.vehicle.suggestions.systems[0].name
+    // });
   }
 }
 
