@@ -2435,12 +2435,12 @@ sliders.forEach((slider, i) => {
 perMonthCheckbox.addEventListener('change', function () {
   calcResult();
 });
-
+let lpgConsumption, cngConsumption;
 function calcResult() {
   const selectedVehicleIsDirect = hasResult() && fetchedModelObj.isDirect;
 
-  const lpgConsumption = selectedVehicleIsDirect ? 1.28 : 1.15;
-  const cngConsumption = selectedVehicleIsDirect ? -0.333 : -0.444;
+  lpgConsumption = selectedVehicleIsDirect ? 1.28 : 1.15;
+  cngConsumption = selectedVehicleIsDirect ? -0.333 : -0.444;
 
   let petrolCostPerMonth, lpgCostPerMonth, cngCostPerMonth;
 
