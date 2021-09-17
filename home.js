@@ -2398,7 +2398,7 @@ function isApaitoumenoEmulatorType(type) {
 
 /* Calculator */
 // let lpgConsumption = 1.15; //15% more than petrol (direct => 1.28)
-let cngConsumption = -0.444; //44,44% less than petrol
+// let cngConsumption = -0.444; //44,44% less than petrol
 
 const sliders = document.querySelectorAll('.range-slider-calc');
 const outputs = document.querySelectorAll('.calc-output');
