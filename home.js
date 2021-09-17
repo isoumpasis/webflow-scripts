@@ -2397,7 +2397,7 @@ function isApaitoumenoEmulatorType(type) {
 /* Basket END */
 
 /* Calculator */
-let lpgConsumption = 1.15; //15% more than petrol
+// let lpgConsumption = 1.15; //15% more than petrol (direct => 1.28)
 let cngConsumption = -0.444; //44,44% less than petrol
 
 const sliders = document.querySelectorAll('.range-slider-calc');
@@ -2437,6 +2437,11 @@ perMonthCheckbox.addEventListener('change', function () {
 });
 
 function calcResult() {
+  const selectedVehicleIsDirect = hasResult() && fetchedModelObj.isDirect;
+
+  const lpgConsumption = selectedVehicleIsDirect ? 1.28 : 1.15;
+  const cngConsumption = selectedVehicleIsDirect ? -0.333 : -0.444;
+
   let petrolCostPerMonth, lpgCostPerMonth, cngCostPerMonth;
 
   const ltPer100Km = parseFloat(document.querySelector('.lt-100km').value);
