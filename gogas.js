@@ -1078,6 +1078,7 @@ function trigger_gogas_summary(type) {
 function initTankWrapperClicks() {
   [...document.querySelectorAll('.tank-img-wrapper')].map((el, i) => {
     el.addEventListener('click', e => {
+      if (typeSelect.selectedIndex === i) return;
       typeSelect.selectedIndex = i + 1;
       typeSelectOnChange();
     });
