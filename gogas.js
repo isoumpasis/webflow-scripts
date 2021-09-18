@@ -1076,11 +1076,19 @@ function trigger_gogas_summary(type) {
 }
 
 function initTankWrapperClicks() {
-  [...document.querySelectorAll('.tank-img-wrapper')].map((el, i) => {
-    el.addEventListener('click', e => {
-      if (typeSelect.selectedIndex === i) return;
-      typeSelect.selectedIndex = i + 1;
-      typeSelectOnChange();
-    });
+  document.querySelector('#intTank').addEventListener('click', e => {
+    if (typeSelect.selectedIndex === 1) return;
+    typeSelect.selectedIndex = 1;
+    typeSelectOnChange();
+  });
+  document.querySelector('#extTank').addEventListener('click', e => {
+    if (typeSelect.selectedIndex === 2) return;
+    typeSelect.selectedIndex = 2;
+    typeSelectOnChange();
+  });
+  document.querySelector('#cylTank').addEventListener('click', e => {
+    if (typeSelect.selectedIndex === 3) return;
+    typeSelect.selectedIndex = 3;
+    typeSelectOnChange();
   });
 }
