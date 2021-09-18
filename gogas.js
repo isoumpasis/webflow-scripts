@@ -125,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
   showFacebookBrowserProblem(isFacebookBrowser());
 
   initLotteryCountdown();
+  initTankWrapperClicks();
 });
 
 function showFacebookBrowserProblem(show) {
@@ -280,7 +281,9 @@ function setLocationSelectHeader(label) {
   locationSelect.innerHTML = temp.join('');
 }
 
-typeSelect.addEventListener('change', function () {
+typeSelect.addEventListener('change', typeSelectOnChange);
+
+function typeSelectOnChange() {
   litresSelect.disabled = true;
   dimensionSelect.disabled = true;
   locationSelect.disabled = true;
@@ -293,7 +296,7 @@ typeSelect.addEventListener('change', function () {
   });
   document.querySelector('.init-container').style.display = 'flex';
 
-  if (!this.value) return;
+  if (!typeSelect.value) return;
 
   litresSelect.disabled = false;
   litresSelect.innerHTML = '';
@@ -305,7 +308,7 @@ typeSelect.addEventListener('change', function () {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ type: this.value })
+    body: JSON.stringify({ type: typeSelect.value })
   })
     .then(response => {
       status = response.status;
@@ -327,7 +330,7 @@ typeSelect.addEventListener('change', function () {
       litresSelect.innerHTML = '<option value="">Προσπαθήστε ξανά</option>';
       console.error('Error Fetch:', error);
     });
-});
+}
 
 function populateLitresSelect(fetchedLitres, options = {}) {
   let litresOptionsArray = ['<option value="">Επιλέξτε Λίτρα</option>'];
@@ -1070,4 +1073,13 @@ function trigger_gogas_results() {
 
 function trigger_gogas_summary(type) {
   triggerGtagEvent('gogas_summary', { summary_type: type });
+}
+
+function initTankWrapperClicks() {
+  [...document.querySelectorAll('.tank-img-wrapper')].map((el, i) => {
+    el.addEventListener('click', e => {
+      typeSelect.selectedIndex = i + 1;
+      typeSelectOnChange();
+    });
+  });
 }
