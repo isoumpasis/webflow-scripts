@@ -1067,7 +1067,8 @@ function trigger_gogas_results() {
     gogas_price: gogasSelections.results.foundTankObj.price,
     gogas_litres: gogasSelections.results.foundTankObj.litres,
     gogas_diameter: gogasSelections.results.foundTankObj.diameter,
-    gogas_length: gogasSelections.results.foundTankObj.length
+    gogas_length: gogasSelections.results.foundTankObj.length,
+    user_location: gogasSelections.form.activeValues.location
   });
 }
 
@@ -1092,3 +1093,18 @@ function initTankWrapperClicks() {
     typeSelectOnChange();
   });
 }
+
+function trigger_multivalve_open() {
+  triggerGtagEvent('multivalve_open', {
+    gogas_type: gogasSelections.results.foundTankObj.type,
+    gogas_price: gogasSelections.results.foundTankObj.price,
+    gogas_litres: gogasSelections.results.foundTankObj.litres,
+    gogas_diameter: gogasSelections.results.foundTankObj.diameter,
+    gogas_length: gogasSelections.results.foundTankObj.length,
+    user_location: gogasSelections.form.activeValues.location
+  });
+}
+
+[...document.querySelectorAll('.multivalve-open')].map(el =>
+  el.addEventListener('click', trigger_multivalve_open)
+);
