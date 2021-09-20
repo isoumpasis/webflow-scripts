@@ -3237,11 +3237,13 @@ function triggerGtagEvent(eventName, params = {}) {
   };
 }
 
-// learn_more
-const learnMoreLotteryBtn = document.querySelector('.link-block-6');
-learnMoreLotteryBtn.addEventListener('click', e => {
-  triggerGtagEvent('learn_more');
-});
+// learn_more_klirwsh
+document
+  .querySelector('.link-block-6')
+  .addEventListener('click', e => trigger_learn_more_klirwsh());
+function learn_more_klirwsh() {
+  triggerGtagEvent('learn_more_klirwsh', { from_page: 'arxiki' });
+}
 
 // step_2_ok
 function trigger_car_step_2() {

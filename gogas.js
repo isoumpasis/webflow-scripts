@@ -1108,3 +1108,10 @@ function trigger_multivalve_open() {
 [...document.querySelectorAll('.multivalve-open')].map(el =>
   el.addEventListener('click', trigger_multivalve_open)
 );
+
+document
+  .querySelector('.link-block-6')
+  .addEventListener('click', e => trigger_learn_more_klirwsh());
+function trigger_learn_more_klirwsh() {
+  triggerGtagEvent('learn_more_klirwsh', { from_page: 'go-gas' });
+}
