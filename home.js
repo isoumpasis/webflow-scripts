@@ -3241,7 +3241,7 @@ function triggerGtagEvent(eventName, params = {}) {
 document
   .querySelector('.link-block-6')
   .addEventListener('click', e => trigger_learn_more_klirwsh());
-function learn_more_klirwsh() {
+function trigger_learn_more_klirwsh() {
   triggerGtagEvent('learn_more_klirwsh', { from_page: 'arxiki' });
 }
 
