@@ -197,7 +197,7 @@ async function initMap() {
 
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(75, 75),
+        scaledSize: new google.maps.Size(60, 60),
         origin: new google.maps.Point(0, 0)
       });
       selectedMarker = marker;
