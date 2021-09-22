@@ -309,7 +309,7 @@ function openInfoWindow(marker) {
   });
   infoWindow.open(map);
 
-  // trigger_pin_opened(markerProps);
+  trigger_pin_opened(markerProps);
 }
 
 function prepareInformation(markerProps) {
