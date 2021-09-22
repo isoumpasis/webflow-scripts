@@ -174,7 +174,7 @@ async function initMap() {
       if (selectedMarker === marker) return;
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(52, 52),
+        scaledSize: new google.maps.Size(60, 60),
         origin: new google.maps.Point(1, 0)
       });
     });
@@ -197,7 +197,7 @@ async function initMap() {
 
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(60, 60),
+        scaledSize: new google.maps.Size(55, 55),
         origin: new google.maps.Point(0, 0)
       });
       selectedMarker = marker;
@@ -210,7 +210,7 @@ async function initMap() {
       if (selectedMarker === marker) return;
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(75, 75),
+        scaledSize: new google.maps.Size(55, 55),
         origin: new google.maps.Point(0, 0)
       });
     });
@@ -943,7 +943,7 @@ async function urlParamsConfig() {
     if (selectedMarker) selectedMarker.setAnimation(null);
     foundMarker.setIcon({
       ...foundMarker.getIcon(),
-      scaledSize: new google.maps.Size(75, 75),
+      scaledSize: new google.maps.Size(55, 55),
       origin: new google.maps.Point(0, 0)
     });
     selectedMarker = foundMarker;
