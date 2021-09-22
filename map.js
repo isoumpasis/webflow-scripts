@@ -1,12 +1,12 @@
 const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
-// const episimosIconUrl =
-// 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
-const episimosIconUrl =
+const lovatoIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60663eb3c347c9975c35d5d9_location-icon-white.svg';
-const testIconUrl =
-  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60b7be0c02c0204b8b52c4b8_tank-effect-green.png';
+const lovatoPremiumIconUrl =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60e22644300db40085ff4a4e_icon-1.1s-197px.svg';
 const gogasIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60c7e4838a662c9a1bee7789_go-gas-location-icon-01.svg';
+const gogasPremiumIconUrl =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60b4fe03d012f7abc4503042_gogasint.png';
 const markerClustererIcon =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6059ab2542758022d1e784de_m1.png';
 
@@ -979,5 +979,9 @@ function isMobile() {
 }
 
 function getIconUrl(props, type = 'lovato') {
-  return props.imgs.length ? testIconUrl : type === 'lovato' ? episimosIconUrl : gogasIconUrl;
+  if (props.imgs.length) {
+    return type === 'lovato' ? lovatoPremiumIconUrl : gogasPremiumIconUrl;
+  } else {
+    return type === 'lovato' ? lovatoIconUrl : gogasIconUrl;
+  }
 }
