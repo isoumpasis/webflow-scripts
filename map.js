@@ -133,7 +133,7 @@ async function initMap() {
       position: cachedPin.geometry,
       icon: {
         url: getIconUrl(cachedPin.properties),
-        scaledSize: new google.maps.Size(65, 65),
+        scaledSize: new google.maps.Size(60, 60),
         origin: new google.maps.Point(0, 0)
       },
       clickable: true,
@@ -174,7 +174,7 @@ async function initMap() {
       if (selectedMarker === marker) return;
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(60, 60),
+        scaledSize: new google.maps.Size(62, 62),
         origin: new google.maps.Point(0, 0)
       });
     });
@@ -197,7 +197,7 @@ async function initMap() {
 
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(55, 55),
+        scaledSize: new google.maps.Size(60, 60),
         origin: new google.maps.Point(0, 0)
       });
       selectedMarker = marker;
@@ -210,7 +210,7 @@ async function initMap() {
       if (selectedMarker === marker) return;
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(55, 55),
+        scaledSize: new google.maps.Size(60, 60),
         origin: new google.maps.Point(0, 0)
       });
     });
@@ -943,7 +943,7 @@ async function urlParamsConfig() {
     if (selectedMarker) selectedMarker.setAnimation(null);
     foundMarker.setIcon({
       ...foundMarker.getIcon(),
-      scaledSize: new google.maps.Size(55, 55),
+      scaledSize: new google.maps.Size(60, 60),
       origin: new google.maps.Point(0, 0)
     });
     selectedMarker = foundMarker;
