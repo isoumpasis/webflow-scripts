@@ -4,7 +4,7 @@ const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
 const episimosIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60663eb3c347c9975c35d5d9_location-icon-white.svg';
 const testIconUrl =
-  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/611066966c37050d52725786_edit-01.svg';
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60b7be0c02c0204b8b52c4b8_tank-effect-green.png';
 const gogasIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60c7e4838a662c9a1bee7789_go-gas-location-icon-01.svg';
 const markerClustererIcon =
