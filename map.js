@@ -133,7 +133,7 @@ async function initMap() {
       position: cachedPin.geometry,
       icon: {
         url: getIconUrl(cachedPin.properties),
-        scaledSize: new google.maps.Size(75, 75),
+        scaledSize: new google.maps.Size(65, 65),
         origin: new google.maps.Point(0, 0)
       },
       clickable: true,
@@ -175,7 +175,7 @@ async function initMap() {
       marker.setIcon({
         ...marker.getIcon(),
         scaledSize: new google.maps.Size(60, 60),
-        origin: new google.maps.Point(1, 0)
+        origin: new google.maps.Point(0, 0)
       });
     });
     // marker.addListener('mouseover', () => {
