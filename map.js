@@ -868,7 +868,7 @@ function filterMarkers() {
   ) {
     markers.map(m => m.setIcon({ ...m.getIcon(), url: gogasIconUrl }));
   } else {
-    markers.map(m => m.setIcon({ ...m.getIcon(), url: episimosIconUrl }));
+    markers.map(m => m.setIcon({ ...m.getIcon(), url: getIconUrl(m) }));
   }
 
   markerClusterer.repaint();
@@ -979,6 +979,5 @@ function isMobile() {
 }
 
 function getIconUrl(pin) {
-  console.log(pin);
-  return episimosIconUrl;
+  return pin.properties.imgs.length ? testIconUrl : episimosIconUrl;
 }
