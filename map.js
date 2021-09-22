@@ -2,7 +2,7 @@ const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
 const lovatoIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60663eb3c347c9975c35d5d9_location-icon-white.svg';
 const lovatoPremiumIconUrl =
-  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60e22644300db40085ff4a4e_icon-1.1s-197px.svg';
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6062e78bd5d2741ee801096e_ecu-exr.png';
 const gogasIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60c7e4838a662c9a1bee7789_go-gas-location-icon-01.svg';
 const gogasPremiumIconUrl =
