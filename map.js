@@ -1,6 +1,6 @@
 const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
 const lovatoIconUrl =
-  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60da84940a1f6e5438b279a9_location-icon-menu-01-01.svg';
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c316426410dd24bb4_lovato-icon.svg';
 const lovatoPremiumIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c6a2bd37fda58d46f_lovato-icon-photo.svg';
 const gogasIconUrl =
@@ -133,7 +133,7 @@ async function initMap() {
       position: cachedPin.geometry,
       icon: {
         url: getIconUrl(cachedPin.properties),
-        scaledSize: new google.maps.Size(50, 50),
+        scaledSize: new google.maps.Size(75, 75),
         origin: new google.maps.Point(0, 0)
       },
       clickable: true,
@@ -197,7 +197,7 @@ async function initMap() {
 
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(50, 50),
+        scaledSize: new google.maps.Size(75, 75),
         origin: new google.maps.Point(0, 0)
       });
       selectedMarker = marker;
@@ -210,7 +210,7 @@ async function initMap() {
       if (selectedMarker === marker) return;
       marker.setIcon({
         ...marker.getIcon(),
-        scaledSize: new google.maps.Size(50, 50),
+        scaledSize: new google.maps.Size(75, 75),
         origin: new google.maps.Point(0, 0)
       });
     });
@@ -943,7 +943,7 @@ async function urlParamsConfig() {
     if (selectedMarker) selectedMarker.setAnimation(null);
     foundMarker.setIcon({
       ...foundMarker.getIcon(),
-      scaledSize: new google.maps.Size(50, 50),
+      scaledSize: new google.maps.Size(75, 75),
       origin: new google.maps.Point(0, 0)
     });
     selectedMarker = foundMarker;
