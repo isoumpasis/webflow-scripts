@@ -132,7 +132,7 @@ async function initMap() {
     return new google.maps.Marker({
       position: cachedPin.geometry,
       icon: {
-        url: getIconUrl(cachedPin),
+        url: getIconUrl(cachedPin.properties),
         scaledSize: new google.maps.Size(50, 50),
         origin: new google.maps.Point(0, 0)
       },
@@ -866,9 +866,9 @@ function filterMarkers() {
     checkedLabels.some(l => l.id === 'gogasTanks') &&
     checkedLabels.every(l => l.id !== 'lovatoSystems')
   ) {
-    markers.map(m => m.setIcon({ ...m.getIcon(), url: gogasIconUrl }));
+    markers.map(m => m.setIcon({ ...m.getIcon(), url: getIconUrl(m.props, 'gogas') }));
   } else {
-    markers.map(m => m.setIcon({ ...m.getIcon(), url: getIconUrl(m) }));
+    markers.map(m => m.setIcon({ ...m.getIcon(), url: getIconUrl(m.props) }));
   }
 
   markerClusterer.repaint();
@@ -978,6 +978,6 @@ function isMobile() {
   return window.matchMedia('(max-width: 430px)').matches;
 }
 
-function getIconUrl(pin) {
-  return pin.properties.imgs.length ? testIconUrl : episimosIconUrl;
+function getIconUrl(props, type = 'lovato') {
+  return props.imgs.length ? testIconUrl : type === 'lovato' ? episimosIconUrl : gogasIconUrl;
 }
