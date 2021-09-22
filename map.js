@@ -3,6 +3,8 @@ const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
 // 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/603a68cae2a619145dcfc86e_location-icon.svg';
 const episimosIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60663eb3c347c9975c35d5d9_location-icon-white.svg';
+const testIconUrl =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/611066966c37050d52725786_edit-01.svg';
 const gogasIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60c7e4838a662c9a1bee7789_go-gas-location-icon-01.svg';
 const markerClustererIcon =
@@ -130,7 +132,7 @@ async function initMap() {
     return new google.maps.Marker({
       position: cachedPin.geometry,
       icon: {
-        url: episimosIconUrl,
+        url: getIconUrl(cachedPin),
         scaledSize: new google.maps.Size(50, 50),
         origin: new google.maps.Point(0, 0)
       },
@@ -974,4 +976,9 @@ function closeMapMenu() {
 
 function isMobile() {
   return window.matchMedia('(max-width: 430px)').matches;
+}
+
+function getIconUrl(pin) {
+  console.log(pin);
+  return episimosIconUrl;
 }
