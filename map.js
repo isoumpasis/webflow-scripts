@@ -308,6 +308,8 @@ function openInfoWindow(marker) {
     pixelOffset: new google.maps.Size(0, -60)
   });
   infoWindow.open(map);
+
+  trigger_info_window_opened(markerProps);
 }
 
 function prepareInformation(markerProps) {
@@ -984,4 +986,34 @@ function getIconUrl(props, type = 'lovato') {
   } else {
     return type === 'lovato' ? lovatoIconUrl : gogasIconUrl;
   }
+}
+
+/* GTAG */
+function triggerGtagEvent(eventName, params = {}) {
+  if (typeof gtag === 'undefined') return { status: 'Error', message: 'gtag undefined' };
+  if (typeof eventName === 'undefined' || eventName === '')
+    return { status: 'Error', message: 'eventName undefined' };
+
+  // params.event_callback = () =>
+  //   console.log(
+  //     `${eventName} event triggered with params ${
+  //       Object.keys(params).length && JSON.stringify(params)
+  //     }`
+  //   );
+
+  gtag('event', eventName, params);
+  return {
+    status: 'OK',
+    message: `"${eventName}" event triggered with params: "${
+      Object.keys(params).length && JSON.stringify(params)
+    }"`
+  };
+}
+
+function trigger_pin_opened(props) {
+  triggerGtagEvent('pin_opened', {
+    pin_name: props.name,
+    pin_has_images: !!props.imgs.length,
+    pin_images_num: props.imgs.length
+  });
 }
