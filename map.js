@@ -1006,6 +1006,7 @@ function trigger_pin_opened(props) {
   triggerGtagEvent('pin_opened', {
     pin_name: props.name,
     pin_has_images: !!props.imgs.length,
-    pin_images_num: props.imgs.length
+    pin_images_num: props.imgs.length,
+    pin_location: props.region
   });
 }
