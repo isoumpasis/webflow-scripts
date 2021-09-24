@@ -1003,7 +1003,6 @@ function triggerGtagEvent(eventName, params = {}) {
 }
 
 function trigger_pin_opened(props) {
-  console.log(props);
   triggerGtagEvent('pin_opened', {
     pin_name: props.name,
     pin_has_images: !!props.imgs.length,
