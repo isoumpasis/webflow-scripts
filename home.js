@@ -564,7 +564,7 @@ function modifyFuelPriceSliders(value, { save = false } = {}) {
   sliders[3].value = locationObj.lpg;
   outputs[3].value = locationObj.lpg;
   calcCovers[3].style.width = calcCoverWidth(sliders[3]) + '%';
-  calcResult();
+  calcResult(true);
   if (save) {
     userSelections.calculator.fuelPricesSelectedIndex = fuelPricesSelectVehicle.selectedIndex;
     userSelections.location = {
@@ -2436,7 +2436,7 @@ perMonthCheckbox.addEventListener('change', function () {
   calcResult();
 });
 let lpgConsumption, cngConsumption;
-function calcResult() {
+function calcResult(initRun = false) {
   const selectedVehicleIsDirect = hasResult() && fetchedModelObj.isDirect;
 
   lpgConsumption = selectedVehicleIsDirect ? 1.28 : 1.15;
@@ -2504,7 +2504,7 @@ function calcResult() {
       : cngPercentageEl.textContent;
   updateBasketSection({ calculator: true, easyPayMonthlyGain: true, prokatavoliDoseis: true });
 
-  if (!step3Triggered) {
+  if (initRun && !step3Triggered) {
     step3Triggered = true;
     trigger_calculator_step_3({
       step3ShouldTrigger,
