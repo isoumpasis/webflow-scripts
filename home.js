@@ -350,9 +350,8 @@ const storesLocationSelect = document.querySelector('#selectStores');
 let noCreditInterest = 12.6;
 let creditInterest = 7.2;
 
+let domContentLoaded = false;
 document.addEventListener('DOMContentLoaded', () => {
-  let domContentLoaded = false;
-
   if (preferredStorage.userSelections) userSelections = getUserSelections();
   userSelections.selectedFuel = 'lpg';
 
