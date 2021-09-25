@@ -3315,7 +3315,7 @@ globalTimeInterval = setInterval(() => {
         step3ShouldTrigger,
         step3Triggered,
         step3ActiveTime,
-        data: userSeletions.calculator
+        data: userSelections.calculator
       });
     }
   }
