@@ -350,7 +350,6 @@ const storesLocationSelect = document.querySelector('#selectStores');
 let noCreditInterest = 12.6;
 let creditInterest = 7.2;
 
-let domContentLoaded = false;
 document.addEventListener('DOMContentLoaded', () => {
   if (preferredStorage.userSelections) userSelections = getUserSelections();
   userSelections.selectedFuel = 'lpg';
@@ -372,8 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initLotteryCountdown();
 
   showFacebookBrowserProblem(isFacebookBrowser());
-
-  domContentLoaded = true;
 });
 
 function showFacebookBrowserProblem(show) {
@@ -567,7 +564,7 @@ function modifyFuelPriceSliders(value, { save = false } = {}) {
   sliders[3].value = locationObj.lpg;
   outputs[3].value = locationObj.lpg;
   calcCovers[3].style.width = calcCoverWidth(sliders[3]) + '%';
-  calcResult(true);
+  calcResult(false);
   if (save) {
     userSelections.calculator.fuelPricesSelectedIndex = fuelPricesSelectVehicle.selectedIndex;
     userSelections.location = {
@@ -1085,7 +1082,7 @@ function populateAndSelectAllOptions(vehicle) {
   // }
   suggestedContainers.forEach(cont => (cont.style.display = 'none'));
   showResults(vehicle.fetched.fetchedModelObj);
-  calcResult();
+  calcResult(false);
 }
 
 /* STORAGE END */
@@ -2441,7 +2438,7 @@ perMonthCheckbox.addEventListener('change', function () {
 
 let lpgConsumption, cngConsumption;
 
-function calcResult() {
+function calcResult(allowedToTrigger = true) {
   const selectedVehicleIsDirect = hasResult() && fetchedModelObj.isDirect;
 
   lpgConsumption = selectedVehicleIsDirect ? 1.28 : 1.15;
@@ -2509,7 +2506,7 @@ function calcResult() {
       : cngPercentageEl.textContent;
   updateBasketSection({ calculator: true, easyPayMonthlyGain: true, prokatavoliDoseis: true });
 
-  if (domContentLoaded && !step3Triggered) {
+  if (allowedToTrigger && !step3Triggered) {
     step3ShouldTrigger = true;
     // trigger_calculator_step_3({
     //   step3ShouldTrigger,
