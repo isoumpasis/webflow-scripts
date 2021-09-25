@@ -2502,9 +2502,8 @@ function calcResult(allowedToTrigger = true) {
   updateBasketSection({ calculator: true, easyPayMonthlyGain: true, prokatavoliDoseis: true });
 
   if (allowedToTrigger && !step3Triggered && step2Triggered) {
-    step3ShouldTrigger = true;
+    step3Triggered = true;
     trigger_calculator_step_3({
-      step3ShouldTrigger,
       step3Triggered,
       step3ActiveTime,
       step2Triggered,
@@ -3300,7 +3299,6 @@ const step3Section = document.querySelector('#calculator');
 let globalTimeInterval,
   step3ActiveTime = 0,
   step3Triggered = false,
-  step3ShouldTrigger = false,
   step3SecondsNeededToTrigger = 10;
 
 globalTimeInterval = setInterval(() => {
@@ -3312,10 +3310,8 @@ globalTimeInterval = setInterval(() => {
     step3ActiveTime++;
     console.log(step3ActiveTime);
     if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
-      step3ShouldTrigger = true;
       step3Triggered = true;
       trigger_calculator_step_3({
-        step3ShouldTrigger,
         step3Triggered,
         step3ActiveTime,
         step2Triggered,
@@ -3323,10 +3319,9 @@ globalTimeInterval = setInterval(() => {
       });
     }
   } else {
-    if (step3ShouldTrigger && !step3Triggered) {
+    if (!step3Triggered) {
       step3Triggered = true;
       trigger_calculator_step_3({
-        step3ShouldTrigger,
         step3Triggered,
         step3ActiveTime,
         step2Triggered,
