@@ -3291,6 +3291,7 @@ function trigger_system_summary(type) {
   triggerGtagEvent('system_summary', { summary_type: type });
 }
 
+const step3Section = document.querySelector('#calculator');
 let globalTimeInterval,
   step3ActiveTime = 0,
   step3Triggered = false;
