@@ -2503,6 +2503,17 @@ function calcResult() {
       ? lpgPercentageEl.textContent
       : cngPercentageEl.textContent;
   updateBasketSection({ calculator: true, easyPayMonthlyGain: true, prokatavoliDoseis: true });
+
+  if (!step3Triggered) {
+    step3Triggered = true;
+    trigger_calculator_step_3({
+      step3ShouldTrigger,
+      step3Triggered,
+      step3ActiveTime,
+      step2Triggered,
+      data: userSelections.calculator
+    });
+  }
 }
 
 function calcCoverWidth(slider) {
@@ -3247,6 +3258,7 @@ function trigger_learn_more_klirwsh() {
 
 // step_2_ok
 function trigger_car_step_2() {
+  step2Triggered = true;
   triggerGtagEvent('car_step_2', {
     selected_fuel: userSelections.selectedFuel,
     vehicle_make: userSelections.vehicle.identification.vehicleValues.make,
@@ -3272,49 +3284,37 @@ function isElementInViewport(el) {
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
-// const step3Section = document.querySelector('#calculator');
-// document.addEventListener('scroll', e => {
-//   if (isElementInViewport(step3Section)) {
-//     console.log('on');
-//     if (step3IsActiveTime) return;
-//     step3TimeInterval = setInterval(() => {
-//       step3ActiveTime++;
-//       console.log(step3ActiveTime);
-//     }, 1000);
-//   } else {
-//     console.log('off');
-//     clearInterval(step3TimeInterval);
-//   }
-// });
 
 function trigger_system_summary(type) {
   triggerGtagEvent('system_summary', { summary_type: type });
 }
 
+const step2Triggered = false;
 const step3Section = document.querySelector('#calculator');
 let globalTimeInterval,
   step3ActiveTime = 0,
   step3Triggered = false,
-  step3ShouldTrigger = false;
+  step3ShouldTrigger = false,
+  step3SecondsNeededToTrigger = 15;
 
 globalTimeInterval = setInterval(() => {
   if (isElementInViewport(step3Section)) {
     console.log('step3 on');
     step3ActiveTime++;
     console.log(step3ActiveTime);
-    if (step3ActiveTime >= 10 && !step3Triggered) {
+    if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
       step3ShouldTrigger = true;
-      console.log('!!! step 3 should trigger!');
+      console.log('!!! step 3 should trigger! (seconds)');
     }
   } else {
     console.log('off');
-    // step3ActiveTime = 0;
     if (step3ShouldTrigger && !step3Triggered) {
       step3Triggered = true;
       trigger_calculator_step_3({
         step3ShouldTrigger,
         step3Triggered,
         step3ActiveTime,
+        step2Triggered,
         data: userSelections.calculator
       });
     }
