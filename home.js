@@ -3294,20 +3294,33 @@ function trigger_system_summary(type) {
 const step3Section = document.querySelector('#calculator');
 let globalTimeInterval,
   step3ActiveTime = 0,
-  step3Triggered = false;
+  step3Triggered = false,
+  step3ShouldTrigger = false;
 
 globalTimeInterval = setInterval(() => {
   if (isElementInViewport(step3Section)) {
     console.log('step3 on');
     step3ActiveTime++;
     console.log(step3ActiveTime);
-    if (step3ActiveTime >= 10) {
-      //&& !step3Triggered) {
-      step3Triggered = true;
-      console.log('!!! step 3 triggered!');
+    if (step3ActiveTime >= 10 && !step3Triggered) {
+      step3ShouldTrigger = true;
+      console.log('!!! step 3 should trigger!');
     }
   } else {
     console.log('off');
-    step3ActiveTime = 0;
+    // step3ActiveTime = 0;
+    if (step3ShouldTrigger && !step3Triggered) {
+      step3Triggered = true;
+      trigger_calculator_step_3({
+        step3ShouldTrigger,
+        step3Triggered,
+        step3ActiveTime,
+        data: userSeletions.calculator
+      });
+    }
   }
 }, 1000);
+
+function trigger_calculator_step_3(options) {
+  console.log(options);
+}
