@@ -3302,7 +3302,7 @@ let globalTimeInterval,
   step3ActiveTime = 0,
   step3Triggered = false,
   step3ShouldTrigger = false,
-  step3SecondsNeededToTrigger = 15;
+  step3SecondsNeededToTrigger = 10;
 
 globalTimeInterval = setInterval(() => {
   if (!step2Triggered) {
@@ -3314,7 +3314,14 @@ globalTimeInterval = setInterval(() => {
     console.log(step3ActiveTime);
     if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
       step3ShouldTrigger = true;
-      console.log('!!! step 3 should trigger!');
+      step3Triggered = true;
+      trigger_calculator_step_3({
+        step3ShouldTrigger,
+        step3Triggered,
+        step3ActiveTime,
+        step2Triggered,
+        data: userSelections.calculator
+      });
     }
   } else {
     if (step3ShouldTrigger && !step3Triggered) {
