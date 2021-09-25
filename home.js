@@ -1564,7 +1564,6 @@ function showResults(fetchedModelObj) {
     displayEmulatorInfo(suggestedContainer);
 
     configureCalculatorAfterSuggestion();
-    console.log('krypse');
     configureEasyPayAfterSuggestion();
     configureLastStepAfterSuggestion();
   } else {
@@ -1593,6 +1592,7 @@ function showResults(fetchedModelObj) {
   } else if (suggestedContainer) {
     trigger_not_convertible();
   }
+  console.log('krypse');
 }
 
 function showGuarantee(show) {
