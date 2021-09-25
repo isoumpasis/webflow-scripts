@@ -351,6 +351,8 @@ let noCreditInterest = 12.6;
 let creditInterest = 7.2;
 
 document.addEventListener('DOMContentLoaded', () => {
+  let domContentLoaded = false;
+
   if (preferredStorage.userSelections) userSelections = getUserSelections();
   userSelections.selectedFuel = 'lpg';
 
@@ -371,6 +373,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initLotteryCountdown();
 
   showFacebookBrowserProblem(isFacebookBrowser());
+
+  domContentLoaded = true;
 });
 
 function showFacebookBrowserProblem(show) {
@@ -2435,8 +2439,10 @@ sliders.forEach((slider, i) => {
 perMonthCheckbox.addEventListener('change', function () {
   calcResult();
 });
+
 let lpgConsumption, cngConsumption;
-function calcResult(initRun = false) {
+
+function calcResult() {
   const selectedVehicleIsDirect = hasResult() && fetchedModelObj.isDirect;
 
   lpgConsumption = selectedVehicleIsDirect ? 1.28 : 1.15;
@@ -2504,7 +2510,7 @@ function calcResult(initRun = false) {
       : cngPercentageEl.textContent;
   updateBasketSection({ calculator: true, easyPayMonthlyGain: true, prokatavoliDoseis: true });
 
-  if (initRun && !step3Triggered) {
+  if (domContentLoaded && !step3Triggered) {
     step3Triggered = true;
     trigger_calculator_step_3({
       step3ShouldTrigger,
