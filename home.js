@@ -3272,20 +3272,20 @@ function isElementInViewport(el) {
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
-const step3Section = document.querySelector('#calculator');
-document.addEventListener('scroll', e => {
-  if (isElementInViewport(step3Section)) {
-    console.log('on');
-    if (step3IsActiveTime) return;
-    step3TimeInterval = setInterval(() => {
-      step3ActiveTime++;
-      console.log(step3ActiveTime);
-    }, 1000);
-  } else {
-    console.log('off');
-    clearInterval(step3TimeInterval);
-  }
-});
+// const step3Section = document.querySelector('#calculator');
+// document.addEventListener('scroll', e => {
+//   if (isElementInViewport(step3Section)) {
+//     console.log('on');
+//     if (step3IsActiveTime) return;
+//     step3TimeInterval = setInterval(() => {
+//       step3ActiveTime++;
+//       console.log(step3ActiveTime);
+//     }, 1000);
+//   } else {
+//     console.log('off');
+//     clearInterval(step3TimeInterval);
+//   }
+// });
 
 function trigger_system_summary(type) {
   triggerGtagEvent('system_summary', { summary_type: type });
