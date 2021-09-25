@@ -3272,15 +3272,41 @@ function isElementInViewport(el) {
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
-const viewEl = document.querySelector('#calculator');
+const step3Section = document.querySelector('#calculator');
 document.addEventListener('scroll', e => {
-  if (isElementInViewport(viewEl)) {
+  if (isElementInViewport(step3Section)) {
     console.log('on');
+    if (step3IsActiveTime) return;
+    step3TimeInterval = setInterval(() => {
+      step3ActiveTime++;
+      console.log(step3ActiveTime);
+    }, 1000);
   } else {
     console.log('off');
+    clearInterval(step3TimeInterval);
   }
 });
 
 function trigger_system_summary(type) {
   triggerGtagEvent('system_summary', { summary_type: type });
 }
+
+let globalTimeInterval,
+  step3ActiveTime = 0,
+  step3Triggered = false;
+
+globalTimeInterval = setInterval(() => {
+  if (isElementInViewport(step3Section)) {
+    console.log('step3 on');
+    step3ActiveTime++;
+    console.log(step3ActiveTime);
+    if (step3ActiveTime >= 10) {
+      //&& !step3Triggered) {
+      step3Triggered = true;
+      console.log('!!! step 3 triggered!');
+    }
+  } else {
+    console.log('off');
+    step3ActiveTime = 0;
+  }
+}, 1000);
