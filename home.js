@@ -3272,14 +3272,14 @@ function isElementInViewport(el) {
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
-// const viewEl = document.querySelector('#calculator');
-// document.addEventListener('scroll', e => {
-//   if (isElementInViewport(viewEl)) {
-//     console.log('on');
-//   } else {
-//     console.log('off');
-//   }
-// });
+const viewEl = document.querySelector('#calculator');
+document.addEventListener('scroll', e => {
+  if (isElementInViewport(viewEl)) {
+    console.log('on');
+  } else {
+    console.log('off');
+  }
+});
 
 function trigger_system_summary(type) {
   triggerGtagEvent('system_summary', { summary_type: type });
