@@ -3245,7 +3245,9 @@ function trigger_learn_more_klirwsh() {
 function trigger_car_step_2() {
   step2Triggered = true;
   step3Triggered = false;
+  step4Triggered = false;
   step3ActiveTime = 0;
+  step4ActiveTime = 0;
   triggerGtagEvent('car_step_2', {
     selected_fuel: userSelections.selectedFuel,
     vehicle_make: userSelections.vehicle.identification.vehicleValues.make,
@@ -3255,6 +3257,7 @@ function trigger_car_step_2() {
     suggested_system: userSelections.vehicle.suggestions.systems[0].name
   });
 }
+
 function trigger_not_convertible() {
   triggerGtagEvent('not_convertible', {
     selected_fuel: userSelections.selectedFuel,
@@ -3287,8 +3290,10 @@ function trigger_system_summary(type) {
 
 let step2Triggered = false,
   step3ActiveTime = 0,
+  step4ActiveTime = 0,
   step3Triggered = false,
-  step3SecondsNeededToTrigger = 10;
+  step4Triggered = false,
+  stepSecondsNeededToTrigger = 10;
 
 function initStepInterval() {
   setInterval(() => {
@@ -3304,7 +3309,7 @@ function step3CalculatorWatch() {
   }
   if (isElementInViewport(document.querySelector('#calculator'))) {
     step3ActiveTime++;
-    if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
+    if (step3ActiveTime >= stepSecondsNeededToTrigger && !step3Triggered) {
       step3Triggered = true;
       trigger_calculator_step_3({ triggered_via: 'time' });
     }
@@ -3313,14 +3318,14 @@ function step3CalculatorWatch() {
 
 // function step4EasyPayWatch() {
 //   if (!step2Triggered) {
-//     step3ActiveTime = 0;
+//     step4ActiveTime = 0;
 //     return;
 //   }
-//   if (isElementInViewport(document.querySelector('#calculator'))) {
-//     step3ActiveTime++;
-//     if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
-//       step3Triggered = true;
-//       trigger_calculator_step_3({ triggered_via: 'time' });
+//   if (isElementInViewport(document.querySelector('#easy-pay'))) {
+//     step4ActiveTime++;
+//     if (step4ActiveTime >= stepSecondsNeededToTrigger && !step4Triggered) {
+//       step4Triggered = true;
+//       trigger_easy_pay_step_4({ triggered_via: 'time' });
 //     }
 //   }
 // }
