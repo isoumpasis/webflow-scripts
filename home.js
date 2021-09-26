@@ -1592,7 +1592,6 @@ function showResults(fetchedModelObj) {
   } else if (suggestedContainer) {
     trigger_not_convertible();
   }
-  console.log('krypse');
 }
 
 function showGuarantee(show) {
@@ -3305,16 +3304,8 @@ globalTimeInterval = setInterval(() => {
   }
   if (isElementInViewport(step3Section)) {
     step3ActiveTime++;
-    console.log(step3ActiveTime);
     if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
       step3Triggered = true;
-      console.log(888);
-      trigger_calculator_step_3({ triggered_via: 'time' });
-    }
-  } else {
-    if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
-      step3Triggered = true;
-      console.log(9999);
       trigger_calculator_step_3({ triggered_via: 'time' });
     }
   }
@@ -3322,4 +3313,5 @@ globalTimeInterval = setInterval(() => {
 
 function trigger_calculator_step_3(options) {
   console.log(options);
+  triggerGtagEvent('calculator_step_3', options);
 }
