@@ -2501,6 +2501,7 @@ function calcResult(allowedToTrigger = true) {
       : cngPercentageEl.textContent;
   updateBasketSection({ calculator: true, easyPayMonthlyGain: true, prokatavoliDoseis: true });
 
+  console.log({ allowedToTrigger }, { step3Triggered }, { step2Triggered });
   if (allowedToTrigger && !step3Triggered && step2Triggered) {
     step3Triggered = true;
     trigger_calculator_step_3({
