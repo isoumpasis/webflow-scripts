@@ -3321,7 +3321,7 @@ globalTimeInterval = setInterval(() => {
       });
     }
   } else {
-    if (!step3Triggered) {
+    if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
       step3Triggered = true;
       console.log(9999);
       trigger_calculator_step_3({
