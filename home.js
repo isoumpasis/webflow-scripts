@@ -2501,15 +2501,9 @@ function calcResult(allowedToTrigger = true) {
       : cngPercentageEl.textContent;
   updateBasketSection({ calculator: true, easyPayMonthlyGain: true, prokatavoliDoseis: true });
 
-  console.log({ allowedToTrigger }, { step3Triggered }, { step2Triggered });
   if (allowedToTrigger && !step3Triggered && step2Triggered) {
     step3Triggered = true;
-    trigger_calculator_step_3({
-      step3Triggered,
-      step3ActiveTime,
-      step2Triggered,
-      data: userSelections.calculator
-    });
+    trigger_calculator_step_3({ triggered_via: 'click' });
   }
 }
 
@@ -3315,23 +3309,13 @@ globalTimeInterval = setInterval(() => {
     if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
       step3Triggered = true;
       console.log(888);
-      trigger_calculator_step_3({
-        step3Triggered,
-        step3ActiveTime,
-        step2Triggered,
-        data: userSelections.calculator
-      });
+      trigger_calculator_step_3({ triggered_via: 'time' });
     }
   } else {
     if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
       step3Triggered = true;
       console.log(9999);
-      trigger_calculator_step_3({
-        step3Triggered,
-        step3ActiveTime,
-        step2Triggered,
-        data: userSelections.calculator
-      });
+      trigger_calculator_step_3({ triggered_via: 'time' });
     }
   }
 }, 1000);
