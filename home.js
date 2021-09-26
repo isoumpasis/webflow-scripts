@@ -3256,6 +3256,8 @@ function trigger_learn_more_klirwsh() {
 // step_2_ok
 function trigger_car_step_2() {
   step2Triggered = true;
+  step3Triggered = false;
+  step3ActiveTime = 0;
   triggerGtagEvent('car_step_2', {
     selected_fuel: userSelections.selectedFuel,
     vehicle_make: userSelections.vehicle.identification.vehicleValues.make,
