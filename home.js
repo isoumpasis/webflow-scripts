@@ -3292,25 +3292,62 @@ let step2Triggered = false,
 
 function initStepInterval() {
   setInterval(() => {
-    step3Watch();
+    stepWatch({
+      viewPortElementWatch: document.querySelector('#calculator'),
+      stepActiveTime: step3ActiveTime,
+      stepSecondsNeededToTrigger: step3SecondsNeededToTrigger,
+      stepTriggered: step3Triggered,
+      triggerFn: trigger_calculator_step_3
+    });
+    // stepWatch({
+    //   viewPortElementWatch: document.querySelector('#calculator'),
+    //   stepActiveTime: step3ActiveTime,
+    //   stepSecondsNeededToTrigger: step3SecondsNeededToTrigger,
+    //   stepTriggered: step3Triggered,
+    //   triggerFn: trigger_calculator_step_3
+    // });
   }, 1000);
 }
 
-function step3Watch() {
+function stepWatch({
+  stepActiveTime,
+  viewPortElementWatch,
+  stepSecondsNeededToTrigger,
+  stepTriggered,
+  triggerFn
+}) {
   if (!step2Triggered) {
-    step3ActiveTime = 0;
+    stepActiveTime = 0;
     return;
   }
-  if (isElementInViewport(document.querySelector('#calculator'))) {
-    step3ActiveTime++;
-    if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
-      step3Triggered = true;
-      trigger_calculator_step_3({ triggered_via: 'time' });
+  if (isElementInViewport(viewPortElementWatch)) {
+    stepActiveTime++;
+    if (stepActiveTime >= stepSecondsNeededToTrigger && !stepTriggered) {
+      stepTriggered = true;
+      triggerFn({ triggered_via: 'time' });
     }
   }
 }
+
+// function step4EasyPayWatch() {
+//   if (!step2Triggered) {
+//     step3ActiveTime = 0;
+//     return;
+//   }
+//   if (isElementInViewport(document.querySelector('#calculator'))) {
+//     step3ActiveTime++;
+//     if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
+//       step3Triggered = true;
+//       trigger_calculator_step_3({ triggered_via: 'time' });
+//     }
+//   }
+// }
 
 function trigger_calculator_step_3(options) {
   console.log(options);
   triggerGtagEvent('calculator_step_3', options);
 }
+
+// function trigger_easy_pay_step_4(options) {
+//   console.log(options);
+// }
