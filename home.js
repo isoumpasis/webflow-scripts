@@ -3292,39 +3292,21 @@ let step2Triggered = false,
 
 function initStepInterval() {
   setInterval(() => {
-    stepWatch({
-      viewPortElementWatch: document.querySelector('#calculator'),
-      stepActiveTime: step3ActiveTime,
-      stepSecondsNeededToTrigger: step3SecondsNeededToTrigger,
-      stepTriggered: step3Triggered,
-      triggerFn: trigger_calculator_step_3
-    });
-    // stepWatch({
-    //   viewPortElementWatch: document.querySelector('#calculator'),
-    //   stepActiveTime: step3ActiveTime,
-    //   stepSecondsNeededToTrigger: step3SecondsNeededToTrigger,
-    //   stepTriggered: step3Triggered,
-    //   triggerFn: trigger_calculator_step_3
-    // });
+    step3CalculatorWatch();
+    // step4EasyPayWatch();
   }, 1000);
 }
 
-function stepWatch({
-  stepActiveTime,
-  viewPortElementWatch,
-  stepSecondsNeededToTrigger,
-  stepTriggered,
-  triggerFn
-}) {
+function step3CalculatorWatch() {
   if (!step2Triggered) {
-    stepActiveTime = 0;
+    step3ActiveTime = 0;
     return;
   }
-  if (isElementInViewport(viewPortElementWatch)) {
-    stepActiveTime++;
-    if (stepActiveTime >= stepSecondsNeededToTrigger && !stepTriggered) {
-      stepTriggered = true;
-      triggerFn({ triggered_via: 'time' });
+  if (isElementInViewport(document.querySelector('#calculator'))) {
+    step3ActiveTime++;
+    if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
+      step3Triggered = true;
+      trigger_calculator_step_3({ triggered_via: 'time' });
     }
   }
 }
