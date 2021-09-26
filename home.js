@@ -371,6 +371,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initLotteryCountdown();
 
   showFacebookBrowserProblem(isFacebookBrowser());
+
+  initStepInterval();
 });
 
 function showFacebookBrowserProblem(show) {
@@ -3222,13 +3224,6 @@ function triggerGtagEvent(eventName, params = {}) {
   if (typeof eventName === 'undefined' || eventName === '')
     return { status: 'Error', message: 'eventName undefined' };
 
-  // params.event_callback = () =>
-  //   console.log(
-  //     `${eventName} event triggered with params ${
-  //       Object.keys(params).length && JSON.stringify(params)
-  //     }`
-  //   );
-
   gtag('event', eventName, params);
   return {
     status: 'OK',
@@ -3290,26 +3285,30 @@ function trigger_system_summary(type) {
   triggerGtagEvent('system_summary', { summary_type: type });
 }
 
-let step2Triggered = false;
-const step3Section = document.querySelector('#calculator');
-let globalTimeInterval,
+let step2Triggered = false,
   step3ActiveTime = 0,
   step3Triggered = false,
   step3SecondsNeededToTrigger = 10;
 
-globalTimeInterval = setInterval(() => {
+function initStepInterval() {
+  setInterval(() => {
+    step3Watch();
+  }, 1000);
+}
+
+function step3Watch() {
   if (!step2Triggered) {
     step3ActiveTime = 0;
     return;
   }
-  if (isElementInViewport(step3Section)) {
+  if (isElementInViewport(document.querySelector('#calculator'))) {
     step3ActiveTime++;
     if (step3ActiveTime >= step3SecondsNeededToTrigger && !step3Triggered) {
       step3Triggered = true;
       trigger_calculator_step_3({ triggered_via: 'time' });
     }
   }
-}, 1000);
+}
 
 function trigger_calculator_step_3(options) {
   console.log(options);
