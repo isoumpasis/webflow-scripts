@@ -853,6 +853,11 @@ function prokatavoliNoCreditSliderOnChange(value) {
   };
 
   updateBasketSection({ prokatavoliDoseis: true });
+
+  if (step2Triggered && !step4Triggered) {
+    step4Triggered = true;
+    trigger_easy_pay_step_4({ triggered_via: 'click' });
+  }
 }
 
 function prokatavoliCreditSliderOnChange(value) {
@@ -880,6 +885,11 @@ function prokatavoliCreditSliderOnChange(value) {
     monthlyCost: creditMonthlyCost.textContent
   };
   updateBasketSection({ prokatavoliDoseis: true });
+
+  if (step2Triggered && !step4Triggered) {
+    step4Triggered = true;
+    trigger_easy_pay_step_4({ triggered_via: 'click' });
+  }
 }
 
 function doseisNoCreditSliderOnChange(value) {
@@ -900,6 +910,11 @@ function doseisNoCreditSliderOnChange(value) {
     monthlyCost: noCreditMonthlyCost.textContent
   };
   updateBasketSection({ prokatavoliDoseis: true });
+
+  if (step2Triggered && !step4Triggered) {
+    step4Triggered = true;
+    trigger_easy_pay_step_4({ triggered_via: 'click' });
+  }
 }
 
 function doseisCreditSelectOnChange(value) {
@@ -917,6 +932,11 @@ function doseisCreditSelectOnChange(value) {
     monthlyCost: creditMonthlyCost.textContent
   };
   updateBasketSection({ prokatavoliDoseis: true });
+
+  if (step2Triggered && !step4Triggered) {
+    step4Triggered = true;
+    trigger_easy_pay_step_4({ triggered_via: 'click' });
+  }
 }
 
 function noVehicleNoCreditSliderOnChange(value) {
