@@ -771,6 +771,11 @@ function initEasyPayTabs() {
           selectedEasyPaySystemPrice = +noVehicleCreditSlider.value;
         }
       }
+
+      if (step2Triggered && !step4Triggered) {
+        step4Triggered = true;
+        trigger_easy_pay_step_4({ triggered_via: 'click' });
+      }
     })
   );
 }
@@ -794,6 +799,11 @@ function initEasyPaySystemSelection() {
       prokatavoliNoCreditSliderOnChange(prokatavoliNoCreditSlider.value);
       prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
       metrhtaFinalCost.textContent = selectedEasyPaySystemPrice.toFixed(2) + '€';
+
+      if (step2Triggered && !step4Triggered) {
+        step4Triggered = true;
+        trigger_easy_pay_step_4({ triggered_via: 'click' });
+      }
     })
   );
 }
