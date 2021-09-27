@@ -3353,7 +3353,6 @@ function step4EasyPayWatch() {
   }
   if (isElementInViewport(document.querySelector('#easy-pay'))) {
     step4ActiveTime++;
-    console.log(step4ActiveTime);
     if (step4ActiveTime >= stepSecondsNeededToTrigger && !step4Triggered) {
       step4Triggered = true;
       trigger_easy_pay_step_4({ triggered_via: 'time' });
