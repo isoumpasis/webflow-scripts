@@ -3362,10 +3362,9 @@ function step4EasyPayWatch() {
 }
 
 function trigger_calculator_step_3(options) {
-  console.log(options);
   triggerGtagEvent('calculator_step_3', options);
 }
 
 function trigger_easy_pay_step_4(options) {
-  console.log(options);
+  triggerGtagEvent('easyPay_step_4', options);
 }
