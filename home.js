@@ -3298,7 +3298,7 @@ let step2Triggered = false,
 function initStepInterval() {
   setInterval(() => {
     step3CalculatorWatch();
-    // step4EasyPayWatch();
+    step4EasyPayWatch();
   }, 1000);
 }
 
@@ -3316,25 +3316,26 @@ function step3CalculatorWatch() {
   }
 }
 
-// function step4EasyPayWatch() {
-//   if (!step2Triggered) {
-//     step4ActiveTime = 0;
-//     return;
-//   }
-//   if (isElementInViewport(document.querySelector('#easy-pay'))) {
-//     step4ActiveTime++;
-//     if (step4ActiveTime >= stepSecondsNeededToTrigger && !step4Triggered) {
-//       step4Triggered = true;
-//       trigger_easy_pay_step_4({ triggered_via: 'time' });
-//     }
-//   }
-// }
+function step4EasyPayWatch() {
+  if (!step2Triggered) {
+    step4ActiveTime = 0;
+    return;
+  }
+  if (isElementInViewport(document.querySelector('#easy-pay'))) {
+    step4ActiveTime++;
+    console.log(step4ActiveTime);
+    if (step4ActiveTime >= stepSecondsNeededToTrigger && !step4Triggered) {
+      step4Triggered = true;
+      trigger_easy_pay_step_4({ triggered_via: 'time' });
+    }
+  }
+}
 
 function trigger_calculator_step_3(options) {
   console.log(options);
   triggerGtagEvent('calculator_step_3', options);
 }
 
-// function trigger_easy_pay_step_4(options) {
-//   console.log(options);
-// }
+function trigger_easy_pay_step_4(options) {
+  console.log(options);
+}
