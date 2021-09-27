@@ -3323,7 +3323,7 @@ let step2Triggered = false,
   step4ActiveTime = 0,
   step3Triggered = false,
   step4Triggered = false,
-  stepSecondsNeededToTrigger = 10;
+  stepSecondsNeededToTrigger = 8;
 
 function initStepInterval() {
   setInterval(() => {
