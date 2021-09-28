@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initProgressSteps() {
   changeProgressStepState('fuel', 'green');
-  changeProgressStepState('car', 'next');
+  // changeProgressStepState('car', 'next');
 }
 
 function showFacebookBrowserProblem(show) {
@@ -3303,7 +3303,7 @@ function trigger_car_step_2() {
 
   resetProgressSteps();
   changeProgressStepState('car', 'green');
-  changeProgressStepState('calculator', 'next');
+  // changeProgressStepState('calculator', 'next');
 
   triggerGtagEvent('car_step_2', {
     selected_fuel: userSelections.selectedFuel,
@@ -3390,7 +3390,7 @@ function trigger_calculator_step_3(options) {
   if (!step2Triggered) return;
   step3Triggered = true;
   changeProgressStepState('calculator', 'green');
-  changeProgressStepState('easy-pay', 'next');
+  // changeProgressStepState('easy-pay', 'next');
   triggerGtagEvent('calculator_step_3', options);
 }
 
@@ -3399,7 +3399,7 @@ function trigger_easy_pay_step_4(options) {
   step4Triggered = true;
 
   changeProgressStepState('easy-pay', 'green');
-  changeProgressStepState('summary', 'next');
+  // changeProgressStepState('summary', 'next');
   triggerGtagEvent('easyPay_step_4', options);
 }
 
@@ -3411,25 +3411,44 @@ function changeProgressStepState(stepName, state) {
   } else if (state === 'gray') {
     stateClassName = 'green-round-checkbox';
     display = 'none';
-  } else if (state === 'next') {
-    stateClassName = 'next-checkbox';
-    display = 'flex';
   }
 
-  //reset the state
-  // [...document.querySelectorAll(`.progress-step-${stepName} .next-checkbox`)].map(
-  //   el => (el.style.display = 'none')
-  // );
   [...document.querySelectorAll(`.progress-step-${stepName} .green-round-checkbox`)].map(
     el => (el.style.display = 'none')
   );
-  if (state === 'next') {
-    [...document.querySelectorAll(`.next-checkbox`)].map(el => (el.style.display = 'none'));
-  }
-
-  //change state
   [...document.querySelectorAll(`.progress-step-${stepName} .${stateClassName}`)].map(
     el => (el.style.display = display)
+  );
+
+  if (getStepState('easy-pay') === 'green') {
+    applyNextState('summary');
+  } else if (getStepState('calculator') === 'green') {
+    applyNextState('easy-pay');
+  } else if (getStepState('car') === 'green') {
+    applyNextState('calculator');
+  } else if (getStepState('fuel') === 'green') {
+    applyNextState('car');
+  }
+}
+
+function getStepState(stepName) {
+  if (
+    document.querySelector(`.progress-step-${stepName} .green-round-checkbox`).style.display !==
+    'none'
+  ) {
+    return 'green';
+  }
+  if (
+    document.querySelector(`.progress-step-${stepName} .next-checkbox`).style.display !== 'none'
+  ) {
+    return 'next';
+  }
+  return 'gray';
+}
+
+function applyNextState(stepName) {
+  [...document.querySelectorAll(`.progress-step-${stepName} .next-checkbox`)].map(
+    el => (el.style.display = 'flex')
   );
 }
 
@@ -3439,5 +3458,5 @@ function resetProgressSteps() {
   changeProgressStepState('calculator', 'gray');
   changeProgressStepState('easy-pay', 'gray');
   changeProgressStepState('summary', 'gray');
-  changeProgressStepState('car', 'next');
+  // changeProgressStepState('car', 'next');
 }
