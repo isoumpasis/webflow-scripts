@@ -3301,6 +3301,7 @@ function trigger_car_step_2() {
   step3ActiveTime = 0;
   step4ActiveTime = 0;
 
+  resetProgressSteps();
   changeProgressStepState('car', 'green');
   changeProgressStepState('calculator', 'next');
 
