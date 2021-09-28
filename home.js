@@ -3434,6 +3434,12 @@ function changeProgressStepState(stepName, state) {
     [...document.querySelectorAll(`.progress-step-${stepName} .progress-text`)].map(
       el => (el.style.opacity = '1')
     );
+    [...document.querySelectorAll(`.flex-step .progress-number`)].map(
+      el => (el.style.fontWeight = 'normal')
+    );
+    [...document.querySelectorAll(`.flex-step .progress-text`)].map(
+      el => (el.style.fontWeight = 'normal')
+    );
   }
 
   if (getStepState('easy-pay') === 'green') {
