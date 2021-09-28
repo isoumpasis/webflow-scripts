@@ -3421,12 +3421,14 @@ function changeProgressStepState(stepName, state) {
   );
 
   if (getStepState('easy-pay') === 'green') {
+    console.log('wronggg');
     applyNextState('summary');
   } else if (getStepState('calculator') === 'green') {
     applyNextState('easy-pay');
   } else if (getStepState('car') === 'green') {
     applyNextState('calculator');
   } else if (getStepState('fuel') === 'green') {
+    console.log('hello');
     applyNextState('car');
   }
 }
