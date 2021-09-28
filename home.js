@@ -560,6 +560,7 @@ fuelPricesSelectVehicle.addEventListener('change', e => {
   locationOnChange(storesLocationSelect.value);
 
   updateBasketSection({ calculator: true });
+  trigger_calculator_step_3({ triggered_via: 'click' });
 });
 
 function modifyFuelPriceSliders(value, { save = false } = {}) {
