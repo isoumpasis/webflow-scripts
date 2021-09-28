@@ -378,6 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initProgressSteps() {
   changeProgressStepState('fuel', 'green');
+  changeProgressStepState('car', 'next');
 }
 
 function showFacebookBrowserProblem(show) {
@@ -3290,6 +3291,7 @@ function trigger_car_step_2() {
   step4ActiveTime = 0;
 
   changeProgressStepState('car', 'green');
+  changeProgressStepState('calculator', 'next');
 
   triggerGtagEvent('car_step_2', {
     selected_fuel: userSelections.selectedFuel,
@@ -3376,11 +3378,13 @@ function step4EasyPayWatch() {
 
 function trigger_calculator_step_3(options) {
   changeProgressStepState('calculator', 'green');
+  changeProgressStepState('easy-pay', 'next');
   triggerGtagEvent('calculator_step_3', options);
 }
 
 function trigger_easy_pay_step_4(options) {
   changeProgressStepState('easy-pay', 'green');
+  changeProgressStepState('summary', 'next');
   triggerGtagEvent('easyPay_step_4', options);
 }
 
@@ -3417,4 +3421,5 @@ function resetProgressSteps() {
   changeProgressStepState('calculator', 'gray');
   changeProgressStepState('easy-pay', 'gray');
   changeProgressStepState('summary', 'gray');
+  changeProgressStepState('car', 'next');
 }
