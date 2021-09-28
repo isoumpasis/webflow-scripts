@@ -3434,12 +3434,6 @@ function changeProgressStepState(stepName, state) {
     [...document.querySelectorAll(`.progress-step-${stepName} .progress-text`)].map(
       el => (el.style.opacity = '1')
     );
-    [...document.querySelectorAll(`.flex-step .progress-number`)].map(
-      el => (el.style.fontWeight = 'normal')
-    );
-    [...document.querySelectorAll(`.flex-step .progress-text`)].map(
-      el => (el.style.fontWeight = 'normal')
-    );
   }
 
   if (getStepState('easy-pay') === 'green') {
@@ -3452,6 +3446,15 @@ function changeProgressStepState(stepName, state) {
   } else if (getStepState('fuel') === 'green') {
     console.log('next car');
     applyNextState('car');
+  }
+
+  if (stepName === 'summary' && state === 'green') {
+    [...document.querySelectorAll(`.flex-step .progress-number`)].map(
+      el => (el.style.fontWeight = 'normal')
+    );
+    [...document.querySelectorAll(`.flex-step .progress-text`)].map(
+      el => (el.style.fontWeight = 'normal')
+    );
   }
 }
 
@@ -3481,7 +3484,6 @@ function applyNextState(stepName) {
   [...document.querySelectorAll(`.progress-step-${stepName} .next-checkbox`)].map(
     el => (el.style.display = 'flex')
   );
-  if (stepName === 'summary') return;
   [...document.querySelectorAll(`.progress-step-${stepName} .progress-number`)].map(
     el => (el.style.fontWeight = 'bold')
   );
