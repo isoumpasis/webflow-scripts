@@ -373,7 +373,12 @@ document.addEventListener('DOMContentLoaded', () => {
   showFacebookBrowserProblem(isFacebookBrowser());
 
   initStepInterval();
+  initProgressSteps();
 });
+
+function initProgressSteps() {
+  changeProgressStepState('fuel', 'green');
+}
 
 function showFacebookBrowserProblem(show) {
   if (isFacebookBrowser()) {
@@ -3278,6 +3283,7 @@ function trigger_car_step_2() {
   step4Triggered = false;
   step3ActiveTime = 0;
   step4ActiveTime = 0;
+
   triggerGtagEvent('car_step_2', {
     selected_fuel: userSelections.selectedFuel,
     vehicle_make: userSelections.vehicle.identification.vehicleValues.make,
@@ -3366,4 +3372,22 @@ function trigger_calculator_step_3(options) {
 
 function trigger_easy_pay_step_4(options) {
   triggerGtagEvent('easyPay_step_4', options);
+}
+
+function changeProgressStepState(stepName, state) {
+  let stateClassName, display;
+  if (state === 'green') {
+    stateClassName = 'green-round-checkbox';
+    display = 'grid';
+  } else if (state === 'gray') {
+    stateClassName = 'green-round-checkbox';
+    display = 'none';
+  } else if (state === 'next') {
+    stateClassName = 'next-checkbox';
+    display = 'grid';
+  }
+
+  [...document.querySelectorAll(`.progress-step-${stepName} ${stateClassName}`)].map(
+    el => (el.style.display = display)
+  );
 }
