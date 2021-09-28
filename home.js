@@ -3449,10 +3449,10 @@ function changeProgressStepState(stepName, state) {
   }
 
   if (stepName === 'summary' && state === 'green') {
-    [...document.querySelectorAll(`.flex-step .progress-number`)].map(
+    [...document.querySelectorAll(`.progress-step-${stepName} .progress-number`)].map(
       el => (el.style.fontWeight = 'normal')
     );
-    [...document.querySelectorAll(`.flex-step .progress-text`)].map(
+    [...document.querySelectorAll(`.progress-step-${stepName} .progress-text`)].map(
       el => (el.style.fontWeight = 'normal')
     );
   }
