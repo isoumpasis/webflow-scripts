@@ -780,7 +780,6 @@ function initEasyPayTabs() {
       }
 
       if (step2Triggered && !step4Triggered) {
-        step4Triggered = true;
         trigger_easy_pay_step_4({ triggered_via: 'click' });
       }
     })
@@ -808,7 +807,6 @@ function initEasyPaySystemSelection() {
       metrhtaFinalCost.textContent = selectedEasyPaySystemPrice.toFixed(2) + '€';
 
       if (step2Triggered && !step4Triggered) {
-        step4Triggered = true;
         trigger_easy_pay_step_4({ triggered_via: 'click' });
       }
     })
@@ -862,7 +860,6 @@ function prokatavoliNoCreditSliderOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
-    step4Triggered = true;
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -894,7 +891,6 @@ function prokatavoliCreditSliderOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
-    step4Triggered = true;
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -919,7 +915,6 @@ function doseisNoCreditSliderOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
-    step4Triggered = true;
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -941,7 +936,6 @@ function doseisCreditSelectOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
-    step4Triggered = true;
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -2545,7 +2539,6 @@ function calcResult(allowedToTrigger = true) {
   updateBasketSection({ calculator: true, easyPayMonthlyGain: true, prokatavoliDoseis: true });
 
   if (allowedToTrigger && !step3Triggered && step2Triggered) {
-    step3Triggered = true;
     trigger_calculator_step_3({ triggered_via: 'click' });
   }
 }
@@ -3357,7 +3350,6 @@ function step3CalculatorWatch() {
   if (isElementInViewport(document.querySelector('#calculator'))) {
     step3ActiveTime++;
     if (step3ActiveTime >= stepSecondsNeededToTrigger && !step3Triggered) {
-      step3Triggered = true;
       trigger_calculator_step_3({ triggered_via: 'time' });
     }
   }
@@ -3371,19 +3363,21 @@ function step4EasyPayWatch() {
   if (isElementInViewport(document.querySelector('#easy-pay'))) {
     step4ActiveTime++;
     if (step4ActiveTime >= stepSecondsNeededToTrigger && !step4Triggered) {
-      step4Triggered = true;
       trigger_easy_pay_step_4({ triggered_via: 'time' });
     }
   }
 }
 
 function trigger_calculator_step_3(options) {
+  step3Triggered = true;
   changeProgressStepState('calculator', 'green');
   changeProgressStepState('easy-pay', 'next');
   triggerGtagEvent('calculator_step_3', options);
 }
 
 function trigger_easy_pay_step_4(options) {
+  step4Triggered = true;
+
   changeProgressStepState('easy-pay', 'green');
   changeProgressStepState('summary', 'next');
   triggerGtagEvent('easyPay_step_4', options);
