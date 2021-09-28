@@ -3427,6 +3427,12 @@ function changeProgressStepState(stepName, state) {
     [...document.querySelectorAll(`.progress-step-${stepName} .progress-text`)].map(
       el => (el.style.opacity = '0.6')
     );
+    [...document.querySelectorAll(`.progress-step-${stepName} .progress-number`)].map(
+      el => (el.style.fontWeight = 'normal')
+    );
+    [...document.querySelectorAll(`.progress-step-${stepName} .progress-text`)].map(
+      el => (el.style.fontWeight = 'normal')
+    );
   } else {
     [...document.querySelectorAll(`.progress-step-${stepName} .progress-number`)].map(
       el => (el.style.opacity = '1')
@@ -3437,14 +3443,12 @@ function changeProgressStepState(stepName, state) {
   }
 
   if (getStepState('easy-pay') === 'green') {
-    console.log('next summary');
     applyNextState('summary');
   } else if (getStepState('calculator') === 'green') {
     applyNextState('easy-pay');
   } else if (getStepState('car') === 'green') {
     applyNextState('calculator');
   } else if (getStepState('fuel') === 'green') {
-    console.log('next car');
     applyNextState('car');
   }
 
