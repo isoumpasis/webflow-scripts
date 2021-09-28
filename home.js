@@ -3402,18 +3402,17 @@ function changeProgressStepState(stepName, state) {
   }
 
   //reset the state
-  [...document.querySelectorAll(`.progress-step-${stepName} .next-checkbox`)].map(
-    el => (el.style.display = 'none')
-  );
+  // [...document.querySelectorAll(`.progress-step-${stepName} .next-checkbox`)].map(
+  //   el => (el.style.display = 'none')
+  // );
   [...document.querySelectorAll(`.progress-step-${stepName} .green-round-checkbox`)].map(
     el => (el.style.display = 'none')
   );
-
-  //change state
   if (state === 'next') {
     [...document.querySelectorAll(`.next-checkbox`)].map(el => (el.style.display = 'none'));
   }
 
+  //change state
   [...document.querySelectorAll(`.progress-step-${stepName} .${stateClassName}`)].map(
     el => (el.style.display = display)
   );
