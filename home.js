@@ -590,6 +590,7 @@ function modifyFuelPriceSliders(value, { save = false } = {}) {
 function initSelectedFuelListeners() {
   cngFuelSelectBtns.forEach(cngBtn => {
     cngBtn.addEventListener('click', e => {
+      step2Triggered = false;
       if (userSelections.selectedFuel === 'cng') return;
       userSelections.selectedFuel = 'cng';
       saveUserSelections();
@@ -605,6 +606,7 @@ function initSelectedFuelListeners() {
   });
   lpgFuelSelectBtns.forEach(lpgBtn => {
     lpgBtn.addEventListener('click', e => {
+      step2Triggered = false;
       if (userSelections.selectedFuel === 'lpg') return;
       userSelections.selectedFuel = 'lpg';
       saveUserSelections();
@@ -920,7 +922,7 @@ function doseisNoCreditSliderOnChange(value) {
   };
   updateBasketSection({ prokatavoliDoseis: true });
 
-  if (step2Triggered && !step4Triggered) {
+  if (allowedToTrigger && step2Triggered && !step4Triggered) {
     console.log(5);
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
