@@ -3420,15 +3420,31 @@ function changeProgressStepState(stepName, state) {
     el => (el.style.display = display)
   );
 
+  if (state === 'green') {
+    [...document.querySelectorAll(`.progress-step-${stepName} .progress-number`)].map(
+      el => (el.style.opacity = '0.6')
+    );
+    [...document.querySelectorAll(`.progress-step-${stepName} .progress-text`)].map(
+      el => (el.style.opacity = '0.6')
+    );
+  } else {
+    [...document.querySelectorAll(`.progress-step-${stepName} .progress-number`)].map(
+      el => (el.style.opacity = '1')
+    );
+    [...document.querySelectorAll(`.progress-step-${stepName} .progress-text`)].map(
+      el => (el.style.opacity = '1')
+    );
+  }
+
   if (getStepState('easy-pay') === 'green') {
-    console.log('wronggg');
+    console.log('next summary');
     applyNextState('summary');
   } else if (getStepState('calculator') === 'green') {
     applyNextState('easy-pay');
   } else if (getStepState('car') === 'green') {
     applyNextState('calculator');
   } else if (getStepState('fuel') === 'green') {
-    console.log('hello');
+    console.log('next car');
     applyNextState('car');
   }
 }
@@ -3450,8 +3466,20 @@ function getStepState(stepName) {
 
 function applyNextState(stepName) {
   [...document.querySelectorAll(`.next-checkbox`)].map(el => (el.style.display = 'none'));
+  [...document.querySelectorAll(`.flex-step .progress-number`)].map(
+    el => (el.style.fontWeight = 'normal')
+  );
+  [...document.querySelectorAll(`.flex-step .progress-text`)].map(
+    el => (el.style.fontWeight = 'normal')
+  );
   [...document.querySelectorAll(`.progress-step-${stepName} .next-checkbox`)].map(
     el => (el.style.display = 'flex')
+  );
+  [...document.querySelectorAll(`.progress-step-${stepName} .progress-number`)].map(
+    el => (el.style.fontWeight = 'bold')
+  );
+  [...document.querySelectorAll(`.progress-step-${stepName} .progress-text`)].map(
+    el => (el.style.fontWeight = 'bold')
   );
 }
 
