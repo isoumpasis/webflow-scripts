@@ -3387,6 +3387,15 @@ function changeProgressStepState(stepName, state) {
     display = 'flex';
   }
 
+  //reset the state
+  [...document.querySelectorAll(`.progress-step-${stepName} .next-checkbox`)].map(
+    el => (el.style.display = 'none')
+  );
+  [...document.querySelectorAll(`.progress-step-${stepName} .green-round-checkbox`)].map(
+    el => (el.style.display = 'none')
+  );
+
+  //change state
   [...document.querySelectorAll(`.progress-step-${stepName} .${stateClassName}`)].map(
     el => (el.style.display = display)
   );
