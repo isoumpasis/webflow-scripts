@@ -784,7 +784,6 @@ function initEasyPayTabs() {
       }
 
       if (step2Triggered && !step4Triggered) {
-        console.log(1);
         trigger_easy_pay_step_4({ triggered_via: 'click' });
       }
     })
@@ -812,7 +811,6 @@ function initEasyPaySystemSelection() {
       metrhtaFinalCost.textContent = selectedEasyPaySystemPrice.toFixed(2) + '€';
 
       if (step2Triggered && !step4Triggered) {
-        console.log(2);
         trigger_easy_pay_step_4({ triggered_via: 'click' });
       }
     })
@@ -866,7 +864,6 @@ function prokatavoliNoCreditSliderOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
-    console.log(3);
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -898,7 +895,6 @@ function prokatavoliCreditSliderOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
-    console.log(4);
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -923,7 +919,6 @@ function doseisNoCreditSliderOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
-    console.log(5);
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -945,7 +940,6 @@ function doseisCreditSelectOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
-    console.log(6);
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -2830,7 +2824,7 @@ document.querySelector('.open-map-btn').addEventListener('click', () => {
 async function enableGPSButtonClick({ showError = true } = {}) {
   try {
     const currentLatLng = await getCurrentPosition();
-    console.log('my current position', currentLatLng);
+    // console.log('my current position', currentLatLng);
     populateClosestsPins({ lat: currentLatLng[0], lng: currentLatLng[1] });
   } catch (e) {
     console.log('error on geolocation', e);
