@@ -3481,6 +3481,7 @@ function applyNextState(stepName) {
   [...document.querySelectorAll(`.progress-step-${stepName} .next-checkbox`)].map(
     el => (el.style.display = 'flex')
   );
+  if (stepName === 'summary') return;
   [...document.querySelectorAll(`.progress-step-${stepName} .progress-number`)].map(
     el => (el.style.fontWeight = 'bold')
   );
