@@ -1137,6 +1137,7 @@ makeSelect.addEventListener('change', function () {
   resetEasyPay();
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
+  resetProgressSteps();
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1250,6 +1251,7 @@ function yearOnChange(value) {
   resetEasyPay();
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
+  resetProgressSteps();
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1325,6 +1327,7 @@ function modelOnChange(value) {
   resetEasyPay();
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
+  resetProgressSteps();
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1468,6 +1471,7 @@ function descriptionOnChange(value) {
     resetEasyPay();
     calcResult(false);
     updateBasketSection({ resetNoVehicle: true });
+    resetProgressSteps();
 
     userSelections.vehicle = {};
     delete userSelections.calculator.driveOftenIndex;
@@ -1608,6 +1612,7 @@ function showResults(fetchedModelObj) {
     resetCalc();
     resetEasyPay();
     updateBasketSection({ resetNoVehicle: true });
+    resetProgressSteps();
   }
 
   configureUserSelectionsAfterResults();
@@ -3284,6 +3289,8 @@ function trigger_car_step_2() {
   step3ActiveTime = 0;
   step4ActiveTime = 0;
 
+  changeProgressStepState('car', 'green');
+
   triggerGtagEvent('car_step_2', {
     selected_fuel: userSelections.selectedFuel,
     vehicle_make: userSelections.vehicle.identification.vehicleValues.make,
@@ -3399,4 +3406,12 @@ function changeProgressStepState(stepName, state) {
   [...document.querySelectorAll(`.progress-step-${stepName} .${stateClassName}`)].map(
     el => (el.style.display = display)
   );
+}
+
+function resetProgressSteps() {
+  changeProgressStepState('fuel', 'green');
+  changeProgressStepState('car', 'gray');
+  changeProgressStepState('calculator', 'gray');
+  changeProgressStepState('easy-pay', 'gray');
+  changeProgressStepState('summary', 'gray');
 }
