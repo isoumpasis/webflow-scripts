@@ -3378,13 +3378,13 @@ function changeProgressStepState(stepName, state) {
   let stateClassName, display;
   if (state === 'green') {
     stateClassName = 'green-round-checkbox';
-    display = 'grid';
+    display = 'flex';
   } else if (state === 'gray') {
     stateClassName = 'green-round-checkbox';
     display = 'none';
   } else if (state === 'next') {
     stateClassName = 'next-checkbox';
-    display = 'grid';
+    display = 'flex';
   }
 
   [...document.querySelectorAll(`.progress-step-${stepName} .${stateClassName}`)].map(
