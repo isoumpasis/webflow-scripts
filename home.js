@@ -3459,6 +3459,9 @@ function changeProgressStepState(stepName, state) {
     [...document.querySelectorAll(`.progress-step-${stepName} .progress-text`)].map(
       el => (el.style.fontWeight = 'normal')
     );
+    if (getStepState('calculator') === 'gray' && getStepState('easy-pay') === 'green') {
+      applyNextState('calculator');
+    }
   }
 }
 
