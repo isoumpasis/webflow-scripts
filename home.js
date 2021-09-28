@@ -3474,6 +3474,7 @@ function getStepState(stepName) {
 }
 
 function applyNextState(stepName) {
+  if (getStepState(stepName) === 'green') return;
   [...document.querySelectorAll(`.next-checkbox`)].map(el => (el.style.display = 'none'));
   [...document.querySelectorAll(`.flex-step .progress-number`)].map(
     el => (el.style.fontWeight = 'normal')
