@@ -3387,7 +3387,7 @@ function changeProgressStepState(stepName, state) {
     display = 'grid';
   }
 
-  [...document.querySelectorAll(`.progress-step-${stepName} ${stateClassName}`)].map(
+  [...document.querySelectorAll(`.progress-step-${stepName} .${stateClassName}`)].map(
     el => (el.style.display = display)
   );
 }
