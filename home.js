@@ -3435,13 +3435,13 @@ function changeProgressStepState(stepName, state) {
 
 function getStepState(stepName) {
   if (
-    document.querySelector(`.progress-step-${stepName} .green-round-checkbox`).style.display !==
-    'none'
+    document.querySelector(`.progress-step-${stepName} .green-round-checkbox`).style.display ===
+    'flex'
   ) {
     return 'green';
   }
   if (
-    document.querySelector(`.progress-step-${stepName} .next-checkbox`).style.display !== 'none'
+    document.querySelector(`.progress-step-${stepName} .next-checkbox`).style.display === 'flex'
   ) {
     return 'next';
   }
@@ -3449,6 +3449,7 @@ function getStepState(stepName) {
 }
 
 function applyNextState(stepName) {
+  [...document.querySelectorAll(`.next-checkbox`)].map(el => (el.style.display = 'none'));
   [...document.querySelectorAll(`.progress-step-${stepName} .next-checkbox`)].map(
     el => (el.style.display = 'flex')
   );
