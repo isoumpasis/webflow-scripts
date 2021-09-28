@@ -3328,6 +3328,7 @@ function isElementInViewport(el) {
 }
 
 function trigger_system_summary(type) {
+  changeProgressStepState('summary', 'green');
   triggerGtagEvent('system_summary', { summary_type: type });
 }
 
@@ -3374,10 +3375,12 @@ function step4EasyPayWatch() {
 }
 
 function trigger_calculator_step_3(options) {
+  changeProgressStepState('calculator', 'green');
   triggerGtagEvent('calculator_step_3', options);
 }
 
 function trigger_easy_pay_step_4(options) {
+  changeProgressStepState('easy-pay', 'green');
   triggerGtagEvent('easyPay_step_4', options);
 }
 
