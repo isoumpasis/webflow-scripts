@@ -560,7 +560,9 @@ fuelPricesSelectVehicle.addEventListener('change', e => {
   locationOnChange(storesLocationSelect.value);
 
   updateBasketSection({ calculator: true });
-  trigger_calculator_step_3({ triggered_via: 'click' });
+  if (step2Triggered && !step3Triggered) {
+    trigger_calculator_step_3({ triggered_via: 'click' });
+  }
 });
 
 function modifyFuelPriceSliders(value, { save = false } = {}) {
@@ -1131,6 +1133,7 @@ makeSelect.addEventListener('change', function () {
   showGuarantee(false);
   resetCalc();
   resetEasyPay();
+  step2Triggered = false;
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
@@ -1245,6 +1248,8 @@ function yearOnChange(value) {
   showGuarantee(false);
   resetCalc();
   resetEasyPay();
+  step2Triggered = false;
+
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
@@ -1321,6 +1326,8 @@ function modelOnChange(value) {
   showGuarantee(false);
   resetCalc();
   resetEasyPay();
+  step2Triggered = false;
+
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
@@ -1465,6 +1472,8 @@ function descriptionOnChange(value) {
     showGuarantee(false);
     resetCalc();
     resetEasyPay();
+    step2Triggered = false;
+
     calcResult(false);
     updateBasketSection({ resetNoVehicle: true });
     resetProgressSteps();
@@ -2538,7 +2547,7 @@ function calcResult(allowedToTrigger = true) {
       : cngPercentageEl.textContent;
   updateBasketSection({ calculator: true, easyPayMonthlyGain: true, prokatavoliDoseis: true });
 
-  if (allowedToTrigger && !step3Triggered && step2Triggered) {
+  if (allowedToTrigger && step2Triggered && !step3Triggered) {
     trigger_calculator_step_3({ triggered_via: 'click' });
   }
 }
@@ -3369,6 +3378,7 @@ function step4EasyPayWatch() {
 }
 
 function trigger_calculator_step_3(options) {
+  if (!step2Triggered) return;
   step3Triggered = true;
   changeProgressStepState('calculator', 'green');
   changeProgressStepState('easy-pay', 'next');
@@ -3376,6 +3386,7 @@ function trigger_calculator_step_3(options) {
 }
 
 function trigger_easy_pay_step_4(options) {
+  if (!step2Triggered) return;
   step4Triggered = true;
 
   changeProgressStepState('easy-pay', 'green');
