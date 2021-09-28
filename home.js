@@ -922,7 +922,7 @@ function doseisNoCreditSliderOnChange(value) {
   };
   updateBasketSection({ prokatavoliDoseis: true });
 
-  if (allowedToTrigger && step2Triggered && !step4Triggered) {
+  if (step2Triggered && !step4Triggered) {
     console.log(5);
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
