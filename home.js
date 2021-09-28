@@ -3410,6 +3410,10 @@ function changeProgressStepState(stepName, state) {
   );
 
   //change state
+  if (state === 'next') {
+    [...document.querySelectorAll(`.next-checkbox`)].map(el => (el.style.display = 'none'));
+  }
+
   [...document.querySelectorAll(`.progress-step-${stepName} .${stateClassName}`)].map(
     el => (el.style.display = display)
   );
