@@ -2053,6 +2053,7 @@ function configureEasyPayAfterSuggestion() {
   configureNoCreditResults();
   configureCreditResults();
   configureMetrhtaResults();
+  doseisNoCreditSliderOnChange(doseisNoCreditSlider.max); //init on max
 }
 
 function configureModelEasyPay() {
