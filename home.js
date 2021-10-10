@@ -600,6 +600,7 @@ function initSelectedFuelListeners() {
         activeContainer.style.display = 'none';
         showResults(fetchedModelObj);
       }
+      calcResult();
       configureEasyPayMonthlyGain();
       updateBasketSection({ selectedFuel: true });
     });
@@ -616,6 +617,7 @@ function initSelectedFuelListeners() {
         activeContainer.style.display = 'none';
         showResults(fetchedModelObj);
       }
+      calcResult();
       configureEasyPayMonthlyGain();
       updateBasketSection({ selectedFuel: true });
     });
