@@ -2510,20 +2510,20 @@ function calcResult(allowedToTrigger = true) {
     lpgResultLabel.textContent = 'Ετήσιο όφελος';
     cngResultLabel.textContent = 'Ετήσιο όφελος';
 
-    petrolExpenses = (petrolCostPerMonth * 12).toFixed(1);
-    lpgExpenses = (lpgCostPerMonth * 12).toFixed(1);
-    cngExpenses = (cngCostPerMonth * 12).toFixed(1);
+    petrolExpenses = +(petrolCostPerMonth * 12).toFixed(1);
+    lpgExpenses = +(lpgCostPerMonth * 12).toFixed(1);
+    cngExpenses = +(cngCostPerMonth * 12).toFixed(1);
 
     petrolCost.textContent = petrolExpenses + '€';
     lpgCost.textContent = lpgExpenses + '€';
     cngCost.textContent = cngExpenses + '€';
 
-    lpgGain = ((petrolCostPerMonth - lpgCostPerMonth) * 12).toFixed(2);
+    lpgGain = +((petrolCostPerMonth - lpgCostPerMonth) * 12).toFixed(2);
 
     lpgResult.textContent = lpgGain + '€';
     lpgPercentageEl.textContent = lpgPercentageValue.toFixed(1) + '%';
 
-    cngGain = ((petrolCostPerMonth - cngCostPerMonth) * 12).toFixed(2);
+    cngGain = +((petrolCostPerMonth - cngCostPerMonth) * 12).toFixed(2);
 
     cngResult.textContent = cngGain + '€';
     cngPercentageEl.textContent = cngPercentageValue.toFixed(1) + '%';
@@ -2534,20 +2534,20 @@ function calcResult(allowedToTrigger = true) {
     lpgResultLabel.textContent = 'Μηνιαίο όφελος';
     cngResultLabel.textContent = 'Μηνιαίο όφελος';
 
-    petrolExpenses = petrolCostPerMonth.toFixed(1);
-    lpgExpenses = lpgCostPerMonth.toFixed(1);
-    cngExpenses = cngCostPerMonth.toFixed(1);
+    petrolExpenses = +petrolCostPerMonth.toFixed(1);
+    lpgExpenses = +lpgCostPerMonth.toFixed(1);
+    cngExpenses = +cngCostPerMonth.toFixed(1);
 
     petrolCost.textContent = petrolExpenses + '€';
     lpgCost.textContent = lpgExpenses + '€';
     cngCost.textContent = cngExpenses + '€';
 
-    lpgGain = (petrolCostPerMonth - lpgCostPerMonth).toFixed(2);
+    lpgGain = +(petrolCostPerMonth - lpgCostPerMonth).toFixed(2);
 
     lpgResult.textContent = lpgGain + '€';
     lpgPercentageEl.textContent = lpgPercentageValue.toFixed(1) + '%';
 
-    cngGain = (petrolCostPerMonth - cngCostPerMonth).toFixed(2);
+    cngGain = +(petrolCostPerMonth - cngCostPerMonth).toFixed(2);
 
     cngResult.textContent = cngGain + '€';
     cngPercentageEl.textContent = cngPercentageValue.toFixed(1) + '%';
@@ -3413,7 +3413,7 @@ function trigger_calculator_step_3(options) {
   // changeProgressStepState('easy-pay', 'next');
   triggerGtagEvent('calculator_step_3', options);
 
-  showHint({ section: calculator });
+  showHint({ section: 'calculator' });
 }
 
 function trigger_easy_pay_step_4(options) {
