@@ -3573,11 +3573,11 @@ function calcResultHypothesis({ years }) {
 function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expensesAfterYears) {
   document.querySelector('.hint-years').textContent = years;
   document.querySelector('.hint-fuel').textContent = fuelTypeString;
-  document.querySelector('.hint-savings').textContent = savingsAfterYears;
-  document.querySelector('.hint-expenses').textContent = expensesAfterYears;
+  document.querySelector('.hint-savings').textContent = savingsAfterYears + '€';
+  document.querySelector('.hint-expenses').textContent = expensesAfterYears + '€';
 
   hintEl.style.display = 'flex';
   setTimeout(() => {
     hintEl.style.display = 'none';
-  }, 5000);
+  }, 10000);
 }
