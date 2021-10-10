@@ -2481,6 +2481,7 @@ perMonthCheckbox.addEventListener('change', function () {
 });
 
 let lpgConsumption, cngConsumption;
+let lpgGain, cngGain, lpgExpenses, cngExpenses, petrolExpenses;
 
 function calcResult(allowedToTrigger = true) {
   const selectedVehicleIsDirect = hasResult() && fetchedModelObj.isDirect;
@@ -2509,14 +2510,22 @@ function calcResult(allowedToTrigger = true) {
     lpgResultLabel.textContent = 'Ετήσιο όφελος';
     cngResultLabel.textContent = 'Ετήσιο όφελος';
 
-    petrolCost.textContent = (petrolCostPerMonth * 12).toFixed(1) + '€';
-    lpgCost.textContent = (lpgCostPerMonth * 12).toFixed(1) + '€';
-    cngCost.textContent = (cngCostPerMonth * 12).toFixed(1) + '€';
+    petrolExpenses = (petrolCostPerMonth * 12).toFixed(1);
+    lpgExpenses = (lpgCostPerMonth * 12).toFixed(1);
+    cngExpenses = (cngCostPerMonth * 12).toFixed(1);
 
-    lpgResult.textContent = ((petrolCostPerMonth - lpgCostPerMonth) * 12).toFixed(2) + '€';
+    petrolCost.textContent = petrolExpenses + '€';
+    lpgCost.textContent = lpgExpenses + '€';
+    cngCost.textContent = cngExpenses + '€';
+
+    lpgGain = ((petrolCostPerMonth - lpgCostPerMonth) * 12).toFixed(2);
+
+    lpgResult.textContent = lpgGain + '€';
     lpgPercentageEl.textContent = lpgPercentageValue.toFixed(1) + '%';
 
-    cngResult.textContent = ((petrolCostPerMonth - cngCostPerMonth) * 12).toFixed(2) + '€';
+    cngGain = ((petrolCostPerMonth - cngCostPerMonth) * 12).toFixed(2);
+
+    cngResult.textContent = cngGain + '€';
     cngPercentageEl.textContent = cngPercentageValue.toFixed(1) + '%';
 
     userSelections.calculator.perMonthCheckbox = false;
@@ -2525,14 +2534,22 @@ function calcResult(allowedToTrigger = true) {
     lpgResultLabel.textContent = 'Μηνιαίο όφελος';
     cngResultLabel.textContent = 'Μηνιαίο όφελος';
 
-    petrolCost.textContent = petrolCostPerMonth.toFixed(1) + '€';
-    lpgCost.textContent = lpgCostPerMonth.toFixed(1) + '€';
-    cngCost.textContent = cngCostPerMonth.toFixed(1) + '€';
+    petrolExpenses = petrolCostPerMonth.toFixed(1);
+    lpgExpenses = lpgCostPerMonth.toFixed(1);
+    cngExpenses = cngCostPerMonth.toFixed(1);
 
-    lpgResult.textContent = (petrolCostPerMonth - lpgCostPerMonth).toFixed(2) + '€';
+    petrolCost.textContent = petrolExpenses + '€';
+    lpgCost.textContent = lpgExpenses + '€';
+    cngCost.textContent = cngExpenses + '€';
+
+    lpgGain = (petrolCostPerMonth - lpgCostPerMonth).toFixed(2);
+
+    lpgResult.textContent = lpgGain + '€';
     lpgPercentageEl.textContent = lpgPercentageValue.toFixed(1) + '%';
 
-    cngResult.textContent = (petrolCostPerMonth - cngCostPerMonth).toFixed(2) + '€';
+    cngGain = (petrolCostPerMonth - cngCostPerMonth).toFixed(2);
+
+    cngResult.textContent = cngGain + '€';
     cngPercentageEl.textContent = cngPercentageValue.toFixed(1) + '%';
 
     userSelections.calculator.perMonthCheckbox = true;
@@ -2553,6 +2570,14 @@ function calcResult(allowedToTrigger = true) {
   if (allowedToTrigger && step2Triggered && !step3Triggered) {
     trigger_calculator_step_3({ triggered_via: 'click' });
   }
+
+  // return {
+  //   lpgGain,
+  //   cngGain,
+  //   lpgExpenses,
+  //   cngExpenses,
+  //   petrolExpenses
+  // };
 }
 
 function calcCoverWidth(slider) {
@@ -3387,6 +3412,8 @@ function trigger_calculator_step_3(options) {
   changeProgressStepState('calculator', 'green');
   // changeProgressStepState('easy-pay', 'next');
   triggerGtagEvent('calculator_step_3', options);
+
+  showHint({ section: calculator });
 }
 
 function trigger_easy_pay_step_4(options) {
@@ -3502,4 +3529,17 @@ function resetProgressSteps() {
   changeProgressStepState('easy-pay', 'gray');
   changeProgressStepState('summary', 'gray');
   // changeProgressStepState('car', 'next');
+}
+
+function showHint({ section }) {
+  if (section === 'calculator') {
+    calcResultHypothesis({ years: 2 });
+  }
+}
+
+function calcResultHypothesis({ years }) {
+  const fuelGain = userSelections.selectedFuel === 'lpg' ? lpgGain : cngGain;
+  const savingsAfterYears = fuelGain * years;
+
+  console.log(`Σε βάθος ${years}ετίας θα έχεις εξοικονομήσει ${savingsAfterYears}€`);
 }
