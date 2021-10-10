@@ -2505,14 +2505,14 @@ function calcResult(allowedToTrigger = true) {
   const lpgPercentageValue = (100 * (petrolCostPerMonth - lpgCostPerMonth)) / petrolCostPerMonth;
   const cngPercentageValue = (100 * (petrolCostPerMonth - cngCostPerMonth)) / petrolCostPerMonth;
 
+  petrolExpenses = +(petrolCostPerMonth * 12).toFixed(1);
+  lpgExpenses = +(lpgCostPerMonth * 12).toFixed(1);
+  cngExpenses = +(cngCostPerMonth * 12).toFixed(1);
+
   if (!perMonthCheckbox.checked) {
     costLabels.forEach(label => (label.textContent = 'Ετήσια Έξοδα:'));
     lpgResultLabel.textContent = 'Ετήσιο όφελος';
     cngResultLabel.textContent = 'Ετήσιο όφελος';
-
-    petrolExpenses = +(petrolCostPerMonth * 12).toFixed(1);
-    lpgExpenses = +(lpgCostPerMonth * 12).toFixed(1);
-    cngExpenses = +(cngCostPerMonth * 12).toFixed(1);
 
     petrolCost.textContent = petrolExpenses + '€';
     lpgCost.textContent = lpgExpenses + '€';
@@ -2534,13 +2534,13 @@ function calcResult(allowedToTrigger = true) {
     lpgResultLabel.textContent = 'Μηνιαίο όφελος';
     cngResultLabel.textContent = 'Μηνιαίο όφελος';
 
-    petrolExpenses = +petrolCostPerMonth.toFixed(1);
-    lpgExpenses = +lpgCostPerMonth.toFixed(1);
-    cngExpenses = +cngCostPerMonth.toFixed(1);
+    // petrolExpenses = +(petrolCostPerMonth * 12).toFixed(1);
+    // lpgExpenses = +(lpgCostPerMonth * 12).toFixed(1);
+    // cngExpenses = +(cngCostPerMonth * 12).toFixed(1);
 
-    petrolCost.textContent = petrolExpenses + '€';
-    lpgCost.textContent = lpgExpenses + '€';
-    cngCost.textContent = cngExpenses + '€';
+    petrolCost.textContent = (petrolExpenses / 12).toFixed(1) + '€';
+    lpgCost.textContent = (lpgExpenses / 12).toFixed(1) + '€';
+    cngCost.textContent = (cngExpenses / 12).toFixed(1) + '€';
 
     lpgGain = +(petrolCostPerMonth - lpgCostPerMonth).toFixed(2);
 
