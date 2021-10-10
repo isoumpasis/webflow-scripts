@@ -2514,18 +2514,18 @@ function calcResult(allowedToTrigger = true) {
     lpgExpenses = +(lpgCostPerMonth * 12).toFixed(1);
     cngExpenses = +(cngCostPerMonth * 12).toFixed(1);
 
-    petrolCost.textContent = petrolExpenses + '€';
-    lpgCost.textContent = lpgExpenses + '€';
-    cngCost.textContent = cngExpenses + '€';
+    petrolCost.textContent = petrolExpenses.toFixed(1) + '€';
+    lpgCost.textContent = lpgExpenses.toFixed(1) + '€';
+    cngCost.textContent = cngExpenses.toFixed(1) + '€';
 
     lpgGain = +((petrolCostPerMonth - lpgCostPerMonth) * 12).toFixed(2);
 
-    lpgResult.textContent = lpgGain + '€';
+    lpgResult.textContent = lpgGain.toFixed(2) + '€';
     lpgPercentageEl.textContent = lpgPercentageValue.toFixed(1) + '%';
 
     cngGain = +((petrolCostPerMonth - cngCostPerMonth) * 12).toFixed(2);
 
-    cngResult.textContent = cngGain + '€';
+    cngResult.textContent = cngGain.toFixed(2) + '€';
     cngPercentageEl.textContent = cngPercentageValue.toFixed(1) + '%';
 
     userSelections.calculator.perMonthCheckbox = false;
@@ -2538,18 +2538,18 @@ function calcResult(allowedToTrigger = true) {
     lpgExpenses = +lpgCostPerMonth.toFixed(1);
     cngExpenses = +cngCostPerMonth.toFixed(1);
 
-    petrolCost.textContent = petrolExpenses + '€';
-    lpgCost.textContent = lpgExpenses + '€';
-    cngCost.textContent = cngExpenses + '€';
+    petrolCost.textContent = petrolExpenses.toFixed(1) + '€';
+    lpgCost.textContent = lpgExpenses.toFixed(1) + '€';
+    cngCost.textContent = cngExpenses.toFixed(1) + '€';
 
     lpgGain = +(petrolCostPerMonth - lpgCostPerMonth).toFixed(2);
 
-    lpgResult.textContent = lpgGain + '€';
+    lpgResult.textContent = lpgGain.toFixed(2) + '€';
     lpgPercentageEl.textContent = lpgPercentageValue.toFixed(1) + '%';
 
     cngGain = +(petrolCostPerMonth - cngCostPerMonth).toFixed(2);
 
-    cngResult.textContent = cngGain + '€';
+    cngResult.textContent = cngGain.toFixed(2) + '€';
     cngPercentageEl.textContent = cngPercentageValue.toFixed(1) + '%';
 
     petrolExpenses = +(petrolExpenses * 12).toFixed(1);
