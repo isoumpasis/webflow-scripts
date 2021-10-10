@@ -3540,6 +3540,9 @@ function showHint({ section }) {
 function calcResultHypothesis({ years }) {
   const fuelGain = userSelections.selectedFuel === 'lpg' ? lpgGain : cngGain;
   const savingsAfterYears = fuelGain * years;
+  const expensesAfterYears = petrolExpenses * years;
 
-  console.log(`Σε βάθος ${years}ετίας θα έχεις εξοικονομήσει ${savingsAfterYears}€`);
+  console.log(
+    `Σε βάθος ${years}ετίας θα έχεις εξοικονομήσει ${savingsAfterYears}€ ενώ αν συνεχίσεις να κινήσε με βενζίνη θα έχεις πληρώσει ${expensesAfterYears}€ !`
+  );
 }
