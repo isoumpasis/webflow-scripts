@@ -2571,13 +2571,8 @@ function calcResult(allowedToTrigger = true) {
     trigger_calculator_step_3({ triggered_via: 'click' });
   }
 
-  // return {
-  //   lpgGain,
-  //   cngGain,
-  //   lpgExpenses,
-  //   cngExpenses,
-  //   petrolExpenses
-  // };
+  showHintTriggered = false;
+  showHintActiveTime = 0;
 }
 
 function calcCoverWidth(slider) {
@@ -3377,6 +3372,7 @@ function initStepInterval() {
   setInterval(() => {
     step3CalculatorWatch();
     step4EasyPayWatch();
+    showHintWatch();
   }, 1000);
 }
 
@@ -3531,9 +3527,27 @@ function resetProgressSteps() {
   // changeProgressStepState('car', 'next');
 }
 
+let showHintActiveTime = 0,
+  showHintTriggered = false;
+const hintSecondsNeededToTrigger = 3;
+
+function showHintWatch() {
+  if (!step2Triggered) {
+    showHintActiveTime = 0;
+    return;
+  }
+  if (isElementInViewport(document.querySelector('#calculator'))) {
+    showHintActiveTime++;
+    if (showHintActiveTime >= hintSecondsNeededToTrigger && !showHintTriggered) {
+      showHint({ section: 'calculator' });
+      showHintTriggered = true;
+    }
+  }
+}
+
 function showHint({ section }) {
   if (section === 'calculator') {
-    calcResultHypothesis({ years: 2 });
+    calcResultHypothesis({ years: 5 });
   }
 }
 
@@ -3543,6 +3557,8 @@ function calcResultHypothesis({ years }) {
   const expensesAfterYears = petrolExpenses * years;
 
   console.log(
-    `Σε βάθος ${years}ετίας θα έχεις εξοικονομήσει ${savingsAfterYears}€ ενώ αν συνεχίσεις να κινήσε με βενζίνη θα έχεις πληρώσει ${expensesAfterYears}€ !`
+    `Σε βάθος ${years}ετίας με ${
+      userSelections.selectedFuel === 'lpg' ? 'υγραέριο' : 'φυσικό αέριο'
+    } θα έχεις εξοικονομήσει ${savingsAfterYears}€ ενώ αν συνεχίσεις να κινήσε με βενζίνη θα έχεις πληρώσει ${expensesAfterYears}!`
   );
 }
