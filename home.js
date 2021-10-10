@@ -3408,8 +3408,6 @@ function trigger_calculator_step_3(options) {
   changeProgressStepState('calculator', 'green');
   // changeProgressStepState('easy-pay', 'next');
   triggerGtagEvent('calculator_step_3', options);
-
-  showHint({ section: 'calculator' });
 }
 
 function trigger_easy_pay_step_4(options) {
@@ -3529,7 +3527,7 @@ function resetProgressSteps() {
 
 let showHintActiveTime = 0,
   showHintTriggered = false;
-const hintSecondsNeededToTrigger = 3;
+const hintSecondsNeededToTrigger = 4;
 
 function showHintWatch() {
   if (!step2Triggered) {
