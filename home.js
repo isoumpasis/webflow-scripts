@@ -3551,12 +3551,12 @@ function showHint({ section }) {
 
 function calcResultHypothesis({ years }) {
   const fuelGain = userSelections.selectedFuel === 'lpg' ? lpgGain : cngGain;
-  const savingsAfterYears = fuelGain * years;
-  const expensesAfterYears = petrolExpenses * years;
+  const savingsAfterYears = +(fuelGain * years).toFixed(2);
+  const expensesAfterYears = +(petrolExpenses * years).toFixed(2);
 
   console.log(
     `Σε βάθος ${years}ετίας με ${
       userSelections.selectedFuel === 'lpg' ? 'υγραέριο' : 'φυσικό αέριο'
-    } θα έχεις εξοικονομήσει ${savingsAfterYears}€ ενώ αν συνεχίσεις να κινήσε με βενζίνη θα έχεις πληρώσει ${expensesAfterYears}!`
+    } θα έχεις εξοικονομήσει ${savingsAfterYears}€ ενώ αν συνεχίσεις να κινήσε με βενζίνη θα έχεις πληρώσει ${expensesAfterYears}€!`
   );
 }
