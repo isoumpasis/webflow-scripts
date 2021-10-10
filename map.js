@@ -971,8 +971,6 @@ async function urlParamsConfig() {
 }
 
 function closeMapMenu() {
-  // document.querySelector('.store-finder').style.height = '60px';
-  // document.querySelector('.div-block-299').style.transform = 'rotateX(0deg)';
   document.querySelector('.div-block-299').click();
 }
 
