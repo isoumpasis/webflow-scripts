@@ -2579,6 +2579,7 @@ function calcResult(allowedToTrigger = true) {
     trigger_calculator_step_3({ triggered_via: 'click' });
   }
 
+  calcResultHypothesis({ years: 5 });
   showHintTriggered = false;
   showHintActiveTime = 0;
 }
@@ -3560,7 +3561,7 @@ document.querySelector('.hint-close-btn').addEventListener('click', e => hintClo
 
 function showHint({ section }) {
   if (section === 'calculator') {
-    calcResultHypothesis({ years: 5 });
+    hintEl.style.display = 'flex';
   }
 }
 
@@ -3569,10 +3570,6 @@ function calcResultHypothesis({ years }) {
   const savingsAfterYears = +(fuelGain * years).toFixed(2);
   const expensesAfterYears = +(petrolExpenses * years).toFixed(2);
   const fuelTypeString = userSelections.selectedFuel === 'lpg' ? 'υγραέριο' : 'φυσικό αέριο';
-  // console.log(
-  //   `Σε βάθος ${years}ετίας με ${fuelTypeString} θα έχεις εξοικονομήσει ${savingsAfterYears}€ ενώ αν συνεχίσεις να κινήσε με βενζίνη θα έχεις πληρώσει ${expensesAfterYears}€!`
-  // );
-
   paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expensesAfterYears);
 }
 
@@ -3581,9 +3578,4 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
   document.querySelector('.hint-fuel').textContent = fuelTypeString;
   document.querySelector('.hint-savings').textContent = savingsAfterYears + '€';
   document.querySelector('.hint-expenses').textContent = expensesAfterYears + '€';
-
-  hintEl.style.display = 'flex';
-  // setTimeout(() => {
-  //   hintEl.style.display = 'none';
-  // }, 10000);
 }
