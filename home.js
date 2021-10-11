@@ -3563,9 +3563,9 @@ function calcResultHypothesis({ years }) {
   const savingsAfterYears = +(fuelGain * years).toFixed(2);
   const expensesAfterYears = +(petrolExpenses * years).toFixed(2);
   const fuelTypeString = userSelections.selectedFuel === 'lpg' ? 'υγραέριο' : 'φυσικό αέριο';
-  console.log(
-    `Σε βάθος ${years}ετίας με ${fuelTypeString} θα έχεις εξοικονομήσει ${savingsAfterYears}€ ενώ αν συνεχίσεις να κινήσε με βενζίνη θα έχεις πληρώσει ${expensesAfterYears}€!`
-  );
+  // console.log(
+  //   `Σε βάθος ${years}ετίας με ${fuelTypeString} θα έχεις εξοικονομήσει ${savingsAfterYears}€ ενώ αν συνεχίσεις να κινήσε με βενζίνη θα έχεις πληρώσει ${expensesAfterYears}€!`
+  // );
 
   paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expensesAfterYears);
 }
