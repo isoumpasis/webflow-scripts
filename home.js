@@ -3535,11 +3535,13 @@ function resetProgressSteps() {
 
 const hintEl = document.querySelector('.hint');
 let showHintActiveTime = 0,
-  showHintTriggered = false;
+  showHintTriggered = false,
+  hintClosedCounter = 0;
 const hintSecondsNeededToTrigger = 4;
+const hintClosedLimit = 2;
 
 function showHintWatch() {
-  if (!step2Triggered) {
+  if (!step2Triggered || hintClosedCounter >= hintClosedLimit) {
     showHintActiveTime = 0;
     return;
   }
@@ -3551,6 +3553,8 @@ function showHintWatch() {
     }
   }
 }
+
+document.querySelector('.hint-close-btn').addEventListener('click', e => hintClosedCounter++);
 
 function showHint({ section }) {
   if (section === 'calculator') {
