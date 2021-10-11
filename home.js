@@ -3577,7 +3577,7 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
   document.querySelector('.hint-expenses').textContent = expensesAfterYears + '€';
 
   hintEl.style.display = 'flex';
-  setTimeout(() => {
-    hintEl.style.display = 'none';
-  }, 10000);
+  // setTimeout(() => {
+  //   hintEl.style.display = 'none';
+  // }, 10000);
 }
