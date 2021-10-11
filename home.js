@@ -3567,8 +3567,8 @@ function showHint({ section }) {
 
 function calcResultHypothesis({ years }) {
   const fuelGain = userSelections.selectedFuel === 'lpg' ? lpgGain : cngGain;
-  const savingsAfterYears = Math.ceil(fuelGain * years);
-  const expensesAfterYears = Math.ceil(petrolExpenses * years);
+  const savingsAfterYears = Math.ceil(fuelGain * years).toLocaleString('el');
+  const expensesAfterYears = Math.ceil(petrolExpenses * years).toLocaleString('el');
   const fuelTypeString = userSelections.selectedFuel === 'lpg' ? 'υγραέριο' : 'φυσικό αέριο';
   paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expensesAfterYears);
 }
