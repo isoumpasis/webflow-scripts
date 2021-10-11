@@ -3380,7 +3380,7 @@ function initStepInterval() {
   setInterval(() => {
     step3CalculatorWatch();
     step4EasyPayWatch();
-    // showHintWatch();
+    showHintWatch();
   }, 1000);
 }
 
