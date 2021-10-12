@@ -3549,7 +3549,7 @@ function showHintWatch() {
     return;
   }
   if (isElementInViewport(document.querySelector('#calculator'))) {
-    hintEl.classList.add('show-hint');
+    showHintTriggered && hintEl.classList.add('show-hint');
     showHintActiveTime++;
     if (showHintActiveTime >= hintSecondsNeededToTrigger && !showHintTriggered) {
       showHint({ section: 'calculator' });
