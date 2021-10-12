@@ -238,4 +238,5 @@ input[type='range']::-ms-thumb:hover {
 
 .show-hint {
   opacity: 1;
+  pointer-events: all;
 }
