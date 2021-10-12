@@ -3549,13 +3549,14 @@ function showHintWatch() {
     return;
   }
   if (isElementInViewport(document.querySelector('#calculator'))) {
+    hintEl.classList.add('show-hint');
     showHintActiveTime++;
     if (showHintActiveTime >= hintSecondsNeededToTrigger && !showHintTriggered) {
       showHint({ section: 'calculator' });
       showHintTriggered = true;
     }
   } else {
-    document.querySelector('.hint-close-btn').click();
+    hintEl.classList.remove('show-hint');
   }
 }
 
