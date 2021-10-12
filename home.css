@@ -229,3 +229,12 @@ input[type='range']::-ms-thumb:hover {
   opacity: 0;
   transition: visibility 0s ease-in-out 500ms, opacity 500ms ease-in-out 0s;
 } */
+
+.hint {
+  transition: opacity 300ms ease-in-out;
+  opacity: 1;
+}
+
+.faint-hint {
+  opacity: 0;
+}

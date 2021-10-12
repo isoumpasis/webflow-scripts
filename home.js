@@ -3557,12 +3557,16 @@ function showHintWatch() {
   }
 }
 
-document.querySelector('.hint-close-btn').addEventListener('click', e => hintClosedCounter++);
+document.querySelector('.hint-close-btn').addEventListener('click', e => {
+  hintClosedCounter++;
+  hintEl.classList.remove('show-hint');
+});
 
 function showHint({ section }) {
   if (section === 'calculator') {
-    hintEl.style.display = 'flex';
-    hintEl.style.transform = 'translate3d(0px, 0px, 0px)';
+    hintEl.classList.add('show-hint');
+    // hintEl.style.opacity = 1;
+    // hintEl.style.transform = 'translate3d(0px, 0px, 0px)';
   }
 }
 
