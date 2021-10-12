@@ -3562,7 +3562,7 @@ document.querySelector('.hint-close-btn').addEventListener('click', e => hintClo
 function showHint({ section }) {
   if (section === 'calculator') {
     hintEl.style.display = 'flex';
-    hintEl.style.transform = 'translate3d(500px, 0px, 0px)';
+    hintEl.style.transform = 'translate3d(0px, 0px, 0px)';
   }
 }
 
