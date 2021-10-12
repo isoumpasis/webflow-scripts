@@ -3554,6 +3554,8 @@ function showHintWatch() {
       showHint({ section: 'calculator' });
       showHintTriggered = true;
     }
+  } else {
+    document.querySelector('.hint-close-btn').click();
   }
 }
 
