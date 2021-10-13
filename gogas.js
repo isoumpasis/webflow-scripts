@@ -1078,13 +1078,15 @@ function trigger_gogas_results() {
     gogas_litres: gogasSelections.results.foundTankObj.litres,
     gogas_diameter: gogasSelections.results.foundTankObj.diameter,
     gogas_length: gogasSelections.results.foundTankObj.length,
-    multivalve_selected: gogasSelections.results.mvSelected,
     user_location: gogasSelections.form.activeValues.location
   });
 }
 
 function trigger_gogas_summary(type) {
-  triggerGtagEvent('gogas_summary', { summary_type: type });
+  triggerGtagEvent('gogas_summary', {
+    summary_type: type,
+    multivalve_selected: gogasSelections.results.mvSelected
+  });
 }
 
 function initTankWrapperClicks() {
