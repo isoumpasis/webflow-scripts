@@ -1137,6 +1137,6 @@ const mvCheckIcons = document.querySelectorAll('.mv-check-icon');
       ? gogasSelections.results.foundTankObj.price + MV_PRICE
       : gogasSelections.results.foundTankObj.price - MV_PRICE;
 
-    activeContainer.querySelector('.price-result').textContent = priceAfterMv + '€';
+    activeContainer.querySelector('.price-result').textContent = priceAfterMv.toFixed(2) + '€';
   });
 });
