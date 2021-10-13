@@ -119,6 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
   litresSelect.disabled = true;
   dimensionSelect.disabled = true;
   locationSelect.disabled = true;
+
+  gogasSelections = { results: { mvSelected: false, mvPrice: MV_PRICE } };
   // if (getGogasSelections()) loadGogasSelections();
 
   initUserInfo();
@@ -554,13 +556,14 @@ function saveUserResults() {
       }
     },
     results: {
+      ...results,
       foundTankObj: {
         ...foundTankObj,
         tankImgUrl: tankImgUrlDict[tempType]
       },
-      finalPrice: foundTankObj.price,
-      mvPrice: MV_PRICE,
-      mvSelected: false
+      finalPrice: foundTankObj.price
+      // mvPrice: MV_PRICE,
+      // mvSelected: false
     }
   };
   console.log(JSON.stringify(gogasSelections.results));
@@ -1149,6 +1152,6 @@ const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
 
     activeContainer.querySelector('.price-result').textContent = priceAfterMv.toFixed(2) + '€';
 
-    mvCheckIcons.map(icon => (icon.style.display = 'block'));
+    mvCheckIcons.map(icon => (icon.style.display = mvSelected ? 'block' : 'none'));
   });
 });
