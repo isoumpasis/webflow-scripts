@@ -3555,7 +3555,8 @@ function showHintWatch() {
     //   hintEl.classList.add('show-hint');
     // }
     showHintActiveTime++;
-    if (showHintActiveTime >= hintSecondsNeededToTrigger && !showHintTriggered) {
+    if (showHintActiveTime >= hintSecondsNeededToTrigger) {
+      //&& !showHintTriggered) {
       showHint({ section: 'calculator' });
       showHintTriggered = true;
     }
@@ -3573,8 +3574,6 @@ document.querySelector('.hint-close-btn').addEventListener('click', e => {
 function showHint({ section }) {
   if (section === 'calculator') {
     hintEl.classList.add('show-hint');
-    // hintEl.style.opacity = 1;
-    // hintEl.style.transform = 'translate3d(0px, 0px, 0px)';
   }
 }
 
