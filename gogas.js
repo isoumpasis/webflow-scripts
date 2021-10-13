@@ -1129,7 +1129,7 @@ const mvCheckIcons = document.querySelectorAll('.mv-check-icon');
       .querySelector('.price-result')
       .textContent.replace('€', '');
 
-    const mvSelected = activeContainer.querySelector('.mv-check-icon').style.display === 'block';
+    const mvSelected = activeContainer.querySelector('.mv-check-icon').style.display === 'none';
     const priceAfterMv = mvSelected ? priceBeforeMv + MV_PRICE : priceBeforeMv - MV_PRICE;
 
     gogasSelections.results.mvSelected = mvSelected;
