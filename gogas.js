@@ -1139,7 +1139,7 @@ const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
 [...document.querySelectorAll('.mv-check-wrapper')].map(wrapper => {
   wrapper.addEventListener('click', e => {
     mvCheckIcons.map(
-      icon => (icon.style.display = icon.style.display === 'none' ? 'block' : 'none')
+      icon => (icon.style.display = icon.style.display != 'block' ? 'block' : 'none')
     );
 
     const mvSelected = activeContainer.querySelector('.mv-check-icon').style.display === 'block';
