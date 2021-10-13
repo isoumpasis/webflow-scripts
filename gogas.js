@@ -1147,7 +1147,7 @@ const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
     gogasSelections.results.mvSelected = mvSelected;
     gogasSelections.results.finalPrice = mvSelected
       ? gogasSelections.results.foundTankObj.price + MV_PRICE
-      : gogasSelections.results.foundTankObj.price - MV_PRICE;
+      : gogasSelections.results.foundTankObj.price;
 
     activeContainer.querySelector('.price-result').textContent = priceAfterMv.toFixed(2) + '€';
   });
