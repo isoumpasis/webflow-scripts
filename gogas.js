@@ -527,7 +527,7 @@ function renderResultsContainer(container) {
 
   const mvSelected = gogasSelections.results.mvSelected;
   console.log('mvSelected', mvSelected);
-  const priceAfterMv = mvSelected ? foundTankObj.price + MV_PRICE : foundTankObj.price - MV_PRICE;
+  const priceAfterMv = mvSelected ? foundTankObj.price + MV_PRICE : foundTankObj.price;
   console.log('priceAfterMv', priceAfterMv);
   container.querySelector('.price-result').textContent = priceAfterMv.toFixed(2) + '€';
 
