@@ -3551,7 +3551,7 @@ function showHintWatch() {
   }
   if (isElementInViewport(document.querySelector('#calculator'))) {
     showHintTriggered && !hintJustClosed && hintEl.classList.add('show-hint');
-    hintJustClosed = true;
+    hintJustClosed = false;
     showHintActiveTime++;
     if (showHintActiveTime >= hintSecondsNeededToTrigger && !showHintTriggered) {
       showHint({ section: 'calculator' });
