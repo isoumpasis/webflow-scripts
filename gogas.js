@@ -556,7 +556,7 @@ function saveUserResults() {
       }
     },
     results: {
-      ...results,
+      ...gogasSelections.results,
       foundTankObj: {
         ...foundTankObj,
         tankImgUrl: tankImgUrlDict[tempType]
