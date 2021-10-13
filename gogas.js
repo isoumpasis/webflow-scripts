@@ -1152,6 +1152,6 @@ const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
 
     activeContainer.querySelector('.price-result').textContent = priceAfterMv.toFixed(2) + '€';
 
-    mvCheckIcons.map(icon => (icon.style.display = mvSelected ? 'block' : 'none'));
+    [...document.querySelectorAll('.mv-check-wrapper')].map(wrapper => wrapper.click());
   });
 });
