@@ -1131,7 +1131,7 @@ function trigger_learn_more_klirwsh() {
 
 /* Multivalve Check */
 const MV_PRICE = 65;
-const mvCheckIcons = document.querySelectorAll('.mv-check-icon');
+const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
 
 [...document.querySelectorAll('.mv-check-wrapper')].map(wrapper => {
   wrapper.addEventListener('click', e => {
@@ -1148,5 +1148,7 @@ const mvCheckIcons = document.querySelectorAll('.mv-check-icon');
       : gogasSelections.results.foundTankObj.price - MV_PRICE;
 
     activeContainer.querySelector('.price-result').textContent = priceAfterMv.toFixed(2) + '€';
+
+    mvCheckIcons.map(icon => (icon.style.display = 'block'));
   });
 });
