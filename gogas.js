@@ -560,13 +560,13 @@ function saveUserResults() {
       foundTankObj: {
         ...foundTankObj,
         tankImgUrl: tankImgUrlDict[tempType]
-      }
-      // finalPrice: gogasSelections.mvSelected ? foundTankObj.price + MV_PRICE : foundTankObj.price
+      },
+      finalPrice: gogasSelections.results.mvSelected
+        ? foundTankObj.price + MV_PRICE
+        : foundTankObj.price
     }
   };
-  gogasSelections.results.finalPrice = gogasSelections.mvSelected
-    ? foundTankObj.price + MV_PRICE
-    : foundTankObj.price;
+
   console.log(JSON.stringify(gogasSelections.results));
   setGogasSelections();
 }
