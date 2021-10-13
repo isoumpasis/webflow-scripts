@@ -521,7 +521,10 @@ function renderResultsContainer(container) {
   container.querySelector('.litres-result').textContent = foundTankObj.litres + ' Λίτρα';
   container.querySelector('.diameter-result').textContent = foundTankObj.diameter / 10;
   container.querySelector('.length-result').textContent = foundTankObj.length / 10;
-  container.querySelector('.price-result').textContent = foundTankObj.price + '€';
+
+  const mvSelected = gogasSelections.results.mvSelected;
+  const priceAfterMv = mvSelected ? foundTankObj.price + MV_PRICE : foundTankObj.price - MV_PRICE;
+  container.querySelector('.price-result').textContent = priceAfterMv + '€';
 
   document.querySelector('.init-container').style.display = 'none';
   container.style.display = 'grid';
