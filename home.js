@@ -3546,14 +3546,14 @@ const hintSecondsNeededToTrigger = 4;
 const hintClosedLimit = 2;
 
 function showHintWatch() {
-  if (!step2Triggered || hintClosedCounter >= hintClosedLimit) {
+  if (!step2Triggered || hintJustClosed || hintClosedCounter >= hintClosedLimit) {
     showHintActiveTime = 0;
     return;
   }
   if (isElementInViewport(document.querySelector('#calculator'))) {
-    if (showHintTriggered && !hintJustClosed) {
-      hintEl.classList.add('show-hint');
-    }
+    // if (showHintTriggered && !hintJustClosed) {
+    //   hintEl.classList.add('show-hint');
+    // }
     showHintActiveTime++;
     if (showHintActiveTime >= hintSecondsNeededToTrigger && !showHintTriggered) {
       showHint({ section: 'calculator' });
