@@ -512,8 +512,8 @@ function locationOnChange(value) {
 function showResults() {
   foundTankObj = fetchedDimensions.find(dim => +dimensionSelect.value == dim.id);
   activeContainer = document.getElementById(typeContainerIdDict[foundTankObj.type]);
-  renderResultsContainer(activeContainer);
   saveUserResults();
+  renderResultsContainer(activeContainer);
   trigger_gogas_results();
 }
 
