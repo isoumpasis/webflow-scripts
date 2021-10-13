@@ -561,7 +561,7 @@ function saveUserResults() {
         ...foundTankObj,
         tankImgUrl: tankImgUrlDict[tempType]
       },
-      finalPrice: foundTankObj.price
+      finalPrice: gogasSelections.mvSelected ? foundTankObj.price + MV_PRICE : foundTankObj.price
       // mvPrice: MV_PRICE,
       // mvSelected: false
     }
