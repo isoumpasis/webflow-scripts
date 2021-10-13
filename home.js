@@ -3539,6 +3539,7 @@ function resetProgressSteps() {
 const hintEl = document.querySelector('.hint');
 let showHintActiveTime = 0,
   showHintTriggered = false,
+  hintJustClosed = false,
   hintClosedCounter = 0;
 const hintSecondsNeededToTrigger = 4;
 const hintClosedLimit = 2;
@@ -3549,7 +3550,8 @@ function showHintWatch() {
     return;
   }
   if (isElementInViewport(document.querySelector('#calculator'))) {
-    showHintTriggered && hintEl.classList.add('show-hint');
+    showHintTriggered && !hintJustClosed && hintEl.classList.add('show-hint');
+    hintJustClosed = true;
     showHintActiveTime++;
     if (showHintActiveTime >= hintSecondsNeededToTrigger && !showHintTriggered) {
       showHint({ section: 'calculator' });
@@ -3562,6 +3564,7 @@ function showHintWatch() {
 
 document.querySelector('.hint-close-btn').addEventListener('click', e => {
   hintClosedCounter++;
+  hintJustClosed = true;
   hintEl.classList.remove('show-hint');
 });
 
