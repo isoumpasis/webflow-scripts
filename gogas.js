@@ -548,7 +548,10 @@ function saveUserResults() {
       foundTankObj: {
         ...foundTankObj,
         tankImgUrl: tankImgUrlDict[tempType]
-      }
+      },
+      finalPrice: foundTankObj.price,
+      mvPrice: MV_PRICE,
+      mvSelected: false
     }
   };
   setGogasSelections();
@@ -1115,3 +1118,25 @@ document
 function trigger_learn_more_klirwsh() {
   triggerGtagEvent('learn_more_klirwsh', { from_page: 'go-gas' });
 }
+
+/* Multivalve Check */
+const MV_PRICE = 65;
+const mvCheckIcons = document.querySelectorAll('.mv-check-icon');
+
+[...document.querySelectorAll('.mv-check-wrapper')].map(wrapper => {
+  wrapper.addEventListener('click', e => {
+    let priceBeforeMv = +activeContainer
+      .querySelector('.price-result')
+      .textContent.replace('€', '');
+
+    const mvSelected = activeContainer.querySelector('.mv-check-icon').style.display === 'block';
+    const priceAfterMv = mvSelected ? priceBeforeMv + MV_PRICE : priceBeforeMv - MV_PRICE;
+
+    gogasSelections.results.mvSelected = mvSelected;
+    gogasSelections.results.finalPrice = mvSelected
+      ? gogasSelections.results.foundTankObj.price + MV_PRICE
+      : gogasSelections.results.foundTankObj.price - MV_PRICE;
+
+    activeContainer.querySelector('.price-result').textContent = priceAfterMv + '€';
+  });
+});

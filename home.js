@@ -2580,7 +2580,6 @@ function calcResult(allowedToTrigger = true) {
   }
 
   calcResultHypothesis({ years: 5 });
-  showHintTriggered = false;
   showHintActiveTime = 0;
   hintJustClosed = false;
 }
@@ -3537,12 +3536,12 @@ function resetProgressSteps() {
   // changeProgressStepState('car', 'next');
 }
 
+/* Hints */
 const hintEl = document.querySelector('.hint');
 let showHintActiveTime = 0,
-  showHintTriggered = false,
   hintJustClosed = false,
   hintClosedCounter = 0;
-const hintSecondsNeededToTrigger = 4;
+const hintSecondsNeededToTrigger = 5;
 const hintClosedLimit = 2;
 
 function showHintWatch() {
@@ -3551,14 +3550,9 @@ function showHintWatch() {
     return;
   }
   if (isElementInViewport(document.querySelector('#calculator'))) {
-    // if (showHintTriggered && !hintJustClosed) {
-    //   hintEl.classList.add('show-hint');
-    // }
     showHintActiveTime++;
     if (showHintActiveTime >= hintSecondsNeededToTrigger) {
-      //&& !showHintTriggered) {
       showHint({ section: 'calculator' });
-      showHintTriggered = true;
     }
   } else {
     hintEl.classList.remove('show-hint');
