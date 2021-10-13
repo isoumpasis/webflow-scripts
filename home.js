@@ -2582,6 +2582,7 @@ function calcResult(allowedToTrigger = true) {
   calcResultHypothesis({ years: 5 });
   showHintTriggered = false;
   showHintActiveTime = 0;
+  hintJustClosed = false;
 }
 
 function calcCoverWidth(slider) {
@@ -3550,8 +3551,9 @@ function showHintWatch() {
     return;
   }
   if (isElementInViewport(document.querySelector('#calculator'))) {
-    showHintTriggered && !hintJustClosed && hintEl.classList.add('show-hint');
-    hintJustClosed = false;
+    if (showHintTriggered && !hintJustClosed) {
+      hintEl.classList.add('show-hint');
+    }
     showHintActiveTime++;
     if (showHintActiveTime >= hintSecondsNeededToTrigger && !showHintTriggered) {
       showHint({ section: 'calculator' });
