@@ -1138,11 +1138,16 @@ const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
 
 [...document.querySelectorAll('.mv-check-wrapper')].map(wrapper => {
   wrapper.addEventListener('click', e => {
+    mvCheckIcons.map(
+      icon => (icon.style.display = icon.style.display === 'none' ? 'block' : 'none')
+    );
+
+    const mvSelected = activeContainer.querySelector('.mv-check-icon').style.display === 'block';
+
     let priceBeforeMv = +activeContainer
       .querySelector('.price-result')
       .textContent.replace('€', '');
 
-    const mvSelected = activeContainer.querySelector('.mv-check-icon').style.display === 'none';
     const priceAfterMv = mvSelected ? priceBeforeMv + MV_PRICE : priceBeforeMv - MV_PRICE;
 
     gogasSelections.results.mvSelected = mvSelected;
@@ -1151,7 +1156,5 @@ const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
       : gogasSelections.results.foundTankObj.price - MV_PRICE;
 
     activeContainer.querySelector('.price-result').textContent = priceAfterMv.toFixed(2) + '€';
-
-    [...document.querySelectorAll('.mv-check-wrapper')].map(wrapper => wrapper.click());
   });
 });
