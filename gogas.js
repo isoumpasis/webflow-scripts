@@ -512,25 +512,31 @@ function locationOnChange(value) {
 function showResults() {
   foundTankObj = fetchedDimensions.find(dim => +dimensionSelect.value == dim.id);
   activeContainer = document.getElementById(typeContainerIdDict[foundTankObj.type]);
+  console.log('show results going for saveUserResults');
   saveUserResults();
+  console.log('show results going for renderResultsContainer');
   renderResultsContainer(activeContainer);
   trigger_gogas_results();
 }
 
 function renderResultsContainer(container) {
+  console.log('renderResultsContainer');
   container.querySelector('.litres-result').textContent = foundTankObj.litres + ' Λίτρα';
   container.querySelector('.diameter-result').textContent = foundTankObj.diameter / 10;
   container.querySelector('.length-result').textContent = foundTankObj.length / 10;
 
   const mvSelected = gogasSelections.results.mvSelected;
+  console.log('mvSelected', mvSelected);
   const priceAfterMv = mvSelected ? foundTankObj.price + MV_PRICE : foundTankObj.price - MV_PRICE;
-  container.querySelector('.price-result').textContent = priceAfterMv + '€';
+  console.log('priceAfterMv', priceAfterMv);
+  container.querySelector('.price-result').textContent = priceAfterMv.toFixed(2) + '€';
 
   document.querySelector('.init-container').style.display = 'none';
   container.style.display = 'grid';
 }
 
 function saveUserResults() {
+  console.log('saveUserResults');
   const tempType = foundTankObj.type;
   gogasSelections = {
     ...gogasSelections,
@@ -557,6 +563,7 @@ function saveUserResults() {
       mvSelected: false
     }
   };
+  console.log(JSON.stringify(gogasSelections.results));
   setGogasSelections();
 }
 
