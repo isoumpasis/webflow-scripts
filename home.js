@@ -74,7 +74,9 @@ const emulatorPriceDict = {
   b6: 95,
   b8: -250, // - from cobd 8cyl = 1000€
   hp: 90,
-  'double-hp': 130
+  'double-hp': 130,
+  t: 90,
+  f: 85
 };
 //90eurw sthn timh gia ta panw apo 180 hp
 
@@ -3585,3 +3587,29 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
   document.querySelector('.hint-savings').textContent = savingsAfterYears + '€';
   document.querySelector('.hint-expenses').textContent = expensesAfterYears + '€';
 }
+
+/* Include Emulator Price */
+[...document.querySelectorAll('.check-wrapper')].forEach(wrapper => {
+  wrapper.addEventListener('click', e => {
+    const emulatorType = userSelections.vehicles.suggestions.emulators.type;
+    const emulatorPrice = emulatorPriceDict[emulatorType];
+    console.log(
+      'getEmulatorType()',
+      emulatorType,
+      'isApaitoumenoEmulatorType',
+      isApaitoumenoEmulatorType(emulatorType),
+      'emulatorPrice',
+      emulatorPrice
+    );
+
+    const activeContainer = getActiveContainer();
+
+    const activeContainerChecks = [...activeContainer.querySelectorAll('.check')];
+
+    const emulatorSelected = activeContainerChecks[0].style.display !== 'block';
+
+    activeContainerChecks.map(
+      thisCheck => (thisCheck.style.display = emulatorSelected ? 'block' : 'none')
+    );
+  });
+});
