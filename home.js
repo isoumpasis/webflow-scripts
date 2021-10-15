@@ -53,8 +53,8 @@ const apaitoumenaEmulatorTypes = ['p', 'b6', 'b8', 'hp', 'double-hp'];
 const cngOnlyEmulatorTypes = ['b6', 'b8', 'f', 'p'];
 const emulatorTextDict = {
   p: 'Fuel Pressure Emulator',
-  t: 'Reducer Lovato RGJ DD (+90€)',
-  f: 'Petrol Level Emulator (+85€)',
+  t: 'Reducer Lovato RGJ DD',
+  f: 'Petrol Level Emulator',
   b6: 'Petrol Injectors Emulator',
   b8: 'Dual Injector Engine 4x2 = 8cyl',
   hp: 'Εξαερωτής RGJ UHPII έως 350HP',
@@ -79,6 +79,8 @@ const emulatorPriceDict = {
   f: 85
 };
 //90eurw sthn timh gia ta panw apo 180 hp
+
+let emulatorSelected = false;
 
 const systemNamesFromIdDict = {
   'notConvertible-lpg': ['not convertible lpg'],
@@ -1577,8 +1579,15 @@ function configureUserSelectionsAfterResults() {
     userSelections.vehicle.suggestions.emulators = {
       ...userSelections.vehicle.suggestions.emulators,
       emulatorText: emulatorTextDict[userSelections.vehicle.suggestions.emulators.type],
-      isMandatory: emulatorIsMandatoryDict[userSelections.vehicle.suggestions.emulators.type]
+      isMandatory: emulatorIsMandatoryDict[userSelections.vehicle.suggestions.emulators.type],
+      emulatorPrice: emulatorPriceDict[userSelections.vehicle.suggestions.emulators.type]
     };
+    if (
+      userSelections.vehicle.suggestions.emulators.hasEmulators &&
+      !userSelections.vehicle.suggestions.emulators.isMandatory
+    ) {
+      userSelections.vehicle.suggestions.emulators.isSelected = emulatorSelected;
+    }
   }
 }
 
@@ -3599,20 +3608,10 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
   wrapper.addEventListener('click', e => {
     const emulatorType = userSelections.vehicle.suggestions.emulators.type;
     const emulatorPrice = emulatorPriceDict[emulatorType];
-    console.log(
-      'getEmulatorType()',
-      emulatorType,
-      'isApaitoumenoEmulatorType',
-      isApaitoumenoEmulatorType(emulatorType),
-      'emulatorPrice',
-      emulatorPrice
-    );
-
     const activeContainer = getActiveContainer();
-
     const activeContainerChecks = [...activeContainer.querySelectorAll('.check')];
 
-    const emulatorSelected = activeContainerChecks[0].style.display !== 'block';
+    emulatorSelected = activeContainerChecks[0].style.display !== 'block';
 
     activeContainerChecks.map(
       thisCheck => (thisCheck.style.display = emulatorSelected ? 'block' : 'none')
