@@ -3623,7 +3623,7 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
       .forEach(priceEl => {
         const prevPriceNumber = +priceEl.textContent.split('€')[0];
 
-        if (!emulatorSelected)
+        if (emulatorSelected)
           suggestedPricesChanges.push({ priceEl, defaultPrice: prevPriceNumber });
 
         const newPriceNumber = emulatorSelected
