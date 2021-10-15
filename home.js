@@ -1825,6 +1825,11 @@ function displayEmulatorInfo(suggestedContainer) {
               suggestedPricesChanges.push({ priceEl, defaultPrice });
               priceEl.textContent =
                 defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
+            } else {
+              //init not selected emulator
+              [...suggestedContainer.querySelectorAll('.check')].map(
+                check => (check.style.display = 'none')
+              );
             }
             emCont.querySelector('.info-content').style.height = '0px';
             emCont.style.display = 'block';
