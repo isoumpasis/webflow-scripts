@@ -3591,7 +3591,7 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
 /* Include Emulator Price */
 [...document.querySelectorAll('.check-wrapper')].forEach(wrapper => {
   wrapper.addEventListener('click', e => {
-    const emulatorType = userSelections.vehicles.suggestions.emulators.type;
+    const emulatorType = userSelections.vehicle.suggestions.emulators.type;
     const emulatorPrice = emulatorPriceDict[emulatorType];
     console.log(
       'getEmulatorType()',
