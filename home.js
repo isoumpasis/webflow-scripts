@@ -2331,14 +2331,18 @@ function updateBasketSection(sections) {
     document.querySelector('.easy-pay-container-basket').style.display = 'block';
 
     if (userSelections.vehicle.suggestions.emulators.hasEmulators) {
-      if (isApaitoumenoEmulatorType(userSelections.vehicle.suggestions.emulators.type)) {
+      if (
+        userSelections.vehicle.suggestions.emulators.isMandatory ||
+        userSelections.vehicle.suggestions.emulators.isSelected
+      ) {
         document.querySelector('.emulator-const-text-basket').textContent =
-          emulatorTextDict[userSelections.vehicle.suggestions.emulators.type];
+          userSelections.vehicle.suggestions.emulators.emulatorText;
         document.querySelector('.emulator-const-basket').style.display = 'flex';
         document.querySelector('.emulator-let-basket').style.display = 'none';
       } else {
         document.querySelector('.emulator-let-text-basket').textContent =
-          emulatorTextDict[userSelections.vehicle.suggestions.emulators.type];
+          userSelections.vehicle.suggestions.emulators.emulatorText +
+          ` (+${userSelections.vehicle.suggestions.emulators.emulatorPrice}€)`;
         document.querySelector('.emulator-const-basket').style.display = 'none';
         document.querySelector('.emulator-let-basket').style.display = 'flex';
       }
