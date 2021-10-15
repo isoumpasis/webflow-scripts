@@ -1839,6 +1839,7 @@ function displayEmulatorInfo(suggestedContainer) {
               [...suggestedContainer.querySelectorAll('.check')].map(
                 check => (check.style.display = 'none')
               );
+              emulatorSelected = false;
             }
             emCont.querySelector('.info-content').style.height = '0px';
             emCont.style.display = 'block';
