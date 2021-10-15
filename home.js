@@ -378,7 +378,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initStepInterval();
   initProgressSteps();
+
+  initHint();
 });
+
+function initHint() {
+  document.querySelector('.hint').style.display = 'flex';
+}
 
 function initProgressSteps() {
   changeProgressStepState('fuel', 'green');
