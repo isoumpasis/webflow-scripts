@@ -3638,5 +3638,12 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
 
     configureEasyPayAfterSuggestion();
     configureUserSelectionsAfterResults();
+    updateBasketSection({
+      vehicle: true,
+      calculator: true,
+      easyPay: true,
+      prokatavoliDoseis: true,
+      easyPayMonthlyGain: true
+    });
   });
 });
