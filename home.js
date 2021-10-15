@@ -5,17 +5,15 @@ const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
 const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
 const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
 const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
-// const downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/system';
-const downloadSummaryUrl = 'http://localhost:1917/summaries/system';
-// const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/system';
-const emailSummaryUrl = 'http://localhost:1917/summaries/email/system';
+const downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/system';
+// const downloadSummaryUrl = 'http://localhost:1917/summaries/system';
+const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/system';
+// const emailSummaryUrl = 'http://localhost:1917/summaries/email/system';
 const mapBaseUrl = baseUrl + mapUrl;
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
-// const urlContactForm = 'http://localhost:1917/contact/'; //
 const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
 const baseDateUrl = 'https://lovatohellas.herokuapp.com/lottery/base-date';
-// const baseDateUrl = 'http://localhost:1917/lottery/base-date';
 
 let fetchedYears;
 let fetchedModels;
