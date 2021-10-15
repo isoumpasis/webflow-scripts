@@ -3622,13 +3622,16 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
       .querySelectorAll(`.suggested-${userSelections.selectedFuel}-price`)
       .forEach(priceEl => {
         const prevPriceNumber = +priceEl.textContent.split('€')[0];
+
+        if (!emulatorSelected)
+          suggestedPricesChanges.push({ priceEl, defaultPrice: prevPriceNumber });
+
         const newPriceNumber = emulatorSelected
           ? prevPriceNumber + emulatorPrice
           : prevPriceNumber - emulatorPrice;
         priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
       });
 
-    // configureSystemsEasyPay();
     configureEasyPayAfterSuggestion();
     configureUserSelectionsAfterResults();
   });
