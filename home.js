@@ -3627,5 +3627,7 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
           : prevPriceNumber - emulatorPrice;
         priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
       });
+
+    configureSystemsEasyPay();
   });
 });
