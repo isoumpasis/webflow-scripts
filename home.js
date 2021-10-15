@@ -3628,6 +3628,8 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
         priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
       });
 
-    configureSystemsEasyPay();
+    // configureSystemsEasyPay();
+    configureEasyPayAfterSuggestion();
+    configureUserSelectionsAfterResults();
   });
 });
