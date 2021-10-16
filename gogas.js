@@ -556,8 +556,8 @@ function saveUserResults() {
         tankImgUrl: tankImgUrlDict[tempType]
       },
       finalPrice: gogasSelections.results.mvSelected
-        ? foundTankObj.price + MV_PRICE
-        : foundTankObj.price
+        ? Math.round((foundTankObj.price + MV_PRICE) * 100) / 100
+        : Math.round(foundTankObj.price * 100) / 100
     }
   };
 
@@ -1150,8 +1150,8 @@ const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
 
     gogasSelections.results.mvSelected = mvSelected;
     gogasSelections.results.finalPrice = mvSelected
-      ? gogasSelections.results.foundTankObj.price + MV_PRICE
-      : gogasSelections.results.foundTankObj.price;
+      ? Math.round((gogasSelections.results.foundTankObj.price + MV_PRICE) * 100) / 100
+      : Math.round(gogasSelections.results.foundTankObj.price * 100) / 100;
 
     activeContainer.querySelector('.price-result').textContent = priceAfterMv.toFixed(2) + '€';
   });
