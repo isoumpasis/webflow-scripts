@@ -3402,7 +3402,10 @@ function isElementInViewport(el) {
   );
 }
 
+let systemSummaryTriggered = false;
+
 function trigger_system_summary(type) {
+  systemSummaryTriggered = true;
   changeProgressStepState('summary', 'green');
   triggerGtagEvent('system_summary', { summary_type: type });
 }
@@ -3452,7 +3455,6 @@ function trigger_calculator_step_3(options) {
   if (!step2Triggered) return;
   step3Triggered = true;
   changeProgressStepState('calculator', 'green');
-  // changeProgressStepState('easy-pay', 'next');
   triggerGtagEvent('calculator_step_3', options);
 }
 
@@ -3461,7 +3463,6 @@ function trigger_easy_pay_step_4(options) {
   step4Triggered = true;
 
   changeProgressStepState('easy-pay', 'green');
-  // changeProgressStepState('summary', 'next');
   triggerGtagEvent('easyPay_step_4', options);
 }
 
@@ -3660,3 +3661,16 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
     });
   });
 });
+
+document.querySelector('sidebar-btn').addEventListener('click', e => {
+  trigger_sidebar_open({
+    step_2_triggered: step2Triggered,
+    step_3_triggered: step3Triggered,
+    step_4_triggered: step4Triggered,
+    system_summary_triggered: systemSummaryTriggered
+  });
+});
+
+function trigger_sidebar_open(options) {
+  triggerGtagEvent('sidebar_open', options);
+}
