@@ -402,6 +402,15 @@ function initCalcOptions() {
 
 function initBasket() {
   updateBasketSection({ resetNoVehicle: true });
+  progressStepClickedOnSidebar(); //Close when progress step is clicked
+}
+
+function progressStepClickedOnSidebar() {
+  document.querySelectorAll('.side-bar-content .step-progress .flex-step').forEach(stepEl =>
+    stepEl.addEventListener('click', e => {
+      document.querySelector('.side-bar-close').click();
+    })
+  );
 }
 
 function initMails() {
