@@ -3663,7 +3663,7 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
   });
 });
 
-document.querySelector('sidebar-btn').addEventListener('click', e => {
+document.querySelector('.sidebar-btn').addEventListener('click', e => {
   trigger_sidebar_open({
     step_2_triggered: step2Triggered,
     step_3_triggered: step3Triggered,
