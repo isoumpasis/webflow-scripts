@@ -1087,7 +1087,8 @@ function trigger_gogas_summary(type) {
     gogas_litres: gogasSelections.results.foundTankObj.litres,
     gogas_diameter: gogasSelections.results.foundTankObj.diameter,
     gogas_length: gogasSelections.results.foundTankObj.length,
-    user_location: gogasSelections.form.activeValues.location
+    user_location: gogasSelections.form.activeValues.location,
+    timer: multivalveSecondsOpened
   });
 }
 
@@ -1168,7 +1169,10 @@ const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
 
     activeContainer.querySelector('.price-result').textContent = priceAfterMv.toFixed(2) + '€';
 
-    trigger_multivalve_checkbox({ multivalve_selected: mvSelected });
+    trigger_multivalve_checkbox({
+      multivalve_selected: mvSelected,
+      timer: multivalveSecondsOpened
+    });
   });
 });
 
