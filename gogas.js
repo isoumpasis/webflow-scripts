@@ -1122,6 +1122,7 @@ function trigger_multivalve_open() {
     multivalve_selected: gogasSelections.results.mvSelected,
     timer: multivalveSecondsOpened
   });
+  console.log('hello? ', multivalveSecondsOpened);
 }
 
 let multivalveOpenStart,
