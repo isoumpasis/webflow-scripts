@@ -1138,7 +1138,7 @@ let multivalveOpenStart,
 });
 
 [...document.querySelectorAll('.mv-close-btn')].forEach(el =>
-  el.addEventListener('click', e => trigger_multivalve_open)
+  el.addEventListener('click', trigger_multivalve_open)
 );
 
 document
