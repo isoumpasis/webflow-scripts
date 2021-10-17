@@ -3328,9 +3328,10 @@ function getNextLotteryDate(date) {
 }
 
 /* GTAG */
-
+let gtagDebug = false;
 function triggerGtagEvent(eventName, params = {}) {
-  if (window.location.href.includes('.io')) return { status: 'Error', message: 'dev' };
+  if (!gtagDebug && window.location.href.includes('.io'))
+    return { status: 'Error', message: 'dev' };
   if (typeof gtag === 'undefined') return { status: 'Error', message: 'gtag undefined' };
   if (typeof eventName === 'undefined' || eventName === '')
     return { status: 'Error', message: 'eventName undefined' };
