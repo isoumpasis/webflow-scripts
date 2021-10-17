@@ -1122,7 +1122,6 @@ function trigger_multivalve_open() {
     multivalve_selected: gogasSelections.results.mvSelected,
     timer: multivalveSecondsOpened
   });
-  console.log('hello? ', multivalveSecondsOpened);
 }
 
 let multivalveOpenStart,
@@ -1134,7 +1133,6 @@ let multivalveOpenStart,
     multivalveOpenStart = new Date();
     isMultivalveOpen = true;
   });
-  //el.addEventListener('click', trigger_multivalve_open);
 });
 
 [...document.querySelectorAll('.mv-close-btn')].forEach(el =>
