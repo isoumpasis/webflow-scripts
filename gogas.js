@@ -1110,6 +1110,7 @@ function initTankWrapperClicks() {
 }
 
 function trigger_multivalve_open() {
+  multivalveOpenEnd = new Date();
   multivalveSecondsOpened =
     Math.round(((multivalveOpenEnd - multivalveOpenStart) / 1000) * 10) / 10;
   triggerGtagEvent('multivalve_open', {
@@ -1126,13 +1127,9 @@ function trigger_multivalve_open() {
 
 let multivalveOpenStart,
   multivalveOpenEnd,
-  isMultivalveOpen = false,
   multivalveSecondsOpened = 0;
 [...document.querySelectorAll('.multivalve-open')].map(el => {
-  el.addEventListener('click', e => {
-    multivalveOpenStart = new Date();
-    isMultivalveOpen = true;
-  });
+  el.addEventListener('click', e => (multivalveOpenStart = new Date()));
 });
 
 [...document.querySelectorAll('.mv-close-btn')].forEach(el =>
