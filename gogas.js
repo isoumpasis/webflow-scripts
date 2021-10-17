@@ -1156,7 +1156,7 @@ const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
 
     activeContainer.querySelector('.price-result').textContent = priceAfterMv.toFixed(2) + '€';
 
-    trigger_multivalve_checkbox({ mvSelected });
+    trigger_multivalve_checkbox({ multivalve_selected: mvSelected });
   });
 });
 
