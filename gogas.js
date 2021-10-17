@@ -1088,7 +1088,7 @@ function trigger_gogas_summary(type) {
     gogas_diameter: gogasSelections.results.foundTankObj.diameter,
     gogas_length: gogasSelections.results.foundTankObj.length,
     user_location: gogasSelections.form.activeValues.location,
-    timer: multivalveSecondsOpened
+    timer: multivalveSecondsOpenedAllTime
   });
 }
 
@@ -1114,6 +1114,7 @@ function trigger_multivalve_open() {
   multivalveOpenEnd = new Date();
   multivalveSecondsOpened =
     Math.round(((multivalveOpenEnd - multivalveOpenStart) / 1000) * 10) / 10;
+  multivalveSecondsOpenedAllTime += multivalveSecondsOpened;
   triggerGtagEvent('multivalve_open', {
     gogas_type: gogasSelections.results.foundTankObj.type,
     gogas_price: gogasSelections.results.foundTankObj.price,
@@ -1128,7 +1129,8 @@ function trigger_multivalve_open() {
 
 let multivalveOpenStart,
   multivalveOpenEnd,
-  multivalveSecondsOpened = 0;
+  multivalveSecondsOpened = 0,
+  multivalveSecondsOpenedAllTime = 0;
 [...document.querySelectorAll('.multivalve-open')].map(el => {
   el.addEventListener('click', e => (multivalveOpenStart = new Date()));
 });
