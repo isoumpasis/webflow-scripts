@@ -1050,18 +1050,13 @@ function startCountdown() {
 }
 
 /* GTAG */
+let gtagDebug = false;
 function triggerGtagEvent(eventName, params = {}) {
-  if (window.location.href.includes('.io')) return { status: 'Error', message: 'dev' };
+  if (!gtagDebug && window.location.href.includes('.io'))
+    return { status: 'Error', message: 'dev' };
   if (typeof gtag === 'undefined') return { status: 'Error', message: 'gtag undefined' };
   if (typeof eventName === 'undefined' || eventName === '')
     return { status: 'Error', message: 'eventName undefined' };
-
-  // params.event_callback = () =>
-  //   console.log(
-  //     `${eventName} event triggered with params ${
-  //       Object.keys(params).length && JSON.stringify(params)
-  //     }`
-  //   );
 
   gtag('event', eventName, params);
   return {
