@@ -1116,7 +1116,8 @@ function trigger_multivalve_open() {
     gogas_litres: gogasSelections.results.foundTankObj.litres,
     gogas_diameter: gogasSelections.results.foundTankObj.diameter,
     gogas_length: gogasSelections.results.foundTankObj.length,
-    user_location: gogasSelections.form.activeValues.location
+    user_location: gogasSelections.form.activeValues.location,
+    multivalve_selected: gogasSelections.results.mvSelected
   });
 }
 
