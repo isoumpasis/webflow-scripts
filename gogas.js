@@ -1110,6 +1110,8 @@ function initTankWrapperClicks() {
 }
 
 function trigger_multivalve_open() {
+  multivalveSecondsOpened =
+    Math.round(((multivalveOpenEnd - multivalveOpenStart) / 1000) * 10) / 10;
   triggerGtagEvent('multivalve_open', {
     gogas_type: gogasSelections.results.foundTankObj.type,
     gogas_price: gogasSelections.results.foundTankObj.price,
@@ -1117,13 +1119,24 @@ function trigger_multivalve_open() {
     gogas_diameter: gogasSelections.results.foundTankObj.diameter,
     gogas_length: gogasSelections.results.foundTankObj.length,
     user_location: gogasSelections.form.activeValues.location,
-    multivalve_selected: gogasSelections.results.mvSelected
+    multivalve_selected: gogasSelections.results.mvSelected,
+    timer: multivalveSecondsOpened
   });
 }
 
-[...document.querySelectorAll('.multivalve-open')].map(el =>
-  el.addEventListener('click', trigger_multivalve_open)
-);
+let multivalveOpenStart,
+  multivalveOpenEnd,
+  isMultivalveOpen = false,
+  multivalveSecondsOpened = 0;
+[...document.querySelectorAll('.multivalve-open')].map(el => {
+  el.addEventListener('click', e => {
+    multivalveOpenStart = new Date();
+    isMultivalveOpen = true;
+  });
+  //el.addEventListener('click', trigger_multivalve_open);
+});
+
+document.querySelector('.mv-close-btn').addEventListener('click', e => trigger_multivalve_open);
 
 document
   .querySelector('.link-block-6')
