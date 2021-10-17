@@ -1081,7 +1081,13 @@ function trigger_gogas_results() {
 function trigger_gogas_summary(type) {
   triggerGtagEvent('gogas_summary', {
     summary_type: type,
-    multivalve_selected: gogasSelections.results.mvSelected
+    multivalve_selected: gogasSelections.results.mvSelected,
+    gogas_type: gogasSelections.results.foundTankObj.type,
+    gogas_price: gogasSelections.results.foundTankObj.price,
+    gogas_litres: gogasSelections.results.foundTankObj.litres,
+    gogas_diameter: gogasSelections.results.foundTankObj.diameter,
+    gogas_length: gogasSelections.results.foundTankObj.length,
+    user_location: gogasSelections.form.activeValues.location
   });
 }
 
@@ -1149,5 +1155,11 @@ const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
       : Math.round(gogasSelections.results.foundTankObj.price * 100) / 100;
 
     activeContainer.querySelector('.price-result').textContent = priceAfterMv.toFixed(2) + '€';
+
+    trigger_multivalve_checkbox({ mvSelected });
   });
 });
+
+function trigger_multivalve_checkbox(options) {
+  triggerGtagEvent('multivalve_checkbox', options);
+}
