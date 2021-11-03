@@ -3578,7 +3578,7 @@ const hintEl = document.querySelector('.hint');
 let showHintActiveTime = 0,
   hintJustClosed = false,
   hintClosedCounter = 0;
-const hintSecondsNeededToTrigger = 5;
+const hintSecondsNeededToTrigger = 7;
 const hintClosedLimit = 2;
 
 function showHintWatch() {
