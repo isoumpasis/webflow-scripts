@@ -1014,10 +1014,8 @@ function trigger_pin_opened(props) {
     pin_location: props.region
   });
 }
-
 function getSourceReferrerDomain() {
-  let sourceURL =
-    window.location != window.parent.location ? document.referrer : document.location.href;
+  let sourceURL = [...window.location.ancestorOrigins][0] || window.location.origin; //fallout
   sourceReferrerDomain = new URL(sourceURL).hostname;
   console.log('sourceReferrerDomain', sourceReferrerDomain);
 }
