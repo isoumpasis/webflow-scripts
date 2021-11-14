@@ -35,6 +35,8 @@ let map,
   slideIndex = 1,
   cachedPins;
 
+let sourceReferrerDomain;
+
 document.addEventListener('DOMContentLoaded', async () => {
   generateInitHtml();
   initDOMEvents();
@@ -44,6 +46,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   await initMap();
   await urlParamsConfig();
   setTimeout(() => endLoader(), 250);
+
+  getSourceReferrerDomain();
 });
 
 async function getCachedPins() {
@@ -992,6 +996,7 @@ function triggerGtagEvent(eventName, params = {}) {
   if (typeof gtag === 'undefined') return { status: 'Error', message: 'gtag undefined' };
   if (typeof eventName === 'undefined' || eventName === '')
     return { status: 'Error', message: 'eventName undefined' };
+  params.source_referrer_domain = sourceReferrerDomain;
   gtag('event', eventName, params);
   return {
     status: 'OK',
@@ -1008,4 +1013,11 @@ function trigger_pin_opened(props) {
     pin_images_num: props.imgs.length,
     pin_location: props.region
   });
+}
+
+function getSourceReferrerDomain() {
+  let sourceURL =
+    window.location != window.parent.location ? document.referrer : document.location.href;
+  sourceReferrerDomain = new URL(sourceURL).hostname;
+  console.log('sourceReferrerDomain', sourceReferrerDomain);
 }

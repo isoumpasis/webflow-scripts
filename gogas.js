@@ -52,6 +52,8 @@ const preferredStorage = localStorage;
 let gogasSelections = {};
 let userInfo = { username: '', email: '', phone: '', address: '' };
 
+let sourceReferrerDomain;
+
 /* STORAGE */
 function setGogasSelections() {
   if (typeof Storage !== 'undefined')
@@ -128,6 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initLotteryCountdown();
   initTankWrapperClicks();
+
+  getSourceReferrerDomain();
 });
 
 function showFacebookBrowserProblem(show) {
@@ -1058,6 +1062,7 @@ function triggerGtagEvent(eventName, params = {}) {
   if (typeof eventName === 'undefined' || eventName === '')
     return { status: 'Error', message: 'eventName undefined' };
 
+  params.source_referrer_domain = sourceReferrerDomain;
   gtag('event', eventName, params);
   return {
     status: 'OK',
@@ -1180,4 +1185,11 @@ const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
 
 function trigger_multivalve_checkbox(options) {
   triggerGtagEvent('multivalve_checkbox', options);
+}
+
+function getSourceReferrerDomain() {
+  let sourceURL =
+    window.location != window.parent.location ? document.referrer : document.location.href;
+  sourceReferrerDomain = new URL(sourceURL).hostname;
+  console.log('sourceReferrerDomain', sourceReferrerDomain);
 }
