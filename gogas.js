@@ -755,6 +755,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
   dataToSend = gogasSelections.results;
   dataToSend.location = gogasSelections.form.activeValues.location;
   dataToSend.mapBaseUrl = mapBaseUrl;
+  dataToSend.sourceReferrerDomain = sourceReferrerDomain;
   dataToSend.userInfo = userInfo;
 
   startLoadingSelect(e.target, triggeredFrom);
@@ -805,6 +806,7 @@ function emailSummarySubmit(e, triggeredFrom) {
   dataToSend = gogasSelections.results;
   dataToSend.location = gogasSelections.form.activeValues.location;
   dataToSend.mapBaseUrl = mapBaseUrl;
+  dataToSend.sourceReferrerDomain = sourceReferrerDomain;
   dataToSend.userInfo = userInfo;
 
   startLoadingSelect(e.target, triggeredFrom);
