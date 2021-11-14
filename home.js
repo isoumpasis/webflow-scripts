@@ -3339,6 +3339,7 @@ function triggerGtagEvent(eventName, params = {}) {
   if (typeof eventName === 'undefined' || eventName === '')
     return { status: 'Error', message: 'eventName undefined' };
 
+  params.sourceReferrerDomain = sourceReferrerDomain;
   gtag('event', eventName, params);
   return {
     status: 'OK',
