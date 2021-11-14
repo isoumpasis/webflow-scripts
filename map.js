@@ -1017,5 +1017,4 @@ function trigger_pin_opened(props) {
 function getSourceReferrerDomain() {
   let sourceURL = [...window.location.ancestorOrigins][0] || window.location.origin; //fallout
   sourceReferrerDomain = new URL(sourceURL).hostname;
-  console.log('sourceReferrerDomain', sourceReferrerDomain);
 }
