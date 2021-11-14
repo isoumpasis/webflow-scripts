@@ -3675,3 +3675,9 @@ document.querySelector('.sidebar-btn').addEventListener('click', e => {
 function trigger_sidebar_open(options) {
   triggerGtagEvent('sidebar_open', options);
 }
+
+document.querySelector('body').onclick = clickIframeSource;
+
+function clickIframeSource() {
+  console.log(location);
+}
