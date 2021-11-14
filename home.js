@@ -2708,6 +2708,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
   dataToSend = userSelections;
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
+  dataToSend.sourceReferrerDomain = sourceReferrerDomain;
   delete dataToSend.fuelPrices;
   delete dataToSend.vehicle.identification.fetchedData;
 
@@ -2754,6 +2755,7 @@ function emailSummarySubmit(e, triggeredFrom) {
   dataToSend = userSelections;
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
+  dataToSend.sourceReferrerDomain = sourceReferrerDomain;
   delete dataToSend.fuelPrices;
   delete dataToSend.vehicle.identification.fetchedData;
 
