@@ -352,6 +352,8 @@ const storesLocationSelect = document.querySelector('#selectStores');
 let noCreditInterest = 12.6;
 let creditInterest = 7.2;
 
+let sourceReferrerDomain;
+
 document.addEventListener('DOMContentLoaded', () => {
   if (preferredStorage.userSelections) userSelections = getUserSelections();
   userSelections.selectedFuel = 'lpg';
@@ -378,6 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProgressSteps();
 
   initHint();
+  getSourceReferrerDomain();
 });
 
 function initHint() {
@@ -3676,11 +3679,9 @@ function trigger_sidebar_open(options) {
   triggerGtagEvent('sidebar_open', options);
 }
 
-document.querySelector('body').onclick = clickIframeSource;
-
-function clickIframeSource() {
+function getSourceReferrerDomain() {
   let sourceURL =
     window.location != window.parent.location ? document.referrer : document.location.href;
-  let source = new URL(sourceURL).hostname;
-  console.log('source', source);
+  sourceReferrerDomain = new URL(sourceURL).hostname;
+  console.log('sourceReferrerDomain', sourceReferrerDomain);
 }
