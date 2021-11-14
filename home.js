@@ -3679,5 +3679,10 @@ function trigger_sidebar_open(options) {
 document.querySelector('body').onclick = clickIframeSource;
 
 function clickIframeSource() {
-  console.log(location);
+  var url = window.location != window.parent.location ? document.referrer : document.location.href;
+  console.log('location', location);
+  console.log('parent.location', parent.location);
+  console.log('document.referrer', document.referrer);
+  console.log('document.location.href', document.location.href);
+  console.log('url', url);
 }
