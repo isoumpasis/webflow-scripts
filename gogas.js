@@ -1190,6 +1190,8 @@ function trigger_multivalve_checkbox(options) {
 function getSourceReferrerDomain() {
   let sourceURL =
     window.location != window.parent.location ? document.referrer : document.location.href;
+  console.log('im here');
+  console.log(sourceURL);
   sourceReferrerDomain = new URL(sourceURL).hostname;
   console.log('sourceReferrerDomain', sourceReferrerDomain);
 }
