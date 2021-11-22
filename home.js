@@ -354,6 +354,8 @@ let creditInterest = 7.2;
 
 let sourceReferrerDomain;
 
+const h2FuelSelection = document.querySelector('.h2-fuel-selection');
+
 document.addEventListener('DOMContentLoaded', () => {
   if (preferredStorage.userSelections) userSelections = getUserSelections();
   userSelections.selectedFuel = 'lpg';
@@ -615,6 +617,8 @@ function initSelectedFuelListeners() {
       userSelections.selectedFuel = 'cng';
       saveUserSelections();
 
+      h2FuelSelection.textContent = 'φυσικού αερίου';
+
       const activeContainer = getActiveContainer();
       if (activeContainer) {
         activeContainer.style.display = 'none';
@@ -631,6 +635,8 @@ function initSelectedFuelListeners() {
       if (userSelections.selectedFuel === 'lpg') return;
       userSelections.selectedFuel = 'lpg';
       saveUserSelections();
+
+      h2FuelSelection.textContent = 'υγραεριοκίνησης';
 
       const activeContainer = getActiveContainer();
       if (activeContainer) {
