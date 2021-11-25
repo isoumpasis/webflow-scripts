@@ -1225,10 +1225,14 @@ function startLoadingSelect(select, triggeredFrom = null, type = null) {
       document.querySelector('#submitSummaryBtn').value = 'Ετοιμάζουμε την προσφορά σου...';
     }
     if (triggeredFrom === 'basket') {
-      if (type === 'download')
-        document.querySelector('.download-summary-basket-descr').innerHTML =
-          'Ετοιμάζουμε την<br>προσφορά σου...';
-      else if (type === 'email')
+      if (type === 'download') {
+        if (isFacebookBrowser()) {
+          document.querySelector('.open-download-form').click();
+        } else {
+          document.querySelector('.download-summary-basket-descr').innerHTML =
+            'Ετοιμάζουμε την<br>προσφορά σου...';
+        }
+      } else if (type === 'email')
         document.querySelector('.email-summary-basket-descr').innerHTML =
           'Ετοιμάζουμε την<br>προσφορά σου...';
     }
