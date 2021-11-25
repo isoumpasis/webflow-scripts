@@ -1975,8 +1975,8 @@ function resetCalc() {
   calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
   if (!getActiveContainer()) {
-    document.querySelector('#vehicle').style.paddingBottom = '9%';
-    document.querySelector('#calculator').style.paddingTop = '7%';
+    document.querySelector('#vehicle').style.paddingBottom = '6%';
+    document.querySelector('#calculator').style.paddingTop = '6%';
   }
 }
 
