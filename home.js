@@ -1,19 +1,20 @@
 /* System Identification */
 const baseUrl = location.origin;
 const mapUrl = '/stores';
-const urlYears = 'https://lovatohellas.herokuapp.com/vehicleDB/get/years';
-const urlModels = 'https://lovatohellas.herokuapp.com/vehicleDB/get/models';
-const urlDescriptions = 'https://lovatohellas.herokuapp.com/vehicleDB/get/descriptions';
-const urlFuelPrices = 'https://lovatohellas.herokuapp.com/fuelPrices';
-const downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/download/system';
+const serverUrl = 'https://lovatohellas.herokuapp.com/';
+const urlYears = serverUrl + 'vehicleDB/get/years';
+const urlModels = serverUrl + 'vehicleDB/get/models';
+const urlDescriptions = serverUrl + 'vehicleDB/get/descriptions';
+const urlFuelPrices = serverUrl + 'fuelPrices';
+const downloadSummaryUrl = serverUrl + 'summaries/download/system';
 // const downloadSummaryUrl = 'http://localhost:1917/summaries/download/system';
-const emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/system';
+const emailSummaryUrl = serverUrl + 'summaries/email/system';
 // const emailSummaryUrl = 'http://localhost:1917/summaries/email/system';
 const mapBaseUrl = baseUrl + mapUrl;
-const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
-const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
-const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
-const baseDateUrl = 'https://lovatohellas.herokuapp.com/lottery/base-date';
+const numPlaceUrl = serverUrl + 'map/pins/numPlace';
+const closestUrl = serverUrl + 'map/pins/closest';
+const urlContactForm = serverUrl + 'contact/';
+const baseDateUrl = serverUrl + 'lottery/base-date';
 
 let fetchedYears;
 let fetchedModels;
