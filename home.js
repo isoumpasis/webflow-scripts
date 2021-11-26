@@ -1,7 +1,7 @@
 /* System Identification */
 const baseUrl = location.origin;
 const mapUrl = '/stores';
-const serverUrl = 'https://lovatohellas.herokuapp.com/';
+let serverUrl = 'https://lovatohellas.herokuapp.com/';
 const urlYears = serverUrl + 'vehicleDB/get/years';
 const urlModels = serverUrl + 'vehicleDB/get/models';
 const urlDescriptions = serverUrl + 'vehicleDB/get/descriptions';
