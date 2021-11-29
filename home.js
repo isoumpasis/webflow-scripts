@@ -402,11 +402,11 @@ function initForeignReferrerOptions() {
     ];
     dontShowEls.forEach(query => (document.querySelector(query).style.display = 'none'));
 
-    [...document.querySelectorAll('a')].forEach(el => {
-      if (el.href.includes('http')) {
-        el.href += '?foreignReferrer=true';
-      }
-    });
+    // [...document.querySelectorAll('a')].forEach(el => {
+    //   if (el.href.includes('http')) {
+    //     el.href += '?foreignReferrer=true';
+    //   }
+    // });
   }
 }
 
