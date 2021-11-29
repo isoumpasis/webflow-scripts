@@ -137,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initForeignReferrerOptions() {
   const urlParams = new URLSearchParams(window.location.search);
-  console.log(window.location.search);
   if (urlParams.has('foreignReferrer') && urlParams.get('foreignReferrer') === 'true') {
     const dontShowEls = [
       '#navFindStore',
@@ -157,6 +156,12 @@ function initForeignReferrerOptions() {
       document.querySelector(query).style.gridRowEnd = 'span 1';
       document.querySelector(query).style.griColumnStart = 'span 2';
       document.querySelector(query).style.gridColumnEnd = 'span 2';
+    });
+
+    [...document.querySelectorAll('a')].forEach(el => {
+      if (el.href.includes('http')) {
+        el.href += '?foreignReferrer=true';
+      }
     });
   }
 }
