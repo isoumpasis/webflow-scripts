@@ -139,7 +139,13 @@ function initForeignReferrerOptions() {
   const urlParams = new URLSearchParams(window.location.search);
   console.log(window.location.search);
   if (urlParams.has('foreignReferrer') && urlParams.get('foreignReferrer') === 'true') {
-    const dontShowEls = ['#navFindStore', '.nav-link-divider', '#contact', '#footer'];
+    const dontShowEls = [
+      '#navFindStore',
+      '.nav-link-divider',
+      '#gogasNavContact',
+      '#contact',
+      '#footer'
+    ];
     dontShowEls.forEach(query => (document.querySelector(query).style.display = 'none'));
 
     const types = ['#eswterikhContainer', '#ekswterikhContainer', '#kylindrikhContainer'];
