@@ -384,7 +384,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initHint();
   getSourceReferrerDomain();
+
+  initForeignReferrerOptions();
 });
+
+function initForeignReferrerOptions() {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('foreignReferrer') && urlParams.get('foreignReferrer') === 'true') {
+    const dontShowEls = [
+      '#navFindStore',
+      '.nav-link-divider',
+      '#stores',
+      '#testimonials',
+      '#remarketing',
+      '#contact',
+      '#footer'
+    ];
+    dontShowEls.forEach(query => (document.querySelector(query).style.display = 'none'));
+  }
+}
 
 function initHint() {
   document.querySelector('.hint').style.display = 'flex';
