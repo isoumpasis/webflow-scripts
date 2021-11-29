@@ -139,22 +139,18 @@ function initForeignReferrerOptions() {
   const urlParams = new URLSearchParams(window.location.search);
   console.log(window.location.search);
   if (urlParams.has('foreignReferrer') && urlParams.get('foreignReferrer') === 'true') {
-    const dontShowEls = [
-      '#navFindStore',
-      '.nav-link-divider',
-      '.location-suggestions',
-      '#contact',
-      '#footer'
-    ];
+    const dontShowEls = ['#navFindStore', '.nav-link-divider', '#contact', '#footer'];
     dontShowEls.forEach(query => (document.querySelector(query).style.display = 'none'));
 
     const types = ['#eswterikhContainer', '#ekswterikhContainer', '#kylindrikhContainer'];
     types.forEach(type => {
+      document.querySelector(`${type} .location-suggestions`).style.display = 'none';
+
       const query = `${type} .tank-result-wrapper`;
       document.querySelector(query).style.gridRowStart = 'span 1';
       document.querySelector(query).style.gridRowEnd = 'span 1';
-      document.querySelector(query).style.griColumnStart = 'span 1';
-      document.querySelector(query).style.gridColumnEnd = 'span 1';
+      document.querySelector(query).style.griColumnStart = 'span 2';
+      document.querySelector(query).style.gridColumnEnd = 'span 2';
     });
   }
 }
