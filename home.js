@@ -392,8 +392,8 @@ function initForeignReferrerOptions() {
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.has('foreignReferrer') && urlParams.get('foreignReferrer') === 'true') {
     const dontShowEls = [
-      '#navFindStore',
-      '.nav-link-divider',
+      '.nav-link-container',
+      '#hero',
       '#stores',
       '#testimonials',
       '#remarketing',
