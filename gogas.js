@@ -145,7 +145,9 @@ function initForeignReferrerOptions() {
     types.forEach(type => {
       document.querySelector(`${type} .location-suggestions`).style.display = 'none';
 
+      document.querySelector(`${type} .tank-wrapper`).style.margin = '0 auto';
       const query = `${type} .tank-result-wrapper`;
+
       document.querySelector(query).style.gridRowStart = 'span 1';
       document.querySelector(query).style.gridRowEnd = 'span 1';
       document.querySelector(query).style.griColumnStart = 'span 2';
