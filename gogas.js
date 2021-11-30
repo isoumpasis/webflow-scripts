@@ -138,13 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initForeignReferrerOptions() {
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.has('foreignReferrer') && urlParams.get('foreignReferrer') === 'true') {
-    const dontShowEls = [
-      '#navFindStore',
-      '.nav-link-divider',
-      '#gogasNavContact',
-      '#contact',
-      '#footer'
-    ];
+    const dontShowEls = ['.navbar.navbar-3', '#gogasNavContact', '#contact', '#footer'];
     dontShowEls.forEach(query => (document.querySelector(query).style.display = 'none'));
 
     const types = ['#eswterikhContainer', '#ekswterikhContainer', '#kylindrikhContainer'];
@@ -158,11 +152,9 @@ function initForeignReferrerOptions() {
       document.querySelector(query).style.gridColumnEnd = 'span 2';
     });
 
-    // [...document.querySelectorAll('a')].forEach(el => {
-    //   if (el.href.includes('http')) {
-    //     el.href += '?foreignReferrer=true';
-    //   }
-    // });
+    const a = '<a href="/go-gas" target="_blank">';
+    document.querySelector('.gogas-logo-nav').outerHTML =
+      a + document.querySelector('.gogas-logo-nav').outerHTML + '</a>';
   }
 }
 

@@ -393,6 +393,7 @@ function initForeignReferrerOptions() {
   if (urlParams.has('foreignReferrer') && urlParams.get('foreignReferrer') === 'true') {
     const dontShowEls = [
       '.nav-link-container',
+      '.menu-button.w-nav-button',
       '#hero',
       '#stores',
       '#testimonials',
