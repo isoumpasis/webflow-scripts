@@ -403,6 +403,9 @@ function initForeignReferrerOptions() {
     ];
     dontShowEls.forEach(query => (document.querySelector(query).style.display = 'none'));
     document.querySelector('a.brand').target = '_blank';
+    document.querySelector('#getYourSummaryH').textContent =
+      'Πάρε την προσφορά και έλα με αυτή στο συνεργείο μας!';
+    document.querySelector('#getYourSummaryP').textContent = 'το συνεργείο μας!';
   }
 }
 
