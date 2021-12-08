@@ -152,6 +152,11 @@ function initForeignReferrerOptions() {
       document.querySelector(query).style.gridRowEnd = 'span 1';
       document.querySelector(query).style.griColumnStart = 'span 2';
       document.querySelector(query).style.gridColumnEnd = 'span 2';
+
+      document.querySelector(`${type} .get-summary-h`).textContent =
+        'Πάρε την προσφορά και έλα στο συνεργείο μας!';
+      document.querySelector(`${type} .get-summary-p`).textContent =
+        'Πάρε την προσφορά για την δεξαμενή σου με έναν από τους παρακάτω τρόπους και επισκέψου με αυτή, το συνεργείο μας!';
     });
 
     const a = '<a href="/go-gas" target="_blank">';
