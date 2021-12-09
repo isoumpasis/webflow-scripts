@@ -3286,6 +3286,8 @@ const _second = 1000;
 const _minute = _second * 60;
 const _hour = _minute * 60;
 const _day = _hour * 24;
+const lotteryDaysInterval = 20;
+
 const daysCountdown = document.querySelector('#days');
 const hoursCountdown = document.querySelector('#hours');
 const minutesCountdown = document.querySelector('#minutes');
@@ -3362,7 +3364,7 @@ function startCountdown() {
 }
 
 function getNextLotteryDate(date) {
-  const minutes = 60 * 24 * 10;
+  const minutes = 60 * 24 * lotteryDaysInterval;
   return new Date(date.getTime() + minutes * 60000);
 }
 
