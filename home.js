@@ -1960,6 +1960,7 @@ function hasValidEmulators(vehObj) {
 }
 
 function hasUHPII(vehObj) {
+  console.log(JSON.stringify(userSelections));
   if (userSelections.selectedFuel === 'cng') return false;
   return vehObj.hp > 180 && vehObj.cylinders <= 4;
 }
