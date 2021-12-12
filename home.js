@@ -40,14 +40,23 @@ const descriptionSelect = document.querySelector('#descriptionSelect');
 
 const suggestedContainers = document.querySelectorAll('.suggested-container');
 let suggestedSystems;
-let driveOftenIndexValue = 2; //default
+let driveOftenIndexValue = 2;
 
 const systemQueryDict = {
-  'DI 3000B': 'di3000b',
-  'DI 60': 'di60',
-  'DI 108': 'di108',
-  'DI 108 8cyl': 'di108-8cyl'
+  // 'DI 3000B': 'di3000b',
+  // 'DI 60': 'di60',
+  // 'DI 108': 'di108',
+  // 'DI 108 8cyl': 'di108-8cyl',
+  604701308: 'di3000b', //Direct Injection
+  604701310: 'di3000b-uhpii', //Direct Injection UHPII
+  604701305: 'di60-uhpii', //Direct Injection ExR UHPII
+  604701306: 'di108-uhpii', //Direct Injection ExR UHPII
+  604701304: 'di60-dd', //Direct Injection ExR DD
+  604701309: 'di3000b-dd', //Direct Injection DD
+  604701574: 'di60canff-dd', //Direct Injection ExR CAN FF DD
+  604701559: 'di60canff-uhpii' //Direct Injection ExR CAN FF UHPII
 };
+
 const apaitoumenaEmulatorTypes = ['p', 'b6', 'b8', 'hp', 'double-hp'];
 const cngOnlyEmulatorTypes = ['b6', 'b8', 'f', 'p'];
 const emulatorTextDict = {
@@ -92,10 +101,16 @@ const systemNamesFromIdDict = {
   'suggested-lpg-cobd': ['Lovato C-OBD II'],
   'suggested-lpg-cobd-6cyl': ['Lovato C-OBD II 5-6cyl'],
   'suggested-lpg-cobd-8cyl': ['Lovato C-OBD II 8cyl'],
+
   'suggested-lpg-di3000b': ['Lovato Direct Injection'],
-  'suggested-lpg-di60': ['Lovato Direct Injection ExR'],
-  'suggested-lpg-di108': ['Lovato Direct Injection ExR 5-6cyl'],
-  'suggested-lpg-di108-8cyl': ['Lovato Direct Injection ExR 8cyl'],
+  'suggested-lpg-di3000b-uhpii': ['Lovato Direct Injection UHPII'],
+  'suggested-lpg-di60-uhpii': ['Lovato Direct Injection ExR UHPII'],
+  'suggested-lpg-di108-uhpii': ['Lovato Direct Injection ExR UHPII 5-6cyl'],
+  'suggested-lpg-di60-dd': ['Lovato Direct Injection ExR DD'],
+  'suggested-lpg-di3000b-dd': ['Lovato Direct Injection DD'],
+  'suggested-lpg-di60canff-dd': ['Lovato Direct Injection ExR CAN FF DD'],
+  'suggested-lpg-di60canff-uhpii': ['Lovato Direct Injection ExR CAN FF UHPII'],
+
   'suggested-lpg-monou': ['Lovato Μονού Ψεκασμού'],
   'suggested-cng-ego': ['Lovato E-GO II'],
   'suggested-cng-exr': ['Lovato Smart ExR'],
@@ -204,6 +219,7 @@ const systemFullKitLogoUrlDict = {
     pngLogo:
       'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521b043afc02057ae8d57_c-obd-logo.png'
   },
+
   'Lovato Direct Injection': {
     fullKit: {
       lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee7341aea14affe7a7745_4cyl-lpg-DI.jpg',
@@ -213,7 +229,16 @@ const systemFullKitLogoUrlDict = {
     pngLogo:
       'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/61052116bda194738e42d1c5_di-logo.png'
   },
-  'Lovato Direct Injection ExR': {
+  'Lovato Direct Injection UHPII': {
+    fullKit: {
+      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee7341aea14affe7a7745_4cyl-lpg-DI.jpg',
+      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754a7bdb14d467b2a9b_4cyl-cng-DI.jpg'
+    },
+    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608843a4610d5c0d5968174c_direct-logo-04.svg',
+    pngLogo:
+      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/61052116bda194738e42d1c5_di-logo.png'
+  },
+  'Lovato Direct Injection ExR UHPII': {
     fullKit: {
       lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
       cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
@@ -222,7 +247,7 @@ const systemFullKitLogoUrlDict = {
     pngLogo:
       'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521dc5b98822c26e0144d_di-exr-logo.png'
   },
-  'Lovato Direct Injection ExR 5-6cyl': {
+  'Lovato Direct Injection ExR UHPII 5-6cyl': {
     fullKit: {
       lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73479dd0f30d40b8c44_6-cyl-lpg-DI-exr.jpg',
       cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6753d4f2f6533da6f5d7_6-cyl-cng-DI-exr.jpg'
@@ -232,16 +257,43 @@ const systemFullKitLogoUrlDict = {
     pngLogo:
       'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521dc5b98822c26e0144d_di-exr-logo.png'
   },
-  'Lovato Direct Injection ExR 8cyl': {
+  'Lovato Direct Injection ExR DD': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73410da6d79bf573625_8-cyl-lpg-DI-exr.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6759d2274958726b8934_8-cyl-cng-DI-exr.jpg'
+      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
+      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
     },
-    cylsDescr: '8cyl',
     logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg',
     pngLogo:
       'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521dc5b98822c26e0144d_di-exr-logo.png'
   },
+  'Lovato Direct Injection DD': {
+    fullKit: {
+      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
+      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
+    },
+    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg',
+    pngLogo:
+      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521dc5b98822c26e0144d_di-exr-logo.png'
+  },
+  'Lovato Direct Injection ExR CAN FF DD': {
+    fullKit: {
+      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
+      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
+    },
+    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg',
+    pngLogo:
+      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521dc5b98822c26e0144d_di-exr-logo.png'
+  },
+  'Lovato Direct Injection ExR CAN FF UHPII': {
+    fullKit: {
+      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
+      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
+    },
+    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg',
+    pngLogo:
+      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521dc5b98822c26e0144d_di-exr-logo.png'
+  },
+
   'Lovato Μονού Ψεκασμού': {
     fullKit: {
       lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f01499ce19af4ccee7b7ea_lpg-monou-simeiou.jpg',
