@@ -2219,7 +2219,7 @@ function configureSystemsEasyPay() {
   }
 
   //CSS for easy pay di system img
-  if (fetchedModelObj.isDirect) {
+  if (fetchedModelObj.isDirect && !foundVehicleObj.system !== '604701308') {
     [...document.querySelectorAll('.system-logo-credit')].map(el => (el.style.height = '35px'));
     [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '210px'));
   } else {
