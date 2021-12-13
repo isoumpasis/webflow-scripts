@@ -2217,7 +2217,16 @@ function configureSystemsEasyPay() {
       el => (el.style.display = 'none')
     );
   }
-  // document.querySelector('.easy-pay-suggested-system-div').click(); //default selection first suggestion DEBUG
+
+  //CSS for easy pay di system img
+  if (fetchedModelObj.isDirect) {
+    [...document.querySelectorAll('.system-logo-credit')].map(el => (el.style.height = '37px'));
+    [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '250px'));
+  } else {
+    [...document.querySelectorAll('.system-logo-credit')].map(el => (el.style.height = '21px'));
+    [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '165px'));
+  }
+
   //Clicking first easy pay system manually
   [...document.querySelectorAll('.system-1st-selection .suggested-system')].map(
     el => (el.style.backgroundColor = 'rgba(132, 184, 211, 0.34)')
