@@ -2219,13 +2219,7 @@ function configureSystemsEasyPay() {
   }
 
   //CSS for easy pay di system img
-  if (fetchedModelObj.isDirect && !foundVehicleObj.system !== '604701308') {
-    [...document.querySelectorAll('.system-logo-credit')].map(el => (el.style.height = '35px'));
-    [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '210px'));
-  } else {
-    [...document.querySelectorAll('.system-logo-credit')].map(el => (el.style.height = '21px'));
-    [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '165px'));
-  }
+  cssEasyPayDISystem();
 
   //Clicking first easy pay system manually
   [...document.querySelectorAll('.system-1st-selection .suggested-system')].map(
@@ -2245,6 +2239,16 @@ function configureSystemsEasyPay() {
   selectedEasyPaySystemPrice = +document
     .querySelector('.system-price-easy-pay')
     .textContent.replace('€', '');
+}
+
+function cssEasyPayDISystem() {
+  if (fetchedModelObj.isDirect && !foundVehicleObj.system !== '604701308') {
+    [...document.querySelectorAll('.system-logo-credit')].map(el => (el.style.height = '35px'));
+    [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '210px'));
+  } else {
+    [...document.querySelectorAll('.system-logo-credit')].map(el => (el.style.height = '21px'));
+    [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '165px'));
+  }
 }
 
 function configureNoCreditSliders() {
