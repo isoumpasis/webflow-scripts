@@ -2244,7 +2244,7 @@ function configureSystemsEasyPay() {
 function cssEasyPayDISystem() {
   if (fetchedModelObj.isDirect && foundVehicleObj.system !== '604701308') {
     [...document.querySelectorAll('.system-logo-credit')].map(el => (el.style.height = '35px'));
-    [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '195px'));
+    [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '170px'));
   } else {
     [...document.querySelectorAll('.system-logo-credit')].map(el => (el.style.height = '21px'));
     [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '165px'));
