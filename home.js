@@ -172,137 +172,124 @@ const makeImgDict = {
   VW: '60f66bedc404ea5a800_VW.png'
 };
 
+const systemFullKitLogoUrlPrefix = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/';
 const systemFullKitLogoUrlDict = {
   'Lovato E-GO II': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee7346ab570f60d7bb37a_4cyl-lpg-ego.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754280dc37314e8f73e_4cyl-cng-ego.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee7346ab570f60d7bb37a_4cyl-lpg-ego.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef6754280dc37314e8f73e_4cyl-cng-ego.jpg'
     },
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6088406ac599186f8b2b6a24_ego-logo-02.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521c827db504fc22c670e_ego-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '6088406ac599186f8b2b6a24_ego-logo-02.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '610521c827db504fc22c670e_ego-logo.png'
   },
   'Lovato Smart ExR': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee733adf1d40cb74f7833_4cyl-lpg-smart.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754af4e784afb8330cf_4cyl-cng-smart-exr.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee733adf1d40cb74f7833_4cyl-lpg-smart.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef6754af4e784afb8330cf_4cyl-cng-smart-exr.jpg'
     },
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/609c30dacc06e8cd8c6ea9e5_smart-exrlogo-03.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6105218ad75db243ceeb475a_exr-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '609c30dacc06e8cd8c6ea9e5_smart-exrlogo-03.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '6105218ad75db243ceeb475a_exr-logo.png'
   },
   'Lovato C-OBD II': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee60f5628ed4315175916_4cyl-lpg-cobd.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef67541fd9cd4ad1733d00_4cyl-cng-cobd.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee60f5628ed4315175916_4cyl-lpg-cobd.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef67541fd9cd4ad1733d00_4cyl-cng-cobd.jpg'
     },
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521b043afc02057ae8d57_c-obd-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '610521b043afc02057ae8d57_c-obd-logo.png'
   },
   'Lovato C-OBD II 5-6cyl': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee733d5512eddeaba0e27_6-cyl-lpg-cobd.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef675387535ba8bd37a04b_6-cyl-cng-cobd.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee733d5512eddeaba0e27_6-cyl-lpg-cobd.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef675387535ba8bd37a04b_6-cyl-cng-cobd.jpg'
     },
     cylsDescr: '5-6cyl',
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521b043afc02057ae8d57_c-obd-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '610521b043afc02057ae8d57_c-obd-logo.png'
   },
   'Lovato C-OBD II 8cyl': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73479dd0f4e870b8c45_8-cyl-lpg-cobd.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6755572ae6790a962780_8-cyl-cng-cobd.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee73479dd0f4e870b8c45_8-cyl-lpg-cobd.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef6755572ae6790a962780_8-cyl-cng-cobd.jpg'
     },
     cylsDescr: '8cyl',
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521b043afc02057ae8d57_c-obd-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '610521b043afc02057ae8d57_c-obd-logo.png'
   },
 
   'Lovato Direct Injection': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee7341aea14affe7a7745_4cyl-lpg-DI.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754a7bdb14d467b2a9b_4cyl-cng-DI.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee7341aea14affe7a7745_4cyl-lpg-DI.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef6754a7bdb14d467b2a9b_4cyl-cng-DI.jpg'
     },
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608843a4610d5c0d5968174c_direct-logo-04.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/61052116bda194738e42d1c5_di-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '608843a4610d5c0d5968174c_direct-logo-04.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '61052116bda194738e42d1c5_di-logo.png'
   },
   'Lovato Direct Injection UHPII': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee7341aea14affe7a7745_4cyl-lpg-DI.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754a7bdb14d467b2a9b_4cyl-cng-DI.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee7341aea14affe7a7745_4cyl-lpg-DI.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef6754a7bdb14d467b2a9b_4cyl-cng-DI.jpg'
     },
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608843a4610d5c0d5968174c_direct-logo-04.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/61052116bda194738e42d1c5_di-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '61b71f1388d4d57ff9843091_DI-UHPII.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '61b71f1c86fca5d72d1a5a64_DI-UHPII.png'
   },
   'Lovato Direct Injection ExR UHPII': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
     },
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521dc5b98822c26e0144d_di-exr-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '61b71f12b96f0a0e014dec6d_DI-EXR-UHPII.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '61b71f1c88d4d54f4d8431a4_DI-EXR-UHPII.png'
   },
   'Lovato Direct Injection ExR UHPII 5-6cyl': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73479dd0f30d40b8c44_6-cyl-lpg-DI-exr.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6753d4f2f6533da6f5d7_6-cyl-cng-DI-exr.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee73479dd0f30d40b8c44_6-cyl-lpg-DI-exr.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef6753d4f2f6533da6f5d7_6-cyl-cng-DI-exr.jpg'
     },
     cylsDescr: '5-6cyl',
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521dc5b98822c26e0144d_di-exr-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '61b71f12b96f0a0e014dec6d_DI-EXR-UHPII.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '61b71f1c88d4d54f4d8431a4_DI-EXR-UHPII.png'
   },
   'Lovato Direct Injection ExR DD': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
     },
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521dc5b98822c26e0144d_di-exr-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '61b71f11d60a033413f2f3fc_DI-EXR-DD.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '61b71f192fdd336f76ea0a54_DI-EXR-DD.png'
   },
   'Lovato Direct Injection DD': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
     },
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521dc5b98822c26e0144d_di-exr-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '61b71f10b6166640ccb3f619_DI-DD.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '61b71f19292185d881e24ef3_DI-DD.png'
   },
   'Lovato Direct Injection ExR CAN FF DD': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
     },
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521dc5b98822c26e0144d_di-exr-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '61b71f126bc64e2e221b4c41_DI-CAN-FF-DD.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '61b71f19d60a038cdcf2f496_DI-EXR-CAN-FF-DD.png'
   },
   'Lovato Direct Injection ExR CAN FF UHPII': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
     },
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/608842f17c61a41e6f07fe13_di-exr-logo-04.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521dc5b98822c26e0144d_di-exr-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '61b71f13522f8bfd8f96a8c5_DI-EXR-CAN-FF-UHPII.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '61b71f195f659e06efd543d8_DI-EXR-CAN-FF-UHPII.png'
   },
 
   'Lovato Μονού Ψεκασμού': {
     fullKit: {
-      lpg: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f01499ce19af4ccee7b7ea_lpg-monou-simeiou.jpg',
-      cng: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f014997b549b2900dc2d28_cng-monou-simeiou.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60f01499ce19af4ccee7b7ea_lpg-monou-simeiou.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60f014997b549b2900dc2d28_cng-monou-simeiou.jpg'
     },
-    logo: 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60a7d730fbc8089bc98263ae_monou-psekasmou-05.svg',
-    pngLogo:
-      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/610521a1778a96783b06a71d_monou-logo.png'
+    logo: systemFullKitLogoUrlPrefix + '60a7d730fbc8089bc98263ae_monou-psekasmou-05.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '610521a1778a96783b06a71d_monou-logo.png'
   }
 };
 
