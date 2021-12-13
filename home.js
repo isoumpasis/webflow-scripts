@@ -2220,8 +2220,8 @@ function configureSystemsEasyPay() {
 
   //CSS for easy pay di system img
   if (fetchedModelObj.isDirect) {
-    [...document.querySelectorAll('.system-logo-credit')].map(el => (el.style.height = '37px'));
-    [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '250px'));
+    [...document.querySelectorAll('.system-logo-credit')].map(el => (el.style.height = '35px'));
+    [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '210px'));
   } else {
     [...document.querySelectorAll('.system-logo-credit')].map(el => (el.style.height = '21px'));
     [...document.querySelectorAll('.suggested-system')].map(el => (el.style.minWidth = '165px'));
