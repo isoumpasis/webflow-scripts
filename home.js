@@ -43,11 +43,7 @@ const suggestedContainers = document.querySelectorAll('.suggested-container');
 let suggestedSystems;
 let driveOftenIndexValue = 2;
 
-const systemQueryDict = {
-  // 'DI 3000B': 'di3000b',
-  // 'DI 60': 'di60',
-  // 'DI 108': 'di108',
-  // 'DI 108 8cyl': 'di108-8cyl',
+const lpgSystemQueryDict = {
   604701308: 'di3000b', //Direct Injection
   604701310: 'di3000b-uhpii', //Direct Injection UHPII
   604701305: 'di60-uhpii', //Direct Injection ExR UHPII
@@ -55,7 +51,20 @@ const systemQueryDict = {
   604701304: 'di60-dd', //Direct Injection ExR DD
   604701309: 'di3000b-dd', //Direct Injection DD
   604701574: 'di60canff-dd', //Direct Injection ExR CAN FF DD
-  604701559: 'di60canff-uhpii' //Direct Injection ExR CAN FF UHPII
+  604701559: 'di60canff-uhpii', //Direct Injection ExR CAN FF UHPII
+  604701307: 'di108-8cyl-uhpii' //Direct Injection ExR UHPII
+};
+
+const cngSystemQueryDict = {
+  604701308: 'di3000b', //Direct Injection
+  604701310: 'di3000b', //Direct Injection
+  604701305: 'di60', //Direct Injection ExR
+  604701306: 'di108', //Direct Injection ExR 5-6cyl
+  604701304: 'di60', //Direct Injection ExR
+  604701309: 'di3000b', //Direct Injection
+  604701574: 'di60canff', //Direct Injection ExR CAN FF
+  604701559: 'di60canff', //Direct Injection ExR CAN FF
+  604701307: 'di108-8cyl' //Direct Injection ExR 8cyl
 };
 
 const apaitoumenaEmulatorTypes = ['p', 'b6', 'b8', 'hp', 'double-hp'];
@@ -111,6 +120,7 @@ const systemNamesFromIdDict = {
   'suggested-lpg-di3000b-dd': ['Lovato Direct Injection DD'],
   'suggested-lpg-di60canff-dd': ['Lovato Direct Injection ExR CAN FF DD'],
   'suggested-lpg-di60canff-uhpii': ['Lovato Direct Injection ExR CAN FF UHPII'],
+  'suggested-lpg-di108-8cyl-uhpii': ['Lovato Direct Injection ExR UHPII 8cyl'],
 
   'suggested-lpg-monou': ['Lovato Μονού Ψεκασμού'],
   'suggested-cng-ego': ['Lovato E-GO II'],
@@ -281,6 +291,15 @@ const systemFullKitLogoUrlDict = {
     },
     logo: systemFullKitLogoUrlPrefix + '61b71f13522f8bfd8f96a8c5_DI-EXR-CAN-FF-UHPII.svg',
     pngLogo: systemFullKitLogoUrlPrefix + '61b71f195f659e06efd543d8_DI-EXR-CAN-FF-UHPII.png'
+  },
+  'Lovato Direct Injection ExR UHPII 8cyl': {
+    fullKit: {
+      lpg: systemFullKitLogoUrlPrefix + '60eee73479dd0f30d40b8c44_6-cyl-lpg-DI-exr.jpg',
+      cng: systemFullKitLogoUrlPrefix + '60ef6753d4f2f6533da6f5d7_6-cyl-cng-DI-exr.jpg'
+    },
+    cylsDescr: '8cyl',
+    logo: systemFullKitLogoUrlPrefix + '61b71f12b96f0a0e014dec6d_DI-EXR-UHPII.svg',
+    pngLogo: systemFullKitLogoUrlPrefix + '61b71f1c88d4d54f4d8431a4_DI-EXR-UHPII.png'
   },
 
   'Lovato Μονού Ψεκασμού': {
@@ -1784,7 +1803,11 @@ function showDirectResults(fetchedModelObj) {
 
   if (foundVehicleObj.isConvertible) {
     const directSystemDiv = document.querySelector(
-      `#suggested-${userSelections.selectedFuel}-${systemQueryDict[foundVehicleObj.system]}`
+      `#suggested-${userSelections.selectedFuel}-${
+        userSelections.selectedFuel === 'lpg'
+          ? lpgSystemQueryDict[foundVehicleObj.system]
+          : cngSystemQueryDict[foundVehicleObj.system]
+      }`
     );
     let temp = descriptionSelect.value.split(' - ');
     directSystemDiv.querySelector('.di-engine-code-overlay').textContent =
@@ -3773,6 +3796,11 @@ function trigger_sidebar_open(options) {
 }
 
 function getSourceReferrerDomain() {
+  //NORMAL //document.location.hostname = 'www.lovatohellas.gr'
+  // const sourceURL = window.location != window.parent.location ? document.referrer : document.location.href;
+  //https://stackoverflow.com/questions/3420004/access-parent-url-from-iframe
+
+  // console.log('window location', window.location);
   let sourceURL = [...window.location.ancestorOrigins][0] || window.location.origin; //fallout
   sourceReferrerDomain = new URL(sourceURL).hostname;
 }
