@@ -132,6 +132,7 @@ const systemNamesFromIdDict = {
   'suggested-cng-cobd-8cyl': ['Lovato C-OBD II 8cyl'],
   'suggested-cng-di3000b': ['Lovato Direct Injection'],
   'suggested-cng-di60': ['Lovato Direct Injection ExR'],
+  'suggested-cng-di60canff': ['Lovato Direct Injection ExR CAN FF'],
   'suggested-cng-di108': ['Lovato Direct Injection ExR 5-6cyl'],
   'suggested-cng-di108-8cyl': ['Lovato Direct Injection ExR 8cyl'],
   'suggested-cng-monou': ['Lovato Μονού Ψεκασμού']
@@ -189,24 +190,42 @@ const systemFullKitLogoUrlDict = {
       lpg: systemFullKitLogoUrlPrefix + '60eee7346ab570f60d7bb37a_4cyl-lpg-ego.jpg',
       cng: systemFullKitLogoUrlPrefix + '60ef6754280dc37314e8f73e_4cyl-cng-ego.jpg'
     },
-    logo: systemFullKitLogoUrlPrefix + '6088406ac599186f8b2b6a24_ego-logo-02.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '610521c827db504fc22c670e_ego-logo.png'
+    logo: {
+      lpg: systemFullKitLogoUrlPrefix + '6088406ac599186f8b2b6a24_ego-logo-02.svg',
+      cng: systemFullKitLogoUrlPrefix + '6088406ac599186f8b2b6a24_ego-logo-02.svg'
+    },
+    pngLogo: {
+      lpg: systemFullKitLogoUrlPrefix + '610521c827db504fc22c670e_ego-logo.png',
+      cng: systemFullKitLogoUrlPrefix + '610521c827db504fc22c670e_ego-logo.png'
+    }
   },
   'Lovato Smart ExR': {
     fullKit: {
       lpg: systemFullKitLogoUrlPrefix + '60eee733adf1d40cb74f7833_4cyl-lpg-smart.jpg',
       cng: systemFullKitLogoUrlPrefix + '60ef6754af4e784afb8330cf_4cyl-cng-smart-exr.jpg'
     },
-    logo: systemFullKitLogoUrlPrefix + '609c30dacc06e8cd8c6ea9e5_smart-exrlogo-03.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '6105218ad75db243ceeb475a_exr-logo.png'
+    logo: {
+      lpg: systemFullKitLogoUrlPrefix + '609c30dacc06e8cd8c6ea9e5_smart-exrlogo-03.svg',
+      cng: systemFullKitLogoUrlPrefix + '609c30dacc06e8cd8c6ea9e5_smart-exrlogo-03.svg'
+    },
+    pngLogo: {
+      lpg: systemFullKitLogoUrlPrefix + '6105218ad75db243ceeb475a_exr-logo.png',
+      cng: systemFullKitLogoUrlPrefix + '6105218ad75db243ceeb475a_exr-logo.png'
+    }
   },
   'Lovato C-OBD II': {
     fullKit: {
       lpg: systemFullKitLogoUrlPrefix + '60eee60f5628ed4315175916_4cyl-lpg-cobd.jpg',
       cng: systemFullKitLogoUrlPrefix + '60ef67541fd9cd4ad1733d00_4cyl-cng-cobd.jpg'
     },
-    logo: systemFullKitLogoUrlPrefix + '60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '610521b043afc02057ae8d57_c-obd-logo.png'
+    logo: {
+      lpg: systemFullKitLogoUrlPrefix + '60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
+      cng: systemFullKitLogoUrlPrefix + '60883f7a4d700e4999151d5c_c-obd-logo-01.svg'
+    },
+    pngLogo: {
+      lpg: systemFullKitLogoUrlPrefix + '610521b043afc02057ae8d57_c-obd-logo.png',
+      cng: systemFullKitLogoUrlPrefix + '610521b043afc02057ae8d57_c-obd-logo.png'
+    }
   },
   'Lovato C-OBD II 5-6cyl': {
     fullKit: {
@@ -214,8 +233,14 @@ const systemFullKitLogoUrlDict = {
       cng: systemFullKitLogoUrlPrefix + '60ef675387535ba8bd37a04b_6-cyl-cng-cobd.jpg'
     },
     cylsDescr: '5-6cyl',
-    logo: systemFullKitLogoUrlPrefix + '60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '610521b043afc02057ae8d57_c-obd-logo.png'
+    logo: {
+      lpg: systemFullKitLogoUrlPrefix + '60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
+      cng: systemFullKitLogoUrlPrefix + '60883f7a4d700e4999151d5c_c-obd-logo-01.svg'
+    },
+    pngLogo: {
+      lpg: systemFullKitLogoUrlPrefix + '610521b043afc02057ae8d57_c-obd-logo.png',
+      cng: systemFullKitLogoUrlPrefix + '610521b043afc02057ae8d57_c-obd-logo.png'
+    }
   },
   'Lovato C-OBD II 8cyl': {
     fullKit: {
@@ -223,33 +248,54 @@ const systemFullKitLogoUrlDict = {
       cng: systemFullKitLogoUrlPrefix + '60ef6755572ae6790a962780_8-cyl-cng-cobd.jpg'
     },
     cylsDescr: '8cyl',
-    logo: systemFullKitLogoUrlPrefix + '60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '610521b043afc02057ae8d57_c-obd-logo.png'
+    logo: {
+      lpg: systemFullKitLogoUrlPrefix + '60883f7a4d700e4999151d5c_c-obd-logo-01.svg',
+      cng: systemFullKitLogoUrlPrefix + '60883f7a4d700e4999151d5c_c-obd-logo-01.svg'
+    },
+    pngLogo: {
+      lpg: systemFullKitLogoUrlPrefix + '610521b043afc02057ae8d57_c-obd-logo.png',
+      cng: systemFullKitLogoUrlPrefix + '610521b043afc02057ae8d57_c-obd-logo.png'
+    }
   },
 
+  //DI
   'Lovato Direct Injection': {
     fullKit: {
       lpg: systemFullKitLogoUrlPrefix + '60eee7341aea14affe7a7745_4cyl-lpg-DI.jpg',
       cng: systemFullKitLogoUrlPrefix + '60ef6754a7bdb14d467b2a9b_4cyl-cng-DI.jpg'
     },
-    logo: systemFullKitLogoUrlPrefix + '608843a4610d5c0d5968174c_direct-logo-04.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '61052116bda194738e42d1c5_di-logo.png'
+    logo: {
+      lpg: systemFullKitLogoUrlPrefix + '608843a4610d5c0d5968174c_direct-logo-04.svg',
+      cng: systemFullKitLogoUrlPrefix + '608843a4610d5c0d5968174c_direct-logo-04.svg'
+    },
+    pngLogo: {
+      lpg: systemFullKitLogoUrlPrefix + '61052116bda194738e42d1c5_di-logo.png',
+      cng: systemFullKitLogoUrlPrefix + '61052116bda194738e42d1c5_di-logo.png'
+    }
   },
+  'Lovato Direct Injection ExR': {
+    fullKit: {
+      cng: systemFullKitLogoUrlPrefix + '60ef6754a7bdb14d467b2a9b_4cyl-cng-DI.jpg'
+    },
+    logo: { cng: systemFullKitLogoUrlPrefix + '608842f17c61a41e6f07fe13_di-exr-logo-04.svg' },
+    pngLogo: { cng: systemFullKitLogoUrlPrefix + '610521dc5b98822c26e0144d_di-exr-logo.png' }
+  },
+
   'Lovato Direct Injection UHPII': {
     fullKit: {
       lpg: systemFullKitLogoUrlPrefix + '60eee7341aea14affe7a7745_4cyl-lpg-DI.jpg',
       cng: systemFullKitLogoUrlPrefix + '60ef6754a7bdb14d467b2a9b_4cyl-cng-DI.jpg'
     },
-    logo: systemFullKitLogoUrlPrefix + '61b71f1388d4d57ff9843091_DI-UHPII.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '61b71f1c86fca5d72d1a5a64_DI-UHPII.png'
+    logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f1388d4d57ff9843091_DI-UHPII.svg' },
+    pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f1c86fca5d72d1a5a64_DI-UHPII.png' }
   },
   'Lovato Direct Injection ExR UHPII': {
     fullKit: {
       lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
       cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
     },
-    logo: systemFullKitLogoUrlPrefix + '61b71f12b96f0a0e014dec6d_DI-EXR-UHPII.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '61b71f1c88d4d54f4d8431a4_DI-EXR-UHPII.png'
+    logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f12b96f0a0e014dec6d_DI-EXR-UHPII.svg' },
+    pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f1c88d4d54f4d8431a4_DI-EXR-UHPII.png' }
   },
   'Lovato Direct Injection ExR UHPII 5-6cyl': {
     fullKit: {
@@ -257,40 +303,49 @@ const systemFullKitLogoUrlDict = {
       cng: systemFullKitLogoUrlPrefix + '60ef6753d4f2f6533da6f5d7_6-cyl-cng-DI-exr.jpg'
     },
     cylsDescr: '5-6cyl',
-    logo: systemFullKitLogoUrlPrefix + '61b71f12b96f0a0e014dec6d_DI-EXR-UHPII.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '61b71f1c88d4d54f4d8431a4_DI-EXR-UHPII.png'
+    logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f12b96f0a0e014dec6d_DI-EXR-UHPII.svg' },
+    pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f1c88d4d54f4d8431a4_DI-EXR-UHPII.png' }
   },
   'Lovato Direct Injection ExR DD': {
     fullKit: {
       lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
       cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
     },
-    logo: systemFullKitLogoUrlPrefix + '61b71f11d60a033413f2f3fc_DI-EXR-DD.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '61b71f192fdd336f76ea0a54_DI-EXR-DD.png'
+    logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f11d60a033413f2f3fc_DI-EXR-DD.svg' },
+    pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f192fdd336f76ea0a54_DI-EXR-DD.png' }
   },
   'Lovato Direct Injection DD': {
     fullKit: {
       lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
       cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
     },
-    logo: systemFullKitLogoUrlPrefix + '61b71f10b6166640ccb3f619_DI-DD.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '61b71f19292185d881e24ef3_DI-DD.png'
+    logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f10b6166640ccb3f619_DI-DD.svg' },
+    pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f19292185d881e24ef3_DI-DD.png' }
   },
   'Lovato Direct Injection ExR CAN FF DD': {
     fullKit: {
       lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
       cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
     },
-    logo: systemFullKitLogoUrlPrefix + '61b71f126bc64e2e221b4c41_DI-CAN-FF-DD.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '61b71f19d60a038cdcf2f496_DI-EXR-CAN-FF-DD.png'
+    logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f126bc64e2e221b4c41_DI-CAN-FF-DD.svg' },
+    pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f19d60a038cdcf2f496_DI-EXR-CAN-FF-DD.png' }
   },
   'Lovato Direct Injection ExR CAN FF UHPII': {
     fullKit: {
       lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
       cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
     },
-    logo: systemFullKitLogoUrlPrefix + '61b71f13522f8bfd8f96a8c5_DI-EXR-CAN-FF-UHPII.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '61b71f195f659e06efd543d8_DI-EXR-CAN-FF-UHPII.png'
+    logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f13522f8bfd8f96a8c5_DI-EXR-CAN-FF-UHPII.svg' },
+    pngLogo: {
+      lpg: systemFullKitLogoUrlPrefix + '61b71f195f659e06efd543d8_DI-EXR-CAN-FF-UHPII.png'
+    }
+  },
+  'Lovato Direct Injection ExR CAN FF': {
+    fullKit: {
+      cng: systemFullKitLogoUrlPrefix + '60ef6754a7bdb14d467b2a9b_4cyl-cng-DI.jpg'
+    },
+    logo: { cng: systemFullKitLogoUrlPrefix + '61b88412710b69bfcfde130d_DI-EXR-CAN-FF-05.svg' },
+    pngLogo: { cng: systemFullKitLogoUrlPrefix + '61b8843c4e91a4356998ff18_DI-EXR-CAN-FF.png' }
   },
   'Lovato Direct Injection ExR UHPII 8cyl': {
     fullKit: {
@@ -298,8 +353,8 @@ const systemFullKitLogoUrlDict = {
       cng: systemFullKitLogoUrlPrefix + '60ef6753d4f2f6533da6f5d7_6-cyl-cng-DI-exr.jpg'
     },
     cylsDescr: '8cyl',
-    logo: systemFullKitLogoUrlPrefix + '61b71f12b96f0a0e014dec6d_DI-EXR-UHPII.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '61b71f1c88d4d54f4d8431a4_DI-EXR-UHPII.png'
+    logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f12b96f0a0e014dec6d_DI-EXR-UHPII.svg' },
+    pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f1c88d4d54f4d8431a4_DI-EXR-UHPII.png' }
   },
 
   'Lovato Μονού Ψεκασμού': {
@@ -307,8 +362,14 @@ const systemFullKitLogoUrlDict = {
       lpg: systemFullKitLogoUrlPrefix + '60f01499ce19af4ccee7b7ea_lpg-monou-simeiou.jpg',
       cng: systemFullKitLogoUrlPrefix + '60f014997b549b2900dc2d28_cng-monou-simeiou.jpg'
     },
-    logo: systemFullKitLogoUrlPrefix + '60a7d730fbc8089bc98263ae_monou-psekasmou-05.svg',
-    pngLogo: systemFullKitLogoUrlPrefix + '610521a1778a96783b06a71d_monou-logo.png'
+    logo: {
+      lpg: systemFullKitLogoUrlPrefix + '60a7d730fbc8089bc98263ae_monou-psekasmou-05.svg',
+      cng: systemFullKitLogoUrlPrefix + '60a7d730fbc8089bc98263ae_monou-psekasmou-05.svg'
+    },
+    pngLogo: {
+      lpg: systemFullKitLogoUrlPrefix + '610521a1778a96783b06a71d_monou-logo.png',
+      cng: systemFullKitLogoUrlPrefix + '610521a1778a96783b06a71d_monou-logo.png'
+    }
   }
 };
 
@@ -1671,9 +1732,13 @@ function configureUserSelectionsAfterResults() {
           system => system.name === userSelections.vehicle.suggestions.systems[0].name
         ).priceNoVAT,
         systemLogoUrl:
-          systemFullKitLogoUrlDict[userSelections.vehicle.suggestions.systems[0].name].logo,
+          systemFullKitLogoUrlDict[userSelections.vehicle.suggestions.systems[0].name].logo[
+            userSelections.selectedFuel
+          ],
         systemLogoUrlPng:
-          systemFullKitLogoUrlDict[userSelections.vehicle.suggestions.systems[0].name].pngLogo,
+          systemFullKitLogoUrlDict[userSelections.vehicle.suggestions.systems[0].name].pngLogo[
+            userSelections.selectedFuel
+          ],
         fullKitUrl:
           systemFullKitLogoUrlDict[userSelections.vehicle.suggestions.systems[0].name].fullKit[
             userSelections.selectedFuel
@@ -2141,8 +2206,8 @@ function getEasyPaySystem(selectedSystemDiv) {
   const priceNoVAT = userSelections.vehicle.suggestions.systems.find(
     system => system.name === name
   ).priceNoVAT;
-  const systemLogoUrl = systemFullKitLogoUrlDict[name].logo;
-  const systemLogoUrlPng = systemFullKitLogoUrlDict[name].pngLogo;
+  const systemLogoUrl = systemFullKitLogoUrlDict[name].logo[userSelections.selectedFuel];
+  const systemLogoUrlPng = systemFullKitLogoUrlDict[name].pngLogo[userSelections.selectedFuel];
   const fullKitUrl = systemFullKitLogoUrlDict[name].fullKit[userSelections.selectedFuel];
   const cylsDescr = systemFullKitLogoUrlDict[name].cylsDescr;
 
