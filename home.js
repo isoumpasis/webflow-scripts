@@ -3878,10 +3878,22 @@ function trigger_sidebar_open(options) {
 
 function getSourceReferrerDomain() {
   //NORMAL //document.location.hostname = 'www.lovatohellas.gr'
-  // const sourceURL = window.location != window.parent.location ? document.referrer : document.location.href;
+  let sourceURL =
+    window.location != window.parent.location ? document.referrer : document.location.host;
   //https://stackoverflow.com/questions/3420004/access-parent-url-from-iframe
+  console.log(
+    { sourceURL },
+    'window.location',
+    window.location,
+    'window.parent.location',
+    window.parent.location,
+    'document.referrer',
+    document.referrer,
+    'document.location.host',
+    document.location.host
+  );
 
   // console.log('window location', window.location);
-  let sourceURL = [...window.location.ancestorOrigins][0] || window.location.origin; //fallout
+  sourceURL = [...window.location.ancestorOrigins][0] || window.location.origin; //fallout
   sourceReferrerDomain = new URL(sourceURL).hostname;
 }
