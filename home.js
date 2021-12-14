@@ -3893,7 +3893,8 @@ function getSourceReferrerDomain() {
     document.location.host
   );
 
-  // console.log('window location', window.location);
-  sourceURL = [...window.location.ancestorOrigins][0] || window.location.origin; //fallout
-  sourceReferrerDomain = new URL(sourceURL).hostname;
+  // sourceURL = [...window.location.ancestorOrigins][0] || window.location.origin; //fallout
+  let hostname = new URL(sourceURL).hostname;
+  hostname = hostname.replace('www.', '');
+  sourceReferrerDomain = hostname;
 }
