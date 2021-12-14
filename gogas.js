@@ -1222,6 +1222,14 @@ function trigger_multivalve_checkbox(options) {
 }
 
 function getSourceReferrerDomain() {
-  let sourceURL = [...window.location.ancestorOrigins][0] || window.location.origin; //fallout
-  sourceReferrerDomain = new URL(sourceURL).hostname;
+  let sourceURL =
+    window.location != window.parent.location ? document.referrer : document.location.host;
+  let hostname;
+  if (window.location != window.parent.location) {
+    hostname = new URL(sourceURL).hostname;
+    hostname = hostname.replace('www.', '');
+  } else {
+    hostname = sourceURL;
+  }
+  sourceReferrerDomain = hostname;
 }

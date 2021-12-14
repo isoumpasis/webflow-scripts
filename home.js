@@ -3877,21 +3877,9 @@ function trigger_sidebar_open(options) {
 }
 
 function getSourceReferrerDomain() {
-  //NORMAL //document.location.hostname = 'www.lovatohellas.gr'
   let sourceURL =
     window.location != window.parent.location ? document.referrer : document.location.host;
-  //https://stackoverflow.com/questions/3420004/access-parent-url-from-iframe
-  console.log(
-    { sourceURL },
-    'window.location',
-    window.location,
-    'window.parent.location',
-    window.parent.location,
-    'document.referrer',
-    document.referrer,
-    'document.location.host',
-    document.location.host
-  );
+
   let hostname;
   if (window.location != window.parent.location) {
     hostname = new URL(sourceURL).hostname;
@@ -3899,8 +3887,5 @@ function getSourceReferrerDomain() {
   } else {
     hostname = sourceURL;
   }
-
-  // sourceURL = [...window.location.ancestorOrigins][0] || window.location.origin; //fallout
-
   sourceReferrerDomain = hostname;
 }
