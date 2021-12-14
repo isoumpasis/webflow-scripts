@@ -275,7 +275,7 @@ const systemFullKitLogoUrlDict = {
   },
   'Lovato Direct Injection ExR': {
     fullKit: {
-      cng: systemFullKitLogoUrlPrefix + '60ef6754a7bdb14d467b2a9b_4cyl-cng-DI.jpg'
+      cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
     },
     logo: { cng: systemFullKitLogoUrlPrefix + '608842f17c61a41e6f07fe13_di-exr-logo-04.svg' },
     pngLogo: { cng: systemFullKitLogoUrlPrefix + '610521dc5b98822c26e0144d_di-exr-logo.png' }
@@ -283,16 +283,14 @@ const systemFullKitLogoUrlDict = {
 
   'Lovato Direct Injection UHPII': {
     fullKit: {
-      lpg: systemFullKitLogoUrlPrefix + '60eee7341aea14affe7a7745_4cyl-lpg-DI.jpg',
-      cng: systemFullKitLogoUrlPrefix + '60ef6754a7bdb14d467b2a9b_4cyl-cng-DI.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee7341aea14affe7a7745_4cyl-lpg-DI.jpg'
     },
     logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f1388d4d57ff9843091_DI-UHPII.svg' },
     pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f1c86fca5d72d1a5a64_DI-UHPII.png' }
   },
   'Lovato Direct Injection ExR UHPII': {
     fullKit: {
-      lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
-      cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
+      lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg'
     },
     logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f12b96f0a0e014dec6d_DI-EXR-UHPII.svg' },
     pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f1c88d4d54f4d8431a4_DI-EXR-UHPII.png' }
