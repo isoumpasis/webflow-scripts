@@ -356,6 +356,18 @@ const systemFullKitLogoUrlDict = {
     logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f12b96f0a0e014dec6d_DI-EXR-UHPII.svg' },
     pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f1c88d4d54f4d8431a4_DI-EXR-UHPII.png' }
   },
+  'Lovato Direct Injection ExR 5-6cyl': {
+    fullKit: { cng: systemFullKitLogoUrlPrefix + '60ef6753d4f2f6533da6f5d7_6-cyl-cng-DI-exr.jpg' },
+    cylsDescr: '8cyl',
+    logo: { cng: systemFullKitLogoUrlPrefix + '608842f17c61a41e6f07fe13_di-exr-logo-04.svg' },
+    pngLogo: { cng: systemFullKitLogoUrlPrefix + '610521dc5b98822c26e0144d_di-exr-logo.png' }
+  },
+  'Lovato Direct Injection ExR 8cyl': {
+    fullKit: { cng: systemFullKitLogoUrlPrefix + '60ef6753d4f2f6533da6f5d7_6-cyl-cng-DI-exr.jpg' },
+    cylsDescr: '8cyl',
+    logo: { cng: systemFullKitLogoUrlPrefix + '608842f17c61a41e6f07fe13_di-exr-logo-04.svg' },
+    pngLogo: { cng: systemFullKitLogoUrlPrefix + '610521dc5b98822c26e0144d_di-exr-logo.png' }
+  },
 
   'Lovato Μονού Ψεκασμού': {
     fullKit: {
