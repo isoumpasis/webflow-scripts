@@ -312,18 +312,12 @@ const systemFullKitLogoUrlDict = {
     pngLogo: { cng: systemFullKitLogoUrlPrefix + '610521dc5b98822c26e0144d_di-exr-logo.png' }
   },
   'Lovato Direct Injection ExR DD': {
-    fullKit: {
-      lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
-      cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
-    },
+    fullKit: { lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg' },
     logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f11d60a033413f2f3fc_DI-EXR-DD.svg' },
     pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f192fdd336f76ea0a54_DI-EXR-DD.png' }
   },
   'Lovato Direct Injection DD': {
-    fullKit: {
-      lpg: systemFullKitLogoUrlPrefix + '60eee73476c7f3f6e21a5dd8_4cyl-lpg-DI-exr.jpg',
-      cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg'
-    },
+    fullKit: { lpg: systemFullKitLogoUrlPrefix + '60eee7341aea14affe7a7745_4cyl-lpg-DI.jpg' },
     logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f10b6166640ccb3f619_DI-DD.svg' },
     pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f19292185d881e24ef3_DI-DD.png' }
   },
@@ -346,24 +340,19 @@ const systemFullKitLogoUrlDict = {
     }
   },
   'Lovato Direct Injection ExR CAN FF': {
-    fullKit: {
-      cng: systemFullKitLogoUrlPrefix + '60ef6754a7bdb14d467b2a9b_4cyl-cng-DI.jpg'
-    },
+    fullKit: { cng: systemFullKitLogoUrlPrefix + '60ef6754b39a8f3c2e68a726_4cyl-cng-DI-exr.jpg' },
     logo: { cng: systemFullKitLogoUrlPrefix + '61b88412710b69bfcfde130d_DI-EXR-CAN-FF-05.svg' },
     pngLogo: { cng: systemFullKitLogoUrlPrefix + '61b8843c4e91a4356998ff18_DI-EXR-CAN-FF.png' }
   },
   'Lovato Direct Injection ExR UHPII 8cyl': {
-    fullKit: {
-      lpg: systemFullKitLogoUrlPrefix + '60eee73479dd0f30d40b8c44_6-cyl-lpg-DI-exr.jpg',
-      cng: systemFullKitLogoUrlPrefix + '60ef6753d4f2f6533da6f5d7_6-cyl-cng-DI-exr.jpg'
-    },
+    fullKit: { lpg: systemFullKitLogoUrlPrefix + '60eee73410da6d79bf573625_8-cyl-lpg-DI-exr.jpg' },
     cylsDescr: '8cyl',
     logo: { lpg: systemFullKitLogoUrlPrefix + '61b71f12b96f0a0e014dec6d_DI-EXR-UHPII.svg' },
     pngLogo: { lpg: systemFullKitLogoUrlPrefix + '61b71f1c88d4d54f4d8431a4_DI-EXR-UHPII.png' }
   },
 
   'Lovato Direct Injection ExR 8cyl': {
-    fullKit: { cng: systemFullKitLogoUrlPrefix + '60ef6753d4f2f6533da6f5d7_6-cyl-cng-DI-exr.jpg' },
+    fullKit: { cng: systemFullKitLogoUrlPrefix + '60ef6759d2274958726b8934_8-cyl-cng-DI-exr.jpg' },
     cylsDescr: '8cyl',
     logo: { cng: systemFullKitLogoUrlPrefix + '608842f17c61a41e6f07fe13_di-exr-logo-04.svg' },
     pngLogo: { cng: systemFullKitLogoUrlPrefix + '610521dc5b98822c26e0144d_di-exr-logo.png' }
