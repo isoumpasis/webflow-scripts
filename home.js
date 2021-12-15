@@ -1849,7 +1849,6 @@ function resetLastStep() {
 
 function adjustSectionPaddings() {
   document.querySelector('#vehicle').style.paddingBottom = '3%';
-  document.querySelector('#calculator').style.paddingTop = '3%';
 }
 
 function resetToDefaultPrices() {
