@@ -534,6 +534,29 @@ function initForeignReferrerOptions() {
     document.querySelector('#getYourSummaryP').textContent = 'το συνεργείο μας!';
     document.querySelector('#vehicle').style.paddingTop = '30px';
   }
+
+  adjustContactInfoContainer();
+}
+
+function adjustContactInfoContainer() {
+  document.querySelector('.contact-info-overlay').remove();
+  const outerHTML = document.querySelector('.contact-info-container').outerHTML;
+  document.querySelector('.contact-info-container').remove();
+
+  const div = document.createElement('div');
+  div.innerHTML = outerHTML;
+
+  const contactInfoContainer = div.firstChild;
+  contactInfoContainer.style.position = 'absolute';
+  contactInfoContainer.style.top = '22%';
+  contactInfoContainer.style.display = 'none';
+
+  document.querySelector('#summary').prepend(contactInfoContainer);
+
+  document
+    .querySelector('#submitSummaryBtn')
+    .addEventListener('click', e => handleSummarySubmit(e, 'form'));
+  
 }
 
 function initHint() {
@@ -2999,7 +3022,7 @@ function emailSummarySubmit(e, triggeredFrom) {
 
 function closeSummaryForm() {
   document.querySelector('.contact-info-container').style.display = 'none';
-  document.querySelector('.contact-info-overlay').style.display = 'none';
+  document.querySelector('.contact-info-overlay')?.style.display = 'none';
 }
 
 function validateUserForm() {
