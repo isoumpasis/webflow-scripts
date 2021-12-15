@@ -556,6 +556,7 @@ function adjustContactInfoContainer() {
   document
     .querySelector('#submitSummaryBtn')
     .addEventListener('click', e => handleSummarySubmit(e, 'form'));
+  document.querySelector('.contact-info-close').addEventListener('click', closeSummaryForm);
 }
 
 function initHint() {
