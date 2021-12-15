@@ -507,8 +507,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initProgressSteps();
 
   initHint();
-  getSourceReferrerDomain();
 
+  getSourceReferrerDomain();
   initForeignReferrerOptions();
 });
 
@@ -557,6 +557,8 @@ function adjustContactInfoContainer() {
     .querySelector('#submitSummaryBtn')
     .addEventListener('click', e => handleSummarySubmit(e, 'form'));
   document.querySelector('.contact-info-close').addEventListener('click', closeSummaryForm);
+
+  initUserInfo();
 }
 
 function initHint() {
