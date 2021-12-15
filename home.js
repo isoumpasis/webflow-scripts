@@ -533,13 +533,11 @@ function initForeignReferrerOptions() {
       'Πάρε την προσφορά και έλα στο συνεργείο μας!';
     document.querySelector('#getYourSummaryP').textContent = 'το συνεργείο μας!';
     document.querySelector('#vehicle').style.paddingTop = '30px';
+    adjustContactInfoContainer();
   }
-
-  adjustContactInfoContainer();
 }
 
 function adjustContactInfoContainer() {
-  console.log('adjusting summary cointaer');
   document.querySelector('.contact-info-overlay').remove();
   const outerHTML = document.querySelector('.contact-info-container').outerHTML;
   document.querySelector('.contact-info-container').remove();
