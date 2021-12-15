@@ -544,8 +544,8 @@ function adjustContactInfoContainer() {
 
   const div = document.createElement('div');
   div.innerHTML = outerHTML;
-
   const contactInfoContainer = div.firstChild;
+
   contactInfoContainer.style.position = 'absolute';
   contactInfoContainer.style.top = '22%';
   contactInfoContainer.style.display = 'none';
