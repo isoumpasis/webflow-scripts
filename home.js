@@ -67,8 +67,8 @@ const cngSystemQueryDict = {
   604701307: 'di108-8cyl' //Direct Injection ExR 8cyl
 };
 
-const apaitoumenaEmulatorTypes = ['p', 'b6', 'b8', 'hp', 'double-hp'];
-const cngOnlyEmulatorTypes = ['b6', 'b8', 'f', 'p'];
+const apaitoumenaEmulatorTypes = ['p', 'b6', 'b8', 'hp', 'double-hp', 'tap'];
+const cngOnlyEmulatorTypes = ['b6', 'b8', 'f', 'p', 'tap'];
 const emulatorTextDict = {
   p: 'Fuel Pressure Emulator',
   t: 'Reducer Lovato RGJ DD',
@@ -76,7 +76,8 @@ const emulatorTextDict = {
   b6: 'Petrol Injectors Emulator',
   b8: 'Dual Injector Engine 4x2 = 8cyl',
   hp: 'Εξαερωτής RGJ UHPII έως 350HP',
-  'double-hp': 'Διπλός Εξαερωτής RGJ UHPII άνω των 350HP'
+  'double-hp': 'Διπλός Εξαερωτής RGJ UHPII άνω των 350HP',
+  tap: 'Timing Advanced Processor'
 };
 const emulatorIsMandatoryDict = {
   p: true,
@@ -85,7 +86,8 @@ const emulatorIsMandatoryDict = {
   b6: true,
   b8: true,
   hp: true,
-  'double-hp': true
+  'double-hp': true,
+  tap: true
 };
 const emulatorPriceDict = {
   p: 85,
@@ -94,7 +96,8 @@ const emulatorPriceDict = {
   hp: 90,
   'double-hp': 130,
   t: 90,
-  f: 85
+  f: 85,
+  tap: 100
 };
 //90eurw sthn timh gia ta panw apo 180 hp
 
