@@ -539,6 +539,7 @@ function initForeignReferrerOptions() {
 }
 
 function adjustContactInfoContainer() {
+  console.log('adjusting summary cointaer');
   document.querySelector('.contact-info-overlay').remove();
   const outerHTML = document.querySelector('.contact-info-container').outerHTML;
   document.querySelector('.contact-info-container').remove();
