@@ -519,6 +519,7 @@ function initForeignReferrerOptions() {
       '.nav-link-container',
       '.menu-button.w-nav-button',
       '#hero',
+      '#vehicle img',
       '#stores',
       '#recentWinners',
       '#testimonials',
@@ -531,6 +532,7 @@ function initForeignReferrerOptions() {
     document.querySelector('#getYourSummaryH').textContent =
       'Πάρε την προσφορά και έλα στο συνεργείο μας!';
     document.querySelector('#getYourSummaryP').textContent = 'το συνεργείο μας!';
+    document.querySelector('#vehicle').style.paddingTop = '30px';
   }
 }
 
