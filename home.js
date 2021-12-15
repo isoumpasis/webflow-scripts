@@ -520,6 +520,7 @@ function initForeignReferrerOptions() {
       '.menu-button.w-nav-button',
       '#hero',
       '#stores',
+      '#recentWinners',
       '#testimonials',
       '#remarketing',
       '#contact',
