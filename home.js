@@ -556,7 +556,6 @@ function adjustContactInfoContainer() {
   document
     .querySelector('#submitSummaryBtn')
     .addEventListener('click', e => handleSummarySubmit(e, 'form'));
-  
 }
 
 function initHint() {
@@ -3022,7 +3021,9 @@ function emailSummarySubmit(e, triggeredFrom) {
 
 function closeSummaryForm() {
   document.querySelector('.contact-info-container').style.display = 'none';
-  document.querySelector('.contact-info-overlay')?.style.display = 'none';
+  if (document.querySelector('.contact-info-overlay')) {
+    document.querySelector('.contact-info-overlay').style.display = 'none';
+  }
 }
 
 function validateUserForm() {
