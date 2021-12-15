@@ -171,23 +171,23 @@ function initForeignReferrerOptions() {
   }
 }
 
-function adjustContactInfoContainer() {
-  // document.querySelector('.email-overlay').remove();
-  // const outerHTML = document.querySelector('.email-contact-pop-up').outerHTML;
-  // document.querySelector('.email-contact-pop-up').remove();
-  // const div = document.createElement('div');
-  // div.innerHTML = outerHTML;
-  // const contactInfoContainer = div.firstChild;
-  // contactInfoContainer.style.position = 'absolute';
-  // contactInfoContainer.style.top = '22%';
-  // contactInfoContainer.style.display = 'none';
-  // document.querySelector('.complete-offer-Copy').prepend(contactInfoContainer);
-  // document
-  //   .querySelector('#submitSummaryBtn')
-  //   .addEventListener('click', e => handleSummarySubmit(e, 'form'));
-  // document.querySelector('.contact-info-close').addEventListener('click', closeSummaryForm);
-  // initUserInfo();
-}
+// function adjustContactInfoContainer() {
+// document.querySelector('.email-overlay').remove();
+// const outerHTML = document.querySelector('.email-contact-pop-up').outerHTML;
+// document.querySelector('.email-contact-pop-up').remove();
+// const div = document.createElement('div');
+// div.innerHTML = outerHTML;
+// const contactInfoContainer = div.firstChild;
+// contactInfoContainer.style.position = 'absolute';
+// contactInfoContainer.style.top = '22%';
+// contactInfoContainer.style.display = 'none';
+// document.querySelector('.complete-offer-Copy').prepend(contactInfoContainer);
+// document
+//   .querySelector('#submitSummaryBtn')
+//   .addEventListener('click', e => handleSummarySubmit(e, 'form'));
+// document.querySelector('.contact-info-close').addEventListener('click', closeSummaryForm);
+// initUserInfo();
+// }
 
 function showFacebookBrowserProblem(show) {
   if (isFacebookBrowser()) {
