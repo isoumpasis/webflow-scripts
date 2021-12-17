@@ -520,6 +520,7 @@ function initForeignReferrerOptions() {
       '.menu-button.w-nav-button',
       '#hero',
       '#vehicle img',
+      '#hamburgerMenuDiv',
       '#stores',
       '#recentWinners',
       '#testimonials',
