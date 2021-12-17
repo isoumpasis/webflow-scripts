@@ -535,7 +535,7 @@ function initForeignReferrerOptions() {
     document.querySelector('#getYourSummaryP').textContent = 'το συνεργείο μας!';
     document.querySelector('#vehicle').style.paddingTop = '30px';
 
-    isMobile() && (document.querySelector('#hamburgerMenuDiv').style.display = 'none');
+    isMobile() && document.querySelector('#hamburgerMenuDiv').remove();
 
     adjustContactInfoContainer();
   }
