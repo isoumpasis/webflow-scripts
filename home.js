@@ -534,6 +534,9 @@ function initForeignReferrerOptions() {
       'Πάρε την προσφορά και έλα στο συνεργείο μας!';
     document.querySelector('#getYourSummaryP').textContent = 'το συνεργείο μας!';
     document.querySelector('#vehicle').style.paddingTop = '30px';
+
+    isMobile() && (document.querySelector('#hamburgerMenuDiv').style.display = 'none');
+
     adjustContactInfoContainer();
   }
 }
