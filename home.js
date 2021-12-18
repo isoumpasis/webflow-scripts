@@ -510,7 +510,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   getSourceReferrerDomain();
   initForeignReferrerOptions();
+
+  displayNoneContainers();
 });
+
+function displayNoneContainers() {
+  suggestedContainers.forEach(c => (c.style.display = 'none'));
+}
 
 function initForeignReferrerOptions() {
   const urlParams = new URLSearchParams(window.location.search);
