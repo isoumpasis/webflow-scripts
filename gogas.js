@@ -921,7 +921,10 @@ function closeSummaryForm() {
 
 function validateUserForm() {
   if (!activeContainer)
-    return { valid: false, msg: 'Χρειάζεται πρώτα να επιλέξετε τη δεξαμενή σας παραπάνω!' };
+    return {
+      valid: false,
+      msg: 'Χρειάζεται πρώτα να επιλέξετε, παραπάνω, τις διαστάσεις της δεξαμενής σας!'
+    };
   if (!document.querySelector('.user-info-username').value)
     return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
   if (!isEmail(document.querySelector('.user-info-email').value))
