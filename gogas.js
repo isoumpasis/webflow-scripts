@@ -809,7 +809,7 @@ function hasUserInfo() {
 }
 
 function hasResult() {
-  return suggestedContainers.some(container => container.style.display !== 'none');
+  return suggestedContainers.some(container => container.style.display === 'grid');
 }
 
 function downloadSummarySubmit(e, triggeredFrom) {
@@ -923,7 +923,7 @@ function validateUserForm() {
   if (!hasResult())
     return {
       valid: false,
-      msg: 'Για να κατεβάσετε την προσφορά θα πρέπει πρώτα να επιλέξετε τη δεξαμενή παραπάνω!'
+      msg: 'Για να κατεβάσετε την προσφορά θα πρέπει πρώτα να επιλέξετε δεξαμενή παραπάνω!'
     };
   if (!document.querySelector('.user-info-username').value)
     return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
