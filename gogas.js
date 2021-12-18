@@ -920,10 +920,10 @@ function closeSummaryForm() {
 }
 
 function validateUserForm() {
-  if (!activeContainer)
+  if (!hasResult())
     return {
       valid: false,
-      msg: 'Χρειάζεται πρώτα να επιλέξετε, παραπάνω, τις διαστάσεις της δεξαμενής σας!'
+      msg: 'Για να κατεβάσετε την προσφορά θα πρέπει πρώτα να επιλέξετε τη δεξαμενή παραπάνω!'
     };
   if (!document.querySelector('.user-info-username').value)
     return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
@@ -934,11 +934,7 @@ function validateUserForm() {
     document.querySelector('.user-info-phone').value.length != 10
   )
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
-  if (!hasResult())
-    return {
-      valid: false,
-      msg: 'Για να κατεβάσετε την προσφορά θα πρέπει πρώτα να επιλέξετε τη δεξαμενή σας από τις "Τιμές Αντικατάστασης"!'
-    };
+
   if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
   return { valid: true };
 }
