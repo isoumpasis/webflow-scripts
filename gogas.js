@@ -764,20 +764,31 @@ function openLocationListContainer() {
 }
 
 /* SUMMARY DOWNLOAD */
-[...document.querySelectorAll('.open-download-form')].map(el =>
-  el.addEventListener('click', e => {
-    formType = 'DOWNLOAD';
-    showFacebookBrowserProblem(true);
-    document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
-  })
-);
-[...document.querySelectorAll('.open-email-form')].map(el =>
-  el.addEventListener('click', e => {
-    formType = 'EMAIL';
-    showFacebookBrowserProblem(false);
-    document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
-  })
-);
+// [...document.querySelectorAll('.open-download-form')].map(el =>
+//   el.addEventListener('click', e => {
+//     formType = 'DOWNLOAD';
+//     showFacebookBrowserProblem(true);
+//     document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
+//   })
+// );
+document.querySelector('#openDownloadForm').addEventListener('click', e => {
+  formType = 'DOWNLOAD';
+  showFacebookBrowserProblem(true);
+  document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
+});
+
+// [...document.querySelectorAll('.open-email-form')].map(el =>
+//   el.addEventListener('click', e => {
+//     formType = 'EMAIL';
+//     showFacebookBrowserProblem(false);
+//     document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
+//   })
+// );
+document.querySelector('#openEmailForm').addEventListener('click', e => {
+  formType = 'EMAIL';
+  showFacebookBrowserProblem(false);
+  document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
+});
 
 document
   .querySelector('#submitSummaryBtn')
@@ -909,6 +920,8 @@ function closeSummaryForm() {
 }
 
 function validateUserForm() {
+  if (!activeContainer)
+    return { valid: false, msg: 'Χρειάζεται πρώτα να επιλέξετε τη δεξαμενή σας παραπάνω!' };
   if (!document.querySelector('.user-info-username').value)
     return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
   if (!isEmail(document.querySelector('.user-info-email').value))
