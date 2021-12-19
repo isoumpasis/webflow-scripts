@@ -2924,7 +2924,7 @@ function hasResult() {
 }
 
 function downloadSummarySubmit(e, triggeredFrom) {
-  const validationResult = validateUserForm();
+  const validationResult = validateUserForm(triggeredFrom);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
@@ -3036,7 +3036,13 @@ function closeSummaryForm() {
   overlay && (overlay.style.display = 'none');
 }
 
-function validateUserForm() {
+function validateUserForm(triggeredFrom = null) {
+  if (triggeredFrom === 'basket' && isFacebookBrowser()) {
+    return {
+      valid: false,
+      msg: 'Για να κατεβάσετε την προσφορά θα πρέπει να ανοίξετε τη σελίδα από άλλον περιηγητή (πχ Chrome) και όχι από τον περιηγητή του Messenger'
+    };
+  }
   if (!document.querySelector('.user-info-username').value)
     return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
   if (!isEmail(document.querySelector('.user-info-email').value))
