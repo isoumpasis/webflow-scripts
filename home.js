@@ -3043,6 +3043,11 @@ function validateUserForm(triggeredFrom = null) {
       msg: 'Για να κατεβάσετε την προσφορά θα πρέπει να ανοίξετε την ιστοσελίδα σε Chrome, Mozilla ή Safari, διότι ο ενσωματομένως περιηγητής του Facebook δεν επιτρέπει τη λήψη αρχείων.'
     };
   }
+  if (!hasResult())
+    return {
+      valid: false,
+      msg: 'Θα πρέπει πρώτα να επιλέξετε το όχημα σας από το Βήμα 2!'
+    };
   if (!document.querySelector('.user-info-username').value)
     return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
   if (!isEmail(document.querySelector('.user-info-email').value))
@@ -3052,11 +3057,6 @@ function validateUserForm(triggeredFrom = null) {
     document.querySelector('.user-info-phone').value.length != 10
   )
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
-  if (!hasResult())
-    return {
-      valid: false,
-      msg: 'Θα πρέπει πρώτα να επιλέξετε το όχημα σας από το Βήμα 2!'
-    };
   if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
   return { valid: true };
 }
