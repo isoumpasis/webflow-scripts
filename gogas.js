@@ -183,7 +183,7 @@ function adjustContactInfoContainer() {
   const emailContactPopup = div.firstChild;
 
   emailContactPopup.style.position = 'absolute';
-  emailContactPopup.style.top = '22%';
+  emailContactPopup.style.top = '-10%';
   emailContactPopup.style.display = 'none';
 
   document.querySelector('.gogas-summary-container').prepend(emailContactPopup);

@@ -526,7 +526,6 @@ function initForeignReferrerOptions() {
       '.menu-button.w-nav-button',
       '#hero',
       '#vehicle img',
-      '#hamburgerMenuDiv',
       '#stores',
       '#recentWinners',
       '#testimonials',
@@ -541,7 +540,7 @@ function initForeignReferrerOptions() {
     document.querySelector('#getYourSummaryP').textContent = 'το συνεργείο μας!';
     document.querySelector('#vehicle').style.paddingTop = '30px';
 
-    isMobile() && document.querySelector('#hamburgerMenuDiv').remove();
+    document.querySelector('#hamburgerMenuDiv').remove();
 
     adjustContactInfoContainer();
   }
