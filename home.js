@@ -3040,7 +3040,7 @@ function validateUserForm(triggeredFrom = null) {
   if (triggeredFrom === 'basket' && isFacebookBrowser()) {
     return {
       valid: false,
-      msg: 'Για να κατεβάσετε την προσφορά θα πρέπει να ανοίξετε τη σελίδα από άλλον περιηγητή (πχ Chrome) και όχι από τον περιηγητή του Messenger'
+      msg: 'Για να κατεβάσετε την προσφορά θα πρέπει να ανοίξετε την ιστοσελίδα σε Chrome, Mozilla ή Safari, διότι ο ενσωματομένως περιηγητής του Facebook δεν επιτρέπει τη λήψη αρχείων.'
     };
   }
   if (!document.querySelector('.user-info-username').value)
