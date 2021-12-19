@@ -511,10 +511,10 @@ document.addEventListener('DOMContentLoaded', () => {
   getSourceReferrerDomain();
   initForeignReferrerOptions();
 
-  displayNoneContainers();
+  // hideSuggestedContainers();
 });
 
-function displayNoneContainers() {
+function hideSuggestedContainers() {
   suggestedContainers.forEach(c => (c.style.display = 'none'));
 }
 
@@ -3033,9 +3033,8 @@ function emailSummarySubmit(e, triggeredFrom) {
 
 function closeSummaryForm() {
   document.querySelector('.contact-info-container').style.display = 'none';
-  if (document.querySelector('.contact-info-overlay')) {
-    document.querySelector('.contact-info-overlay').style.display = 'none';
-  }
+  const overlay = document.querySelector('.contact-info-overlay');
+  overlay && (overlay.style.display = 'none');
 }
 
 function validateUserForm() {

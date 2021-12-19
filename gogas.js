@@ -168,26 +168,33 @@ function initForeignReferrerOptions() {
     const a = '<a href="/go-gas" target="_blank">';
     document.querySelector('.gogas-logo-nav').outerHTML =
       a + document.querySelector('.gogas-logo-nav').outerHTML + '</a>';
+
+    adjustContactInfoContainer();
   }
 }
 
-// function adjustContactInfoContainer() {
-// document.querySelector('.email-overlay').remove();
-// const outerHTML = document.querySelector('.email-contact-pop-up').outerHTML;
-// document.querySelector('.email-contact-pop-up').remove();
-// const div = document.createElement('div');
-// div.innerHTML = outerHTML;
-// const contactInfoContainer = div.firstChild;
-// contactInfoContainer.style.position = 'absolute';
-// contactInfoContainer.style.top = '22%';
-// contactInfoContainer.style.display = 'none';
-// document.querySelector('.complete-offer-Copy').prepend(contactInfoContainer);
-// document
-//   .querySelector('#submitSummaryBtn')
-//   .addEventListener('click', e => handleSummarySubmit(e, 'form'));
-// document.querySelector('.contact-info-close').addEventListener('click', closeSummaryForm);
-// initUserInfo();
-// }
+function adjustContactInfoContainer() {
+  document.querySelector('.email-overlay').remove();
+  const outerHTML = document.querySelector('.email-contact-pop-up').outerHTML;
+  document.querySelector('.email-contact-pop-up').remove();
+
+  const div = document.createElement('div');
+  div.innerHTML = outerHTML;
+  const emailContactPopup = div.firstChild;
+
+  emailContactPopup.style.position = 'absolute';
+  emailContactPopup.style.top = '22%';
+  emailContactPopup.style.display = 'none';
+
+  document.querySelector('.gogas-summary-container').prepend(emailContactPopup);
+
+  document
+    .querySelector('#submitSummaryBtn')
+    .addEventListener('click', e => handleSummarySubmit(e, 'form'));
+  document.querySelector('.contact-pop-up-close').addEventListener('click', closeSummaryForm);
+
+  initUserInfo();
+}
 
 function showFacebookBrowserProblem(show) {
   if (isFacebookBrowser()) {
@@ -916,7 +923,8 @@ function emailSummarySubmit(e, triggeredFrom) {
 
 function closeSummaryForm() {
   document.querySelector('.email-contact-pop-up').style.display = 'none';
-  document.querySelector('.email-overlay').style.display = 'none';
+  const overlay = document.querySelector('.email-overlay');
+  overlay && (overlay.style.display = 'none');
 }
 
 function validateUserForm() {
