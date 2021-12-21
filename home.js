@@ -537,13 +537,13 @@ function initForeignReferrerOptions() {
     } else {
       const gogasBtn = document.querySelector('.go-gas-interest-btn');
       gogasBtn.href = gogasBtn.href + '?foreignReferrer=true';
+      const gogasHeroImgA = document.querySelector('.hero-slide-2 a');
+      gogasHeroImgA.href = gogasHeroImgA.href + '?foreignReferrer=true';
     }
 
     dontShowEls.forEach(query => (document.querySelector(query).style.display = 'none'));
 
     document.querySelector('a.brand').target = '_blank';
-    const gogasHeroImgA = document.querySelector('.hero-slide-2 a');
-    gogasHeroImgA.href = gogasHeroImgA.href + '?foreignReferrer=true';
     document.querySelector('#getYourSummaryH').textContent =
       'Πάρε την προσφορά και έλα στο συνεργείο μας!';
     document.querySelector('#getYourSummaryP').textContent = 'το συνεργείο μας!';
