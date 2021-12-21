@@ -524,8 +524,6 @@ function initForeignReferrerOptions() {
     const dontShowEls = [
       '.nav-link-container',
       '.menu-button.w-nav-button',
-      '#hero',
-      '#vehicle img',
       '#stores',
       '#recentWinners',
       '#testimonials',
@@ -533,13 +531,20 @@ function initForeignReferrerOptions() {
       '#contact',
       '#footer'
     ];
+    if (!(urlParams.has('showHero') && urlParams.get('showHero') === 'true')) {
+      dontShowEls.push('#hero', '#vehicle img');
+      document.querySelector('#vehicle').style.paddingTop = '30px';
+    } else {
+      const gogasBtn = document.querySelector('.go-gas-interest-btn');
+      gogasBtn.href = gogasBtn.href + '?foreignReferrer=true';
+    }
+
     dontShowEls.forEach(query => (document.querySelector(query).style.display = 'none'));
+
     document.querySelector('a.brand').target = '_blank';
     document.querySelector('#getYourSummaryH').textContent =
       'Πάρε την προσφορά και έλα στο συνεργείο μας!';
     document.querySelector('#getYourSummaryP').textContent = 'το συνεργείο μας!';
-    document.querySelector('#vehicle').style.paddingTop = '30px';
-
     document.querySelector('#hamburgerMenuDiv').remove();
 
     adjustContactInfoContainer();
