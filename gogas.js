@@ -150,7 +150,6 @@ function initForeignReferrerOptions() {
     const types = ['#eswterikhContainer', '#ekswterikhContainer', '#kylindrikhContainer'];
     types.forEach(type => {
       document.querySelector(`${type} .location-suggestions`).style.display = 'none';
-
       document.querySelector(`${type} .tank-wrapper`).style.margin = '0 auto';
       const query = `${type} .tank-result-wrapper`;
 
@@ -158,16 +157,18 @@ function initForeignReferrerOptions() {
       document.querySelector(query).style.gridRowEnd = 'span 1';
       document.querySelector(query).style.griColumnStart = 'span 2';
       document.querySelector(query).style.gridColumnEnd = 'span 2';
-
-      document.querySelector(`.gogas-summary-container .get-summary-h`).textContent =
-        'Πάρε την προσφορά και έλα στο συνεργείο μας!';
-      document.querySelector(`.gogas-summary-container .get-summary-p`).textContent =
-        'Πάρε την προσφορά για την δεξαμενή σου με έναν από τους παρακάτω τρόπους και επισκέψου με αυτή, το συνεργείο μας!';
     });
+    document.querySelector(`.gogas-summary-container .get-summary-h`).textContent =
+      'Πάρε την προσφορά και έλα στο συνεργείο μας!';
+    document.querySelector(`.gogas-summary-container .get-summary-p`).textContent =
+      'Πάρε την προσφορά για την δεξαμενή σου με έναν από τους παρακάτω τρόπους και επισκέψου με αυτή, το συνεργείο μας!';
 
     const a = '<a href="/go-gas" target="_blank">';
     document.querySelector('.gogas-logo-nav').outerHTML =
       a + document.querySelector('.gogas-logo-nav').outerHTML + '</a>';
+
+    const gogasHeroImgA = document.querySelector('.hero-slide-wrapper');
+    gogasHeroImgA.href = gogasHeroImgA.href + '?foreignReferrer=true';
 
     adjustContactInfoContainer();
   }
