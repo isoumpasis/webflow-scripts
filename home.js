@@ -512,7 +512,19 @@ document.addEventListener('DOMContentLoaded', () => {
   initForeignReferrerOptions();
 
   // hideSuggestedContainers();
+
+  createPulse();
 });
+
+function createPulse() {
+  const pulseDiv = document.createElement('div');
+  pulseDiv.classList.add('pulse');
+  document.querySelector('#email-form').prepend(pulseDiv);
+}
+
+function togglePulse(show) {
+  document.querySelector('.pulse').style.display = show ? 'block' : 'none';
+}
 
 function hideSuggestedContainers() {
   suggestedContainers.forEach(c => (c.style.display = 'none'));
@@ -1358,6 +1370,7 @@ makeSelect.addEventListener('change', function () {
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
+  togglePulse(false);
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1367,6 +1380,7 @@ makeSelect.addEventListener('change', function () {
   if (!this.value) {
     yearSelect.disabled = true;
     yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
+    togglePulse(true);
     return;
   }
   yearSelect.disabled = false;

@@ -243,11 +243,12 @@ input[type='range']::-ms-thumb:hover {
 
 .pulse {
   position: absolute;
-  left: 50%;
+  left: 40px;
   top: 50%;
+  z-index: 2;
   transform: translateX(-50%) translateY(-50%);
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 }
 
 .pulse:before {
@@ -272,7 +273,7 @@ input[type='range']::-ms-thumb:hover {
   display: block;
   width: 100%;
   height: 100%;
-  background-color: white;
+  background-color: #b3e8ff;
   border-radius: 15px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
   animation: pulse-dot 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.4s infinite;
