@@ -557,7 +557,7 @@ function initForeignReferrerOptions() {
       document.querySelector('#vehicle').style.paddingTop = '30px';
     } else {
       const gogasBtn = document.querySelector('.go-gas-interest-btn');
-      gogasBtn.href = gogasBtn.href + '?foreignReferrer=true';
+      gogasBtn.href = gogasBtn.href + `?foreignReferrer=true&domain=${sourceReferrerDomain}`;
       const gogasHeroImgA = document.querySelector('.hero-slide-2 a');
       gogasHeroImgA.href = gogasHeroImgA.href + '?foreignReferrer=true';
     }
