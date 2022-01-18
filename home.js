@@ -565,9 +565,7 @@ function initForeignReferrerOptions() {
     dontShowEls.forEach(query => (document.querySelector(query).style.display = 'none'));
 
     document.querySelector('a.brand').target = '_blank';
-    document.querySelector('#getYourSummaryH').textContent =
-      'Πάρε την προσφορά και έλα στο συνεργείο μας!';
-    document.querySelector('#getYourSummaryP').textContent = 'το συνεργείο μας!';
+    document.querySelector('.foreign-summary-text').textContent = 'έλα στο συνεργείο μας!';
     document.querySelector('#hamburgerMenuDiv').remove();
 
     adjustContactInfoContainer();
@@ -3683,6 +3681,7 @@ let systemSummaryTriggered = false;
 function trigger_system_summary(type) {
   systemSummaryTriggered = true;
   changeProgressStepState('summary', 'green');
+  togglePulse('.summary-pulse', false);
   triggerGtagEvent('system_summary', { summary_type: type });
 }
 
