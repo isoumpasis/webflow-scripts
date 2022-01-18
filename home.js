@@ -3773,10 +3773,9 @@ function changeProgressStepState(stepName, state) {
     applyNextState('easy-pay');
   } else if (getStepState('car') === 'green') {
     applyNextState('calculator');
+  } else {
+    applyNextState('car');
   }
-  // else if (getStepState('fuel') === 'green') {
-  //   applyNextState('car');
-  // }
 
   if (stepName === 'summary' && state === 'green') {
     [...document.querySelectorAll(`.progress-step-${stepName} .progress-number`)].map(
