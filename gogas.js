@@ -1268,6 +1268,8 @@ function trigger_multivalve_checkbox(options) {
 }
 
 function getSourceReferrerDomain() {
+  const urlParams = new URLSearchParams(window.location.search);
+
   if (urlParams.has('domain')) {
     sourceReferrerDomain = urlParams.get('domain');
     return;
