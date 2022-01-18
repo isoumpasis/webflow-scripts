@@ -525,6 +525,10 @@ function initPulses() {
   summaryPulse.classList.add('pulse', 'summary-pulse');
   document.querySelector('.summary-btns-container').prepend(summaryPulse);
   togglePulse('.summary-pulse', false);
+
+  summaryPulse.addEventListener('click', e =>
+    document.querySelector('.open-download-form').click()
+  );
 }
 
 function togglePulse(pulseSelector, show) {

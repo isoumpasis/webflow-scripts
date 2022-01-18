@@ -243,12 +243,33 @@ input[type='range']::-ms-thumb:hover {
 
 .pulse {
   position: absolute;
-  left: 40px;
-  top: 50%;
+  /* left: 40px;
+  top: 50%; */
   z-index: 2;
   transform: translateX(-50%) translateY(-50%);
   width: 20px;
   height: 20px;
+}
+
+.car-pulse {
+  top: 50%;
+  left: 40px;
+}
+
+.summary-pulse {
+  top: 50%;
+  left: 13%;
+}
+
+@media (max-width: 768px) {
+  .car-pulse {
+    top: 36px;
+    left: 10%;
+  }
+  .summary-pulse {
+    top: 50%;
+    left: 6%;
+  }
 }
 
 .pulse:before {
