@@ -556,10 +556,11 @@ function initForeignReferrerOptions() {
       dontShowEls.push('#hero', '#vehicle img');
       document.querySelector('#vehicle').style.paddingTop = '30px';
     } else {
+      const newLink = `?foreignReferrer=true&domain=${sourceReferrerDomain}`;
       const gogasBtn = document.querySelector('.go-gas-interest-btn');
-      gogasBtn.href = gogasBtn.href + `?foreignReferrer=true&domain=${sourceReferrerDomain}`;
+      gogasBtn.href = gogasBtn.href + newLink;
       const gogasHeroImgA = document.querySelector('.hero-slide-2 a');
-      gogasHeroImgA.href = gogasHeroImgA.href + '?foreignReferrer=true';
+      gogasHeroImgA.href = gogasHeroImgA.href + newLink;
     }
 
     dontShowEls.forEach(query => (document.querySelector(query).style.display = 'none'));
