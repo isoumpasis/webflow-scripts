@@ -582,7 +582,7 @@ function adjustContactInfoContainer() {
   const contactInfoContainer = div.firstChild;
 
   contactInfoContainer.style.position = 'absolute';
-  contactInfoContainer.style.top = '15%';
+  contactInfoContainer.style.top = '38%';
   contactInfoContainer.style.display = 'none';
 
   document.querySelector('#summary').prepend(contactInfoContainer);
