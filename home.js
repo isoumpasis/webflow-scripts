@@ -524,7 +524,7 @@ function initPulses() {
   const summaryPulse = document.createElement('div');
   summaryPulse.classList.add('pulse', 'summary-pulse');
   document.querySelector('.summary-btns-container').prepend(summaryPulse);
-  togglePulse('summary-pulse', false);
+  togglePulse('.summary-pulse', false);
 }
 
 function togglePulse(pulseSelector, show) {
@@ -1376,7 +1376,7 @@ makeSelect.addEventListener('change', function () {
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
-  togglePulse('car-pulse', false);
+  togglePulse('.car-pulse', false);
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1386,8 +1386,8 @@ makeSelect.addEventListener('change', function () {
   if (!this.value) {
     yearSelect.disabled = true;
     yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-    togglePulse('car-pulse', true);
-    togglePulse('summary-pulse', false);
+    togglePulse('.car-pulse', true);
+    togglePulse('.summary-pulse', false);
     return;
   }
   yearSelect.disabled = false;
@@ -1499,7 +1499,7 @@ function yearOnChange(value) {
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
-  togglePulse('summary-pulse', false);
+  togglePulse('.summary-pulse', false);
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1578,7 +1578,7 @@ function modelOnChange(value) {
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
-  togglePulse('summary-pulse', false);
+  togglePulse('.summary-pulse', false);
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1725,7 +1725,7 @@ function descriptionOnChange(value) {
     calcResult(false);
     updateBasketSection({ resetNoVehicle: true });
     resetProgressSteps();
-    togglePulse('summary-pulse', false);
+    togglePulse('.summary-pulse', false);
 
     userSelections.vehicle = {};
     delete userSelections.calculator.driveOftenIndex;
@@ -1896,7 +1896,7 @@ function showResults(fetchedModelObj) {
       easyPayMonthlyGain: true
     });
     trigger_car_step_2();
-    togglePulse('summary-pulse', true);
+    togglePulse('.summary-pulse', true);
   } else if (suggestedContainer) {
     trigger_not_convertible();
   }
