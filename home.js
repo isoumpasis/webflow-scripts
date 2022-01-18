@@ -513,17 +513,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // hideSuggestedContainers();
 
-  createPulse();
+  initPulses();
 });
 
-function createPulse() {
-  const pulseDiv = document.createElement('div');
-  pulseDiv.classList.add('pulse');
-  document.querySelector('#email-form').prepend(pulseDiv);
+function initPulses() {
+  const carPulse = document.createElement('div');
+  carPulse.classList.add('pulse', 'car-pulse');
+  document.querySelector('#email-form').prepend(carPulse);
+
+  const summaryPulse = document.createElement('div');
+  summaryPulse.classList.add('pulse', 'summary-pulse');
+  document.querySelector('.summary-btns-container').prepend(summaryPulse);
+  togglePulse('summary-pulse', false);
 }
 
-function togglePulse(show) {
-  document.querySelector('.pulse').style.display = show ? 'block' : 'none';
+function togglePulse(pulseSelector, show) {
+  document.querySelector(pulseSelector).style.display = show ? 'block' : 'none';
 }
 
 function hideSuggestedContainers() {
@@ -1371,7 +1376,7 @@ makeSelect.addEventListener('change', function () {
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
-  togglePulse(false);
+  togglePulse('car-pulse', false);
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1381,7 +1386,8 @@ makeSelect.addEventListener('change', function () {
   if (!this.value) {
     yearSelect.disabled = true;
     yearSelect.innerHTML = '<option value="">Χρονολογία</option>';
-    togglePulse(true);
+    togglePulse('car-pulse', true);
+    togglePulse('summary-pulse', false);
     return;
   }
   yearSelect.disabled = false;
@@ -1493,6 +1499,7 @@ function yearOnChange(value) {
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
+  togglePulse('summary-pulse', false);
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1571,6 +1578,7 @@ function modelOnChange(value) {
   calcResult(false);
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
+  togglePulse('summary-pulse', false);
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1717,6 +1725,7 @@ function descriptionOnChange(value) {
     calcResult(false);
     updateBasketSection({ resetNoVehicle: true });
     resetProgressSteps();
+    togglePulse('summary-pulse', false);
 
     userSelections.vehicle = {};
     delete userSelections.calculator.driveOftenIndex;
@@ -1887,6 +1896,7 @@ function showResults(fetchedModelObj) {
       easyPayMonthlyGain: true
     });
     trigger_car_step_2();
+    togglePulse('summary-pulse', true);
   } else if (suggestedContainer) {
     trigger_not_convertible();
   }
