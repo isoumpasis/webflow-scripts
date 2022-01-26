@@ -707,57 +707,56 @@ function initSelects() {
 }
 
 function initFuelPrices() {
-  if (
-    userSelections &&
-    userSelections.location &&
-    userSelections.fuelPrices &&
-    !isExpired(userSelections.fuelPrices.expDate)
-  ) {
-    fuelPrices = userSelections.fuelPrices.prices;
-    initPlaceSelects(userSelections.location.place);
-    modifyFuelPriceSliders(userSelections.location.place);
-  } else {
-    fetch(urlFuelPrices, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+  // if (
+  //   userSelections &&
+  //   userSelections.location &&
+  //   userSelections.fuelPrices &&
+  //   !isExpired(userSelections.fuelPrices.expDate)
+  // ) {
+  //   fuelPrices = userSelections.fuelPrices.prices;
+  //   initPlaceSelects(userSelections.location.place);
+  //   modifyFuelPriceSliders(userSelections.location.place);
+  // } else {
+  fetch(urlFuelPrices, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      data.pop(); //removes m.o.
+      fuelPrices = data;
+
+      let newValue = 'ΑΤΤΙΚΗΣ';
+      // if (
+      //   userSelections &&
+      //   userSelections.location &&
+      //   userSelections.fuelPrices &&
+      //   isExpired(userSelections.fuelPrices.expDate)
+      // ) {
+      // newValue = userSelections.location.place;
+      // }
+
+      userSelections.fuelPrices = {
+        prices: fuelPrices
+        // expDate: setExpDate(fuelPricesCacheTime)
+      };
+
+      initPlaceSelects(newValue);
+      modifyFuelPriceSliders(newValue, { save: true });
     })
-      .then(res => res.json())
-      .then(data => {
-        data.pop(); //removes m.o.
-        fuelPrices = data;
-
-        let newValue = 'ΑΤΤΙΚΗΣ';
-        if (
-          userSelections &&
-          userSelections.location &&
-          userSelections.fuelPrices &&
-          isExpired(userSelections.fuelPrices.expDate)
-        ) {
-          newValue = userSelections.location.place;
-        }
-
-        userSelections.fuelPrices = {
-          prices: fuelPrices,
-          expDate: setExpDate(fuelPricesCacheTime)
-        };
-
-        initPlaceSelects(newValue);
-        modifyFuelPriceSliders(newValue, { save: true });
-      })
-      .catch(e => console.error('Error on FuelPrices Fetch:', e));
-  }
+    .catch(e => console.error('Error on FuelPrices Fetch:', e));
 }
 
-function setExpDate(ms) {
-  return new Date().getTime() + ms;
-}
+// function setExpDate(ms) {
+//   return new Date().getTime() + ms;
+// }
 
-function isExpired(expDate) {
-  if (!expDate) return true;
-  return new Date().getTime() > expDate;
-}
+// function isExpired(expDate) {
+//   if (!expDate) return true;
+//   return new Date().getTime() > expDate;
+// }
 
 function initDriveOftenRadio() {
   selectDriveOftenRadioInput(2);
