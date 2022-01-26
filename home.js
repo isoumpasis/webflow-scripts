@@ -3202,8 +3202,7 @@ function locationOnChange(value) {
     userSelections.location.numPlaces &&
     (userSelections.location.numPlaces.places || userSelections.location.numPlaces.places === 0) &&
     userSelections.location.place === value &&
-    userSelections.location.place === userSelections.location.numPlaces.place &&
-    !isExpired(userSelections.location.numPlaces.expDate)
+    userSelections.location.place === userSelections.location.numPlaces.place
   ) {
     fetchedPinsLength = userSelections.location.numPlaces.places;
     populateLocationContainerResults(fetchedPinsLength);
@@ -3234,11 +3233,11 @@ function locationOnChange(value) {
       populateLocationContainerResults(fetchedPinsLength);
       userSelections.location.numPlaces = {
         place: storesLocationSelect.value,
-        places: fetchedPinsLength,
-        expDate:
-          !userSelections.location.numPlaces || isExpired(userSelections.location.numPlaces.expDate)
-            ? setExpDate(numPlacesCacheTime)
-            : userSelections.location.numPlaces.expDate
+        places: fetchedPinsLength
+        // expDate:
+        //   !userSelections.location.numPlaces || isExpired(userSelections.location.numPlaces.expDate)
+        //     ? setExpDate(numPlacesCacheTime)
+        //     : userSelections.location.numPlaces.expDate
       };
       saveUserSelections();
     })
