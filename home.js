@@ -1,8 +1,8 @@
 /* System Identification */
 const baseUrl = location.origin;
 const mapUrl = '/stores';
-// let serverUrl = 'https://lovatohellas.herokuapp.com/';
-let serverUrl = 'http://localhost:1917/';
+let serverUrl = 'https://lovatohellas.herokuapp.com/';
+// let serverUrl = 'http://localhost:1917/';
 const urlYears = serverUrl + 'vehicleDB/get/years';
 const urlModels = serverUrl + 'vehicleDB/get/models';
 const urlDescriptions = serverUrl + 'vehicleDB/get/descriptions';
@@ -26,8 +26,8 @@ let userSelections = { selectedFuel: 'lpg', vehicle: {}, calculator: {}, easyPay
 let userInfo = { username: '', email: '', phone: '' };
 const preferredStorage = localStorage;
 //one week and one hour
-const fuelPricesCacheTime = 1000 * 60 * 60 * 24 * 7 + 1000 * 60 * 60;
-const numPlacesCacheTime = 1000 * 60 * 60 * 24 * 7 + 1000 * 60 * 60;
+// const fuelPricesCacheTime = 1000 * 60 * 60 * 24 * 7 + 1000 * 60 * 60;
+// const numPlacesCacheTime = 1000 * 60 * 60 * 24 * 7 + 1000 * 60 * 60;
 let fetchedPinsLength,
   fetchedClosests,
   isLocationSelected = false,
