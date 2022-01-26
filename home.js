@@ -3231,14 +3231,23 @@ function locationOnChange(value) {
       }
       fetchedPinsLength = data;
       populateLocationContainerResults(fetchedPinsLength);
-      userSelections.location.numPlaces = {
-        place: storesLocationSelect.value,
-        places: fetchedPinsLength
-        // expDate:
-        //   !userSelections.location.numPlaces || isExpired(userSelections.location.numPlaces.expDate)
-        //     ? setExpDate(numPlacesCacheTime)
-        //     : userSelections.location.numPlaces.expDate
-      };
+      if (userSelections.location && userSelections.location.numPlaces) {
+        userSelections.location.numPlaces = {
+          place: storesLocationSelect.value,
+          places: fetchedPinsLength
+          // expDate:
+          //   !userSelections.location.numPlaces || isExpired(userSelections.location.numPlaces.expDate)
+          //     ? setExpDate(numPlacesCacheTime)
+          //     : userSelections.location.numPlaces.expDate
+        };
+      } else {
+        userSelections.location = {
+          numPlaces: {
+            place: storesLocationSelect.value,
+            places: fetchedPinsLength
+          }
+        };
+      }
       saveUserSelections();
     })
     .catch(error => {
