@@ -35,7 +35,7 @@ let map,
   slideIndex = 1,
   cachedPins;
 
-let sourceReferrerDomain;
+// let sourceReferrerDomain;
 
 document.addEventListener('DOMContentLoaded', async () => {
   generateInitHtml();
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await urlParamsConfig();
   setTimeout(() => endLoader(), 250);
 
-  getSourceReferrerDomain();
+  // getSourceReferrerDomain();
 });
 
 async function getCachedPins() {
@@ -1014,7 +1014,7 @@ function trigger_pin_opened(props) {
     pin_location: props.region
   });
 }
-function getSourceReferrerDomain() {
-  let sourceURL = [...window.location.ancestorOrigins][0] || window.location.origin; //fallout
-  sourceReferrerDomain = new URL(sourceURL).hostname;
-}
+// function getSourceReferrerDomain() {
+//   let sourceURL = [...window.location.ancestorOrigins][0] || window.location.origin; //fallout
+//   sourceReferrerDomain = new URL(sourceURL).hostname;
+// }
