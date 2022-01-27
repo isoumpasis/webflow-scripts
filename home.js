@@ -477,7 +477,7 @@ const storesLocationSelect = document.querySelector('#selectStores');
 let noCreditInterest = 12.6;
 let creditInterest = 7.2;
 
-let sourceReferrerDomain;
+// let sourceReferrerDomain;
 
 const h2FuelSelection = document.querySelector('.h2-fuel-selection');
 
@@ -3963,16 +3963,16 @@ function trigger_sidebar_open(options) {
   triggerGtagEvent('sidebar_open', options);
 }
 
-function getSourceReferrerDomain() {
-  let sourceURL =
-    window.location != window.parent.location ? document.referrer : document.location.host;
+// function getSourceReferrerDomain() {
+//   let sourceURL =
+//     window.location != window.parent.location ? document.referrer : document.location.host;
 
-  let hostname;
-  if (window.location != window.parent.location) {
-    hostname = new URL(sourceURL).hostname;
-    hostname = hostname.replace('www.', '');
-  } else {
-    hostname = sourceURL;
-  }
-  sourceReferrerDomain = hostname;
-}
+//   let hostname;
+//   if (window.location != window.parent.location) {
+//     hostname = new URL(sourceURL).hostname;
+//     hostname = hostname.replace('www.', '');
+//   } else {
+//     hostname = sourceURL;
+//   }
+//   sourceReferrerDomain = hostname;
+// }
