@@ -514,12 +514,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // hideSuggestedContainers();
 
   initPulses();
-  configGtag();
+  // configGtag();
 });
 
-function configGtag() {
-  gtag('config', 'G-1BV1MH8CNJ', { global_referrer_domain: sourceReferrerDomain });
-}
+// function configGtag() {
+//   gtag('config', 'G-1BV1MH8CNJ', { global_referrer_domain: sourceReferrerDomain });
+// }
 
 function initPulses() {
   const carPulse = document.createElement('div');
