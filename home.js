@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initHint();
 
-  getSourceReferrerDomain();
+  // getSourceReferrerDomain();
   initForeignReferrerOptions();
 
   // hideSuggestedContainers();

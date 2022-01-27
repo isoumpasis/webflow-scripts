@@ -52,7 +52,7 @@ const preferredStorage = localStorage;
 let gogasSelections = {};
 let userInfo = { username: '', email: '', phone: '', address: '' };
 
-let sourceReferrerDomain;
+// let sourceReferrerDomain;
 
 /* STORAGE */
 function setGogasSelections() {
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLotteryCountdown();
   initTankWrapperClicks();
 
-  getSourceReferrerDomain();
+  // getSourceReferrerDomain();
   initForeignReferrerOptions();
 });
 
@@ -1267,23 +1267,23 @@ function trigger_multivalve_checkbox(options) {
   triggerGtagEvent('multivalve_checkbox', options);
 }
 
-function getSourceReferrerDomain() {
-  const urlParams = new URLSearchParams(window.location.search);
+// function getSourceReferrerDomain() {
+//   const urlParams = new URLSearchParams(window.location.search);
 
-  if (urlParams.has('domain')) {
-    sourceReferrerDomain = urlParams.get('domain');
-    return;
-  }
+//   if (urlParams.has('domain')) {
+//     sourceReferrerDomain = urlParams.get('domain');
+//     return;
+//   }
 
-  let sourceURL =
-    window.location != window.parent.location ? document.referrer : document.location.host;
+//   let sourceURL =
+//     window.location != window.parent.location ? document.referrer : document.location.host;
 
-  let hostname;
-  if (window.location != window.parent.location) {
-    hostname = new URL(sourceURL).hostname;
-    hostname = hostname.replace('www.', '');
-  } else {
-    hostname = sourceURL;
-  }
-  sourceReferrerDomain = hostname;
-}
+//   let hostname;
+//   if (window.location != window.parent.location) {
+//     hostname = new URL(sourceURL).hostname;
+//     hostname = hostname.replace('www.', '');
+//   } else {
+//     hostname = sourceURL;
+//   }
+//   sourceReferrerDomain = hostname;
+// }
