@@ -518,7 +518,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function configGtag() {
-  gtag('config', 'G-1BV1MH8CNJ', { source_referrer_domain_global: sourceReferrerDomain });
+  gtag('config', 'G-1BV1MH8CNJ', { global_referrer_domain: sourceReferrerDomain });
 }
 
 function initPulses() {
