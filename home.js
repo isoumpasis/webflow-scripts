@@ -3240,12 +3240,14 @@ function locationOnChange(value) {
           //     ? setExpDate(numPlacesCacheTime)
           //     : userSelections.location.numPlaces.expDate
         };
+        userSelections.location.place = storesLocationSelect.value;
       } else {
         userSelections.location = {
           numPlaces: {
             place: storesLocationSelect.value,
             places: fetchedPinsLength
-          }
+          },
+          place: storesLocationSelect.value
         };
       }
       saveUserSelections();
