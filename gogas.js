@@ -28,7 +28,7 @@ let fetchedLitres,
   fetchedPinsLength,
   fetchedClosests,
   foundTankObj,
-  activeContainer;
+  activeContainer = null;
 let isLocationSelected = false;
 let geolocationError = false;
 let formType = 'DOWNLOAD';
@@ -365,6 +365,7 @@ function typeSelectOnChange() {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
+  activeContainer = null;
 
   if (!typeSelect.value) return;
 
@@ -441,6 +442,7 @@ function litresOnChange(value) {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
+  activeContainer = null;
 
   if (!value) return;
 
@@ -509,6 +511,7 @@ function dimensionOnChange(value) {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
+  activeContainer = null;
 
   if (value !== 0 && !value) return;
 
@@ -532,6 +535,7 @@ function locationOnChange(value) {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
+  activeContainer = null;
 
   if (!value) {
     isLocationSelected = false;
@@ -1262,7 +1266,7 @@ function trigger_multivalve_checkbox(options) {
 }
 
 function trigger_opened_summary_form(options) {
-  triggerGtagEvent('opened_summary_form', options);
+  triggerGtagEvent('opened_summary_form', { ...options, has_gogas_result: !!activeContainer });
 }
 
 // function getSourceReferrerDomain() {

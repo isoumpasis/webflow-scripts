@@ -3974,7 +3974,13 @@ function trigger_sidebar_open(options) {
 }
 
 function trigger_opened_summary_form(options) {
-  triggerGtagEvent('opened_summary_form', options);
+  triggerGtagEvent('opened_summary_form', {
+    ...options,
+    step_2_triggered: step2Triggered,
+    step_3_triggered: step3Triggered,
+    step_4_triggered: step4Triggered,
+    system_summary_triggered: systemSummaryTriggered
+  });
 }
 
 // function getSourceReferrerDomain() {
