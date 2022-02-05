@@ -773,30 +773,24 @@ function openLocationListContainer() {
 }
 
 /* SUMMARY DOWNLOAD */
-// [...document.querySelectorAll('.open-download-form')].map(el =>
-//   el.addEventListener('click', e => {
-//     formType = 'DOWNLOAD';
-//     showFacebookBrowserProblem(true);
-//     document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
-//   })
-// );
 document.querySelector('#openDownloadForm').addEventListener('click', e => {
   formType = 'DOWNLOAD';
   showFacebookBrowserProblem(true);
   document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
+  trigger_opened_summary_form({
+    summary_type: 'download',
+    is_facebook_browser: isFacebookBrowser()
+  });
 });
 
-// [...document.querySelectorAll('.open-email-form')].map(el =>
-//   el.addEventListener('click', e => {
-//     formType = 'EMAIL';
-//     showFacebookBrowserProblem(false);
-//     document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
-//   })
-// );
 document.querySelector('#openEmailForm').addEventListener('click', e => {
   formType = 'EMAIL';
   showFacebookBrowserProblem(false);
   document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
+  trigger_opened_summary_form({
+    summary_type: 'email',
+    is_facebook_browser: isFacebookBrowser()
+  });
 });
 
 document
@@ -1265,6 +1259,10 @@ const mvCheckIcons = [...document.querySelectorAll('.mv-check-icon')];
 
 function trigger_multivalve_checkbox(options) {
   triggerGtagEvent('multivalve_checkbox', options);
+}
+
+function trigger_opened_summary_form(options) {
+  triggerGtagEvent('opened_summary_form', options);
 }
 
 // function getSourceReferrerDomain() {
