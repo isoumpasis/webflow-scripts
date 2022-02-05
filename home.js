@@ -2919,11 +2919,19 @@ document.querySelector('.open-download-form').addEventListener('click', e => {
   formType = 'DOWNLOAD';
   showFacebookBrowserProblem(true);
   document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
+  trigger_opened_summary_form({
+    summary_type: 'download',
+    is_facebook_browser: isFacebookBrowser()
+  });
 });
 document.querySelector('.open-email-form').addEventListener('click', e => {
   formType = 'EMAIL';
   showFacebookBrowserProblem(false);
   document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
+  trigger_opened_summary_form({
+    summary_type: 'email',
+    is_facebook_browser: isFacebookBrowser()
+  });
 });
 
 document
@@ -3617,7 +3625,7 @@ function getNextLotteryDate(date) {
 /* GTAG */
 let gtagDebug = false;
 function triggerGtagEvent(eventName, params = {}) {
-  if (!gtagDebug && window.location.href.includes('.io'))
+  if (!gtagDebug && window.location.href.includes('webflow.io'))
     return { status: 'Error', message: 'dev' };
   if (typeof gtag === 'undefined') return { status: 'Error', message: 'gtag undefined' };
   if (typeof eventName === 'undefined' || eventName === '')
@@ -3963,6 +3971,10 @@ document.querySelector('.sidebar-btn').addEventListener('click', e => {
 
 function trigger_sidebar_open(options) {
   triggerGtagEvent('sidebar_open', options);
+}
+
+function trigger_opened_summary_form(options) {
+  triggerGtagEvent('opened_summary_form', options);
 }
 
 // function getSourceReferrerDomain() {

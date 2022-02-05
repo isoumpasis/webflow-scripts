@@ -1136,7 +1136,7 @@ function startCountdown() {
 /* GTAG */
 let gtagDebug = false;
 function triggerGtagEvent(eventName, params = {}) {
-  if (!gtagDebug && window.location.href.includes('.io'))
+  if (!gtagDebug && window.location.href.includes('webflow.io'))
     return { status: 'Error', message: 'dev' };
   if (typeof gtag === 'undefined') return { status: 'Error', message: 'gtag undefined' };
   if (typeof eventName === 'undefined' || eventName === '')
