@@ -719,27 +719,29 @@ function prepareClosestList(fetchedClosests) {
 
 function generateListItems(fetchedClosests) {
   const listItem = document.querySelector('.list-item').cloneNode(true);
-  suggestedContainers.forEach(container => {
-    const containerList = container.querySelector('.location-list-block');
-    [...containerList.querySelectorAll('.list-item')].forEach(el => {
-      el.remove();
-    });
-    for (let i = 0; i < fetchedClosests.length; i++) {
-      const cloneListItem = listItem.cloneNode(true);
-      containerList.appendChild(cloneListItem);
+  [...suggestedContainers, document.querySelector('.mobile-location-container')].forEach(
+    container => {
+      const containerList = container.querySelector('.location-list-block');
+      [...containerList.querySelectorAll('.list-item')].forEach(el => {
+        el.remove();
+      });
+      for (let i = 0; i < fetchedClosests.length; i++) {
+        const cloneListItem = listItem.cloneNode(true);
+        containerList.appendChild(cloneListItem);
+      }
     }
-  });
+  );
 
   //Additional mobile container
-  const mobileLocationContainer = document.querySelector('.mobile-location-container');
-  const containerMobileList = mobileLocationContainer.querySelector('.location-list-block');
-  [...containerMobileList.querySelectorAll('.list-item')].forEach(el => {
-    el.remove();
-  });
-  for (let i = 0; i < fetchedClosests.length; i++) {
-    const cloneListItem = listItem.cloneNode(true);
-    containerMobileList.appendChild(cloneListItem);
-  }
+  // const mobileLocationContainer = document.querySelector('.mobile-location-container');
+  // const containerMobileList = mobileLocationContainer.querySelector('.location-list-block');
+  // [...containerMobileList.querySelectorAll('.list-item')].forEach(el => {
+  //   el.remove();
+  // });
+  // for (let i = 0; i < fetchedClosests.length; i++) {
+  //   const cloneListItem = listItem.cloneNode(true);
+  //   containerMobileList.appendChild(cloneListItem);
+  // }
 }
 
 function populateClosestsList(fetchedClosests) {
@@ -750,7 +752,7 @@ function populateClosestsList(fetchedClosests) {
   let geometryParam;
   const filtersParam = '2';
 
-  suggestedContainers.forEach(container => {
+  [...suggestedContainers, document.querySelector('.mobile-list-container')].forEach(container => {
     names = [...container.querySelectorAll('.closest-name')];
     addresses = [...container.querySelectorAll('.closest-address')];
     phones = [...container.querySelectorAll('.closest-phone')];
