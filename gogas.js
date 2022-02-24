@@ -729,6 +729,17 @@ function generateListItems(fetchedClosests) {
       containerList.appendChild(cloneListItem);
     }
   });
+
+  //For additional mobile container
+  const mobileLocationContainer = document.querySelector('.mobile-location-container');
+  const containerList = mobileLocationContainer.querySelector('.location-list-block');
+  [...containerList.querySelectorAll('.list-item')].forEach(el => {
+    el.remove();
+  });
+  for (let i = 0; i < fetchedClosests.length; i++) {
+    const cloneListItem = listItem.cloneNode(true);
+    containerList.appendChild(cloneListItem);
+  }
 }
 
 function populateClosestsList(fetchedClosests) {
