@@ -752,31 +752,33 @@ function populateClosestsList(fetchedClosests) {
   let geometryParam;
   const filtersParam = '2';
 
-  [...suggestedContainers, document.querySelector('.mobile-list-container')].forEach(container => {
-    names = [...container.querySelectorAll('.closest-name')];
-    addresses = [...container.querySelectorAll('.closest-address')];
-    phones = [...container.querySelectorAll('.closest-phone')];
-    emails = [...container.querySelectorAll('.closest-email')];
-    distances = [...container.querySelectorAll('.closest-distance')];
-    openMaps = [...container.querySelectorAll('.closest-open-map')];
+  [...suggestedContainers, document.querySelector('.mobile-location-container')].forEach(
+    container => {
+      names = [...container.querySelectorAll('.closest-name')];
+      addresses = [...container.querySelectorAll('.closest-address')];
+      phones = [...container.querySelectorAll('.closest-phone')];
+      emails = [...container.querySelectorAll('.closest-email')];
+      distances = [...container.querySelectorAll('.closest-distance')];
+      openMaps = [...container.querySelectorAll('.closest-open-map')];
 
-    fetchedClosests.forEach((closest, i) => {
-      names[i].textContent = closest.pin.properties.name;
-      addresses[i].textContent = closest.pin.properties.address;
-      phones[i].textContent = closest.pin.properties.phone;
-      emails[i].textContent = closest.pin.properties.email ? closest.pin.properties.email : '';
-      distances[i].textContent = Math.round(closest.distance * 100) / 100;
+      fetchedClosests.forEach((closest, i) => {
+        names[i].textContent = closest.pin.properties.name;
+        addresses[i].textContent = closest.pin.properties.address;
+        phones[i].textContent = closest.pin.properties.phone;
+        emails[i].textContent = closest.pin.properties.email ? closest.pin.properties.email : '';
+        distances[i].textContent = Math.round(closest.distance * 100) / 100;
 
-      // gpsParam = encodeURI(closest.pin.properties.address);
-      // openMaps[i].href = `${mapBaseUrl}?gps=${gpsParam}&filters=${filtersParam}`;
-      // nameParam = encodeURI(closest.pin.properties.name);
-      // openMaps[i].href = `${mapBaseUrl}?name=${nameParam}&filters=${filtersParam}`;
-      let { lat, lng } = closest.pin.geometry;
-      geometryParam = lat + ',' + lng;
-      openMaps[i].href = `${mapBaseUrl}?geometry=${geometryParam}&filters=${filtersParam}`;
-      openMaps[i].target = '_blank';
-    });
-  });
+        // gpsParam = encodeURI(closest.pin.properties.address);
+        // openMaps[i].href = `${mapBaseUrl}?gps=${gpsParam}&filters=${filtersParam}`;
+        // nameParam = encodeURI(closest.pin.properties.name);
+        // openMaps[i].href = `${mapBaseUrl}?name=${nameParam}&filters=${filtersParam}`;
+        let { lat, lng } = closest.pin.geometry;
+        geometryParam = lat + ',' + lng;
+        openMaps[i].href = `${mapBaseUrl}?geometry=${geometryParam}&filters=${filtersParam}`;
+        openMaps[i].target = '_blank';
+      });
+    }
+  );
 }
 
 function addLocationStr(location) {
