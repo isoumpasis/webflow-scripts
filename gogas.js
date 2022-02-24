@@ -732,13 +732,13 @@ function generateListItems(fetchedClosests) {
 
   //For additional mobile container
   const mobileLocationContainer = document.querySelector('.mobile-location-container');
-  const containerList = mobileLocationContainer.querySelector('.location-list-block');
-  [...containerList.querySelectorAll('.list-item')].forEach(el => {
+  const containerMobileList = mobileLocationContainer.querySelector('.location-list-block');
+  [...containerMobileList.querySelectorAll('.list-item')].forEach(el => {
     el.remove();
   });
   for (let i = 0; i < fetchedClosests.length; i++) {
     const cloneListItem = listItem.cloneNode(true);
-    containerList.appendChild(cloneListItem);
+    containerMobileList.appendChild(cloneListItem);
   }
 }
 
