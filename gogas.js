@@ -730,7 +730,7 @@ function generateListItems(fetchedClosests) {
     }
   });
 
-  //For additional mobile container
+  //Additional mobile container
   const mobileLocationContainer = document.querySelector('.mobile-location-container');
   const containerMobileList = mobileLocationContainer.querySelector('.location-list-block');
   [...containerMobileList.querySelectorAll('.list-item')].forEach(el => {
