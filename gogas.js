@@ -365,6 +365,7 @@ function typeSelectOnChange() {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
+  document.querySelector('.mobile-location-container').style.display = 'block';
   activeContainer = null;
 
   if (!typeSelect.value) return;
@@ -442,6 +443,7 @@ function litresOnChange(value) {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
+  document.querySelector('.mobile-location-container').style.display = 'block';
   activeContainer = null;
 
   if (!value) return;
@@ -511,6 +513,7 @@ function dimensionOnChange(value) {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
+  document.querySelector('.mobile-location-container').style.display = 'block';
   activeContainer = null;
 
   if (value !== 0 && !value) return;
@@ -535,6 +538,7 @@ function locationOnChange(value) {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
+  document.querySelector('.mobile-location-container').style.display = 'block';
   activeContainer = null;
 
   if (!value) {
@@ -602,6 +606,8 @@ function renderResultsContainer(container) {
 
   document.querySelector('.init-container').style.display = 'none';
   container.style.display = 'grid';
+
+  if (isNotDesktop()) document.querySelector('.mobile-location-container').style.display = 'block';
 }
 
 function saveUserResults() {
@@ -1284,23 +1290,6 @@ function trigger_opened_summary_form(options) {
   triggerGtagEvent('opened_summary_form', { ...options, has_gogas_result: !!activeContainer });
 }
 
-// function getSourceReferrerDomain() {
-//   const urlParams = new URLSearchParams(window.location.search);
-
-//   if (urlParams.has('domain')) {
-//     sourceReferrerDomain = urlParams.get('domain');
-//     return;
-//   }
-
-//   let sourceURL =
-//     window.location != window.parent.location ? document.referrer : document.location.host;
-
-//   let hostname;
-//   if (window.location != window.parent.location) {
-//     hostname = new URL(sourceURL).hostname;
-//     hostname = hostname.replace('www.', '');
-//   } else {
-//     hostname = sourceURL;
-//   }
-//   sourceReferrerDomain = hostname;
-// }
+function isNotDesktop() {
+  return window.matchMedia('screen and (max-width: 991px)').matches;
+}
