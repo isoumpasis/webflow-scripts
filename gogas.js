@@ -179,10 +179,7 @@ function initForeignReferrerOptions() {
       document.querySelector(query).style.griColumnStart = 'span 2';
       document.querySelector(query).style.gridColumnEnd = 'span 2';
     });
-    document.querySelector(`.gogas-summary-container .get-summary-h`).textContent =
-      'Πάρε την προσφορά και έλα στο συνεργείο μας!';
-    document.querySelector(`.gogas-summary-container .get-summary-p`).textContent =
-      'Πάρε την προσφορά για την δεξαμενή σου με έναν από τους παρακάτω τρόπους και επισκέψου με αυτή, το συνεργείο μας!';
+    document.querySelector('.foreign-summary-text').textContent = 'έλα στο συνεργείο μας!';
 
     const a = '<a href="/go-gas" target="_blank">';
     document.querySelector('.gogas-logo-nav').outerHTML =
