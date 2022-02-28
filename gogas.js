@@ -156,9 +156,13 @@ function togglePulse(pulseSelector, show) {
   document.querySelector(pulseSelector).style.display = show ? 'block' : 'none';
 }
 
-function initForeignReferrerOptions() {
+function isForeign() {
   const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.has('foreignReferrer') && urlParams.get('foreignReferrer') === 'true') {
+  return urlParams.has('foreignReferrer') && urlParams.get('foreignReferrer') === 'true';
+}
+
+function initForeignReferrerOptions() {
+  if (isForeign()) {
     const dontShowEls = [
       '.navbar.navbar-3',
       '#gogasNavContact',
@@ -635,9 +639,8 @@ function renderResultsContainer(container) {
   document.querySelector('.init-container').style.display = 'none';
   container.style.display = 'grid';
 
-  document.querySelector('.mobile-location-container').style.display = isNotDesktop()
-    ? 'block'
-    : 'none';
+  document.querySelector('.mobile-location-container').style.display =
+    isNotDesktop() && !isForeign() ? 'block' : 'none';
 
   togglePulse('.summary-pulse', true);
 }
