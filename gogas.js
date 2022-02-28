@@ -436,13 +436,14 @@ function typeSelectOnChange() {
 function populateLitresSelect(fetchedLitres, options = {}) {
   let litresOptionsArray = ['<option value="">Επιλέξτε Λίτρα</option>'];
 
-  const allDimensionsTypeLabel =
-    typeSelect.value !== 'unknown'
-      ? ` για ${typeSelect.options[typeSelect.selectedIndex].textContent.toLowerCase()}`
-      : '';
-  litresOptionsArray.push(
-    `<option value="allDimensions">Όλες οι διαστάσεις${allDimensionsTypeLabel}</option>`
-  );
+  // const allDimensionsTypeLabel =
+  //   typeSelect.value !== 'unknown'
+  //     ? ` για ${typeSelect.options[typeSelect.selectedIndex].textContent.toLowerCase()}`
+  //     : '';
+  // litresOptionsArray.push(
+  //   `<option value="allDimensions">Όλες οι διαστάσεις${allDimensionsTypeLabel}</option>`
+  // );
+  litresOptionsArray.push(`<option value="allDimensions">🔹 Δες όλες τις διαστάσεις</option>`);
 
   fetchedLitres.forEach(litre => {
     litresOptionsArray.push(`<option value="${litre}">${litre} LT</option>`);
