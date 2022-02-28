@@ -607,7 +607,10 @@ function renderResultsContainer(container) {
   document.querySelector('.init-container').style.display = 'none';
   container.style.display = 'grid';
 
-  if (isNotDesktop()) document.querySelector('.mobile-location-container').style.display = 'block';
+  document.querySelector('.mobile-location-container').style.display = isNotDesktop()
+    ? 'block'
+    : 'none';
+  // if (isNotDesktop()) document.querySelector('.mobile-location-container').style.display = 'block';
 }
 
 function saveUserResults() {
