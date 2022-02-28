@@ -133,7 +133,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // getSourceReferrerDomain();
   initForeignReferrerOptions();
+
+  initPulses();
 });
+
+function initPulses() {
+  const tankPulse = document.createElement('div');
+  tankPulse.classList.add('pulse', 'tank-pulse');
+  document.querySelector('#tankForm').prepend(tankPulse);
+
+  const summaryPulse = document.createElement('div');
+  summaryPulse.classList.add('pulse', 'summary-pulse');
+  document.querySelector('.summary-btns-container').prepend(summaryPulse);
+  togglePulse('.summary-pulse', false);
+
+  summaryPulse.addEventListener('click', e =>
+    document.querySelector('.open-download-form').click()
+  );
+}
+
+function togglePulse(pulseSelector, show) {
+  document.querySelector(pulseSelector).style.display = show ? 'block' : 'none';
+}
 
 function initForeignReferrerOptions() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -365,10 +386,15 @@ function typeSelectOnChange() {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
+  togglePulse('.tank-pulse', false);
   document.querySelector('.mobile-location-container').style.display = 'none';
   activeContainer = null;
 
-  if (!typeSelect.value) return;
+  if (!typeSelect.value) {
+    togglePulse('.tank-pulse', true);
+    togglePulse('.summary-pulse', false);
+    return;
+  }
 
   litresSelect.disabled = false;
   litresSelect.innerHTML = '';
@@ -443,6 +469,7 @@ function litresOnChange(value) {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
+  togglePulse('.summary-pulse', false);
   document.querySelector('.mobile-location-container').style.display = 'none';
   activeContainer = null;
 
@@ -513,6 +540,7 @@ function dimensionOnChange(value) {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
+  togglePulse('.summary-pulse', false);
   document.querySelector('.mobile-location-container').style.display = 'none';
   activeContainer = null;
 
@@ -538,6 +566,7 @@ function locationOnChange(value) {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
+  togglePulse('.summary-pulse', false);
   document.querySelector('.mobile-location-container').style.display = 'none';
   activeContainer = null;
 
@@ -610,7 +639,8 @@ function renderResultsContainer(container) {
   document.querySelector('.mobile-location-container').style.display = isNotDesktop()
     ? 'block'
     : 'none';
-  // if (isNotDesktop()) document.querySelector('.mobile-location-container').style.display = 'block';
+
+  togglePulse('.summary-pulse', true);
 }
 
 function saveUserResults() {
