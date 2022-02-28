@@ -188,6 +188,8 @@ function initForeignReferrerOptions() {
     const gogasHeroImgA = document.querySelector('.hero-slide-wrapper');
     gogasHeroImgA.href = gogasHeroImgA.href + '?foreignReferrer=true';
 
+    document.querySelector('.mobile-location-container').style.display = 'none';
+
     adjustContactInfoContainer();
   }
 }
