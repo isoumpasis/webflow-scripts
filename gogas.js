@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
   showFacebookBrowserProblem(isFacebookBrowser());
 
   initLotteryCountdown();
-  initTankWrapperClicks();
+  // initTankWrapperClicks();
 
   // getSourceReferrerDomain();
   initForeignReferrerOptions();
