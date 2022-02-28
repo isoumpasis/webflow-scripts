@@ -365,7 +365,7 @@ function typeSelectOnChange() {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
-  document.querySelector('.mobile-location-container').style.display = 'block';
+  document.querySelector('.mobile-location-container').style.display = 'none';
   activeContainer = null;
 
   if (!typeSelect.value) return;
@@ -443,7 +443,7 @@ function litresOnChange(value) {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
-  document.querySelector('.mobile-location-container').style.display = 'block';
+  document.querySelector('.mobile-location-container').style.display = 'none';
   activeContainer = null;
 
   if (!value) return;
@@ -513,7 +513,7 @@ function dimensionOnChange(value) {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
-  document.querySelector('.mobile-location-container').style.display = 'block';
+  document.querySelector('.mobile-location-container').style.display = 'none';
   activeContainer = null;
 
   if (value !== 0 && !value) return;
@@ -538,7 +538,7 @@ function locationOnChange(value) {
     container.style.display = 'none';
   });
   document.querySelector('.init-container').style.display = 'flex';
-  document.querySelector('.mobile-location-container').style.display = 'block';
+  document.querySelector('.mobile-location-container').style.display = 'none';
   activeContainer = null;
 
   if (!value) {
@@ -740,17 +740,6 @@ function generateListItems(fetchedClosests) {
       }
     }
   );
-
-  //Additional mobile container
-  // const mobileLocationContainer = document.querySelector('.mobile-location-container');
-  // const containerMobileList = mobileLocationContainer.querySelector('.location-list-block');
-  // [...containerMobileList.querySelectorAll('.list-item')].forEach(el => {
-  //   el.remove();
-  // });
-  // for (let i = 0; i < fetchedClosests.length; i++) {
-  //   const cloneListItem = listItem.cloneNode(true);
-  //   containerMobileList.appendChild(cloneListItem);
-  // }
 }
 
 function populateClosestsList(fetchedClosests) {
