@@ -832,6 +832,7 @@ document.querySelector('#openDownloadForm').addEventListener('click', e => {
   formType = 'DOWNLOAD';
   showFacebookBrowserProblem(true);
   document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
+  document.querySelector('.email-mandatory').textContent = '(προαιρετικό)';
   trigger_opened_summary_form({
     summary_type: 'download',
     is_facebook_browser: isFacebookBrowser()
@@ -842,6 +843,8 @@ document.querySelector('#openEmailForm').addEventListener('click', e => {
   formType = 'EMAIL';
   showFacebookBrowserProblem(false);
   document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
+  document.querySelector('.email-mandatory').textContent = '*';
+
   trigger_opened_summary_form({
     summary_type: 'email',
     is_facebook_browser: isFacebookBrowser()
@@ -871,7 +874,7 @@ function hasResult() {
 }
 
 function downloadSummarySubmit(e, triggeredFrom) {
-  const validationResult = validateUserForm();
+  const validationResult = validateUserForm(triggeredFrom);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
@@ -922,7 +925,7 @@ function isFacebookBrowser() {
 }
 
 function emailSummarySubmit(e, triggeredFrom) {
-  const validationResult = validateUserForm();
+  const validationResult = validateUserForm(triggeredFrom);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
@@ -978,20 +981,20 @@ function closeSummaryForm() {
   overlay && (overlay.style.display = 'none');
 }
 
-function validateUserForm() {
+function validateUserForm(triggeredFrom) {
   if (!hasResult())
     return {
       valid: false,
       msg: 'Για να κατεβάσετε την προσφορά θα πρέπει πρώτα να επιλέξετε δεξαμενή παραπάνω!'
     };
-  if (!document.querySelector('.user-info-username').value)
-    return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
-  if (!isEmail(document.querySelector('.user-info-email').value))
+  // if (!document.querySelector('.user-info-username').value)
+  //   return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
+
+  if (triggeredFrom === 'EMAIL' && !isEmail(document.querySelector('.user-info-email').value))
     return { valid: false, msg: 'Απαιτείται έγκυρο email' };
-  if (
-    isNaN(document.querySelector('.user-info-phone').value) ||
-    document.querySelector('.user-info-phone').value.length != 10
-  )
+
+  const userPhone = document.querySelector('.user-info-phone').value;
+  if (userPhone && (isNaN(userPhone) || userPhone.length != 10))
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
 
   if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
