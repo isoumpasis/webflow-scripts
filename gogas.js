@@ -208,8 +208,9 @@ function adjustContactInfoContainer() {
   const emailContactPopup = div.firstChild;
 
   emailContactPopup.style.position = 'absolute';
-  emailContactPopup.style.top = '273px';
+  emailContactPopup.style.bottom = '-50px';
   emailContactPopup.style.display = 'none';
+  if (isMobile()) emailContactPopup.style.height = '100%';
 
   document.querySelector('.gogas-summary-container').prepend(emailContactPopup);
 
