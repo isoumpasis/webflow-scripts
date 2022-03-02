@@ -579,9 +579,9 @@ function initForeignReferrerOptions() {
 }
 
 function adjustContactInfoContainer() {
-  document.querySelector('.contact-info-overlay').remove();
-  const outerHTML = document.querySelector('.contact-info-container').outerHTML;
-  document.querySelector('.contact-info-container').remove();
+  document.querySelector('.email-overlay').remove();
+  const outerHTML = document.querySelector('.email-contact-pop-up').outerHTML;
+  document.querySelector('.email-contact-pop-up').remove();
 
   const div = document.createElement('div');
   div.innerHTML = outerHTML;
@@ -596,7 +596,7 @@ function adjustContactInfoContainer() {
   document
     .querySelector('#submitSummaryBtn')
     .addEventListener('click', e => handleSummarySubmit(e, 'form'));
-  document.querySelector('.contact-info-close').addEventListener('click', closeSummaryForm);
+  document.querySelector('.contact-pop-up-close').addEventListener('click', closeSummaryForm);
 
   initUserInfo();
 }
@@ -3078,8 +3078,8 @@ function emailSummarySubmit(e, triggeredFrom) {
 }
 
 function closeSummaryForm() {
-  document.querySelector('.contact-info-container').style.display = 'none';
-  const overlay = document.querySelector('.contact-info-overlay');
+  document.querySelector('.email-contact-pop-up').style.display = 'none';
+  const overlay = document.querySelector('.email-overlay');
   overlay && (overlay.style.display = 'none');
 }
 
