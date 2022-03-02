@@ -994,7 +994,10 @@ function validateUserForm(triggeredFrom) {
   // if (!document.querySelector('.user-info-username').value)
   //   return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
 
-  if (triggeredFrom === 'EMAIL' && !isEmail(document.querySelector('.user-info-email').value))
+  const userEmail = document.querySelector('.user-info-email').value;
+  if (userEmail && !isEmail(userEmail)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
+
+  if (triggeredFrom === 'EMAIL' && !isEmail(userEmail))
     return { valid: false, msg: 'Απαιτείται έγκυρο email' };
 
   const userPhone = document.querySelector('.user-info-phone').value;
