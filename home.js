@@ -2950,8 +2950,8 @@ document
 function handleSummarySubmit(e, triggeredFrom) {
   e.preventDefault();
   formType === 'DOWNLOAD'
-    ? downloadSummarySubmit(e, triggeredFrom)
-    : emailSummarySubmit(e, triggeredFrom);
+    ? downloadSummarySubmit(e, triggeredFrom, formType)
+    : emailSummarySubmit(e, triggeredFrom, formType);
 }
 
 function hasUserInfo() {
@@ -2972,8 +2972,8 @@ function hasResult() {
   } else return true;
 }
 
-function downloadSummarySubmit(e, triggeredFrom) {
-  const validationResult = validateUserForm(triggeredFrom);
+function downloadSummarySubmit(e, triggeredFrom, formType) {
+  const validationResult = validateUserForm(triggeredFrom, formType);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
@@ -3021,8 +3021,8 @@ function downloadSummarySubmit(e, triggeredFrom) {
     });
 }
 
-function emailSummarySubmit(e, triggeredFrom) {
-  const validationResult = validateUserForm(triggeredFrom);
+function emailSummarySubmit(e, triggeredFrom, formType) {
+  const validationResult = validateUserForm(triggeredFrom, formType);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
@@ -3089,7 +3089,7 @@ function closeSummaryForm() {
   overlay && (overlay.style.display = 'none');
 }
 
-function validateUserForm(triggeredFrom = null) {
+function validateUserForm(triggeredFrom = null, formType) {
   if (triggeredFrom === 'basket' && isFacebookBrowser()) {
     return {
       valid: false,
@@ -3107,7 +3107,7 @@ function validateUserForm(triggeredFrom = null) {
   const userEmail = document.querySelector('.user-info-email').value;
   if (userEmail && !isEmail(userEmail)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
 
-  if (triggeredFrom === 'EMAIL' && !isEmail(userEmail))
+  if (formType === 'EMAIL' && !isEmail(userEmail))
     return { valid: false, msg: 'Απαιτείται έγκυρο email' };
 
   const userPhone = document.querySelector('.user-info-phone').value;
