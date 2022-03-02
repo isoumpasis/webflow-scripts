@@ -2940,12 +2940,18 @@ document
   .querySelector('#submitSummaryBtn')
   .addEventListener('click', e => handleSummarySubmit(e, 'form'));
 
-document
-  .querySelector('#downloadSummaryBtnBasket')
-  .addEventListener('click', e => downloadSummarySubmit(e, 'basket', 'DOWNLOAD'));
-document
-  .querySelector('#emailSummaryBtnBasket')
-  .addEventListener('click', e => emailSummarySubmit(e, 'basket', 'EMAIL'));
+document.querySelector('#downloadSummaryBtnBasket').addEventListener('click', e => {
+  document.querySelector('.side-bar-close').click();
+  document.querySelector('#summary').scrollIntoView();
+  document.querySelector('.open-download-form').click();
+  // downloadSummarySubmit(e, 'basket', 'DOWNLOAD');
+});
+document.querySelector('#emailSummaryBtnBasket').addEventListener('click', e => {
+  document.querySelector('.side-bar-close').click();
+  document.querySelector('#summary').scrollIntoView();
+  document.querySelector('.open-email-form').click();
+  // emailSummarySubmit(e, 'basket', 'EMAIL');
+});
 
 function handleSummarySubmit(e, triggeredFrom) {
   e.preventDefault();
