@@ -885,9 +885,13 @@ function downloadSummarySubmit(e, triggeredFrom, formType) {
   dataToSend.sourceReferrerDomain = sourceReferrerDomain;
   dataToSend.userInfo = userInfo;
 
-  return console.log(validationResult, 'ok');
+  console.log(validationResult, 'ok');
 
   startLoadingSelect(e.target, triggeredFrom);
+  const submitSummaryBtn = document.querySelector('#submitSummaryBtn');
+  submitSummaryBtn.setAttribute('disabled', 'true');
+  submitSummaryBtn.style.cursor = 'wait';
+
   fetch(downloadSummaryUrl, {
     method: 'POST',
     headers: {
@@ -898,6 +902,8 @@ function downloadSummarySubmit(e, triggeredFrom, formType) {
     .then(res => {
       if (res.status !== 200) {
         endLoadingSelect(e.target, triggeredFrom);
+        submitSummaryBtn.removeAttribute('disabled');
+        submitSummaryBtn.style.cursor = 'pointer';
         if (res.status === 429) {
           handleInvalidDownload(
             'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
@@ -912,11 +918,15 @@ function downloadSummarySubmit(e, triggeredFrom, formType) {
       const newBlob = new Blob([blob], { type: 'image/png' });
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
       endLoadingSelect(e.target, triggeredFrom);
+      submitSummaryBtn.removeAttribute('disabled');
+      submitSummaryBtn.style.cursor = 'pointer';
       closeSummaryForm();
       trigger_gogas_summary('download');
     })
     .catch(error => {
       endLoadingSelect(e.target, triggeredFrom);
+      submitSummaryBtn.removeAttribute('disabled');
+      submitSummaryBtn.style.cursor = 'pointer';
       console.error('Error Fetch:', error);
     });
 }
@@ -938,9 +948,13 @@ function emailSummarySubmit(e, triggeredFrom, formType) {
   dataToSend.sourceReferrerDomain = sourceReferrerDomain;
   dataToSend.userInfo = userInfo;
 
-  return console.log(validationResult, 'ok');
+  console.log(validationResult, 'ok');
 
   startLoadingSelect(e.target, triggeredFrom);
+  const submitSummaryBtn = document.querySelector('#submitSummaryBtn');
+  submitSummaryBtn.setAttribute('disabled', 'true');
+  submitSummaryBtn.style.cursor = 'wait';
+
   fetch(emailSummaryUrl, {
     method: 'POST',
     headers: {
@@ -951,6 +965,8 @@ function emailSummarySubmit(e, triggeredFrom, formType) {
     .then(res => {
       if (res.status !== 200) {
         endLoadingSelect(e.target, triggeredFrom);
+        submitSummaryBtn.removeAttribute('disabled');
+        submitSummaryBtn.style.cursor = 'pointer';
         if (res.status === 429) {
           handleInvalidDownload(
             'Έχετε ξεπεράσει το όριο των κλήσεων για την προσφορά, προσπαθήστε αργότερα'
@@ -965,6 +981,8 @@ function emailSummarySubmit(e, triggeredFrom, formType) {
     .then(data => {
       if (!data) return;
       endLoadingSelect(e.target, triggeredFrom);
+      submitSummaryBtn.removeAttribute('disabled');
+      submitSummaryBtn.style.cursor = 'pointer';
       document.querySelector('.summary-success-form').style.display = 'block';
       document.querySelector('.success-msg-email').textContent = userInfo.email;
       setTimeout(() => {
@@ -975,6 +993,8 @@ function emailSummarySubmit(e, triggeredFrom, formType) {
     })
     .catch(error => {
       endLoadingSelect(e.target, triggeredFrom);
+      submitSummaryBtn.removeAttribute('disabled');
+      submitSummaryBtn.style.cursor = 'pointer';
       console.error('Error Fetch:', error);
     });
 }
