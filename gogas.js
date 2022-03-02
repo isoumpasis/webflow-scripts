@@ -223,7 +223,7 @@ function adjustContactInfoContainer() {
 }
 
 function isMobile() {
-  return window.matchMedia('screen and (max-width: 768px)').matches;
+  return window.matchMedia('screen and (max-width: 479px)').matches;
 }
 
 function showFacebookBrowserProblem(show) {
