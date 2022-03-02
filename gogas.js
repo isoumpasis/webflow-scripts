@@ -885,6 +885,8 @@ function downloadSummarySubmit(e, triggeredFrom) {
   dataToSend.sourceReferrerDomain = sourceReferrerDomain;
   dataToSend.userInfo = userInfo;
 
+  return console.log(validationResult, 'ok');
+
   startLoadingSelect(e.target, triggeredFrom);
   fetch(downloadSummaryUrl, {
     method: 'POST',
@@ -935,6 +937,8 @@ function emailSummarySubmit(e, triggeredFrom) {
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.sourceReferrerDomain = sourceReferrerDomain;
   dataToSend.userInfo = userInfo;
+
+  return console.log(validationResult, 'ok');
 
   startLoadingSelect(e.target, triggeredFrom);
   fetch(emailSummaryUrl, {

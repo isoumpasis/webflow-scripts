@@ -2985,6 +2985,8 @@ function downloadSummarySubmit(e, triggeredFrom) {
   delete dataToSend.fuelPrices;
   delete dataToSend.vehicle.identification.fetchedData;
 
+  return console.log(validationResult, 'ok');
+
   startLoadingSelect(e.target, triggeredFrom, 'download');
   fetch(downloadSummaryUrl, {
     method: 'POST',
@@ -3031,6 +3033,8 @@ function emailSummarySubmit(e, triggeredFrom) {
   dataToSend.sourceReferrerDomain = sourceReferrerDomain;
   delete dataToSend.fuelPrices;
   delete dataToSend.vehicle.identification.fetchedData;
+
+  return console.log(validationResult, 'ok');
 
   startLoadingSelect(e.target, triggeredFrom, 'email');
   fetch(emailSummaryUrl, {
