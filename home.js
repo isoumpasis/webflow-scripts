@@ -2942,13 +2942,13 @@ document
 
 document.querySelector('#downloadSummaryBtnBasket').addEventListener('click', e => {
   document.querySelector('.side-bar-close').click();
-  document.querySelector('#summary').scrollIntoView();
+  document.querySelector('#summary').scrollIntoView({ behavior: 'smooth' });
   document.querySelector('.open-download-form').click();
   // downloadSummarySubmit(e, 'basket', 'DOWNLOAD');
 });
 document.querySelector('#emailSummaryBtnBasket').addEventListener('click', e => {
   document.querySelector('.side-bar-close').click();
-  document.querySelector('#summary').scrollIntoView();
+  document.querySelector('#summary').scrollIntoView({ behavior: 'smooth' });
   document.querySelector('.open-email-form').click();
   // emailSummarySubmit(e, 'basket', 'EMAIL');
 });
