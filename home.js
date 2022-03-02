@@ -3105,7 +3105,7 @@ function validateUserForm(triggeredFrom = null, formType) {
   if (!hasResult())
     return {
       valid: false,
-      msg: 'Θα πρέπει πρώτα να επιλέξετε το όχημα σας από το Βήμα 2!'
+      msg: 'Θα πρέπει πρώτα να επιλέξετε το όχημα σας από το Βήμα 1!'
     };
   // if (!document.querySelector('.user-info-username').value)
   //   return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
