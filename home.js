@@ -2919,6 +2919,7 @@ document.querySelector('.open-download-form').addEventListener('click', e => {
   formType = 'DOWNLOAD';
   showFacebookBrowserProblem(true);
   document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
+  document.querySelector('.email-mandatory').textContent = '(προαιρετικό)';
   trigger_opened_summary_form({
     summary_type: 'download',
     is_facebook_browser: isFacebookBrowser()
@@ -2928,6 +2929,7 @@ document.querySelector('.open-email-form').addEventListener('click', e => {
   formType = 'EMAIL';
   showFacebookBrowserProblem(false);
   document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
+  document.querySelector('.email-mandatory').textContent = '(*υποχρεωτικό)';
   trigger_opened_summary_form({
     summary_type: 'email',
     is_facebook_browser: isFacebookBrowser()
@@ -3018,7 +3020,7 @@ function downloadSummarySubmit(e, triggeredFrom) {
 }
 
 function emailSummarySubmit(e, triggeredFrom) {
-  const validationResult = validateUserForm();
+  const validationResult = validateUserForm(triggeredFrom);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
@@ -3095,14 +3097,14 @@ function validateUserForm(triggeredFrom = null) {
       valid: false,
       msg: 'Θα πρέπει πρώτα να επιλέξετε το όχημα σας από το Βήμα 2!'
     };
-  if (!document.querySelector('.user-info-username').value)
-    return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
-  if (!isEmail(document.querySelector('.user-info-email').value))
+  // if (!document.querySelector('.user-info-username').value)
+  //   return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
+
+  if (triggeredFrom === 'EMAIL' && !isEmail(document.querySelector('.user-info-email').value))
     return { valid: false, msg: 'Απαιτείται έγκυρο email' };
-  if (
-    isNaN(document.querySelector('.user-info-phone').value) ||
-    document.querySelector('.user-info-phone').value.length != 10
-  )
+
+  const userPhone = document.querySelector('.user-info-phone').value;
+  if (userPhone && (isNaN(userPhone) || userPhone.length != 10))
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
   if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
   return { valid: true };
