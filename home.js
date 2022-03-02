@@ -3110,7 +3110,7 @@ function validateUserForm(triggeredFrom = null) {
   const userPhone = document.querySelector('.user-info-phone').value;
   if (userPhone && (isNaN(userPhone) || userPhone.length != 10))
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
-  if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
+  // if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
   return { valid: true };
 }
 
@@ -3479,7 +3479,7 @@ function validateContactForm() {
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
   if (!document.querySelector('#contactMsg').value)
     return { valid: false, msg: 'Παρακαλούμε γράψτε πρώτα το μήνυμα σας' };
-  if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
+  // if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
   return { valid: true };
 }
 
