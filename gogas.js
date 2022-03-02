@@ -222,6 +222,10 @@ function adjustContactInfoContainer() {
   initUserInfo();
 }
 
+function isMobile() {
+  return window.matchMedia('screen and (max-width: 768px)').matches;
+}
+
 function showFacebookBrowserProblem(show) {
   if (isFacebookBrowser()) {
     document.querySelector('.facebook-browser-div').style.display = show ? 'block' : 'none';
