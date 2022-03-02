@@ -843,7 +843,7 @@ document.querySelector('#openEmailForm').addEventListener('click', e => {
   formType = 'EMAIL';
   showFacebookBrowserProblem(false);
   document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
-  document.querySelector('.email-mandatory').textContent = '*';
+  document.querySelector('.email-mandatory').textContent = '(*υποχρεωτικό)';
 
   trigger_opened_summary_form({
     summary_type: 'email',
