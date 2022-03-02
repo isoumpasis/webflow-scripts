@@ -2942,10 +2942,10 @@ document
 
 document
   .querySelector('#downloadSummaryBtnBasket')
-  .addEventListener('click', e => downloadSummarySubmit(e, 'basket'));
+  .addEventListener('click', e => downloadSummarySubmit(e, 'basket', 'DOWNLOAD'));
 document
   .querySelector('#emailSummaryBtnBasket')
-  .addEventListener('click', e => emailSummarySubmit(e, 'basket'));
+  .addEventListener('click', e => emailSummarySubmit(e, 'basket', 'EMAIL'));
 
 function handleSummarySubmit(e, triggeredFrom) {
   e.preventDefault();
