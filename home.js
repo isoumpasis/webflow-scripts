@@ -2285,6 +2285,7 @@ function getEasyPaySystem(selectedSystemDiv) {
     system => system.name === name
   ).priceNoVAT;
   const systemLogoUrl = systemFullKitLogoUrlDict[name].logo[userSelections.selectedFuel];
+  console.log({ name, systemLogoUrl });
   const systemLogoUrlPng = systemFullKitLogoUrlDict[name].pngLogo[userSelections.selectedFuel];
   const fullKitUrl = systemFullKitLogoUrlDict[name].fullKit[userSelections.selectedFuel];
   const cylsDescr = systemFullKitLogoUrlDict[name].cylsDescr;
