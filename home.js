@@ -209,8 +209,8 @@ const systemFullKitLogoUrlDict = {
       cng: systemFullKitLogoUrlPrefix + '60ef6754af4e784afb8330cf_4cyl-cng-smart-exr.jpg'
     },
     logo: {
-      lpg: systemFullKitLogoUrlPrefix + '609c30dacc06e8cd8c6ea9e5_smart-exrlogo-03.svg',
-      cng: systemFullKitLogoUrlPrefix + '609c30dacc06e8cd8c6ea9e5_smart-exrlogo-03.svg'
+      lpg: systemFullKitLogoUrlPrefix + '622a02bdd112ce17bceea736_smart-exr-flat-03.svg',
+      cng: systemFullKitLogoUrlPrefix + '622a02bdd112ce17bceea736_smart-exr-flat-03.svg'
     },
     pngLogo: {
       lpg: systemFullKitLogoUrlPrefix + '6105218ad75db243ceeb475a_exr-logo.png',
