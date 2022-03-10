@@ -2885,8 +2885,18 @@ function calcResult(allowedToTrigger = true) {
 }
 
 function calcCoverWidth(slider) {
-  let offset = (slider.max - slider.value) / (slider.max - slider.min) > 0.2 ? 0 : 1.5;
-  return ((slider.max - slider.value) / (slider.max - slider.min)) * 100 + offset;
+  const sliderMaxMin = (slider.max - slider.value) / (slider.max - slider.min);
+  let offset;
+  if (isFirefox()) {
+    offset = sliderMaxMin > 0.2 ? 0 : 0;
+  } else {
+    offset = sliderMaxMin > 0.2 ? 0 : 1.5;
+  }
+  return sliderMaxMin * 100 + offset;
+}
+
+function isFirefox() {
+  return navigator.userAgent.indexOf('Firefox') !== -1;
 }
 
 /* Calculator END */
