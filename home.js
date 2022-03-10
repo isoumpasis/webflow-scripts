@@ -2888,7 +2888,7 @@ function calcCoverWidth(slider) {
   const sliderMaxMin = (slider.max - slider.value) / (slider.max - slider.min);
   let offset;
   if (isFirefox()) {
-    offset = sliderMaxMin > 0.2 ? 10 : 5;
+    offset = sliderMaxMin > 0.2 ? 0 : -10;
   } else {
     offset = sliderMaxMin > 0.2 ? 0 : 1.5;
   }
