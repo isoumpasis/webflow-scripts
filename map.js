@@ -5,10 +5,18 @@ const lovatoIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c316426410dd24bb4_lovato-icon.svg';
 const lovatoImagesIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c6a2bd37fda58d46f_lovato-icon-photo.svg';
+const lovatoPremiumIconUrl =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fdaba1f774b4bdca62024_lvt-star.svg';
+const lovatoPremiumImagesIconUrl =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fdb302095ef883cced98c_lvt-star-photo.svg';
 const gogasIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fda977980b6dec98b7bd1_go-gas.svg';
 const gogasImagesIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fdaa4fc672a46a2a8c3fa_go-gas-photo.svg';
+const gogasPremiumIconUrl =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fdaaa3c64c4852e3cd1eb_go-gas-star.svg';
+const gogasPremiumImagesIconUrl =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fdb25b2137d845fb5986e_go-gas-star-photo.svg';
 
 const markerClustererIcon =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6059ab2542758022d1e784de_m1.png';
@@ -987,9 +995,12 @@ function isMobile() {
 
 function getIconUrl(props, type = 'lovato') {
   if (props.imgs.length) {
-    return type === 'lovato' ? lovatoImagesIconUrl : gogasImagesIconUrl;
+    if (pin.isPremium)
+      return type === 'lovato' ? lovatoPremiumImagesIconUrl : gogasPremiumImagesIconUrl;
+    else return type === 'lovato' ? lovatoImagesIconUrl : gogasImagesIconUrl;
   } else {
-    return type === 'lovato' ? lovatoIconUrl : gogasIconUrl;
+    if (pin.isPremium) return type === 'lovato' ? lovatoPremiumIconUrl : gogasPremiumIconUrl;
+    else return type === 'lovato' ? lovatoIconUrl : gogasIconUrl;
   }
 }
 
