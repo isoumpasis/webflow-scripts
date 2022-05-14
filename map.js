@@ -1,12 +1,15 @@
-const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
+// const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
+const urlCachedPins = 'localhost:1917/map/pins/cached';
+
 const lovatoIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c316426410dd24bb4_lovato-icon.svg';
-const lovatoPremiumIconUrl =
+const lovatoImagesIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c6a2bd37fda58d46f_lovato-icon-photo.svg';
 const gogasIconUrl =
-  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c4a88b81ca8f9462d_gogas-icon.svg';
-const gogasPremiumIconUrl =
-  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c2efc825cabdf0a36_gogas-icon-photo.svg';
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fda977980b6dec98b7bd1_go-gas.svg';
+const gogasImagesIconUrl =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fdaa4fc672a46a2a8c3fa_go-gas-photo.svg';
+
 const markerClustererIcon =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6059ab2542758022d1e784de_m1.png';
 
@@ -984,7 +987,7 @@ function isMobile() {
 
 function getIconUrl(props, type = 'lovato') {
   if (props.imgs.length) {
-    return type === 'lovato' ? lovatoPremiumIconUrl : gogasPremiumIconUrl;
+    return type === 'lovato' ? lovatoImagesIconUrl : gogasImagesIconUrl;
   } else {
     return type === 'lovato' ? lovatoIconUrl : gogasIconUrl;
   }
