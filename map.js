@@ -995,11 +995,11 @@ function isMobile() {
 
 function getIconUrl(props, type = 'lovato') {
   if (props.imgs.length) {
-    if (pin.isPremium)
+    if (props.isPremium)
       return type === 'lovato' ? lovatoPremiumImagesIconUrl : gogasPremiumImagesIconUrl;
     else return type === 'lovato' ? lovatoImagesIconUrl : gogasImagesIconUrl;
   } else {
-    if (pin.isPremium) return type === 'lovato' ? lovatoPremiumIconUrl : gogasPremiumIconUrl;
+    if (props.isPremium) return type === 'lovato' ? lovatoPremiumIconUrl : gogasPremiumIconUrl;
     else return type === 'lovato' ? lovatoIconUrl : gogasIconUrl;
   }
 }
