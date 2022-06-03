@@ -932,10 +932,11 @@ async function urlParamsConfig() {
     });
     filterMarkers();
   } else {
-    const labels = document.querySelectorAll('.f-label div');
-    labels[0].classList.add('w--redirected-checked');
-    labels[0].nextElementSibling.checked = true;
-    filterMarkers();
+    //run lovato systems filter on init
+    //   const labels = document.querySelectorAll('.f-label div');
+    //   labels[0].classList.add('w--redirected-checked');
+    //   labels[0].nextElementSibling.checked = true;
+    //   filterMarkers();
   }
 
   if (urlParams.has('geometry')) {
