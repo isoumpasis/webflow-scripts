@@ -909,7 +909,6 @@ async function urlParamsConfig() {
   let gps, filters, geometry;
   if (urlParams.has('gps')) {
     gps = urlParams.get('gps');
-    const searchInput = document.querySelector('#searchInput');
     try {
       const res = await geocoderSolution(gps);
       map.setZoom(isMobile() ? gpsZoomMobile : gpsZoom);
@@ -931,6 +930,11 @@ async function urlParamsConfig() {
       labels[filter - 1].classList.add('w--redirected-checked');
       labels[filter - 1].nextElementSibling.checked = true;
     });
+    filterMarkers();
+  } else {
+    const labels = document.querySelectorAll('.f-label div');
+    labels[0].classList.add('w--redirected-checked');
+    labels[0].nextElementSibling.checked = true;
     filterMarkers();
   }
 
