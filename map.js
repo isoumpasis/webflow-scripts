@@ -883,6 +883,7 @@ function filterMarkers() {
   if (!checkedLabels.length) markers.map(m => m.setVisible(true));
   else markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
 
+  console.log('filtermarkers ', checkedLabels);
   if (!checkedLabels.length) {
     markers.map(m => m.setIcon({ ...m.getIcon(), url: getIconUrl(m.props, 'nofilters') }));
   } else {
