@@ -1,10 +1,8 @@
 const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
 // const urlCachedPins = 'http://localhost:1917/map/pins/cached';
 
-// const lovatoIconUrl =
-//   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c316426410dd24bb4_lovato-icon.svg';
 const lovatoIconUrl =
-  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/629b1453550865e61d971e07_gogas-white-06.svg';
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c316426410dd24bb4_lovato-icon.svg';
 const lovatoImagesIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c6a2bd37fda58d46f_lovato-icon-photo.svg';
 const lovatoPremiumIconUrl =
@@ -19,6 +17,10 @@ const gogasPremiumIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fdaaa3c64c4852e3cd1eb_go-gas-star.svg';
 const gogasPremiumImagesIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fdb25b2137d845fb5986e_go-gas-star-photo.svg';
+const gogasWhiteImagesIconUrl =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/629b1a5f4ed1a81b7521861c_gogas-pin-photo-07.svg';
+const gogasWhiteIconUrl =
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/629b1a5cb35cbe239ec4c5e3_gogas-pin-06.svg';
 
 const markerClustererIcon =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/6059ab2542758022d1e784de_m1.png';
