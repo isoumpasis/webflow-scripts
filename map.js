@@ -1,8 +1,10 @@
 const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
 // const urlCachedPins = 'http://localhost:1917/map/pins/cached';
 
+// const lovatoIconUrl =
+//   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c316426410dd24bb4_lovato-icon.svg';
 const lovatoIconUrl =
-  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c316426410dd24bb4_lovato-icon.svg';
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/629b1453550865e61d971e07_gogas-white-06.svg';
 const lovatoImagesIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c6a2bd37fda58d46f_lovato-icon-photo.svg';
 const lovatoPremiumIconUrl =
