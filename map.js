@@ -1011,6 +1011,7 @@ function isMobile() {
 }
 
 function getIconUrl(props, type = 'lovato') {
+  console.log(props, type);
   if (type === 'nofilters') {
     if (!props.lovatoServices.lovatoSystems && props.lovatoServices.gogasTanks) {
       return props.images.length ? gogasWhiteImagesIconUrl : gogasWhiteIconUrl;
