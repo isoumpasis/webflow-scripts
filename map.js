@@ -1010,12 +1010,12 @@ function getIconUrl(props, type = 'lovato') {
   console.log(props, type);
   if (type === 'nofilters') {
     if (!props.lovatoServices.lovatoSystems && props.lovatoServices.gogasTanks) {
-      return props.images.length ? gogasWhiteImagesIconUrl : gogasWhiteIconUrl;
+      return props.imgs.length ? gogasWhiteImagesIconUrl : gogasWhiteIconUrl;
     } else {
       if (props.isPremium) {
-        return props.images.length ? lovatoPremiumImagesIconUrl : lovatoPremiumIconUrl;
+        return props.imgs.length ? lovatoPremiumImagesIconUrl : lovatoPremiumIconUrl;
       } else {
-        return props.images.length ? lovatoImagesIconUrl : lovatoIconUrl;
+        return props.imgs.length ? lovatoImagesIconUrl : lovatoIconUrl;
       }
     }
   }
