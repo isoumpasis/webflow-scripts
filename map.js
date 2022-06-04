@@ -877,19 +877,22 @@ function initFilters() {
 }
 
 function filterMarkers() {
-  const labels = document.querySelectorAll('#filterForm .f-label');
-  const checkedLabels = [...labels].filter(l => l.querySelector('input').checked);
+  const checkedLabels = getCheckedFilters();
 
   if (!checkedLabels.length) markers.map(m => m.setVisible(true));
   else markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
 
-  if (
-    checkedLabels.some(l => l.id === 'gogasTanks') &&
-    checkedLabels.every(l => l.id !== 'lovatoSystems')
-  ) {
-    markers.map(m => m.setIcon({ ...m.getIcon(), url: getIconUrl(m.props, 'gogas') }));
+  if (!checkedLabels.length) {
+    markers.map(m => m.setIcon({ ...m.getIcon(), url: getIconUrl(m.props, 'nofilters') }));
   } else {
-    markers.map(m => m.setIcon({ ...m.getIcon(), url: getIconUrl(m.props) }));
+    if (
+      checkedLabels.some(l => l.id === 'gogasTanks' || l.id === 'gogasGuarantee') &&
+      checkedLabels.every(l => l.id !== 'lovatoSystems')
+    ) {
+      markers.map(m => m.setIcon({ ...m.getIcon(), url: getIconUrl(m.props, 'gogas') }));
+    } else {
+      markers.map(m => m.setIcon({ ...m.getIcon(), url: getIconUrl(m.props) }));
+    }
   }
 
   markerClusterer.repaint();
@@ -897,6 +900,11 @@ function filterMarkers() {
   infoWindow.close();
   if (selectedMarker) selectedMarker.setAnimation(null);
   selectedMarker = null;
+}
+
+function getCheckedFilters() {
+  const labels = document.querySelectorAll('#filterForm .f-label');
+  return [...labels].filter(l => l.querySelector('input').checked);
 }
 
 function setMarkerVisibility(marker, labels) {
@@ -1003,13 +1011,30 @@ function isMobile() {
 }
 
 function getIconUrl(props, type = 'lovato') {
+  if (type === 'nofilters') {
+    if (!props.lovatoServices.lovatoSystems && props.lovatoServices.gogasTanks) {
+      return props.images.length ? gogasWhiteImagesIconUrl : gogasWhiteIconUrl;
+    } else {
+      if (props.isPremium) {
+        return props.images.length ? lovatoPremiumImagesIconUrl : lovatoPremiumIconUrl;
+      } else {
+        return props.images.length ? lovatoImagesIconUrl : lovatoIconUrl;
+      }
+    }
+  }
+
   if (props.imgs.length) {
-    if (props.isPremium)
+    if (props.isPremium) {
       return type === 'lovato' ? lovatoPremiumImagesIconUrl : gogasPremiumImagesIconUrl;
-    else return type === 'lovato' ? lovatoImagesIconUrl : gogasImagesIconUrl;
+    } else {
+      return type === 'lovato' ? lovatoImagesIconUrl : gogasImagesIconUrl;
+    }
   } else {
-    if (props.isPremium) return type === 'lovato' ? lovatoPremiumIconUrl : gogasPremiumIconUrl;
-    else return type === 'lovato' ? lovatoIconUrl : gogasIconUrl;
+    if (props.isPremium) {
+      return type === 'lovato' ? lovatoPremiumIconUrl : gogasPremiumIconUrl;
+    } else {
+      return type === 'lovato' ? lovatoIconUrl : gogasIconUrl;
+    }
   }
 }
 
