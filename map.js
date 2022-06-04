@@ -877,7 +877,8 @@ function initFilters() {
 }
 
 function filterMarkers() {
-  const checkedLabels = getCheckedFilters();
+  const labels = document.querySelectorAll('#filterForm .f-label');
+  const checkedLabels = [...labels].filter(l => l.querySelector('input').checked);
 
   if (!checkedLabels.length) markers.map(m => m.setVisible(true));
   else markers.map(m => m.setVisible(setMarkerVisibility(m, labels)));
@@ -900,11 +901,6 @@ function filterMarkers() {
   infoWindow.close();
   if (selectedMarker) selectedMarker.setAnimation(null);
   selectedMarker = null;
-}
-
-function getCheckedFilters() {
-  const labels = document.querySelectorAll('#filterForm .f-label');
-  return [...labels].filter(l => l.querySelector('input').checked);
 }
 
 function setMarkerVisibility(marker, labels) {
