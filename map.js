@@ -151,7 +151,7 @@ async function initMap() {
     return new google.maps.Marker({
       position: cachedPin.geometry,
       icon: {
-        url: getIconUrl(cachedPin.properties),
+        url: getIconUrl(cachedPin.properties, 'nofilters'),
         scaledSize: new google.maps.Size(60, 60),
         origin: new google.maps.Point(0, 0)
       },
