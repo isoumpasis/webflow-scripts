@@ -778,7 +778,7 @@ function initDOMEvents() {
 
   //Geolocation Btn Click
   document.querySelectorAll('.my-location-btn').forEach(el => {
-    google.maps.event.addDomListener(el, 'click', async () => {
+    el.addEventListener('click', async () => {
       try {
         const currentLatLng = await getCurrentPosition();
         const myLatLng = {
