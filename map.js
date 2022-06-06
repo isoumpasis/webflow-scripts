@@ -259,32 +259,32 @@ async function initMap() {
     );
   });
 
-  google.maps.event.addListener(markerClusterer, 'clusterclick', cluster => {
-    infoWindow.close();
-    if (selectedMarker) {
-      selectedMarker.setAnimation(null);
-    }
-    selectedMarker = null;
-    map.setZoom(zoomLevelsDependedOnZoom[map.getZoom()]);
-    //map.setZoom(map.getZoom() + 2);
-    map.setCenter(cluster.getCenter());
-  });
+  // google.maps.event.addListener(markerClusterer, 'clusterclick', cluster => {
+  //   infoWindow.close();
+  //   if (selectedMarker) {
+  //     selectedMarker.setAnimation(null);
+  //   }
+  //   selectedMarker = null;
+  //   map.setZoom(zoomLevelsDependedOnZoom[map.getZoom()]);
+  //   //map.setZoom(map.getZoom() + 2);
+  //   map.setCenter(cluster.getCenter());
+  // });
 
-  google.maps.event.addListener(markerClusterer, 'mouseover', cluster => {
-    infoWindow.close();
-    if (selectedMarker) {
-      selectedMarker.setAnimation(null);
-    }
-    selectedMarker = null;
-    let label = cluster.clusterIcon_.div_.querySelector('span');
-    label.classList.add('cluster-hover');
-    cluster.clusterIcon_.div_.classList.add('grow');
-  });
-  google.maps.event.addListener(markerClusterer, 'mouseout', cluster => {
-    let label = cluster.clusterIcon_.div_.querySelector('span');
-    label.classList.remove('cluster-hover');
-    cluster.clusterIcon_.div_.classList.add('grow');
-  });
+  // google.maps.event.addListener(markerClusterer, 'mouseover', cluster => {
+  //   infoWindow.close();
+  //   if (selectedMarker) {
+  //     selectedMarker.setAnimation(null);
+  //   }
+  //   selectedMarker = null;
+  //   let label = cluster.clusterIcon_.div_.querySelector('span');
+  //   label.classList.add('cluster-hover');
+  //   cluster.clusterIcon_.div_.classList.add('grow');
+  // });
+  // google.maps.event.addListener(markerClusterer, 'mouseout', cluster => {
+  //   let label = cluster.clusterIcon_.div_.querySelector('span');
+  //   label.classList.remove('cluster-hover');
+  //   cluster.clusterIcon_.div_.classList.add('grow');
+  // });
 
   infoWindow.addListener('closeclick', () => {
     if (selectedMarker) {
