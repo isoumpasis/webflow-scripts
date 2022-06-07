@@ -14,9 +14,9 @@ const gogasIconUrl =
 const gogasImagesIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fdaa4fc672a46a2a8c3fa_go-gas-photo.svg';
 const gogasPremiumIconUrl =
-  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fdaaa3c64c4852e3cd1eb_go-gas-star.svg';
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/629f38116b62208142bb5228_gogas.svg';
 const gogasPremiumImagesIconUrl =
-  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/627fdb25b2137d845fb5986e_go-gas-star-photo.svg';
+  'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/629f3811f5f02982cddf44d0_gogas_star.svg';
 const gogasWhiteImagesIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/629b1a5f4ed1a81b7521861c_gogas-pin-photo-07.svg';
 const gogasWhiteIconUrl =
