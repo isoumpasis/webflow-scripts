@@ -1024,7 +1024,7 @@ function validateUserForm(formType) {
   const userEmail = document.querySelector('.user-info-email').value;
   if (userEmail && !isEmail(userEmail)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
 
-  console.log(formType, userEmail, isEmail(userEmail));
+  // console.log(formType, userEmail, isEmail(userEmail));
   if (formType === 'EMAIL' && !isEmail(userEmail))
     return { valid: false, msg: 'Απαιτείται έγκυρο email' };
 
