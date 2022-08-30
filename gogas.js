@@ -38,13 +38,21 @@ const typeContainerIdDict = {
   ΚΥΛΙΝΔΡΙΚΗ: 'kylindrikhContainer'
 };
 
+// const tankImgUrlWithLotterDict = {
+//   ΕΣΩΤΕΡΙΚΗ:
+//     'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f9ee45e6ea190e6455e9f7_internal-tank-wmv.jpg',
+//   ΕΞΩΤΕΡΙΚΗ:
+//     'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f9ee7fbd49ae0779fc2cad_externall-tank-wmv.jpg',
+//   ΚΥΛΙΝΔΡΙΚΗ:
+//     'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f9ee7fc8df88ee62a068d3_cyl-tank-wmv.jpg'
+// };
 const tankImgUrlDict = {
   ΕΣΩΤΕΡΙΚΗ:
-    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f9ee45e6ea190e6455e9f7_internal-tank-wmv.jpg',
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/630e0c04a3b2846bb304b384_int-tank-with-mv.jpg',
   ΕΞΩΤΕΡΙΚΗ:
-    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f9ee7fbd49ae0779fc2cad_externall-tank-wmv.jpg',
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/630e0c04c9c0546c24044622_ext-tank-with-mv.jpg',
   ΚΥΛΙΝΔΡΙΚΗ:
-    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/60f9ee7fc8df88ee62a068d3_cyl-tank-wmv.jpg'
+    'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/630e0c04458984ce820047bb_cyl-tank-with-mv.jpg'
 };
 
 const preferredStorage = localStorage;
