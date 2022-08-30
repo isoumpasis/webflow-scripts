@@ -7,14 +7,13 @@ const mapBaseUrl = baseUrl + mapUrl;
 const serverBaseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
-let downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/download/gogas';
-// const downloadSummaryUrl = 'http://localhost:1917/summaries/download/gogas';
-let emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/gogas';
-// const emailSummaryUrl = 'http://localhost:1917/summaries/email/gogas';
+// let downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/download/gogas';
+const downloadSummaryUrl = 'http://localhost:1917/summaries/download/gogas';
+// let emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/gogas';
+const emailSummaryUrl = 'http://localhost:1917/summaries/email/gogas';
 // const urlContactForm = 'http://localhost:1917/contact/';
 const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
 const baseDateUrl = 'https://lovatohellas.herokuapp.com/lottery/base-date';
-// const baseDateUrl = 'http://localhost:1917/lottery/base-date';
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
@@ -885,7 +884,7 @@ function downloadSummarySubmit(e, triggeredFrom, formType) {
   dataToSend.sourceReferrerDomain = sourceReferrerDomain;
   dataToSend.userInfo = userInfo;
 
-  console.log(validationResult, 'ok');
+  // console.log(validationResult, 'ok');
 
   startLoadingSelect(e.target, triggeredFrom);
   const submitSummaryBtn = document.querySelector('#submitSummaryBtn');

@@ -1,8 +1,8 @@
 /* System Identification */
 const baseUrl = location.origin;
 const mapUrl = '/stores';
-// let serverUrl = 'https://lovatohellas.herokuapp.com/';
-let serverUrl = 'http://localhost:1917/';
+let serverUrl = 'https://lovatohellas.herokuapp.com/';
+// let serverUrl = 'http://localhost:1917/';
 const urlYears = serverUrl + 'vehicleDB/get/years';
 const urlModels = serverUrl + 'vehicleDB/get/models';
 const urlDescriptions = serverUrl + 'vehicleDB/get/descriptions';
@@ -3000,7 +3000,7 @@ function downloadSummarySubmit(e, triggeredFrom, formType) {
   delete dataToSend.fuelPrices;
   delete dataToSend.vehicle.identification.fetchedData;
 
-  console.log(validationResult, 'ok');
+  // console.log(validationResult, 'ok');
 
   startLoadingSelect(e.target, triggeredFrom, 'download');
   const submitSummaryBtn = document.querySelector('#submitSummaryBtn');
@@ -3606,7 +3606,7 @@ function initLotteryCountdown() {
 
         return;
       }
-      console.log('Base Date:', data);
+      // console.log('Base Date:', data);
       baseDate = new Date(data);
       // baseDate = new Date(new Date().getTime() + 60000);
       showBaseDate();
