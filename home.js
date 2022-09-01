@@ -3030,7 +3030,8 @@ function downloadSummarySubmit(e, triggeredFrom, formType) {
     })
     .then(blob => {
       if (!blob) return;
-      const newBlob = new Blob([blob], { type: 'image/png' });
+      const newBlob = new Blob([blob], { type: 'application/pdf' });
+      // const newBlob = new Blob([blob], { type: 'image/png' });
       downloadFile(newBlob, 'Η προσφορά μου -' + dataToSend.userInfo.username);
       endLoadingSelect(e.target, triggeredFrom, 'download');
       submitSummaryBtn.removeAttribute('disabled');
@@ -3175,8 +3176,8 @@ function downloadFile(blob, fileName) {
   }
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
-  // link.download = fileName + '.pdf';
-  link.download = fileName + '.png';
+  link.download = fileName + '.pdf';
+  // link.download = fileName + '.png';
   document.body.append(link);
   link.click();
   link.remove();
