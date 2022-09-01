@@ -7,11 +7,10 @@ const mapBaseUrl = baseUrl + mapUrl;
 const serverBaseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
 const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
 const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
-let downloadSummaryUrl = 'https://lovatohellas-dev.herokuapp.com/summaries/download/gogas';
+let downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/download/gogas';
 // const downloadSummaryUrl = 'http://localhost:1917/summaries/download/gogas';
-let emailSummaryUrl = 'https://lovatohellas-dev.herokuapp.com/summaries/email/gogas';
+let emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/gogas';
 // const emailSummaryUrl = 'http://localhost:1917/summaries/email/gogas';
-// const urlContactForm = 'http://localhost:1917/contact/';
 const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
 const baseDateUrl = 'https://lovatohellas.herokuapp.com/lottery/base-date';
 
@@ -1159,7 +1158,7 @@ function initLotteryCountdown() {
 
         return;
       }
-      console.log('Base Date:', data);
+      // console.log('Base Date:', data);
       baseDate = new Date(data);
       showBaseDate();
       startCountdown();
