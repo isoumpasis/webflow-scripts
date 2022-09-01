@@ -3059,7 +3059,7 @@ function emailSummarySubmit(e, triggeredFrom, formType) {
   delete dataToSend.fuelPrices;
   delete dataToSend.vehicle.identification.fetchedData;
 
-  console.log(validationResult, 'ok');
+  // console.log(validationResult, 'ok');
 
   startLoadingSelect(e.target, triggeredFrom, 'email');
   const submitSummaryBtn = document.querySelector('#submitSummaryBtn');
