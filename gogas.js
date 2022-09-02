@@ -1,5 +1,5 @@
 /* System Identification */
-let serverUrl = 'https://lovatohellas-dev.herokuapp.com/';
+let serverUrl = 'https://lovatohellas.herokuapp.com/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlLitres = '/litres';
