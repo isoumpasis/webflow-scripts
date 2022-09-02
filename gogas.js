@@ -1,18 +1,17 @@
 /* System Identification */
+let serverUrl = 'https://lovatohellas-dev.herokuapp.com/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlLitres = '/litres';
 const urlDimensions = '/dimensions';
 const mapBaseUrl = baseUrl + mapUrl;
-const serverBaseUrl = 'https://lovatohellas.herokuapp.com/gogasDB/get';
-const closestUrl = 'https://lovatohellas.herokuapp.com/map/pins/closest';
-const numPlaceUrl = 'https://lovatohellas.herokuapp.com/map/pins/numPlace';
-let downloadSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/download/gogas';
-// const downloadSummaryUrl = 'http://localhost:1917/summaries/download/gogas';
-let emailSummaryUrl = 'https://lovatohellas.herokuapp.com/summaries/email/gogas';
-// const emailSummaryUrl = 'http://localhost:1917/summaries/email/gogas';
-const urlContactForm = 'https://lovatohellas.herokuapp.com/contact/';
-// const baseDateUrl = 'https://lovatohellas.herokuapp.com/lottery/base-date';
+const serverBaseUrl = serverUrl + 'gogasDB/get';
+const closestUrl = serverUrl + 'map/pins/closest';
+const numPlaceUrl = serverUrl + 'map/pins/numPlace';
+const downloadSummaryUrl = serverUrl + 'summaries/download/gogas';
+const emailSummaryUrl = serverUrl + 'summaries/email/gogas';
+const urlContactForm = serverUrl + 'contact';
+// const baseDateUrl = serverUrl + 'lottery/base-date'
 
 const typeSelect = document.querySelector('#typeSelect');
 const litresSelect = document.querySelector('#litresSelect');
