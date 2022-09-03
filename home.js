@@ -168,6 +168,7 @@ const makeImgDict = {
   LEXUS: '6077f60b02c7ef3588ff4bed_Lexus.png',
   MAZDA: '6077f60bac4c25e840296a07_Mazda.png',
   'MERCEDES-BENZ': '6077f60b2cf4c1fc9aeb4a97_Mercedes-Benz.png',
+  MG: '63132f4ce66c6bff8c0bdbba_MG.png',
   MINI: '6077f60dec0785fc99826f63_Mini.png',
   MITSUBISHI: '6077f60df4fa193ad096cf91_Mitsubishi.png',
   NISSAN: '6077f60c3f6057d3245ac3fd_Nissan.png',
