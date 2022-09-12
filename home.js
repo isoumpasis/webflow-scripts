@@ -4174,6 +4174,7 @@ function easyPayFileUploader() {
   });
 
   document.querySelector('#easyPayFileUploaderSubmit').addEventListener('click', () => {
+    console.log('cllicked submit');
     const validationResult = validateUserForm(null, 'EMAIL');
     if (!validationResult.valid) return displayEasyPayMsg('error', validationResult.msg);
 
