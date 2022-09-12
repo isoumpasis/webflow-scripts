@@ -283,7 +283,6 @@ input[type='range']::-ms-thumb:hover {
   }
 }
 #fileUploadContainer {
-  width: 80%;
   border: 2px solid blue;
   border-radius: 10px;
   cursor: pointer;
@@ -291,10 +290,9 @@ input[type='range']::-ms-thumb:hover {
   padding: 50px;
   margin: 10px auto;
   display: flex;
-  gap: 20px;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
   position: relative;
   -webkit-transition: border 500ms ease-out;
