@@ -4077,14 +4077,26 @@ const dropzoneErrorDict = {
 };
 let myDropzone;
 const uploadProgressBar = document.querySelector('.total-progress .progress-bar');
+const easyPayFormEl = document.querySelector('#easyPayForm');
+const easyPayFormErrorEl = document.querySelector('.easy-pay-form-error');
 
 function easyPayFileUploader() {
+  document.querySelector('#openEasyPayFormBtn').addEventListener('click', () => {
+    if (!hasResult()) {
+      easyPayFormEl.style.display = 'none';
+      easyPayFormErrorEl.style.display = 'block';
+      setTimeout(() => (easyPayFormErrorEl.style.display = 'none'), 2000);
+      return;
+    }
+    easyPayFormErrorEl.style.display = 'none';
+    easyPayFormEl.style.display = 'block';
+  });
+
   myDropzone = new Dropzone('#fileUploadContainer', {
     url: easyPayFileUploaderUrl,
-    // params: { data: JSON.stringify(prepareDataToSend()) },
     paramName: () => 'file',
     autoQueue: false,
-    maxFilesize: EASY_PAY_MAX_FILE_SIZE, // MB,
+    maxFilesize: EASY_PAY_MAX_FILE_SIZE,
     maxFiles: EASY_PAY_MAX_FILES,
     parallelUploads: EASY_PAY_MAX_FILES,
     uploadMultiple: true,
@@ -4127,6 +4139,11 @@ function easyPayFileUploader() {
   });
 
   myDropzone.on('sendingmultiple', function (file, xhr, formData) {
+    if (!myDropzone.files.length) {
+      displayEasyPayMsg('error', 'Παρακαλώ προσθέστε τα αρχεία που απαιτούνται.');
+      return;
+    }
+
     formData.append('data', JSON.stringify(prepareDataToSend()));
     // Show the total progress bar when upload starts
 
