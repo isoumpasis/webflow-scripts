@@ -290,9 +290,9 @@ input[type='range']::-ms-thumb:hover {
   padding: 50px;
   margin: 10px auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   position: relative;
   -webkit-transition: border 500ms ease-out;
