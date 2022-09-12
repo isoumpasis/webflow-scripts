@@ -4176,8 +4176,10 @@ function easyPayFileUploader() {
   document.querySelector('#easyPayFileUploaderSubmit').addEventListener('click', () => {
     console.log('cllicked submit');
     const validationResult = validateUserForm(null, 'EMAIL');
+    console.log(validationResult);
     if (!validationResult.valid) return displayEasyPayMsg('error', validationResult.msg);
 
+    console.log('valid!, enqueue');
     myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
   });
 }
