@@ -1,6 +1,6 @@
 /* System Identification */
-let serverUrl = 'https://lovatohellas.herokuapp.com/';
-// let serverUrl = 'http://localhost:1917/';
+// let serverUrl = 'https://lovatohellas.herokuapp.com/';
+let serverUrl = 'http://localhost:1917/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlYears = serverUrl + 'vehicleDB/get/years';
@@ -516,6 +516,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initPulses();
   // configGtag();
+
+  easyPayFileUploader();
 });
 
 // function configGtag() {
@@ -659,6 +661,10 @@ function initUserInfo() {
     el.value = userInfo.address || '';
     el.autocomplete = 'street-address';
   });
+  [...document.querySelectorAll('.user-info-comment')].map(el => {
+    el.value = userInfo.comment || '';
+  });
+  // userInfo.category = 0;
 
   [...document.querySelectorAll('.user-info-username')].map(element =>
     element.addEventListener('input', e => {
@@ -678,6 +684,7 @@ function initUserInfo() {
       saveUserInfo();
     })
   );
+
   [...document.querySelectorAll('.user-info-phone')].map(element =>
     element.addEventListener('input', e => {
       [...document.querySelectorAll('.user-info-phone')].map(el => {
@@ -693,6 +700,15 @@ function initUserInfo() {
         el.value = e.target.value;
       });
       userInfo.address = e.target.value;
+      saveUserInfo();
+    })
+  );
+  [...document.querySelectorAll('.user-info-comment')].map(element =>
+    element.addEventListener('input', e => {
+      [...document.querySelectorAll('.user-info-comment')].map(el => {
+        el.value = e.target.value;
+      });
+      userInfo.comment = e.target.value;
       saveUserInfo();
     })
   );
@@ -2994,12 +3010,7 @@ function downloadSummarySubmit(e, triggeredFrom, formType) {
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
 
-  dataToSend = userSelections;
-  dataToSend.mapBaseUrl = mapBaseUrl;
-  dataToSend.userInfo = userInfo;
-  dataToSend.sourceReferrerDomain = sourceReferrerDomain;
-  delete dataToSend.fuelPrices;
-  delete dataToSend.vehicle.identification.fetchedData;
+  const dataToSend = prepareDataToSend();
 
   // console.log(validationResult, 'ok');
 
@@ -3047,18 +3058,26 @@ function downloadSummarySubmit(e, triggeredFrom, formType) {
     });
 }
 
+function prepareDataToSend() {
+  console.log('Preparing data to send!!!!!');
+  const dataToSend = userSelections;
+  dataToSend.mapBaseUrl = mapBaseUrl;
+  dataToSend.userInfo = userInfo;
+  dataToSend.userInfo.category = getEasyPayFileUploadCategory();
+  dataToSend.sourceReferrerDomain = sourceReferrerDomain;
+  delete dataToSend.fuelPrices;
+  delete dataToSend.vehicle.identification.fetchedData;
+  console.log(dataToSend);
+  return dataToSend;
+}
+
 function emailSummarySubmit(e, triggeredFrom, formType) {
   const validationResult = validateUserForm(triggeredFrom, formType);
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   [...document.querySelectorAll('.summary-form-error')].map(el => (el.style.display = 'none'));
 
-  dataToSend = userSelections;
-  dataToSend.mapBaseUrl = mapBaseUrl;
-  dataToSend.userInfo = userInfo;
-  dataToSend.sourceReferrerDomain = sourceReferrerDomain;
-  delete dataToSend.fuelPrices;
-  delete dataToSend.vehicle.identification.fetchedData;
+  const dataToSend = prepareDataToSend();
 
   // console.log(validationResult, 'ok');
 
@@ -4043,3 +4062,175 @@ function trigger_opened_summary_form(options) {
 //   }
 //   sourceReferrerDomain = hostname;
 // }
+
+/* EASY PAY FILE UPLOADER */
+const maxFilenameLength = 18;
+const EASY_PAY_MAX_FILES = 6;
+const EASY_PAY_MAX_FILE_SIZE = 2;
+const dropzoneErrorDict = {
+  'You can not upload any more files.': `Μέγιστος αριθμός αρχείων: ${EASY_PAY_MAX_FILES}`,
+  "You can't upload files of this type.": 'Τα μόνα επιτρεπτά αρχεία είναι pdf και εικόνες',
+  'File too large': 'Το αρχείο είναι πολύ μεγάλο. Μέγιστο όριο 2 MB',
+  'Unexpected field': 'Μέγιστος αριθμός αρχείων: 6',
+  'File type not allowed': 'Τα μόνα επιτρεπτά αρχεία είναι pdf και εικόνες'
+};
+let myDropzone;
+const uploadProgressBar = document.querySelector('.total-progress .progress-bar');
+
+function easyPayFileUploader() {
+  myDropzone = new Dropzone('#fileUploadContainer', {
+    url: '/summaries/easyPay',
+    params: { data: JSON.stringify(prepareDataToSend()) },
+    paramName: () => 'file',
+    autoQueue: false,
+    maxFilesize: EASY_PAY_MAX_FILE_SIZE, // MB,
+    maxFiles: EASY_PAY_MAX_FILES,
+    parallelUploads: EASY_PAY_MAX_FILES,
+    uploadMultiple: true,
+    acceptedFiles: 'image/*,application/pdf',
+    previewTemplate: document.getElementById('easyPayUploadPreview').innerHTML,
+    thumbnailWidth: 80,
+    thumbnailHeight: 80
+  });
+
+  myDropzone.on('addedfile', file => {
+    console.log('A file has been added', file);
+    if (myDropzone.files.length) {
+      document.querySelector('.dz-message').style.display = 'none';
+    }
+
+    if (
+      myDropzone.files.length > EASY_PAY_MAX_FILES ||
+      file.size / 1000000 > EASY_PAY_MAX_FILE_SIZE ||
+      !file.type
+    ) {
+      myDropzone.removeFile(file);
+      return;
+    }
+
+    fixFilePreviewTemplate(file);
+  });
+  myDropzone.on('removedfile', file => {
+    console.log('A file has been removed', file);
+    if (!myDropzone.files.length) {
+      document.querySelector('.dz-message').style.display = 'block';
+    }
+  });
+
+  myDropzone.on('totaluploadprogress', function (progress) {
+    uploadProgressBar.value = progress;
+    if (progress === 100) {
+      uploadProgressBar.style.opacity = '0';
+      document.querySelector('.total-progress .upload-loading').style.display = 'block';
+    }
+  });
+
+  myDropzone.on('sendingmultiple', function (file) {
+    // Show the total progress bar when upload starts
+    console.log('sendingmultiple', file);
+    document.querySelector('.total-progress').style.opacity = '1';
+    uploadProgressBar.style.opacity = '1';
+
+    // Disable the submit button
+  });
+
+  myDropzone.on('successmultiple', function (file, res) {
+    document.querySelector('.total-progress .upload-loading').style.display = 'none';
+    displayEasyPayMsg('success', 'Η αποστολή ολοκληρώθηκε με επιτυχία!');
+
+    downloadFileFromEasyPay(res.data, 'Η προσφορά μου -' + summaryData.userInfo.username);
+    myDropzone.removeAllFiles();
+  });
+  myDropzone.on('errormultiple', function (file, res) {
+    console.log('error multiple', res);
+
+    document.querySelector('.total-progress .upload-loading').style.display = 'none';
+
+    if (typeof res === 'string') {
+      //client error
+      displayEasyPayMsg(
+        'error',
+        dropzoneErrorDict[res] ||
+          `Το αρχείο είναι πολύ μεγάλο. Μέγιστο όριο ${EASY_PAY_MAX_FILE_SIZE} MB`
+      );
+
+      return;
+    }
+
+    //server error
+    console.log(res.status, res.name);
+    if (res.status === 'error' || res.hasOwnProperty('name')) {
+      myDropzone.removeAllFiles();
+      displayEasyPayMsg(
+        'error',
+        dropzoneErrorDict[res.msg || res.message] || res.msg || res.message
+      );
+      return;
+    }
+  });
+
+  myDropzone.on('queuecomplete', function (progress) {
+    document.querySelector('.total-progress').style.opacity = '0';
+  });
+
+  document.querySelector('#easyPayFileUploaderSubmit').addEventListener('click', () => {
+    const validationResult = validateUserForm(null, 'EMAIL');
+    if (!validationResult.valid) return displayEasyPayMsg('error', validationResult.msg);
+
+    myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+  });
+}
+
+function fixFilePreviewTemplate(file) {
+  if (file.type === 'application/pdf') {
+    const previewImgEl = file.previewElement.querySelector('.dz-image-img');
+    previewImgEl.src =
+      'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/631c6e9292aded48a225dba8_500px-Adobe_PDF_Icon.svg_.png';
+    previewImgEl.alt = 'Αρχείο PDF';
+    previewImgEl.width = 80;
+    previewImgEl.height = 80;
+  }
+
+  filename = file.previewElement.querySelector('.dz-filename span').textContent;
+  file.previewElement.querySelector('.dz-filename span').textContent =
+    filename.length > maxFilenameLength
+      ? `${filename.substring(0, maxFilenameLength)}...`
+      : filename;
+
+  filesizeEl = file.previewElement.querySelector('.dz-size');
+  filesize = filesizeEl.textContent;
+}
+
+function downloadFileFromEasyPay(base64, fileName) {
+  const link = document.createElement('a');
+  link.href = 'data:image/png;base64,' + base64;
+  link.download = fileName + '.png';
+  document.body.append(link);
+  link.click();
+  link.remove();
+}
+
+function displayEasyPayMsg(type, msg, time = 2000) {
+  console.log(type, msg);
+  document
+    .querySelector('#fileUploadContainer')
+    .classList.add(type === 'error' ? 'container-error' : 'container-success');
+  msgEl = document.querySelector('#fileUploadContainer .utils-msg');
+  msgEl.className = 'utils-msg'; //reseting
+  msgEl.classList.add(`${type}-msg`);
+  msgEl.textContent = msg;
+  msgEl.style.opacity = '1';
+  setTimeout(() => {
+    msgEl.style.opacity = '0';
+    document
+      .querySelector('#fileUploadContainer')
+      .classList.remove(type === 'error' ? 'container-error' : 'container-success');
+  }, time);
+}
+
+function getEasyPayFileUploadCategory() {
+  const currentTab = [...document.querySelectorAll('#fileUploadTabs')].filter(el =>
+    el.className.includes('w--current')
+  )[0];
+  return +currentTab.getAttribute('data-w-tab').split(' ')[1] - 1;
+}
