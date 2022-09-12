@@ -4139,7 +4139,7 @@ function easyPayFileUploader() {
     document.querySelector('.total-progress .upload-loading').style.display = 'none';
     displayEasyPayMsg('success', 'Η αποστολή ολοκληρώθηκε με επιτυχία!');
 
-    downloadFileFromEasyPay(res.data, 'Η προσφορά μου -' + summaryData.userInfo.username);
+    downloadFileFromEasyPay(res.data, 'Η προσφορά μου -' + userInfo.username);
     myDropzone.removeAllFiles();
   });
   myDropzone.on('errormultiple', function (file, res) {
