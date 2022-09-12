@@ -4236,7 +4236,7 @@ function displayEasyPayMsg(type, msg, time = 2000) {
 
 function getEasyPayFileUploadCategory() {
   try {
-    const currentTab = [...document.querySelectorAll('#fileUploadTabs')].filter(el =>
+    const currentTab = [...document.querySelectorAll('#fileUploadTabs a')].filter(el =>
       el.className.includes('w--current')
     )[0];
     return +currentTab.getAttribute('data-w-tab').split(' ')[1] - 1;
