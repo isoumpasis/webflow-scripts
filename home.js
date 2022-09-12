@@ -4229,8 +4229,12 @@ function displayEasyPayMsg(type, msg, time = 2000) {
 }
 
 function getEasyPayFileUploadCategory() {
-  const currentTab = [...document.querySelectorAll('#fileUploadTabs')].filter(el =>
-    el.className.includes('w--current')
-  )[0];
-  return +currentTab.getAttribute('data-w-tab').split(' ')[1] - 1;
+  try {
+    const currentTab = [...document.querySelectorAll('#fileUploadTabs')].filter(el =>
+      el.className.includes('w--current')
+    )[0];
+    return +currentTab.getAttribute('data-w-tab').split(' ')[1] - 1;
+  } catch (e) {
+    return 0;
+  }
 }
