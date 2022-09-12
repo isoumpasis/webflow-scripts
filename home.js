@@ -4088,9 +4088,25 @@ function easyPayFileUploader() {
       setTimeout(() => (easyPayFormErrorEl.style.display = 'none'), 2000);
       return;
     }
+    syncEasyPayForm();
     easyPayFormErrorEl.style.display = 'none';
     easyPayFormEl.style.display = 'block';
   });
+
+  function syncEasyPayForm() {
+    document.querySelector('.easy-pay-form-system-name').textContent =
+      userSelections.easyPay.system.name;
+    document.querySelector('.easy-pay-form-price-vat').textContent =
+      userSelections.easyPay.system.priceWithVAT;
+    document.querySelector('.easy-pay-form-prokatavoli').textContent =
+      userSelections.easyPay.noCreditSettings.prokatavoli;
+    document.querySelector('.easy-pay-form-doseis').textContent =
+      userSelections.easyPay.noCreditSettings.doseis;
+    document.querySelector('.easy-pay-form-monthly').textContent =
+      userSelections.easyPay.noCreditSettings.monthlyCost;
+    document.querySelector('.easy-pay-form-final').textContent =
+      userSelections.easyPay.noCreditSettings.finalCost;
+  }
 
   myDropzone = new Dropzone('#fileUploadContainer', {
     url: easyPayFileUploaderUrl,
