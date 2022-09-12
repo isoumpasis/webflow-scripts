@@ -4081,7 +4081,7 @@ const uploadProgressBar = document.querySelector('.total-progress .progress-bar'
 function easyPayFileUploader() {
   myDropzone = new Dropzone('#fileUploadContainer', {
     url: easyPayFileUploaderUrl,
-    params: { data: JSON.stringify(prepareDataToSend()) },
+    // params: { data: JSON.stringify(prepareDataToSend()) },
     paramName: () => 'file',
     autoQueue: false,
     maxFilesize: EASY_PAY_MAX_FILE_SIZE, // MB,
@@ -4126,7 +4126,8 @@ function easyPayFileUploader() {
     }
   });
 
-  myDropzone.on('sendingmultiple', function (file) {
+  myDropzone.on('sendingmultiple', function (file, xhr, formData) {
+    formData.append('data', JSON.stringify(prepareDataToSend()));
     // Show the total progress bar when upload starts
     console.log('sendingmultiple', file);
     document.querySelector('.total-progress').style.opacity = '1';
