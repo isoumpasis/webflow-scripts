@@ -4129,6 +4129,8 @@ function easyPayFileUploader() {
   myDropzone.on('sendingmultiple', function (file, xhr, formData) {
     formData.append('data', JSON.stringify(prepareDataToSend()));
     // Show the total progress bar when upload starts
+    //
+
     console.log('sendingmultiple', file);
     document.querySelector('.total-progress').style.opacity = '1';
     uploadProgressBar.style.opacity = '1';
