@@ -4299,6 +4299,7 @@ function validateFileUploadForm() {
   if (!userPhone) return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
   // if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
 
+  console.log('files length', myDropzone.files.length);
   if (!myDropzone.files.length) {
     return { valid: false, msg: 'Παρακαλώ προσθέστε τα απαιτούμενα δικαιολογητικά' };
   }
