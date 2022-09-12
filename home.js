@@ -15,6 +15,7 @@ const mapBaseUrl = baseUrl + mapUrl;
 const numPlaceUrl = serverUrl + 'map/pins/numPlace';
 const closestUrl = serverUrl + 'map/pins/closest';
 const urlContactForm = serverUrl + 'contact/';
+const easyPayFileUploaderUrl = serverUrl + 'summaries/easyPay';
 // const baseDateUrl = serverUrl + 'lottery/base-date';
 
 let fetchedYears;
@@ -4079,7 +4080,7 @@ const uploadProgressBar = document.querySelector('.total-progress .progress-bar'
 
 function easyPayFileUploader() {
   myDropzone = new Dropzone('#fileUploadContainer', {
-    url: '/summaries/easyPay',
+    url: easyPayFileUploaderUrl,
     params: { data: JSON.stringify(prepareDataToSend()) },
     paramName: () => 'file',
     autoQueue: false,
