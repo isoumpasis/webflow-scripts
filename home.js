@@ -4155,11 +4155,6 @@ function easyPayFileUploader() {
   });
 
   myDropzone.on('sendingmultiple', function (file, xhr, formData) {
-    if (!myDropzone.files.length) {
-      displayEasyPayMsg('error', 'Παρακαλώ προσθέστε τα αρχεία που απαιτούνται.');
-      return;
-    }
-
     formData.append('data', JSON.stringify(prepareDataToSend()));
     // Show the total progress bar when upload starts
 
@@ -4303,5 +4298,10 @@ function validateFileUploadForm() {
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
   if (!userPhone) return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
   // if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
+
+  if (!myDropzone.files.length) {
+    return { valid: false, msg: 'Παρακαλώ προσθέστε τα απαιτούμενα δικαιολογητικά' };
+  }
+
   return { valid: true };
 }
