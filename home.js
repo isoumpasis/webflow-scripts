@@ -4132,7 +4132,7 @@ function easyPayFileUploader() {
 
     if (
       myDropzone.files.length > EASY_PAY_MAX_FILES ||
-      file.size / 1000000 > EASY_PAY_MAX_FILE_SIZE ||
+      file.size / 1048576 > EASY_PAY_MAX_FILE_SIZE ||
       !file.type
     ) {
       myDropzone.removeFile(file);
