@@ -322,7 +322,7 @@ input[type='range']::-ms-thumb:hover {
 }
 .total-progress .progress-bar {
   padding: 11px;
-  width: 80%;
+  width: 100%;
 }
 .total-progress div {
   display: flex;
