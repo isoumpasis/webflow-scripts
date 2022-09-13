@@ -4144,7 +4144,7 @@ function easyPayFileUploader() {
   myDropzone.on('removedfile', file => {
     console.log('A file has been removed', file);
     if (!myDropzone.files.length) {
-      document.querySelector('.dz-message').style.display = 'block';
+      document.querySelector('.dz-message').style.display = 'flex';
     }
   });
 
@@ -4219,6 +4219,9 @@ function easyPayFileUploader() {
 
     console.log('valid!, enqueue');
     myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+  });
+  document.querySelector('.file-upload-reset-btn').addEventListener('click', () => {
+    myDropzone.removeAllFiles();
   });
 }
 
