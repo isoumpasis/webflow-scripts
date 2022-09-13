@@ -4262,7 +4262,7 @@ function displayEasyPayMsg(type, msg, time = 2000) {
   document
     .querySelector('#fileUploadContainer')
     .classList.add(type === 'error' ? 'container-error' : 'container-success');
-  msgEl = document.querySelector('#fileUploadContainer .utils-msg');
+  msgEl = document.querySelector('#easyPayForm .utils-msg');
   msgEl.className = 'utils-msg'; //reseting
   msgEl.classList.add(`${type}-msg`);
   msgEl.textContent = msg;
