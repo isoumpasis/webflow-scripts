@@ -4146,6 +4146,7 @@ function easyPayFileUploader() {
     if (!myDropzone.files.length) {
       document.querySelector('.dz-message').style.display = 'flex';
     }
+    enableFileUploaderSubmitBtn();
   });
 
   myDropzone.on('totaluploadprogress', function (progress) {
@@ -4165,6 +4166,7 @@ function easyPayFileUploader() {
     uploadProgressBar.style.opacity = '1';
 
     // Disable the submit button
+    disableFileUploaderSubmitBtn();
   });
 
   myDropzone.on('successmultiple', function (file, res) {
@@ -4173,6 +4175,8 @@ function easyPayFileUploader() {
 
     downloadFileFromEasyPay(res.data, 'Η προσφορά μου -' + userInfo.username);
     myDropzone.removeAllFiles();
+
+    enableFileUploaderSubmitBtn();
 
     setTimeout(() => {
       easyPayFormEl.style.display = 'none';
@@ -4183,6 +4187,7 @@ function easyPayFileUploader() {
     console.log('error multiple', res);
 
     document.querySelector('.total-progress .upload-loading').style.display = 'none';
+    enableFileUploaderSubmitBtn();
 
     if (typeof res === 'string') {
       //client error
@@ -4319,4 +4324,17 @@ function validateFileUploadForm() {
   }
 
   return { valid: true };
+}
+
+function disableFileUploaderSubmitBtn() {
+  submitBtn = document.querySelector('#easyPayFileUploaderSubmit');
+  submitBtn.setAttribute('disabled', 'true');
+  submitBtn.style.cursor = 'wait';
+  submitBtn.style.opacity = '0.5';
+}
+function enableFileUploaderSubmitBtn() {
+  submitBtn = document.querySelector('#easyPayFileUploaderSubmit');
+  submitBtn.setAttribute('disabled', 'false');
+  submitBtn.style.cursor = 'default';
+  submitBtn.style.opacity = '1';
 }
