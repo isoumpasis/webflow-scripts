@@ -3060,7 +3060,6 @@ function downloadSummarySubmit(e, triggeredFrom, formType) {
 }
 
 function prepareDataToSend() {
-  console.log('Preparing data to send!!!!!');
   const dataToSend = userSelections;
   dataToSend.mapBaseUrl = mapBaseUrl;
   dataToSend.userInfo = userInfo;
@@ -3068,7 +3067,6 @@ function prepareDataToSend() {
   dataToSend.sourceReferrerDomain = sourceReferrerDomain;
   delete dataToSend.fuelPrices;
   delete dataToSend.vehicle.identification.fetchedData;
-  console.log(dataToSend);
   return dataToSend;
 }
 
@@ -4145,7 +4143,6 @@ function easyPayFileUploader() {
     if (!myDropzone.files.length) {
       document.querySelector('.dz-message').style.display = 'flex';
     }
-    enableFileUploaderSubmitBtn();
   });
 
   myDropzone.on('totaluploadprogress', function (progress) {
@@ -4160,7 +4157,6 @@ function easyPayFileUploader() {
     formData.append('data', JSON.stringify(prepareDataToSend()));
     // Show the total progress bar when upload starts
 
-    console.log('sendingmultiple', file);
     document.querySelector('.total-progress').style.opacity = '1';
     uploadProgressBar.style.opacity = '1';
 
@@ -4221,12 +4217,9 @@ function easyPayFileUploader() {
   });
 
   document.querySelector('#easyPayFileUploaderSubmit').addEventListener('click', () => {
-    console.log('cllicked submit');
     const validationResult = validateFileUploadForm();
-    console.log(validationResult);
     if (!validationResult.valid) return displayEasyPayMsg('error', validationResult.msg);
 
-    console.log('valid!, enqueue');
     myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
   });
   document.querySelector('.file-upload-reset-btn').addEventListener('click', () => {
