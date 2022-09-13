@@ -4121,15 +4121,7 @@ function easyPayFileUploader() {
     acceptedFiles: 'image/*,application/pdf',
     previewTemplate: document.getElementById('easyPayUploadPreview').innerHTML,
     thumbnailWidth: 90,
-    thumbnailHeight: 90,
-    accept: function (file, done) {
-      console.log(file);
-      if (file.name == 'justinbieber.jpg') {
-        done("Naha, you don't.");
-      } else {
-        done();
-      }
-    }
+    thumbnailHeight: 90
   });
 
   myDropzone.on('addedfile', file => {
@@ -4194,6 +4186,10 @@ function easyPayFileUploader() {
         dropzoneErrorDict[res] ||
           `Το αρχείο είναι πολύ μεγάλο. Μέγιστο όριο ${EASY_PAY_MAX_FILE_SIZE} MB`
       );
+
+      if (res.includes('upload files of this type')) {
+        myDropzone.removeFile(file);
+      }
 
       return;
     }
