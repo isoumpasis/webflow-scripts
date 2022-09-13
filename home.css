@@ -326,6 +326,7 @@ input[type='range']::-ms-thumb:hover {
 }
 .total-progress div {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 5px;
