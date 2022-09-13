@@ -1,6 +1,6 @@
 /* System Identification */
-// let serverUrl = 'https://lovatohellas.herokuapp.com/';
-let serverUrl = 'http://localhost:1917/';
+let serverUrl = 'https://lovatohellas-dev.herokuapp.com/';
+// let serverUrl = 'http://localhost:1917/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlYears = serverUrl + 'vehicleDB/get/years';
@@ -4067,7 +4067,7 @@ function trigger_opened_summary_form(options) {
 /* EASY PAY FILE UPLOADER */
 const maxFilenameLength = 18;
 const EASY_PAY_MAX_FILES = 6;
-const EASY_PAY_MAX_FILE_SIZE = 5;
+const EASY_PAY_MAX_FILE_SIZE = 4;
 const dropzoneErrorDict = {
   'You can not upload any more files.': `Μέγιστος αριθμός αρχείων: ${EASY_PAY_MAX_FILES}`,
   "You can't upload files of this type.": 'Τα μόνα επιτρεπτά αρχεία είναι pdf και εικόνες',
