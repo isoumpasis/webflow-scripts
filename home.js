@@ -4067,11 +4067,11 @@ function trigger_opened_summary_form(options) {
 /* EASY PAY FILE UPLOADER */
 const maxFilenameLength = 18;
 const EASY_PAY_MAX_FILES = 6;
-const EASY_PAY_MAX_FILE_SIZE = 2;
+const EASY_PAY_MAX_FILE_SIZE = 1.5;
 const dropzoneErrorDict = {
   'You can not upload any more files.': `Μέγιστος αριθμός αρχείων: ${EASY_PAY_MAX_FILES}`,
   "You can't upload files of this type.": 'Τα μόνα επιτρεπτά αρχεία είναι pdf και εικόνες',
-  'File too large': 'Το αρχείο είναι πολύ μεγάλο. Μέγιστο όριο 2 MB',
+  'File too large': 'Το αρχείο είναι πολύ μεγάλο. Μέγιστο όριο 1.5 MB',
   'Unexpected field': 'Μέγιστος αριθμός αρχείων: 6',
   'File type not allowed': 'Τα μόνα επιτρεπτά αρχεία είναι pdf και εικόνες'
 };
