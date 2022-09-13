@@ -2303,7 +2303,7 @@ function getEasyPaySystem(selectedSystemDiv) {
     system => system.name === name
   ).priceNoVAT;
   const systemLogoUrl = systemFullKitLogoUrlDict[name].logo[userSelections.selectedFuel];
-  console.log({ name, systemLogoUrl });
+  // console.log({ name, systemLogoUrl });
   const systemLogoUrlPng = systemFullKitLogoUrlDict[name].pngLogo[userSelections.selectedFuel];
   const fullKitUrl = systemFullKitLogoUrlDict[name].fullKit[userSelections.selectedFuel];
   const cylsDescr = systemFullKitLogoUrlDict[name].cylsDescr;
@@ -4173,6 +4173,11 @@ function easyPayFileUploader() {
 
     downloadFileFromEasyPay(res.data, 'Η προσφορά μου -' + userInfo.username);
     myDropzone.removeAllFiles();
+
+    setTimeout(() => {
+      easyPayFormEl.style.display = 'none';
+      document.querySelector('.easy-pay-form-overlay').style.display = 'none';
+    }, 3000);
   });
   myDropzone.on('errormultiple', function (file, res) {
     console.log('error multiple', res);
