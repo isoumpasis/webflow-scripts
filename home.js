@@ -4188,6 +4188,7 @@ function easyPayFileUploader() {
       );
 
       if (res.includes('upload files of this type')) {
+        console.log('includes!');
         myDropzone.removeFile(file);
       }
 
