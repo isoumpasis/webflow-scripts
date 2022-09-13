@@ -4120,8 +4120,16 @@ function easyPayFileUploader() {
     uploadMultiple: true,
     acceptedFiles: 'image/*,application/pdf',
     previewTemplate: document.getElementById('easyPayUploadPreview').innerHTML,
-    thumbnailWidth: 80,
-    thumbnailHeight: 80
+    thumbnailWidth: 90,
+    thumbnailHeight: 90,
+    accept: function (file, done) {
+      console.log(file);
+      if (file.name == 'justinbieber.jpg') {
+        done("Naha, you don't.");
+      } else {
+        done();
+      }
+    }
   });
 
   myDropzone.on('addedfile', file => {
@@ -4223,8 +4231,8 @@ function fixFilePreviewTemplate(file) {
     previewImgEl.src =
       'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/631c6e9292aded48a225dba8_500px-Adobe_PDF_Icon.svg_.png';
     previewImgEl.alt = 'Αρχείο PDF';
-    previewImgEl.width = 80;
-    previewImgEl.height = 80;
+    previewImgEl.width = 90;
+    previewImgEl.height = 90;
   }
 
   filename = file.previewElement.querySelector('.dz-filename span').textContent;
