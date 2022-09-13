@@ -321,7 +321,7 @@ input[type='range']::-ms-thumb:hover {
   align-items: center;
 }
 .total-progress .progress-bar {
-  padding: 10px;
+  padding: 11px;
   width: 80%;
 }
 .total-progress div {
