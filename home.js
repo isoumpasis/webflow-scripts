@@ -4090,7 +4090,9 @@ function easyPayFileUploader() {
     }
     syncEasyPayForm();
     easyPayFormErrorEl.style.display = 'none';
+
     easyPayFormEl.style.display = 'block';
+    document.querySelector('.easy-pay-form-overlay').style.display = 'block';
   });
 
   function syncEasyPayForm() {
