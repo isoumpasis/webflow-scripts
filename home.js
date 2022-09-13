@@ -4169,7 +4169,7 @@ function easyPayFileUploader() {
 
   myDropzone.on('successmultiple', function (file, res) {
     document.querySelector('.total-progress .upload-loading').style.display = 'none';
-    displayEasyPayMsg('success', 'Η αποστολή ολοκληρώθηκε με επιτυχία!');
+    displayEasyPayMsg('success', 'Η αποστολή ολοκληρώθηκε με επιτυχία!', 3000);
 
     downloadFileFromEasyPay(res.data, 'Η προσφορά μου -' + userInfo.username);
     myDropzone.removeAllFiles();
