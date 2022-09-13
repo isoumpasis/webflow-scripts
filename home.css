@@ -406,8 +406,8 @@ input[type='range']::-ms-thumb:hover {
 }
 .file-upload-utils-container {
   pointer-events: none;
-  position: absolute;
-  bottom: 0px;
+  /* position: absolute;
+  bottom: 0px; */
 }
 .utils-msg {
   -webkit-transition: opacity 0.2s linear;

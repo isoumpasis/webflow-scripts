@@ -4327,15 +4327,17 @@ function validateFileUploadForm() {
   return { valid: true };
 }
 
+sumbitFileUploaderBtn = document.querySelector('#easyPayFileUploaderSubmit');
+disableDropzoneEl = document.querySelector('#disableDropzoneDiv');
 function disableFileUploaderSubmitBtn() {
-  submitBtn = document.querySelector('#easyPayFileUploaderSubmit');
-  submitBtn.setAttribute('disabled', 'true');
-  submitBtn.style.cursor = 'wait';
-  submitBtn.style.opacity = '0.5';
+  sumbitFileUploaderBtn.setAttribute('disabled', 'true');
+  sumbitFileUploaderBtn.style.cursor = 'wait';
+  sumbitFileUploaderBtn.style.opacity = '0.5';
+  disableDropzoneEl.style.display = 'block';
 }
 function enableFileUploaderSubmitBtn() {
-  submitBtn = document.querySelector('#easyPayFileUploaderSubmit');
-  submitBtn.setAttribute('disabled', 'false');
-  submitBtn.style.cursor = 'pointer';
-  submitBtn.style.opacity = '1';
+  sumbitFileUploaderBtn.setAttribute('disabled', 'false');
+  sumbitFileUploaderBtn.style.cursor = 'pointer';
+  sumbitFileUploaderBtn.style.opacity = '1';
+  disableDropzoneEl.style.display = 'none';
 }
