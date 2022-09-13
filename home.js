@@ -4147,7 +4147,7 @@ function easyPayFileUploader() {
 
   myDropzone.on('totaluploadprogress', function (progress) {
     uploadProgressBar.value = progress;
-    disableFileUploaderSubmitBtn();
+    // disableFileUploaderSubmitBtn();
     if (progress === 100) {
       uploadProgressBar.style.opacity = '0';
       document.querySelector('.total-progress .upload-loading').style.display = 'block';
