@@ -4125,7 +4125,6 @@ function easyPayFileUploader() {
   });
 
   myDropzone.on('addedfile', file => {
-    console.log('A file has been added', file);
     if (myDropzone.files.length) {
       document.querySelector('.dz-message').style.display = 'none';
     }
@@ -4142,7 +4141,7 @@ function easyPayFileUploader() {
     fixFilePreviewTemplate(file);
   });
   myDropzone.on('removedfile', file => {
-    console.log('A file has been removed', file);
+    // console.log('A file has been removed', file);
     if (!myDropzone.files.length) {
       document.querySelector('.dz-message').style.display = 'flex';
     }
@@ -4184,7 +4183,7 @@ function easyPayFileUploader() {
     }, 3000);
   });
   myDropzone.on('errormultiple', function (file, res) {
-    console.log('error multiple', res);
+    // console.log('error multiple', res);
 
     document.querySelector('.total-progress .upload-loading').style.display = 'none';
     enableFileUploaderSubmitBtn();
@@ -4265,7 +4264,7 @@ function downloadFileFromEasyPay(base64, fileName) {
 }
 
 function displayEasyPayMsg(type, msg, time = 2000) {
-  console.log(type, msg);
+  // console.log(type, msg);
   document
     .querySelector('#fileUploadContainer')
     .classList.add(type === 'error' ? 'container-error' : 'container-success');
@@ -4300,6 +4299,14 @@ function validateFileUploadForm() {
   //     msg: 'Για να κατεβάσετε την προσφορά θα πρέπει να ανοίξετε την ιστοσελίδα σε Chrome, Mozilla ή Safari, διότι ο ενσωματομένως περιηγητής του Facebook δεν επιτρέπει τη λήψη αρχείων.'
   //   };
   // }
+  submitBtn = document.querySelector('#easyPayFileUploaderSubmit');
+  if (submitBtn.getAttribute('disabled') === 'true') {
+    return {
+      valid: false,
+      msg: 'Παρακαλώ περιμένετε'
+    };
+  }
+
   if (!hasResult())
     return {
       valid: false,
@@ -4335,6 +4342,6 @@ function disableFileUploaderSubmitBtn() {
 function enableFileUploaderSubmitBtn() {
   submitBtn = document.querySelector('#easyPayFileUploaderSubmit');
   submitBtn.setAttribute('disabled', 'false');
-  submitBtn.style.cursor = 'default';
+  submitBtn.style.cursor = 'pointer';
   submitBtn.style.opacity = '1';
 }
