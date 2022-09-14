@@ -315,13 +315,6 @@ input[type='range']::-ms-thumb:hover {
 .dz-drag-hover .dz-message {
   opacity: 0.5;
 }
-/* .upload-container-with-files {
-  padding-top: 70px;
-} */
-/* .dz-message-with-files {
-  position: absolute;
-  top: 15px;
-} */
 .total-progress {
   opacity: 0;
   display: flex;
@@ -445,8 +438,30 @@ input[type='range']::-ms-thumb:hover {
   z-index: 9999;
 }
 
-/* @media (max-width: 768px) {
-  .upload-container-with-files {
-    padding-top: 120px;
+@media (max-width: 768px) {
+  .dz-image-preview,
+  .dz-preview {
+    cursor: default;
   }
-} */
+  /* .dz-image-preview .dz-image-img,
+  .dz-preview .dz-image-img {
+    opacity: 0.4;
+  } */
+  .dz-image-preview .dz-details,
+  .dz-preview .dz-details {
+    opacity: 1;
+  }
+  .dz-image-preview .dz-remove-icon,
+  .dz-preview .dz-remove-icon {
+    opacity: 1;
+  }
+  .dz-remove-icon {
+    top: 0;
+    right: 0;
+    z-index: 99;
+  }
+  .dz-image-preview .dz-size,
+  .dz-preview .dz-size {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
