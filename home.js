@@ -4202,7 +4202,7 @@ function easyPayFileUploader() {
     setTimeout(() => {
       easyPayFormEl.style.display = 'none';
       document.querySelector('.easy-pay-form-overlay').style.display = 'none';
-    }, 3000);
+    }, 6000);
   });
   myDropzone.on('errormultiple', function (file, res) {
     // console.log('error multiple', res);
