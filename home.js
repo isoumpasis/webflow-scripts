@@ -4112,6 +4112,9 @@ function easyPayFileUploader() {
       userSelections.easyPay.noCreditSettings.monthlyCost;
     document.querySelector('.easy-pay-form-final').textContent =
       userSelections.easyPay.noCreditSettings.finalCost;
+    document.querySelector('.easy-pay-form-descr').textContent = isFacebookBrowser()
+      ? 'Με την αποστολή της αίτησης θα πάρεις με email την ολοκληρωμένη προσφορά!'
+      : 'Με την αποστολή της αίτησης θα κατεβάσεις και θα πάρεις με email την ολοκληρωμένη προσφορά!';
   }
 
   myDropzone = new Dropzone('#fileUploadContainer', {
@@ -4180,7 +4183,7 @@ function easyPayFileUploader() {
 
   myDropzone.on('successmultiple', function (file, res) {
     document.querySelector('.total-progress .upload-loading').style.display = 'none';
-    displayEasyPayMsg('success', 'Η αποστολή ολοκληρώθηκε με επιτυχία!', 3000);
+    displayEasyPayMsg('success', 'Η αποστολή ολοκληρώθηκε με επιτυχία!', 6000);
 
     downloadFileFromEasyPay(res.data, 'Η προσφορά μου -' + userInfo.username);
     myDropzone.removeAllFiles();
