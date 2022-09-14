@@ -1,6 +1,6 @@
 /* System Identification */
-let serverUrl = 'https://lovatohellas-dev.herokuapp.com/';
-// let serverUrl = 'http://localhost:1917/';
+// let serverUrl = 'https://lovatohellas-dev.herokuapp.com/';
+let serverUrl = 'http://localhost:1917/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlYears = serverUrl + 'vehicleDB/get/years';
@@ -1046,7 +1046,6 @@ function initEasyPayTabs() {
       }
 
       if (step2Triggered && !step4Triggered) {
-        console.log('init easy pay 4 tabs');
         trigger_easy_pay_step_4({ triggered_via: 'click' });
       }
     })
@@ -1074,7 +1073,6 @@ function initEasyPaySystemSelection() {
       metrhtaFinalCost.textContent = selectedEasyPaySystemPrice.toFixed(2) + '€';
 
       if (step2Triggered && !step4Triggered) {
-        console.log('init easy pay system selection');
         trigger_easy_pay_step_4({ triggered_via: 'click' });
       }
     })
@@ -1128,7 +1126,6 @@ function prokatavoliNoCreditSliderOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
-    console.log('prokatavoliNoCreditSliderOnChange');
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -1160,7 +1157,6 @@ function prokatavoliCreditSliderOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
-    console.log('prokatavoliCreditSliderOnChange');
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -1185,7 +1181,6 @@ function doseisNoCreditSliderOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
-    console.log('doseisNoCreditSliderOnChange');
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -1207,7 +1202,6 @@ function doseisCreditSelectOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
-    console.log('doseisCreditSelectOnChange');
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
