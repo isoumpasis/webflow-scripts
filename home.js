@@ -4120,7 +4120,7 @@ function easyPayFileUploader() {
     previewTemplate: document.getElementById('easyPayUploadPreview').innerHTML,
     thumbnailWidth: 90,
     thumbnailHeight: 90,
-    clickable: ['.upload-clickable', '#fileUploadContainer']
+    clickable: '.upload-clickable'
   });
 
   myDropzone.on('addedfile', file => {
