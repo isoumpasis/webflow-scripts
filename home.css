@@ -438,15 +438,11 @@ input[type='range']::-ms-thumb:hover {
   z-index: 9999;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .dz-image-preview,
   .dz-preview {
     cursor: default;
   }
-  /* .dz-image-preview .dz-image-img,
-  .dz-preview .dz-image-img {
-    opacity: 0.4;
-  } */
   .dz-image-preview .dz-details,
   .dz-preview .dz-details {
     opacity: 1;
@@ -464,4 +460,4 @@ input[type='range']::-ms-thumb:hover {
   .dz-preview .dz-size {
     background-color: rgba(255, 255, 255, 0.8);
   }
-}
+} */

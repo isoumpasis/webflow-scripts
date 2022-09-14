@@ -1046,6 +1046,7 @@ function initEasyPayTabs() {
       }
 
       if (step2Triggered && !step4Triggered) {
+        console.log('init easy pay 4 tabs');
         trigger_easy_pay_step_4({ triggered_via: 'click' });
       }
     })
@@ -1073,6 +1074,7 @@ function initEasyPaySystemSelection() {
       metrhtaFinalCost.textContent = selectedEasyPaySystemPrice.toFixed(2) + '€';
 
       if (step2Triggered && !step4Triggered) {
+        console.log('init easy pay system selection');
         trigger_easy_pay_step_4({ triggered_via: 'click' });
       }
     })
