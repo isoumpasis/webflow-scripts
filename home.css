@@ -314,6 +314,13 @@ input[type='range']::-ms-thumb:hover {
 .dz-drag-hover .dz-message {
   opacity: 0.5;
 }
+.upload-container-with-files {
+  padding-top: 70px;
+}
+.dz-message-with-files {
+  position: absolute;
+  top: 15px;
+}
 .total-progress {
   opacity: 0;
   display: flex;
@@ -435,4 +442,10 @@ input[type='range']::-ms-thumb:hover {
 
 .w-lightbox-backdrop {
   z-index: 9999;
+}
+
+@media (max-width: 768px) {
+  .upload-container-with-files {
+    padding-top: 120px;
+  }
 }

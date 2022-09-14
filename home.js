@@ -4118,14 +4118,16 @@ function easyPayFileUploader() {
     uploadMultiple: true,
     acceptedFiles: 'image/*,application/pdf',
     previewTemplate: document.getElementById('easyPayUploadPreview').innerHTML,
-    thumbnailWidth: 90,
-    thumbnailHeight: 90,
+    thumbnailWidth: 80,
+    thumbnailHeight: 80,
     clickable: '.upload-clickable'
   });
 
   myDropzone.on('addedfile', file => {
     if (myDropzone.files.length) {
-      document.querySelector('.dz-message').style.display = 'none';
+      // document.querySelector('.dz-message').style.display = 'none';
+      document.querySelector('.dz-message').classList.add('.dz-message-with-files');
+      document.querySelector('#fileUploadContainer').classList.add('.upload-container-with-files');
     }
 
     if (
@@ -4142,7 +4144,11 @@ function easyPayFileUploader() {
   myDropzone.on('removedfile', file => {
     // console.log('A file has been removed', file);
     if (!myDropzone.files.length) {
-      document.querySelector('.dz-message').style.display = 'flex';
+      // document.querySelector('.dz-message').style.display = 'flex';
+      document.querySelector('.dz-message').classList.remove('.dz-message-with-files');
+      document
+        .querySelector('#fileUploadContainer')
+        .classList.remove('.upload-container-with-files');
     }
   });
 
@@ -4235,8 +4241,8 @@ function fixFilePreviewTemplate(file) {
     previewImgEl.src =
       'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/631c6e9292aded48a225dba8_500px-Adobe_PDF_Icon.svg_.png';
     previewImgEl.alt = 'Αρχείο PDF';
-    previewImgEl.width = 90;
-    previewImgEl.height = 90;
+    previewImgEl.width = 80;
+    previewImgEl.height = 80;
   }
 
   filename = file.previewElement.querySelector('.dz-filename span').textContent;
@@ -4341,4 +4347,12 @@ function enableFileUploaderSubmitBtn() {
   sumbitFileUploaderBtn.style.cursor = 'pointer';
   sumbitFileUploaderBtn.style.opacity = '1';
   disableDropzoneEl.style.display = 'none';
+}
+
+function triggerEasyPayFileUpload(options) {
+  trigger_system_summary('download');
+  trigger_system_summary('email');
+  triggerGtagEvent('easy_pay_file_upload', options);
+  //category
+  //doseis
 }
