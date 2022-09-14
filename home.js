@@ -4077,6 +4077,12 @@ let myDropzone;
 const uploadProgressBar = document.querySelector('.total-progress .progress-bar');
 const easyPayFormEl = document.querySelector('#easyPayForm');
 const easyPayFormErrorEl = document.querySelector('.easy-pay-form-error');
+const easyPayCategoryDict = {
+  0: 'Μισθωτός',
+  1: 'Ελ. Επαγγελματίας',
+  2: 'Συνταξιούχος',
+  3: 'Αγρότης'
+};
 
 function easyPayFileUploader() {
   document.querySelector('#openEasyPayFormBtn').addEventListener('click', () => {
@@ -4180,6 +4186,15 @@ function easyPayFileUploader() {
     myDropzone.removeAllFiles();
 
     enableFileUploaderSubmitBtn();
+    const data = prepareDataToSend();
+    triggerEasyPayFileUpload({
+      client_category: easyPayCategoryDict[data.userInfo.category],
+      system_name: data.easyPay.system.name,
+      doseis: data.easyPay.noCreditSettings.doseis,
+      monthly_cost: data.easyPay.noCreditSettings.monthlyCost,
+      prokatavoli: data.easyPay.noCreditSettings.prokatavoli,
+      final_cost: data.easyPay.noCreditSettings.finalCost
+    });
 
     setTimeout(() => {
       easyPayFormEl.style.display = 'none';
@@ -4353,6 +4368,4 @@ function triggerEasyPayFileUpload(options) {
   trigger_system_summary('download');
   trigger_system_summary('email');
   triggerGtagEvent('easy_pay_file_upload', options);
-  //category
-  //doseis
 }
