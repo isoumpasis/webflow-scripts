@@ -289,6 +289,7 @@ input[type='range']::-ms-thumb:hover {
   text-align: center;
   padding: 50px;
   margin: 10px auto;
+  gap: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -314,13 +315,13 @@ input[type='range']::-ms-thumb:hover {
 .dz-drag-hover .dz-message {
   opacity: 0.5;
 }
-.upload-container-with-files {
+/* .upload-container-with-files {
   padding-top: 70px;
-}
-.dz-message-with-files {
+} */
+/* .dz-message-with-files {
   position: absolute;
   top: 15px;
-}
+} */
 .total-progress {
   opacity: 0;
   display: flex;
@@ -444,8 +445,8 @@ input[type='range']::-ms-thumb:hover {
   z-index: 9999;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .upload-container-with-files {
     padding-top: 120px;
   }
-}
+} */

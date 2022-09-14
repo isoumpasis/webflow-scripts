@@ -4124,11 +4124,11 @@ function easyPayFileUploader() {
   });
 
   myDropzone.on('addedfile', file => {
-    if (myDropzone.files.length) {
-      // document.querySelector('.dz-message').style.display = 'none';
-      document.querySelector('.dz-message').classList.add('.dz-message-with-files');
-      document.querySelector('#fileUploadContainer').classList.add('.upload-container-with-files');
-    }
+    // if (myDropzone.files.length) {
+    // document.querySelector('.dz-message').style.display = 'none';
+    // document.querySelector('.dz-message').classList.add('.dz-message-with-files');
+    // document.querySelector('#fileUploadContainer').classList.add('.upload-container-with-files');
+    // }
 
     if (
       myDropzone.files.length > EASY_PAY_MAX_FILES ||
@@ -4141,16 +4141,16 @@ function easyPayFileUploader() {
 
     fixFilePreviewTemplate(file);
   });
-  myDropzone.on('removedfile', file => {
-    // console.log('A file has been removed', file);
-    if (!myDropzone.files.length) {
-      // document.querySelector('.dz-message').style.display = 'flex';
-      document.querySelector('.dz-message').classList.remove('.dz-message-with-files');
-      document
-        .querySelector('#fileUploadContainer')
-        .classList.remove('.upload-container-with-files');
-    }
-  });
+  // myDropzone.on('removedfile', file => {
+  // console.log('A file has been removed', file);
+  // if (!myDropzone.files.length) {
+  // document.querySelector('.dz-message').style.display = 'flex';
+  //   document.querySelector('.dz-message').classList.remove('.dz-message-with-files');
+  //   document
+  //     .querySelector('#fileUploadContainer')
+  //     .classList.remove('.upload-container-with-files');
+  // }
+  // });
 
   myDropzone.on('totaluploadprogress', function (progress) {
     uploadProgressBar.value = progress;
