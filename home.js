@@ -1128,6 +1128,7 @@ function prokatavoliNoCreditSliderOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
+    console.log('prokatavoliNoCreditSliderOnChange');
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -1159,6 +1160,7 @@ function prokatavoliCreditSliderOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
+    console.log('prokatavoliCreditSliderOnChange');
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -1183,6 +1185,7 @@ function doseisNoCreditSliderOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
+    console.log('doseisNoCreditSliderOnChange');
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
@@ -1204,6 +1207,7 @@ function doseisCreditSelectOnChange(value) {
   updateBasketSection({ prokatavoliDoseis: true });
 
   if (step2Triggered && !step4Triggered) {
+    console.log('doseisCreditSelectOnChange');
     trigger_easy_pay_step_4({ triggered_via: 'click' });
   }
 }
