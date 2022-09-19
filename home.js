@@ -478,7 +478,7 @@ const storesLocationSelect = document.querySelector('#selectStores');
 
 let noCreditInterest = 12.6;
 
-let creditInterest = 8.2; //7.2 //8.2 //credit + isfora
+let creditInterest = 8.2; //7.2 //credit + isfora
 
 // let sourceReferrerDomain;
 
@@ -2559,9 +2559,9 @@ function PMT(interestPerMonth, doseis, cost) {
 }
 
 function getCreditMonthlyCost(poso, doseis) {
-  if (doseis <= 6) {
-    return Math.round((poso / doseis) * 100) / 100;
-  }
+  // if (doseis <= 6) {
+  //   return Math.round((poso / doseis) * 100) / 100;
+  // }
 
   let posoEksoflisis =
     (poso / doseis) *
