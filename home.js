@@ -477,7 +477,8 @@ const notificationIconBasket = document.querySelector('.notification-icon-basket
 const storesLocationSelect = document.querySelector('#selectStores');
 
 let noCreditInterest = 12.6;
-let creditInterest = 7.2;
+
+let creditInterest = 8.2; //7.2 //8.2 //credit + isfora
 
 // let sourceReferrerDomain;
 
