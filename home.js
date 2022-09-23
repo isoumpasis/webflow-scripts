@@ -1002,7 +1002,7 @@ function initCredit() {
     )
   );
 
-  doseisCreditSelect.selectedIndex = 10; //12 doseis
+  doseisCreditSelect.selectedIndex = 9; //12 doseis
 }
 
 function initMetrhta() {
