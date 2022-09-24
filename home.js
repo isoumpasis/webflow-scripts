@@ -391,6 +391,7 @@ const prokatavoliCreditSlider = document.querySelector('.prokatavoli-credit-slid
 
 const doseisNoCreditSlider = document.querySelector('.doseis-no-credit-slider');
 const doseisCreditSelect = document.querySelector('.doseis-credit-select');
+const doseisCreditSlider = document.querySelector('.doseis-credit-slider');
 
 const noVehicleNoCreditSlider = document.querySelector('.no-vehicle-no-credit-slider');
 const noVehicleCreditSlider = document.querySelector('.no-vehicle-credit-slider');
@@ -400,6 +401,7 @@ const prokatavoliNoCreditCover = document.querySelector('.prokatavoli-no-credit-
 const prokatavoliCreditCover = document.querySelector('.prokatavoli-credit-cover');
 
 const doseisNoCreditCover = document.querySelector('.doseis-no-credit-cover');
+const doseisCreditCover = document.querySelector('.doseis-credit-cover');
 
 const noVehicleNoCreditCover = document.querySelector('.no-vehicle-no-credit-cover');
 const noVehicleCreditCover = document.querySelector('.no-vehicle-credit-cover');
@@ -409,6 +411,7 @@ const outputNoCreditProkatavoli = document.querySelector('.output-no-credit-prok
 const outputCreditProkatavoli = document.querySelector('.output-credit-prokatavoli');
 
 const outputNoCreditDoseis = document.querySelector('.output-no-credit-doseis');
+const outputCreditDoseis = document.querySelector('.output-credit-doseis');
 
 const outputNoCreditNoVehicle = document.querySelector('.output-no-credit-no-vehicle');
 const outputCreditNoVehicle = document.querySelector('.output-credit-no-vehicle');
@@ -421,6 +424,8 @@ const creditProkatavoliPlus = document.querySelector('.credit-prokatavoli-plus')
 
 const noCreditDoseisMinus = document.querySelector('.no-credit-doseis-minus');
 const noCreditDoseisPlus = document.querySelector('.no-credit-doseis-plus');
+const creditDoseisMinus = document.querySelector('.credit-doseis-minus');
+const creditDoseisPlus = document.querySelector('.credit-doseis-plus');
 
 const noCreditNoVehicleMinus = document.querySelector('.no-credit-no-vehicle-minus');
 const noCreditNoVehiclePlus = document.querySelector('.no-credit-no-vehicle-plus');
@@ -457,6 +462,8 @@ const maxProkatavoliCreditSliderText = document.querySelector(
 
 const minDoseisNoCreditSliderText = document.querySelector('.min-doseis-no-credit-slider-text');
 const maxDoseisNoCreditSliderText = document.querySelector('.max-doseis-no-credit-slider-text');
+const minDoseisCreditSliderText = document.querySelector('.min-doseis-credit-slider-text');
+const maxDoseisCreditSliderText = document.querySelector('.max-doseis-credit-slider-text');
 
 const minNoVehicleNoCreditSliderText = document.querySelector(
   '.min-no-vehicle-no-credit-slider-text'
@@ -966,11 +973,20 @@ function initCredit() {
   );
   doseisCreditSelect.addEventListener('change', e => doseisCreditSelectOnChange(e.target.value));
 
+  doseisCreditSlider.addEventListener('input', e => doseisCreditSliderOnChange(e.target.value));
+
   outputCreditProkatavoli.addEventListener('change', function () {
     if (+this.value > +prokatavoliCreditSlider.max) this.value = prokatavoliCreditSlider.max;
     if (+this.value < +prokatavoliCreditSlider.min) this.value = prokatavoliCreditSlider.min;
     if (+this.value) this.value = Math.round(+this.value);
     prokatavoliCreditSliderOnChange(this.value);
+  });
+
+  outputCreditDoseis.addEventListener('change', function () {
+    if (+this.value > +doseisCreditSlider.max) this.value = doseisCreditSlider.max;
+    if (+this.value < +doseisCreditSlider.min) this.value = doseisCreditSlider.min;
+    if (+this.value) this.value = Math.round(+this.value);
+    doseisCreditSliderOnChange(this.value);
   });
 
   outputCreditNoVehicle.addEventListener('change', function () {
@@ -988,6 +1004,17 @@ function initCredit() {
   creditProkatavoliPlus.addEventListener('click', () =>
     prokatavoliCreditSliderOnChange(
       parseInt(prokatavoliCreditSlider.value) + parseInt(prokatavoliCreditSlider.step)
+    )
+  );
+
+  creditDoseisMinus.addEventListener('click', () =>
+    doseisCreditSliderOnChange(
+      parseInt(doseisCreditSlider.value) - parseInt(doseisCreditSlider.step)
+    )
+  );
+  creditDoseisPlus.addEventListener('click', () =>
+    doseisCreditSliderOnChange(
+      parseInt(doseisCreditSlider.value) + parseInt(doseisCreditSlider.step)
     )
   );
 
@@ -1178,6 +1205,29 @@ function doseisNoCreditSliderOnChange(value) {
     doseis: +doseisNoCreditSlider.value,
     finalCost: noCreditFinalCost.textContent,
     monthlyCost: noCreditMonthlyCost.textContent
+  };
+  updateBasketSection({ prokatavoliDoseis: true });
+
+  if (step2Triggered && !step4Triggered) {
+    trigger_easy_pay_step_4({ triggered_via: 'click' });
+  }
+}
+function doseisCreditSliderOnChange(value) {
+  doseisCreditSlider.value = value;
+  outputCreditDoseis.value = doseisCreditSlider.value;
+  doseisCreditCover.style.width = calcCoverWidth(doseisCreditSlider) + '%';
+  doseisChangeMinMaxLabelsWeight();
+  configureCreditResults();
+
+  if (!userSelections.vehicle.suggestions) return;
+  // userSelections.easyPay.noCreditSettings = { ...userSelections.easyPay.noCreditSettings, doseis: +doseisNoCreditSlider.value };
+  // userSelections.easyPay.noCreditSettings.finalCost = noCreditFinalCost.textContent;
+
+  userSelections.easyPay.creditSettings = {
+    ...userSelections.easyPay.creditSettings,
+    doseis: +doseisCreditSlider.value,
+    finalCost: creditFinalCost.textContent,
+    monthlyCost: creditMonthlyCost.textContent
   };
   updateBasketSection({ prokatavoliDoseis: true });
 
