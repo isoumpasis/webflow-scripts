@@ -2564,12 +2564,14 @@ function configureNoCreditResults() {
 }
 
 function configureCreditResults() {
-  const doseisCreditSelectValueInt = +doseisCreditSelect.value;
+  // const doseisCreditSelectValueInt = +doseisCreditSelect.value;
+  const doseisCreditSliderValueInt = +doseisCreditSlider.value;
   const prokatavoliCreditSliderValueInt = +prokatavoliCreditSlider.value;
 
   const monthlyCost = getCreditMonthlyCost(
     +creditEnapomeinanPoso.textContent,
-    doseisCreditSelectValueInt
+    doseisCreditSliderValueInt
+    // doseisCreditSelectValueInt
   );
   creditMonthlyCost.textContent = monthlyCost.toFixed(2) + '€';
 
@@ -2578,7 +2580,7 @@ function configureCreditResults() {
   creditFinalCost.textContent =
     (
       Math.round(
-        (monthlyCost * doseisCreditSelectValueInt + prokatavoliCreditSliderValueInt) * 10
+        (monthlyCost * doseisCreditSliderValueInt + prokatavoliCreditSliderValueInt) * 10
       ) / 10
     ).toFixed(2) + '€';
 }
