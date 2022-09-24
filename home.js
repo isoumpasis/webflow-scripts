@@ -390,7 +390,7 @@ const prokatavoliNoCreditSlider = document.querySelector('.prokatavoli-no-credit
 const prokatavoliCreditSlider = document.querySelector('.prokatavoli-credit-slider');
 
 const doseisNoCreditSlider = document.querySelector('.doseis-no-credit-slider');
-const doseisCreditSelect = document.querySelector('.doseis-credit-select');
+// const doseisCreditSelect = document.querySelector('.doseis-credit-select');
 const doseisCreditSlider = document.querySelector('.doseis-credit-slider');
 
 const noVehicleNoCreditSlider = document.querySelector('.no-vehicle-no-credit-slider');
@@ -971,7 +971,7 @@ function initCredit() {
   prokatavoliCreditSlider.addEventListener('input', e =>
     prokatavoliCreditSliderOnChange(e.target.value)
   );
-  doseisCreditSelect.addEventListener('change', e => doseisCreditSelectOnChange(e.target.value));
+  // doseisCreditSelect.addEventListener('change', e => doseisCreditSelectOnChange(e.target.value));
 
   doseisCreditSlider.addEventListener('input', e => doseisCreditSliderOnChange(e.target.value));
 
@@ -1029,7 +1029,7 @@ function initCredit() {
     )
   );
 
-  doseisCreditSelect.selectedIndex = 9; //12 doseis
+  // doseisCreditSelect.selectedIndex = 9; //12 doseis
 }
 
 function initMetrhta() {
@@ -1237,26 +1237,26 @@ function doseisCreditSliderOnChange(value) {
   }
 }
 
-function doseisCreditSelectOnChange(value) {
-  configureCreditResults();
-  if (!userSelections.vehicle.suggestions) return;
-  // userSelections.easyPay.creditSettings = {
-  // 	...userSelections.easyPay.creditSettings,
-  // 	doseis: +doseisCreditSelect.value !== 1 ? +doseisCreditSelect.value : 'Χωρίς Δόσεις'
-  // };
-  // userSelections.easyPay.creditSettings.finalCost = creditFinalCost.textContent;
-  userSelections.easyPay.creditSettings = {
-    ...userSelections.easyPay.creditSettings,
-    doseis: +doseisCreditSelect.value !== 1 ? +doseisCreditSelect.value : 'Χωρίς Δόσεις',
-    finalCost: creditFinalCost.textContent,
-    monthlyCost: creditMonthlyCost.textContent
-  };
-  updateBasketSection({ prokatavoliDoseis: true });
+// function doseisCreditSelectOnChange(value) {
+//   configureCreditResults();
+//   if (!userSelections.vehicle.suggestions) return;
+//   // userSelections.easyPay.creditSettings = {
+//   // 	...userSelections.easyPay.creditSettings,
+//   // 	doseis: +doseisCreditSelect.value !== 1 ? +doseisCreditSelect.value : 'Χωρίς Δόσεις'
+//   // };
+//   // userSelections.easyPay.creditSettings.finalCost = creditFinalCost.textContent;
+//   userSelections.easyPay.creditSettings = {
+//     ...userSelections.easyPay.creditSettings,
+//     doseis: +doseisCreditSelect.value !== 1 ? +doseisCreditSelect.value : 'Χωρίς Δόσεις',
+//     finalCost: creditFinalCost.textContent,
+//     monthlyCost: creditMonthlyCost.textContent
+//   };
+//   updateBasketSection({ prokatavoliDoseis: true });
 
-  if (step2Triggered && !step4Triggered) {
-    trigger_easy_pay_step_4({ triggered_via: 'click' });
-  }
-}
+//   if (step2Triggered && !step4Triggered) {
+//     trigger_easy_pay_step_4({ triggered_via: 'click' });
+//   }
+// }
 
 function noVehicleNoCreditSliderOnChange(value) {
   noVehicleNoCreditSlider.value = value;
