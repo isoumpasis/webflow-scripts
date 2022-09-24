@@ -1170,7 +1170,8 @@ function prokatavoliCreditSliderOnChange(value) {
   creditEnapomeinanPoso.textContent = (
     selectedEasyPaySystemPrice - parseInt(prokatavoliCreditSlider.value)
   ).toFixed(1);
-  doseisCreditSelectOnChange(+doseisCreditSelect.value);
+  doseisCreditSliderOnChange(+doseisCreditSlider.value);
+  // doseisCreditSelectOnChange(+doseisCreditSelect.value);
 
   if (!userSelections.vehicle.suggestions) return;
   // userSelections.easyPay.creditSettings.prokatavoli = +prokatavoliCreditSlider.value;
@@ -1306,6 +1307,10 @@ function doseisChangeMinMaxLabelsWeight() {
     doseisNoCreditSlider.value === doseisNoCreditSlider.max ? 'bold' : 'normal';
   minDoseisNoCreditSliderText.style.fontWeight =
     doseisNoCreditSlider.value === doseisNoCreditSlider.min ? 'bold' : 'normal';
+  maxDoseisCreditSliderText.style.fontWeight =
+    doseisCreditSlider.value === doseisCreditSlider.max ? 'bold' : 'normal';
+  minDoseisCreditSliderText.style.fontWeight =
+    doseisCreditSlider.value === doseisCreditSlider.min ? 'bold' : 'normal';
 }
 function noVehicleNoCreditChangeMinMaxLabelsWeight() {
   maxNoVehicleNoCreditSliderText.style.fontWeight =
@@ -1344,6 +1349,12 @@ minDoseisNoCreditSliderText.addEventListener('click', e =>
 );
 maxDoseisNoCreditSliderText.addEventListener('click', e =>
   doseisNoCreditSliderOnChange(doseisNoCreditSlider.max)
+);
+minDoseisCreditSliderText.addEventListener('click', e =>
+  doseisCreditSliderOnChange(doseisCreditSlider.min)
+);
+maxDoseisCreditSliderText.addEventListener('click', e =>
+  doseisCreditSliderOnChange(doseisCreditSlider.max)
 );
 
 minNoVehicleNoCreditSliderText.addEventListener('click', e =>
@@ -2376,7 +2387,8 @@ function getCreditSettings() {
   if (!userSelections.vehicle.suggestions.systems) return;
   return {
     prokatavoli: +prokatavoliCreditSlider.value,
-    doseis: +doseisCreditSelect.value,
+    // doseis: +doseisCreditSelect.value,
+    doseis: +doseisCreditSlider.value,
     finalCost: creditFinalCost.textContent,
     monthlyCost: creditMonthlyCost.textContent
   };
@@ -2520,7 +2532,9 @@ function configureCreditSliders() {
   maxProkatavoliCreditSliderText.textContent = floorPrice - 100 + '€';
 
   prokatavoliCreditCover.style.width = calcCoverWidth(prokatavoliCreditSlider) + '%';
+  doseisCreditCover.style.width = calcCoverWidth(doseisCreditSlider) + '%';
   outputCreditProkatavoli.value = prokatavoliCreditSlider.value;
+  outputNoCreditDoseis.value = doseisNoCreditSlider.value;
 
   creditEnapomeinanPoso.textContent = (
     selectedEasyPaySystemPrice - parseInt(prokatavoliCreditSlider.value)
