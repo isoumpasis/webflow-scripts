@@ -3283,9 +3283,9 @@ function downloadFile(blob, fileName) {
 
 function initStores() {
   if (userSelections.location) {
-    locationOnChange(userSelections.location.place);
+    locationOnChange(userSelections.location.place, true);
   } else {
-    locationOnChange(storesLocationSelect.value);
+    locationOnChange(storesLocationSelect.value, true);
   }
   // enableGPSButtonClick();
 }
@@ -3333,7 +3333,7 @@ function setLocationSelectHeader(label) {
 }
 
 storesLocationSelect.addEventListener('change', e => locationOnChange(e.target.value));
-function locationOnChange(value) {
+function locationOnChange(value, init = false) {
   if (!value) {
     isLocationSelected = false;
     return;
@@ -3342,12 +3342,14 @@ function locationOnChange(value) {
 
   fuelPricesSelectNoVehicle.value = value;
   fuelPricesSelectVehicle.value = value;
-  modifyFuelPriceSliders(value, { save: true });
-  [...document.querySelectorAll('.place-calc-descr')].map(
-    el =>
-      (el.textContent =
-        fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent)
-  );
+  if (!init) {
+    modifyFuelPriceSliders(value, { save: true });
+    [...document.querySelectorAll('.place-calc-descr')].map(
+      el =>
+        (el.textContent =
+          fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent)
+    );
+  }
 
   storesLocationSelect.value = value;
   document.querySelector('.searching-place-text-location').textContent =
