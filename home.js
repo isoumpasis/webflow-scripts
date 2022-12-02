@@ -838,6 +838,7 @@ notConvertibleFormLocationSelect.addEventListener('change', e => {
 });
 
 function modifyFuelPriceSliders(value, { save = false } = {}) {
+  console.log(fuelPrices);
   const locationObj = fuelPrices.find(obj => obj.place.indexOf(value) !== -1);
   if (!locationObj) return;
 
