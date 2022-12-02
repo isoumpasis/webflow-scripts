@@ -478,6 +478,9 @@ const maxNoVehicleMetrhtaSliderText = document.querySelector('.max-no-vehicle-me
 
 const fuelPricesSelectVehicle = document.querySelector('#fuelPricesSelectVehicle');
 const fuelPricesSelectNoVehicle = document.querySelector('#fuelPricesSelectNoVehicle');
+const notConvertibleFormLocationSelect = document.querySelector(
+  '#notConvertibleFormLocationSelect'
+);
 
 const notificationIconBasket = document.querySelector('.notification-icon-basket');
 
@@ -800,33 +803,38 @@ function initPlaceSelects(placeValue) {
 }
 
 fuelPricesSelectNoVehicle.addEventListener('change', e => {
-  fuelPricesSelectVehicle.value = e.target.value;
-  modifyFuelPriceSliders(e.target.value, { save: true });
-  [...document.querySelectorAll('.place-calc-descr')].map(
-    el =>
-      (el.textContent =
-        fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent)
-  );
+  locationOnChange(e.target.value);
+  // fuelPricesSelectVehicle.value = e.target.value;
+  // modifyFuelPriceSliders(e.target.value, { save: true });
+  // [...document.querySelectorAll('.place-calc-descr')].map(
+  //   el =>
+  //     (el.textContent =
+  //       fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent)
+  // );
 
-  storesLocationSelect.value = e.target.value;
-  locationOnChange(storesLocationSelect.value);
+  // storesLocationSelect.value = e.target.value;
+  // locationOnChange(storesLocationSelect.value);
 });
 fuelPricesSelectVehicle.addEventListener('change', e => {
-  fuelPricesSelectNoVehicle.value = e.target.value;
-  modifyFuelPriceSliders(e.target.value, { save: true });
-  [...document.querySelectorAll('.place-calc-descr')].map(
-    el =>
-      (el.textContent =
-        fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent)
-  );
+  locationOnChange(e.target.value);
+  // fuelPricesSelectNoVehicle.value = e.target.value;
+  // modifyFuelPriceSliders(e.target.value, { save: true });
+  // [...document.querySelectorAll('.place-calc-descr')].map(
+  //   el =>
+  //     (el.textContent =
+  //       fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent)
+  // );
 
-  storesLocationSelect.value = e.target.value;
-  locationOnChange(storesLocationSelect.value);
+  // storesLocationSelect.value = e.target.value;
+  // locationOnChange(storesLocationSelect.value);
 
   updateBasketSection({ calculator: true });
   if (step2Triggered && !step3Triggered) {
     trigger_calculator_step_3({ triggered_via: 'click' });
   }
+});
+notConvertibleFormLocationSelect.addEventListener('change', e => {
+  locationOnChange(e.target.value);
 });
 
 function modifyFuelPriceSliders(value, { save = false } = {}) {
@@ -3330,6 +3338,15 @@ function locationOnChange(value) {
     return;
   }
   isLocationSelected = true;
+
+  fuelPricesSelectNoVehicle.value = value;
+  fuelPricesSelectVehicle.value = value;
+  modifyFuelPriceSliders(value, { save: true });
+  [...document.querySelectorAll('.place-calc-descr')].map(
+    el =>
+      (el.textContent =
+        fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent)
+  );
 
   storesLocationSelect.value = value;
   document.querySelector('.searching-place-text-location').textContent =
