@@ -3351,6 +3351,8 @@ function locationOnChange(value, init = false) {
     );
   }
 
+  notConvertibleFormLocationSelect.value = value;
+
   storesLocationSelect.value = value;
   document.querySelector('.searching-place-text-location').textContent =
     storesLocationSelect.options[storesLocationSelect.selectedIndex].innerHTML;
