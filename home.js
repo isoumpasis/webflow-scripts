@@ -1476,6 +1476,7 @@ makeSelect.addEventListener('change', function () {
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
   togglePulse('.car-pulse', false);
+  resetNotConvForm();
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1599,6 +1600,7 @@ function yearOnChange(value) {
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
   togglePulse('.summary-pulse', false);
+  resetNotConvForm();
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1678,6 +1680,7 @@ function modelOnChange(value) {
   updateBasketSection({ resetNoVehicle: true });
   resetProgressSteps();
   togglePulse('.summary-pulse', false);
+  resetNotConvForm();
 
   userSelections.vehicle = {};
   delete userSelections.calculator.driveOftenIndex;
@@ -1829,6 +1832,7 @@ function descriptionOnChange(value) {
     updateBasketSection({ resetNoVehicle: true });
     resetProgressSteps();
     togglePulse('.summary-pulse', false);
+    resetNotConvForm();
 
     userSelections.vehicle = {};
     delete userSelections.calculator.driveOftenIndex;
@@ -4511,6 +4515,11 @@ notConvFormSubmitBtn.addEventListener('click', e => {
     .then(res => res.json())
     .then(data => {
       console.log('getting back', data);
+      if (data.status !== 200) {
+        handleInvalidDownload(data?.messages[0] || 'Κάτι πήγε στραβά');
+      } else {
+        showSuccessNotConvForm();
+      }
     })
     .catch(e => console.error('Error on Not Conv Form Fetch:', e));
 });
@@ -4537,4 +4546,14 @@ function showNotConvertibleFormContainer() {
     '#notConvertibleModelName'
   ).textContent = `${modelSelect.value} (${yearSelect.value})`;
   document.querySelector('.not-convertible-form-container').style.display = 'flex';
+}
+
+function showSuccessNotConvForm() {
+  document.querySelector('.not-conv-raw-form').style.display = 'none';
+  document.querySelector('.not-conv-success-container').style.display = 'flex';
+}
+
+function resetNotConvForm() {
+  document.querySelector('.not-conv-raw-form').style.display = 'flex';
+  document.querySelector('.not-conv-success-container').style.display = 'none';
 }
