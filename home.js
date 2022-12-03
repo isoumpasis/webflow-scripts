@@ -531,6 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initPulses();
   // configGtag();
+  initNotConvSubmitBtn();
 
   easyPayFileUploader();
 });
@@ -538,6 +539,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // function configGtag() {
 //   gtag('config', 'G-1BV1MH8CNJ', { global_referrer_domain: sourceReferrerDomain });
 // }
+
+function initNotConvSubmitBtn() {
+  document.querySelector('#notConvFormSubmitBtn').removeAttribute('type');
+}
 
 function initPulses() {
   const carPulse = document.createElement('div');
@@ -4482,7 +4487,6 @@ function triggerEasyPayFileUpload(options) {
 notConvFormSubmitBtn.addEventListener('click', e => {
   e.preventDefault();
   const validationResult = validateNotConvForm();
-  validationResult.valid = true;
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   vehicleValues = userSelections.vehicle.identification.vehicleValues;
@@ -4505,6 +4509,8 @@ notConvFormSubmitBtn.addEventListener('click', e => {
 
   console.log('sending data...', dataToSend);
 
+  notConvFormSubmitBtn.disabled = true;
+  notConvFormSubmitBtn.textContent = 'Γίνεται αποστολή...';
   fetch(urlNotConvForm, {
     method: 'POST',
     headers: {
@@ -4514,6 +4520,9 @@ notConvFormSubmitBtn.addEventListener('click', e => {
   })
     .then(res => res.json())
     .then(data => {
+      notConvFormSubmitBtn.disabled = false;
+      notConvFormSubmitBtn.textContent = 'Αποστολή';
+
       console.log('getting back', data);
       if (data.status && data.status !== 200) {
         handleInvalidDownload(data?.messages[0] || 'Κάτι πήγε στραβά');
@@ -4521,7 +4530,11 @@ notConvFormSubmitBtn.addEventListener('click', e => {
         showSuccessNotConvForm();
       }
     })
-    .catch(e => console.error('Error on Not Conv Form Fetch:', e));
+    .catch(e => {
+      console.error('Error on Not Conv Form Fetch:', e);
+      notConvFormSubmitBtn.disabled = false;
+      notConvFormSubmitBtn.textContent = 'Αποστολή';
+    });
 });
 
 function validateNotConvForm() {
