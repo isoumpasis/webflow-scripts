@@ -4478,6 +4478,7 @@ function triggerEasyPayFileUpload(options) {
 notConvFormSubmitBtn.addEventListener('click', e => {
   e.preventDefault();
   const validationResult = validateNotConvForm();
+  validationResult.valid = true;
   if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
 
   vehicleValues = userSelections.vehicle.identification.vehicleValues;
