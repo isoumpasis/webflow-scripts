@@ -4492,7 +4492,8 @@ notConvFormSubmitBtn.addEventListener('click', e => {
       username: userInfo.username,
       email: userInfo.email,
       phone: userInfo.phone,
-      place: userSelections.location.place
+      place: userSelections.location.place,
+      sourceReferrerDomain
     }
   };
 
