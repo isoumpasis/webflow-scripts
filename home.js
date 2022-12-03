@@ -1977,7 +1977,6 @@ function showResults(fetchedModelObj) {
     resetEasyPay();
     updateBasketSection({ resetNoVehicle: true });
     resetProgressSteps();
-    showNotConvertibleFormContainer();
   }
 
   configureUserSelectionsAfterResults();
@@ -2051,9 +2050,12 @@ function showDirectResults(fetchedModelObj) {
       temp[1] + ' - ' + temp[0].replace(' ', '');
     directSystemDiv.style.display = 'grid';
   } else {
+    console.log('found vehicle obj cylinders', foundVehicleObj);
     if (foundVehicleObj.cylinders <= 4) {
+      console.log('form');
       document.querySelector('.not-convertible-form-container').style.display = 'flex';
     } else {
+      console.log('not conv');
       document.querySelector(
         `.not-convertible-${userSelections.selectedFuel}-container`
       ).style.display = 'grid';
@@ -4509,8 +4511,4 @@ function validateNotConvForm() {
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
 
   return { valid: true };
-}
-
-function showNotConvertibleFormContainer() {
-  document.querySelector('.not-convertible-form-container').style.display = 'flex';
 }
