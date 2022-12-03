@@ -107,6 +107,7 @@ let emulatorSelected = false;
 const systemNamesFromIdDict = {
   'notConvertible-lpg': ['not convertible lpg'],
   'notConvertible-cng': ['not convertible cng'],
+  'notConvertible-form': ['not convertible form'],
 
   'suggested-lpg-ego': ['Lovato E-GO II'],
   'suggested-lpg-exr': ['Lovato Smart ExR'],
