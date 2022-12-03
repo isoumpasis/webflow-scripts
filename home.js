@@ -4496,6 +4496,7 @@ function validateNotConvForm() {
   if (userEmail && !isEmail(userEmail)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
 
   const userPhone = document.querySelector('.user-info-phone').value;
+  if (!userPhone) return { valid: false, msg: 'Απαιτείται αριθμός τηλεφώνου' };
   if (userPhone && (isNaN(userPhone) || userPhone.length !== 10))
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
 
