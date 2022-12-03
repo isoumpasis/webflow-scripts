@@ -4515,7 +4515,7 @@ notConvFormSubmitBtn.addEventListener('click', e => {
     .then(res => res.json())
     .then(data => {
       console.log('getting back', data);
-      if (data.status !== 200) {
+      if (data.status && data.status !== 200) {
         handleInvalidDownload(data?.messages[0] || 'Κάτι πήγε στραβά');
       } else {
         showSuccessNotConvForm();
