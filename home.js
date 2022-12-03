@@ -1961,7 +1961,8 @@ function showResults(fetchedModelObj) {
     suggestedContainer &&
     !suggestedContainer.classList.contains(
       `not-convertible-${userSelections.selectedFuel}-container`
-    )
+    ) &&
+    !suggestedContainer.classList.contains('not-convertible-form-container')
   ) {
     showGuarantee(true);
     displayEmulatorInfo(suggestedContainer);
@@ -1975,6 +1976,7 @@ function showResults(fetchedModelObj) {
     resetEasyPay();
     updateBasketSection({ resetNoVehicle: true });
     resetProgressSteps();
+    showNotConvertibleFormContainer();
   }
 
   configureUserSelectionsAfterResults();
@@ -1983,7 +1985,8 @@ function showResults(fetchedModelObj) {
     suggestedContainer &&
     !suggestedContainer.classList.contains(
       `not-convertible-${userSelections.selectedFuel}-container`
-    )
+    ) &&
+    !suggestedContainer.classList.contains('not-convertible-form-container')
   ) {
     updateBasketSection({
       vehicle: true,
@@ -2047,9 +2050,13 @@ function showDirectResults(fetchedModelObj) {
       temp[1] + ' - ' + temp[0].replace(' ', '');
     directSystemDiv.style.display = 'grid';
   } else {
-    document.querySelector(
-      `.not-convertible-${userSelections.selectedFuel}-container`
-    ).style.display = 'grid';
+    if (foundVehicleObj.cylinders <= 4) {
+      document.querySelector('.not-convertible-form-container').style.display = 'flex';
+    } else {
+      document.querySelector(
+        `.not-convertible-${userSelections.selectedFuel}-container`
+      ).style.display = 'grid';
+    }
   }
 }
 
@@ -4501,4 +4508,8 @@ function validateNotConvForm() {
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
 
   return { valid: true };
+}
+
+function showNotConvertibleFormContainer() {
+  document.querySelector('.not-convertible-form-container').style.display = 'flex';
 }
