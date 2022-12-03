@@ -2055,10 +2055,7 @@ function showDirectResults(fetchedModelObj) {
     directSystemDiv.style.display = 'grid';
   } else {
     if (foundVehicleObj.cylinders <= 4) {
-      document.querySelector(
-        '#notConvertibleModelName'
-      ).textContent = `${makeSelect.value} ${modelSelect.value} (${yearSelect.value})`;
-      document.querySelector('.not-convertible-form-container').style.display = 'flex';
+      showNotConvertibleFormContainer();
     } else {
       document.querySelector(
         `.not-convertible-${userSelections.selectedFuel}-container`
@@ -4515,4 +4512,13 @@ function validateNotConvForm() {
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
 
   return { valid: true };
+}
+
+function showNotConvertibleFormContainer() {
+  document.querySelector('#notConvertibleMakeImg').src =
+    makeImgPrefix + makeImgDict[makeSelect.value];
+  document.querySelector(
+    '#notConvertibleModelName'
+  ).textContent = `${modelSelect.value} (${yearSelect.value})`;
+  document.querySelector('.not-convertible-form-container').style.display = 'flex';
 }
