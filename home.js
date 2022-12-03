@@ -1826,6 +1826,7 @@ descriptionSelect.addEventListener('change', e => descriptionOnChange(e.target.v
 
 function descriptionOnChange(value) {
   suggestedContainers.forEach(cont => (cont.style.display = 'none'));
+  resetNotConvForm();
 
   if (!value) {
     showGuarantee(false);
@@ -1837,7 +1838,6 @@ function descriptionOnChange(value) {
     updateBasketSection({ resetNoVehicle: true });
     resetProgressSteps();
     togglePulse('.summary-pulse', false);
-    resetNotConvForm();
 
     userSelections.vehicle = {};
     delete userSelections.calculator.driveOftenIndex;
