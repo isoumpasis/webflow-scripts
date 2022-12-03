@@ -493,6 +493,7 @@ let creditInterest = 8.2; //7.2 //credit + isfora
 // let sourceReferrerDomain;
 
 const h2FuelSelection = document.querySelector('.h2-fuel-selection');
+const notConvFormSubmitBtn = document.querySelector('#notConvFormSubmitBtn');
 
 document.addEventListener('DOMContentLoaded', () => {
   if (preferredStorage.userSelections) userSelections = getUserSelections();
@@ -838,7 +839,7 @@ notConvertibleFormLocationSelect.addEventListener('change', e => {
 });
 
 function modifyFuelPriceSliders(value, { save = false } = {}) {
-  console.log(fuelPrices);
+  // console.log(fuelPrices);
   const locationObj = fuelPrices.find(obj => obj.place.indexOf(value) !== -1);
   if (!locationObj) return;
 
@@ -3243,7 +3244,7 @@ function validateUserForm(triggeredFrom = null, formType) {
     return { valid: false, msg: 'Απαιτείται έγκυρο email' };
 
   const userPhone = document.querySelector('.user-info-phone').value;
-  if (userPhone && (isNaN(userPhone) || userPhone.length != 10))
+  if (userPhone && (isNaN(userPhone) || userPhone.length !== 10))
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
   // if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
   return { valid: true };
@@ -4429,7 +4430,7 @@ function validateFileUploadForm() {
   if (!isEmail(userEmail)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
 
   const userPhone = document.querySelector('.user-info-phone').value;
-  if (userPhone && (isNaN(userPhone) || userPhone.length != 10))
+  if (userPhone && (isNaN(userPhone) || userPhone.length !== 10))
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
   if (!userPhone) return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
   // if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
@@ -4460,4 +4461,43 @@ function triggerEasyPayFileUpload(options) {
   trigger_system_summary('download');
   trigger_system_summary('email');
   triggerGtagEvent('easy_pay_file_upload', options);
+}
+
+notConvFormSubmitBtn.addEventListener('click', e => {
+  e.preventDefault();
+  const validationResult = validateNotConvForm();
+  if (!validationResult.valid) return handleInvalidDownload(validationResult.msg);
+
+  vehicleValues = userSelections.vehicle.identification.vehicleValues;
+  const dataToSend = {
+    vehicle: {
+      make: vehicleValues.make,
+      year: vehicleValues.year,
+      model: vehicleValues.model,
+      description: vehicleValues.description,
+      selectedFuel: userSelections.selectedFuel
+    },
+    userInfo: {
+      username: userInfo.username,
+      email: userInfo.email,
+      phone: userInfo.phone,
+      place: userSelections.location.place
+    }
+  };
+
+  console.log('sending data...', dataToSend);
+});
+
+function validateNotConvForm() {
+  if (!document.querySelector('.user-info-username').value)
+    return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
+
+  const userEmail = document.querySelector('.user-info-email').value;
+  if (userEmail && !isEmail(userEmail)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
+
+  const userPhone = document.querySelector('.user-info-phone').value;
+  if (userPhone && (isNaN(userPhone) || userPhone.length !== 10))
+    return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
+
+  return { valid: true };
 }
