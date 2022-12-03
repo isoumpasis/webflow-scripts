@@ -2054,12 +2054,12 @@ function showDirectResults(fetchedModelObj) {
       temp[1] + ' - ' + temp[0].replace(' ', '');
     directSystemDiv.style.display = 'grid';
   } else {
-    console.log('found vehicle obj cylinders', foundVehicleObj);
     if (foundVehicleObj.cylinders <= 4) {
-      console.log('form');
+      document.querySelector(
+        '#notConvertibleModelName'
+      ).textContent = `${makeSelect.value} ${modelSelect.value} (${yearSelect.value})`;
       document.querySelector('.not-convertible-form-container').style.display = 'flex';
     } else {
-      console.log('not conv');
       document.querySelector(
         `.not-convertible-${userSelections.selectedFuel}-container`
       ).style.display = 'grid';
