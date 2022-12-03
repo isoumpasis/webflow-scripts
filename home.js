@@ -17,6 +17,7 @@ const closestUrl = serverUrl + 'map/pins/closest';
 const urlContactForm = serverUrl + 'contact/';
 const easyPayFileUploaderUrl = serverUrl + 'summaries/easyPay';
 // const baseDateUrl = serverUrl + 'lottery/base-date';
+const urlNotConvFormSubmit = serverUrl + 'notConvertible/';
 
 let fetchedYears;
 let fetchedModels;
@@ -4498,6 +4499,19 @@ notConvFormSubmitBtn.addEventListener('click', e => {
   };
 
   console.log('sending data...', dataToSend);
+
+  fetch(urlNotConvFormSubmit, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ data: dataToSend })
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log('getting back', data);
+    })
+    .catch(e => console.error('Error on FuelPrices Fetch:', e));
 });
 
 function validateNotConvForm() {
