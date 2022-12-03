@@ -541,7 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // }
 
 function initNotConvSubmitBtn() {
-  document.querySelector('#notConvFormSubmitBtn').removeAttribute('type');
+  document.querySelector('#notConvFormSubmitBtn').setAttribute('type', 'button');
 }
 
 function initPulses() {
