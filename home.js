@@ -17,7 +17,7 @@ const closestUrl = serverUrl + 'map/pins/closest';
 const urlContactForm = serverUrl + 'contact/';
 const easyPayFileUploaderUrl = serverUrl + 'summaries/easyPay';
 // const baseDateUrl = serverUrl + 'lottery/base-date';
-const urlNotConvFormSubmit = serverUrl + 'notConvertible/';
+const urlNotConvForm = serverUrl + 'notConvertible';
 
 let fetchedYears;
 let fetchedModels;
@@ -4500,7 +4500,7 @@ notConvFormSubmitBtn.addEventListener('click', e => {
 
   console.log('sending data...', dataToSend);
 
-  fetch(urlNotConvFormSubmit, {
+  fetch(urlNotConvForm, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -4511,7 +4511,7 @@ notConvFormSubmitBtn.addEventListener('click', e => {
     .then(data => {
       console.log('getting back', data);
     })
-    .catch(e => console.error('Error on FuelPrices Fetch:', e));
+    .catch(e => console.error('Error on Not Conv Form Fetch:', e));
 });
 
 function validateNotConvForm() {
