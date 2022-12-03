@@ -1736,7 +1736,11 @@ function populateDescriptionSelect(fetchedModelObj) {
     let engineCodesOptions = [];
     fetchedModelObj.vehicles.forEach(vehicle => {
       vehicle.engineCodes.forEach(code => {
-        let convertibleSymbol = vehicle.isConvertible ? ' ✔️' : ' &#10060;';
+        let convertibleSymbol = vehicle.isConvertible
+          ? ' ✔️'
+          : vehicle.cylinders <= 4
+          ? ' &#8987;'
+          : ' &#10060;';
         engineCodesOptions.push(code + convertibleSymbol);
       });
     });
