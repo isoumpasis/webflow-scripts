@@ -1739,7 +1739,7 @@ function populateDescriptionSelect(fetchedModelObj) {
         let convertibleSymbol = vehicle.isConvertible
           ? ' ✔️'
           : vehicle.cylinders <= 4
-          ? ' &#8987;'
+          ? ' &#9203;'
           : ' &#10060;';
         engineCodesOptions.push(code + convertibleSymbol);
       });
