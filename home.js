@@ -4554,6 +4554,6 @@ function showSuccessNotConvForm() {
 }
 
 function resetNotConvForm() {
-  document.querySelector('.not-conv-raw-form').style.display = 'flex';
+  document.querySelector('.not-conv-raw-form').style.display = 'block';
   document.querySelector('.not-conv-success-container').style.display = 'none';
 }
