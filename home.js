@@ -4533,6 +4533,7 @@ notConvFormSubmitBtn.addEventListener('click', e => {
         handleInvalidDownload(data?.messages[0] || 'Κάτι πήγε στραβά');
       } else {
         showSuccessNotConvForm();
+        trigger_not_convertible_form_submit();
       }
     })
     .catch(e => {
@@ -4574,4 +4575,16 @@ function showSuccessNotConvForm() {
 function resetNotConvForm() {
   document.querySelector('.not-conv-raw-form').style.display = 'block';
   document.querySelector('.not-conv-success-container').style.display = 'none';
+}
+
+function trigger_not_convertible_form_submit() {
+  triggerGtagEvent('not_convertible_form_submit', {
+    selected_fuel: userSelections.selectedFuel,
+    vehicle_make: userSelections.vehicle.identification.vehicleValues.make,
+    vehicle_year: userSelections.vehicle.identification.vehicleValues.year,
+    vehicle_model: userSelections.vehicle.identification.vehicleValues.model,
+    vehicle_description: userSelections.vehicle.identification.vehicleValues.description,
+    user_location: userSelections.location.place,
+    sourceReferrerDomain
+  });
 }
