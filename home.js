@@ -4513,6 +4513,8 @@ notConvFormSubmitBtn.addEventListener('click', e => {
 
   notConvFormSubmitBtn.disabled = true;
   notConvFormSubmitBtn.value = 'Γίνεται αποστολή...';
+  notConvFormSubmitBtn.style.cursor = 'wait';
+
   fetch(urlNotConvForm, {
     method: 'POST',
     headers: {
@@ -4524,6 +4526,7 @@ notConvFormSubmitBtn.addEventListener('click', e => {
     .then(data => {
       notConvFormSubmitBtn.disabled = false;
       notConvFormSubmitBtn.value = 'Αποστολή';
+      notConvFormSubmitBtn.style.cursor = 'pointer';
 
       if (data.status && data.status !== 200) {
         handleInvalidDownload(data?.messages[0] || 'Κάτι πήγε στραβά');
@@ -4536,6 +4539,7 @@ notConvFormSubmitBtn.addEventListener('click', e => {
       console.error('Error on Not Conv Form Fetch:', e);
       notConvFormSubmitBtn.disabled = false;
       notConvFormSubmitBtn.value = 'Αποστολή';
+      notConvFormSubmitBtn.style.cursor = 'pointer';
     });
 });
 
