@@ -2014,7 +2014,9 @@ function showResults(fetchedModelObj) {
     trigger_car_step_2();
     togglePulse('.summary-pulse', true);
   } else if (suggestedContainer) {
-    trigger_not_convertible();
+    trigger_not_convertible(
+      suggestedContainer.classList.contains('not-convertible-form-container')
+    );
   }
 }
 
@@ -3851,13 +3853,14 @@ function trigger_car_step_2() {
   });
 }
 
-function trigger_not_convertible() {
+function trigger_not_convertible(notConvForm = false) {
   triggerGtagEvent('not_convertible', {
     selected_fuel: userSelections.selectedFuel,
     vehicle_make: userSelections.vehicle.identification.vehicleValues.make,
     vehicle_year: userSelections.vehicle.identification.vehicleValues.year,
     vehicle_model: userSelections.vehicle.identification.vehicleValues.model,
-    vehicle_description: userSelections.vehicle.identification.vehicleValues.description
+    vehicle_description: userSelections.vehicle.identification.vehicleValues.description,
+    not_conv_form: notConvForm
   });
 }
 
