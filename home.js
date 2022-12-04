@@ -4584,7 +4584,6 @@ function trigger_not_convertible_form_submit() {
     vehicle_year: userSelections.vehicle.identification.vehicleValues.year,
     vehicle_model: userSelections.vehicle.identification.vehicleValues.model,
     vehicle_description: userSelections.vehicle.identification.vehicleValues.description,
-    user_location: userSelections.location.place,
-    sourceReferrerDomain
+    user_location: userSelections.location.place
   });
 }
