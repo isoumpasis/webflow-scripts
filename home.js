@@ -4335,7 +4335,7 @@ function easyPayFileUploader() {
       );
 
       if (res.includes('upload files of this type')) {
-        console.log('includes!');
+        // console.log('includes!');
         myDropzone.removeFile(file);
       }
 
@@ -4399,7 +4399,6 @@ function downloadFileFromEasyPay(base64, fileName) {
 }
 
 function displayEasyPayMsg(type, msg, time = 2000) {
-  // console.log(type, msg);
   document
     .querySelector('#fileUploadContainer')
     .classList.add(type === 'error' ? 'container-error' : 'container-success');
@@ -4512,8 +4511,6 @@ notConvFormSubmitBtn.addEventListener('click', e => {
     }
   };
 
-  console.log('sending data...', dataToSend);
-
   notConvFormSubmitBtn.disabled = true;
   notConvFormSubmitBtn.value = 'Γίνεται αποστολή...';
   fetch(urlNotConvForm, {
@@ -4528,7 +4525,6 @@ notConvFormSubmitBtn.addEventListener('click', e => {
       notConvFormSubmitBtn.disabled = false;
       notConvFormSubmitBtn.value = 'Αποστολή';
 
-      console.log('getting back', data);
       if (data.status && data.status !== 200) {
         handleInvalidDownload(data?.messages[0] || 'Κάτι πήγε στραβά');
       } else {
