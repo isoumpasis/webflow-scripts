@@ -1,6 +1,6 @@
 /* System Identification */
-// let serverUrl = 'https://lovatohellas.herokuapp.com/';
-let serverUrl = 'http://localhost:1917/';
+let serverUrl = 'https://lovatohellas.herokuapp.com/';
+// let serverUrl = 'http://localhost:1917/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlYears = serverUrl + 'vehicleDB/get/years';
@@ -4484,7 +4484,7 @@ function enableFileUploaderSubmitBtn() {
 
 function triggerEasyPayFileUpload(options) {
   trigger_system_summary('download');
-  trigger_system_summary('email');
+  // trigger_system_summary('email');
   triggerGtagEvent('easy_pay_file_upload', options);
 }
 
