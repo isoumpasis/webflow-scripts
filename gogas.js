@@ -843,10 +843,10 @@ document.querySelector('#openDownloadForm').addEventListener('click', e => {
 
   const hasStrictSummaryPolicy = getStrictSummaryPolicy();
   document.querySelector('.name-mandatory').textContent = hasStrictSummaryPolicy
-    ? '(*)'
+    ? '*'
     : '(προαιρετικό)';
   document.querySelector('.phone-mandatory').textContent = hasStrictSummaryPolicy
-    ? '(*)'
+    ? '*'
     : '(προαιρετικό)';
   document.querySelector('.email-mandatory').textContent = '(προαιρετικό)';
 
@@ -867,12 +867,12 @@ document.querySelector('#openEmailForm').addEventListener('click', e => {
 
   const hasStrictSummaryPolicy = getStrictSummaryPolicy();
   document.querySelector('.name-mandatory').textContent = hasStrictSummaryPolicy
-    ? '(*)'
+    ? '*'
     : '(προαιρετικό)';
   document.querySelector('.phone-mandatory').textContent = hasStrictSummaryPolicy
-    ? '(*)'
+    ? '*'
     : '(προαιρετικό)';
-  document.querySelector('.email-mandatory').textContent = '(*)';
+  document.querySelector('.email-mandatory').textContent = '*';
 
   document.querySelector('#summaryFormTitle').textContent = hasStrictSummaryPolicy
     ? 'Πρόσθεσε τα στοιχεία σου για την καλύτερη εξυπηρέτησή σου!'
