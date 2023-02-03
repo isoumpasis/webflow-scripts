@@ -3292,7 +3292,6 @@ function validateUserForm(triggeredFrom = null, formType) {
     };
 
   const hasStrictSummaryPolicy = getStrictSummaryPolicy();
-  console.log({ hasStrictSummaryPolicy }, { sourceReferrerDomain });
 
   if (hasStrictSummaryPolicy) {
     if (!document.querySelector('.user-info-username').value)

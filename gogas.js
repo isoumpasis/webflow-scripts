@@ -1,6 +1,6 @@
 /* System Identification */
-let serverUrl = 'https://lovatohellas.herokuapp.com/';
-// let serverUrl = 'http://localhost:1917/';
+// let serverUrl = 'https://lovatohellas.herokuapp.com/';
+let serverUrl = 'http://localhost:1917/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlLitres = '/litres';
@@ -53,6 +53,8 @@ const tankImgUrlDict = {
   ΚΥΛΙΝΔΡΙΚΗ:
     'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/630e0c04458984ce820047bb_cyl-tank-with-mv.jpg'
 };
+
+const strictSummaryPolicyReferrers = ['kalogritsasgas.gr', 'lovato-hellas.webflow.io'];
 
 const preferredStorage = localStorage;
 let gogasSelections = {};
@@ -838,7 +840,20 @@ document.querySelector('#openDownloadForm').addEventListener('click', e => {
   formType = 'DOWNLOAD';
   showFacebookBrowserProblem(true);
   document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
+
+  const hasStrictSummaryPolicy = getStrictSummaryPolicy();
+  document.querySelector('.name-mandatory').textContent = hasStrictSummaryPolicy
+    ? '(*υποχρεωτικό)'
+    : '(προαιρετικό)';
+  document.querySelector('.phone-mandatory').textContent = hasStrictSummaryPolicy
+    ? '(*υποχρεωτικό)'
+    : '(προαιρετικό)';
   document.querySelector('.email-mandatory').textContent = '(προαιρετικό)';
+
+  document.querySelector('#summaryFormTitle').textContent = hasStrictSummaryPolicy
+    ? 'Πρόσθεσε τα στοιχεία σου για την καλύτερη εξυπηρέτησή σου!'
+    : 'Πρόσθεσε, προαιρετικά, τα στοιχεία σου για την καλύτερη εξυπηρέτησή σου!';
+
   trigger_opened_summary_form({
     summary_type: 'download',
     is_facebook_browser: isFacebookBrowser()
@@ -1011,19 +1026,26 @@ function closeSummaryForm() {
   overlay && (overlay.style.display = 'none');
 }
 
+function getStrictSummaryPolicy() {
+  return strictSummaryPolicyReferrers.includes(sourceReferrerDomain);
+}
+
 function validateUserForm(formType) {
   if (!hasResult())
     return {
       valid: false,
       msg: 'Για να κατεβάσετε την προσφορά θα πρέπει πρώτα να επιλέξετε δεξαμενή παραπάνω!'
     };
-  // if (!document.querySelector('.user-info-username').value)
-  //   return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
 
+  const hasStrictSummaryPolicy = getStrictSummaryPolicy();
+
+  if (hasStrictSummaryPolicy) {
+    if (!document.querySelector('.user-info-username').value)
+      return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
+  }
   const userEmail = document.querySelector('.user-info-email').value;
   if (userEmail && !isEmail(userEmail)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
 
-  // console.log(formType, userEmail, isEmail(userEmail));
   if (formType === 'EMAIL' && !isEmail(userEmail))
     return { valid: false, msg: 'Απαιτείται έγκυρο email' };
 
@@ -1031,7 +1053,10 @@ function validateUserForm(formType) {
   if (userPhone && (isNaN(userPhone) || userPhone.length != 10))
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
 
-  // if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
+  if (hasStrictSummaryPolicy) {
+    if (!userPhone) return { valid: false, msg: 'Απαιτείται τηλέφωνο' };
+  }
+
   return { valid: true };
 }
 
