@@ -381,7 +381,7 @@ const systemFullKitLogoUrlDict = {
   }
 };
 
-const strictSummaryPolicyReferrers = ['kalogritsasgas.gr', 'lovato-hellas.webflow.io'];
+const strictSummaryPolicyReferrers = ['kalogritsasgas.gr'];
 
 const VAT = 1.24;
 

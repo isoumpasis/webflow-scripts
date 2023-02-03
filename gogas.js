@@ -54,7 +54,7 @@ const tankImgUrlDict = {
     'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/630e0c04458984ce820047bb_cyl-tank-with-mv.jpg'
 };
 
-const strictSummaryPolicyReferrers = ['kalogritsasgas.gr', 'lovato-hellas.webflow.io'];
+const strictSummaryPolicyReferrers = ['kalogritsasgas.gr'];
 
 const preferredStorage = localStorage;
 let gogasSelections = {};
