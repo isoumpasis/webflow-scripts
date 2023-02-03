@@ -843,10 +843,10 @@ document.querySelector('#openDownloadForm').addEventListener('click', e => {
 
   const hasStrictSummaryPolicy = getStrictSummaryPolicy();
   document.querySelector('.name-mandatory').textContent = hasStrictSummaryPolicy
-    ? '(*υποχρεωτικό)'
+    ? '(*)'
     : '(προαιρετικό)';
   document.querySelector('.phone-mandatory').textContent = hasStrictSummaryPolicy
-    ? '(*υποχρεωτικό)'
+    ? '(*)'
     : '(προαιρετικό)';
   document.querySelector('.email-mandatory').textContent = '(προαιρετικό)';
 
@@ -864,7 +864,19 @@ document.querySelector('#openEmailForm').addEventListener('click', e => {
   formType = 'EMAIL';
   showFacebookBrowserProblem(false);
   document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
-  document.querySelector('.email-mandatory').textContent = '(*υποχρεωτικό)';
+
+  const hasStrictSummaryPolicy = getStrictSummaryPolicy();
+  document.querySelector('.name-mandatory').textContent = hasStrictSummaryPolicy
+    ? '(*)'
+    : '(προαιρετικό)';
+  document.querySelector('.phone-mandatory').textContent = hasStrictSummaryPolicy
+    ? '(*)'
+    : '(προαιρετικό)';
+  document.querySelector('.email-mandatory').textContent = '(*)';
+
+  document.querySelector('#summaryFormTitle').textContent = hasStrictSummaryPolicy
+    ? 'Πρόσθεσε τα στοιχεία σου για την καλύτερη εξυπηρέτησή σου!'
+    : 'Πρόσθεσε, προαιρετικά, τα στοιχεία σου για την καλύτερη εξυπηρέτησή σου!';
 
   trigger_opened_summary_form({
     summary_type: 'email',
