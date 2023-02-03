@@ -1,6 +1,6 @@
 /* System Identification */
-let serverUrl = 'https://lovatohellas.herokuapp.com/';
-// let serverUrl = 'http://localhost:1917/';
+// let serverUrl = 'https://lovatohellas.herokuapp.com/';
+let serverUrl = 'http://localhost:1917/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlYears = serverUrl + 'vehicleDB/get/years';
@@ -380,6 +380,8 @@ const systemFullKitLogoUrlDict = {
     }
   }
 };
+
+const strictSummaryPolicyReferrers = ['kalogritsasgas.gr', 'lovato-hellas.webflow.io'];
 
 const VAT = 1.24;
 
@@ -3048,7 +3050,19 @@ document.querySelector('.open-download-form').addEventListener('click', e => {
   formType = 'DOWNLOAD';
   showFacebookBrowserProblem(true);
   document.querySelector('#submitSummaryBtn').value = 'Κατέβασε και εκτύπωσε!';
+
+  const hasStrictSummaryPolicy = getStrictSummaryPolicy();
+  document.querySelector('.name-mandatory').textContent = hasStrictSummaryPolicy
+    ? '(*υποχρεωτικό)'
+    : '(προαιρετικό)';
+  document.querySelector('.phone-mandatory').textContent = hasStrictSummaryPolicy
+    ? '(*υποχρεωτικό)'
+    : '(προαιρετικό)';
   document.querySelector('.email-mandatory').textContent = '(προαιρετικό)';
+
+  document.querySelector('#summaryFormTitle').textContent = hasStrictSummaryPolicy
+    ? 'Πρόσθεσε τα στοιχεία σου για την καλύτερη εξυπηρέτησή σου!'
+    : 'Πρόσθεσε, προαιρετικά, τα στοιχεία σου για την καλύτερη εξυπηρέτησή σου!';
   trigger_opened_summary_form({
     summary_type: 'download',
     is_facebook_browser: isFacebookBrowser()
@@ -3058,7 +3072,20 @@ document.querySelector('.open-email-form').addEventListener('click', e => {
   formType = 'EMAIL';
   showFacebookBrowserProblem(false);
   document.querySelector('#submitSummaryBtn').value = 'Πάρε με Email!';
+
+  const hasStrictSummaryPolicy = getStrictSummaryPolicy();
+  document.querySelector('.name-mandatory').textContent = hasStrictSummaryPolicy
+    ? '(*υποχρεωτικό)'
+    : '(προαιρετικό)';
+  document.querySelector('.phone-mandatory').textContent = hasStrictSummaryPolicy
+    ? '(*υποχρεωτικό)'
+    : '(προαιρετικό)';
   document.querySelector('.email-mandatory').textContent = '(*υποχρεωτικό)';
+
+  document.querySelector('#summaryFormTitle').textContent = hasStrictSummaryPolicy
+    ? 'Πρόσθεσε τα στοιχεία σου για την καλύτερη εξυπηρέτησή σου!'
+    : 'Πρόσθεσε, προαιρετικά, τα στοιχεία σου για την καλύτερη εξυπηρέτησή σου!';
+
   trigger_opened_summary_form({
     summary_type: 'email',
     is_facebook_browser: isFacebookBrowser()
@@ -3247,6 +3274,10 @@ function closeSummaryForm() {
   overlay && (overlay.style.display = 'none');
 }
 
+function getStrictSummaryPolicy() {
+  return strictSummaryPolicyReferrers.includes(sourceReferrerDomain);
+}
+
 function validateUserForm(triggeredFrom = null, formType) {
   if (triggeredFrom === 'basket' && isFacebookBrowser()) {
     return {
@@ -3259,8 +3290,14 @@ function validateUserForm(triggeredFrom = null, formType) {
       valid: false,
       msg: 'Θα πρέπει πρώτα να επιλέξετε το όχημα σας από το Βήμα 1!'
     };
-  // if (!document.querySelector('.user-info-username').value)
-  //   return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
+
+  const hasStrictSummaryPolicy = getStrictSummaryPolicy();
+  console.log({ hasStrictSummaryPolicy }, { sourceReferrerDomain });
+
+  if (hasStrictSummaryPolicy) {
+    if (!document.querySelector('.user-info-username').value)
+      return { valid: false, msg: 'Απαιτείται ονοματεπώνυμο' };
+  }
 
   const userEmail = document.querySelector('.user-info-email').value;
   if (userEmail && !isEmail(userEmail)) return { valid: false, msg: 'Απαιτείται έγκυρο email' };
@@ -3271,7 +3308,10 @@ function validateUserForm(triggeredFrom = null, formType) {
   const userPhone = document.querySelector('.user-info-phone').value;
   if (userPhone && (isNaN(userPhone) || userPhone.length !== 10))
     return { valid: false, msg: 'Απαιτείται έγκυρος αριθμός τηλεφώνου (10ψηφία)' };
-  // if (!hasUserInfo()) return { valid: false, msg: 'Συμπληρώστε πρώτα τα προσωπικά σας στοιχεία' };
+
+  if (hasStrictSummaryPolicy) {
+    if (!userPhone) return { valid: false, msg: 'Απαιτείται τηλέφωνο' };
+  }
   return { valid: true };
 }
 
