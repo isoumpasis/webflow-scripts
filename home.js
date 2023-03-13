@@ -4564,7 +4564,7 @@ notConvFormSubmitBtn.addEventListener('click', e => {
     .then(res => res.json())
     .then(data => {
       notConvFormSubmitBtn.disabled = false;
-      notConvFormSubmitBtn.value = 'Αποστολή';
+      notConvFormSubmitBtn.value = 'Ενημερώστε με!';
       notConvFormSubmitBtn.style.cursor = 'pointer';
 
       if (data.status && data.status !== 200) {
@@ -4577,7 +4577,7 @@ notConvFormSubmitBtn.addEventListener('click', e => {
     .catch(e => {
       console.error('Error on Not Conv Form Fetch:', e);
       notConvFormSubmitBtn.disabled = false;
-      notConvFormSubmitBtn.value = 'Αποστολή';
+      notConvFormSubmitBtn.value = 'Ενημερώστε με!';
       notConvFormSubmitBtn.style.cursor = 'pointer';
     });
 });
