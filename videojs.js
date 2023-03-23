@@ -84,7 +84,6 @@ function clickVideoFn(e) {
     player.muted(false);
     player.currentTime(0);
   }
-  document.activeElement?.blur();
 }
 
 // player.on('click', function (e) {
