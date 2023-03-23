@@ -82,8 +82,8 @@ function clickVideoFn(e) {
     player.controls(true);
     player.muted(false);
     player.currentTime(0);
+    setTimeout(() => {
+      player.play();
+    }, 100);
   }
-  setTimeout(() => {
-    player.play();
-  }, 2000);
 }
