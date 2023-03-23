@@ -61,18 +61,8 @@ player.on('ready', function () {
   heroVideo = document.querySelector('#heroVideo');
   heroVideoContainer = document.querySelector('#heroVideoContainer');
 
-  heroVideoContainer.addEventListener('click', e => {
-    bigPlayBtn.style.display = 'none';
-    heroVideo.style.cursor = 'default';
-    if (interval) {
-      clearInterval(interval);
-      interval = null;
-
-      player.controls(true);
-      player.muted(false);
-      player.currentTime(0);
-    }
-  });
+  // heroVideoContainer.addEventListener('click', clickVideoFn);
+  heroVideoContainer.addEventListener('touchstart', clickVideoFn);
 
   bigPlayBtn.style.display = 'block';
   heroVideo.style.cursor = 'pointer';
@@ -82,6 +72,19 @@ player.on('ready', function () {
     player.currentTime(0);
   }, 3000);
 });
+
+function clickVideoFn(e) {
+  bigPlayBtn.style.display = 'none';
+  heroVideo.style.cursor = 'default';
+  if (interval) {
+    clearInterval(interval);
+    interval = null;
+
+    player.controls(true);
+    player.muted(false);
+    player.currentTime(0);
+  }
+}
 
 // player.on('click', function (e) {
 
