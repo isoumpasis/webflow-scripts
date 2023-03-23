@@ -26,6 +26,7 @@ video {
   width: 2px;
 }
 
-button.vjs-play-control.vjs-control:focus-visible {
+button.vjs-play-control.vjs-control:focus-visible,
+video:focus-visible {
   outline: none;
 }
