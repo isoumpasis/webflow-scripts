@@ -87,3 +87,32 @@ function clickVideoFn(e) {
     }, 50);
   }
 }
+
+player.reloadSourceOnError({
+  // getSource allows you to override the source object used when an error occurs
+  getSource: function (reload) {
+    console.log('Reloading because of an error');
+
+    // call reload() with a fresh source object
+    // you can do this step asynchronously if you want (but the error dialog will
+    // show up while you're waiting)
+    reload({
+      src: 'https://drive.google.com/uc?id=1jh4ntoT_QMHfVyLG32nR2f3UHO_OmVCU&authuser=0&export=download',
+      type: 'video/mp4'
+    });
+  },
+
+  // errorInterval specifies the minimum amount of seconds that must pass before
+  // another reload will be attempted
+  errorInterval: 5
+});
+
+player.on('error', () => {
+  const error = player.error();
+  console.log('error', error);
+  if (error.code === 2) {
+    player.src(
+      'https://drive.google.com/uc?id=1jh4ntoT_QMHfVyLG32nR2f3UHO_OmVCU&authuser=0&export=download'
+    );
+  }
+});
