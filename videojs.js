@@ -85,6 +85,13 @@ function clickVideoFn(e) {
     player.currentTime(0);
   }
   document.activeElement?.blur();
+  function blurAll() {
+    var tmp = document.createElement('input');
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);
+  }
+  blurAll();
 }
 
 // player.on('click', function (e) {
