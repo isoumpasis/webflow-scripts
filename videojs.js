@@ -38,7 +38,7 @@ videojs.addLanguage('el', {
   'Picture-in-Picture': 'Προβολή σε παράθυρο'
 });
 
-let bigPlayBtn, heroVideo;
+let bigPlayBtn, heroVideo, heroVideoContainer;
 
 let videoStarted = false;
 
@@ -59,8 +59,9 @@ player.on('ready', function () {
   console.log('ready');
   bigPlayBtn = document.querySelector('.vjs-big-play-button');
   heroVideo = document.querySelector('#heroVideo');
+  heroVideoContainer = document.querySelector('#heroVideoContainer');
 
-  heroVideo.addEventListener('click', e => {
+  heroVideoContainer.addEventListener('click', e => {
     bigPlayBtn.style.display = 'none';
     heroVideo.style.cursor = 'default';
     if (interval) {
