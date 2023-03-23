@@ -104,15 +104,5 @@ player.reloadSourceOnError({
 
   // errorInterval specifies the minimum amount of seconds that must pass before
   // another reload will be attempted
-  errorInterval: 5
-});
-
-player.on('error', () => {
-  const error = player.error();
-  console.log('error', error);
-  if (error.code === 2) {
-    player.src(
-      'https://drive.google.com/uc?id=1jh4ntoT_QMHfVyLG32nR2f3UHO_OmVCU&authuser=0&export=download'
-    );
-  }
+  errorInterval: 1
 });
