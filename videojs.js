@@ -69,7 +69,8 @@ player.on('ready', function () {
   }, 3000);
 });
 
-player.on('click', function (e) {
+// player.on('click', function (e) {
+heroVideo.addEventListener('click', e => {
   bigPlayBtn.style.display = 'none';
   heroVideo.style.cursor = 'default';
   if (interval) {
@@ -81,3 +82,4 @@ player.on('click', function (e) {
     player.currentTime(0);
   }
 });
+// });
