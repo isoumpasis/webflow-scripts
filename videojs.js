@@ -38,7 +38,8 @@ videojs.addLanguage('el', {
   'Picture-in-Picture': 'Προβολή σε παράθυρο'
 });
 
-let bigPlayBtn, heroVideo;
+const bigPlayBtn = document.querySelector('.vjs-big-play-button');
+const heroVideo = document.querySelector('#heroVideo');
 
 let videoStarted = false;
 
@@ -57,14 +58,12 @@ let interval = null;
 
 player.on('ready', function () {
   console.log('ready');
-  bigPlayBtn = document.querySelector('.vjs-big-play-button');
-  heroVideo = document.querySelector('#heroVideo');
 
   bigPlayBtn.style.display = 'block';
   heroVideo.style.cursor = 'pointer';
 
   interval = setInterval(() => {
-    console.log(player.currentTime());
+    // console.log(player.currentTime());
     player.currentTime(0);
   }, 3000);
 });
