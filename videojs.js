@@ -61,7 +61,7 @@ player.on('ready', function () {
   heroVideo = document.querySelector('#heroVideo');
   heroVideoContainer = document.querySelector('#heroVideoContainer');
 
-  // heroVideoContainer.addEventListener('click', clickVideoFn);
+  heroVideoContainer.addEventListener('click', clickVideoFn);
   heroVideoContainer.addEventListener('touchstart', clickVideoFn);
 
   bigPlayBtn.style.display = 'block';
