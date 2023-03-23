@@ -79,10 +79,9 @@ function clickVideoFn(e) {
   if (interval) {
     clearInterval(interval);
     interval = null;
-
     player.controls(true);
     player.muted(false);
     player.currentTime(0);
-    player.play();
   }
+  player.play();
 }
