@@ -83,9 +83,6 @@ function clickVideoFn(e) {
     player.controls(true);
     player.muted(false);
     player.currentTime(0);
+    player.play();
   }
 }
-
-// player.on('click', function (e) {
-
-// });
