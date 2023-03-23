@@ -84,6 +84,6 @@ function clickVideoFn(e) {
     player.currentTime(0);
     setTimeout(() => {
       player.play();
-    }, 100);
+    }, 50);
   }
 }
