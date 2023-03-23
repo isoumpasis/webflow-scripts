@@ -25,3 +25,7 @@ video {
 .video-js .vjs-progress-control .vjs-mouse-display {
   width: 2px;
 }
+
+button.vjs-play-control.vjs-control:focus-visible {
+  outline: none;
+}
