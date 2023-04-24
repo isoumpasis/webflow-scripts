@@ -381,7 +381,7 @@ const systemFullKitLogoUrlDict = {
   }
 };
 
-const strictSummaryPolicyReferrers = ['kalogritsasgas.gr', 'autoroumeliotis.gr'];
+const strictSummaryPolicyReferrers = ['kalogritsasgas.gr', 'autoroumeliotis.gr']; //
 
 const VAT = 1.24;
 
