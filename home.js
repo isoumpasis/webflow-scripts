@@ -4701,7 +4701,7 @@ player.on('ready', function () {
   interval = setInterval(() => {
     // console.log(player.currentTime());
     player.currentTime(0);
-  }, 3000);
+  }, 8000);
 });
 
 function clickVideoFn(e) {
