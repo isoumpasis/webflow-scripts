@@ -4700,7 +4700,7 @@ player.on('ready', function () {
 
   interval = setInterval(() => {
     // console.log(player.currentTime());
-    player.currentTime(200);
+    player.currentTime(0);
   }, 8000);
 });
 
@@ -4712,7 +4712,7 @@ function clickVideoFn(e) {
     interval = null;
     player.controls(true);
     player.muted(false);
-    player.currentTime(0);
+    player.currentTime(200);
     setTimeout(() => {
       player.play();
     }, 50);
