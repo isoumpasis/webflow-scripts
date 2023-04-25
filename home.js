@@ -4728,7 +4728,7 @@ player.reloadSourceOnError({
     // you can do this step asynchronously if you want (but the error dialog will
     // show up while you're waiting)
     reload({
-      src: 'https://drive.google.com/uc?id=1jh4ntoT_QMHfVyLG32nR2f3UHO_OmVCU&authuser=0&export=download',
+      src: 'https://drive.google.com/uc?id=1quxLrbad-IpcanZA7fEZC2izRdsCbjiD&authuser=0&export=download',
       type: 'video/mp4'
     });
   },
