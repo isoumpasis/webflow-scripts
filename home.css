@@ -461,3 +461,36 @@ input[type='range']::-ms-thumb:hover {
     background-color: rgba(255, 255, 255, 0.8);
   }
 } */
+
+#heroVideo {
+  border-radius: 20px;
+}
+
+video {
+  border-radius: 20px;
+  box-shadow: 10px 3px 17px -3px rgba(0, 0, 0, 0.66);
+  -webkit-box-shadow: 10px 3px 17px -3px rgba(0, 0, 0, 0.66);
+  -moz-box-shadow: 10px 3px 17px -3px rgba(0, 0, 0, 0.66);
+}
+
+.vjs-theme-city {
+  --vjs-theme-city--primary: #0079af;
+}
+
+.vjs-control-bar {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.vjs-theme-city .vjs-progress-control .vjs-progress-holder {
+  height: 5px;
+}
+
+.video-js .vjs-progress-control .vjs-mouse-display {
+  width: 2px;
+}
+
+button.vjs-play-control.vjs-control:focus-visible,
+video:focus-visible {
+  outline: none;
+}
