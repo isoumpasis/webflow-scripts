@@ -4700,7 +4700,7 @@ player.on('ready', function () {
 
   interval = setInterval(() => {
     // console.log(player.currentTime());
-    player.currentTime(0);
+    player.currentTime(200);
   }, 8000);
 });
 
