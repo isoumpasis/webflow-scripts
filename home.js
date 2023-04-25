@@ -4712,7 +4712,7 @@ function clickVideoFn(e) {
     interval = null;
     player.controls(true);
     player.muted(false);
-    player.currentTime(200);
+    player.currentTime(0);
     setTimeout(() => {
       player.play();
     }, 50);
