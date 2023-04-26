@@ -514,6 +514,9 @@ video:focus-visible {
   }
 }
 
-#heroVideo:hover #heroVideo .vjs-big-play-button {
+/* #heroVideo:hover .vjs-big-play-button {
+  transform: scale(1.25);
+} */
+.vjs-big-play-button:hover {
   transform: scale(1.25);
 }
