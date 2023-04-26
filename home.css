@@ -499,6 +499,7 @@ video:focus-visible {
 #heroVideo .vjs-big-play-button {
   background: url(https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/644913ab5231e8f14d3074ec_lovato-play-btn_v2.svg)
     no-repeat center center;
+  transition: transform 250ms;
   border: none;
   width: 270px;
   left: 42%;
@@ -514,9 +515,6 @@ video:focus-visible {
   }
 }
 
-/* #heroVideo:hover .vjs-big-play-button {
-  transform: scale(1.25);
-} */
-.vjs-big-play-button:hover {
+#heroVideo:hover .vjs-big-play-button {
   transform: scale(1.25);
 }
