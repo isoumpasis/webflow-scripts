@@ -465,6 +465,9 @@ input[type='range']::-ms-thumb:hover {
 #heroVideo {
   /* border-radius: 30px; */
   background: transparent;
+  border: 1px solid lightgray;
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 }
 
 /* video {
@@ -518,5 +521,5 @@ video:focus-visible {
 }
 
 #heroVideo:hover .vjs-big-play-button {
-  transform: scale(1.25);
+  transform: scale(1.15);
 }
