@@ -503,6 +503,9 @@ video:focus-visible {
   width: 270px;
   left: 46%;
 }
+#heroVideo .vjs-big-play-button .vjs-icon-placeholder:before {
+  content: '';
+}
 
 @media (max-width: 580px) {
   #heroVideo .vjs-big-play-button {
