@@ -521,5 +521,5 @@ video:focus-visible {
 }
 
 #heroVideo:hover .vjs-big-play-button {
-  transform: scale(1.15);
+  transform: scale(1.08);
 }
