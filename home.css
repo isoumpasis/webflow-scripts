@@ -501,8 +501,10 @@ video:focus-visible {
     no-repeat center center;
   transition: transform 250ms;
   border: none;
-  width: 270px;
-  left: 42%;
+  width: 273px;
+  height: 60px;
+  top: 48%;
+  left: 41%;
 }
 #heroVideo .vjs-big-play-button .vjs-icon-placeholder:before {
   content: '';
