@@ -463,16 +463,16 @@ input[type='range']::-ms-thumb:hover {
 } */
 
 #heroVideo {
-  border-radius: 30px;
+  /* border-radius: 30px; */
   background: transparent;
 }
 
-video {
+/* video {
   border-radius: 20px;
-  /* box-shadow: 10px 3px 17px -3px rgba(0, 0, 0, 0.66);
+  box-shadow: 10px 3px 17px -3px rgba(0, 0, 0, 0.66);
   -webkit-box-shadow: 10px 3px 17px -3px rgba(0, 0, 0, 0.66);
-  -moz-box-shadow: 10px 3px 17px -3px rgba(0, 0, 0, 0.66); */
-}
+  -moz-box-shadow: 10px 3px 17px -3px rgba(0, 0, 0, 0.66);
+} */
 
 .vjs-theme-city {
   --vjs-theme-city--primary: #0079af;
