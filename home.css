@@ -496,7 +496,7 @@ video:focus-visible {
   outline: none;
 }
 
-.vjs-big-play-button {
+#heroVideo .vjs-big-play-button {
   background: url(https://uploads-ssl.webflow.com/60362f40a83dcf0034…b/644913ab5231e8f14d3074ec_lovato-play-btn_v2.svg)
     no-repeat center center;
   border: none;
@@ -505,12 +505,12 @@ video:focus-visible {
 }
 
 @media (max-width: 580px) {
-  .vjs-big-play-button {
+  #heroVideo .vjs-big-play-button {
     width: 160px;
     left: 52%;
   }
 }
 
-#heroVideo:hover .vjs-big-play-button {
-  font-size: 5em;
+#heroVideo:hover #heroVideo .vjs-big-play-button {
+  font-size: 4em;
 }
