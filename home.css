@@ -495,3 +495,22 @@ button.vjs-play-control.vjs-control:focus-visible,
 video:focus-visible {
   outline: none;
 }
+
+.vjs-big-play-button {
+  background: url(https://uploads-ssl.webflow.com/60362f40a83dcf0034…b/644913ab5231e8f14d3074ec_lovato-play-btn_v2.svg)
+    no-repeat center center;
+  border: none;
+  width: 270px;
+  left: 46%;
+}
+
+@media (max-width: 580px) {
+  .vjs-big-play-button {
+    width: 160px;
+    left: 52%;
+  }
+}
+
+#heroVideo:hover .vjs-big-play-button {
+  font-size: 5em;
+}
