@@ -4725,8 +4725,11 @@ function clickVideoFn(e) {
     player.muted(false);
     player.currentTime(0);
 
-    console.log('send 0%');
-    trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 0 });
+    if (!i0) {
+      console.log('send 0%');
+      trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 0 });
+      i0 = true;
+    }
     setTimeout(() => {
       player.play();
     }, 50);
@@ -4743,7 +4746,7 @@ player.reloadSourceOnError({
   errorInterval: 1
 });
 
-let i25 = false,
+let i=0 = false, i25 = false,
   i50 = false,
   i75 = false,
   i100 = false;
