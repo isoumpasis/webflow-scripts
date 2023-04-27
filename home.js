@@ -4682,13 +4682,14 @@ const player = videojs('heroVideo', {
   muted: true,
   autoplay: true,
   controlBar: {
-    fullscreenToggle: false
+    fullscreenToggle: !isMobile()
   },
   userActions: {
-    doubleClick: false
+    doubleClick: !isMobile()
   }
   // aspectRatio: "16:9"
 });
+console.log(isMobile());
 
 let interval = null;
 
