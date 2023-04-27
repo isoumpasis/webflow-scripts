@@ -4687,14 +4687,11 @@ const player = videojs('heroVideo', {
   userActions: {
     doubleClick: !isMobile()
   }
-  // aspectRatio: "16:9"
 });
-console.log(isMobile());
 
 let interval = null;
 
 player.on('ready', function () {
-  console.log('player ready');
   bigPlayBtn = document.querySelector('.vjs-big-play-button');
   heroVideo = document.querySelector('#heroVideo');
   heroVideoContainer = document.querySelector('#heroVideoContainer');
@@ -4706,7 +4703,6 @@ player.on('ready', function () {
   heroVideo.style.cursor = 'pointer';
 
   interval = setInterval(() => {
-    // console.log(player.currentTime());
     player.currentTime(0);
   }, 8000);
 });
@@ -4738,21 +4734,12 @@ function clickVideoFn(e) {
 }
 
 player.reloadSourceOnError({
-  // getSource allows you to override the source object used when an error occurs
   getSource: function (reload) {
-    console.log('Reloading because of an error');
-
-    // call reload() with a fresh source object
-    // you can do this step asynchronously if you want (but the error dialog will
-    // show up while you're waiting)
     reload({
       src: 'https://drive.google.com/uc?id=1quxLrbad-IpcanZA7fEZC2izRdsCbjiD&authuser=0&export=download',
       type: 'video/mp4'
     });
   },
-
-  // errorInterval specifies the minimum amount of seconds that must pass before
-  // another reload will be attempted
   errorInterval: 1
 });
 
@@ -4760,7 +4747,7 @@ let i25 = false,
   i50 = false,
   i75 = false,
   i100 = false;
-const video = document.querySelector('#heroVideo');
+const video = document.querySelector('#heroVideo video');
 video.addEventListener('timeupdate', event => {
   const currentTime = video.currentTime;
   const duration = video.duration;
