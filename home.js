@@ -4680,7 +4680,10 @@ const player = videojs('heroVideo', {
   playsinline: true,
   fluid: true,
   muted: true,
-  autoplay: true
+  autoplay: true,
+  controlBar: {
+    fullScreenToogle: !isMobile()
+  }
   // aspectRatio: "16:9"
 });
 
@@ -4702,6 +4705,14 @@ player.on('ready', function () {
     // console.log(player.currentTime());
     player.currentTime(0);
   }, 8000);
+});
+
+player.on('fullscreenchange', function () {
+  if (isMobile()) {
+    if (player.isFullscreen()) {
+      player.exitFullscreen();
+    }
+  }
 });
 
 function clickVideoFn(e) {
