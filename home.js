@@ -4681,9 +4681,7 @@ const player = videojs('heroVideo', {
   fluid: true,
   muted: true,
   autoplay: true,
-  controlBar: {
-    fullScreenToogle: !isMobile()
-  }
+  fullScreenToogle: !isMobile()
   // aspectRatio: "16:9"
 });
 
