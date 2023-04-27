@@ -499,7 +499,7 @@ video:focus-visible {
   transition: transform 250ms;
   border: none;
   width: 273px;
-  height: 60px;
+  height: 70px;
   top: 48%;
   left: 41%;
 }
@@ -507,10 +507,16 @@ video:focus-visible {
   content: '';
 }
 
+@media (max-width: 750px) {
+  #heroVideo .vjs-big-play-button {
+    height: 64px;
+    left: 48%;
+  }
+}
 @media (max-width: 580px) {
   #heroVideo .vjs-big-play-button {
-    width: 160px;
-    left: 52%;
+    height: 52px;
+    left: 34%;
   }
 }
 
