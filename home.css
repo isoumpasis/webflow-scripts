@@ -498,15 +498,16 @@ video:focus-visible {
     no-repeat center center;
   transition: transform 250ms;
   border: none;
-  width: 273px;
+  /* width: 273px;
   height: 70px;
   top: 48%;
-  left: 41%;
+  left: 41%; */
+  scale: 2.5;
 }
 #heroVideo .vjs-big-play-button .vjs-icon-placeholder:before {
   content: '';
 }
-
+/* 
 @media (max-width: 1920px) {
   #heroVideo .vjs-big-play-button {
     left: 38%;
@@ -523,7 +524,7 @@ video:focus-visible {
     height: 52px;
     left: 30%;
   }
-}
+} */
 
 #heroVideo:hover .vjs-big-play-button {
   transform: scale(1.08);
