@@ -465,6 +465,8 @@ input[type='range']::-ms-thumb:hover {
 #heroVideo {
   border-radius: 30px;
   background: transparent;
+  min-width: 800px;
+  min-height: 400px;
 }
 
 video {
@@ -504,12 +506,24 @@ video:focus-visible {
   content: '';
 }
 
+@media (max-width: 940px) {
+  #heroVideo {
+    min-width: 500px;
+    min-height: 300px;
+  }
+}
 @media (max-width: 550px) {
+  #heroVideo {
+    min-width: 300px;
+  }
   #heroVideo .vjs-big-play-button {
     scale: 2;
   }
 }
 @media (max-width: 350px) {
+  #heroVideo {
+    min-width: 200px;
+  }
   #heroVideo .vjs-big-play-button {
     scale: 1.5;
   }
