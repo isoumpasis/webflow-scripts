@@ -507,16 +507,21 @@ video:focus-visible {
   content: '';
 }
 
+@media (max-width: 1920px) {
+  #heroVideo .vjs-big-play-button {
+    left: 38%;
+  }
+}
 @media (max-width: 750px) {
   #heroVideo .vjs-big-play-button {
     height: 64px;
-    left: 48%;
+    left: 37%;
   }
 }
 @media (max-width: 580px) {
   #heroVideo .vjs-big-play-button {
     height: 52px;
-    left: 34%;
+    left: 30%;
   }
 }
 
