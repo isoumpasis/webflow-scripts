@@ -4746,7 +4746,8 @@ player.reloadSourceOnError({
   errorInterval: 1
 });
 
-let i=0 = false, i25 = false,
+let i0 = false,
+  i25 = false,
   i50 = false,
   i75 = false,
   i100 = false;
