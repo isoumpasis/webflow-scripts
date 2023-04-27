@@ -4726,7 +4726,7 @@ function clickVideoFn(e) {
     player.currentTime(0);
 
     if (!i0) {
-      console.log('send 0%');
+      // console.log('send 0%');
       trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 0 });
       i0 = true;
     }
@@ -4758,28 +4758,28 @@ video.addEventListener('timeupdate', event => {
 
   if (currentTime > 0.25 * duration) {
     if (!i25) {
-      console.log('send 25%');
+      // console.log('send 25%');
       trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 25 });
       i25 = true;
     }
   }
   if (currentTime > 0.5 * duration) {
     if (!i50) {
-      console.log('send 50%');
+      // console.log('send 50%');
       trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 50 });
       i50 = true;
     }
   }
   if (currentTime > 0.75 * duration) {
     if (!i75) {
-      console.log('send 75%');
+      // console.log('send 75%');
       trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 75 });
       i75 = true;
     }
   }
   if (currentTime > 0.9 * duration) {
     if (!i100) {
-      console.log('send 100%');
+      // console.log('send 100%');
       trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 100 });
       i100 = true;
     }
