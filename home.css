@@ -463,14 +463,16 @@ input[type='range']::-ms-thumb:hover {
 } */
 
 #heroVideo {
-  border-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
   background: transparent;
   min-width: 800px;
   min-height: 400px;
 }
 
 video {
-  border-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .vjs-theme-city {
