@@ -4739,9 +4739,13 @@ function clickVideoFn(e) {
 player.reloadSourceOnError({
   getSource: function (reload) {
     reload({
-      src: 'https://drive.google.com/uc?id=1quxLrbad-IpcanZA7fEZC2izRdsCbjiD&authuser=0&export=download',
+      src: 'https://drive.google.com/uc?id=12Gj4M3K3QpSZdp-agOoKOwL8C60Czry0&authuser=0&export=download',
       type: 'video/mp4'
     });
+    // reload({
+    //   src: 'https://drive.google.com/uc?id=1quxLrbad-IpcanZA7fEZC2izRdsCbjiD&authuser=0&export=download',
+    //   type: 'video/mp4'
+    // });
   },
   errorInterval: 1
 });
