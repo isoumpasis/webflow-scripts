@@ -4676,7 +4676,7 @@ let videoStarted = false;
 const player = videojs('heroVideo', {
   language: 'el',
   controls: false,
-  loop: true,
+  loop: false,
   playsinline: true,
   fluid: true,
   muted: true,
