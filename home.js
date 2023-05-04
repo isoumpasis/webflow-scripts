@@ -589,8 +589,8 @@ function initForeignReferrerOptions() {
       const newLink = `?foreignReferrer=true&domain=${sourceReferrerDomain}`;
       const gogasBtn = document.querySelector('.go-gas-interest-btn');
       gogasBtn.href = gogasBtn.href + newLink;
-      const gogasHeroImgA = document.querySelector('.hero-slide-2 a');
-      gogasHeroImgA.href = gogasHeroImgA.href + newLink;
+      // const gogasHeroImgA = document.querySelector('.hero-slide-2 a');
+      // gogasHeroImgA.href = gogasHeroImgA.href + newLink;
     }
 
     dontShowEls.forEach(query => (document.querySelector(query).style.display = 'none'));
