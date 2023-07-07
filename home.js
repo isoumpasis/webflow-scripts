@@ -2197,6 +2197,12 @@ function displayEmulatorInfo(suggestedContainer) {
     suggestedContainer
       .querySelectorAll(`.suggested-${userSelections.selectedFuel}-system`)
       .forEach(system => {
+        if (isApaitoumenoEmulatorType(vehicleEmulatorType)) {
+          const priceEl = system.querySelector(`.suggested-${userSelections.selectedFuel}-price`);
+          const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
+          suggestedPricesChanges.push({ priceEl, defaultPrice });
+          priceEl.textContent = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
+        }
         system.querySelectorAll('.info-content-block').forEach(emCont => {
           if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
             if (isApaitoumenoEmulatorType(vehicleEmulatorType)) {
@@ -2221,6 +2227,42 @@ function displayEmulatorInfo(suggestedContainer) {
       });
   }
 }
+// function displayEmulatorInfo(suggestedContainer) {
+//   //Hide all emulator containers first
+//   suggestedContainer
+//     .querySelectorAll('.info-content-block')
+//     .forEach(emCont => (emCont.style.display = 'none'));
+
+//   if (hasValidEmulators(foundVehicleObj) || hasUHPII(foundVehicleObj)) {
+//     const vehicleEmulatorType = getEmulatorType();
+
+//     suggestedContainer
+//       .querySelectorAll(`.suggested-${userSelections.selectedFuel}-system`)
+//       .forEach(system => {
+//         system.querySelectorAll('.info-content-block').forEach(emCont => {
+//           if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
+//             if (isApaitoumenoEmulatorType(vehicleEmulatorType)) {
+//               const priceEl = system.querySelector(
+//                 `.suggested-${userSelections.selectedFuel}-price`
+//               );
+//               const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
+//               suggestedPricesChanges.push({ priceEl, defaultPrice });
+//               priceEl.textContent =
+//                 defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
+//             } else {
+//               //init not selected emulator
+//               [...suggestedContainer.querySelectorAll('.check')].map(
+//                 check => (check.style.display = 'none')
+//               );
+//               emulatorSelected = false;
+//             }
+//             emCont.querySelector('.info-content').style.height = '0px';
+//             emCont.style.display = 'block';
+//           }
+//         });
+//       });
+//   }
+// }
 function hasValidEmulators(vehObj) {
   if (userSelections.selectedFuel === 'lpg') return vehObj.hasOwnProperty('emulators');
   return (
