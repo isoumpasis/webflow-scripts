@@ -2209,24 +2209,35 @@ function displayEmulatorInfo(suggestedContainer) {
           );
           emulatorSelected = false;
         }
-        // system.querySelectorAll('.info-content-block').forEach(emCont => {
-        //   if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
+
         const emCont = generateEmulatorInfoContentBlock(vehicleEmulatorType, system);
         emCont.querySelector('.info-content').style.height = '0px';
+        if (isMobile()) {
+          system.querySelector('.suggested-image-content').style.height = '50px';
+        }
         emCont.style.display = 'block';
-        // }
-        // });
       });
   }
 }
 
 function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
+  //clone html
   const infoContentBlockToCopy = document.querySelector(
     `.info-content-block.emulator-${emulatorType}`
   );
   const clone = infoContentBlockToCopy.cloneNode(true);
   console.log('clone', clone);
   systemContainer.querySelector('.suggested-image-content').appendChild(clone);
+
+  //trigger anim
+  const infoTriggerLink = clone.querySelector('.info-trigger-link');
+  infoTriggerLink.addEventListener('click', () => {
+    clone.querySelector('.info-content').style.height = 'auto';
+    if (isMobile()) {
+      systemContainer.querySelector('.suggested-image-content').style.height = '350px';
+    }
+  });
+
   return clone;
 }
 // function displayEmulatorInfo(suggestedContainer) {
