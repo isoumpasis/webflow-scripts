@@ -2202,30 +2202,32 @@ function displayEmulatorInfo(suggestedContainer) {
           const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
           suggestedPricesChanges.push({ priceEl, defaultPrice });
           priceEl.textContent = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
+        } else {
+          //init not selected emulator
+          [...suggestedContainer.querySelectorAll('.check')].map(
+            check => (check.style.display = 'none')
+          );
+          emulatorSelected = false;
         }
-        system.querySelectorAll('.info-content-block').forEach(emCont => {
-          if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
-            if (isApaitoumenoEmulatorType(vehicleEmulatorType)) {
-              const priceEl = system.querySelector(
-                `.suggested-${userSelections.selectedFuel}-price`
-              );
-              const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
-              suggestedPricesChanges.push({ priceEl, defaultPrice });
-              priceEl.textContent =
-                defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
-            } else {
-              //init not selected emulator
-              [...suggestedContainer.querySelectorAll('.check')].map(
-                check => (check.style.display = 'none')
-              );
-              emulatorSelected = false;
-            }
-            emCont.querySelector('.info-content').style.height = '0px';
-            emCont.style.display = 'block';
-          }
-        });
+        // system.querySelectorAll('.info-content-block').forEach(emCont => {
+        //   if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
+        const emCont = generateEmulatorInfoContentBlock(vehicleEmulatorType, system);
+        emCont.querySelector('.info-content').style.height = '0px';
+        emCont.style.display = 'block';
+        // }
+        // });
       });
   }
+}
+
+function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
+  const infoContentBlockToCopy = document.querySelector(
+    `.info-content-block.emulator-${emulatorType}`
+  );
+  const clone = infoContentBlockToCopy.cloneNode(true);
+  console.log('clone', clone);
+  systemContainer.querySelector('.suggested-image-content').appendChild(clone);
+  return clone;
 }
 // function displayEmulatorInfo(suggestedContainer) {
 //   //Hide all emulator containers first
