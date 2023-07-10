@@ -2218,6 +2218,7 @@ function displayEmulatorInfo(suggestedContainer) {
         }
         emCont.style.display = 'block';
       });
+    connectCheckboxEmulator(emulatorType, suggestedContainer);
   }
 }
 
@@ -2275,6 +2276,35 @@ function connectMoreInfoBtn(emulatorType, clone) {
       document.querySelector('.emulator-info-overlay').style.display = 'block';
     });
   }
+}
+
+function connectCheckboxEmulator(emulatorType, suggestedContainer) {
+  [...suggestedContainer.querySelectorAll('.check-wrapper')].forEach(wrapper => {
+    wrapper.addEventListener('click', e => {
+      const emulatorPrice = emulatorPriceDict[emulatorType];
+      const suggestedContainerChecks = [...suggestedContainer.querySelectorAll('.check')];
+
+      emulatorSelected = suggestedContainerChecks[0].style.display !== 'block';
+
+      suggestedContainerChecks.map(
+        thisCheck => (thisCheck.style.display = emulatorSelected ? 'block' : 'none')
+      );
+
+      suggestedContainer
+        .querySelectorAll(`.suggested-${userSelections.selectedFuel}-price`)
+        .forEach(priceEl => {
+          const prevPriceNumber = +priceEl.textContent.split('€')[0];
+
+          if (emulatorSelected)
+            suggestedPricesChanges.push({ priceEl, defaultPrice: prevPriceNumber });
+
+          const newPriceNumber = emulatorSelected
+            ? prevPriceNumber + emulatorPrice
+            : prevPriceNumber - emulatorPrice;
+          priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
+        });
+    });
+  });
 }
 
 // function displayEmulatorInfo(suggestedContainer) {
