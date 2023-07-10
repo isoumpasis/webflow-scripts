@@ -2266,12 +2266,12 @@ function hideEmulatorCardListener(clone) {
 
 function connectMoreInfoBtn(emulatorType, clone) {
   if (emulatorType === 't') {
-    clone.querySelector('.reducer-info-trigger').addEventListener(() => {
+    clone.querySelector('.reducer-info-trigger').addEventListener('click', () => {
       document.querySelector('.reducer-info-overlay').style.display = 'block';
     });
   }
   if (emulatorType === 'f') {
-    clone.querySelector('.emulator-info-trigger').addEventListener(() => {
+    clone.querySelector('.emulator-info-trigger').addEventListener('click', () => {
       document.querySelector('.emulator-info-overlay').style.display = 'block';
     });
   }
