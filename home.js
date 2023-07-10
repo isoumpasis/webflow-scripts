@@ -2249,7 +2249,7 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 }
 
 function showEmulatorCardListener(clone) {
-  clone.querySelector('.info-content').style.maxHeight = '1000px'; //'auto';
+  clone.querySelector('.info-content').style.maxHeight = '700px'; //'auto';
   if (isMobile()) {
     systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
   }
