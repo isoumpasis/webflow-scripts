@@ -2226,16 +2226,14 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
     `.info-content-block.emulator-${emulatorType}`
   );
   if (emulatorAlreadyThere) {
-    console.log('emulator already there', emulatorAlreadyThere);
     return emulatorAlreadyThere;
   }
 
   //clone html
   const infoContentBlockToCopy = document.querySelector(
-    `#suggested-lpg-ego .info-content-block.emulator-${emulatorType}`
+    `.emulator-templates .info-content-block.emulator-${emulatorType}`
   );
   const clone = infoContentBlockToCopy.cloneNode(true);
-  console.log('clone', clone);
   systemContainer.querySelector('.suggested-image-content').appendChild(clone);
 
   //trigger anim
@@ -2287,7 +2285,6 @@ function connectMoreInfoBtn(emulatorType, clone) {
 function connectCheckboxEmulator(emulatorType, systemContainer) {
   [...systemContainer.querySelectorAll('.check-wrapper')].forEach(wrapper => {
     wrapper.addEventListener('click', e => {
-      console.log('clicked', wrapper, systemContainer);
       const emulatorPrice = emulatorPriceDict[emulatorType];
       const suggestedContainer = getActiveContainer();
       const suggestedContainerChecks = [...suggestedContainer.querySelectorAll('.check')];
