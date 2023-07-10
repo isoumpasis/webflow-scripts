@@ -2218,7 +2218,7 @@ function displayEmulatorInfo(suggestedContainer) {
         }
         emCont.style.display = 'block';
       });
-    connectCheckboxEmulator(emulatorType, suggestedContainer);
+    connectCheckboxEmulator(vehicleEmulatorType, suggestedContainer);
   }
 }
 
