@@ -2256,7 +2256,7 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 }
 
 function showEmulatorCardListener(clone, systemContainer) {
-  clone.querySelector('.info-content').style.maxHeight = '700px'; //'auto';
+  clone.querySelector('.info-content').style.maxHeight = '400px'; //'auto';
   if (isMobile()) {
     systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
   }
