@@ -2240,10 +2240,15 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 
   //trigger anim
   const infoTriggerLink = clone.querySelector('.info-trigger-link');
+
   infoTriggerLink.addEventListener('click', () => showEmulatorCardListener(clone, systemContainer));
 
   const closeBtn = clone.querySelector('.close-info');
   closeBtn.addEventListener('click', () => hideEmulatorCardListener(clone, systemContainer));
+
+  if (isMobile()) {
+    systemContainer.querySelector('.suggested-image-content').style.height = '800px';
+  }
 
   connectMoreInfoBtn(emulatorType, clone);
 
