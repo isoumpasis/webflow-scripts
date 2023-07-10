@@ -536,5 +536,5 @@ video:focus-visible {
 }
 
 .info-content {
-  transition: max-height 1s ease-out;
+  transition: max-height 300ms ease-out;
 }
