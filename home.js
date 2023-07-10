@@ -2280,7 +2280,7 @@ function connectMoreInfoBtn(emulatorType, clone) {
 }
 
 function connectCheckboxEmulator(emulatorType, systemContainer) {
-  systemContainer.querySelector('.check-wrapper').forEach(wrapper => {
+  systemContainer.querySelector('.check-wrapper')?.forEach(wrapper => {
     wrapper.addEventListener('click', e => {
       console.log('clicked', wrapper, systemContainer);
       const emulatorPrice = emulatorPriceDict[emulatorType];
