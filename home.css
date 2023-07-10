@@ -534,3 +534,7 @@ video:focus-visible {
 #heroVideo:hover .vjs-big-play-button {
   transform: scale(1.1);
 }
+
+.info-content {
+  transition: max-height 1s ease-out;
+}

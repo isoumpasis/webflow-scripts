@@ -2211,9 +2211,9 @@ function displayEmulatorInfo(suggestedContainer) {
         }
 
         const emCont = generateEmulatorInfoContentBlock(vehicleEmulatorType, system);
-        emCont.querySelector('.info-content').style.height = '0px';
+        emCont.querySelector('.info-content').style.maxHeight = '0px';
         if (isMobile()) {
-          system.querySelector('.suggested-image-content').style.height = '50px';
+          system.querySelector('.suggested-image-content').style.maxHeight = '50px';
         }
         emCont.style.display = 'block';
       });
@@ -2248,16 +2248,16 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 }
 
 function showEmulatorCardListener(clone) {
-  clone.querySelector('.info-content').style.height = 'auto';
+  clone.querySelector('.info-content').style.maxHeight = '5000px'; //'auto';
   if (isMobile()) {
-    systemContainer.querySelector('.suggested-image-content').style.height = '350px';
+    systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
   }
 }
 
 function hideEmulatorCardListener(clone) {
-  clone.querySelector('.info-content').style.height = '0px';
+  clone.querySelector('.info-content').style.maxHeight = '0px';
   if (isMobile()) {
-    systemContainer.querySelector('.suggested-image-content').style.height = '50px';
+    systemContainer.querySelector('.suggested-image-content').style.maxHeight = '50px';
   }
 }
 
