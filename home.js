@@ -2241,10 +2241,10 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 
   //trigger anim
   const infoTriggerLink = clone.querySelector('.info-trigger-link');
-  infoTriggerLink.addEventListener('click', () => showEmulatorCardListener(clone));
+  infoTriggerLink.addEventListener('click', () => showEmulatorCardListener(clone, systemContainer));
 
   const closeBtn = clone.querySelector('.close-info');
-  closeBtn.addEventListener('click', () => hideEmulatorCardListener(clone));
+  closeBtn.addEventListener('click', () => hideEmulatorCardListener(clone, systemContainer));
 
   connectMoreInfoBtn(emulatorType, clone);
 
@@ -2279,6 +2279,13 @@ function connectMoreInfoBtn(emulatorType, clone) {
 }
 
 function connectCheckboxEmulator(emulatorType, suggestedContainer) {
+  const emulatorAlreadyThere = suggestedContainer.querySelector(
+    `.info-content-block.emulator-${emulatorType}`
+  );
+  if (emulatorAlreadyThere) {
+    console.log('checkbox already connected', emulatorAlreadyThere);
+    return emulatorAlreadyThere;
+  }
   [...suggestedContainer.querySelectorAll('.check-wrapper')].forEach(wrapper => {
     wrapper.addEventListener('click', e => {
       console.log('clicked', wrapper, suggestedContainer);
@@ -2304,6 +2311,15 @@ function connectCheckboxEmulator(emulatorType, suggestedContainer) {
             : prevPriceNumber - emulatorPrice;
           priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
         });
+      configureEasyPayAfterSuggestion();
+      configureUserSelectionsAfterResults();
+      updateBasketSection({
+        vehicle: true,
+        calculator: true,
+        easyPay: true,
+        prokatavoliDoseis: true,
+        easyPayMonthlyGain: true
+      });
     });
   });
 }
