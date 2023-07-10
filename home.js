@@ -2212,6 +2212,7 @@ function displayEmulatorInfo(suggestedContainer) {
 
         const emCont = generateEmulatorInfoContentBlock(vehicleEmulatorType, system);
         emCont.querySelector('.info-content').style.maxHeight = '0px';
+        emCont.querySelector('.info-content').style.height = 'auto';
         if (isMobile()) {
           system.querySelector('.suggested-image-content').style.maxHeight = '50px';
         }
@@ -2248,7 +2249,7 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 }
 
 function showEmulatorCardListener(clone) {
-  clone.querySelector('.info-content').style.maxHeight = '5000px'; //'auto';
+  clone.querySelector('.info-content').style.maxHeight = '1000px'; //'auto';
   if (isMobile()) {
     systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
   }
