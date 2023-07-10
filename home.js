@@ -2247,7 +2247,7 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 
   connectMoreInfoBtn(emulatorType, clone);
 
-  connectCheckboxEmulator(vehicleEmulatorType, systemContainer);
+  connectCheckboxEmulator(emulatorType, systemContainer);
 
   return clone;
 }
