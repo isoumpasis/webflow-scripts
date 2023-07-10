@@ -2252,14 +2252,14 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
   return clone;
 }
 
-function showEmulatorCardListener(clone) {
+function showEmulatorCardListener(clone, systemContainer) {
   clone.querySelector('.info-content').style.maxHeight = '700px'; //'auto';
   if (isMobile()) {
     systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
   }
 }
 
-function hideEmulatorCardListener(clone) {
+function hideEmulatorCardListener(clone, systemContainer) {
   clone.querySelector('.info-content').style.maxHeight = '0px';
   if (isMobile()) {
     systemContainer.querySelector('.suggested-image-content').style.maxHeight = '50px';
