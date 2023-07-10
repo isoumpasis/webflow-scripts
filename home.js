@@ -2238,6 +2238,14 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
     }
   });
 
+  const closeBtn = clone.querySelector('.close-info');
+  closeBtn.addEventListener('click', () => {
+    clone.querySelector('.info-content').style.height = '0px';
+    if (isMobile()) {
+      systemContainer.querySelector('.suggested-image-content').style.height = '50px';
+    }
+  });
+
   return clone;
 }
 // function displayEmulatorInfo(suggestedContainer) {
