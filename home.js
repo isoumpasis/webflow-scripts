@@ -2221,9 +2221,17 @@ function displayEmulatorInfo(suggestedContainer) {
 }
 
 function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
+  const emulatorAlreadyThere = systemContainer.querySelector(
+    `.info-content-block.emulator-${emulatorType}`
+  );
+  if (emulatorAlreadyThere) {
+    console.log('emulator already there', emulatorAlreadyThere);
+    return emulatorAlreadyThere;
+  }
+
   //clone html
   const infoContentBlockToCopy = document.querySelector(
-    `.info-content-block.emulator-${emulatorType}`
+    `#suggested-lpg-ego .info-content-block.emulator-${emulatorType}`
   );
   const clone = infoContentBlockToCopy.cloneNode(true);
   console.log('clone', clone);
@@ -2231,23 +2239,28 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 
   //trigger anim
   const infoTriggerLink = clone.querySelector('.info-trigger-link');
-  infoTriggerLink.addEventListener('click', () => {
-    clone.querySelector('.info-content').style.height = 'auto';
-    if (isMobile()) {
-      systemContainer.querySelector('.suggested-image-content').style.height = '350px';
-    }
-  });
+  infoTriggerLink.addEventListener('click', () => showEmulatorCardListener(clone));
 
   const closeBtn = clone.querySelector('.close-info');
-  closeBtn.addEventListener('click', () => {
-    clone.querySelector('.info-content').style.height = '0px';
-    if (isMobile()) {
-      systemContainer.querySelector('.suggested-image-content').style.height = '50px';
-    }
-  });
+  closeBtn.addEventListener('click', () => hideEmulatorCardListener(clone));
 
   return clone;
 }
+
+function showEmulatorCardListener(clone) {
+  clone.querySelector('.info-content').style.height = 'auto';
+  if (isMobile()) {
+    systemContainer.querySelector('.suggested-image-content').style.height = '350px';
+  }
+}
+
+function hideEmulatorCardListener(clone) {
+  clone.querySelector('.info-content').style.height = '0px';
+  if (isMobile()) {
+    systemContainer.querySelector('.suggested-image-content').style.height = '50px';
+  }
+}
+
 // function displayEmulatorInfo(suggestedContainer) {
 //   //Hide all emulator containers first
 //   suggestedContainer
