@@ -2245,6 +2245,8 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
   const closeBtn = clone.querySelector('.close-info');
   closeBtn.addEventListener('click', () => hideEmulatorCardListener(clone));
 
+  connectMoreInfoBtn(emulatorType, clone);
+
   return clone;
 }
 
@@ -2259,6 +2261,19 @@ function hideEmulatorCardListener(clone) {
   clone.querySelector('.info-content').style.maxHeight = '0px';
   if (isMobile()) {
     systemContainer.querySelector('.suggested-image-content').style.maxHeight = '50px';
+  }
+}
+
+function connectMoreInfoBtn(emulatorType, clone) {
+  if (emulatorType === 't') {
+    clone.querySelector('.reducer-info-trigger').addEventListener(() => {
+      document.querySelector('.reducer-info-overlay').style.display = 'block';
+    });
+  }
+  if (emulatorType === 'f') {
+    clone.querySelector('.emulator-info-trigger').addEventListener(() => {
+      document.querySelector('.emulator-info-overlay').style.display = 'block';
+    });
   }
 }
 
