@@ -2218,7 +2218,6 @@ function displayEmulatorInfo(suggestedContainer) {
         }
         emCont.style.display = 'block';
       });
-    connectCheckboxEmulator(vehicleEmulatorType, suggestedContainer);
   }
 }
 
@@ -2247,6 +2246,8 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
   closeBtn.addEventListener('click', () => hideEmulatorCardListener(clone, systemContainer));
 
   connectMoreInfoBtn(emulatorType, clone);
+
+  connectCheckboxEmulator(vehicleEmulatorType, systemContainer);
 
   return clone;
 }
@@ -2278,18 +2279,12 @@ function connectMoreInfoBtn(emulatorType, clone) {
   }
 }
 
-function connectCheckboxEmulator(emulatorType, suggestedContainer) {
-  const emulatorAlreadyThere = suggestedContainer.querySelector(
-    `.info-content-block.emulator-${emulatorType}`
-  );
-  if (emulatorAlreadyThere) {
-    console.log('checkbox already connected', emulatorAlreadyThere);
-    return emulatorAlreadyThere;
-  }
-  [...suggestedContainer.querySelectorAll('.check-wrapper')].forEach(wrapper => {
+function connectCheckboxEmulator(emulatorType, systemContainer) {
+  systemContainer.querySelector('.check-wrapper').forEach(wrapper => {
     wrapper.addEventListener('click', e => {
-      console.log('clicked', wrapper, suggestedContainer);
+      console.log('clicked', wrapper, systemContainer);
       const emulatorPrice = emulatorPriceDict[emulatorType];
+      const suggestedContainer = getActiveContainer();
       const suggestedContainerChecks = [...suggestedContainer.querySelectorAll('.check')];
 
       emulatorSelected = suggestedContainerChecks[0].style.display !== 'block';
