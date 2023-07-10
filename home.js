@@ -2281,6 +2281,7 @@ function connectMoreInfoBtn(emulatorType, clone) {
 function connectCheckboxEmulator(emulatorType, suggestedContainer) {
   [...suggestedContainer.querySelectorAll('.check-wrapper')].forEach(wrapper => {
     wrapper.addEventListener('click', e => {
+      console.log('clicked', wrapper, suggestedContainer);
       const emulatorPrice = emulatorPriceDict[emulatorType];
       const suggestedContainerChecks = [...suggestedContainer.querySelectorAll('.check')];
 
