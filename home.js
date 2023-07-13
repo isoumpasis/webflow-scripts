@@ -576,7 +576,6 @@ function initForeignReferrerOptions() {
       '.nav-link-container',
       '.menu-button.w-nav-button',
       '#stores',
-      '#recentWinners',
       '#testimonials',
       '#remarketing',
       '#contact',
