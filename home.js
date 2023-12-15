@@ -18,6 +18,7 @@ const urlContactForm = serverUrl + 'contact/';
 const easyPayFileUploaderUrl = serverUrl + 'summaries/easyPay';
 // const baseDateUrl = serverUrl + 'lottery/base-date';
 const urlNotConvForm = serverUrl + 'notConvertible';
+const urlRemainingPremium = serverUrl + 'remainingPremium';
 
 let fetchedYears;
 let fetchedModels;
@@ -500,6 +501,7 @@ const h2FuelSelection = document.querySelector('.h2-fuel-selection');
 const notConvFormSubmitBtn = document.querySelector('#notConvFormSubmitBtn');
 
 document.addEventListener('DOMContentLoaded', () => {
+  initRemainingPremium();
   if (preferredStorage.userSelections) userSelections = getUserSelections();
   userSelections.selectedFuel = 'lpg';
 
@@ -541,6 +543,21 @@ document.addEventListener('DOMContentLoaded', () => {
 // function configGtag() {
 //   gtag('config', 'G-1BV1MH8CNJ', { global_referrer_domain: sourceReferrerDomain });
 // }
+
+function initRemainingPremium() {
+  fetch(urlRemainingPremium, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      document.querySelector('#remainingPremium').textContent = data?.remaining || 500;
+    })
+    .catch(e => console.error('Error on FuelPrices Fetch:', e));
+}
 
 function initNotConvSubmitBtn() {
   document.querySelector('#notConvFormSubmitBtn').setAttribute('type', 'button');
