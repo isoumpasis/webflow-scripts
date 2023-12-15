@@ -545,12 +545,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // }
 
 function initRemainingPremium() {
-  fetch(urlRemainingPremium, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(urlRemainingPremium)
     .then(res => res.json())
     .then(data => {
       console.log(data);
