@@ -496,6 +496,7 @@ let noCreditInterest = 12.6;
 let creditInterest = 8.2; //7.2 //credit + isfora
 
 // let sourceReferrerDomain;
+let remainingPremium;
 
 const h2FuelSelection = document.querySelector('.h2-fuel-selection');
 const notConvFormSubmitBtn = document.querySelector('#notConvFormSubmitBtn');
@@ -548,8 +549,9 @@ function initRemainingPremium() {
   fetch(urlRemainingPremium)
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       document.querySelector('#remainingPremium').textContent = data?.remaining || 500;
+      remainingPremium = data?.remaining;
+      console.log('remaining Premium', remainingPremium, typeof remainingPremium);
     })
     .catch(e => console.error('Error on FuelPrices Fetch:', e));
 }
@@ -3342,9 +3344,19 @@ function prepareDataToSend() {
   dataToSend.userInfo = userInfo;
   dataToSend.userInfo.category = getEasyPayFileUploadCategory();
   dataToSend.sourceReferrerDomain = sourceReferrerDomain;
+  dataToSend.isCobdPremiumOffer = isCobdPremiumOffer();
   delete dataToSend.fuelPrices;
   delete dataToSend.vehicle.identification.fetchedData;
   return dataToSend;
+}
+
+function isCobdPremiumOffer() {
+  if (remainingPremium) {
+    if (userSelections.easyPay.system.name.indexOf('C-OBD') !== -1) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function emailSummarySubmit(e, triggeredFrom, formType) {
