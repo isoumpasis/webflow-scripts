@@ -551,7 +551,6 @@ function initRemainingPremium() {
     .then(data => {
       document.querySelector('#remainingPremium').textContent = data?.remaining || 500;
       remainingPremium = data?.remaining;
-      console.log('remaining Premium', remainingPremium, typeof remainingPremium);
     })
     .catch(e => console.error('Error on FuelPrices Fetch:', e));
 }
@@ -3352,7 +3351,10 @@ function prepareDataToSend() {
 
 function isCobdPremiumOffer() {
   if (remainingPremium) {
-    if (userSelections.easyPay.system.name.indexOf('C-OBD') !== -1) {
+    if (
+      userSelections.easyPay.system.name.indexOf('C-OBD') !== -1 &&
+      userSelections.selectedFuel === 'lpg'
+    ) {
       return true;
     }
   }
