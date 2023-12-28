@@ -3352,7 +3352,7 @@ function prepareDataToSend() {
 function isCobdPremiumOffer() {
   if (remainingPremium) {
     if (
-      new Date().getFullYear() === 2024 &&
+      // new Date().getFullYear() === 2024 &&
       userSelections.easyPay.system.name.indexOf('C-OBD') !== -1 &&
       userSelections.selectedFuel === 'lpg'
     ) {
