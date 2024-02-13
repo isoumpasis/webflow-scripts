@@ -1,5 +1,5 @@
-const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
-// const urlCachedPins = 'http://localhost:1917/map/pins/cached';
+// const urlCachedPins = 'https://lovatohellas.herokuapp.com/map/pins/cached';
+const urlCachedPins = 'http://localhost:1917/map/pins/cached';
 
 const lovatoIconUrl =
   'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/614b0c9c316426410dd24bb4_lovato-icon.svg';
