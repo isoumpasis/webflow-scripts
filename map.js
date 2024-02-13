@@ -161,7 +161,7 @@ async function initMap() {
       animation: google.maps.Animation.DROP,
       visible: true,
       props: cachedPin.properties,
-      zIndex: google.maps.Marker.MAX_ZINDEX + 1 + pinIndex
+      zIndex: google.maps.Marker.MAX_ZINDEX + 1 + cachedPins.length - pinIndex
     });
   });
   markerClusterer = new MarkerClusterer(map, markers, {
