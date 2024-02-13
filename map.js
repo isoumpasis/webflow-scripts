@@ -147,7 +147,7 @@ async function initMap() {
   userMarker = new google.maps.Marker();
   selectedMarker = new google.maps.Marker();
 
-  markers = cachedPins.map(cachedPin => {
+  markers = cachedPins.map((cachedPin, pinIndex) => {
     return new google.maps.Marker({
       position: cachedPin.geometry,
       icon: {
@@ -160,8 +160,8 @@ async function initMap() {
       cursor: 'pointer',
       animation: google.maps.Animation.DROP,
       visible: true,
-      props: cachedPin.properties
-      // zIndex: google.maps.Marker.MAX_ZINDEX + 1
+      props: cachedPin.properties,
+      zIndex: google.maps.Marker.MAX_ZINDEX + 1 + pinIndex
     });
   });
   markerClusterer = new MarkerClusterer(map, markers, {
