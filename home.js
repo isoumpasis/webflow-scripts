@@ -4792,168 +4792,168 @@ function trigger_not_convertible_form_submit() {
 
 /* VIDEO JS */
 
-videojs.addLanguage('el', {
-  Play: 'Aναπαραγωγή',
-  Pause: 'Παύση',
-  'Current Time': 'Τρέχων χρόνος',
-  Duration: 'Συνολικός χρόνος',
-  'Remaining Time': 'Υπολοιπόμενος χρόνος',
-  'Play Video': 'Αναπαραγωγή',
-  Fullscreen: 'Πλήρης οθόνη',
-  'Exit Fullscreen': 'Έξοδος από πλήρη οθόνη',
-  Mute: 'Σίγαση',
-  Unmute: 'Kατάργηση σίγασης',
-  'Playback Rate': 'Ρυθμός αναπαραγωγής',
-  Subtitles: 'Υπότιτλοι',
-  'subtitles off': 'απόκρυψη υπότιτλων',
-  Captions: 'Λεζάντες',
-  'captions off': 'απόκρυψη λεζάντων',
-  'Close Modal Dialog': 'Κλείσιμο παραθύρου',
-  'You aborted the media playback': 'Ακυρώσατε την αναπαραγωγή',
-  'A network error caused the media download to fail part-way.':
-    'Ένα σφάλμα δικτύου προκάλεσε την αποτυχία μεταφόρτωσης του αρχείου προς αναπαραγωγή.',
-  'The media could not be loaded, either because the server or network failed or because the format is not supported.':
-    'Το αρχείο προς αναπαραγωγή δεν ήταν δυνατό να φορτωθεί είτε γιατί υπήρξε σφάλμα στον διακομιστή ή το δίκτυο, είτε γιατί ο τύπος του αρχείου δεν υποστηρίζεται.',
-  'The media playback was aborted due to a corruption problem or because the media used features your browser did not support.':
-    'Η αναπαραγωγή ακυρώθηκε είτε λόγω κατεστραμμένου αρχείου, είτε γιατί το αρχείο απαιτεί λειτουργίες που δεν υποστηρίζονται από το πρόγραμμα περιήγησης που χρησιμοποιείτε.',
-  'No compatible source was found for this media.':
-    'Δεν βρέθηκε συμβατή πηγή αναπαραγωγής για το συγκεκριμένο αρχείο.',
-  'The media is encrypted and we do not have the keys to decrypt it.':
-    'Το αρχείο προς αναπαραγωγή είναι κρυπτογραφημένo και δεν υπάρχουν τα απαραίτητα κλειδιά αποκρυπτογράφησης.',
-  Close: 'Κλείσιμο',
-  'Modal Window': 'Aναδυόμενο παράθυρο',
-  'This is a modal window': 'Το παρών είναι ένα αναδυόμενο παράθυρο',
-  'This modal can be closed by pressing the Escape key or activating the close button.':
-    'Αυτό το παράθυρο μπορεί να εξαφανιστεί πατώντας το πλήκτρο Escape ή πατώντας το κουμπί κλεισίματος.',
-  ', opens captions settings dialog': ', εμφανίζει τις ρυθμίσεις για τις λεζάντες',
-  ', opens subtitles settings dialog': ', εμφανίζει τις ρυθμίσεις για τους υπότιτλους',
-  ', opens descriptions settings dialog': ', εμφανίζει τις ρυθμίσεις για τις περιγραφές',
-  ', selected': ', επιλεγμένο',
-  'Picture-in-Picture': 'Προβολή σε παράθυρο'
-});
+// videojs.addLanguage('el', {
+//   Play: 'Aναπαραγωγή',
+//   Pause: 'Παύση',
+//   'Current Time': 'Τρέχων χρόνος',
+//   Duration: 'Συνολικός χρόνος',
+//   'Remaining Time': 'Υπολοιπόμενος χρόνος',
+//   'Play Video': 'Αναπαραγωγή',
+//   Fullscreen: 'Πλήρης οθόνη',
+//   'Exit Fullscreen': 'Έξοδος από πλήρη οθόνη',
+//   Mute: 'Σίγαση',
+//   Unmute: 'Kατάργηση σίγασης',
+//   'Playback Rate': 'Ρυθμός αναπαραγωγής',
+//   Subtitles: 'Υπότιτλοι',
+//   'subtitles off': 'απόκρυψη υπότιτλων',
+//   Captions: 'Λεζάντες',
+//   'captions off': 'απόκρυψη λεζάντων',
+//   'Close Modal Dialog': 'Κλείσιμο παραθύρου',
+//   'You aborted the media playback': 'Ακυρώσατε την αναπαραγωγή',
+//   'A network error caused the media download to fail part-way.':
+//     'Ένα σφάλμα δικτύου προκάλεσε την αποτυχία μεταφόρτωσης του αρχείου προς αναπαραγωγή.',
+//   'The media could not be loaded, either because the server or network failed or because the format is not supported.':
+//     'Το αρχείο προς αναπαραγωγή δεν ήταν δυνατό να φορτωθεί είτε γιατί υπήρξε σφάλμα στον διακομιστή ή το δίκτυο, είτε γιατί ο τύπος του αρχείου δεν υποστηρίζεται.',
+//   'The media playback was aborted due to a corruption problem or because the media used features your browser did not support.':
+//     'Η αναπαραγωγή ακυρώθηκε είτε λόγω κατεστραμμένου αρχείου, είτε γιατί το αρχείο απαιτεί λειτουργίες που δεν υποστηρίζονται από το πρόγραμμα περιήγησης που χρησιμοποιείτε.',
+//   'No compatible source was found for this media.':
+//     'Δεν βρέθηκε συμβατή πηγή αναπαραγωγής για το συγκεκριμένο αρχείο.',
+//   'The media is encrypted and we do not have the keys to decrypt it.':
+//     'Το αρχείο προς αναπαραγωγή είναι κρυπτογραφημένo και δεν υπάρχουν τα απαραίτητα κλειδιά αποκρυπτογράφησης.',
+//   Close: 'Κλείσιμο',
+//   'Modal Window': 'Aναδυόμενο παράθυρο',
+//   'This is a modal window': 'Το παρών είναι ένα αναδυόμενο παράθυρο',
+//   'This modal can be closed by pressing the Escape key or activating the close button.':
+//     'Αυτό το παράθυρο μπορεί να εξαφανιστεί πατώντας το πλήκτρο Escape ή πατώντας το κουμπί κλεισίματος.',
+//   ', opens captions settings dialog': ', εμφανίζει τις ρυθμίσεις για τις λεζάντες',
+//   ', opens subtitles settings dialog': ', εμφανίζει τις ρυθμίσεις για τους υπότιτλους',
+//   ', opens descriptions settings dialog': ', εμφανίζει τις ρυθμίσεις για τις περιγραφές',
+//   ', selected': ', επιλεγμένο',
+//   'Picture-in-Picture': 'Προβολή σε παράθυρο'
+// });
 
-let bigPlayBtn, heroVideo, heroVideoContainer;
+// let bigPlayBtn, heroVideo, heroVideoContainer;
 
-let videoStarted = false;
+// let videoStarted = false;
 
-const player = videojs('heroVideo', {
-  language: 'el',
-  controls: false,
-  loop: false,
-  playsinline: true,
-  fluid: true,
-  muted: true,
-  autoplay: true,
-  controlBar: {
-    fullscreenToggle: !isMobile()
-  },
-  userActions: {
-    doubleClick: !isMobile()
-  }
-});
+// const player = videojs('heroVideo', {
+//   language: 'el',
+//   controls: false,
+//   loop: false,
+//   playsinline: true,
+//   fluid: true,
+//   muted: true,
+//   autoplay: true,
+//   controlBar: {
+//     fullscreenToggle: !isMobile()
+//   },
+//   userActions: {
+//     doubleClick: !isMobile()
+//   }
+// });
 
-let interval = null;
+// let interval = null;
 
-player.on('ready', function () {
-  bigPlayBtn = document.querySelector('.vjs-big-play-button');
-  heroVideo = document.querySelector('#heroVideo');
-  heroVideoContainer = document.querySelector('#heroVideoContainer');
+// player.on('ready', function () {
+//   bigPlayBtn = document.querySelector('.vjs-big-play-button');
+//   heroVideo = document.querySelector('#heroVideo');
+//   heroVideoContainer = document.querySelector('#heroVideoContainer');
 
-  heroVideoContainer.addEventListener('click', clickVideoFn);
-  heroVideoContainer.addEventListener('touchstart', clickVideoFn);
+//   heroVideoContainer.addEventListener('click', clickVideoFn);
+//   heroVideoContainer.addEventListener('touchstart', clickVideoFn);
 
-  bigPlayBtn.style.display = 'block';
-  heroVideo.style.cursor = 'pointer';
+//   bigPlayBtn.style.display = 'block';
+//   heroVideo.style.cursor = 'pointer';
 
-  interval = setInterval(() => {
-    player.currentTime(0);
-  }, 8000);
-});
+//   interval = setInterval(() => {
+//     player.currentTime(0);
+//   }, 8000);
+// });
 
-player.on('fullscreenchange', function () {
-  if (isMobile()) {
-    if (player.isFullscreen()) {
-      player.exitFullscreen();
-    }
-  }
-});
+// player.on('fullscreenchange', function () {
+//   if (isMobile()) {
+//     if (player.isFullscreen()) {
+//       player.exitFullscreen();
+//     }
+//   }
+// });
 
-function clickVideoFn(e) {
-  bigPlayBtn.style.display = 'none';
-  heroVideo.style.cursor = 'default';
-  if (interval) {
-    clearInterval(interval);
-    interval = null;
-    player.controls(true);
-    player.muted(false);
-    player.currentTime(0);
+// function clickVideoFn(e) {
+//   bigPlayBtn.style.display = 'none';
+//   heroVideo.style.cursor = 'default';
+//   if (interval) {
+//     clearInterval(interval);
+//     interval = null;
+//     player.controls(true);
+//     player.muted(false);
+//     player.currentTime(0);
 
-    if (!i0) {
-      // console.log('send 0%');
-      trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 0 });
-      i0 = true;
-    }
-    setTimeout(() => {
-      player.play();
-    }, 50);
-  }
-}
+//     if (!i0) {
+//       // console.log('send 0%');
+//       trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 0 });
+//       i0 = true;
+//     }
+//     setTimeout(() => {
+//       player.play();
+//     }, 50);
+//   }
+// }
 
-player.reloadSourceOnError({
-  getSource: function (reload) {
-    reload({
-      src: 'https://drive.google.com/uc?id=12Gj4M3K3QpSZdp-agOoKOwL8C60Czry0&authuser=0&export=download',
-      type: 'video/mp4'
-    });
-    // reload({
-    //   src: 'https://drive.google.com/uc?id=1quxLrbad-IpcanZA7fEZC2izRdsCbjiD&authuser=0&export=download',
-    //   type: 'video/mp4'
-    // });
-  },
-  errorInterval: 1
-});
+// player.reloadSourceOnError({
+//   getSource: function (reload) {
+//     reload({
+//       src: 'https://drive.google.com/uc?id=12Gj4M3K3QpSZdp-agOoKOwL8C60Czry0&authuser=0&export=download',
+//       type: 'video/mp4'
+//     });
+//     // reload({
+//     //   src: 'https://drive.google.com/uc?id=1quxLrbad-IpcanZA7fEZC2izRdsCbjiD&authuser=0&export=download',
+//     //   type: 'video/mp4'
+//     // });
+//   },
+//   errorInterval: 1
+// });
 
-let i0 = false,
-  i25 = false,
-  i50 = false,
-  i75 = false,
-  i100 = false;
-const video = document.querySelector('#heroVideo video');
-video.addEventListener('timeupdate', event => {
-  const currentTime = video.currentTime;
-  const duration = video.duration;
+// let i0 = false,
+//   i25 = false,
+//   i50 = false,
+//   i75 = false,
+//   i100 = false;
+// const video = document.querySelector('#heroVideo video');
+// video.addEventListener('timeupdate', event => {
+//   const currentTime = video.currentTime;
+//   const duration = video.duration;
 
-  if (currentTime > 0.25 * duration) {
-    if (!i25) {
-      // console.log('send 25%');
-      trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 25 });
-      i25 = true;
-    }
-  }
-  if (currentTime > 0.5 * duration) {
-    if (!i50) {
-      // console.log('send 50%');
-      trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 50 });
-      i50 = true;
-    }
-  }
-  if (currentTime > 0.75 * duration) {
-    if (!i75) {
-      // console.log('send 75%');
-      trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 75 });
-      i75 = true;
-    }
-  }
-  if (currentTime > 0.9 * duration) {
-    if (!i100) {
-      // console.log('send 100%');
-      trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 100 });
-      i100 = true;
-    }
-  }
-});
+//   if (currentTime > 0.25 * duration) {
+//     if (!i25) {
+//       // console.log('send 25%');
+//       trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 25 });
+//       i25 = true;
+//     }
+//   }
+//   if (currentTime > 0.5 * duration) {
+//     if (!i50) {
+//       // console.log('send 50%');
+//       trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 50 });
+//       i50 = true;
+//     }
+//   }
+//   if (currentTime > 0.75 * duration) {
+//     if (!i75) {
+//       // console.log('send 75%');
+//       trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 75 });
+//       i75 = true;
+//     }
+//   }
+//   if (currentTime > 0.9 * duration) {
+//     if (!i100) {
+//       // console.log('send 100%');
+//       trigger_video_watch_time({ video_id: 'heroVideo', watch_time: 100 });
+//       i100 = true;
+//     }
+//   }
+// });
 
-function trigger_video_watch_time(options) {
-  triggerGtagEvent('video_watch_time', options);
-}
+// function trigger_video_watch_time(options) {
+//   triggerGtagEvent('video_watch_time', options);
+// }
 /* VIDEO JS */
