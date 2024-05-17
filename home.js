@@ -1,6 +1,6 @@
 /* System Identification */
-let serverUrl = 'https://lovatohellas.herokuapp.com/';
-// let serverUrl = 'http://localhost:1917/';
+// let serverUrl = 'https://lovatohellas.herokuapp.com/';
+let serverUrl = 'http://localhost:1917/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlYears = serverUrl + 'vehicleDB/get/years';
@@ -18,7 +18,7 @@ const urlContactForm = serverUrl + 'contact/';
 const easyPayFileUploaderUrl = serverUrl + 'summaries/easyPay';
 // const baseDateUrl = serverUrl + 'lottery/base-date';
 const urlNotConvForm = serverUrl + 'notConvertible';
-const urlRemainingPremium = serverUrl + 'remainingPremium';
+// const urlRemainingPremium = serverUrl + 'remainingPremium';
 
 let fetchedYears;
 let fetchedModels;
@@ -496,13 +496,13 @@ let noCreditInterest = 12.6;
 let creditInterest = 8.2; //7.2 //credit + isfora
 
 // let sourceReferrerDomain;
-let remainingPremium;
+let remainingPremium = 'always';
 
 const h2FuelSelection = document.querySelector('.h2-fuel-selection');
 const notConvFormSubmitBtn = document.querySelector('#notConvFormSubmitBtn');
 
 document.addEventListener('DOMContentLoaded', () => {
-  initRemainingPremium();
+  // initRemainingPremium();
   if (preferredStorage.userSelections) userSelections = getUserSelections();
   userSelections.selectedFuel = 'lpg';
 
@@ -545,15 +545,15 @@ document.addEventListener('DOMContentLoaded', () => {
 //   gtag('config', 'G-1BV1MH8CNJ', { global_referrer_domain: sourceReferrerDomain });
 // }
 
-function initRemainingPremium() {
-  fetch(urlRemainingPremium)
-    .then(res => res.json())
-    .then(data => {
-      document.querySelector('#remainingPremium').textContent = data?.remaining || 500;
-      remainingPremium = data?.remaining;
-    })
-    .catch(e => console.error('Error on FuelPrices Fetch:', e));
-}
+// function initRemainingPremium() {
+//   fetch(urlRemainingPremium)
+//     .then(res => res.json())
+//     .then(data => {
+//       document.querySelector('#remainingPremium').textContent = data?.remaining || 500;
+//       remainingPremium = data?.remaining;
+//     })
+//     .catch(e => console.error('Error on FuelPrices Fetch:', e));
+// }
 
 function initNotConvSubmitBtn() {
   document.querySelector('#notConvFormSubmitBtn').setAttribute('type', 'button');
