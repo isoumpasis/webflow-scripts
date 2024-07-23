@@ -1,6 +1,6 @@
 /* System Identification */
-let serverUrl = 'https://lovatohellas.herokuapp.com/';
-// let serverUrl = 'http://localhost:1917/';
+// let serverUrl = 'https://lovatohellas.herokuapp.com/';
+let serverUrl = 'http://localhost:1917/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlYears = serverUrl + 'vehicleDB/get/years';
@@ -496,7 +496,7 @@ let noCreditInterest = 12.6;
 let creditInterest = 8.2; //7.2 //credit + isfora
 
 // let sourceReferrerDomain;
-let remainingPremium = 'always';
+let remainingPremium = null; // 'always';
 
 const h2FuelSelection = document.querySelector('.h2-fuel-selection');
 const notConvFormSubmitBtn = document.querySelector('#notConvFormSubmitBtn');
