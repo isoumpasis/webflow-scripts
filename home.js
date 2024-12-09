@@ -2417,6 +2417,7 @@ function configureCalculatorAfterSuggestion() {
 
   document.querySelector('#calcContainerVehicle').style.display = 'block';
   document.querySelector('#calcContainerNoVehicle').style.display = 'none';
+  document.querySelector('.consumption-wrapper').style.display = 'flex';
 
   sliders[1].value = foundVehicleObj.consumption[getDriveOftenIndex()];
   outputs[1].value = sliders[1].value;
@@ -2470,6 +2471,7 @@ function resetCalc() {
 
   document.querySelector('#calcContainerVehicle').style.display = 'none';
   document.querySelector('#calcContainerNoVehicle').style.display = 'flex';
+  document.querySelector('.consumption-wrapper').style.display = 'none';
 
   sliders[1].value = 8;
   outputs[1].value = 8;
