@@ -481,8 +481,7 @@ const maxNoVehicleCreditSliderText = document.querySelector('.max-no-vehicle-cre
 const minNoVehicleMetrhtaSliderText = document.querySelector('.min-no-vehicle-metrhta-slider-text');
 const maxNoVehicleMetrhtaSliderText = document.querySelector('.max-no-vehicle-metrhta-slider-text');
 
-const fuelPricesSelectVehicle = document.querySelector('#fuelPricesSelectVehicle');
-const fuelPricesSelectNoVehicle = document.querySelector('#fuelPricesSelectNoVehicle');
+const fuelPricesSelect = document.querySelector('#fuelPricesSelect');
 const notConvertibleFormLocationSelect = document.querySelector(
   '#notConvertibleFormLocationSelect'
 );
@@ -814,41 +813,15 @@ function initDriveOftenRadio() {
 }
 
 function initPlaceSelects(placeValue) {
-  fuelPricesSelectVehicle.value = placeValue;
-  fuelPricesSelectNoVehicle.value = placeValue;
+  fuelPricesSelect.value = placeValue;
   [...document.querySelectorAll('.place-calc-descr')].map(
-    el =>
-      (el.textContent =
-        fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent)
+    el => (el.textContent = fuelPricesSelect.options[fuelPricesSelect.selectedIndex].textContent)
   );
   storesLocationSelect.value = placeValue;
 }
 
-fuelPricesSelectNoVehicle.addEventListener('change', e => {
+fuelPricesSelect.addEventListener('change', e => {
   locationOnChange(e.target.value);
-  // fuelPricesSelectVehicle.value = e.target.value;
-  // modifyFuelPriceSliders(e.target.value, { save: true });
-  // [...document.querySelectorAll('.place-calc-descr')].map(
-  //   el =>
-  //     (el.textContent =
-  //       fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent)
-  // );
-
-  // storesLocationSelect.value = e.target.value;
-  // locationOnChange(storesLocationSelect.value);
-});
-fuelPricesSelectVehicle.addEventListener('change', e => {
-  locationOnChange(e.target.value);
-  // fuelPricesSelectNoVehicle.value = e.target.value;
-  // modifyFuelPriceSliders(e.target.value, { save: true });
-  // [...document.querySelectorAll('.place-calc-descr')].map(
-  //   el =>
-  //     (el.textContent =
-  //       fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent)
-  // );
-
-  // storesLocationSelect.value = e.target.value;
-  // locationOnChange(storesLocationSelect.value);
 
   updateBasketSection({ calculator: true });
   if (step2Triggered && !step3Triggered) {
@@ -872,11 +845,10 @@ function modifyFuelPriceSliders(value, { save = false } = {}) {
   calcCovers[3].style.width = calcCoverWidth(sliders[3]) + '%';
   calcResult(false);
   if (save) {
-    userSelections.calculator.fuelPricesSelectedIndex = fuelPricesSelectVehicle.selectedIndex;
+    userSelections.calculator.fuelPricesSelectedIndex = fuelPricesSelect.selectedIndex;
     userSelections.location = {
-      index: fuelPricesSelectVehicle.selectedIndex,
-      place: fuelPricesSelectVehicle.value
-      // place: fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent
+      index: fuelPricesSelect.selectedIndex,
+      place: fuelPricesSelect.value
     };
     saveUserSelections();
   }
@@ -1908,7 +1880,7 @@ function configureUserSelectionsAfterResults() {
     calculator: {
       ...userSelections.calculator,
       driveOftenIndex: driveOftenIndexValue,
-      fuelPricesSelectedIndex: fuelPricesSelectVehicle.selectedIndex,
+      fuelPricesSelectedIndex: fuelPricesSelect.selectedIndex,
       kmPerYearValue: +document.querySelector('.km-year').value,
       trueConsumption: +document.querySelector('.lt-100km').value,
       gain: userSelections.selectedFuel === 'lpg' ? lpgResult.textContent : cngResult.textContent,
@@ -2919,7 +2891,7 @@ function updateBasketSection(sections) {
         ? 'Εκτός πόλης'
         : 'Μικτά';
     document.querySelector('.fuel-place-basket').textContent =
-      fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].innerHTML;
+      fuelPricesSelect.options[fuelPricesSelect.selectedIndex].innerHTML;
     document.querySelector('.km-per-year-text-basket').textContent =
       userSelections.calculator.kmPerYearValue + ' km';
 
@@ -3570,14 +3542,11 @@ function locationOnChange(value, init = false) {
   }
   isLocationSelected = true;
 
-  fuelPricesSelectNoVehicle.value = value;
-  fuelPricesSelectVehicle.value = value;
+  fuelPricesSelect.value = value;
   if (!init) {
     modifyFuelPriceSliders(value, { save: true });
     [...document.querySelectorAll('.place-calc-descr')].map(
-      el =>
-        (el.textContent =
-          fuelPricesSelectVehicle.options[fuelPricesSelectVehicle.selectedIndex].textContent)
+      el => (el.textContent = fuelPricesSelect.options[fuelPricesSelect.selectedIndex].textContent)
     );
   }
 
