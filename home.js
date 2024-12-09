@@ -2388,7 +2388,6 @@ function configureCalculatorAfterSuggestion() {
   consumptionRadios[2].dataset.cons = foundVehicleObj.consumption[2];
 
   document.querySelector('#calcContainerVehicle').style.display = 'block';
-  document.querySelector('#calcContainerNoVehicle').style.display = 'none';
   document.querySelector('.consumption-wrapper').style.display = 'flex';
 
   sliders[1].value = foundVehicleObj.consumption[getDriveOftenIndex()];
@@ -2442,7 +2441,6 @@ function resetCalc() {
   document.querySelector('#consumptionModelNameCalc').classList.remove('calc-info-style');
 
   document.querySelector('#calcContainerVehicle').style.display = 'none';
-  document.querySelector('#calcContainerNoVehicle').style.display = 'flex';
   document.querySelector('.consumption-wrapper').style.display = 'none';
 
   sliders[1].value = 8;
@@ -4881,7 +4879,7 @@ function trigger_not_convertible_form_submit() {
 //     //   type: 'video/mp4'
 //     // });
 //   },
-//   errorInterval: 1
+// t  errorInterval: 1
 // });
 
 // let i0 = false,
