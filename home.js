@@ -809,7 +809,8 @@ function initFuelPrices() {
 // }
 
 function initDriveOftenRadio() {
-  selectDriveOftenRadioInput(2);
+  selectDriveOftenRadioInput(0);
+  document.querySelector('.consumption-wrapper').style.display = 'none';
 }
 
 function initPlaceSelects(placeValue) {
@@ -2388,11 +2389,12 @@ function configureCalculatorAfterSuggestion() {
   consumptionRadios[2].dataset.cons = foundVehicleObj.consumption[2];
 
   document.querySelector('#calcContainerVehicle').style.display = 'block';
-  document.querySelector('.consumption-wrapper').style.display = 'flex';
 
   sliders[1].value = foundVehicleObj.consumption[getDriveOftenIndex()];
   outputs[1].value = sliders[1].value;
   calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
+
+  document.querySelector('.consumption-wrapper').style.display = 'flex';
 
   [...document.querySelectorAll('.in-consumption')].map(
     el => (el.textContent = foundVehicleObj.consumption[0])
