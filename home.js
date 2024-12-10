@@ -3052,6 +3052,7 @@ function calcResult(allowedToTrigger = true) {
 
   const lpgPercentageValue = (100 * (petrolCostPerMonth - lpgCostPerMonth)) / petrolCostPerMonth;
   const cngPercentageValue = (100 * (petrolCostPerMonth - cngCostPerMonth)) / petrolCostPerMonth;
+  const activeContainer = getActiveContainer();
 
   if (!perMonthCheckbox.checked) {
     costLabels.forEach(label => (label.textContent = 'Ετήσια Έξοδα:'));
@@ -3076,6 +3077,10 @@ function calcResult(allowedToTrigger = true) {
     cngResult.textContent = cngGain.toFixed(2) + '€';
     cngPercentageEl.textContent = cngPercentageValue.toFixed(1) + '%';
 
+    if (activeContainer) {
+      configureAmortizationInMonths((lpgGain / 12).toFixed(1));
+    }
+
     userSelections.calculator.perMonthCheckbox = false;
   } else {
     costLabels.forEach(label => (label.textContent = 'Μηνιαία Έξοδα:'));
@@ -3091,6 +3096,10 @@ function calcResult(allowedToTrigger = true) {
     cngCost.textContent = cngExpenses.toFixed(1) + '€';
 
     lpgGain = +(petrolCostPerMonth - lpgCostPerMonth).toFixed(2);
+
+    if (activeContainer) {
+      configureAmortizationInMonths(lpgGain);
+    }
 
     lpgResult.textContent = lpgGain.toFixed(2) + '€';
     lpgPercentageEl.textContent = lpgPercentageValue.toFixed(1) + '%';
@@ -3128,6 +3137,23 @@ function calcResult(allowedToTrigger = true) {
   calcResultHypothesis({ years: 5 });
   showHintActiveTime = 0;
   hintJustClosed = false;
+}
+
+function configureAmortizationInMonths(lpgMonthlyGain) {
+  const { priceWithVAT } = getSystemNamePrice();
+
+  let amortizationInMonths = Math.round(priceWithVAT / lpgMonthlyGain);
+
+  if (lpgMonthlyGain > priceWithVAT) {
+    amortizationInMonths = 0;
+  }
+
+  document.querySelector('.amortization-months').textContent = amortizationInMonths;
+  if (amortizationInMonths === 1) {
+    document.querySelector('.amortization-wrapper .amortization-text').textContent = 'μήνα';
+  } else {
+    document.querySelector('.amortization-wrapper .amortization-text').textContent = 'μήνες';
+  }
 }
 
 function calcCoverWidth(slider) {
