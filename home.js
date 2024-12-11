@@ -2410,6 +2410,9 @@ function configureCalculatorAfterSuggestion() {
     '#consumptionModelNameCalc'
   ).textContent = `${makeSelect.value} ${modelSelect.value} (${yearSelect.value})`;
   document.querySelector('#consumptionModelNameCalc').classList.add('calc-info-style');
+
+  document.querySelector('.amortization-wrapper').style.display = 'flex';
+  document.querySelector('.amortization-add-car').style.display = 'none';
 }
 
 function selectDriveOftenRadioInput(index) {
@@ -2444,6 +2447,8 @@ function resetCalc() {
 
   document.querySelector('#calcContainerVehicle').style.display = 'none';
   document.querySelector('.consumption-wrapper').style.display = 'none';
+  document.querySelector('.amortization-wrapper').style.display = 'none';
+  document.querySelector('.amortization-add-car').style.display = 'block';
 
   sliders[1].value = 8;
   outputs[1].value = 8;
