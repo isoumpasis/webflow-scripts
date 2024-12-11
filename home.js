@@ -653,8 +653,9 @@ function showFacebookBrowserProblem(show) {
 }
 
 function initCalcOptions() {
-  document.querySelector('#consumptionModelNameCalc').textContent = 'αυτοκίνητό σας';
-  document.querySelector('#consumptionModelNameCalc').classList.remove('calc-info-style');
+  resetCalc();
+  // document.querySelector('#consumptionModelNameCalc').textContent = 'αυτοκίνητό σας';
+  // document.querySelector('#consumptionModelNameCalc').classList.remove('calc-info-style');
 }
 
 function initBasket() {
