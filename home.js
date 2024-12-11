@@ -1105,6 +1105,8 @@ function initEasyPaySystemSelection() {
       prokatavoliCreditSliderOnChange(prokatavoliCreditSlider.value);
       metrhtaFinalCost.textContent = selectedEasyPaySystemPrice.toFixed(2) + '€';
 
+      calcResult(false);
+
       if (step2Triggered && !step4Triggered) {
         trigger_easy_pay_step_4({ triggered_via: 'click' });
       }
