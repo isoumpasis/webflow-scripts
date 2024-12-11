@@ -3140,7 +3140,7 @@ function calcResult(allowedToTrigger = true) {
 }
 
 function configureAmortizationInMonths(lpgMonthlyGain) {
-  const { priceWithVAT } = getSystemNamePrice();
+  const { priceWithVAT } = getSelectedSystemNamePrice();
 
   let amortizationInMonths = Math.round(priceWithVAT / lpgMonthlyGain);
 
@@ -3154,6 +3154,18 @@ function configureAmortizationInMonths(lpgMonthlyGain) {
   } else {
     document.querySelector('.amortization-wrapper .amortization-text').textContent = 'μήνες';
   }
+}
+
+function getSelectedSystemNamePrice() {
+  const systems = getSystemsNamePrice(getActiveContainer());
+  let foundSelectedSystem;
+  for (let system of systems) {
+    system.priceWithVAT = +system.priceNoVAT.split('€')[0] * VAT;
+    if (system.priceWithVAT === selectedEasyPaySystemPrice) {
+      foundSelectedSystem = system;
+    }
+  }
+  return foundSelectedSystem;
 }
 
 function calcCoverWidth(slider) {
