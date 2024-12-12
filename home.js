@@ -595,7 +595,7 @@ function initForeignReferrerOptions() {
     ];
     if (!(urlParams.has('showHero') && urlParams.get('showHero') === 'true')) {
       dontShowEls.push('#hero', '#vehicle img');
-      document.querySelector('#vehicle').style.paddingTop = '30px';
+      // document.querySelector('#vehicle').style.paddingTop = '30px';
     } else {
       const newLink = `?foreignReferrer=true&domain=${sourceReferrerDomain}`;
       const gogasBtn = document.querySelector('.go-gas-interest-btn');
@@ -2024,7 +2024,7 @@ function resetLastStep() {
 }
 
 function adjustSectionPaddings() {
-  document.querySelector('#vehicle').style.paddingBottom = '3%';
+  // document.querySelector('#vehicle').style.paddingBottom = '3%';
 }
 
 function resetToDefaultPrices() {
@@ -2458,10 +2458,10 @@ function resetCalc() {
   outputs[1].value = 8;
   calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
-  if (!getActiveContainer()) {
-    document.querySelector('#vehicle').style.paddingBottom = '6%';
-    document.querySelector('#calculator').style.paddingTop = '6%';
-  }
+  // if (!getActiveContainer()) {
+  //   document.querySelector('#vehicle').style.paddingBottom = '6%';
+  //   document.querySelector('#calculator').style.paddingTop = '6%';
+  // }
 }
 
 document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
