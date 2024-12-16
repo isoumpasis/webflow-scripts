@@ -3151,6 +3151,8 @@ function calcResult(allowedToTrigger = true) {
 function configureAmortizationInMonths(lpgMonthlyGain) {
   const { priceWithVAT } = getSelectedSystemNamePrice();
 
+  if (priceWithVAT === null) return;
+
   let amortizationInMonths = Math.round(priceWithVAT / lpgMonthlyGain);
 
   if (lpgMonthlyGain > priceWithVAT) {
@@ -3167,6 +3169,9 @@ function configureAmortizationInMonths(lpgMonthlyGain) {
 
 function getSelectedSystemNamePrice() {
   const systems = getSystemsNamePrice(getActiveContainer());
+  if (systems[0].name === 'not convertible form') {
+    return { priceWithVAT: null };
+  }
   let foundSelectedSystem;
   for (let system of systems) {
     system.priceWithVAT = +system.priceNoVAT.split('€')[0] * VAT;
