@@ -1845,7 +1845,7 @@ function descriptionOnChange(value) {
 
   /* Elevator on Step 2 after vehicle select */
   setTimeout(() => {
-    document.querySelector('#systemsContainer').scrollIntoView({ behavior: 'smooth' });
+    document.querySelector('#vehicle').scrollIntoView({ behavior: 'smooth' });
   }, 100);
 }
 
