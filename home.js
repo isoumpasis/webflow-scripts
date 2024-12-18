@@ -1842,6 +1842,11 @@ function descriptionOnChange(value) {
   calcResult(false);
 
   saveUserSelections();
+
+  /* Elevator on Step 2 after vehicle select */
+  setTimeout(() => {
+    document.querySelector('#systemsContainer').scrollIntoView({ behavior: 'smooth' });
+  }, 100);
 }
 
 function configureUserSelectionsAfterResults() {
