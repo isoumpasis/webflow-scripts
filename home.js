@@ -2062,7 +2062,7 @@ function showDirectResults(fetchedModelObj) {
     let temp = descriptionSelect.value.split(' - ');
     directSystemDiv.querySelector('.di-engine-code-overlay').textContent =
       temp[1] + ' - ' + temp[0].replace(' ', '');
-    directSystemDiv.style.display = 'grid';
+    directSystemDiv.style.display = 'block';
   } else {
     if (foundVehicleObj.cylinders <= 4) {
       showNotConvertibleFormContainer();
@@ -2083,7 +2083,7 @@ function showMonouResults(fetchedModelObj) {
       break;
     }
   }
-  document.querySelector(`#suggested-${userSelections.selectedFuel}-monou`).style.display = 'grid';
+  document.querySelector(`#suggested-${userSelections.selectedFuel}-monou`).style.display = 'block';
 }
 
 function showCylinderResults(fetchedModelObj, years) {
@@ -2108,21 +2108,21 @@ function showCylinderResults(fetchedModelObj, years) {
     const cobdDiv = document.querySelector(`#suggested-${userSelections.selectedFuel}-cobd-8cyl`);
     cobdDiv.querySelector('.suggested-descr-text').textContent = '4x2 = 8cyl';
     cobdDiv.querySelector('.left-overlay-description').textContent = '4x2 = 8cyl έως 180HP';
-    cobdDiv.style.display = 'grid';
+    cobdDiv.style.display = 'block';
   } else if (cyls == 5 || cyls == 6) {
     suggestedSystems = ['C-OBD II 6cyl'];
     const cobdDiv = document.querySelector(`#suggested-${userSelections.selectedFuel}-cobd-6cyl`);
     // const cylinderDescrText = getCylinderDescrText();
     // cobdDiv.querySelector('.suggested-descr-text').textContent = '5-6cyl' + cylinderDescrText;
     // cobdDiv.querySelector('.left-overlay-description').textContent = '5-6cyl' + cylinderDescrText;
-    cobdDiv.style.display = 'grid';
+    cobdDiv.style.display = 'block';
   } else if (cyls == 8) {
     suggestedSystems = ['C-OBD II 8cyl'];
     const cobdDiv = document.querySelector(`#suggested-${userSelections.selectedFuel}-cobd-8cyl`);
     // const cylinderDescrText = getCylinderDescrText();
     // cobdDiv.querySelector('.suggested-descr-text').textContent = '8cyl' + cylinderDescrText;
     // cobdDiv.querySelector('.left-overlay-description').textContent = '8cyl' + cylinderDescrText;
-    cobdDiv.style.display = 'grid';
+    cobdDiv.style.display = 'block';
   } else if (years <= 1998) {
     if (
       foundVehicleObj.hp > 180 ||
@@ -2132,11 +2132,11 @@ function showCylinderResults(fetchedModelObj, years) {
       const exrDiv = document.querySelector(`#suggested-${userSelections.selectedFuel}-exr`);
       exrDiv.querySelector('.left-overlay-description').textContent =
         '2-4cyl' + getCylinderDescrText();
-      exrDiv.style.display = 'grid';
+      exrDiv.style.display = 'block';
     } else {
       suggestedSystems = ['E-GO'];
       document.querySelector(`#suggested-${userSelections.selectedFuel}-ego`).style.display =
-        'grid';
+        'block';
     }
   } else if (years >= 1999 && years <= 2004) {
     if (
@@ -2147,13 +2147,13 @@ function showCylinderResults(fetchedModelObj, years) {
       const exrDiv = document.querySelector(`#suggested-${userSelections.selectedFuel}-exr`);
       exrDiv.querySelector('.left-overlay-description').textContent =
         '2-4cyl' + getCylinderDescrText();
-      exrDiv.style.display = 'grid';
+      exrDiv.style.display = 'block';
     } else {
       suggestedSystems = ['Smart ExR', 'E-GO'];
       const exrEgoDiv = document.querySelector(`#suggested-${userSelections.selectedFuel}-exr-ego`);
       exrEgoDiv.querySelector('.left-overlay-description').textContent =
         '2-4cyl' + getCylinderDescrText();
-      exrEgoDiv.style.display = 'grid';
+      exrEgoDiv.style.display = 'block';
     }
   } else if (years >= 2005 && years <= 2013) {
     suggestedSystems = ['C-OBD II', 'Smart ExR'];
@@ -2161,13 +2161,13 @@ function showCylinderResults(fetchedModelObj, years) {
     cobdExrDiv
       .querySelectorAll('.left-overlay-description')
       .forEach(el => (el.textContent = '2-4cyl' + getCylinderDescrText()));
-    cobdExrDiv.style.display = 'grid';
+    cobdExrDiv.style.display = 'block';
   } else {
     suggestedSystems = ['C-OBD II'];
     const cobdDiv = document.querySelector(`#suggested-${userSelections.selectedFuel}-cobd`);
     cobdDiv.querySelector('.left-overlay-description').textContent =
       '2-4cyl' + getCylinderDescrText();
-    cobdDiv.style.display = 'grid';
+    cobdDiv.style.display = 'block';
   }
 }
 
