@@ -2005,7 +2005,7 @@ function showResults(fetchedModelObj) {
 
   const suggestedContainer = getActiveContainer();
   //Always open on first tab
-  [...getActiveContainer().querySelectorAll('.system-switch')][0].click();
+  [...getActiveContainer().querySelectorAll('.system-switch')][0]?.click();
 
   userSelections.vehicle.suggestions = {
     ...userSelections.vehicle.suggestions,
