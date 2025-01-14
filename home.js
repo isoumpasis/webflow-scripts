@@ -2027,10 +2027,10 @@ function showGuarantee(show) {
 }
 function showCarMakeStep1(show) {
   document.querySelector('.car-make-step1').style.display = show ? 'flex' : 'none';
-  const makeImgSrc = document.querySelector('#makeImg').src;
-  const modelNameText = document.querySelector('#modelName').textContent;
-  document.querySelector('#makeImgStep1').src = makeImgSrc;
-  document.querySelector('#modelNameStep1').textContent = modelNameText;
+  document.querySelector('#makeImgStep1').src = makeImgPrefix + makeImgDict[makeSelect.value];
+  document.querySelector(
+    '#modelNameStep1'
+  ).textContent = `${modelSelect.value} (${yearSelect.value})`;
 }
 
 function configureLastStepAfterSuggestion() {
