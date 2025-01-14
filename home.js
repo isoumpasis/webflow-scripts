@@ -1463,6 +1463,7 @@ makeSelect.addEventListener('change', function () {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  showCarMakeStep1(false);
   showGuarantee(false);
   resetCalc();
   resetEasyPay();
@@ -1586,6 +1587,7 @@ function yearOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  showCarMakeStep1(false);
   showGuarantee(false);
   resetCalc();
   resetEasyPay();
@@ -1666,6 +1668,7 @@ function modelOnChange(value) {
   suggestedContainers.forEach(container => {
     container.style.display = 'none';
   });
+  showCarMakeStep1(false);
   showGuarantee(false);
   resetCalc();
   resetEasyPay();
@@ -1819,6 +1822,7 @@ function descriptionOnChange(value) {
   suggestedContainers.forEach(cont => (cont.style.display = 'none'));
 
   if (!value) {
+    showCarMakeStep1(false);
     showGuarantee(false);
     resetCalc();
     resetEasyPay();
@@ -1977,6 +1981,7 @@ function showResults(fetchedModelObj) {
     ) &&
     !suggestedContainer.classList.contains('not-convertible-form-container')
   ) {
+    showCarMakeStep1(true);
     showGuarantee(true);
     displayEmulatorInfo(suggestedContainer);
 
@@ -1984,6 +1989,7 @@ function showResults(fetchedModelObj) {
     configureEasyPayAfterSuggestion();
     configureLastStepAfterSuggestion();
   } else {
+    showCarMakeStep1(false);
     showGuarantee(false);
     resetCalc();
     resetEasyPay();
@@ -2018,6 +2024,13 @@ function showResults(fetchedModelObj) {
 
 function showGuarantee(show) {
   document.querySelector('.three-year-guarantee').style.display = show ? 'flex' : 'none';
+}
+function showCarMakeStep1(show) {
+  document.querySelector('.car-make-step1').style.display = show ? 'flex' : 'none';
+  const makeImgSrc = document.querySelector('#makeImg').src;
+  const modelNameText = document.querySelector('#modelName').textContent;
+  document.querySelector('#makeImgStep1').src = makeImgSrc;
+  document.querySelector('#modelNameStep1').textContent = modelNameText;
 }
 
 function configureLastStepAfterSuggestion() {
