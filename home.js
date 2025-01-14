@@ -761,24 +761,24 @@ function initContainersTabs() {
       console.log('tab click');
       if (el.classList.contains('tab1')) {
         console.log('tab 1 click');
-        if (userSelections.method === 'Χωρίς πιστωτική κάρτα') {
+        if (userSelections.easyPay.method === 'Χωρίς πιστωτική κάρτα') {
           console.log('tab 1 click no credit');
           firstSystems[0].click();
-        } else if (userSelections.method === 'Με πιστωτική κάρτα') {
+        } else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
           console.log('tab 1 click credit');
           firstSystems[1].click();
-        } else if (userSelections.method === 'Με πιστωτική κάρτα') {
+        } else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
           console.log('tab 1 click metrhta');
           firstSystems[2].click();
         }
       }
       if (el.classList.contains('tab2')) {
         console.log('tab 2 click');
-        if (userSelections.method === 'Χωρίς πιστωτική κάρτα') {
+        if (userSelections.easyPay.method === 'Χωρίς πιστωτική κάρτα') {
           secondSystems[0].click();
-        } else if (userSelections.method === 'Με πιστωτική κάρτα') {
+        } else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
           secondSystems[1].click();
-        } else if (userSelections.method === 'Με πιστωτική κάρτα') {
+        } else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
           secondSystems[2].click();
         }
       }
