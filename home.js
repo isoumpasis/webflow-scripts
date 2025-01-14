@@ -506,6 +506,7 @@ document.addEventListener('DOMContentLoaded', () => {
   userSelections.selectedFuel = 'lpg';
 
   initSelects();
+  initContainersTabs();
   initFuelPrices();
   initDriveOftenRadio();
   initSelectedFuelListeners();
@@ -746,6 +747,37 @@ function initUserInfo() {
       saveUserInfo();
     })
   );
+}
+function initContainersTabs() {
+  const firstSystems = [
+    ...document.querySelectorAll('.easy-pay-suggested-system-div.system-1st-selection')
+  ];
+  const secondSystems = [
+    ...document.querySelectorAll('.easy-pay-suggested-system-div.system-2nd-selection')
+  ];
+
+  document.querySelectorAll('.system-switch').forEach(el => {
+    el.addEventListener.onClick(e => {
+      if (el.classList.contains('tab1')) {
+        if (userSelections.method === 'Χωρίς πιστωτική κάρτα') {
+          firstSystems[0].click();
+        } else if (userSelections.method === 'Με πιστωτική κάρτα') {
+          firstSystems[1].click();
+        } else if (userSelections.method === 'Με πιστωτική κάρτα') {
+          firstSystems[2].click();
+        }
+      }
+      if (el.classList.contains('tab2')) {
+        if (userSelections.method === 'Χωρίς πιστωτική κάρτα') {
+          secondSystems[0].click();
+        } else if (userSelections.method === 'Με πιστωτική κάρτα') {
+          secondSystems[1].click();
+        } else if (userSelections.method === 'Με πιστωτική κάρτα') {
+          secondSystems[2].click();
+        }
+      }
+    });
+  });
 }
 
 function initSelects() {
