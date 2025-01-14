@@ -1145,6 +1145,16 @@ function initEasyPaySystemSelection() {
 
       calcResult(false);
 
+      const systemTabs = [...getActiveContainer().querySelectorAll('.system-switch')];
+      if (el.classList.contains('system-1st-selection')) {
+        console.log('system tab 1 click');
+        systemTabs[0].click();
+      }
+      if (el.classList.contains('system-1nd-selection')) {
+        console.log('system tab 2 click');
+        systemTabs[1].click();
+      }
+
       if (step2Triggered && !step4Triggered) {
         trigger_easy_pay_step_4({ triggered_via: 'click' });
       }
