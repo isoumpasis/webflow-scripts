@@ -757,7 +757,7 @@ function initContainersTabs() {
   ];
 
   document.querySelectorAll('.system-switch').forEach(el => {
-    el.addEventListener.onClick(e => {
+    el.addEventListener('click', e => {
       if (el.classList.contains('tab1')) {
         if (userSelections.method === 'Χωρίς πιστωτική κάρτα') {
           firstSystems[0].click();
