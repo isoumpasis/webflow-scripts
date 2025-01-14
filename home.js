@@ -1150,7 +1150,7 @@ function initEasyPaySystemSelection() {
         console.log('system tab 1 click');
         systemTabs[0].click();
       }
-      if (el.classList.contains('system-1nd-selection')) {
+      if (el.classList.contains('system-2nd-selection')) {
         console.log('system tab 2 click');
         systemTabs[1].click();
       }
