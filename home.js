@@ -758,22 +758,16 @@ function initContainersTabs() {
 
   document.querySelectorAll('.system-switch').forEach(el => {
     el.addEventListener('click', e => {
-      console.log('tab click');
       if (el.classList.contains('tab1')) {
-        console.log('tab 1 click');
         if (userSelections.easyPay.method === 'Χωρίς πιστωτική κάρτα') {
-          console.log('tab 1 click no credit');
           firstSystems[0].click();
         } else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
-          console.log('tab 1 click credit');
           firstSystems[1].click();
         } else if (userSelections.easyPay.method === 'Μετρητά') {
-          console.log('tab 1 click metrhta');
           firstSystems[2].click();
         }
       }
       if (el.classList.contains('tab2')) {
-        console.log('tab 2 click');
         if (userSelections.easyPay.method === 'Χωρίς πιστωτική κάρτα') {
           secondSystems[0].click();
         } else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
@@ -1147,11 +1141,9 @@ function initEasyPaySystemSelection() {
 
       const systemTabs = [...getActiveContainer().querySelectorAll('.system-switch')];
       if (el.classList.contains('system-1st-selection')) {
-        console.log('system tab 1 click');
         systemTabs[0].click();
       }
       if (el.classList.contains('system-2nd-selection')) {
-        console.log('system tab 2 click');
         systemTabs[1].click();
       }
 
@@ -2012,6 +2004,8 @@ function showResults(fetchedModelObj) {
   }
 
   const suggestedContainer = getActiveContainer();
+  //Always open on first tab
+  [...getActiveContainer().querySelectorAll('.system-switch')][0].click();
 
   userSelections.vehicle.suggestions = {
     ...userSelections.vehicle.suggestions,
@@ -2031,6 +2025,7 @@ function showResults(fetchedModelObj) {
   ) {
     showCarMakeStep1(true);
     showGuarantee(true);
+
     displayEmulatorInfo(suggestedContainer);
 
     configureCalculatorAfterSuggestion();
