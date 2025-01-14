@@ -767,7 +767,7 @@ function initContainersTabs() {
         } else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
           console.log('tab 1 click credit');
           firstSystems[1].click();
-        } else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
+        } else if (userSelections.easyPay.method === 'Μετρητά') {
           console.log('tab 1 click metrhta');
           firstSystems[2].click();
         }
@@ -778,7 +778,7 @@ function initContainersTabs() {
           secondSystems[0].click();
         } else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
           secondSystems[1].click();
-        } else if (userSelections.easyPay.method === 'Με πιστωτική κάρτα') {
+        } else if (userSelections.easyPay.method === 'Μετρητά') {
           secondSystems[2].click();
         }
       }
