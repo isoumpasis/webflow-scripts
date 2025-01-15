@@ -2008,6 +2008,8 @@ function showResults(fetchedModelObj) {
   const suggestedContainer = getActiveContainer();
   //Always open on first tab
   [...getActiveContainer().querySelectorAll('.system-switch')][0]?.click();
+  //Always open on paroxes extras tab
+  getActiveContainer().querySelector('.extras-switch-left')?.click();
 
   userSelections.vehicle.suggestions = {
     ...userSelections.vehicle.suggestions,
