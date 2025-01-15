@@ -1883,7 +1883,9 @@ function descriptionOnChange(value) {
   }
 
   showResults(fetchedModelObj);
-  calcResult(false);
+  if (!getActiveContainer()?.id.includes('notConvertible')) {
+    calcResult(false);
+  }
 
   saveUserSelections();
 
