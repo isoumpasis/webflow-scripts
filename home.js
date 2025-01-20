@@ -2292,11 +2292,11 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
   systemContainer.querySelector('.lpg-system-wrap').appendChild(clone);
 
   //trigger anim
-  // const infoTriggerLink = clone.querySelector('.info-trigger-link');
+  const infoTriggerLink = clone.querySelector('.info-trigger-link');
 
-  // infoTriggerLink.addEventListener('click', () => {
-  // showEmulatorCardListener(clone, systemContainer)
-  // });
+  infoTriggerLink.addEventListener('click', () => {
+    showEmulatorCardListener(clone, systemContainer);
+  });
 
   const closeBtn = clone.querySelector('.close-info');
   closeBtn.addEventListener('click', () => hideEmulatorCardListener(clone, systemContainer));
@@ -2313,17 +2313,18 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 }
 
 function showEmulatorCardListener(clone, systemContainer) {
-  clone.querySelector('.info-content').style.maxHeight = '400px'; //'auto';
-  if (isMobile()) {
-    systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
-  }
+  clone.querySelector('.info-content').style.maxHeight = 'auto'; //'400px';
+  // if (isMobile()) {
+  //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
+  // }
 }
 
 function hideEmulatorCardListener(clone, systemContainer) {
-  clone.querySelector('.info-content').style.maxHeight = '0px';
-  if (isMobile()) {
-    systemContainer.querySelector('.suggested-image-content').style.maxHeight = '50px';
-  }
+  // clone.querySelector('.info-content').style.maxHeight = '0px';
+  clone.querySelector('.info-content').style.height = '0px';
+  // if (isMobile()) {
+  //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '50px';
+  // }
 }
 
 function connectMoreInfoBtn(emulatorType, clone) {
