@@ -2355,13 +2355,17 @@ function connectCheckboxEmulator(emulatorType, systemContainer) {
         .forEach(priceEl => {
           const prevPriceNumber = +priceEl.textContent.split('€')[0];
 
+          let priceMatch = priceEl.textContent.match(/\d+€/);
+
           if (emulatorSelected)
             suggestedPricesChanges.push({ priceEl, defaultPrice: prevPriceNumber });
 
           const newPriceNumber = emulatorSelected
             ? prevPriceNumber + emulatorPrice
             : prevPriceNumber - emulatorPrice;
-          priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
+
+          priceEl.innerHTML = priceEl.textContent.replace(priceMatch[0], newPriceNumber + '€');
+          // priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
         });
       configureEasyPayAfterSuggestion();
       configureUserSelectionsAfterResults();
