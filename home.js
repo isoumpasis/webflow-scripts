@@ -2314,10 +2314,10 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 
 function showEmulatorCardListener(clone, systemContainer) {
   clone.querySelector('.info-content').style.maxHeight = '420px';
-  [...getActiveContainer().querySelectorAll('.car-img')].forEach(car => {
-    car.style.transition = 'opacity 0.3s ease';
-    car.style.opacity = 0;
-  });
+  const car = systemContainer.querySelector('.car-img');
+  car.style.transition = 'opacity 0.3s ease';
+  car.style.opacity = 0;
+
   // if (isMobile()) {
   //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
   // }
@@ -2325,9 +2325,8 @@ function showEmulatorCardListener(clone, systemContainer) {
 
 function hideEmulatorCardListener(clone, systemContainer) {
   clone.querySelector('.info-content').style.maxHeight = '0px';
-  [...getActiveContainer().querySelectorAll('.car-img')].forEach(car => {
-    car.style.opacity = 1;
-  });
+  const car = systemContainer.querySelector('.car-img');
+  car.style.opacity = 1;
   // if (isMobile()) {
   //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '50px';
   // }
