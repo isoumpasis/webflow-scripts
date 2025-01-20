@@ -2313,8 +2313,10 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 }
 
 function showEmulatorCardListener(clone, systemContainer) {
-  // clone.querySelector('.info-content').style.height = 'auto';
   clone.querySelector('.info-content').style.maxHeight = '420px';
+  Webflow.push(function () {
+    clone.querySelector('.info-trigger-link').click(); // You can trigger the click manually if needed
+  });
   // if (isMobile()) {
   //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
   // }
@@ -2322,7 +2324,6 @@ function showEmulatorCardListener(clone, systemContainer) {
 
 function hideEmulatorCardListener(clone, systemContainer) {
   clone.querySelector('.info-content').style.maxHeight = '0px';
-  // clone.querySelector('.info-content').style.height = '0px';
   // if (isMobile()) {
   //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '50px';
   // }
