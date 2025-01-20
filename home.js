@@ -2315,6 +2315,7 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 function showEmulatorCardListener(clone, systemContainer) {
   clone.querySelector('.info-content').style.maxHeight = '420px';
   [...getActiveContainer().querySelectorAll('.car-img')].forEach(car => {
+    car.style.transition = 'opacity 0.3s ease';
     car.style.opacity = 0;
   });
   // if (isMobile()) {
