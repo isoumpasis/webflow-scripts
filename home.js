@@ -2313,16 +2313,16 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 }
 
 function showEmulatorCardListener(clone, systemContainer) {
-  clone.querySelector('.info-content').style.height = 'auto';
-  // clone.querySelector('.info-content').style.maxHeight = '400px';
+  // clone.querySelector('.info-content').style.height = 'auto';
+  clone.querySelector('.info-content').style.maxHeight = '420px';
   // if (isMobile()) {
   //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
   // }
 }
 
 function hideEmulatorCardListener(clone, systemContainer) {
-  // clone.querySelector('.info-content').style.maxHeight = '0px';
-  clone.querySelector('.info-content').style.height = '0px';
+  clone.querySelector('.info-content').style.maxHeight = '0px';
+  // clone.querySelector('.info-content').style.height = '0px';
   // if (isMobile()) {
   //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '50px';
   // }
