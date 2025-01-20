@@ -2248,30 +2248,30 @@ function displayEmulatorInfo(suggestedContainer) {
   if (hasValidEmulators(foundVehicleObj) || hasUHPII(foundVehicleObj)) {
     const vehicleEmulatorType = getEmulatorType();
 
-    suggestedContainer
-      .querySelectorAll(`.suggested-${userSelections.selectedFuel}-system`)
-      .forEach(system => {
-        if (isApaitoumenoEmulatorType(vehicleEmulatorType)) {
-          const priceEl = system.querySelector(`.suggested-${userSelections.selectedFuel}-price`);
-          const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
-          suggestedPricesChanges.push({ priceEl, defaultPrice });
-          priceEl.textContent = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
-        } else {
-          //init not selected emulator
-          [...suggestedContainer.querySelectorAll('.check')].map(
-            check => (check.style.display = 'none')
-          );
-          emulatorSelected = false;
-        }
+    // suggestedContainer
+    //   .querySelectorAll(`.suggested-${userSelections.selectedFuel}-system`)
+    suggestedContainer.querySelector('.system-content').children.forEach(system => {
+      if (isApaitoumenoEmulatorType(vehicleEmulatorType)) {
+        const priceEl = system.querySelector(`.suggested-${userSelections.selectedFuel}-price`);
+        const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
+        suggestedPricesChanges.push({ priceEl, defaultPrice });
+        priceEl.textContent = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
+      } else {
+        //init not selected emulator
+        [...suggestedContainer.querySelectorAll('.check')].map(
+          check => (check.style.display = 'none')
+        );
+        emulatorSelected = false;
+      }
 
-        const emCont = generateEmulatorInfoContentBlock(vehicleEmulatorType, system);
-        emCont.querySelector('.info-content').style.maxHeight = '0px';
-        emCont.querySelector('.info-content').style.height = 'auto';
-        if (isMobile()) {
-          system.querySelector('.suggested-image-content').style.maxHeight = '50px';
-        }
-        emCont.style.display = 'block';
-      });
+      const emCont = generateEmulatorInfoContentBlock(vehicleEmulatorType, system);
+      emCont.querySelector('.info-content').style.maxHeight = '0px';
+      emCont.querySelector('.info-content').style.height = 'auto';
+      if (isMobile()) {
+        system.querySelector('.suggested-image-content').style.maxHeight = '50px';
+      }
+      emCont.style.display = 'block';
+    });
   }
 }
 
