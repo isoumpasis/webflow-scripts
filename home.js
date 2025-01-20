@@ -2317,7 +2317,6 @@ function showEmulatorCardListener(clone, systemContainer) {
   const car = systemContainer.querySelector('.car-img');
   car.style.transition = 'opacity 0.3s ease';
   car.style.opacity = 0;
-
   // if (isMobile()) {
   //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
   // }
