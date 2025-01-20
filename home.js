@@ -2314,7 +2314,9 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 
 function showEmulatorCardListener(clone, systemContainer) {
   clone.querySelector('.info-content').style.maxHeight = '420px';
-  clone.querySelector('.car-img').style.opacity = 0;
+  [...getActiveContainer().querySelectorAll('.car-img')].forEach(car => {
+    car.style.opacity = 0;
+  });
   // if (isMobile()) {
   //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
   // }
@@ -2322,7 +2324,9 @@ function showEmulatorCardListener(clone, systemContainer) {
 
 function hideEmulatorCardListener(clone, systemContainer) {
   clone.querySelector('.info-content').style.maxHeight = '0px';
-  clone.querySelector('.car-img').style.opacity = 1;
+  [...getActiveContainer().querySelectorAll('.car-img')].forEach(car => {
+    car.style.opacity = 1;
+  });
   // if (isMobile()) {
   //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '50px';
   // }
