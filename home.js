@@ -2288,7 +2288,8 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
     `.emulator-templates .info-content-block.emulator-${emulatorType}`
   );
   const clone = infoContentBlockToCopy.cloneNode(true);
-  systemContainer.querySelector('.suggested-image-content').appendChild(clone);
+  // systemContainer.querySelector('.suggested-image-content').appendChild(clone);
+  systemContainer.querySelector('.lpg-system-wrap').appendChild(clone);
 
   //trigger anim
   const infoTriggerLink = clone.querySelector('.info-trigger-link');
