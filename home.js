@@ -2345,6 +2345,7 @@ function connectMoreInfoBtn(emulatorType, clone) {
 }
 
 function connectCheckboxEmulator(emulatorType, systemContainer) {
+  console.log('systemContainer', systemContainer);
   [...systemContainer.querySelectorAll('.check-wrapper')].forEach(wrapper => {
     wrapper.addEventListener('click', e => {
       const emulatorPrice = emulatorPriceDict[emulatorType];
@@ -4423,6 +4424,7 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
 /* Include Emulator Price */
 [...document.querySelectorAll('.check-wrapper')].forEach(wrapper => {
   wrapper.addEventListener('click', e => {
+    console.log('check to see if runs when');
     const emulatorType = userSelections.vehicle.suggestions.emulators.type;
     const emulatorPrice = emulatorPriceDict[emulatorType];
     const activeContainer = getActiveContainer();
