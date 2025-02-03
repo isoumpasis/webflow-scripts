@@ -2720,6 +2720,7 @@ function configureSystemsEasyPay() {
   cssEasyPayDISystem();
 
   //Clicking first easy pay system manually
+  console.log('clicking first easy pay system mannually');
   [...document.querySelectorAll('.system-1st-selection .suggested-system')].map(
     el => (el.style.backgroundColor = 'rgba(132, 184, 211, 0.34)')
   );
