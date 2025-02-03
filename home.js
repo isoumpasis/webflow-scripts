@@ -2649,9 +2649,9 @@ function getCylinderDescrText() {
   return hp <= 180 ? ' έως 180HP' : hp <= 360 ? ' έως 360HP' : ' άνω των 360HP';
 }
 
-function configureEasyPayAfterSuggestion() {
+function configureEasyPayAfterSuggestion(firstSystemSelected = true) {
   configureModelEasyPay();
-  configureSystemsEasyPay();
+  configureSystemsEasyPay(firstSystemSelected);
   configureNoCreditSliders();
   configureCreditSliders();
   configureNoCreditResults();
@@ -2684,7 +2684,7 @@ function configureModelEasyPay() {
   );
 }
 
-function configureSystemsEasyPay() {
+function configureSystemsEasyPay(firstSystemSelected = true) {
   const activeContainer = getActiveContainer();
   const systemLogoSrcs = [...activeContainer.querySelectorAll('.system-logo')].map(el => el.src);
   const systemLogoCreditEls = document.querySelectorAll('.system-logo-credit');
@@ -2719,21 +2719,37 @@ function configureSystemsEasyPay() {
   //CSS for easy pay di system img
   cssEasyPayDISystem();
 
-  //Clicking first easy pay system manually
-  console.log('clicking first easy pay system mannually');
-  [...document.querySelectorAll('.system-1st-selection .suggested-system')].map(
+  // //Clicking first easy pay system manually
+  // console.log('clicking first easy pay system mannually');
+  // [...document.querySelectorAll('.system-1st-selection .suggested-system')].map(
+  //   el => (el.style.backgroundColor = 'rgba(132, 184, 211, 0.34)')
+  // );
+  // [...document.querySelectorAll('.system-2nd-selection .suggested-system')].map(
+  //   el => (el.style.backgroundColor = 'rgba(241, 241, 241)')
+  // );
+  // [...document.querySelectorAll('.system-1st-selection .system-checkmark')].map(
+  //   el => (el.style.display = 'block')
+  // );
+  // [...document.querySelectorAll('.system-2nd-selection .system-checkmark')].map(
+  //   el => (el.style.display = 'none')
+  // );
+  // changePriceFontWeight(document.querySelector('.system-1st-selection'));
+
+  //Clicking easy pay system
+  const systemTxt = firstSystemSelected ? '1st' : '2nd';
+  [...document.querySelectorAll(`.system-${systemTxt}-selection .suggested-system`)].map(
     el => (el.style.backgroundColor = 'rgba(132, 184, 211, 0.34)')
   );
-  [...document.querySelectorAll('.system-2nd-selection .suggested-system')].map(
+  [...document.querySelectorAll(`.system-${systemTxt}-selection .suggested-system`)].map(
     el => (el.style.backgroundColor = 'rgba(241, 241, 241)')
   );
-  [...document.querySelectorAll('.system-1st-selection .system-checkmark')].map(
+  [...document.querySelectorAll(`.system-${systemTxt}-selection .system-checkmark`)].map(
     el => (el.style.display = 'block')
   );
-  [...document.querySelectorAll('.system-2nd-selection .system-checkmark')].map(
+  [...document.querySelectorAll(`.system-${systemTxt}-selection .system-checkmark`)].map(
     el => (el.style.display = 'none')
   );
-  changePriceFontWeight(document.querySelector('.system-1st-selection'));
+  changePriceFontWeight(document.querySelector(`.system-${systemTxt}-selection`));
 
   selectedEasyPaySystemPrice = +document
     .querySelector('.system-price-easy-pay')
