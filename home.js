@@ -2375,7 +2375,7 @@ function connectCheckboxEmulator(emulatorType, systemContainer) {
           priceEl.innerHTML = priceEl.innerHTML.replace(priceMatch[0], newPriceNumber + '€');
           // priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
         });
-      configureEasyPayAfterSuggestion();
+      configureEasyPayAfterSuggestion(systemContainer.classList.contains('system-1'));
       configureUserSelectionsAfterResults();
       calcResult(false);
       updateBasketSection({
