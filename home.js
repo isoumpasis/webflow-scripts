@@ -1895,9 +1895,10 @@ function descriptionOnChange(value) {
   }, 100);
 }
 
-function configureUserSelectionsAfterResults() {
+function configureUserSelectionsAfterResults(firstSystemSelected = true) {
   const activeContainer = getActiveContainer();
   const activeContainerId = activeContainer.id;
+  const selectedSystemIndex = firstSystemSelected ? 0 : 1;
 
   userSelections = {
     ...userSelections,
@@ -1951,25 +1952,28 @@ function configureUserSelectionsAfterResults() {
       ...userSelections.easyPay,
       method: getEasyPayMethod(),
       system: {
-        name: userSelections.vehicle.suggestions.systems[0].name, //default
+        name: userSelections.vehicle.suggestions.systems[selectedSystemIndex].name,
         priceWithVAT: selectedEasyPaySystemPrice + '€',
         priceNoVAT: userSelections.vehicle.suggestions.systems.find(
-          system => system.name === userSelections.vehicle.suggestions.systems[0].name
+          system =>
+            system.name === userSelections.vehicle.suggestions.systems[selectedSystemIndex].name
         ).priceNoVAT,
         systemLogoUrl:
-          systemFullKitLogoUrlDict[userSelections.vehicle.suggestions.systems[0].name].logo[
-            userSelections.selectedFuel
-          ],
+          systemFullKitLogoUrlDict[
+            userSelections.vehicle.suggestions.systems[selectedSystemIndex].name
+          ].logo[userSelections.selectedFuel],
         systemLogoUrlPng:
-          systemFullKitLogoUrlDict[userSelections.vehicle.suggestions.systems[0].name].pngLogo[
-            userSelections.selectedFuel
-          ],
+          systemFullKitLogoUrlDict[
+            userSelections.vehicle.suggestions.systems[selectedSystemIndex].name
+          ].pngLogo[userSelections.selectedFuel],
         fullKitUrl:
-          systemFullKitLogoUrlDict[userSelections.vehicle.suggestions.systems[0].name].fullKit[
-            userSelections.selectedFuel
-          ],
+          systemFullKitLogoUrlDict[
+            userSelections.vehicle.suggestions.systems[selectedSystemIndex].name
+          ].fullKit[userSelections.selectedFuel],
         cylsDescr:
-          systemFullKitLogoUrlDict[userSelections.vehicle.suggestions.systems[0].name].cylsDescr
+          systemFullKitLogoUrlDict[
+            userSelections.vehicle.suggestions.systems[selectedSystemIndex].name
+          ].cylsDescr
       },
       noCreditSettings: getNoCreditSettings(),
       creditSettings: getCreditSettings()
@@ -2376,7 +2380,7 @@ function connectCheckboxEmulator(emulatorType, systemContainer) {
           // priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
         });
       configureEasyPayAfterSuggestion(systemContainer.classList.contains('system-1'));
-      configureUserSelectionsAfterResults();
+      configureUserSelectionsAfterResults(systemContainer.classList.contains('system-1'));
       calcResult(false);
       updateBasketSection({
         vehicle: true,
