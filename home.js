@@ -2651,7 +2651,11 @@ function getCylinderDescrText() {
 }
 
 function configureEasyPayAfterSuggestion(firstSystemSelected = true) {
-  console.log('conf easy pay after suggestion. is first system?', firstSystemSelected);
+  console.log(
+    'conf easy pay after suggestion. is first system?',
+    firstSystemSelected,
+    selectedEasyPaySystemPrice
+  );
   configureModelEasyPay();
   configureSystemsEasyPay(firstSystemSelected);
   configureNoCreditSliders();
@@ -2660,6 +2664,7 @@ function configureEasyPayAfterSuggestion(firstSystemSelected = true) {
   configureCreditResults();
   configureMetrhtaResults();
   doseisNoCreditSliderOnChange(doseisNoCreditSlider.max); //init on max
+  console.log('after', selectEasyPaySystemPrice);
 }
 
 function configureModelEasyPay() {
@@ -2720,22 +2725,6 @@ function configureSystemsEasyPay(firstSystemSelected = true) {
 
   //CSS for easy pay di system img
   cssEasyPayDISystem();
-
-  // //Clicking first easy pay system manually
-  // console.log('clicking first easy pay system mannually');
-  // [...document.querySelectorAll('.system-1st-selection .suggested-system')].map(
-  //   el => (el.style.backgroundColor = 'rgba(132, 184, 211, 0.34)')
-  // );
-  // [...document.querySelectorAll('.system-2nd-selection .suggested-system')].map(
-  //   el => (el.style.backgroundColor = 'rgba(241, 241, 241)')
-  // );
-  // [...document.querySelectorAll('.system-1st-selection .system-checkmark')].map(
-  //   el => (el.style.display = 'block')
-  // );
-  // [...document.querySelectorAll('.system-2nd-selection .system-checkmark')].map(
-  //   el => (el.style.display = 'none')
-  // );
-  // changePriceFontWeight(document.querySelector('.system-1st-selection'));
 
   //Clicking easy pay system
   const systemTxt = firstSystemSelected ? '1st' : '2nd';
