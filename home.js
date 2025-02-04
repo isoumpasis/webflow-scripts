@@ -2664,7 +2664,7 @@ function configureEasyPayAfterSuggestion(firstSystemSelected = true) {
   configureCreditResults();
   configureMetrhtaResults();
   doseisNoCreditSliderOnChange(doseisNoCreditSlider.max); //init on max
-  console.log('after', selectEasyPaySystemPrice);
+  console.log('after', selectedEasyPaySystemPrice);
 }
 
 function configureModelEasyPay() {
