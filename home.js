@@ -2739,16 +2739,17 @@ function configureSystemsEasyPay(firstSystemSelected = true) {
 
   //Clicking easy pay system
   const systemTxt = firstSystemSelected ? '1st' : '2nd';
+  const otherSystemText = firstSystemSelected ? '2nd' : '1st';
   [...document.querySelectorAll(`.system-${systemTxt}-selection .suggested-system`)].map(
     el => (el.style.backgroundColor = 'rgba(132, 184, 211, 0.34)')
   );
-  [...document.querySelectorAll(`.system-${systemTxt}-selection .suggested-system`)].map(
+  [...document.querySelectorAll(`.system-${otherSystemText}-selection .suggested-system`)].map(
     el => (el.style.backgroundColor = 'rgba(241, 241, 241)')
   );
   [...document.querySelectorAll(`.system-${systemTxt}-selection .system-checkmark`)].map(
     el => (el.style.display = 'block')
   );
-  [...document.querySelectorAll(`.system-${systemTxt}-selection .system-checkmark`)].map(
+  [...document.querySelectorAll(`.system-${otherSystemText}-selection .system-checkmark`)].map(
     el => (el.style.display = 'none')
   );
   changePriceFontWeight(document.querySelector(`.system-${systemTxt}-selection`));
