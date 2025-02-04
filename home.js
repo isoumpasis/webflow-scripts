@@ -2651,6 +2651,7 @@ function getCylinderDescrText() {
 }
 
 function configureEasyPayAfterSuggestion(firstSystemSelected = true) {
+  console.log('conf easy pay after suggestion. is first system?', firstSystemSelected);
   configureModelEasyPay();
   configureSystemsEasyPay(firstSystemSelected);
   configureNoCreditSliders();
@@ -4422,45 +4423,45 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
 }
 
 /* Include Emulator Price */
-[...document.querySelectorAll('.check-wrapper')].forEach(wrapper => {
-  wrapper.addEventListener('click', e => {
-    console.log('check to see if runs when');
-    const emulatorType = userSelections.vehicle.suggestions.emulators.type;
-    const emulatorPrice = emulatorPriceDict[emulatorType];
-    const activeContainer = getActiveContainer();
-    const activeContainerChecks = [...activeContainer.querySelectorAll('.check')];
+// [...document.querySelectorAll('.check-wrapper')].forEach(wrapper => {
+//   wrapper.addEventListener('click', e => {
+//     console.log('check to see if runs when');
+//     const emulatorType = userSelections.vehicle.suggestions.emulators.type;
+//     const emulatorPrice = emulatorPriceDict[emulatorType];
+//     const activeContainer = getActiveContainer();
+//     const activeContainerChecks = [...activeContainer.querySelectorAll('.check')];
 
-    emulatorSelected = activeContainerChecks[0].style.display !== 'block';
+//     emulatorSelected = activeContainerChecks[0].style.display !== 'block';
 
-    activeContainerChecks.map(
-      thisCheck => (thisCheck.style.display = emulatorSelected ? 'block' : 'none')
-    );
+//     activeContainerChecks.map(
+//       thisCheck => (thisCheck.style.display = emulatorSelected ? 'block' : 'none')
+//     );
 
-    activeContainer
-      .querySelectorAll(`.suggested-${userSelections.selectedFuel}-price`)
-      .forEach(priceEl => {
-        const prevPriceNumber = +priceEl.textContent.split('€')[0];
+//     activeContainer
+//       .querySelectorAll(`.suggested-${userSelections.selectedFuel}-price`)
+//       .forEach(priceEl => {
+//         const prevPriceNumber = +priceEl.textContent.split('€')[0];
 
-        if (emulatorSelected)
-          suggestedPricesChanges.push({ priceEl, defaultPrice: prevPriceNumber });
+//         if (emulatorSelected)
+//           suggestedPricesChanges.push({ priceEl, defaultPrice: prevPriceNumber });
 
-        const newPriceNumber = emulatorSelected
-          ? prevPriceNumber + emulatorPrice
-          : prevPriceNumber - emulatorPrice;
-        priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
-      });
+//         const newPriceNumber = emulatorSelected
+//           ? prevPriceNumber + emulatorPrice
+//           : prevPriceNumber - emulatorPrice;
+//         priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
+//       });
 
-    configureEasyPayAfterSuggestion();
-    configureUserSelectionsAfterResults();
-    updateBasketSection({
-      vehicle: true,
-      calculator: true,
-      easyPay: true,
-      prokatavoliDoseis: true,
-      easyPayMonthlyGain: true
-    });
-  });
-});
+//     configureEasyPayAfterSuggestion();
+//     configureUserSelectionsAfterResults();
+//     updateBasketSection({
+//       vehicle: true,
+//       calculator: true,
+//       easyPay: true,
+//       prokatavoliDoseis: true,
+//       easyPayMonthlyGain: true
+//     });
+//   });
+// });
 
 document.querySelector('.sidebar-btn').addEventListener('click', e => {
   trigger_sidebar_open({
