@@ -2098,7 +2098,9 @@ function adjustSectionPaddings() {
 
 function resetToDefaultPrices() {
   suggestedPricesChanges.forEach(priceChange => {
-    priceChange.priceEl.textContent = priceChange.defaultPrice + '€ + ΦΠΑ';
+    // priceChange.priceEl.textContent = priceChange.defaultPrice + '€ + ΦΠΑ';
+    priceChange.priceEl.innerHTML =
+      priceChange.defaultPrice + '€' + '<span class="vat">+ΦΠΑ</span>';
   });
   suggestedPricesChanges = [];
 }
@@ -2356,7 +2358,6 @@ function connectMoreInfoBtn(emulatorType, clone) {
 }
 
 function connectCheckboxEmulator(emulatorType, systemContainer) {
-  console.log('systemContainer', systemContainer);
   [...systemContainer.querySelectorAll('.check-wrapper')].forEach(wrapper => {
     wrapper.addEventListener('click', e => {
       const emulatorPrice = emulatorPriceDict[emulatorType];
@@ -2666,11 +2667,6 @@ function getCylinderDescrText() {
 }
 
 function configureEasyPayAfterSuggestion(firstSystemSelected = true) {
-  console.log(
-    'conf easy pay after suggestion. is first system?',
-    firstSystemSelected,
-    selectedEasyPaySystemPrice
-  );
   configureModelEasyPay();
   configureSystemsEasyPay(firstSystemSelected);
   configureNoCreditSliders();
@@ -2679,7 +2675,6 @@ function configureEasyPayAfterSuggestion(firstSystemSelected = true) {
   configureCreditResults();
   configureMetrhtaResults();
   doseisNoCreditSliderOnChange(doseisNoCreditSlider.max); //init on max
-  console.log('after', selectedEasyPaySystemPrice);
 }
 
 function configureModelEasyPay() {
