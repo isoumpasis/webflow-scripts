@@ -2259,7 +2259,14 @@ function displayEmulatorInfo(suggestedContainer) {
         const priceEl = system.querySelector(`.suggested-${userSelections.selectedFuel}-price`);
         const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
         suggestedPricesChanges.push({ priceEl, defaultPrice });
-        priceEl.textContent = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
+        console.log('is apaitoumeno', defaultPrice, emulatorPriceDict[vehicleEmulatorType]);
+        priceEl.innerHTML =
+          defaultPrice +
+          emulatorPriceDict[vehicleEmulatorType] +
+          '€' +
+          '<span class="vat">+ΦΠΑ</span>';
+
+        // priceEl.textContent = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
       } else {
         //init not selected emulator
         [...suggestedContainer.querySelectorAll('.check')].map(
@@ -2367,7 +2374,7 @@ function connectCheckboxEmulator(emulatorType, systemContainer) {
         .forEach(priceEl => {
           const prevPriceNumber = +priceEl.textContent.split('€')[0];
 
-          let priceMatch = priceEl.textContent.match(/\d+€/);
+          // let priceMatch = priceEl.textContent.match(/\d+€/);
 
           if (emulatorSelected)
             suggestedPricesChanges.push({ priceEl, defaultPrice: prevPriceNumber });
@@ -2378,7 +2385,10 @@ function connectCheckboxEmulator(emulatorType, systemContainer) {
 
           // priceEl.innerHTML = priceEl.innerHTML.replace(priceMatch[0], newPriceNumber + '€');
           // priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
+          console.log('priceEl', priceEl, priceEl.innerHTML);
           priceEl.innerHTML = newPriceNumber + '€' + '<span class="vat">+ΦΠΑ</span>';
+          console.log('newPriceNumber', newPriceNumber);
+          console.log('priceEl', priceEl, priceEl.innerHTML);
         });
       configureEasyPayAfterSuggestion(systemContainer.classList.contains('system-1'));
       configureUserSelectionsAfterResults(systemContainer.classList.contains('system-1'));
