@@ -2512,8 +2512,8 @@ function resetCalc() {
   calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
   if (!getActiveContainer()) {
-    document.querySelector('#vehicle').style.paddingTop = '2%';
-    document.querySelector('#vehicle').style.paddingBottom = '2%';
+    document.querySelector('#vehicle').style.paddingTop = '0%';
+    document.querySelector('#vehicle').style.paddingBottom = '0%';
   }
 }
 
