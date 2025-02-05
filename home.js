@@ -2021,7 +2021,7 @@ function showResults(fetchedModelObj) {
   };
   saveUserSelections();
 
-  adjustSectionPaddings();
+  // adjustSectionPaddings();
 
   //If there is a suggestion
   if (
@@ -2092,13 +2092,12 @@ function resetLastStep() {
   document.querySelector('.finish-step-model').textContent = 'όχημα σου';
 }
 
-function adjustSectionPaddings() {
-  // document.querySelector('#vehicle').style.paddingBottom = '3%';
-}
+// function adjustSectionPaddings() {
+// document.querySelector('#vehicle').style.paddingBottom = '3%';
+// }
 
 function resetToDefaultPrices() {
   suggestedPricesChanges.forEach(priceChange => {
-    // priceChange.priceEl.textContent = priceChange.defaultPrice + '€ + ΦΠΑ';
     priceChange.priceEl.innerHTML =
       priceChange.defaultPrice + '€' + '<span class="vat">+ΦΠΑ</span>';
   });
@@ -2247,28 +2246,24 @@ function runConsumptionRace(vehicles) {
 
 function displayEmulatorInfo(suggestedContainer) {
   //Hide all emulator containers first
-  suggestedContainer
-    .querySelectorAll('.info-content-block')
-    .forEach(emCont => (emCont.style.display = 'none'));
+  suggestedContainer.querySelectorAll('.info-content-block').forEach(emCont => {
+    emCont.style.display = 'none';
+  });
+  resetCardsFromEmulators(suggestedContainer);
 
   if (hasValidEmulators(foundVehicleObj) || hasUHPII(foundVehicleObj)) {
     const vehicleEmulatorType = getEmulatorType();
 
-    // suggestedContainer
-    //   .querySelectorAll(`.suggested-${userSelections.selectedFuel}-system`)
     suggestedContainer.querySelector('.system-content').children.forEach(system => {
       if (isApaitoumenoEmulatorType(vehicleEmulatorType)) {
         const priceEl = system.querySelector(`.suggested-${userSelections.selectedFuel}-price`);
         const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
         suggestedPricesChanges.push({ priceEl, defaultPrice });
-        console.log('is apaitoumeno', defaultPrice, emulatorPriceDict[vehicleEmulatorType]);
         priceEl.innerHTML =
           defaultPrice +
           emulatorPriceDict[vehicleEmulatorType] +
           '€' +
           '<span class="vat">+ΦΠΑ</span>';
-
-        // priceEl.textContent = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
       } else {
         //init not selected emulator
         [...suggestedContainer.querySelectorAll('.check')].map(
@@ -2286,6 +2281,12 @@ function displayEmulatorInfo(suggestedContainer) {
       emCont.style.display = 'block';
     });
   }
+}
+
+function resetCardsFromEmulators(suggestedContainer) {
+  suggestedContainer.querySelector('.system-content').children.forEach(system => {
+    system.querySelector('.car-img').style.opacity = 1;
+  });
 }
 
 function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
@@ -2375,8 +2376,6 @@ function connectCheckboxEmulator(emulatorType, systemContainer) {
         .forEach(priceEl => {
           const prevPriceNumber = +priceEl.textContent.split('€')[0];
 
-          // let priceMatch = priceEl.textContent.match(/\d+€/);
-
           if (emulatorSelected)
             suggestedPricesChanges.push({ priceEl, defaultPrice: prevPriceNumber });
 
@@ -2384,12 +2383,7 @@ function connectCheckboxEmulator(emulatorType, systemContainer) {
             ? prevPriceNumber + emulatorPrice
             : prevPriceNumber - emulatorPrice;
 
-          // priceEl.innerHTML = priceEl.innerHTML.replace(priceMatch[0], newPriceNumber + '€');
-          // priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
-          console.log('priceEl', priceEl, priceEl.innerHTML);
           priceEl.innerHTML = newPriceNumber + '€' + '<span class="vat">+ΦΠΑ</span>';
-          console.log('newPriceNumber', newPriceNumber);
-          console.log('priceEl', priceEl, priceEl.innerHTML);
         });
       configureEasyPayAfterSuggestion(systemContainer.classList.contains('system-1'));
       configureUserSelectionsAfterResults(systemContainer.classList.contains('system-1'));
@@ -2405,42 +2399,6 @@ function connectCheckboxEmulator(emulatorType, systemContainer) {
   });
 }
 
-// function displayEmulatorInfo(suggestedContainer) {
-//   //Hide all emulator containers first
-//   suggestedContainer
-//     .querySelectorAll('.info-content-block')
-//     .forEach(emCont => (emCont.style.display = 'none'));
-
-//   if (hasValidEmulators(foundVehicleObj) || hasUHPII(foundVehicleObj)) {
-//     const vehicleEmulatorType = getEmulatorType();
-
-//     suggestedContainer
-//       .querySelectorAll(`.suggested-${userSelections.selectedFuel}-system`)
-//       .forEach(system => {
-//         system.querySelectorAll('.info-content-block').forEach(emCont => {
-//           if (emCont.classList.contains(`emulator-${vehicleEmulatorType}`)) {
-//             if (isApaitoumenoEmulatorType(vehicleEmulatorType)) {
-//               const priceEl = system.querySelector(
-//                 `.suggested-${userSelections.selectedFuel}-price`
-//               );
-//               const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
-//               suggestedPricesChanges.push({ priceEl, defaultPrice });
-//               priceEl.textContent =
-//                 defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€ + ΦΠΑ';
-//             } else {
-//               //init not selected emulator
-//               [...suggestedContainer.querySelectorAll('.check')].map(
-//                 check => (check.style.display = 'none')
-//               );
-//               emulatorSelected = false;
-//             }
-//             emCont.querySelector('.info-content').style.height = '0px';
-//             emCont.style.display = 'block';
-//           }
-//         });
-//       });
-//   }
-// }
 function hasValidEmulators(vehObj) {
   if (userSelections.selectedFuel === 'lpg') return vehObj.hasOwnProperty('emulators');
   return (
