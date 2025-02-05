@@ -2021,7 +2021,7 @@ function showResults(fetchedModelObj) {
   };
   saveUserSelections();
 
-  // adjustSectionPaddings();
+  adjustSectionPaddingsWithResult();
 
   //If there is a suggestion
   if (
@@ -2092,9 +2092,10 @@ function resetLastStep() {
   document.querySelector('.finish-step-model').textContent = 'όχημα σου';
 }
 
-// function adjustSectionPaddings() {
-// document.querySelector('#vehicle').style.paddingBottom = '3%';
-// }
+function adjustSectionPaddingsWithResult() {
+  document.querySelector('#vehicle').style.paddingTop = '2%';
+  document.querySelector('#vehicle').style.paddingBottom = '2%';
+}
 
 function resetToDefaultPrices() {
   suggestedPricesChanges.forEach(priceChange => {
@@ -2510,10 +2511,10 @@ function resetCalc() {
   outputs[1].value = 8;
   calcCovers[1].style.width = calcCoverWidth(sliders[1]) + '%';
 
-  // if (!getActiveContainer()) {
-  //   document.querySelector('#vehicle').style.paddingBottom = '6%';
-  //   document.querySelector('#calculator').style.paddingTop = '6%';
-  // }
+  if (!getActiveContainer()) {
+    document.querySelector('#vehicle').style.paddingTop = '2%';
+    document.querySelector('#vehicle').style.paddingBottom = '2%';
+  }
 }
 
 document.querySelectorAll('.radio-button.w-radio input').forEach(el => {
