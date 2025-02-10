@@ -2260,11 +2260,8 @@ function displayEmulatorInfo(suggestedContainer) {
         const priceEl = system.querySelector(`.suggested-${userSelections.selectedFuel}-price`);
         const defaultPrice = parseInt(priceEl.textContent.split('€')[0]);
         suggestedPricesChanges.push({ priceEl, defaultPrice });
-        priceEl.innerHTML =
-          defaultPrice +
-          emulatorPriceDict[vehicleEmulatorType] +
-          '€' +
-          '<span class="vat">+ΦΠΑ</span>';
+        priceEl.innerHTML = defaultPrice + emulatorPriceDict[vehicleEmulatorType] + '€';
+        // +'<span class="vat">+ΦΠΑ</span>';
       } else {
         //init not selected emulator
         [...suggestedContainer.querySelectorAll('.check')].map(
@@ -2384,7 +2381,8 @@ function connectCheckboxEmulator(emulatorType, systemContainer) {
             ? prevPriceNumber + emulatorPrice
             : prevPriceNumber - emulatorPrice;
 
-          priceEl.innerHTML = newPriceNumber + '€' + '<span class="vat">+ΦΠΑ</span>';
+          priceEl.innerHTML = newPriceNumber + '€';
+          // + '<span class="vat">+ΦΠΑ</span>';
         });
       configureEasyPayAfterSuggestion(systemContainer.classList.contains('system-1'));
       configureUserSelectionsAfterResults(systemContainer.classList.contains('system-1'));
@@ -4380,47 +4378,6 @@ function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expense
   document.querySelector('.hint-savings').textContent = savingsAfterYears + '€';
   document.querySelector('.hint-expenses').textContent = expensesAfterYears + '€';
 }
-
-/* Include Emulator Price */
-// [...document.querySelectorAll('.check-wrapper')].forEach(wrapper => {
-//   wrapper.addEventListener('click', e => {
-//     console.log('check to see if runs when');
-//     const emulatorType = userSelections.vehicle.suggestions.emulators.type;
-//     const emulatorPrice = emulatorPriceDict[emulatorType];
-//     const activeContainer = getActiveContainer();
-//     const activeContainerChecks = [...activeContainer.querySelectorAll('.check')];
-
-//     emulatorSelected = activeContainerChecks[0].style.display !== 'block';
-
-//     activeContainerChecks.map(
-//       thisCheck => (thisCheck.style.display = emulatorSelected ? 'block' : 'none')
-//     );
-
-//     activeContainer
-//       .querySelectorAll(`.suggested-${userSelections.selectedFuel}-price`)
-//       .forEach(priceEl => {
-//         const prevPriceNumber = +priceEl.textContent.split('€')[0];
-
-//         if (emulatorSelected)
-//           suggestedPricesChanges.push({ priceEl, defaultPrice: prevPriceNumber });
-
-//         const newPriceNumber = emulatorSelected
-//           ? prevPriceNumber + emulatorPrice
-//           : prevPriceNumber - emulatorPrice;
-//         priceEl.textContent = newPriceNumber + '€ + ΦΠΑ';
-//       });
-
-//     configureEasyPayAfterSuggestion();
-//     configureUserSelectionsAfterResults();
-//     updateBasketSection({
-//       vehicle: true,
-//       calculator: true,
-//       easyPay: true,
-//       prokatavoliDoseis: true,
-//       easyPayMonthlyGain: true
-//     });
-//   });
-// });
 
 document.querySelector('.sidebar-btn').addEventListener('click', e => {
   trigger_sidebar_open({
