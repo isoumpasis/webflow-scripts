@@ -2099,8 +2099,8 @@ function adjustSectionPaddingsWithResult() {
 
 function resetToDefaultPrices() {
   suggestedPricesChanges.forEach(priceChange => {
-    priceChange.priceEl.innerHTML =
-      priceChange.defaultPrice + '€' + '<span class="vat">+ΦΠΑ</span>';
+    priceChange.priceEl.innerHTML = priceChange.defaultPrice + '€';
+    // + '<span class="vat">+ΦΠΑ</span>';
   });
   suggestedPricesChanges = [];
 }
