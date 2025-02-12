@@ -595,11 +595,10 @@ function initForeignReferrerOptions() {
       '#footer'
     ];
     if (!(urlParams.has('showHero') && urlParams.get('showHero') === 'true')) {
-      dontShowEls.push('#hero', '#vehicle img');
-      // document.querySelector('#vehicle').style.paddingTop = '30px';
+      // dontShowEls.push('#hero', '#vehicle img');
     } else {
       const newLink = `?foreignReferrer=true&domain=${sourceReferrerDomain}`;
-      const gogasBtn = document.querySelector('.go-gas-interest-btn');
+      const gogasBtn = document.querySelector('#gogasBtn');
       gogasBtn.href = gogasBtn.href + newLink;
       // const gogasHeroImgA = document.querySelector('.hero-slide-2 a');
       // gogasHeroImgA.href = gogasHeroImgA.href + newLink;
