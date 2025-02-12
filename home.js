@@ -2550,7 +2550,7 @@ function getSystemsNamePrice(activeContainer) {
   ].map(priceEl => priceEl.textContent);
 
   const array = [];
-  names.forEach((name, i) => array.push({ name, priceNoVAT: prices[i] }));
+  names.forEach((name, i) => array.push({ name, priceNoVAT: prices[i] + ' + ΦΠΑ' }));
   return array;
 }
 
