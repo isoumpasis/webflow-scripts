@@ -164,29 +164,71 @@ async function initMap() {
       zIndex: google.maps.Marker.MAX_ZINDEX + 1 + cachedPins.length - pinIndex
     });
   });
-  markerClusterer = new MarkerClusterer(map, markers, {
-    styles: [
-      {
-        url: markerClustererIcon,
-        width: 53,
-        height: 52,
-        anchorText: [20, 0],
-        textColor: '#fff',
-        textSize: 11,
-        fontWeight: 'bold'
-      }
-    ],
-    // imagePath:
-    // 	'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
-    averageCenter: true,
-    zoomOnClick: false,
-    //minimumClusterSize: 3,
-    maxZoom: maxZoomClusterer,
+
+  clusterAlgo = new markerClusterer.GridAlgorithm({
     gridSize: isMobile()
       ? gridSizesDependedOnZoomMobile[startZoom]
-      : gridSizesDependedOnZoom[startZoom], //default=60,
-    ignoreHidden: true
+      : gridSizesDependedOnZoom[startZoom],
+    maxZoom: maxZoomClusterer,
+    maxDistance: 10000
   });
+
+  markerClusterer = new markerClusterer.MarkerClusterer({
+    markers,
+    map,
+    renderer: {
+      render: ({ count, position }) => {
+        return new google.maps.Marker({
+          label: {
+            text: String(count),
+            color: '#fff',
+            fontSize: '11px',
+            fontWeight: 'bold'
+          },
+          icon: {
+            url: markerClustererIcon,
+            scaledSize: new google.maps.Size(53, 52)
+          },
+          position,
+          zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count
+        });
+      }
+    },
+    algorithm: clusterAlgo,
+    onClusterClick: (e, clusterer, map) => {
+      infoWindow.close();
+      if (selectedMarker) {
+        selectedMarker.setAnimation(null);
+      }
+      selectedMarker = null;
+      map.setZoom(zoomLevelsDependedOnZoom[map.getZoom()]);
+      map.setCenter(e.latLng);
+    }
+  });
+
+  // markerClusterer = new MarkerClusterer(map, markers, {
+  //   styles: [
+  //     {
+  //       url: markerClustererIcon,
+  //       width: 53,
+  //       height: 52,
+  //       anchorText: [20, 0],
+  //       textColor: '#fff',
+  //       textSize: 11,
+  //       fontWeight: 'bold'
+  //     }
+  //   ],
+  //   // imagePath:
+  //   // 	'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+  //   averageCenter: true,
+  //   zoomOnClick: false,
+  //   //minimumClusterSize: 3,
+  //   maxZoom: maxZoomClusterer,
+  //   gridSize: isMobile()
+  //     ? gridSizesDependedOnZoomMobile[startZoom]
+  //     : gridSizesDependedOnZoom[startZoom], //default=60,
+  //   ignoreHidden: true
+  // });
 
   markers.forEach(marker => {
     marker.addListener('mouseover', () => {
@@ -254,37 +296,40 @@ async function initMap() {
     let currentZoom = map.getZoom();
     //console.log('current zoom', currentZoom);
     if (currentZoom > maxZoomClusterer) return;
-    markerClusterer.setGridSize(
-      isMobile() ? gridSizesDependedOnZoomMobile[currentZoom] : gridSizesDependedOnZoom[currentZoom]
-    );
+    // markerClusterer.setGridSize(
+    //   isMobile() ? gridSizesDependedOnZoomMobile[currentZoom] : gridSizesDependedOnZoom[currentZoom]
+    // );
+    markerClusterer.algorithm.gridSize = isMobile()
+      ? gridSizesDependedOnZoomMobile[currentZoom]
+      : gridSizesDependedOnZoom[currentZoom];
   });
 
-  google.maps.event.addListener(markerClusterer, 'clusterclick', cluster => {
-    infoWindow.close();
-    if (selectedMarker) {
-      selectedMarker.setAnimation(null);
-    }
-    selectedMarker = null;
-    map.setZoom(zoomLevelsDependedOnZoom[map.getZoom()]);
-    //map.setZoom(map.getZoom() + 2);
-    map.setCenter(cluster.getCenter());
-  });
+  // google.maps.event.addListener(markerClusterer, 'clusterclick', cluster => {
+  //   infoWindow.close();
+  //   if (selectedMarker) {
+  //     selectedMarker.setAnimation(null);
+  //   }
+  //   selectedMarker = null;
+  //   map.setZoom(zoomLevelsDependedOnZoom[map.getZoom()]);
+  //   //map.setZoom(map.getZoom() + 2);
+  //   map.setCenter(cluster.getCenter());
+  // });
 
-  google.maps.event.addListener(markerClusterer, 'mouseover', cluster => {
-    infoWindow.close();
-    if (selectedMarker) {
-      selectedMarker.setAnimation(null);
-    }
-    selectedMarker = null;
-    let label = cluster.clusterIcon_.div_.querySelector('span');
-    label.classList.add('cluster-hover');
-    cluster.clusterIcon_.div_.classList.add('grow');
-  });
-  google.maps.event.addListener(markerClusterer, 'mouseout', cluster => {
-    let label = cluster.clusterIcon_.div_.querySelector('span');
-    label.classList.remove('cluster-hover');
-    cluster.clusterIcon_.div_.classList.add('grow');
-  });
+  // google.maps.event.addListener(markerClusterer, 'mouseover', cluster => {
+  //   infoWindow.close();
+  //   if (selectedMarker) {
+  //     selectedMarker.setAnimation(null);
+  //   }
+  //   selectedMarker = null;
+  //   let label = cluster.clusterIcon_.div_.querySelector('span');
+  //   label.classList.add('cluster-hover');
+  //   cluster.clusterIcon_.div_.classList.add('grow');
+  // });
+  // google.maps.event.addListener(markerClusterer, 'mouseout', cluster => {
+  //   let label = cluster.clusterIcon_.div_.querySelector('span');
+  //   label.classList.remove('cluster-hover');
+  //   cluster.clusterIcon_.div_.classList.add('grow');
+  // });
 
   infoWindow.addListener('closeclick', () => {
     if (selectedMarker) {
@@ -902,7 +947,7 @@ function filterMarkers() {
     }
   }
 
-  markerClusterer.repaint();
+  // markerClusterer.repaint();
 
   infoWindow.close();
   if (selectedMarker) selectedMarker.setAnimation(null);
