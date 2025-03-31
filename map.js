@@ -33,7 +33,7 @@ const gpsZoom = 11,
 foundMarkerZoom = 14;
 const maxZoomClusterer = 10;
 let markers = [],
-  markerClusterer;
+  clusterer;
 
 const gridSizesDependedOnZoom = { 6: 40, 7: 35, 8: 30, 9: 25, 10: 30 };
 const gridSizesDependedOnZoomMobile = { 6: 40, 7: 35, 8: 30, 9: 25, 10: 15 };
@@ -173,7 +173,7 @@ async function initMap() {
     maxDistance: 10000
   });
 
-  markerClusterer = new markerClusterer.MarkerClusterer({
+  clusterer = new markerClusterer.MarkerClusterer({
     markers,
     map,
     renderer: {
@@ -299,7 +299,7 @@ async function initMap() {
     // markerClusterer.setGridSize(
     //   isMobile() ? gridSizesDependedOnZoomMobile[currentZoom] : gridSizesDependedOnZoom[currentZoom]
     // );
-    markerClusterer.algorithm.gridSize = isMobile()
+    clusterer.algorithm.gridSize = isMobile()
       ? gridSizesDependedOnZoomMobile[currentZoom]
       : gridSizesDependedOnZoom[currentZoom];
   });
