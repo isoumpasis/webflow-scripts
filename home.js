@@ -2315,6 +2315,9 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
   if (isMobile()) {
     clone.style.width = '100%';
     clone.style.inset = '0% 0% -2% auto';
+    clone.querySelector('.info-trigger').style.borderRadius = '6px';
+    clone.querySelector('.info-trigger').style.width = '22px';
+    clone.querySelector('.info-trigger').style.height = '22px';
   }
 
   connectMoreInfoBtn(emulatorType, clone);
