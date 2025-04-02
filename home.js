@@ -2272,9 +2272,6 @@ function displayEmulatorInfo(suggestedContainer) {
       const emCont = generateEmulatorInfoContentBlock(vehicleEmulatorType, system);
       emCont.querySelector('.info-content').style.maxHeight = '0px';
       emCont.querySelector('.info-content').style.height = 'auto';
-      // if (isMobile()) {
-      //   system.querySelector('.suggested-image-content').style.maxHeight = '50px';
-      // }
       emCont.style.display = 'block';
     });
   }
@@ -2315,7 +2312,7 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
   if (isMobile()) {
     clone.style.width = '100%';
     clone.style.inset = '0% 0% -2% auto';
-    clone.querySelector('.info-trigger').style.borderRadius = '6px';
+    clone.querySelector('.info-trigger').style.borderRadius = '20px';
     clone.querySelector('.info-trigger').style.width = '22px';
     clone.querySelector('.info-trigger').style.height = '22px';
   }
@@ -2328,22 +2325,16 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 }
 
 function showEmulatorCardListener(clone, systemContainer) {
-  clone.querySelector('.info-content').style.maxHeight = '420px';
+  clone.querySelector('.info-content').style.maxHeight = isMobile() ? '444px' : '420px';
   const car = systemContainer.querySelector('.car-img');
   car.style.transition = 'opacity 0.3s ease';
   car.style.opacity = 0;
-  // if (isMobile()) {
-  //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '350px';
-  // }
 }
 
 function hideEmulatorCardListener(clone, systemContainer) {
   clone.querySelector('.info-content').style.maxHeight = '0px';
   const car = systemContainer.querySelector('.car-img');
   car.style.opacity = 1;
-  // if (isMobile()) {
-  //   systemContainer.querySelector('.suggested-image-content').style.maxHeight = '50px';
-  // }
 }
 
 function connectMoreInfoBtn(emulatorType, clone) {
