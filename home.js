@@ -2312,9 +2312,10 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
   const closeBtn = clone.querySelector('.close-info');
   closeBtn.addEventListener('click', () => hideEmulatorCardListener(clone, systemContainer));
 
-  // if (isMobile()) {
-  //   systemContainer.querySelector('.suggested-image-content').style.height = '800px';
-  // }
+  if (isMobile()) {
+    clone.style.width = '100%';
+    clone.style.inset = '0% 0% -2% auto';
+  }
 
   connectMoreInfoBtn(emulatorType, clone);
 
