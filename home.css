@@ -228,7 +228,7 @@ input[type='range']::-ms-thumb:hover {
 }
 @media (max-width: 768px) {
   .car-pulse {
-    top: 25px;
+    top: 22px;
     left: 13%;
   }
   .summary-pulse {
