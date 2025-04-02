@@ -2309,7 +2309,7 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
   const closeBtn = clone.querySelector('.close-info');
   closeBtn.addEventListener('click', () => hideEmulatorCardListener(clone, systemContainer));
 
-  if (isMobile()) {
+  if (isMobile479()) {
     clone.style.width = '100%';
     clone.style.inset = '0% 0% -2% auto';
     clone.querySelector('.info-trigger').style.borderRadius = '20px';
@@ -2328,7 +2328,7 @@ function generateEmulatorInfoContentBlock(emulatorType, systemContainer) {
 }
 
 function showEmulatorCardListener(clone, systemContainer) {
-  clone.querySelector('.info-content').style.maxHeight = isMobile() ? '444px' : '420px';
+  clone.querySelector('.info-content').style.maxHeight = isMobile479() ? '444px' : '420px';
   const car = systemContainer.querySelector('.car-img');
   car.style.transition = 'opacity 0.3s ease';
   car.style.opacity = 0;
@@ -3984,6 +3984,9 @@ document
 
 function isMobile() {
   return window.matchMedia('screen and (max-width: 768px)').matches;
+}
+function isMobile479() {
+  return window.matchMedia('screen and (max-width: 479px)').matches;
 }
 
 /* LOTTERY */
