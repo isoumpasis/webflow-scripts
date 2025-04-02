@@ -2272,9 +2272,9 @@ function displayEmulatorInfo(suggestedContainer) {
       const emCont = generateEmulatorInfoContentBlock(vehicleEmulatorType, system);
       emCont.querySelector('.info-content').style.maxHeight = '0px';
       emCont.querySelector('.info-content').style.height = 'auto';
-      if (isMobile()) {
-        system.querySelector('.suggested-image-content').style.maxHeight = '50px';
-      }
+      // if (isMobile()) {
+      //   system.querySelector('.suggested-image-content').style.maxHeight = '50px';
+      // }
       emCont.style.display = 'block';
     });
   }
