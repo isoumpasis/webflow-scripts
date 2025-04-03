@@ -608,6 +608,7 @@ function initForeignReferrerOptions() {
 
     document.querySelector('a.brand').target = '_blank';
     document.querySelector('.foreign-summary-text').textContent = 'έλα στο συνεργείο μας!';
+    document.querySelector('#storesStepMenu .progress-text').textContent = 'Έλα στο συνεργείο μας';
     document.querySelector('#hamburgerMenuDiv').remove();
 
     adjustContactInfoContainer();
