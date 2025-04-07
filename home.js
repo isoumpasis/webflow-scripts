@@ -148,6 +148,7 @@ const systemNamesFromIdDict = {
 const makeImgPrefix = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/';
 const makeImgDict = {
   'ALFA ROMEO': '6077f1d502c7ef4d03ff154b_Alfa_Romeo.avif',
+  'ALFA ROMEO PNG': '6077f1d502c7ef4d03ff154b_Alfa_Romeo.png',
   AUDI: '6077f607b580721ba1274496_Audi.png',
   BMW: '6077f607325eb960af680a4e_BMW.png',
   CADILLAC: '61b8fd8721dd7f462b25e630_Cadillac.png',
@@ -1946,6 +1947,9 @@ function configureUserSelectionsAfterResults(firstSystemSelected = true) {
           : cngPercentageEl.textContent
     }
   };
+  if (makeSelect.value === 'ALFA ROMEO') {
+    userSelections.vehicle.identification.vehicleValues.makeImgUrl = makeImgDict['ALFA ROMEO PNG'];
+  }
 
   if (userSelections.vehicle.suggestions.hasResult) {
     userSelections.easyPay = {
