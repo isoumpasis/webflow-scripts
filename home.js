@@ -1948,7 +1948,8 @@ function configureUserSelectionsAfterResults(firstSystemSelected = true) {
     }
   };
   if (makeSelect.value === 'ALFA ROMEO') {
-    userSelections.vehicle.identification.vehicleValues.makeImgUrl = makeImgDict['ALFA ROMEO PNG'];
+    userSelections.vehicle.identification.vehicleValues.makeImgUrl =
+      makeImgPrefix + makeImgDict['ALFA ROMEO PNG'];
   }
 
   if (userSelections.vehicle.suggestions.hasResult) {
