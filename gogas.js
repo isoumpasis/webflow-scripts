@@ -171,7 +171,7 @@ function isForeign() {
 
 function initForeignReferrerOptions() {
   if (isForeign()) {
-    const dontShowEls = ['.navbar', '#gogasNavContact', '#recentWinners', '#contact', '#footer'];
+    const dontShowEls = ['.navbar', '#gogasNavContact', '#contact', '#footer'];
     dontShowEls.forEach(query => (document.querySelector(query).style.display = 'none'));
 
     const types = ['#eswterikhContainer', '#ekswterikhContainer', '#kylindrikhContainer'];
