@@ -30,7 +30,7 @@ select::-webkit-scrollbar-thumb,
 .loading-select {
   -webkit-appearance: none;
   background: #ffffff
-    url(https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/604fdd781484d9192decddd2_Spin-1s-200px.gif)
+    url(https://cdn.prod.website-files.com/60362f40a83dcf0034eb880b/6837fec247c30d116f1f022b_604fdd781484d9192decddd2_Spin-1s-200px.gif)
     no-repeat center center;
   background-size: 40px 40px;
   appearance: none;
