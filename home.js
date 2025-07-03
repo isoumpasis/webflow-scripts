@@ -3436,8 +3436,8 @@ function prepareDataToSend() {
 function isPremiumOffer() {
   if (userSelections?.easyPay?.system) {
     if (
-      !userSelections?.easyPay?.system?.name.includes('E-GO') ||
-      !userSelections?.easyPay?.system?.name.includes('E-GO')
+      !userSelections?.easyPay?.system?.name.includes('E-GO') &&
+      !userSelections?.easyPay?.system?.name.includes('Μονού Ψεκασμού')
     ) {
       return true;
     }
