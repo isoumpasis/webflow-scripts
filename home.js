@@ -496,7 +496,7 @@ let noCreditInterest = 12.6;
 let creditInterest = 8.2; //7.2 //credit + isfora
 
 // let sourceReferrerDomain;
-let remainingPremium = null; // 'always';
+// let remainingPremium = null; // 'always';
 
 const h2FuelSelection = document.querySelector('.h2-fuel-selection');
 const notConvFormSubmitBtn = document.querySelector('#notConvFormSubmitBtn');
@@ -2285,7 +2285,7 @@ function displayEmulatorInfo(suggestedContainer) {
 
 function resetCardsFromEmulators(suggestedContainer) {
   suggestedContainer.querySelector('.system-content').children.forEach(system => {
-    system.querySelector('.car-img').style.opacity = 1;
+    system.querySelector('.car-img')?.style?.opacity = 1;
   });
 }
 
@@ -3425,23 +3425,31 @@ function prepareDataToSend() {
   dataToSend.userInfo = userInfo;
   dataToSend.userInfo.category = getEasyPayFileUploadCategory();
   dataToSend.sourceReferrerDomain = sourceReferrerDomain;
-  dataToSend.isCobdPremiumOffer = isCobdPremiumOffer();
+  dataToSend.isPremiumOffer = isPremiumOffer();
   delete dataToSend.fuelPrices;
   delete dataToSend.vehicle.identification.fetchedData;
   return dataToSend;
 }
 
-function isCobdPremiumOffer() {
-  if (remainingPremium) {
+function isPremiumOffer() {
+  if (userSelections?.easyPay?.system) {
     if (
-      new Date().getFullYear() === 2024 &&
-      userSelections.easyPay.system.name.indexOf('C-OBD') !== -1 &&
-      userSelections.selectedFuel === 'lpg'
+      !userSelections?.easyPay?.system?.name.includes('E-GO') ||
+      !userSelections?.easyPay?.system?.name.includes('E-GO')
     ) {
       return true;
     }
   }
   return false;
+  // if (remainingPremium) {
+  //   if (
+  //     new Date().getFullYear() === 2024 &&
+  //     userSelections.easyPay.system.name.indexOf('C-OBD') !== -1 &&
+  //     userSelections.selectedFuel === 'lpg'
+  //   ) {
+  //     return true;
+  //   }
+  // }
 }
 
 function emailSummarySubmit(e, triggeredFrom, formType) {
