@@ -2028,6 +2028,8 @@ function showResults(fetchedModelObj) {
 
   adjustSectionPaddingsWithResult();
 
+  setImgDownloadSectionSrc();
+
   //If there is a suggestion
   if (
     suggestedContainer &&
@@ -2076,6 +2078,12 @@ function showResults(fetchedModelObj) {
       suggestedContainer.classList.contains('not-convertible-form-container')
     );
   }
+}
+
+function setImgDownloadSectionSrc() {
+  document.querySelector('#imgDownloadSection').src = isPremiumOffer()
+    ? 'https://cdn.prod.website-files.com/60362f40a83dcf0034eb880b/68664df10a63bf6cc856ee50_offer-cta.avif'
+    : 'https://cdn.prod.website-files.com/60362f40a83dcf0034eb880b/61e547c355b97c69ec69772d_shutterstock_1152719507.avif';
 }
 
 function showGuarantee(show) {
