@@ -2028,8 +2028,6 @@ function showResults(fetchedModelObj) {
 
   adjustSectionPaddingsWithResult();
 
-  setImgDownloadSectionSrc();
-
   //If there is a suggestion
   if (
     suggestedContainer &&
@@ -2056,6 +2054,8 @@ function showResults(fetchedModelObj) {
   }
 
   configureUserSelectionsAfterResults();
+
+  setImgDownloadSectionSrc();
 
   if (
     suggestedContainer &&
