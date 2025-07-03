@@ -2285,7 +2285,9 @@ function displayEmulatorInfo(suggestedContainer) {
 
 function resetCardsFromEmulators(suggestedContainer) {
   suggestedContainer.querySelector('.system-content').children.forEach(system => {
-    system.querySelector('.car-img')?.style?.opacity = 1;
+    if (system.querySelector('.car-img')) {
+      system.querySelector('.car-img').style.opacity = 1;
+    }
   });
 }
 
