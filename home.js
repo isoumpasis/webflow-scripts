@@ -1148,6 +1148,8 @@ function initEasyPaySystemSelection() {
         systemTabs[1].click();
       }
 
+      setImgDownloadSectionSrc();
+
       if (step2Triggered && !step4Triggered) {
         trigger_easy_pay_step_4({ triggered_via: 'click' });
       }
