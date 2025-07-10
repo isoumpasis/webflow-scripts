@@ -2091,6 +2091,7 @@ function setImgDownloadSectionSrc() {
 
 function showGuarantee(show) {
   document.querySelector('.three-year-guarantee').style.display = show ? 'flex' : 'none';
+  if (!show) document.querySelector('.wlc-gallery').style.display = 'none';
 }
 function showCarMakeStep1(show) {
   document.querySelector('.car-make-step1').style.display = show ? 'flex' : 'none';
