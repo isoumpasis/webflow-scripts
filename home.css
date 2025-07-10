@@ -542,3 +542,7 @@ video:focus-visible {
 #vehicle {
   scroll-margin-top: 0px;
 }
+
+.css-sfbnep {
+  z-index: 9999;
+}
