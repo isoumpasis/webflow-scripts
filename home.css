@@ -543,3 +543,7 @@ video:focus-visible {
 .w-lightbox-backdrop {
   z-index: 2147483652;
 }
+
+.css-sfbnep {
+  z-index: 5000 !important;
+}
