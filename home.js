@@ -2085,13 +2085,12 @@ function setImgDownloadSectionSrc() {
   document.querySelector('#imgDownloadSection').src = isPremiumOffer()
     ? 'https://cdn.prod.website-files.com/60362f40a83dcf0034eb880b/68664df10a63bf6cc856ee50_offer-cta.avif'
     : 'https://cdn.prod.website-files.com/60362f40a83dcf0034eb880b/61e547c355b97c69ec69772d_shutterstock_1152719507.avif';
+
+  document.querySelector('.wlc-gallery').style.display = isPremiumOffer() ? 'flex' : 'none';
 }
 
 function showGuarantee(show) {
   document.querySelector('.three-year-guarantee').style.display = show ? 'flex' : 'none';
-  if (isPremiumOffer()) {
-    document.querySelector('.wlc-gallery').style.display = show ? 'flex' : 'none';
-  }
 }
 function showCarMakeStep1(show) {
   document.querySelector('.car-make-step1').style.display = show ? 'flex' : 'none';
