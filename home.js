@@ -3453,6 +3453,18 @@ function isPremiumOffer() {
     ) {
       return true;
     }
+  } else {
+    const activeContainer = getActiveContainer();
+    const notPremiumIds = [
+      'notConvertible-form',
+      'not-Convertible-lpg',
+      'notConvertible-cng',
+      'suggested-lpg-ego',
+      'suggested-lpg-monou'
+    ];
+    if (activeContainer && !notPremiumIds.includes(activeContainer.id)) {
+      return true;
+    }
   }
   return false;
   // if (remainingPremium) {
