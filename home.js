@@ -3457,7 +3457,7 @@ function isPremiumOffer() {
     const activeContainer = getActiveContainer();
     const notPremiumIds = [
       'notConvertible-form',
-      'not-Convertible-lpg',
+      'notConvertible-lpg',
       'notConvertible-cng',
       'suggested-lpg-ego',
       'suggested-lpg-monou'
