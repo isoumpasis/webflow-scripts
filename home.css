@@ -434,10 +434,6 @@ input[type='range']::-ms-thumb:hover {
   font-weight: bold;
 }
 
-.w-lightbox-backdrop {
-  z-index: 9999;
-}
-
 /* @media (max-width: 768px) {
   .dz-image-preview,
   .dz-preview {
@@ -543,6 +539,7 @@ video:focus-visible {
   scroll-margin-top: 0px;
 }
 
-.css-sfbnep {
-  z-index: 9999;
+/*more than hotjar feedback */
+.w-lightbox-backdrop {
+  z-index: 2147483652;
 }
