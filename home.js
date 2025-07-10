@@ -2039,13 +2039,12 @@ function showResults(fetchedModelObj) {
     !suggestedContainer.classList.contains('not-convertible-form-container')
   ) {
     showCarMakeStep1(true);
-    showGuarantee(true);
-
     displayEmulatorInfo(suggestedContainer);
 
     configureCalculatorAfterSuggestion();
     configureEasyPayAfterSuggestion();
     configureLastStepAfterSuggestion();
+    showGuarantee(true);
   } else {
     showCarMakeStep1(false);
     showGuarantee(false);
