@@ -1,6 +1,6 @@
 /* System Identification */
-let serverUrl = 'https://lovatohellas.herokuapp.com/';
-// let serverUrl = 'http://localhost:1917/';
+// let serverUrl = 'https://lovatohellas.herokuapp.com/';
+let serverUrl = 'http://localhost:1917/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlYears = serverUrl + 'vehicleDB/get/years';
@@ -1784,9 +1784,9 @@ function populateDescriptionSelect(fetchedModelObj) {
         let convertibleSymbol = vehicle.isConvertible
           ? ' ✔️'
           : vehicle.cylinders <= 4
-          ? // ? ' &#9203;'
-            ' ⭐'
-          : ' &#10060;';
+            ? // ? ' &#9203;'
+              ' ⭐'
+            : ' &#10060;';
         engineCodesOptions.push(code + convertibleSymbol);
       });
     });
@@ -1917,8 +1917,8 @@ function configureUserSelectionsAfterResults(firstSystemSelected = true) {
               descriptionSelect.value.length === 1
                 ? ' cyl'
                 : descriptionSelect.value.includes(' - ')
-                ? ''
-                : ' hp'
+                  ? ''
+                  : ' hp'
             }`,
           makeImgUrl: makeImgPrefix + makeImgDict[makeSelect.value]
         },
@@ -2096,9 +2096,8 @@ function showGuarantee(show) {
 function showCarMakeStep1(show) {
   document.querySelector('.car-make-step1').style.display = show ? 'flex' : 'none';
   document.querySelector('#makeImgStep1').src = makeImgPrefix + makeImgDict[makeSelect.value];
-  document.querySelector(
-    '#modelNameStep1'
-  ).textContent = `${modelSelect.value} (${yearSelect.value})`;
+  document.querySelector('#modelNameStep1').textContent =
+    `${modelSelect.value} (${yearSelect.value})`;
 }
 
 function configureLastStepAfterSuggestion() {
@@ -2444,15 +2443,12 @@ function configureCalculatorAfterSuggestion() {
   document.querySelector('#makeImg').src = makeImgPrefix + makeImgDict[makeSelect.value];
   document.querySelector('#modelName').textContent = `${modelSelect.value} (${yearSelect.value})`;
 
-  document.querySelector(
-    '#inConsumption .text-span'
-  ).innerHTML = `(${foundVehicleObj.consumption[0]}L/100km)`;
-  document.querySelector(
-    '#outConsumption .text-span'
-  ).innerHTML = `(${foundVehicleObj.consumption[1]}L/100km)`;
-  document.querySelector(
-    '#combinedConsumption .text-span'
-  ).innerHTML = `(${foundVehicleObj.consumption[2]}L/100km)`;
+  document.querySelector('#inConsumption .text-span').innerHTML =
+    `(${foundVehicleObj.consumption[0]}L/100km)`;
+  document.querySelector('#outConsumption .text-span').innerHTML =
+    `(${foundVehicleObj.consumption[1]}L/100km)`;
+  document.querySelector('#combinedConsumption .text-span').innerHTML =
+    `(${foundVehicleObj.consumption[2]}L/100km)`;
 
   const consumptionRadios = document.querySelectorAll('.radio-button.w-radio');
 
@@ -2478,9 +2474,8 @@ function configureCalculatorAfterSuggestion() {
     el => (el.textContent = foundVehicleObj.consumption[2])
   );
 
-  document.querySelector(
-    '#consumptionModelNameCalc'
-  ).textContent = `${makeSelect.value} ${modelSelect.value} (${yearSelect.value})`;
+  document.querySelector('#consumptionModelNameCalc').textContent =
+    `${makeSelect.value} ${modelSelect.value} (${yearSelect.value})`;
   document.querySelector('#consumptionModelNameCalc').classList.add('calc-info-style');
 
   document.querySelector('.amortization-wrapper').style.display = 'flex';
@@ -2967,8 +2962,8 @@ function updateBasketSection(sections) {
       userSelections.calculator.driveOftenIndex === 0
         ? 'Εντός πόλης'
         : userSelections.calculator.driveOftenIndex === 1
-        ? 'Εκτός πόλης'
-        : 'Μικτά';
+          ? 'Εκτός πόλης'
+          : 'Μικτά';
     document.querySelector('.fuel-place-basket').textContent =
       fuelPricesSelect.options[fuelPricesSelect.selectedIndex].innerHTML;
     document.querySelector('.km-per-year-text-basket').textContent =
@@ -4839,9 +4834,8 @@ function validateNotConvForm() {
 function showNotConvertibleFormContainer() {
   document.querySelector('#notConvertibleMakeImg').src =
     makeImgPrefix + makeImgDict[makeSelect.value];
-  document.querySelector(
-    '#notConvertibleModelName'
-  ).textContent = `${modelSelect.value} (${yearSelect.value})`;
+  document.querySelector('#notConvertibleModelName').textContent =
+    `${modelSelect.value} (${yearSelect.value})`;
   document.querySelector('.not-convertible-form-container').style.display = 'flex';
 }
 
