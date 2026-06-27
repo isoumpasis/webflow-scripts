@@ -1,6 +1,6 @@
 /* System Identification */
-let serverUrl = 'https://lovatohellas.herokuapp.com/';
-// let serverUrl = 'http://localhost:1917/';
+// let serverUrl = 'https://lovatohellas.herokuapp.com/';
+let serverUrl = 'http://localhost:1917/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlYears = serverUrl + 'vehicleDB/get/years';
@@ -19,6 +19,7 @@ const easyPayFileUploaderUrl = serverUrl + 'summaries/easyPay';
 // const baseDateUrl = serverUrl + 'lottery/base-date';
 const urlNotConvForm = serverUrl + 'notConvertible';
 // const urlRemainingPremium = serverUrl + 'remainingPremium';
+const urlAi = serverUrl + 'ai';
 
 let fetchedYears;
 let fetchedModels;
@@ -5027,3 +5028,26 @@ function trigger_not_convertible_form_submit() {
 //   triggerGtagEvent('video_watch_time', options);
 // }
 /* VIDEO JS */
+
+/* Ai */
+document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
+  e.preventDefault();
+  const aiInput = document.querySelector('#aiInput').value.trim();
+  console.log('aiInput', aiInput);
+
+  fetch(urlAi, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ userQuestion: aiInput })
+  })
+    .then(res => res.json())
+    .then(data => {
+      const aiAnswer = data.answer;
+      console.log('aiAnswer', aiAnswer);
+    })
+    .catch(e => console.error('Error on Ai Fetch:', e));
+
+  document.querySelector('#aiInput').value = '';
+});
