@@ -5025,7 +5025,7 @@ function trigger_not_convertible_form_submit() {
 // });
 
 // function trigger_video_watch_time(options) {
-//   triggerGtagEvent('video_watch_time', options);
+//   triggerGtagEvent('video_watch_time', options);//
 // }
 /* VIDEO JS */
 
