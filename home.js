@@ -5032,6 +5032,12 @@ function trigger_not_convertible_form_submit() {
 /* Ai */
 document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
   e.preventDefault();
+  const aiConversationDiv = document.querySelector('#aiConversationDiv');
+  const aiUserQuestionEl = document.querySelector('#aiUserQuestion');
+  const aiAnswerEl = document.querySelector('#aiAnswer');
+
+  aiConversationDiv.style.display = 'none';
+
   const aiInput = document.querySelector('#aiInput').value.trim();
   console.log('aiInput', aiInput);
 
@@ -5046,8 +5052,27 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
     .then(data => {
       const aiAnswer = data.answer;
       console.log('aiAnswer', aiAnswer);
+
+      aiConversationDiv.style.display = 'flex';
+      aiUserQuestionEl.textContent = aiInput;
+      typeResponse(aiAnswer, aiAnswerEl, 50);
     })
     .catch(e => console.error('Error on Ai Fetch:', e));
 
   document.querySelector('#aiInput').value = '';
 });
+
+//TYPING EFFECT (Word by Word)
+function typeResponse(text, element, speed = 40) {
+  const words = text.split(' ');
+  let i = 0;
+
+  function type() {
+    if (i < words.length) {
+      element.textContent += words[i] + ' ';
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  type();
+}
