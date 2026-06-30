@@ -5034,7 +5034,7 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
   e.preventDefault();
   const aiConversationDiv = document.querySelector('#aiConversationDiv');
   const aiUserQuestionEl = document.querySelector('#aiUserQuestion');
-  const aiAnswerEl = document.querySelector('#aiAnswer');
+  const aiAnswerEl = document.querySelector('#aiAnswerText');
 
   aiConversationDiv.style.display = 'none';
 
