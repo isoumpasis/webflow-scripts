@@ -1,6 +1,6 @@
 /* System Identification */
-let serverUrl = 'https://lovatohellas.herokuapp.com/';
-// let serverUrl = 'http://localhost:1917/';
+// let serverUrl = 'https://lovatohellas.herokuapp.com/';
+let serverUrl = 'http://localhost:1917/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlYears = serverUrl + 'vehicleDB/get/years';
@@ -5052,7 +5052,7 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
     .then(res => res.json())
     .then(data => {
       const aiAnswer = data.answer;
-      console.log('aiAnswer', aiAnswer);
+      // console.log('aiAnswer', aiAnswer);
 
       aiConversationDiv.style.display = 'flex';
       aiUserQuestionEl.textContent = aiInput;
