@@ -5037,6 +5037,7 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
   const aiAnswerEl = document.querySelector('#aiAnswerText');
 
   aiConversationDiv.style.display = 'none';
+  aiAnswerEl.textContent = '';
 
   const aiInput = document.querySelector('#aiInput').value.trim();
   console.log('aiInput', aiInput);
@@ -5055,7 +5056,7 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
 
       aiConversationDiv.style.display = 'flex';
       aiUserQuestionEl.textContent = aiInput;
-      typeResponse(aiAnswer, aiAnswerEl, 50);
+      typeResponse(aiAnswer, aiAnswerEl, 100);
     })
     .catch(e => console.error('Error on Ai Fetch:', e));
 
