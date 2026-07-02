@@ -5045,7 +5045,7 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
   let aiUserSelections = {
     hasResult: hasResult(),
     fuelPrices: userSelections.fuelPrices.prices,
-    location: userSelections.location.numPlaces.place
+    location: userSelections.location?.place || userSelections.location?.numPlaces.place
   };
   if (hasResult()) {
     aiUserSelections = {
