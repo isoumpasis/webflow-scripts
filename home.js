@@ -1,6 +1,6 @@
 /* System Identification */
-let serverUrl = 'https://lovatohellas.herokuapp.com/';
-// let serverUrl = 'http://localhost:1917/';
+// let serverUrl = 'https://lovatohellas.herokuapp.com/';
+let serverUrl = 'http://localhost:1917/';
 const baseUrl = location.origin;
 const mapUrl = '/stores';
 const urlYears = serverUrl + 'vehicleDB/get/years';
@@ -5042,12 +5042,44 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
   const aiInput = document.querySelector('#aiInput').value.trim();
   // console.log('aiInput', aiInput);
 
+  let aiUserSelections = {};
+  if (hasResult()) {
+    aiUserSelections = {
+      ...aiUserSelections,
+      make: userSelections.vehicle.identification.vehicleValues.make,
+      year: userSelections.vehicle.identification.vehicleValues.year,
+      model: userSelections.vehicle.identification.vehicleValues.model,
+      description: userSelections.vehicle.identification.vehicleValues.description,
+      consumption: userSelections.vehicle.identification.foundVehicleObj.consumption,
+      cylinders: userSelections.vehicle.identification.foundVehicleObj.cylinders,
+      hp: userSelections.vehicle.identification.foundVehicleObj.hp,
+
+      isDirectInjection: userSelections.vehicle.identification.fetchedData.fetchedModelObj.isDirect,
+      isMonopointInjection:
+        userSelections.vehicle.identification.fetchedData.fetchedModelObj.isMonou,
+
+      hasEmulator: userSelections.vehicle.suggestions.emulators.hasEmulators,
+      isEmulatorMandatory: userSelections.vehicle.suggestions.emulators.isMandatory,
+      emulatorText: userSelections.vehicle.suggestions.emulators.emulatorText,
+      emulatorPrice: userSelections.vehicle.suggestions.emulators.emulatorPrice,
+
+      systemName: userSelections.easyPay.system.name,
+      systemPriceNoVAT: userSelections.easyPay.system.priceNoVAT,
+      systemPriceWithVAT: userSelections.easyPay.system.priceWithVAT,
+
+      fuelPrices: userSelections.fuelPrices.prices,
+      location: userSelections.location.place,
+
+      isPremiumOffer: userSelections.isPremiumOffer
+    };
+  }
+
   fetch(urlAi, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ userQuestion: aiInput })
+    body: JSON.stringify({ userQuestion: aiInput, userSelections: aiUserSelections })
   })
     .then(res => res.json())
     .then(data => {
