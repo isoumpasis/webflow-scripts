@@ -5042,7 +5042,11 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
   const aiInput = document.querySelector('#aiInput').value.trim();
   // console.log('aiInput', aiInput);
 
-  let aiUserSelections = {};
+  let aiUserSelections = {
+    hasResult: hasResult(),
+    fuelPrices: userSelections.fuelPrices.prices,
+    location: userSelections.location.numPlaces.place
+  };
   if (hasResult()) {
     aiUserSelections = {
       ...aiUserSelections,
@@ -5066,9 +5070,6 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
       systemName: userSelections.easyPay.system.name,
       systemPriceNoVAT: userSelections.easyPay.system.priceNoVAT,
       systemPriceWithVAT: userSelections.easyPay.system.priceWithVAT,
-
-      fuelPrices: userSelections.fuelPrices.prices,
-      location: userSelections.location.place,
 
       isPremiumOffer: userSelections.isPremiumOffer
     };
