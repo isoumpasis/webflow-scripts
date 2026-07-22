@@ -2046,6 +2046,7 @@ function showResults(fetchedModelObj) {
     configureEasyPayAfterSuggestion();
     configureLastStepAfterSuggestion();
     showGuarantee(true);
+    askAiOnStep1('Μπορεί να μπει υγραέριο στο αυτοκίνητό μου;');
   } else {
     showCarMakeStep1(false);
     showGuarantee(false);
@@ -5042,6 +5043,43 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
   const aiInput = document.querySelector('#aiInput').value.trim();
   // console.log('aiInput', aiInput);
 
+  fetch(urlAi, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ userQuestion: aiInput, userSelections: getAiUserSelections() })
+  })
+    .then(res => res.json())
+    .then(data => {
+      const aiAnswer = data.answer;
+      // console.log('aiAnswer', aiAnswer);
+
+      aiConversationDiv.style.display = 'flex';
+      aiUserQuestionEl.textContent = aiInput;
+      typeResponse(aiAnswer, aiAnswerEl, 100);
+    })
+    .catch(e => console.error('Error on Ai Fetch:', e));
+
+  document.querySelector('#aiInput').value = '';
+});
+
+//TYPING EFFECT (Word by Word)
+function typeResponse(text, element, speed = 40) {
+  const words = text.split(' ');
+  let i = 0;
+
+  function type() {
+    if (i < words.length) {
+      element.textContent += words[i] + ' ';
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  type();
+}
+
+function getAiUserSelections() {
   let aiUserSelections = {
     hasResult: hasResult(),
     fuelPrices: userSelections.fuelPrices.prices,
@@ -5080,39 +5118,28 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
       isPremiumOffer: isPremiumOffer()
     };
   }
+  return aiUserSelections;
+}
+
+async function askAiOnStep1(aiInput) {
+  const aiAnswerEl = document.querySelector('#car_step1_ai');
 
   fetch(urlAi, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ userQuestion: aiInput, userSelections: aiUserSelections })
+    body: JSON.stringify({
+      userQuestion: aiInput,
+      userSelections: getAiUserSelections()
+    })
   })
     .then(res => res.json())
     .then(data => {
       const aiAnswer = data.answer;
       // console.log('aiAnswer', aiAnswer);
 
-      aiConversationDiv.style.display = 'flex';
-      aiUserQuestionEl.textContent = aiInput;
       typeResponse(aiAnswer, aiAnswerEl, 100);
     })
     .catch(e => console.error('Error on Ai Fetch:', e));
-
-  document.querySelector('#aiInput').value = '';
-});
-
-//TYPING EFFECT (Word by Word)
-function typeResponse(text, element, speed = 40) {
-  const words = text.split(' ');
-  let i = 0;
-
-  function type() {
-    if (i < words.length) {
-      element.textContent += words[i] + ' ';
-      i++;
-      setTimeout(type, speed);
-    }
-  }
-  type();
 }
