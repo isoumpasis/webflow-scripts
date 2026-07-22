@@ -2046,7 +2046,6 @@ function showResults(fetchedModelObj) {
     configureEasyPayAfterSuggestion();
     configureLastStepAfterSuggestion();
     showGuarantee(true);
-    askAiOnStep1('Μπορεί να μπει υγραέριο στο αυτοκίνητό μου;');
   } else {
     showCarMakeStep1(false);
     showGuarantee(false);
@@ -2080,6 +2079,17 @@ function showResults(fetchedModelObj) {
     trigger_not_convertible(
       suggestedContainer.classList.contains('not-convertible-form-container')
     );
+  }
+
+  //If there is a suggestion (after configuring userSelections)
+  if (
+    suggestedContainer &&
+    !suggestedContainer.classList.contains(
+      `not-convertible-${userSelections.selectedFuel}-container`
+    ) &&
+    !suggestedContainer.classList.contains('not-convertible-form-container')
+  ) {
+    askAiOnStep1('Μπορεί να μπει υγραέριο στο αυτοκίνητό μου;');
   }
 }
 
@@ -5123,6 +5133,7 @@ function getAiUserSelections() {
 
 async function askAiOnStep1(aiInput) {
   const aiAnswerEl = document.querySelector('#car_step1_ai');
+  aiAnswerEl.textContent = '';
 
   fetch(urlAi, {
     method: 'POST',
