@@ -2089,7 +2089,9 @@ function showResults(fetchedModelObj) {
     ) &&
     !suggestedContainer.classList.contains('not-convertible-form-container')
   ) {
-    askAiOnStep1('Μπορεί να μπει υγραέριο στο αυτοκίνητό μου;');
+    askAiOnStep1(
+      'Μπορεί να μπει υγραέριο στο αυτοκίνητό μου; Ξεκίνα την απάντηση σου κατευθείαν από το αυτοκίνητό μου χωρίς αρχικές φράσεις.'
+    );
   }
 }
 
