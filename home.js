@@ -5071,9 +5071,11 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
       systemPriceNoVAT: userSelections.easyPay.system.priceNoVAT,
       systemPriceWithVAT: userSelections.easyPay.system.priceWithVAT,
 
-      bestOffer: userSelections.vehicle.systems[0],
+      bestOffer: userSelections.vehicle.suggestions.systems[0],
       secondaryOffer:
-        userSelections.vehicle.systems.length == 2 ? userSelections.vehicle.systems[1] : null,
+        userSelections.vehicle.suggestions.systems.length == 2
+          ? userSelections.vehicle.suggestions.systems[1]
+          : null,
 
       isPremiumOffer: isPremiumOffer()
     };
