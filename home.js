@@ -5071,7 +5071,7 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
       systemPriceNoVAT: userSelections.easyPay.system.priceNoVAT,
       systemPriceWithVAT: userSelections.easyPay.system.priceWithVAT,
 
-      isPremiumOffer: userSelections.isPremiumOffer
+      isPremiumOffer: isPremiumOffer()
     };
   }
 
