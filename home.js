@@ -5150,7 +5150,7 @@ async function askAiOnStep1(aiInput) {
       const aiAnswer = data.answer;
       // console.log('aiAnswer', aiAnswer);
 
-      typeResponse(aiAnswer, aiAnswerEl, 100);
+      typeResponse(aiAnswer, aiAnswerEl, 70);
     })
     .catch(e => console.error('Error on Ai Fetch:', e));
 }
