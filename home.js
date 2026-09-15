@@ -203,7 +203,7 @@ const makeImgDict = {
 };
 
 function getMakeImgUrl(make) {
-  if (makeImgDict[make].prefix === false) {
+  if (makeImgDict[make]?.prefix === false) {
     return makeImgDict[make].url;
   }
   return makeImgPrefix + makeImgDict[make];
