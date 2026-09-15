@@ -160,6 +160,10 @@ const makeImgDict = {
   DAEWOO: '6077f6096e3ae999700f15ad_Daewoo.png',
   DAIHATSU: '6077f6095e0f21739e801c4d_Daihatsu.png',
   DODGE: '6077f60929203581043c205d_Dodge.png',
+  DS: {
+    prefix: false,
+    url: 'https://cdn.prod.website-files.com/60362f40a83dcf0034eb880b/6aa92eb30933d2af87685b8f_ds%20100.png'
+  },
   FIAT: '6077f609aecccf25fc3868f0_Fiat.png',
   FORD: '6077f609ed355314a4ea8ba7_Ford.png',
   HONDA: '6077f6094bacedfa12748b66_Honda.png',
@@ -167,6 +171,10 @@ const makeImgDict = {
   HYUNDAI: '6077f60969316192201b5e9a_Hyundai.png',
   JAGUAR: '6077f609703f555667a6b6eb_Jaguar.png',
   JEEP: '6077f6099881859ece0dc158_Jeep.png',
+  KGM: {
+    prefix: false,
+    url: 'https://cdn.prod.website-files.com/60362f40a83dcf0034eb880b/6aa91c9909f535ac74cec733_kgm_logo_100.png'
+  },
   KIA: '6077f609ed35535997ea8ba8_Kia.jpg',
   LADA: '6077f60b7735848bc7f48c50_Lada.png',
   LANCIA: '6077f60b703f55244fa6b6ec_Lancia.png',
@@ -193,6 +201,13 @@ const makeImgDict = {
   VOLVO: '6077f60f6931617b461b5e9e_Volvo.png',
   VW: '6077f60f66bedc404ea5a800_VW.png'
 };
+
+function getMakeImgUrl(make) {
+  if (makeImgDict[make].prefix === false) {
+    return makeImgDict[make].url;
+  }
+  return makeImgPrefix + makeImgDict[make];
+}
 
 const systemFullKitLogoUrlPrefix = 'https://uploads-ssl.webflow.com/60362f40a83dcf0034eb880b/';
 const systemFullKitLogoUrlDict = {
@@ -1921,7 +1936,7 @@ function configureUserSelectionsAfterResults(firstSystemSelected = true) {
                   ? ''
                   : ' hp'
             }`,
-          makeImgUrl: makeImgPrefix + makeImgDict[makeSelect.value]
+          makeImgUrl: getMakeImgUrl(makeSelect.value)
         },
         fetchedData: { fetchedYears, fetchedModels, fetchedModelObj },
         foundVehicleObj
@@ -2109,7 +2124,7 @@ function showGuarantee(show) {
 }
 function showCarMakeStep1(show) {
   document.querySelector('.car-make-step1').style.display = show ? 'flex' : 'none';
-  document.querySelector('#makeImgStep1').src = makeImgPrefix + makeImgDict[makeSelect.value];
+  document.querySelector('#makeImgStep1').src = getMakeImgUrl(makeSelect.value);
   document.querySelector('#modelNameStep1').textContent =
     `${modelSelect.value} (${yearSelect.value})`;
 }
@@ -2454,7 +2469,7 @@ function configureCalculatorAfterSuggestion() {
   document.querySelector('#calcTitle').textContent =
     'Υπολόγισε πόσα θα εξοικονομείς με το αυτοκίνητό σου!';
 
-  document.querySelector('#makeImg').src = makeImgPrefix + makeImgDict[makeSelect.value];
+  document.querySelector('#makeImg').src = getMakeImgUrl(makeSelect.value);
   document.querySelector('#modelName').textContent = `${modelSelect.value} (${yearSelect.value})`;
 
   document.querySelector('#inConsumption .text-span').innerHTML =
@@ -4846,8 +4861,7 @@ function validateNotConvForm() {
 }
 
 function showNotConvertibleFormContainer() {
-  document.querySelector('#notConvertibleMakeImg').src =
-    makeImgPrefix + makeImgDict[makeSelect.value];
+  document.querySelector('#notConvertibleMakeImg').src = getMakeImgUrl(makeSelect.value);
   document.querySelector('#notConvertibleModelName').textContent =
     `${modelSelect.value} (${yearSelect.value})`;
   document.querySelector('.not-convertible-form-container').style.display = 'flex';
