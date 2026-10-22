@@ -557,6 +557,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initNotConvSubmitBtn();
 
   easyPayFileUploader();
+
+  initAi();
 });
 
 // function configGtag() {
