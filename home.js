@@ -21,6 +21,7 @@ const urlNotConvForm = serverUrl + 'notConvertible';
 // const urlRemainingPremium = serverUrl + 'remainingPremium';
 const urlAi = serverUrl + 'ai';
 
+let enableAi = false;
 let fetchedYears;
 let fetchedModels;
 let fetchedModelObj;
@@ -5148,6 +5149,7 @@ function getAiUserSelections() {
 }
 
 async function askAiOnStep1(aiInput) {
+  if (!enableAi) return;
   const aiAnswerEl = document.querySelector('#car_step1_ai');
   aiAnswerEl.textContent = '';
 
