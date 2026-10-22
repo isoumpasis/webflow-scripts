@@ -5058,6 +5058,18 @@ function trigger_not_convertible_form_submit() {
 /* VIDEO JS */
 
 /* Ai */
+function initAi() {
+  const aiDivBlockHero = document.querySelector('.ai-div-block-hero');
+  const aiDivBlockStep1 = document.querySelector('.ai-div-block-step1');
+  if (!enableAi) {
+    aiDivBlockHero.style.display = 'none';
+    aiDivBlockStep1.style.display = 'none';
+    return;
+  }
+  aiDivBlockHero.style.display = 'flex';
+  aiDivBlockStep1.style.display = 'flex';
+}
+
 document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
   e.preventDefault();
   const aiConversationDiv = document.querySelector('#aiConversationDiv');
