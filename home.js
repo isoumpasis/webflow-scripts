@@ -5061,6 +5061,27 @@ function trigger_not_convertible_form_submit() {
 
 /* Ai */
 function initAi() {
+  showOrHideAi();
+  if (!enableAi) return;
+
+  initAiSidebar();
+}
+
+function initAiSidebar() {
+  const navAiToggleBtn = document.querySelector('#navAiToggleBtn');
+  const aiSidebar = document.querySelector('#aiSidebar');
+  const aiCloseSidebarBtn = document.querySelector('#aiCloseSidebarBtn');
+
+  navAiToggleBtn.addEventListener('click', () => {
+    aiSidebar.classList.toggle('is_open');
+  });
+
+  aiCloseSidebarBtn.addEventListener('click', () => {
+    aiSidebar.classList.remove('is_open');
+  });
+}
+
+function showOrHideAi() {
   const aiDivBlockHero = document.querySelector('.ai-div-block-hero');
   const aiDivBlockStep1 = document.querySelector('.ai-div-block-step1');
   if (!enableAi) {
