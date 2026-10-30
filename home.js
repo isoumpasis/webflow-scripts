@@ -5085,7 +5085,6 @@ function initAiSidebar() {
     qstn.addEventListener('click', async () => {
       console.log('clicked suggested question', qstn.textContent);
       const aiAnswer = await askAiQuestion(qstn.textContent);
-      console.log('aiAnswer in fn', aiAnswer);
       showAiAnswer(aiAnswer);
     });
   });
@@ -5221,9 +5220,6 @@ async function askAiOnStep1(aiInput) {
 async function askAiQuestion(question) {
   if (!enableAi) return;
 
-  const chatContainer = document.querySelector('#chatContainer');
-  chatContainer.style.display = 'block';
-
   showAiQuestion(question);
 
   try {
@@ -5247,6 +5243,10 @@ async function askAiQuestion(question) {
 
 function showAiQuestion(question) {
   const chatContainer = document.querySelector('#chatContainer');
+  chatContainer.innerHTML = ''; // Clear previous content
+  document.querySelector('.ready-questions-container').style.display = 'none'; // clear
+  chatContainer.style.display = 'block';
+
   const aiChatRowEl = document.createElement('div');
   const aiQuestionEl = document.createElement('div');
   const aiQuestionTxt = document.createElement('div');
@@ -5262,8 +5262,6 @@ function showAiQuestion(question) {
 }
 
 function showAiAnswer(answer) {
-  console.log('showAiAnswer', answer);
-
   const chatContainer = document.querySelector('#chatContainer');
 
   const aiChatRowEl = document.createElement('div');
