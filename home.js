@@ -5218,20 +5218,21 @@ async function askAiOnStep1(aiInput) {
 async function askAiQuestion(question) {
   if (!enableAi) return;
 
-  fetch(urlAi, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      userQuestion: question,
-      userSelections: getAiUserSelections()
-    })
-  })
-    .then(res => res.json())
-    .then(data => {
-      console.log('aiAnswer', data);
-      return data.answer;
-    })
-    .catch(e => console.error('Error on Ai Fetch:', e));
+  try {
+    const res = await fetch(urlAi, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userQuestion: question,
+        userSelections: getAiUserSelections()
+      })
+    });
+    const data = await res.json();
+    console.log('aiAnswer', data);
+    return data.answer;
+  } catch (e) {
+    console.error('Error on Ai Fetch:', e);
+  }
 }
