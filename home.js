@@ -5075,9 +5075,16 @@ function initAiSidebar() {
   navAiToggleBtn.addEventListener('click', () => {
     aiSidebar.classList.toggle('is_open');
   });
-
   aiCloseSidebarBtn.addEventListener('click', () => {
     aiSidebar.classList.remove('is_open');
+  });
+
+  document.querySelectorAll('.suggested_ai_question').forEach(qstn => {
+    qstn.addEventListener('click', async () => {
+      console.log('clicked suggested question', qstn.textContent);
+      const aiAnswer = await askAiQuestion(qstn.textContent);
+      console.log('aiAnswer in fn', aiAnswer);
+    });
   });
 }
 
@@ -5204,6 +5211,27 @@ async function askAiOnStep1(aiInput) {
       // console.log('aiAnswer', aiAnswer);
 
       typeResponse(aiAnswer, aiAnswerEl, 70);
+    })
+    .catch(e => console.error('Error on Ai Fetch:', e));
+}
+
+async function askAiQuestion(question) {
+  if (!enableAi) return;
+
+  fetch(urlAi, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userQuestion: question,
+      userSelections: getAiUserSelections()
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log('aiAnswer', data);
+      return data.answer;
     })
     .catch(e => console.error('Error on Ai Fetch:', e));
 }
