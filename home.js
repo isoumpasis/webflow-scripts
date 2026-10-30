@@ -5234,7 +5234,7 @@ async function askAiQuestion(question) {
       })
     });
     const data = await res.json();
-    console.log('aiAnswer', data);
+    console.log('aiAnswer', data.answer);
     return data.answer;
   } catch (e) {
     console.error('Error on Ai Fetch:', e);
@@ -5275,5 +5275,5 @@ function showAiAnswer(answer) {
   chatContainer.appendChild(aiChatRowEl);
   aiChatRowEl.appendChild(aiAnswerEl);
   aiAnswerEl.appendChild(aiAnswerTxt);
-  typeResponse(answer, aiAnswerTxt, 70);
+  typeResponse(answer, aiAnswerTxt, 50);
 }
