@@ -5079,11 +5079,14 @@ function initAiSidebar() {
     aiSidebar.classList.remove('is_open');
   });
 
+  document.querySelector('#chatContainer').style.display = 'none';
+
   document.querySelectorAll('.suggested_ai_question').forEach(qstn => {
     qstn.addEventListener('click', async () => {
       console.log('clicked suggested question', qstn.textContent);
       const aiAnswer = await askAiQuestion(qstn.textContent);
       console.log('aiAnswer in fn', aiAnswer);
+      showAiAnswer(aiAnswer);
     });
   });
 }
@@ -5218,6 +5221,11 @@ async function askAiOnStep1(aiInput) {
 async function askAiQuestion(question) {
   if (!enableAi) return;
 
+  const chatContainer = document.querySelector('#chatContainer');
+  chatContainer.style.display = 'block';
+
+  showAiQuestion(question);
+
   try {
     const res = await fetch(urlAi, {
       method: 'POST',
@@ -5235,4 +5243,39 @@ async function askAiQuestion(question) {
   } catch (e) {
     console.error('Error on Ai Fetch:', e);
   }
+}
+
+function showAiQuestion(question) {
+  const chatContainer = document.querySelector('#chatContainer');
+  const aiChatRowEl = document.createElement('div');
+  const aiQuestionEl = document.createElement('div');
+  const aiQuestionTxt = document.createElement('div');
+
+  aiChatRowEl.classList.add('ai-chat-row');
+  aiQuestionEl.classList.add('ai-question');
+  aiQuestionTxt.classList.add('ai-question-txt');
+
+  chatContainer.appendChild(aiChatRowEl);
+  aiChatRowEl.appendChild(aiQuestionEl);
+  aiQuestionEl.appendChild(aiQuestionTxt);
+  aiQuestionTxt.textContent = question;
+}
+
+function showAiAnswer(answer) {
+  console.log('showAiAnswer', answer);
+
+  const chatContainer = document.querySelector('#chatContainer');
+
+  const aiChatRowEl = document.createElement('div');
+  const aiAnswerEl = document.createElement('div');
+  const aiAnswerTxt = document.createElement('div');
+
+  aiChatRowEl.classList.add('ai-chat-row');
+  aiAnswerEl.classList.add('ai-answer');
+  aiAnswerTxt.classList.add('ai-answer-txt');
+
+  chatContainer.appendChild(aiChatRowEl);
+  aiChatRowEl.appendChild(aiAnswerEl);
+  aiAnswerEl.appendChild(aiAnswerTxt);
+  // typeResponse(answer, aiAnswerTxt, 70);
 }
