@@ -5147,6 +5147,8 @@ function typeResponse(text, element, speed = 40) {
     }
   }
   type();
+  const chatBody = document.querySelector('.ai-chat-body');
+  chatBody.style.paddingBottom = 0;
 }
 
 function getAiUserSelections() {
