@@ -5084,6 +5084,10 @@ function initAiSidebar() {
 
   navAiToggleBtn.addEventListener('click', () => {
     aiSidebar.classList.toggle('is_open');
+    if (aiSidebar.classList.contains('is_open')) {
+      const chatBody = document.querySelector('.ai-chat-body');
+      chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+    }
   });
   aiCloseSidebarBtn.addEventListener('click', () => {
     aiSidebar.classList.remove('is_open');
