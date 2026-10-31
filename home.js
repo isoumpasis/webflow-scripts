@@ -5080,6 +5080,7 @@ function initAiSidebar() {
   const navAiToggleBtn = document.querySelector('#navAiToggleBtn');
   const aiSidebar = document.querySelector('#aiSidebar');
   const aiCloseSidebarBtn = document.querySelector('#aiCloseSidebarBtn');
+  const chatContainer = document.querySelector('#chatContainer');
 
   navAiToggleBtn.addEventListener('click', () => {
     aiSidebar.classList.toggle('is_open');
@@ -5088,7 +5089,8 @@ function initAiSidebar() {
     aiSidebar.classList.remove('is_open');
   });
 
-  document.querySelector('#chatContainer').style.display = 'none';
+  chatContainer.style.display = 'none';
+  chatContainer.innerHTML = '';
 
   document.querySelectorAll('.suggested_ai_question').forEach(qstn => {
     qstn.addEventListener('click', async () => {
@@ -5233,9 +5235,6 @@ function showAiQuestion(question) {
 
   const chatContainer = document.querySelector('#chatContainer');
   chatContainer.style.display = 'block';
-  if (aiChatHistory.length === 0) {
-    chatContainer.innerHTML = ''; // Clear previous content
-  }
 
   const aiChatRowEl = document.createElement('div');
   const aiQuestionEl = document.createElement('div');
