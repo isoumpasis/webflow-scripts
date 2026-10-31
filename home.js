@@ -5233,7 +5233,9 @@ function showAiQuestion(question) {
 
   const chatContainer = document.querySelector('#chatContainer');
   chatContainer.style.display = 'block';
-  // chatContainer.innerHTML = ''; // Clear previous content
+  if (aiChatHistory.length === 0) {
+    chatContainer.innerHTML = ''; // Clear previous content
+  }
 
   const aiChatRowEl = document.createElement('div');
   const aiQuestionEl = document.createElement('div');
