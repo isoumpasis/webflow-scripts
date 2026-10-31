@@ -5147,8 +5147,6 @@ function typeResponse(text, element, speed = 40) {
     }
   }
   type();
-  const chatBody = document.querySelector('.ai-chat-body');
-  chatBody.style.paddingBottom = 0;
 }
 
 function getAiUserSelections() {
@@ -5252,7 +5250,7 @@ function showAiQuestion(question) {
   aiQuestionTxt.textContent = question;
 
   const chatBody = document.querySelector('.ai-chat-body');
-  chatBody.style.paddingBottom = '60vh';
+  chatBody.style.paddingBottom = '40vh';
   chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
 }
 

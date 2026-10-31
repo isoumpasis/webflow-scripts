@@ -552,3 +552,6 @@ video:focus-visible {
 .ai-textarea::-webkit-scrollbar {
   display: none;
 }
+.ai-chat-body::-webkit-scrollbar {
+  display: none;
+}
