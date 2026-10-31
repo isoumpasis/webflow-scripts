@@ -5063,7 +5063,6 @@ function trigger_not_convertible_form_submit() {
 function initAi() {
   showOrHideAi();
   if (!enableAi) return;
-
   initAiSidebar();
 }
 
@@ -5087,6 +5086,36 @@ function initAiSidebar() {
       const aiAnswer = await askAiQuestion(qstn.textContent);
       showAiAnswer(aiAnswer);
     });
+  });
+
+  initAiSearchBar();
+}
+
+function initAiSearchBar() {
+  const aiTextArea = document.querySelector('#aiTextArea');
+  const aiSendBtn = document.querySelector('#aiSendBtn');
+  aiSendBtn.classList.remove('active');
+
+  aiTextArea.addEventListener('keypress', async e => {
+    if (aiTextArea.value.trim().length) {
+      aiSendBtn.classList.add('active');
+    } else {
+      aiSendBtn.classList.remove('active');
+    }
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const question = aiTextArea.value.trim();
+      if (!question) return;
+      const aiAnswer = await askAiQuestion(question);
+      showAiAnswer(aiAnswer);
+    }
+  });
+
+  aiSendBtn.addEventListener('click', async () => {
+    const question = aiTextArea.value.trim();
+    if (!question) return;
+    const aiAnswer = await askAiQuestion(question);
+    showAiAnswer(aiAnswer);
   });
 }
 
