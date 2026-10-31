@@ -5248,6 +5248,10 @@ function showAiQuestion(question) {
   aiChatRowEl.appendChild(aiQuestionEl);
   aiQuestionEl.appendChild(aiQuestionTxt);
   aiQuestionTxt.textContent = question;
+
+  const chatBody = document.querySelector('.ai-chat-body');
+  chatBody.style.paddingBottom = '60vh';
+  chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
 }
 
 function showAiAnswer(answer) {
