@@ -5060,10 +5060,20 @@ function trigger_not_convertible_form_submit() {
 /* VIDEO JS */
 
 /* Ai */
+let aiChatHistory = [];
 function initAi() {
   showOrHideAi();
   if (!enableAi) return;
   initAiSidebar();
+}
+
+function showOrHideAi() {
+  const aiDivBlockStep1 = document.querySelector('.ai-div-block-step1');
+  if (!enableAi) {
+    aiDivBlockStep1.style.display = 'none';
+    return;
+  }
+  aiDivBlockStep1.style.display = 'flex';
 }
 
 function initAiSidebar() {
@@ -5122,51 +5132,6 @@ function initAiSearchBar() {
   });
 }
 
-function showOrHideAi() {
-  const aiDivBlockHero = document.querySelector('.ai-div-block-hero');
-  const aiDivBlockStep1 = document.querySelector('.ai-div-block-step1');
-  if (!enableAi) {
-    aiDivBlockHero.style.display = 'none';
-    aiDivBlockStep1.style.display = 'none';
-    return;
-  }
-  aiDivBlockHero.style.display = 'flex';
-  aiDivBlockStep1.style.display = 'flex';
-}
-
-document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
-  e.preventDefault();
-  const aiConversationDiv = document.querySelector('#aiConversationDiv');
-  const aiUserQuestionEl = document.querySelector('#aiUserQuestion');
-  const aiAnswerEl = document.querySelector('#aiAnswerText');
-
-  aiConversationDiv.style.display = 'none';
-  aiAnswerEl.textContent = '';
-
-  const aiInput = document.querySelector('#aiInput').value.trim();
-  // console.log('aiInput', aiInput);
-
-  fetch(urlAi, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ userQuestion: aiInput, userSelections: getAiUserSelections() })
-  })
-    .then(res => res.json())
-    .then(data => {
-      const aiAnswer = data.answer;
-      // console.log('aiAnswer', aiAnswer);
-
-      aiConversationDiv.style.display = 'flex';
-      aiUserQuestionEl.textContent = aiInput;
-      typeResponse(aiAnswer, aiAnswerEl, 100);
-    })
-    .catch(e => console.error('Error on Ai Fetch:', e));
-
-  document.querySelector('#aiInput').value = '';
-});
-
 //TYPING EFFECT (Word by Word)
 function typeResponse(text, element, speed = 40) {
   const words = text.split(' ');
@@ -5224,31 +5189,6 @@ function getAiUserSelections() {
   return aiUserSelections;
 }
 
-async function askAiOnStep1(aiInput) {
-  if (!enableAi) return;
-  const aiAnswerEl = document.querySelector('#car_step1_ai');
-  aiAnswerEl.textContent = '';
-
-  fetch(urlAi, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      userQuestion: aiInput,
-      userSelections: getAiUserSelections()
-    })
-  })
-    .then(res => res.json())
-    .then(data => {
-      const aiAnswer = data.answer;
-      // console.log('aiAnswer', aiAnswer);
-
-      typeResponse(aiAnswer, aiAnswerEl, 70);
-    })
-    .catch(e => console.error('Error on Ai Fetch:', e));
-}
-
 async function askAiQuestion(question) {
   if (!enableAi) return;
 
@@ -5262,14 +5202,28 @@ async function askAiQuestion(question) {
       },
       body: JSON.stringify({
         userQuestion: question,
+        chatHistory: aiChatHistory,
         userSelections: getAiUserSelections()
       })
     });
+    if (!res.ok) {
+      throw new Error(`AI request failed: ${res.status}`);
+    }
+
     const data = await res.json();
-    console.log('aiAnswer', data.answer);
+    if (typeof data.answer !== 'string') {
+      throw new Error('AI response does not contain a valid answer');
+    }
+
+    aiChatHistory.push(
+      { role: 'user', content: question },
+      { role: 'assistant', content: data.answer }
+    );
+    console.log('chatHistory', aiChatHistory);
     return data.answer;
   } catch (e) {
     console.error('Error on Ai Fetch:', e);
+    return 'Σφάλμα κατά την επικοινωνία με το AI. Παρακαλώ δοκιμάστε ξανά αργότερα.';
   }
 }
 
@@ -5278,8 +5232,8 @@ function showAiQuestion(question) {
   document.querySelector('#aiWelcomePar').style.display = 'none'; // clear
 
   const chatContainer = document.querySelector('#chatContainer');
-  chatContainer.innerHTML = ''; // Clear previous content
   chatContainer.style.display = 'block';
+  // chatContainer.innerHTML = ''; // Clear previous content
 
   const aiChatRowEl = document.createElement('div');
   const aiQuestionEl = document.createElement('div');
@@ -5310,4 +5264,64 @@ function showAiAnswer(answer) {
   aiChatRowEl.appendChild(aiAnswerEl);
   aiAnswerEl.appendChild(aiAnswerTxt);
   typeResponse(answer, aiAnswerTxt, 50);
+}
+
+/* archive ai */
+document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
+  e.preventDefault();
+  const aiConversationDiv = document.querySelector('#aiConversationDiv');
+  const aiUserQuestionEl = document.querySelector('#aiUserQuestion');
+  const aiAnswerEl = document.querySelector('#aiAnswerText');
+
+  aiConversationDiv.style.display = 'none';
+  aiAnswerEl.textContent = '';
+
+  const aiInput = document.querySelector('#aiInput').value.trim();
+  // console.log('aiInput', aiInput);
+
+  fetch(urlAi, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ userQuestion: aiInput, userSelections: getAiUserSelections() })
+  })
+    .then(res => res.json())
+    .then(data => {
+      const aiAnswer = data.answer;
+      // console.log('aiAnswer', aiAnswer);
+
+      aiConversationDiv.style.display = 'flex';
+      aiUserQuestionEl.textContent = aiInput;
+      typeResponse(aiAnswer, aiAnswerEl, 100);
+    })
+    .catch(e => console.error('Error on Ai Fetch:', e));
+
+  document.querySelector('#aiInput').value = '';
+});
+
+/* archive ai */
+async function askAiOnStep1(aiInput) {
+  if (!enableAi) return;
+  const aiAnswerEl = document.querySelector('#car_step1_ai');
+  aiAnswerEl.textContent = '';
+
+  fetch(urlAi, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userQuestion: aiInput,
+      userSelections: getAiUserSelections()
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      const aiAnswer = data.answer;
+      // console.log('aiAnswer', aiAnswer);
+
+      typeResponse(aiAnswer, aiAnswerEl, 70);
+    })
+    .catch(e => console.error('Error on Ai Fetch:', e));
 }
