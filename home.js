@@ -5116,6 +5116,7 @@ function initAiSearchBar() {
   aiSendBtn.addEventListener('click', async () => {
     const question = aiTextArea.value.trim();
     if (!question) return;
+    aiTextArea.value = '';
     const aiAnswer = await askAiQuestion(question);
     showAiAnswer(aiAnswer);
   });
@@ -5273,9 +5274,11 @@ async function askAiQuestion(question) {
 }
 
 function showAiQuestion(question) {
+  document.querySelector('.ready-questions-container').style.display = 'none'; // clear
+  document.querySelector('#aiWelcomePar').style.display = 'none'; // clear
+
   const chatContainer = document.querySelector('#chatContainer');
   chatContainer.innerHTML = ''; // Clear previous content
-  document.querySelector('.ready-questions-container').style.display = 'none'; // clear
   chatContainer.style.display = 'block';
 
   const aiChatRowEl = document.createElement('div');
