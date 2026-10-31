@@ -5132,6 +5132,7 @@ function initAiSearchBar() {
   aiSendBtn.addEventListener('click', async () => {
     const question = aiTextArea.value.trim();
     if (!question) return;
+    aiSendBtn.classList.remove('active');
     aiTextArea.value = '';
     const aiAnswer = await askAiQuestion(question);
     showAiAnswer(aiAnswer);
