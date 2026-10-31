@@ -547,3 +547,8 @@ video:focus-visible {
 .css-sfbnep {
   z-index: 5000 !important;
 }
+
+/* Ai */
+.ai-textarea::-webkit-scrollbar {
+  display: none;
+}
