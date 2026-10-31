@@ -5096,18 +5096,20 @@ function initAiSearchBar() {
   const aiSendBtn = document.querySelector('#aiSendBtn');
   aiSendBtn.classList.remove('active');
 
-  aiTextArea.addEventListener('keypress', async e => {
+  aiTextArea.addEventListener('input', async e => {
     if (aiTextArea.value.trim().length) {
       aiSendBtn.classList.add('active');
     } else {
       aiSendBtn.classList.remove('active');
     }
-    if (e.key === 'Enter') {
+  });
+
+  aiTextArea.addEventListener('keydown', async e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       const question = aiTextArea.value.trim();
       if (!question) return;
-      const aiAnswer = await askAiQuestion(question);
-      showAiAnswer(aiAnswer);
+      aiSendBtn.click();
     }
   });
 
