@@ -21,7 +21,7 @@ const urlNotConvForm = serverUrl + 'notConvertible';
 // const urlRemainingPremium = serverUrl + 'remainingPremium';
 const urlAi = serverUrl + 'ai';
 
-let enableAi = true;
+let enableAi = false;
 let fetchedYears;
 let fetchedModels;
 let fetchedModelObj;
