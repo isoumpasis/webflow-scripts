@@ -21,7 +21,7 @@ const urlNotConvForm = serverUrl + 'notConvertible';
 // const urlRemainingPremium = serverUrl + 'remainingPremium';
 const urlAi = serverUrl + 'ai';
 
-let enableAi = true;
+let enableAi = false;
 let fetchedYears;
 let fetchedModels;
 let fetchedModelObj;
@@ -5069,8 +5069,12 @@ function initAi() {
 
 function showOrHideAi() {
   const aiDivBlockStep1 = document.querySelector('.ai-div-block-step1');
+  const navAiToggleBtn = document.querySelector('#navAiToggleBtn');
+  const aiSidebar = document.querySelector('#aiSidebar');
   if (!enableAi) {
     aiDivBlockStep1.style.display = 'none';
+    navAiToggleBtn.style.display = 'none';
+    aiSidebar.style.display = 'none';
     return;
   }
   aiDivBlockStep1.style.display = 'flex';
