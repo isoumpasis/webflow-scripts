@@ -5078,6 +5078,8 @@ function showOrHideAi() {
     return;
   }
   aiDivBlockStep1.style.display = 'flex';
+  navAiToggleBtn.style.display = 'flex';
+  aiSidebar.style.display = 'block';
 }
 
 function initAiSidebar() {
