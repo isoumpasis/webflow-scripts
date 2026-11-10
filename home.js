@@ -5247,9 +5247,9 @@ function getAiUserSelections() {
 
 async function submitAiQuestion(question) {
   showAiQuestion(question);
-  const aiAnswerTxt = showAiLoading();
+  const loading = showAiLoading();
   const answer = await askAiQuestion(question);
-  showAiAnswer(answer, aiAnswerTxt);
+  showAiAnswer(answer, loading);
 }
 
 async function askAiQuestion(question) {
@@ -5332,16 +5332,51 @@ function createAiAnswerBubble() {
 
 function showAiLoading() {
   const aiAnswerTxt = createAiAnswerBubble();
+  const messages = [
+    'Το Lovato AI σκέφτεται',
+    'Εξετάζω τις επιλογές σας στο site',
+    'Συντάσσω μια χρήσιμη απάντηση'
+  ];
+  const messageEl = document.createElement('span');
+  const dotsEl = document.createElement('span');
+  let messageIndex = 0;
+  let transitionTimeout;
+
   aiAnswerTxt.classList.add('is-loading');
   aiAnswerTxt.setAttribute('role', 'status');
   aiAnswerTxt.setAttribute('aria-live', 'polite');
-  aiAnswerTxt.textContent = 'Το AI ετοιμάζει την απάντηση';
+  messageEl.classList.add('ai-loading-message');
+  dotsEl.classList.add('ai-loading-dots');
+  dotsEl.setAttribute('aria-hidden', 'true');
+  for (let i = 0; i < 3; i++) {
+    dotsEl.appendChild(document.createElement('span'));
+  }
+  messageEl.textContent = messages[messageIndex];
+  aiAnswerTxt.append(messageEl, dotsEl);
+
+  const intervalId = setInterval(() => {
+    messageEl.classList.add('is-changing');
+    transitionTimeout = setTimeout(() => {
+      messageIndex = (messageIndex + 1) % messages.length;
+      messageEl.textContent = messages[messageIndex];
+      messageEl.classList.remove('is-changing');
+    }, 180);
+  }, 2800);
+
   const chatBody = document.querySelector('.ai-chat-body');
   chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
-  return aiAnswerTxt;
+  return {
+    element: aiAnswerTxt,
+    stop() {
+      clearInterval(intervalId);
+      clearTimeout(transitionTimeout);
+    }
+  };
 }
 
-function showAiAnswer(answer, aiAnswerTxt = createAiAnswerBubble()) {
+function showAiAnswer(answer, loading) {
+  loading.stop();
+  const aiAnswerTxt = loading.element;
   aiAnswerTxt.classList.remove('is-loading');
   aiAnswerTxt.removeAttribute('role');
   aiAnswerTxt.removeAttribute('aria-live');
