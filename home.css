@@ -291,13 +291,24 @@ input[type='range']::-ms-thumb:hover {
   vertical-align: text-bottom;
   animation: ai-typing-cursor 0.8s steps(2, start) infinite;
 }
+.ai-answer-txt.is-loading::after {
+  content: '...';
+  display: inline-block;
+  animation: ai-loading-pulse 1.2s ease-in-out infinite;
+}
 @keyframes ai-typing-cursor {
   to {
     visibility: hidden;
   }
 }
+@keyframes ai-loading-pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  .ai-answer-txt.is-typing::after {
+  .ai-answer-txt.is-typing::after,
+  .ai-answer-txt.is-loading::after {
     animation: none;
   }
 }

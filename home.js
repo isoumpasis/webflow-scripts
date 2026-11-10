@@ -5106,8 +5106,7 @@ function initAiSidebar() {
   document.querySelectorAll('.suggested_ai_question').forEach(qstn => {
     qstn.addEventListener('click', async () => {
       console.log('clicked suggested question', qstn.textContent);
-      const aiAnswer = await askAiQuestion(qstn.textContent);
-      showAiAnswer(aiAnswer);
+      await submitAiQuestion(qstn.textContent);
     });
   });
 
@@ -5145,8 +5144,7 @@ function initAiSearchBar() {
     if (!question) return;
     aiSendBtn.classList.remove('active');
     aiTextArea.value = '';
-    const aiAnswer = await askAiQuestion(question);
-    showAiAnswer(aiAnswer);
+    await submitAiQuestion(question);
   });
 }
 
@@ -5247,10 +5245,15 @@ function getAiUserSelections() {
   return aiUserSelections;
 }
 
+async function submitAiQuestion(question) {
+  showAiQuestion(question);
+  const aiAnswerTxt = showAiLoading();
+  const answer = await askAiQuestion(question);
+  showAiAnswer(answer, aiAnswerTxt);
+}
+
 async function askAiQuestion(question) {
   if (!enableAi) return;
-
-  showAiQuestion(question);
 
   try {
     const res = await fetch(urlAi, {
@@ -5310,7 +5313,7 @@ function showAiQuestion(question) {
   chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
 }
 
-function showAiAnswer(answer) {
+function createAiAnswerBubble() {
   const chatContainer = document.querySelector('#chatContainer');
 
   const aiChatRowEl = document.createElement('div');
@@ -5324,7 +5327,24 @@ function showAiAnswer(answer) {
   chatContainer.appendChild(aiChatRowEl);
   aiChatRowEl.appendChild(aiAnswerEl);
   aiAnswerEl.appendChild(aiAnswerTxt);
-  // typeResponse(answer, aiAnswerTxt, 40);
+  return aiAnswerTxt;
+}
+
+function showAiLoading() {
+  const aiAnswerTxt = createAiAnswerBubble();
+  aiAnswerTxt.classList.add('is-loading');
+  aiAnswerTxt.setAttribute('role', 'status');
+  aiAnswerTxt.setAttribute('aria-live', 'polite');
+  aiAnswerTxt.textContent = 'Το AI ετοιμάζει την απάντηση';
+  const chatBody = document.querySelector('.ai-chat-body');
+  chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+  return aiAnswerTxt;
+}
+
+function showAiAnswer(answer, aiAnswerTxt = createAiAnswerBubble()) {
+  aiAnswerTxt.classList.remove('is-loading');
+  aiAnswerTxt.removeAttribute('role');
+  aiAnswerTxt.removeAttribute('aria-live');
   typeMarkdownResponse(answer, aiAnswerTxt, 40);
 }
 
