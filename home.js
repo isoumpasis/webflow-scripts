@@ -5060,6 +5060,7 @@ function trigger_not_convertible_form_submit() {
 /* VIDEO JS */
 
 /* Ai */
+const MAX_AI_QUESTION_LENGTH = 4000;
 let aiChatHistory = [];
 function initAi() {
   showOrHideAi();
@@ -5116,9 +5117,13 @@ function initAiSidebar() {
 function initAiSearchBar() {
   const aiTextArea = document.querySelector('#aiTextArea');
   const aiSendBtn = document.querySelector('#aiSendBtn');
+  aiTextArea.maxLength = MAX_AI_QUESTION_LENGTH;
   aiSendBtn.classList.remove('active');
 
   aiTextArea.addEventListener('input', async e => {
+    if (aiTextArea.value.length > MAX_AI_QUESTION_LENGTH) {
+      aiTextArea.value = aiTextArea.value.slice(0, MAX_AI_QUESTION_LENGTH);
+    }
     if (aiTextArea.value.trim().length) {
       aiSendBtn.classList.add('active');
     } else {
@@ -5136,7 +5141,7 @@ function initAiSearchBar() {
   });
 
   aiSendBtn.addEventListener('click', async () => {
-    const question = aiTextArea.value.trim();
+    const question = aiTextArea.value.trim().slice(0, MAX_AI_QUESTION_LENGTH);
     if (!question) return;
     aiSendBtn.classList.remove('active');
     aiTextArea.value = '';
