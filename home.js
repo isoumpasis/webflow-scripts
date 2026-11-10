@@ -5333,9 +5333,11 @@ function createAiAnswerBubble() {
 function showAiLoading() {
   const aiAnswerTxt = createAiAnswerBubble();
   const messages = [
-    'Το Lovato AI σκέφτεται',
+    'Σκέφτομαι την καλύτερη απάντηση για εσάς',
     'Εξετάζω τις επιλογές σας στο site',
-    'Συντάσσω μια χρήσιμη απάντηση'
+    'Συντάσσω μια χρήσιμη απάντηση',
+    'Αναλύω τα δεδομένα σας',
+    'Αναζητώ την καλύτερη λύση για εσάς'
   ];
   const messageEl = document.createElement('span');
   const dotsEl = document.createElement('span');
@@ -5361,7 +5363,7 @@ function showAiLoading() {
       messageEl.textContent = messages[messageIndex];
       messageEl.classList.remove('is-changing');
     }, 180);
-  }, 2800);
+  }, 1500);
 
   const chatBody = document.querySelector('.ai-chat-body');
   chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
