@@ -5284,7 +5284,8 @@ function showAiAnswer(answer) {
   chatContainer.appendChild(aiChatRowEl);
   aiChatRowEl.appendChild(aiAnswerEl);
   aiAnswerEl.appendChild(aiAnswerTxt);
-  typeResponse(answer, aiAnswerTxt, 50);
+  // typeResponse(answer, aiAnswerTxt, 50);
+  aiAnswerTxt.innerHTML = DOMPurify.sanitize(marked.parse(answer));
 }
 
 /* archive ai */
