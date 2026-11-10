@@ -5165,6 +5165,46 @@ function typeResponse(text, element, speed = 40) {
   type();
 }
 
+async function typeMarkdownResponse(markdown, element, speed = 40) {
+  const template = document.createElement('template');
+  template.innerHTML = DOMPurify.sanitize(marked.parse(markdown));
+
+  const walker = document.createTreeWalker(template.content, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  while (walker.nextNode()) {
+    textNodes.push({ node: walker.currentNode, text: walker.currentNode.textContent });
+    walker.currentNode.textContent = '';
+  }
+
+  element.replaceChildren(template.content);
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    textNodes.forEach(({ node, text }) => {
+      node.textContent = text;
+    });
+    return;
+  }
+
+  element.classList.add('is-typing');
+  const chatBody = document.querySelector('.ai-chat-body');
+
+  try {
+    for (const { node, text } of textNodes) {
+      const segments = text.match(/\s+|\S+/g) || [];
+      for (const segment of segments) {
+        node.appendData(segment);
+        if (!/^\s+$/.test(segment)) {
+          chatBody.scrollTop = chatBody.scrollHeight;
+          const pause = /[.!?…]$/.test(segment) ? speed * 3 : speed;
+          await new Promise(resolve => setTimeout(resolve, pause));
+        }
+      }
+    }
+  } finally {
+    element.classList.remove('is-typing');
+  }
+}
+
 function getAiUserSelections() {
   let aiUserSelections = {
     hasResult: hasResult(),
@@ -5284,8 +5324,8 @@ function showAiAnswer(answer) {
   chatContainer.appendChild(aiChatRowEl);
   aiChatRowEl.appendChild(aiAnswerEl);
   aiAnswerEl.appendChild(aiAnswerTxt);
-  // typeResponse(answer, aiAnswerTxt, 50);
-  aiAnswerTxt.innerHTML = DOMPurify.sanitize(marked.parse(answer));
+  // typeResponse(answer, aiAnswerTxt, 40);
+  typeMarkdownResponse(answer, aiAnswerTxt, 40);
 }
 
 /* archive ai */

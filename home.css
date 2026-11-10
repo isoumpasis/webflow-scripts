@@ -282,6 +282,25 @@ input[type='range']::-ms-thumb:hover {
     transform: scale(0.8);
   }
 }
+.ai-answer-txt.is-typing::after {
+  content: '';
+  display: inline-block;
+  height: 1em;
+  margin-left: 3px;
+  border-left: 2px solid currentColor;
+  vertical-align: text-bottom;
+  animation: ai-typing-cursor 0.8s steps(2, start) infinite;
+}
+@keyframes ai-typing-cursor {
+  to {
+    visibility: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ai-answer-txt.is-typing::after {
+    animation: none;
+  }
+}
 #fileUploadContainer {
   border: 2px solid blue;
   border-radius: 10px;
