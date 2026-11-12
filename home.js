@@ -5192,7 +5192,7 @@ async function typeMarkdownResponse(markdown, element, speed = 40) {
       for (const segment of segments) {
         node.appendData(segment);
         if (!/^\s+$/.test(segment)) {
-          chatBody.scrollTop = chatBody.scrollHeight;
+          if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
           const pause = /[.!?…]$/.test(segment) ? speed * 3 : speed;
           await new Promise(resolve => setTimeout(resolve, pause));
         }
@@ -5330,9 +5330,7 @@ function createAiAnswerBubble() {
   return aiAnswerTxt;
 }
 
-async function showAiLoading() {
-  await new Promise(resolve => setTimeout(resolve, 500));
-  const aiAnswerTxt = createAiAnswerBubble();
+function startAiLoading(aiAnswerTxt) {
   const messages = [
     'Σκέφτομαι την καλύτερη απάντηση για εσάς',
     'Εξετάζω τις επιλογές σας στο site',
@@ -5345,6 +5343,7 @@ async function showAiLoading() {
   let messageIndex = 0;
   let transitionTimeout;
 
+  aiAnswerTxt.replaceChildren();
   aiAnswerTxt.classList.add('is-loading');
   aiAnswerTxt.setAttribute('role', 'status');
   aiAnswerTxt.setAttribute('aria-live', 'polite');
@@ -5367,7 +5366,9 @@ async function showAiLoading() {
   }, 2000);
 
   const chatBody = document.querySelector('.ai-chat-body');
-  chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+  if (chatBody) {
+    chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+  }
   return {
     element: aiAnswerTxt,
     stop() {
@@ -5375,6 +5376,11 @@ async function showAiLoading() {
       clearTimeout(transitionTimeout);
     }
   };
+}
+
+async function showAiLoading(targetElement) {
+  await new Promise(resolve => setTimeout(resolve, 500));
+  return startAiLoading(targetElement || createAiAnswerBubble());
 }
 
 function showAiAnswer(answer, loading) {
@@ -5387,61 +5393,78 @@ function showAiAnswer(answer, loading) {
 }
 
 /* archive ai */
-document.querySelector('#aiSubmitBtn').addEventListener('click', e => {
+document.querySelector('#aiSubmitBtn').addEventListener('click', async e => {
   e.preventDefault();
   const aiConversationDiv = document.querySelector('#aiConversationDiv');
   const aiUserQuestionEl = document.querySelector('#aiUserQuestion');
   const aiAnswerEl = document.querySelector('#aiAnswerText');
 
-  aiConversationDiv.style.display = 'none';
-  aiAnswerEl.textContent = '';
-
   const aiInput = document.querySelector('#aiInput').value.trim();
+  document.querySelector('#aiInput').value = '';
+  aiConversationDiv.style.display = 'flex';
+  aiUserQuestionEl.textContent = aiInput;
   // console.log('aiInput', aiInput);
 
-  fetch(urlAi, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ userQuestion: aiInput, userSelections: getAiUserSelections() })
-  })
-    .then(res => res.json())
-    .then(data => {
-      const aiAnswer = data.answer;
-      // console.log('aiAnswer', aiAnswer);
+  const loading = await showAiLoading(aiAnswerEl);
+  try {
+    const res = await fetch(urlAi, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userQuestion: aiInput, userSelections: getAiUserSelections() })
+    });
+    if (!res.ok) {
+      throw new Error(`AI request failed: ${res.status}`);
+    }
 
-      aiConversationDiv.style.display = 'flex';
-      aiUserQuestionEl.textContent = aiInput;
-      typeResponse(aiAnswer, aiAnswerEl, 100);
-    })
-    .catch(e => console.error('Error on Ai Fetch:', e));
-
-  document.querySelector('#aiInput').value = '';
+    const data = await res.json();
+    if (typeof data.answer !== 'string') {
+      throw new Error('AI response does not contain a valid answer');
+    }
+    showAiAnswer(data.answer, loading);
+  } catch (e) {
+    loading.stop();
+    aiAnswerEl.classList.remove('is-loading');
+    aiAnswerEl.removeAttribute('role');
+    aiAnswerEl.removeAttribute('aria-live');
+    aiAnswerEl.textContent = 'Σφάλμα κατά την επικοινωνία με το AI. Παρακαλώ δοκιμάστε ξανά αργότερα.';
+    console.error('Error on Ai Fetch:', e);
+  }
 });
 
 /* archive ai */
 async function askAiOnStep1(aiInput) {
   if (!enableAi) return;
   const aiAnswerEl = document.querySelector('#car_step1_ai');
-  aiAnswerEl.textContent = '';
+  const loading = await showAiLoading(aiAnswerEl);
 
-  fetch(urlAi, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      userQuestion: aiInput,
-      userSelections: getAiUserSelections()
-    })
-  })
-    .then(res => res.json())
-    .then(data => {
-      const aiAnswer = data.answer;
-      // console.log('aiAnswer', aiAnswer);
+  try {
+    const res = await fetch(urlAi, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userQuestion: aiInput,
+        userSelections: getAiUserSelections()
+      })
+    });
+    if (!res.ok) {
+      throw new Error(`AI request failed: ${res.status}`);
+    }
 
-      typeResponse(aiAnswer, aiAnswerEl, 70);
-    })
-    .catch(e => console.error('Error on Ai Fetch:', e));
+    const data = await res.json();
+    if (typeof data.answer !== 'string') {
+      throw new Error('AI response does not contain a valid answer');
+    }
+    showAiAnswer(data.answer, loading);
+  } catch (e) {
+    loading.stop();
+    aiAnswerEl.classList.remove('is-loading');
+    aiAnswerEl.removeAttribute('role');
+    aiAnswerEl.removeAttribute('aria-live');
+    aiAnswerEl.textContent = 'Σφάλμα κατά την επικοινωνία με το AI. Παρακαλώ δοκιμάστε ξανά αργότερα.';
+    console.error('Error on Ai Fetch:', e);
+  }
 }
