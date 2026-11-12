@@ -5247,7 +5247,7 @@ function getAiUserSelections() {
 
 async function submitAiQuestion(question) {
   showAiQuestion(question);
-  const loading = showAiLoading();
+  const loading = await showAiLoading();
   const answer = await askAiQuestion(question);
   showAiAnswer(answer, loading);
 }
@@ -5309,7 +5309,7 @@ function showAiQuestion(question) {
   aiQuestionTxt.textContent = question;
 
   const chatBody = document.querySelector('.ai-chat-body');
-  chatBody.style.paddingBottom = '40vh';
+  chatBody.style.paddingBottom = '20vh';
   chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
 }
 
@@ -5330,7 +5330,8 @@ function createAiAnswerBubble() {
   return aiAnswerTxt;
 }
 
-function showAiLoading() {
+async function showAiLoading() {
+  await new Promise(resolve => setTimeout(resolve, 500));
   const aiAnswerTxt = createAiAnswerBubble();
   const messages = [
     'Σκέφτομαι την καλύτερη απάντηση για εσάς',
@@ -5363,7 +5364,7 @@ function showAiLoading() {
       messageEl.textContent = messages[messageIndex];
       messageEl.classList.remove('is-changing');
     }, 180);
-  }, 1500);
+  }, 2000);
 
   const chatBody = document.querySelector('.ai-chat-body');
   chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
