@@ -3240,7 +3240,7 @@ function calcResult(allowedToTrigger = true) {
     trigger_calculator_step_3({ triggered_via: 'click' });
   }
 
-  calcResultHypothesis({ years: 5 });
+  // calcResultHypothesis({ years: 5 });
   // showHintActiveTime = 0;
   // hintJustClosed = false;
 }
@@ -5402,7 +5402,6 @@ function showAiAnswer(answer, loading) {
   typeMarkdownResponse(answer, aiAnswerTxt, 40);
 }
 
-/* archive ai */
 document.querySelector('#aiSubmitBtn').addEventListener('click', async e => {
   e.preventDefault();
   const aiConversationDiv = document.querySelector('#aiConversationDiv');
