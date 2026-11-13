@@ -4440,10 +4440,35 @@ function calcResultHypothesis({ years }) {
 }
 
 function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expensesAfterYears) {
-  document.querySelector('.hint-years').textContent = years;
-  document.querySelector('.hint-fuel').textContent = fuelTypeString;
-  document.querySelector('.hint-savings').textContent = savingsAfterYears + '€';
-  document.querySelector('.hint-expenses').textContent = expensesAfterYears + '€';
+  const hintYears = document.querySelector('.hint-years');
+  const hintFuel = document.querySelector('.hint-fuel');
+  const hintSavings = document.querySelector('.hint-savings');
+  const hintExpenses = document.querySelector('.hint-expenses');
+
+  hintYears.textContent = '';
+  hintFuel.textContent = '';
+  hintSavings.textContent = '';
+  hintExpenses.textContent = '';
+
+  typeResponse(String(years), hintYears);
+  typeResponse(fuelTypeString, hintFuel);
+  typeResponse(savingsAfterYears + '€', hintSavings);
+  typeResponse(expensesAfterYears + '€', hintExpenses);
+}
+
+//TYPING EFFECT (Word by Word)
+function typeResponse(text, element, speed = 40) {
+  const words = text.split(' ');
+  let i = 0;
+
+  function type() {
+    if (i < words.length) {
+      element.textContent += words[i] + (i < words.length - 1 ? ' ' : '');
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  type();
 }
 
 document.querySelector('.sidebar-btn').addEventListener('click', e => {
@@ -5148,21 +5173,6 @@ function initAiSearchBar() {
   });
 }
 
-//TYPING EFFECT (Word by Word)
-function typeResponse(text, element, speed = 40) {
-  const words = text.split(' ');
-  let i = 0;
-
-  function type() {
-    if (i < words.length) {
-      element.textContent += words[i] + ' ';
-      i++;
-      setTimeout(type, speed);
-    }
-  }
-  type();
-}
-
 async function typeMarkdownResponse(markdown, element, speed = 40) {
   const template = document.createElement('template');
   template.innerHTML = DOMPurify.sanitize(marked.parse(markdown));
@@ -5334,9 +5344,9 @@ function startAiLoading(aiAnswerTxt) {
   const messages = [
     'Σκέφτομαι την καλύτερη απάντηση για εσάς',
     'Εξετάζω τις επιλογές σας στο site',
-    'Συντάσσω μια χρήσιμη απάντηση',
-    'Αναλύω τα δεδομένα σας',
-    'Αναζητώ την καλύτερη λύση για εσάς'
+    'Αναζητώ στη βάση δεδομένων της Lovato Hellas',
+    'Συμβουλεύομαι δεδομένα προηγούμενων εγκαταστάσεων',
+    'Συντάσσω μια χρήσιμη απάντηση'
   ];
   const messageEl = document.createElement('span');
   const dotsEl = document.createElement('span');
@@ -5428,7 +5438,8 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', async e => {
     aiAnswerEl.classList.remove('is-loading');
     aiAnswerEl.removeAttribute('role');
     aiAnswerEl.removeAttribute('aria-live');
-    aiAnswerEl.textContent = 'Σφάλμα κατά την επικοινωνία με το AI. Παρακαλώ δοκιμάστε ξανά αργότερα.';
+    aiAnswerEl.textContent =
+      'Σφάλμα κατά την επικοινωνία με το AI. Παρακαλώ δοκιμάστε ξανά αργότερα.';
     console.error('Error on Ai Fetch:', e);
   }
 });
@@ -5464,7 +5475,8 @@ async function askAiOnStep1(aiInput) {
     aiAnswerEl.classList.remove('is-loading');
     aiAnswerEl.removeAttribute('role');
     aiAnswerEl.removeAttribute('aria-live');
-    aiAnswerEl.textContent = 'Σφάλμα κατά την επικοινωνία με το AI. Παρακαλώ δοκιμάστε ξανά αργότερα.';
+    aiAnswerEl.textContent =
+      'Σφάλμα κατά την επικοινωνία με το AI. Παρακαλώ δοκιμάστε ξανά αργότερα.';
     console.error('Error on Ai Fetch:', e);
   }
 }
