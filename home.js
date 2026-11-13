@@ -545,7 +545,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initStepInterval();
   initProgressSteps();
 
-  initHint();
+  // initHint();
 
   // getSourceReferrerDomain();
   initForeignReferrerOptions();
@@ -658,9 +658,9 @@ function adjustContactInfoContainer() {
   initUserInfo();
 }
 
-function initHint() {
-  document.querySelector('.hint').style.display = 'flex';
-}
+// function initHint() {
+//   document.querySelector('.hint').style.display = 'flex';
+// }
 
 function initProgressSteps() {
   changeProgressStepState('fuel', 'green');
@@ -3241,8 +3241,8 @@ function calcResult(allowedToTrigger = true) {
   }
 
   calcResultHypothesis({ years: 5 });
-  showHintActiveTime = 0;
-  hintJustClosed = false;
+  // showHintActiveTime = 0;
+  // hintJustClosed = false;
 }
 
 function configureAmortizationInMonths(lpgMonthlyGain) {
@@ -4182,7 +4182,7 @@ function trigger_car_step_2() {
   step3ActiveTime = 0;
   step4ActiveTime = 0;
 
-  hintClosedCounter = 0;
+  // hintClosedCounter = 0;
 
   resetProgressSteps();
   changeProgressStepState('car', 'green');
@@ -4245,7 +4245,7 @@ function initStepInterval() {
   setInterval(() => {
     step3CalculatorWatch();
     step4EasyPayWatch();
-    showHintWatch();
+    // showHintWatch();
   }, 1000);
 }
 
@@ -4397,79 +4397,79 @@ function resetProgressSteps() {
 }
 
 /* Hints */
-const hintEl = document.querySelector('.hint');
-let showHintActiveTime = 0,
-  hintJustClosed = false,
-  hintClosedCounter = 0;
-const hintSecondsNeededToTrigger = 7;
-const hintClosedLimit = 2;
+// const hintEl = document.querySelector('.hint');
+// let showHintActiveTime = 0,
+//   hintJustClosed = false,
+//   hintClosedCounter = 0;
+// const hintSecondsNeededToTrigger = 7;
+// const hintClosedLimit = 2;
 
-function showHintWatch() {
-  if (!step2Triggered || hintJustClosed || hintClosedCounter >= hintClosedLimit) {
-    showHintActiveTime = 0;
-    return;
-  }
-  if (isElementInViewport(document.querySelector('#calculator'))) {
-    showHintActiveTime++;
-    if (showHintActiveTime >= hintSecondsNeededToTrigger) {
-      showHint({ section: 'calculator' });
-    }
-  } else {
-    hintEl.classList.remove('show-hint');
-  }
-}
+// function showHintWatch() {
+//   if (!step2Triggered || hintJustClosed || hintClosedCounter >= hintClosedLimit) {
+//     showHintActiveTime = 0;
+//     return;
+//   }
+//   if (isElementInViewport(document.querySelector('#calculator'))) {
+//     showHintActiveTime++;
+//     if (showHintActiveTime >= hintSecondsNeededToTrigger) {
+//       showHint({ section: 'calculator' });
+//     }
+//   } else {
+//     hintEl.classList.remove('show-hint');
+//   }
+// }
 
-document.querySelector('.hint-close-btn').addEventListener('click', e => {
-  hintClosedCounter++;
-  hintJustClosed = true;
-  hintEl.classList.remove('show-hint');
-});
+// document.querySelector('.hint-close-btn').addEventListener('click', e => {
+//   hintClosedCounter++;
+//   hintJustClosed = true;
+//   hintEl.classList.remove('show-hint');
+// });
 
-function showHint({ section }) {
-  if (section === 'calculator') {
-    hintEl.classList.add('show-hint');
-  }
-}
+// function showHint({ section }) {
+//   if (section === 'calculator') {
+//     hintEl.classList.add('show-hint');
+//   }
+// }
 
-function calcResultHypothesis({ years }) {
-  const fuelGain = userSelections.selectedFuel === 'lpg' ? lpgGain : cngGain;
-  const savingsAfterYears = Math.ceil(fuelGain * years).toLocaleString('el');
-  const expensesAfterYears = Math.ceil(petrolExpenses * years).toLocaleString('el');
-  const fuelTypeString = userSelections.selectedFuel === 'lpg' ? 'υγραεριοκίνηση' : 'φυσικό αέριο';
-  paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expensesAfterYears);
-}
+// function calcResultHypothesis({ years }) {
+//   const fuelGain = userSelections.selectedFuel === 'lpg' ? lpgGain : cngGain;
+//   const savingsAfterYears = Math.ceil(fuelGain * years).toLocaleString('el');
+//   const expensesAfterYears = Math.ceil(petrolExpenses * years).toLocaleString('el');
+//   const fuelTypeString = userSelections.selectedFuel === 'lpg' ? 'υγραεριοκίνηση' : 'φυσικό αέριο';
+//   paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expensesAfterYears);
+// }
 
-function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expensesAfterYears) {
-  const hintYears = document.querySelector('.hint-years');
-  const hintFuel = document.querySelector('.hint-fuel');
-  const hintSavings = document.querySelector('.hint-savings');
-  const hintExpenses = document.querySelector('.hint-expenses');
+// function paintResultHypothesis(years, fuelTypeString, savingsAfterYears, expensesAfterYears) {
+//   const hintYears = document.querySelector('.hint-years');
+//   const hintFuel = document.querySelector('.hint-fuel');
+//   const hintSavings = document.querySelector('.hint-savings');
+//   const hintExpenses = document.querySelector('.hint-expenses');
 
-  hintYears.textContent = '';
-  hintFuel.textContent = '';
-  hintSavings.textContent = '';
-  hintExpenses.textContent = '';
+//   hintYears.textContent = '';
+//   hintFuel.textContent = '';
+//   hintSavings.textContent = '';
+//   hintExpenses.textContent = '';
 
-  typeResponse(String(years), hintYears);
-  typeResponse(fuelTypeString, hintFuel);
-  typeResponse(savingsAfterYears + '€', hintSavings);
-  typeResponse(expensesAfterYears + '€', hintExpenses);
-}
+//   typeResponse(String(years), hintYears);
+//   typeResponse(fuelTypeString, hintFuel);
+//   typeResponse(savingsAfterYears + '€', hintSavings);
+//   typeResponse(expensesAfterYears + '€', hintExpenses);
+// }
 
-//TYPING EFFECT (Word by Word)
-function typeResponse(text, element, speed = 40) {
-  const words = text.split(' ');
-  let i = 0;
+// //TYPING EFFECT (Word by Word)
+// function typeResponse(text, element, speed = 40) {
+//   const words = text.split(' ');
+//   let i = 0;
 
-  function type() {
-    if (i < words.length) {
-      element.textContent += words[i] + (i < words.length - 1 ? ' ' : '');
-      i++;
-      setTimeout(type, speed);
-    }
-  }
-  type();
-}
+//   function type() {
+//     if (i < words.length) {
+//       element.textContent += words[i] + (i < words.length - 1 ? ' ' : '');
+//       i++;
+//       setTimeout(type, speed);
+//     }
+//   }
+//   type();
+// }
 
 document.querySelector('.sidebar-btn').addEventListener('click', e => {
   trigger_sidebar_open({
