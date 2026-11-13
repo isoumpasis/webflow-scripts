@@ -5177,6 +5177,22 @@ async function typeMarkdownResponse(markdown, element, speed = 40) {
   const template = document.createElement('template');
   template.innerHTML = DOMPurify.sanitize(marked.parse(markdown));
 
+  template.content.querySelectorAll('a[href]').forEach(anchor => {
+    const url = new URL(anchor.href, window.location.href);
+    const isSamePageAnchor =
+      url.origin === window.location.origin &&
+      url.pathname === window.location.pathname &&
+      url.search === window.location.search &&
+      url.hash.length > 1;
+
+    if (isSamePageAnchor) {
+      anchor.removeAttribute('target');
+    } else {
+      anchor.target = '_blank';
+      anchor.rel = 'noopener noreferrer';
+    }
+  });
+
   const walker = document.createTreeWalker(template.content, NodeFilter.SHOW_TEXT);
   const textNodes = [];
   while (walker.nextNode()) {
