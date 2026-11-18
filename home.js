@@ -5265,6 +5265,8 @@ function getAiUserSelections() {
 
       isPremiumOffer: isPremiumOffer()
     };
+  } else {
+    aiUserSelections.notConvertible = userSelections.vehicle.suggestions.containerId;
   }
   return aiUserSelections;
 }
