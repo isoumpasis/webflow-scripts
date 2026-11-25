@@ -5267,6 +5267,7 @@ function getAiUserSelections() {
     };
   } else {
     aiUserSelections.notConvertible = userSelections.vehicle.suggestions.containerId;
+    aiUserSelections.isMasterDirect = userSelections.vehicle.suggestions.containerId;
   }
   return aiUserSelections;
 }
