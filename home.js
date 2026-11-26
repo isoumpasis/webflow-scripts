@@ -5176,14 +5176,7 @@ async function typeMarkdownResponse(markdown, element, speed = 40) {
   template.innerHTML = DOMPurify.sanitize(marked.parse(markdown));
 
   template.content.querySelectorAll('a[href]').forEach(anchor => {
-    const url = new URL(anchor.href, window.location.href);
-    const isSamePageAnchor =
-      url.origin === window.location.origin &&
-      url.pathname === window.location.pathname &&
-      url.search === window.location.search &&
-      url.hash.length > 1;
-
-    console.log('url', url, 'isSamePageAnchor', isSamePageAnchor);
+    const isSamePageAnchor = anchor.getAttribute('href').trim().startsWith('#');
 
     if (isSamePageAnchor) {
       anchor.removeAttribute('target');
