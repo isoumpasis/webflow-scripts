@@ -5183,6 +5183,8 @@ async function typeMarkdownResponse(markdown, element, speed = 40) {
       url.search === window.location.search &&
       url.hash.length > 1;
 
+    console.log('url', url, 'isSamePageAnchor', isSamePageAnchor);
+
     if (isSamePageAnchor) {
       anchor.removeAttribute('target');
     } else {
