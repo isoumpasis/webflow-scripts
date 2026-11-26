@@ -5234,6 +5234,7 @@ function getAiUserSelections() {
     location: userSelections.location?.place || userSelections.location?.numPlaces.place
   };
   if (hasResult()) {
+    console.log('userSelections.calculator', userSelections.calculator);
     aiUserSelections = {
       ...aiUserSelections,
       make: userSelections.vehicle.identification.vehicleValues.make,
