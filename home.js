@@ -5263,7 +5263,9 @@ function getAiUserSelections() {
           ? userSelections.vehicle.suggestions.systems[1]
           : null,
 
-      isPremiumOffer: isPremiumOffer()
+      isPremiumOffer: isPremiumOffer(),
+      yearlyKm: userSelections.calculator.kmPerYearValue,
+      selectedConsumption: userSelections.calculator.trueConsumption
     };
   } else {
     aiUserSelections.notConvertible = userSelections.vehicle.suggestions.containerId;
