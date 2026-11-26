@@ -5266,7 +5266,11 @@ function getAiUserSelections() {
 
       isPremiumOffer: isPremiumOffer(),
       yearlyKm: userSelections.calculator.kmPerYearValue,
-      selectedConsumption: userSelections.calculator.trueConsumption
+      selectedConsumption: userSelections.calculator.trueConsumption,
+
+      easyPayMethod: userSelections.easyPay.method,
+      easyPayNoCreditSettings: userSelections.easyPay.noCreditSettings,
+      easyPayCreditSettings: userSelections.easyPay.creditSettings
     };
   } else {
     aiUserSelections.notConvertible = userSelections.vehicle?.suggestions?.containerId;
