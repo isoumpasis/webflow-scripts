@@ -5451,7 +5451,11 @@ document.querySelector('#aiSubmitBtn').addEventListener('click', async e => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ userQuestion: aiInput, userSelections: getAiUserSelections() })
+      body: JSON.stringify({
+        conversationId: aiConversationId,
+        userQuestion: aiInput,
+        userSelections: getAiUserSelections()
+      })
     });
     if (!res.ok) {
       throw new Error(`AI request failed: ${res.status}`);
@@ -5486,6 +5490,7 @@ async function askAiOnStep1(aiInput) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        conversationId: aiConversationId,
         userQuestion: aiInput,
         userSelections: getAiUserSelections()
       })
