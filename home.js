@@ -5085,6 +5085,14 @@ function trigger_not_convertible_form_submit() {
 /* Ai */
 const MAX_AI_QUESTION_LENGTH = 4000;
 let aiChatHistory = [];
+
+let aiConversationId = sessionStorage.getItem('aiConvId');
+
+if (!aiConversationId) {
+  aiConversationId = crypto.randomUUID();
+  sessionStorage.setItem('aiConvId', aiConversationId);
+}
+
 function initAi() {
   showOrHideAi();
   if (!enableAi) return;
@@ -5284,6 +5292,8 @@ async function submitAiQuestion(question) {
 async function askAiQuestion(question) {
   if (!enableAi) return;
 
+  const questionDate = new Date().toISOString();
+
   try {
     const res = await fetch(urlAi, {
       method: 'POST',
@@ -5291,6 +5301,7 @@ async function askAiQuestion(question) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        conversationId: aiConversationId,
         userQuestion: question,
         chatHistory: aiChatHistory,
         userSelections: getAiUserSelections()
@@ -5306,8 +5317,8 @@ async function askAiQuestion(question) {
     }
 
     aiChatHistory.push(
-      { role: 'user', content: question },
-      { role: 'assistant', content: data.answer }
+      { role: 'user', content: question, date: questionDate },
+      { role: 'assistant', content: data.answer, date: data.date }
     );
     console.log('chatHistory', aiChatHistory);
     return data.answer;
