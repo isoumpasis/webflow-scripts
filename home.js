@@ -5418,7 +5418,7 @@ function showAiAnswer(answer, loading) {
   aiAnswerTxt.classList.remove('is-loading');
   aiAnswerTxt.removeAttribute('role');
   aiAnswerTxt.removeAttribute('aria-live');
-  typeMarkdownResponse(answer, aiAnswerTxt, 40);
+  typeMarkdownResponse(answer, aiAnswerTxt, 60);
 }
 
 document.querySelector('#aiSubmitBtn').addEventListener('click', async e => {
