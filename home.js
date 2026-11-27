@@ -5318,7 +5318,7 @@ async function askAiQuestion(question) {
 
     aiChatHistory.push(
       { role: 'user', content: question, date: questionDate },
-      { role: 'assistant', content: data.answer, date: data.date }
+      { role: 'assistant', content: data.answer, date: data.timestamp }
     );
     console.log('chatHistory', aiChatHistory);
     return data.answer;
