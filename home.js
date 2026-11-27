@@ -5338,7 +5338,7 @@ function showAiQuestion(question) {
   aiQuestionTxt.textContent = question;
 
   const chatBody = document.querySelector('.ai-chat-body');
-  chatBody.style.paddingBottom = '5vh';
+  // chatBody.style.paddingBottom = '5vh';
   chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
 }
 
